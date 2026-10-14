@@ -1,0 +1,11 @@
+data/
+out/
+eval/results.json
+ocr/ocr
+*.pt
+*.pth
+*.safetensors
+__pycache__/
+*.pyc
+.DS_Store
+weights/

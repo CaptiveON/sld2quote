@@ -1,0 +1,22 @@
+{
+  "_note": "Illustrative catalogue for the prototype. Part numbers and prices are invented and roughly ordered like the market; they are not any supplier's figures.",
+  "ka_bands": [[50, "N"], [65, "H"], [80, "L"], [100, "X"]],
+  "acb": {"1600": 4200, "2000": 4900, "2500": 5600, "3200": 7400, "4000": 9800},
+  "mccb": {"100": 310, "160": 380, "250": 520, "400": 980, "630": 1450, "800": 1900},
+  "band_multiplier": {"N": 1.0, "H": 1.18, "L": 1.4, "X": 1.75},
+  "poles_multiplier": {"3": 1.0, "4": 1.22},
+  "bus_section_switch": {"1600": 3100, "2000": 3600, "2500": 4100, "3200": 5200, "4000": 6600},
+  "ats_controller": 1850,
+  "functional_unit_kit": {"ACB": 1400, "MCCB": 420, "BUS_SECTION": 900},
+  "busbar": {"_note": "copper per metre for a 4-bar set (3 phases + neutral), kg/m, and GBP/kg",
+             "kg_per_m": {"1600": 24, "2000": 30, "2500": 38, "3200": 50, "4000": 64}, "gbp_per_kg": 11.5,
+             "metres_per_section": 1.2},
+  "enclosure_section": {"base": 2600, "form_multiplier": {"Form 3b": 1.0, "Form 4 Type 2": 1.12, "Form 4 Type 4": 1.18, "Form 4 Type 6": 1.3, "Form 4 Type 7": 1.42},
+                        "ip_multiplier": {"IP31": 1.0, "IP41": 1.03, "IP42": 1.05, "IP54": 1.15}},
+  "ways_per_section": 4,
+  "labour": {"rate_gbp_per_hour": 48, "hours": {"ACB": 16, "MCCB": 6, "BUS_SECTION": 10, "section_assembly": 14, "test_per_section": 4}},
+  "delivery_gbp": 850,
+  "documentation_gbp": 600,
+  "witness_test_gbp": 1200,
+  "margin": 0.15
+}
