@@ -202,6 +202,21 @@ More passes past a cap, if Adnan decides so, are a new run from the trained weig
 (`train --model weights/rtdetr_r18_full --out weights/rtdetr_r18_more --epochs N --lr 5e-5`); the exact command per model goes at the end of
 the overnight summary. Results are reported to Adnan decision first, in plain language, with the full tables after.
 
+**Overnight result, 18 Oct 00:21 (`weights/overnight_summary.md`, both runs re-evaluated and reproduced exactly).** Both models stopped
+early after pass 6 with pass 3 best; neither meets the size rule (3 of 14 classes each). With NMS at threshold 0.10: r18vd val mAP@0.5 0.929
+(mean P 0.94, mean R 0.89), test_clean 0.939, test_scan 0.840, test_unseen 0.926; r50vd val 0.905, test_unseen 0.874, relay recall 0.13 on val
+and 0.08 on test_unseen, 2.3 times slower per pass. Val curve r18vd: 0.711, 0.862, 0.929, 0.905, 0.912, 0.913. Reading: (1) the early-stop
+rule (patience 3) fired while the cosine schedule, sized to the cap, was still at about 9e-5, so the low-learning-rate tail never ran; the
+17 Oct 2-epoch run that annealed to zero scored the same or better with NMS (val 0.933, test_unseen 0.937), so the tail is the missing piece,
+not more high-rate passes and not model size; (2) the failing classes are the rare and small ones: relay 0.7% of training boxes (precision
+0.68), capacitor 1.8% (recall 0.72 to 0.78), SPD 3.2% (0.78 to 0.81), earth 5.0% and small (0.72 to 0.77); boards on test_unseen rest on
+28 boxes from 5 sheets; (3) per-tile scores are a floor: symbols cut by a tile edge are found 0.50 of the time against 0.89 for whole ones,
+and every symbol is whole in at least one tile, so the sheet-level reader (step 4, tiles merged) will score higher; (4) with 24 relay boxes in
+test_unseen, 0.95 recall allows one miss, so the rule needs a larger unseen set to be a steady verdict (403 held-out-style sheets are unused).
+Proposals to Adnan: keep r18vd; run the 1-hour annealing continuation from its best weights now; then a fresh r18vd run with repeat-factor
+sampling of rare classes and a schedule that completes its decay (cap plus best pass, no early stop); widen test_unseen to 60 sheets; judge
+the rule at sheet level in step 4 as well as per tile. NMS stays: without it false positives on test_unseen are 159 instead of 93.
+
 ## 8. Metrics (as implemented in `evaluate.py`; keep the names)
 
 symbol precision and recall (IoU >= 0.3, same type); rating accuracy, poles accuracy, kA accuracy over matched devices; notes accuracy over
