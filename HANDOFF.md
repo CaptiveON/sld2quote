@@ -59,6 +59,7 @@ model-weight downloads. The Apple Vision OCR tool is compiled at `ocr/ocr` (rebu
 | `sld2quote/evaluate.py` | Per-sheet and aggregate metrics (section 8); reference BoM built by the same rules from ground truth | Run 17 Oct on `data/baseline` (seeds 100 to 129, 30 clean + 30 scan): see `eval/RESULTS.md` |
 | `sld2quote/tiles.py` | Page tiling shared by the COCO export and the trained reader's inference: 640 px tiles, stride 480, last tile flush with the edge, boxes kept in a tile at 60% visible or more, white padding for short pages | Done 17 Oct; tests in `tests/test_export.py` |
 | `sld2quote/export_coco.py` | `python3 -m sld2quote.export_coco --pool data/pool --out data/coco`: splits by whole sheet in seed order (train 400, val 40, test 30 as clean and scan copies of the same sheets, test_unseen 20 of the held-out styles: font Courier New, labels below), standard COCO with 0-based ids in `classes.CLASSES` order and extra keys for per-style scoring, manifest, contact sheet | Done 17 Oct: 11,244 tiles, 47,531 boxes, 100 s; audited against the pool; 14 deliberate faults each caught by a test |
+| `sld2quote/train_detector.py` | `train` (RT-DETR fine-tune: one-tile-at-a-time dataset, zoom and brightness jitter without flips, two-group AdamW, warm-up and cosine, clipping, per-epoch checkpoint with optimiser state for `--resume`, time budget summed over resumes, val every epoch, final metrics.json and card.md, operating threshold saved in config.json), `eval` (any split), `bench` (seconds per sheet on cpu and mps). Metrics: pycocotools mAP, per-class precision and recall at IoU 0.5 at the threshold that maximises mean F1 on val, recall by copy and style, false positives at tile edges | Done 17 Oct; 6 tests in `tests/test_train.py`; needs pycocotools (installed 17 Oct, noted in README) |
 | `README.md`, `run_demo.sh` | Status and run instructions | Written; README numbers must be replaced by evaluate output |
 
 Run: `python3 sld2quote/generate.py --out data --n 10 --seed 1 --scan`; `python3 -m sld2quote.cli run data/sheet-0001.png`;
@@ -157,6 +158,32 @@ tiles / 38,332 boxes; val 40 / 936 / 3,934; test_clean and test_scan 30 sheets e
 appear as background inside tiles that also hold symbols. Known skew: test_unseen has 15 sheets with labels below and 7 in Courier New
 (2 both), so the layout hold-out dominates; the font and label_pos keys on each tile let the trainer score the two separately. Contact sheet
 checked by eye: tight boxes, correct names.
+
+**Step 3 go, 17 Oct 15:35 (Adnan), with the size rule in force:** RT-DETR r18vd trains first (75-minute budget on MPS); it is final if it
+reaches at least 0.95 precision and recall on every class on val and on test_unseen at the threshold chosen on val; otherwise r50vd trains
+overnight. The CPU benchmark of both sizes decides what the live demo can serve. Smoke run on MPS (32 tiles, 2 epochs) ran end to end.
+
+Bench (M2 Max, `weights/bench/bench.md`, untrained heads, median of 3, tiles batched): seconds per sheet for 1600x1000 (6 tiles) / 3200x1000
+(14 tiles): r18vd cpu 8 threads 0.82 / 1.87, cpu 2 threads 1.31 / 3.10, mps 0.23 / 0.47; r50vd cpu 8 threads 1.65 / 3.49, cpu 2 threads
+2.45 / 5.90, mps 0.44 / 0.84. r18vd is half of r50vd everywhere. A free Space's 2 shared vCPUs will be slower than 2 M2 threads; the bench
+must be rerun on the Space. Training launched 15:30: r18vd, 2 epochs (1,147 steps each at batch 8, 5.7 to 6.5 images/s on MPS, about 25 min
+per epoch, so 3 epochs would not fit the 75 min budget), val after each epoch, under caffeinate. One MPS fall-back to cpu:
+grid_sampler_2d_backward (deformable attention). MPS training is seeded but not bitwise repeatable.
+
+**Step 3, first run, 17 Oct 16:18 (`weights/rtdetr_r18/card.md`):** r18vd, 2 epochs, 48 min, 6.9 images/s. At the val-chosen threshold
+0.15: val mAP@0.5 0.854, mean precision 0.82, mean recall 0.81, worst class precision 0.64 (fuse switch: 845 boxes predicted for 564) and
+worst recall 0.48 (earth); test_clean mAP@0.5 0.888, test_scan 0.826, test_unseen 0.849; recall clean 0.90 vs scan 0.76; symbols cut by a tile
+edge 0.40 vs whole 0.84; unseen font (Courier New) 0.83 but labels-below 0.72 vs labels-right 0.84. Fails the size rule. Diagnosis from the
+error analysis: 92% of false positives are a second box on a symbol already found, and 78% of misses are correct boxes scored below the
+threshold; val mAP was flat between epochs 1 and 2 (0.848 to 0.854) because the cosine schedule had ended. A DETR learns to suppress its
+own duplicates over a long schedule (RT-DETR's reference is 72 epochs); two is far too few. Class-agnostic NMS at IoU 0.5 on the same
+weights: val mAP@0.5 0.933, mean precision 0.95, worst precision 0.81, worst recall 0.63; still short.
+
+**Decision (orchestrator, 16:45):** NMS at IoU 0.5 becomes part of the detector's post-processing, because the reader must de-duplicate
+anyway (within a tile and across overlapping tiles) or parts are counted twice in the quote; metrics are reported with and without it.
+Overnight queue on this Mac: r18vd with a full schedule (batch 16, epochs sized from the measured rate to fit about 4.5 h), then r50vd
+(about 6.5 h), both from the hub weights, both scored on every split; the size rule is applied to the full runs on 18 Oct morning.
+Rare-class sampling (earth, relay, SPD) is held back until the full run shows whether those classes still lag.
 
 ## 8. Metrics (as implemented in `evaluate.py`; keep the names)
 
