@@ -185,6 +185,15 @@ Overnight queue on this Mac: r18vd with a full schedule (batch 16, epochs sized 
 (about 6.5 h), both from the hub weights, both scored on every split; the size rule is applied to the full runs on 18 Oct morning.
 Rare-class sampling (earth, relay, SPD) is held back until the full run shows whether those classes still lag.
 
+**Overnight queue launched 17 Oct 17:00** (`scripts/train_overnight.sh`, under caffeinate; log `weights/overnight_queue.log`): r18vd batch 16,
+lr 1e-4, warm-up 300, 9 epochs (573 steps each, measured 6.4 images/s, about 25 min per epoch with val), budget 270 min; then r50vd batch 8
+(batch 16 thrashed MPS memory at 22 GiB), 6 epochs (1,147 steps, 3.0 images/s, about 53 min per epoch), budget 390 min; then eval of every
+split for both and `weights/overnight_summary.md` (per split with NMS and raw, per class with the size rule applied, curves, a plain-language
+paragraph). Expected finish about 02:15 on 18 Oct, 04:20 at the latest. `detect()` is now the detector's one inference path (processor
+detections at the score floor, then class-agnostic NMS at `--nms-iou`, default 0.5); config.json carries score_threshold,
+score_threshold_raw and nms_iou, so the reader inherits them. On the first run's weights the new eval reproduces the NMS experiment exactly
+(val mAP@0.5 0.933 at threshold 0.10). 8 trainer tests. The queue script was smoke-tested end to end with 16 tiles and 1 epoch per model.
+
 ## 8. Metrics (as implemented in `evaluate.py`; keep the names)
 
 symbol precision and recall (IoU >= 0.3, same type); rating accuracy, poles accuracy, kA accuracy over matched devices; notes accuracy over

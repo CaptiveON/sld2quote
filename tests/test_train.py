@@ -1,12 +1,13 @@
-"""Trainer checks: the precision and recall matcher, the threshold chooser, the split report, the dataset, collate and augmentation
-on a two-tile COCO fixture, and one optimisation step of rtdetr_r18vd on cpu (skipped unless its weights are already in the Hugging
-Face cache)."""
+"""Trainer checks: the precision and recall matcher, the threshold chooser, the split report, NMS, the size rule, the dataset,
+collate and augmentation on a two-tile COCO fixture, and one optimisation step plus the shared inference path of rtdetr_r18vd on
+cpu (skipped unless its weights are already in the Hugging Face cache)."""
 import json, math, os, sys, time
 from types import SimpleNamespace
 import numpy as np
 import pytest
 import torch
 from PIL import Image, ImageDraw
+from torchvision import ops
 from transformers import RTDetrImageProcessor, get_cosine_schedule_with_warmup
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
@@ -80,6 +81,29 @@ def test_split_report_counts_false_positives_of_absent_classes_and_leaves_empty_
     assert m["map50"] == pytest.approx((1 + 51 / 101) / 2, abs=1e-4)  # pycocotools: both breakers found, half the transformers
 
 
+def test_nms_removes_a_duplicate_and_keeps_two_symbols_that_overlap_less_than_half():
+    I = CLASS_ID["isolator"]
+    r = {"scores": torch.tensor([0.9, 0.8, 0.7, 0.6]), "labels": torch.tensor([B, B, I, T]),
+         "boxes": torch.tensor([[0, 0, 10, 10], [1, 0, 11, 10], [8, 0, 18, 10], [0, 0, 10, 10.0]])}
+    k = td.nms(r, 0.5)
+    # the second breaker box duplicates the first (IoU 0.82) and the transformer label sits on the same symbol (IoU 1), so both
+    # go whatever their class; the isolator overlaps the breaker with IoU 0.11, two symbols drawn close together, so it stays
+    assert k["labels"].tolist() == [B, I] and k["scores"].tolist() == pytest.approx([0.9, 0.7]) and k["boxes"].tolist()[1] == [8, 0, 18, 10]
+    assert td.nms({key: v[:0] for key, v in r.items()}, 0.5)["scores"].numel() == 0  # a tile with nothing detected
+
+
+def test_size_rule_passes_a_class_only_at_target_on_both_val_and_test_unseen():
+    def split(**per):
+        pc = {c: {"gt": 10, "precision": 1.0, "recall": 1.0} for c in CLASSES}
+        for c, (gt, p, r) in per.items():
+            pc[c] = {"gt": gt, "precision": p, "recall": r}
+        return {"per_class": pc}
+    val = split(earth=(10, 0.99, 0.96), relay=(0, None, None), spd=(10, None, 0.0))
+    unseen = split(earth=(10, 0.97, 0.94), meter=(10, 0.95, 0.95))
+    rule = td.size_rule(val, unseen, 0.95)
+    assert (rule["breaker"], rule["meter"], rule["earth"], rule["relay"], rule["spd"]) == ("pass", "pass", "fail", "n/a", "fail")
+
+
 def test_dataset_and_collate_give_the_model_its_inputs(tmp_path):
     proc = RTDetrImageProcessor(do_resize=False)  # the hub processor's settings, without a download
     ds = td.Tiles(coco_fixture(tmp_path), "train", proc)
@@ -120,7 +144,12 @@ def test_one_optimisation_step_on_cpu(tmp_path):
     opt = td.optimiser(model, lr=1e-4, backbone_lr=1e-5, weight_decay=1e-4)
     assert [g["lr"] for g in opt.param_groups] == [1e-5, 1e-4]
     assert len(opt.param_groups[0]["params"]) == sum(1 for n, p in model.named_parameters() if n.startswith("model.backbone.") and p.requires_grad) > 0
-    head = model.class_embed[-1].weight.detach().clone()
-    model.train(); loss = td.step(model, opt, get_cosine_schedule_with_warmup(opt, 0, 10), td.collate([ds[0], ds[1]]), "cpu", 0.1)
+    head = model.class_embed[-1].weight.detach().clone(); b = td.collate([ds[0], ds[1]])
+    model.train(); loss = td.step(model, opt, get_cosine_schedule_with_warmup(opt, 0, 10), b, "cpu", 0.1)
     assert math.isfinite(loss) and loss > 0 and not torch.equal(head, model.class_embed[-1].weight)
+    model.eval()
+    with torch.no_grad():  # the shared inference path: raw, then with NMS, which never leaves two boxes overlapping by more than 0.5
+        raw, kept = (td.detect(model, ds.proc, b["pixel_values"], [(640, 640)] * 2, 0.01, n) for n in (0, 0.5))
+    assert all(len(k["scores"]) <= len(r["scores"]) for r, k in zip(raw, kept))
+    assert all(float(ops.box_iou(k["boxes"], k["boxes"]).fill_diagonal_(0).max()) <= 0.5 for k in kept if len(k["boxes"]) > 1)
     assert time.time() - t0 < 60
