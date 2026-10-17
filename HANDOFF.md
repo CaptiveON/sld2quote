@@ -28,7 +28,12 @@ Synthetic data only; illustrative prices; nothing from R&B. The numbers it produ
 | Numbers | Every figure in README comes from `python3 -m sld2quote.evaluate`, never typed by hand; failures listed by cause | Credibility with an academic panel |
 | Prices | Invented catalogue (`sld2quote/catalogue.json`), labelled illustrative | No supplier figures available or wanted |
 | Repository | Name `sld2quote`; private on GitHub now, public later (date is Adnan's call); Zenodo DOI after Phase 6; commits are authored by Adnan only, no co-author lines | |
-| Deadline | The job application is submitted 20 to 23 Oct 2026; if the repo is not complete by 22 Oct it is not linked from the form and goes to interview instead. The application files are never edited from this repo | |
+| Deadline | Everything is finished before 22 Oct 2026: all 11 steps of the plan in section 7 and every decided feature (the live one-link site with its three parts, the Linux text reader, the scorecard, packaging, the real-drawing test set). Nothing is dropped or deferred. Adnan then adds sld2quote as a project to his application before submitting it (window 20 to 23 Oct). Missed targets are reported honestly, never hidden. The application files are never edited from this repo | Locked by Adnan on 15 Oct 2026; replaces the earlier rule that an unfinished repo would go to interview instead |
+| One-link site | A live demo on a Hugging Face Space that also hosts the whole site, in three parts: "Try it" (make a new drawing from a seed, pick a held-out one, or upload a PNG; the server runs the pipeline and scores generated drawings against their answer keys live), "How it works" (implementation, scorecard, how to reproduce), "The real project" (how the KTP would build it, from the research brief) | Chosen by Adnan on 15 Oct 2026 over a replayed static site, and over GitHub Pages or a shared claude.ai page. Hugging Face account `itsmoadnan` is logged in on this Mac (checked 15 Oct) |
+| Working agreement | Nothing new is built until Adnan says go; each step is proposed first and waits for his answer | Adnan, 15 Oct 2026 |
+| Symbol-to-label link | Rules, no second model: symbols on one vertical line form a way (a chain, top to bottom); text lines stacked at regular spacing beside the chain's top device or below its bottom device form the way's label block; a block goes to the way with the shortest edge-to-edge gap between the symbol box and the text box (not centre distance), right or below as tie-break, each text used once, a contested block flagged low confidence; lines are routed to devices by content (device word with A to the switching device, kW to the contactor, kVAr to the capacitor, kVA to the source, CT ratio to the CT, mm² is the way's cable, text inside a symbol is its tag, the remainder is the destination); missing poles or kA come from the notes and are marked assumed. The generator records which device each text was drawn for, and `evaluate.py` gains link precision and recall so a wrong link is told apart from a missed symbol or a misread | Agreed by Adnan on 17 Oct 2026. To be refined with industrially practised methods (a learned link model trained on estimator corrections, schedule-table joins) once he is in the KTP |
+| Build standard | Real engineering, as near as possible to the product built after the KTP, never prototype shortcuts: best practice, efficient code, configuration, logging, tests, resumable runs and recorded artefacts for anything that trains or serves. The finished product works end to end, shows value, and a non-technical user can test it on the site step by step, with a plain-language explanation of how each step relates to the estimator's problem | Locked by Adnan on 17 Oct 2026 |
+| Orchestration | Claude (Fable 5.1) orchestrates as the senior staff ML, AI and computer-vision engineer: defines interfaces, briefs, reviews, integrates and keeps git. Sub-agents are Opus 5.5 at most, at most three at a time, briefed as staff engineers with explicit contracts and acceptance criteria. A Fable sub-agent needs Adnan's permission. Adnan is asked whenever a decision is his | Locked by Adnan on 17 Oct 2026 |
 
 Still open (Adnan decides, see section 10): README AI-assistance wording; LICENSE text (MIT proposed); public date; whether to add the link to form answer Q6 / Link 4; whether to email the PETRONAS/Mahidol authors for their SLD data from a Salford address later.
 
@@ -44,7 +49,7 @@ model-weight downloads. The Apple Vision OCR tool is compiled at `ocr/ocr` (rebu
 
 | File | Does | Status |
 |---|---|---|
-| `sld2quote/generate.py` | Synthetic sheets (1600x1000, grey PNG) with style variation and `--scan` degradation; ground truth JSON with device boxes, busbars, connections, notes, every drawn text with its box, a specification with clauses and deliberate conflicts | Works. Symbols are simplified (square with diagonal; two circles; circle with G). Styles: 5 fonts, 4 sizes, 2 line widths, 3 symbol sizes, labels right or below |
+| `sld2quote/generate.py` | Synthetic sheets (1600x1000, grey PNG) with style variation and `--scan` degradation; ground truth JSON with device boxes, busbars, connections, notes, every drawn text with its box, a specification with clauses and deliberate conflicts | Works. Symbols since 15 Oct follow IEC 60617 (see Phase 2 note in section 7): breakers as the standard switch with a cross or the box with a diagonal (`style.breaker`, one per sheet), fuse switches, isolators, motor starters (contactor and motor), PFC (capacitor and earth), SPD (arrester and earth), CT with meter and sometimes a relay on incomers, downstream board boxes; seven bodies from the open library in `assets/symbols/` (CC BY 3.0, `ATTRIBUTION.md`), the rest drawn in `generate.py`. Styles: 5 fonts, 4 sizes, 2 line widths, 3 symbol sizes, labels right or below. Since 15 Oct: `--level simple` (one transformer, 4 to 9 ways), `medium` (second transformer on busbar B, bus-section, 10 to 14 ways, cable sizes) or `mix` (default, per seed); the page widens so no label overlaps a symbol, another label or the edge (audited on 300 sheets, previously 16% of sheets had a label over a symbol); scan copies record `style.rotate_deg` and `image_box()` maps ground-truth boxes into the rotated image (unmapped boxes were up to 35 px off on wide scans) |
 | `ocr/ocr.swift` | Vision OCR to JSON boxes (page pixels, origin top-left) | Works. Reads small text far better when the image is upscaled 2 to 3x, which the reader does |
 | `sld2quote/reader.py` | `read_sheet(image_path)`: adaptive binarise, deskew by projection, busbars by horizontal runs, vertical lines, line removal, components, shape tests (diagonal, ring), page OCR at 2x plus a second OCR pass around each symbol at 3x with same-line merging, label association, notes by the NOTES anchor | Runs; three known faults (section 6) |
 | `sld2quote/spec.py` | Clauses to requirements with clause ids as evidence; `cross_check(notes, spec)` lists drawing-vs-spec conflicts | Works on the generator's clauses |
@@ -76,6 +81,12 @@ A trained reader (`reader_v2.py`) must return the same shape; its `symbols[].kin
 **Conflicts** (`cross_check`): `[{"field", "drawing", "spec", "drawing_evidence": [ids], "spec_clause": id}]`.
 **BoM** (`build_bom`): `{"board": {...}, "lines": [{"line", "part", "description", "qty", "unit_gbp", "total_gbp", "evidence": [ids], "rule": "R-...", "conf", "basis"}], "subtotal_gbp", "margin_gbp", "total_gbp", "issues": [{"kind", "what", "action", "evidence"}]}`.
 **Ground truth** (`generate.py`): as written today; add keys, never rename. Device `type` values are the same five as above.
+Coordinates are in the drawing frame; `size` is per sheet (1600 to about 4300 px wide); `style.level` and, on scan copies, `style.rotate_deg`
+were added on 15 Oct. Training labels must go through `image_box()` so they match the saved scan image.
+Device types since 15 Oct: the five above plus FUSE_SWITCH, ISOLATOR, CONTACTOR, MOTOR, CAPACITOR, SPD, EARTH, CT, METER, RELAY and BOARD
+(ids such as `OG-3-K` hang below way `OG-3`; `ACB-1-CT`, `-PM`, `-R` sit on incomer ACB-1). Detector classes are 14, one per symbol meaning:
+breaker (ACB, MCCB and BUS_SECTION in either drawn style; `style.breaker` keeps the style for a per-style score), fuse_switch, isolator,
+contactor, transformer, generator, motor, board, ct, meter, relay, spd, capacitor, earth.
 
 ## 6. Known faults to fix first (diagnosed on sheet-0001, 14 Oct)
 
@@ -101,6 +112,36 @@ Also missing: bus-section and generator cases are generated but untested in the 
 | 6 Packaging | README rewritten from the evaluation output (what it is, what it is not, numbers, failure causes, how the KTP replaces each module, attribution, AI-assistance line [CONFIRM]); `tests/` with pytest smoke tests (generator determinism; reader on a fixture sheet; rules invariants: never silently lowers a kA, every line has evidence; evaluate runs on two sheets); `run_demo.sh`; `CITATION.cff`; `CHANGELOG.md`; screenshots of `review.html` in `docs/`; LICENSE (MIT proposed); `.gitignore` as now; model weights not committed (training command plus a release asset) | A clean clone runs the demo in under five minutes on a Mac | 2 h |
 
 Order is 1, 2, 3, 4, 6, then 5 if time allows before 22 Oct; 5 is still worth doing afterwards for the interview.
+
+**Order revised 15 Oct 2026 (Adnan):** the trained reader comes first instead of hand-tuning the classical one. (a) Baseline evaluation of
+the classical reader, untouched, as the "before" number; (b) Phase 3 on the current symbol set, trained on simple and medium sheets;
+(c) evaluate both readers; (d) fix the label, notes and roles faults the per-sheet table shows (shared code, so both readers gain); (e) decide
+Phase 2 from the unseen-style numbers. Phase 1's symbol-shape fixes are skipped; the classical reader stays as the baseline. Then 4, 6, 5.
+
+**Phase 2 symbols done 15 Oct (Adnan asked for the wider set before training):** IEC 60617 symbols for the LV items an estimator prices,
+placed where they belong, priced by `rules.py` with illustrative catalogue lines; layout audited on 300 sheets (no text over symbols, text or the
+page edge; no overlapping symbols) and `tests/test_generate.py` checks every answer-key box against the drawn ink. Still open from Phase 2:
+withdrawable brackets, double-line busbar, section boxes, more fonts; a changeover-switch symbol (ATS is drawn as interlocked ACBs, a common
+practice); an ANSI/IEEE 315 style, which matters for the US real test set in Phase 5. Rating and tag formats do not vary yet (all "MCCB 250 A 4P"
+style); consultants vary them, so that is the next realism step for the label reader.
+
+**Plan after the one-link decision (15 Oct, not started; each step waits for Adnan's go):** what the live site forces: (i) a text reader
+that also runs on Linux, since Apple Vision is Mac only (keep Vision as the Mac engine, choose the Linux engine by measuring it on our sheets,
+score both); (ii) a detector size that reads a sheet in about 15 s on the free CPU (measure RT-DETR r18vd against r50vd before training;
+same model family as decided); (iii) the Space stays private until Adnan says public, because a public Space publishes the code, so README
+AI wording and LICENSE come first; (iv) the free tier sleeps when idle and takes about a minute to wake. Steps: 1 baseline; 2 training set;
+3 train; 4 reader_v2 and `--reader`; 5 Linux text reader, compared with Vision; 6 compare readers and fix label reading; 7 clean / scan /
+unseen scorecard with failures by cause; 8 site: server API and the three-part front end, run locally; 9 Space deployed privately, tested,
+public on Adnan's word; 10 package (README from numbers, tests, licence, 0.2.0); 11 real drawings (10 to 20 public-domain sheets, hand-labelled,
+scored). All 11 are required before 22 Oct (locked 15 Oct, see Deadline in section 2). Proposed days: Fri 16 steps 1 to 3; Sat 17 steps 4
+and 5, and sourcing the real drawings; Sun 18 steps 6 and 7; Mon 19 step 8 and labelling the real drawings; Tue 20 steps 9 (private) and 10,
+and finishing the labels; Wed 21 step 11 scoring, final checks and the public switch on Adnan's word; Thu 22 Adnan updates and submits the
+application. The older rule above that step 5 "is still worth doing afterwards for the interview" no longer applies.
+
+**Days revised 17 Oct (Friday passed with no go, nothing dropped):** Sat 17 steps 1 to 3 (and the 15 Oct work committed first); Sun 18
+steps 4 and 5, and sourcing the real drawings; Mon 19 steps 6 (including the symbol-to-label link above) and 7, and labelling; Tue 20
+steps 8 and 9 (private Space); Wed 21 steps 10 and 11, final checks, public switch on Adnan's word; Thu 22 Adnan updates and submits the
+application.
 
 ## 8. Metrics (as implemented in `evaluate.py`; keep the names)
 
@@ -128,6 +169,9 @@ references R&B's drawings, parts or prices. Synthetic is said out loud in every 
 
 1. Clone `github.com/CaptiveON/sld2quote` (private) into a fresh directory, or open the local copy at `~/Documents/techproject/experimental/thmillion/practical/sld2quote`; `git log --oneline` shows this handoff as the first commit.
 2. `python3 sld2quote/generate.py --out data --n 30 --seed 100 --scan` then `python3 -m sld2quote.evaluate --data data --out eval` to get the baseline table before touching code.
-3. Phase 1 fixes in `reader.py`; re-run; commit "Phase 1: ...".
+3. Superseded on 15 Oct: follow the revised order in section 7 (baseline, then Phase 3). A preview of the training sheets
+   (seeds 1001 to 1012) is in `data/preview/`; on its 12 clean sheets the untouched classical reader found 17% of symbols (27% before the
+   wider symbol set), so the trained reader is the next step. `reader._runs` now returns plain ints (a busbar merge leaked a numpy int and
+   crashed the CLI's JSON output on the new sheets).
 4. Fetch the symbol library (`git clone https://github.com/synergycodes/ng-diagram-single-line-diagram` into a scratch directory, not into this repo; copy only the symbol SVGs with their licence file into `assets/symbols/` with an ATTRIBUTION.md), then Phase 2.
 5. Phase 3 training on this Mac (MPS); check `torch.backends.mps.is_available()` first; download `PekingU/rtdetr_r50vd` weights once.

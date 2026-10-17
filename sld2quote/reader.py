@@ -104,7 +104,7 @@ def prepare(path: str):
 def _runs(v: np.ndarray):
     """start, end (exclusive) of True runs in a 1-D bool array"""
     d = np.diff(np.concatenate(([0], v.astype(np.int8), [0])))
-    return list(zip(np.where(d == 1)[0], np.where(d == -1)[0]))
+    return [(int(s), int(e)) for s, e in zip(np.where(d == 1)[0], np.where(d == -1)[0])]  # plain ints, so outputs stay JSON
 
 
 def find_busbars(b: np.ndarray, min_len=220, min_thick=4):

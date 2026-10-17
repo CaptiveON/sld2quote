@@ -13,7 +13,7 @@ plan review.
 
 | Module | What it does | In the KTP it becomes |
 |---|---|---|
-| `sld2quote/generate.py` | Draws synthetic LV switchboard SLDs with style variation and a scan-like variant, and writes ground truth (devices with boxes, busbars, connections, notes, a specification with deliberate conflicts) | The labelling tool over real sheets, plus a synthetic generator seeded with real topologies |
+| `sld2quote/generate.py` | Draws synthetic LV switchboard SLDs, simple and medium boards with IEC 60617 symbols (breakers, fuse switches, isolators, motor starters, power-factor correction, surge protection, metering), with style variation and a scan-like variant, and writes ground truth (devices with boxes, busbars, connections, notes, a specification with deliberate conflicts) | The labelling tool over real sheets, plus a synthetic generator seeded with real topologies |
 | `ocr/ocr.swift` | On-device OCR with Apple Vision (no cloud, no install) | The same, or a document OCR model, run inside the company's boundary |
 | `sld2quote/reader.py` | Busbars and lines by run-length analysis, symbols by connected components and shape tests, labels by a second OCR pass around each symbol, notes by anchor | A trained symbol detector and layout model; the interface stays |
 | `sld2quote/spec.py` | Clauses to requirements with the clause as evidence; drawing-versus-specification cross-check | An LLM extractor with a fixed schema and clause citations |
@@ -35,3 +35,9 @@ Requires macOS (Apple Vision for OCR), Python 3.12 with numpy, Pillow and scipy;
 - The reader is classical computer vision chosen for speed of demonstration; a trained detector is the KTP's first task.
 - The specification parser is rule-based; an LLM with citations is the KTP's second task.
 - Written with AI coding agents as implementation tools under the author's direction and tests. [CONFIRM wording with the author]
+
+## Attribution
+Seven symbol drawings in `assets/symbols/` (breaker, disconnector, current transformer, earth, protection relay, capacitor, surge
+arrester) are IEC 60617 artwork from the QElectroTech elements library (https://qelectrotech.org/, by the QElectroTech team and
+contributors), licensed under CC BY 3.0 and taken unchanged from synergycodes/ng-diagram-single-line-diagram. Details are in
+`assets/symbols/ATTRIBUTION.md`.

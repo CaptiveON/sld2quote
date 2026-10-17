@@ -77,6 +77,37 @@ def build_bom(extraction: dict, spec: dict | None, conflicts: list[dict]) -> dic
                     1, base * CAT["band_multiplier"][band] * CAT["poles_multiplier"][str(poles)], ev, "R-MCCB-SELECT", d["conf"], f"rating {rating} A; poles {poles}{' (notes default)' if d.get('poles') is None else ''}; kA {dka}")
                 add("FU-KIT-MCCB", "Outgoing functional unit: compartment door, terminals, labels", 1, CAT["functional_unit_kit"]["MCCB"], ev, "R-FU-KIT", d["conf"])
                 ways += 1
+        elif d["type"] in ("FUSE_SWITCH", "ISOLATOR"):
+            rating = d.get("rating")
+            if rating is None:
+                issues.append({"kind": "missing", "what": f"{d['id']} ({d['type']}): rating not read", "action": "read from drawing / schedule", "evidence": ev}); continue
+            poles, fsw = d.get("poles") or poles_default, d["type"] == "FUSE_SWITCH"
+            table = CAT["fuse_switch"] if fsw else CAT["isolator"]
+            key = _nearest_key(table, rating)
+            add(f"{'FSW' if fsw else 'ISOL'}-{key}-{poles}P", f"{'Fuse-switch-disconnector' if fsw else 'Switch-disconnector'} {key} A {poles}-pole" + (f"; feeds {d['dest']}" if d.get("dest") else ""),
+                1, table[key] * CAT["poles_multiplier"][str(poles)], ev, "R-FSW-SELECT" if fsw else "R-ISOL-SELECT", d["conf"], f"rating {rating} A; poles {poles}")
+            if fsw:
+                add(f"FUSE-{key}", f"Fuse links {key} A, one per pole", poles, CAT["fuse_link"][key], ev, "R-FUSE-LINKS", d["conf"])
+            add(f"FU-KIT-{d['type']}", "Outgoing functional unit: compartment door, terminals, labels", 1, CAT["functional_unit_kit"][d["type"]], ev, "R-FU-KIT", d["conf"])
+            ways += 1
+        elif d["type"] in ("CONTACTOR", "CAPACITOR") and d.get("rating") is None:
+            issues.append({"kind": "missing", "what": f"{d['id']} ({d['type']}): {'kW' if d['type'] == 'CONTACTOR' else 'kVAr'} not read", "action": "read from drawing / schedule", "evidence": ev})
+        elif d["type"] == "CONTACTOR":
+            key = _nearest_key(CAT["starter"], d["rating"])
+            add(f"STARTER-{key}KW", f"Motor starter for {d['rating']} kW: contactor, overload relay and control circuit", 1, CAT["starter"][key], ev, "R-STARTER", d["conf"], f"{d['rating']} kW from the starter label")
+        elif d["type"] == "CAPACITOR":
+            add(f"PFC-{d['rating']}KVAR", f"Power-factor correction bank {d['rating']} kVAr, detuned, in its own section", 1, d["rating"] * CAT["pfc_gbp_per_kvar"], ev, "R-PFC", d["conf"])
+            sections += 1
+        elif d["type"] == "SPD":
+            add("SPD-T12", "Surge protective device, Type 1+2, with status indication", 1, CAT["spd_gbp"], ev, "R-SPD", d["conf"])
+        elif d["type"] == "CT":
+            add("CT-SET", "Current transformers" + (f" {d['rating']}/5 A" if d.get("rating") else "") + ", set of three, class 1", 1, CAT["ct_set_gbp"], ev, "R-METERING", d["conf"])
+        elif d["type"] == "METER":
+            unit = (d.get("label") or "").strip()
+            add(f"METER-{unit or 'MF'}", f"Panel meter ({unit or 'multifunction'})", 1, CAT["meter_gbp"].get(unit, CAT["meter_gbp"]["kW"]), ev, "R-METERING", d["conf"])
+        elif d["type"] == "RELAY":
+            add("RELAY-OC", "Overcurrent and earth-fault protection relay", 1, CAT["relay_gbp"], ev, "R-PROTECTION", d["conf"])
+        # MOTOR, EARTH and BOARD are loads or context: drawn, read and checked, but not part of this board's price
     # busbars
     bus_rating = None
     for bb in extraction["busbars"]:
