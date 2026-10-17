@@ -194,6 +194,14 @@ detections at the score floor, then class-agnostic NMS at `--nms-iou`, default 0
 score_threshold_raw and nms_iou, so the reader inherits them. On the first run's weights the new eval reproduces the NMS experiment exactly
 (val mAP@0.5 0.933 at threshold 0.10). 8 trainer tests. The queue script was smoke-tested end to end with 16 tiles and 1 epoch per model.
 
+**Training protocol changed by Adnan, 17 Oct 17:25, queue stopped and relaunched:** early stopping on the validation score (val mAP@0.5
+with NMS after every pass; stop when it has not improved for 3 passes; the best pass's weights are the model), with hard caps of 10 passes
+for r18vd and 8 for r50vd. If a model reaches the target within its cap, good; otherwise it stops at the cap and the summary reports it as it
+is. The cosine schedule is sized to the cap. The 9-epoch r18vd run (25 minutes in) was moved to `weights/aborted_r18_full_9ep_1725`.
+More passes past a cap, if Adnan decides so, are a new run from the trained weights with a fresh shorter schedule
+(`train --model weights/rtdetr_r18_full --out weights/rtdetr_r18_more --epochs N --lr 5e-5`); the exact command per model goes at the end of
+the overnight summary. Results are reported to Adnan decision first, in plain language, with the full tables after.
+
 ## 8. Metrics (as implemented in `evaluate.py`; keep the names)
 
 symbol precision and recall (IoU >= 0.3, same type); rating accuracy, poles accuracy, kA accuracy over matched devices; notes accuracy over

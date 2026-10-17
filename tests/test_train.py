@@ -1,6 +1,6 @@
-"""Trainer checks: the precision and recall matcher, the threshold chooser, the split report, NMS, the size rule, the dataset,
+"""Trainer checks: the precision and recall matcher, the threshold chooser, the split report, NMS, the size rule, early stopping, the dataset,
 collate and augmentation on a two-tile COCO fixture, and one optimisation step plus the shared inference path of rtdetr_r18vd on
-cpu (skipped unless its weights are already in the Hugging Face cache)."""
+cpu, and reloading trained weights for more passes (skipped unless the weights are already in the Hugging Face cache)."""
 import json, math, os, sys, time
 from types import SimpleNamespace
 import numpy as np
@@ -104,6 +104,27 @@ def test_size_rule_passes_a_class_only_at_target_on_both_val_and_test_unseen():
     assert (rule["breaker"], rule["meter"], rule["earth"], rule["relay"], rule["spd"]) == ("pass", "pass", "fail", "n/a", "fail")
 
 
+def run_curve(scores, patience, cap=None):
+    """the trainer's epoch loop on a hand-made val curve: passes run, the stop reason and the best epoch"""
+    a, hist = SimpleNamespace(patience=patience, min_delta=0.002, epochs=cap or len(scores), nms_iou=0.5), {"epochs": []}
+    for epoch in range(a.epochs):
+        if stop := td.patience_stop(a, hist, epoch):
+            break
+        hist["epochs"].append({"epoch": epoch + 1, "val": {"nms": {"map50": scores[epoch]}}})
+    return len(hist["epochs"]), stop, td.early_stop([e["val"]["nms"]["map50"] for e in hist["epochs"]], a.min_delta)[0] + 1
+
+
+def test_early_stopping_keeps_the_best_pass_and_stops_after_patience_passes_without_a_real_gain():
+    # it improves to 0.80 at epoch 3, then 0.801 (a rise below min_delta), 0.79 and 0.80: three passes without a real gain, so it
+    # stops after epoch 6 with epoch 3 as the best pass, although 0.801 is higher by a hair
+    n, stop, best = run_curve([0.5, 0.7, 0.8, 0.801, 0.79, 0.80, 0.95, 0.96], 3)
+    assert (n, best) == (6, 3) and stop.startswith("early stop after epoch 6 of 8: 3 val passes") and "best pass was epoch 3 at 0.8" in stop
+    # a late improvement resets the count: two flat passes, a gain at epoch 6, two more flat passes, and the cap of 8 ends it
+    assert run_curve([0.5, 0.7, 0.8, 0.8, 0.8, 0.85, 0.85, 0.849], 3) == (8, None, 6)
+    # on a curve that keeps improving patience never triggers and the cap ends it; patience 0 never stops, even on a falling curve
+    assert run_curve([0.1, 0.2, 0.3, 0.4], 3) == (4, None, 4) and run_curve([0.5, 0.4, 0.3, 0.2, 0.1], 0) == (5, None, 1)
+
+
 def test_dataset_and_collate_give_the_model_its_inputs(tmp_path):
     proc = RTDetrImageProcessor(do_resize=False)  # the hub processor's settings, without a download
     ds = td.Tiles(coco_fixture(tmp_path), "train", proc)
@@ -132,6 +153,18 @@ def test_jitter_moves_each_box_with_its_symbol_and_drops_what_the_zoom_cuts_off(
         x, y, w, h = kept[0]["bbox"]
         assert np.allclose([x, y, x + w, y + h], [xs.min(), ys.min(), xs.max() + 1, ys.max() + 1], atol=1.5)
         assert [k["category_id"] for k in kept] == kept_classes  # zooming in leaves 1 px of the cut symbol, below 0.6 of it
+
+
+def test_trained_weights_load_for_more_passes_without_a_new_head(tmp_path):
+    try:
+        model = td.load_model("PekingU/rtdetr_r18vd", local_files_only=True)
+    except OSError as e:
+        pytest.skip(f"PekingU/rtdetr_r18vd is not in the Hugging Face cache, and this test does not download it ({type(e).__name__})")
+    model.save_pretrained(tmp_path); RTDetrImageProcessor(do_resize=False).save_pretrained(tmp_path)  # what a run writes
+    again, info = td.load_model(str(tmp_path), output_loading_info=True)
+    assert not (info["missing_keys"] or info["mismatched_keys"] or info["unexpected_keys"])  # nothing newly initialised
+    assert torch.equal(again.class_embed[-1].weight, model.class_embed[-1].weight) and torch.equal(again.model.enc_score_head.weight, model.model.enc_score_head.weight)
+    assert td.load_processor(str(tmp_path)).do_resize is False
 
 
 def test_one_optimisation_step_on_cpu(tmp_path):
