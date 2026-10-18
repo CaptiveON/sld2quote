@@ -12,12 +12,10 @@ IoU >= 0.5; mAP comes from pycocotools. The data is synthetic: every tile is cut
 from __future__ import annotations
 import argparse, contextlib, copy, glob, hashlib, importlib.metadata as md, io, json, logging, math, os, platform, random, shlex, shutil, statistics, subprocess, sys, time
 from collections import Counter, defaultdict
-from types import SimpleNamespace
+from types import MethodType, SimpleNamespace
 import numpy as np
 import torch
 from PIL import Image, ImageEnhance
-from pycocotools.coco import COCO
-from pycocotools.cocoeval import COCOeval
 from torch.utils.data import DataLoader, Dataset, SubsetRandomSampler
 from torchvision import ops
 from transformers import RTDetrForObjectDetection, RTDetrImageProcessor, get_cosine_schedule_with_warmup, set_seed
@@ -33,6 +31,7 @@ SELECT = ("val", "val_unseen")  # the splits a pass and the thresholds are chose
 STYLE_KEYS = ("copy", "breaker", "level", "font", "label_pos")  # image keys the export adds, for recall by style
 EDGE_PX = 2                                                    # a detection this close to the tile border touches the edge
 SLOWED = 0.85                                                  # a pass below this share of its run's best rate was slowed by other work
+MPS_ROWS = 65536                                               # on MPS a linear's weight gradient over more rows can be wrong (split_linear)
 VAL_KEYS = ("map50", "map", "mean_precision", "mean_recall", "min_precision", "min_recall", "mean_f1")  # kept per epoch in history.json
 SCORE = {"map50": ("mean_map50", "mAP@0.5"), "f1": ("pooled_mean_f1", "mean per-class F1 at the operating threshold")}  # --select: key, wording
 LABEL = {"nms": "with NMS", "raw": "raw"}
@@ -163,6 +162,28 @@ def load_processor(name: str, **kw):
     return RTDetrImageProcessor.from_pretrained(name, do_resize=False, **kw)
 
 
+def split_linear(self, x):
+    """nn.Linear's forward in pieces of at most MPS_ROWS rows while gradients are on. On MPS (torch 2.5.1, macOS 27) a
+    linear's weight gradient over more rows than that, a matrix product with that inner size, sometimes comes out wrong,
+    apparently read from stale memory: the decoder's value projections see 16 x 8,400 encoder tokens, and their weight
+    gradients were off by up to 4e36 against float64 on the CPU, while every other parameter agreed. The 0.1 clip then made
+    such a step almost empty, and garbage that was not finite turned the weights into NaN (run 4 of night 2b, 18 Oct). Each
+    piece's product stays within the limit and autograd adds up the pieces' gradients; inference never splits."""
+    rows = x.numel() // x.shape[-1]
+    if not (torch.is_grad_enabled() and rows > MPS_ROWS):
+        return torch.nn.functional.linear(x, self.weight, self.bias)
+    parts = x.reshape(rows, x.shape[-1]).split(MPS_ROWS)
+    return torch.cat([torch.nn.functional.linear(q, self.weight, self.bias) for q in parts]).view(*x.shape[:-1], -1)
+
+
+def mps_safe(model):
+    """every linear of the model in pieces (split_linear), for training on MPS"""
+    for m in model.modules():
+        if isinstance(m, torch.nn.Linear):
+            m.forward = MethodType(split_linear, m)
+    return model
+
+
 def optimiser(model, lr: float, backbone_lr: float, weight_decay: float):
     """AdamW in two groups: the pretrained backbone at its own, lower rate first, then the rest"""
     groups = [[], []]
@@ -203,13 +224,20 @@ def ema_window(decay: float, warmup: int, updates: int, passes: int) -> str:
 
 
 def step(model, opt, sched, batch: dict, device: str, grad_clip: float, ema: EMA | None = None) -> float:
-    """one optimisation step, and the weight average's update after it; a non-finite loss stops the run before it can reach a checkpoint"""
+    """one optimisation step, and the weight average's update after it. A non-finite loss stops the run before it can reach a
+    checkpoint; a finite loss with a gradient that is not finite (a numerical fault, not the data: see split_linear) skips
+    this one update with a warning that names its tiles, as mixed-precision training does"""
     out = model(pixel_values=batch["pixel_values"].to(device), labels=[{k: v.to(device) for k, v in l.items()} for l in batch["labels"]])
     loss = out.loss.item()
     if not math.isfinite(loss):
         raise FloatingPointError(f"loss became {loss}; the last checkpoint is untouched")
     opt.zero_grad(set_to_none=True); out.loss.backward()
-    torch.nn.utils.clip_grad_norm_(model.parameters(), grad_clip); opt.step(); sched.step()
+    norm = torch.nn.utils.clip_grad_norm_(model.parameters(), grad_clip)
+    if not torch.isfinite(norm):
+        opt.zero_grad(set_to_none=True); sched.step()
+        log.warning(f"gradient norm {float(norm)} at loss {loss:.4f}: update skipped; tiles {[int(l['image_id']) for l in batch['labels']]}")
+        return loss
+    opt.step(); sched.step()
     if ema:
         ema.update(model)
     return loss
@@ -317,6 +345,8 @@ def recall_by(anns: list, found, key) -> dict:
 
 def coco_map(ds: Tiles, dets: list) -> tuple:
     """(mAP@0.5, mAP@0.5:0.95) from pycocotools over the split's tiles; None when the split has no box to find"""
+    from pycocotools.coco import COCO          # lazy: the reader imports this module on servers without pycocotools
+    from pycocotools.cocoeval import COCOeval
     anns = ds.annotations()
     if not anns:
         return None, None
@@ -536,6 +566,8 @@ def cmd_train(a, argv: list):
         hist, start = st["history"], st["epoch"] + 1; a.model = hist["args"]["model"]; hist.setdefault("resumed", []).append(cmd)
     src = ck if a.resume else a.model
     model, proc = load_model(src).to(a.device), load_processor(src)
+    if a.device.startswith("mps"):
+        mps_safe(model); log.info(f"MPS: every linear computes in pieces of at most {MPS_ROWS} rows while training (split_linear)")
     ds = Tiles(a.data, "train", proc, aug=(a.brightness, a.contrast, a.scale_jitter, a.min_visible), limit=a.limit, seed=a.seed)
     if len(ds) < a.batch:
         raise SystemExit(f"{len(ds)} training tiles make no full batch of {a.batch}")

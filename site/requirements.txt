@@ -1,0 +1,16 @@
+# the server's Python packages, pinned to the versions the site was built and tested with (macOS, Python 3.12.1)
+# on a CPU-only Linux box (the Space) install torch and torchvision from the CPU wheel index to skip the CUDA download:
+#   pip install torch==2.5.1 torchvision==0.20.1 --index-url https://download.pytorch.org/whl/cpu && pip install -r site/requirements.txt
+fastapi==0.139.0
+uvicorn==0.51.0
+python-multipart==0.0.32
+huggingface_hub==0.26.2
+torch==2.5.1
+torchvision==0.20.1
+transformers==4.46.1
+numpy==2.2.6
+Pillow==11.0.0
+scipy==1.14.1
+rapidocr-onnxruntime==1.4.4
+onnxruntime==1.31.0
+opencv-python==5.0.0.93
