@@ -101,8 +101,15 @@ boxes, but on the unseen style the generator fell from 98 percent found to 50 pe
 held-out font draws those letters differently, and the extra passes fitted the four training fonts more closely.
 
 **What was done.** A second validation set of held-out-style drawings, disjoint from the test set, so the best pass is chosen on both
-seen and unseen styles while the test set stays untouched. A wider font set in the generator (about 15 fonts, two held out) for a new
-training run.
+seen and unseen styles while the test set stays untouched. A wider font set in the generator (16 fonts) for a new training run.
+
+**Correction (18 Oct, later the same day).** The engineer who widened the fonts checked the generator and found that the letters inside
+symbols were drawn in Arial Bold on every sheet, whatever the sheet's font. So the held-out font never changed a glyph inside a symbol,
+and the explanation above cannot be literally right; what the unseen style changes is the text around the symbols and, far more often,
+the layout: 49 of the 60 unseen-style test sheets have their labels below the symbols, a layout the model never trained on, against 16
+in a held-out font. The lesson is the same as in entries 10 and 10a: an explanation that fits the numbers still has to be checked against
+the code. In response, the wide font set now draws the inner glyphs in the sheet's font, the model trains on both label layouts, and the
+hold-out is fonts only (three of sixteen), so the "unseen" test measures one thing.
 
 **For the real project.** Font and drafting style vary by consultant; the training set must span them, and the validation set must contain
 styles the model was not trained on, or the selection step will quietly pick the model that generalises worst.

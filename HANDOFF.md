@@ -325,6 +325,16 @@ epochs and set weight decay 0 on norm weights and biases (noted, not applied yet
 (`scripts/train_night2b.sh`) runs `rtdetr_r18_plain_ema` and `rtdetr_r18_fonts_ema` after night2 (each about 3.8 h), summary
 `weights/night2b_summary.md` over six runs, expected early 19 Oct. Morning: drawing-level check of the candidates.
 
+**Fonts data, 18 Oct 12:10.** The wide font set (classic five plus Tahoma, Georgia, Times New Roman, Futura, Helvetica, Helvetica Neue,
+Avenir Next, Optima, Geneva, Menlo, Monaco; `--fonts wide`, `style.font_set`) reproduces every existing sheet byte-identically under the
+default classic set (942 seeds, 5,652 files checked). Finding: the glyphs inside symbols (G, M, meter units, I>) were Arial Bold on every
+sheet, so the "unseen font changes the glyph" reading of A's loss is withdrawn; the labels-below layout (49 of 60 unseen test sheets) is
+the likelier cause. Decisions: in the wide set the inner glyphs follow the sheet font; the notes box is sized to its longest line and
+labels-below start below the cable stub (wide set only, so classic stays byte-identical); the hold-out is fonts only (Courier New, Tahoma,
+Times New Roman; `--held-out-label-pos none`), with both layouts in training. `data/pool_fonts` (seeds 20000 to 20899) and
+`data/coco_fonts` are regenerated accordingly before run 2 starts. Known and left: Georgia has old-style figures; Avenir Next's first
+face is bold; `evaluate --make-sets` writes to a fixed folder, so it must gain an output option before it is used with another export.
+
 ## 8. Metrics (as implemented in `evaluate.py`; keep the names)
 
 symbol precision and recall (IoU >= 0.3, same type); rating accuracy, poles accuracy, kA accuracy over matched devices; notes accuracy over
