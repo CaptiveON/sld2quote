@@ -79,7 +79,7 @@ def eval_sheet(png: str, gt_path: str, spec_path: str, read=read_sheet) -> dict:
             "sym_precision": round(prec, 3), "sym_recall": round(rec, 3), "rating_acc": round(rating_ok / max(1, tp), 3), "poles_acc": round(poles_ok / max(1, tp), 3), "ka_acc": round(ka_ok / max(1, tp), 3),
             "notes_acc": round(notes_ok / len(notes_fields), 3), "conflict_tp": len(pc & gc), "conflict_fp": len(pc - gc), "conflict_fn": len(gc - pc),
             "bom_precision": round(bprec, 3), "bom_recall": round(brec, 3), "price_error": round(price_err, 4), "pred_total": bom["total_gbp"], "gt_total": gbom["total_gbp"], "seconds": round(secs["total"], 1),
-            "seconds_ocr": secs["ocr"], "seconds_detector": secs["detector"], "reader": ex["reader"], "detector": ex.get("detector"),
+            "seconds_ocr": secs["ocr"], "seconds_detector": secs["detector"], "reader": ex["reader"], "detector": ex.get("detector"), "crops": ex.get("crops"),
             "per_type": {t: {"tp": hit[t], "pred": npred[t], "gt": ngt[t], "rating_ok": hit_rating[t]} for t in TYPES if npred[t] or ngt[t]}}
 
 
@@ -123,10 +123,11 @@ def describe(rows: list) -> str:
     d = rows[0]["detector"] if rows else None
     on = d and (d["device"] + (f" ({d['threads']} threads)" if d["device"] == "cpu" and d.get("threads") else ""))
     src = {"drawing": " (chosen on whole validation drawings)", "tile": " (chosen per tile at training)", "argument": " (given)"}.get(d.get("score_threshold_source"), "") if d else ""
+    crops = "" if not rows or rows[0].get("crops") is None else f"; OCR crop pass around every symbol {'on' if rows[0]['crops'] else 'off'}"
     return ("classical reader (shape tests)" if not d else f"trained reader: detector `{d['weights']}` on {on}, score threshold {d['score_threshold']}{src}, "
             f"NMS IoU {d['nms_iou']} per tile, tiles merged at IoU {d['merge_iou']}" +
             (f", boxes within {d['edge_px']} px of an inner tile edge dropped" if d.get("edge_px") is not None else "") +
-            (f", a box holding {d['contain']} of a better box's area dropped" if d.get("contain") is not None else ""))
+            (f", a box holding {d['contain']} of a better box's area dropped" if d.get("contain") is not None else "")) + crops
 
 
 def section(rows: list) -> list[str]:
@@ -205,7 +206,7 @@ def main(argv=None):
         for d, n in make_sets(a.coco, a.sets).items():
             print(f"{d}: {n} sheets, clean and scan copies")
         return
-    read = choose(a.reader, a.weights, a.device)
+    read = choose(a.reader, a.weights, a.device, a.crops)
     rows = []
     for png in sorted(glob.glob(os.path.join(a.data, "sheet-*.png"))):
         stem = png[:-4]; gt = stem + ".json"; spec = os.path.join(a.data, os.path.basename(stem).replace("-scan", "") + "-spec.txt")  # the clean copy's

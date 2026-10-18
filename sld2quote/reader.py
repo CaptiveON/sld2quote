@@ -394,11 +394,16 @@ def _timed(clock: dict, key: str, fn, *args):
     return out
 
 
-def read_sheet(image_path: str, texts: list[dict] | None = None, finder=classical, reader: str = "classical") -> dict:
+def read_sheet(image_path: str, texts: list[dict] | None = None, finder=classical, reader: str = "classical", crops: bool | None = None) -> dict:
     """the reading pipeline of both readers. finder(page_img, ink_without_lines, texts) returns the symbols in the pixels
     of the prepared (deskewed) page, the frame of the OCR and the line finders; every OCR call goes through _ocr_image.
-    "seconds" splits the time into OCR and the symbol finder ("detector")."""
+    crops: the second OCR pass around every symbol (None: on for vision, which reads small text better enlarged, off for
+    the other engines, which read the page pass better and pay about 0.3 s per symbol for the crops; see eval/OCR.md);
+    without it the labels come from the page texts. "seconds" splits the time into OCR and the symbol finder ("detector")."""
     t0, clock = time.perf_counter(), {"ocr": 0.0, "detector": 0.0}
+    if crops is None:
+        from .ocr import default_engine
+        crops = (os.environ.get("SLD2QUOTE_OCR") or default_engine()) == "vision"
     g, b, ang = prepare(image_path)
     H, W = b.shape
     page_img = Image.fromarray(g.astype(np.uint8))
@@ -409,13 +414,13 @@ def read_sheet(image_path: str, texts: list[dict] | None = None, finder=classica
     vlines = find_vertical_lines(b)
     ink = remove_lines(b, busbars, vlines)
     symbols = _timed(clock, "detector", finder, page_img, ink, texts)
-    local = _timed(clock, "ocr", symbol_texts, page_img, symbols)
+    local = _timed(clock, "ocr", symbol_texts, page_img, symbols) if crops else {}
     label_busbars(busbars, texts)
     devices = make_devices(symbols, local, texts, busbars, vlines, H)
     notes = read_notes(texts)
     all_texts = texts + [tb for reg in local.values() for tb in reg]
     return {"image": os.path.basename(image_path), "size": [int(W), int(H)], "deskew_deg": round(float(ang), 2),
-            "texts": all_texts, "busbars": busbars, "vlines_count": len(vlines), "symbols": symbols, "devices": devices, "notes": notes,
+            "texts": all_texts, "busbars": busbars, "vlines_count": len(vlines), "symbols": symbols, "devices": devices, "notes": notes, "crops": bool(crops),
             "reader": reader, "seconds": {"total": round(time.perf_counter() - t0, 2), **{k: round(v, 2) for k, v in clock.items()}}}
 
 
@@ -428,14 +433,16 @@ def add_reader_args(ap):
     ap.add_argument("--reader", choices=READERS, default="classical", help="symbol finder: classical shape tests or the trained detector")
     ap.add_argument("--weights", default=WEIGHTS, help="trained reader: detector weights directory")
     ap.add_argument("--device", help="trained reader: cpu or mps (default mps when available, else cpu)")
+    ap.add_argument("--crops", type=int, choices=(0, 1), help="the OCR pass around every symbol: 1 on, 0 off (default: on for vision, off for the other engines)")
 
 
-def choose(name: str = "classical", weights: str = WEIGHTS, device: str | None = None):
+def choose(name: str = "classical", weights: str = WEIGHTS, device: str | None = None, crops: bool | int | None = None):
     """read_sheet of the named reader; the trained one is imported only when chosen, since it loads torch"""
+    crops = None if crops is None else bool(crops)
     if name == "classical":
-        return read_sheet
+        return partial(read_sheet, crops=crops)
     from . import reader_v2
-    return partial(reader_v2.read_sheet, weights=weights, device=device)
+    return partial(reader_v2.read_sheet, weights=weights, device=device, crops=crops)
 
 
 if __name__ == "__main__":

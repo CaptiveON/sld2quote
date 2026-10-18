@@ -31,7 +31,7 @@ def main(argv=None):
         stem = os.path.splitext(os.path.basename(a.image))[0]
         spec = a.spec or os.path.join(os.path.dirname(a.image), stem.replace("-scan", "") + "-spec.txt")
         out = a.out or os.path.join("out", stem)
-        res = run(a.image, spec, out, choose(a.reader, a.weights, a.device))
+        res = run(a.image, spec, out, choose(a.reader, a.weights, a.device, a.crops))
         print(json.dumps(res))
 
 

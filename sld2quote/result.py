@@ -82,12 +82,13 @@ def source_of(image_path: str, gt: dict | None, given: dict | None) -> dict:
 
 
 def build_result(image_path: str, spec_path: str | None = None, out_dir: str | None = None, gt_path: str | None = None,
-                 reader: str = "trained", weights: str = WEIGHTS, device: str = "cpu", source: dict | None = None) -> dict:
-    """run the pipeline as cli.run does, write its files plus sheet.png, overlay.png and result.json into out_dir, return the Result"""
+                 reader: str = "trained", weights: str = WEIGHTS, device: str = "cpu", source: dict | None = None, crops: bool | None = None) -> dict:
+    """run the pipeline as cli.run does, write its files plus sheet.png, overlay.png and result.json into out_dir, return the Result;
+    crops (the OCR pass around every symbol) None follows the OCR engine (reader.read_sheet)"""
     t0 = time.perf_counter()
     out_dir = out_dir or os.path.join("out", os.path.splitext(os.path.basename(image_path))[0])
     os.makedirs(out_dir, exist_ok=True)
-    ex = choose(reader, weights, device)(image_path)
+    ex = choose(reader, weights, device, crops)(image_path)
     t1 = time.perf_counter()
     sp = read_spec(spec_path) if spec_path and os.path.exists(spec_path) else None
     conflicts = cross_check(ex["notes"], sp) if sp else []
@@ -127,7 +128,7 @@ def main(argv=None):
     ap.add_argument("image"); ap.add_argument("--spec"); ap.add_argument("--gt", help="answer key (the generator's .json): scores the run"); ap.add_argument("--out", required=True)
     add_reader_args(ap); ap.set_defaults(reader="trained", device="cpu")
     a = ap.parse_args(argv)
-    r = build_result(a.image, a.spec, a.out, a.gt, a.reader, a.weights, a.device)
+    r = build_result(a.image, a.spec, a.out, a.gt, a.reader, a.weights, a.device, crops=a.crops)
     print(json.dumps({"out": a.out, "devices": len(r["devices"]), "total_gbp": r["bom"]["total_gbp"], "score": r["score"], "timing": r["timing"]}))
 
 

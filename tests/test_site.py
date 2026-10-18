@@ -1,6 +1,7 @@
 """The site's back end (site/app.py) through FastAPI's test client, with the classical reader (SLD2QUOTE_READER=classical,
 so no weights are needed) and the runs in a temporary directory: health, the samples list without and with an index, a
-live generated sheet scored against its answer key, the upload checks, and a run file served. About 10 s."""
+live generated sheet scored against its answer key, the upload checks, a run file served, and the OCR crop pass following the
+engine (on for vision, off for rapidocr) unless overridden, in the reader and through the server's SLD2QUOTE_CROPS. About 10 s."""
 import json, os, sys, tempfile, time
 import pytest
 
@@ -9,6 +10,7 @@ os.environ["SLD2QUOTE_READER"] = "classical"
 os.environ["SLD2QUOTE_RUNS"] = tempfile.mkdtemp(prefix="sld2quote-runs-")
 sys.path.insert(0, os.path.join(ROOT, "site"))
 import app as site  # noqa: E402
+from sld2quote import reader  # noqa: E402
 from fastapi.testclient import TestClient  # noqa: E402
 
 RESULT_KEYS = {"id", "source", "images", "size", "steps", "devices", "board", "bom", "issues", "conflicts", "spec", "score", "timing", "reader", "engine", "model", "files"}
@@ -81,3 +83,22 @@ def test_live_runs_answer_503_while_warming(client, monkeypatch):
 def test_scorecards_and_index(client):
     assert set(client.get("/api/scorecards").json()) == {"results_md", "ocr_md", "detector_md", "problems_md"}
     assert client.get("/").status_code == 200 and client.get("/static/../app.py").status_code in (400, 404)
+
+
+def test_the_crop_pass_follows_the_engine_unless_overridden(tmp_path, monkeypatch):
+    from PIL import Image
+    page = tmp_path / "blank.png"; Image.new("L", (400, 300), 255).save(page)
+    tags = []
+    monkeypatch.setattr(reader, "_ocr_image", lambda img, scale, tag: tags.append(tag) or [])
+    one = lambda page_img, ink, texts: [{"id": "S1", "kind": "BREAKER", "box": [100, 100, 30, 30], "shape_score": 1.0}]
+    for engine, crops, expect in [("vision", None, True), ("rapidocr", None, False), ("rapidocr", True, True), ("vision", False, False)]:
+        monkeypatch.setenv("SLD2QUOTE_OCR", engine); tags.clear()
+        ex = reader.read_sheet(str(page), finder=one, crops=crops)
+        assert ex["crops"] is expect and ("crop" in tags) is expect and tags[0] == "page", (engine, crops, tags)
+    assert reader.choose("classical", crops=0).keywords == {"crops": False}
+
+
+def test_the_server_passes_crops_through(client, monkeypatch):
+    monkeypatch.setattr(site, "CROPS", False)
+    res = client.post("/api/generate", json={"seed": 3, "level": "simple"}).json()
+    assert client.get(res["files"]["extraction_json"]).json()["crops"] is False

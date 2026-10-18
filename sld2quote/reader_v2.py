@@ -120,16 +120,16 @@ def threshold(config, given: float | None = None) -> tuple:
 
 
 def read_sheet(image_path: str, texts: list[dict] | None = None, weights: str = WEIGHTS, device: str | None = None,
-               score_threshold: float | None = None, nms_iou: float | None = None) -> dict:
-    """the section 5 extraction with the detector's symbols; score_threshold defaults to threshold()'s choice and nms_iou to
-    the model's config.json"""
+               score_threshold: float | None = None, nms_iou: float | None = None, crops: bool | None = None) -> dict:
+    """the section 5 extraction with the detector's symbols; score_threshold defaults to threshold()'s choice, nms_iou to
+    the model's config.json and crops (the OCR pass around every symbol) to the OCR engine's default (reader.read_sheet)"""
     device = device or default_device()
     model, proc = load(weights, device)
     st, source = threshold(model.config, score_threshold)
     ni = getattr(model.config, "nms_iou", None) if nms_iou is None else nms_iou
     if st is None or ni is None:
         raise ValueError(f"{weights}: config.json has no score_threshold or nms_iou (trained before they were saved); pass both")
-    ex = reader.read_sheet(image_path, texts, finder=lambda page, ink, texts: to_symbols(detect_page(page, model, proc, device, st, ni)), reader="trained")
+    ex = reader.read_sheet(image_path, texts, finder=lambda page, ink, texts: to_symbols(detect_page(page, model, proc, device, st, ni)), reader="trained", crops=crops)
     ex["detector"] = {"weights": weights, "device": device, "threads": torch.get_num_threads(), "score_threshold": st, "score_threshold_source": source, "nms_iou": ni, "merge_iou": MERGE_IOU,
                      "edge_px": EDGE_PX, "contain": CONTAIN}
     return ex

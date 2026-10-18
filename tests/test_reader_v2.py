@@ -134,7 +134,7 @@ def test_the_classical_reader_reads_a_generated_sheet_exactly_as_before_the_refa
     im, sh = make_sheet(1, level="medium"); im.save(tmp_path / "sheet-medium-1.png")
     ex = reader.read_sheet(str(tmp_path / "sheet-medium-1.png"), [{"text": t["text"], "conf": 1.0, "box": list(t["box"]), "src": "page"} for t in sh.texts])
     assert [(d["type"], d["box"], d.get("rating"), d["label_texts"]) for d in ex["devices"]] == BEFORE_DEVICES
-    old = {k: v for k, v in ex.items() if k not in ("reader", "seconds")}
+    old = {k: v for k, v in ex.items() if k not in ("reader", "seconds", "crops")}  # crops: added 19 Oct, a setting not a reading
     assert hashlib.sha256(json.dumps(old, separators=(",", ":")).encode()).hexdigest() == BEFORE_SHA256
     assert ex["reader"] == "classical" and set(ex["seconds"]) == {"total", "ocr", "detector"}
 
