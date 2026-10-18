@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse, glob, json, os, re, shutil, time
 from collections import Counter, defaultdict
 from .classes import DEVICE_TO_CLASS
+from .ocr import default_engine
 from .reader import read_sheet, add_reader_args, choose
 from .spec import read_spec, cross_check
 from .rules import build_bom
@@ -79,8 +80,13 @@ def eval_sheet(png: str, gt_path: str, spec_path: str, read=read_sheet) -> dict:
             "sym_precision": round(prec, 3), "sym_recall": round(rec, 3), "rating_acc": round(rating_ok / max(1, tp), 3), "poles_acc": round(poles_ok / max(1, tp), 3), "ka_acc": round(ka_ok / max(1, tp), 3),
             "notes_acc": round(notes_ok / len(notes_fields), 3), "conflict_tp": len(pc & gc), "conflict_fp": len(pc - gc), "conflict_fn": len(gc - pc),
             "bom_precision": round(bprec, 3), "bom_recall": round(brec, 3), "price_error": round(price_err, 4), "pred_total": bom["total_gbp"], "gt_total": gbom["total_gbp"], "seconds": round(secs["total"], 1),
-            "seconds_ocr": secs["ocr"], "seconds_detector": secs["detector"], "reader": ex["reader"], "detector": ex.get("detector"), "crops": ex.get("crops"),
+            "seconds_ocr": secs["ocr"], "seconds_detector": secs["detector"], "reader": ex["reader"], "detector": ex.get("detector"), "crops": ex.get("crops"), "engine": engine(),
             "per_type": {t: {"tp": hit[t], "pred": npred[t], "gt": ngt[t], "rating_ok": hit_rating[t]} for t in TYPES if npred[t] or ngt[t]}}
+
+
+def engine() -> str:
+    """the OCR engine the reader used: SLD2QUOTE_OCR, else the platform default"""
+    return os.environ.get("SLD2QUOTE_OCR") or default_engine()
 
 
 def agg(sub):
@@ -123,7 +129,7 @@ def describe(rows: list) -> str:
     d = rows[0]["detector"] if rows else None
     on = d and (d["device"] + (f" ({d['threads']} threads)" if d["device"] == "cpu" and d.get("threads") else ""))
     src = {"drawing": " (chosen on whole validation drawings)", "tile": " (chosen per tile at training)", "argument": " (given)"}.get(d.get("score_threshold_source"), "") if d else ""
-    crops = "" if not rows or rows[0].get("crops") is None else f"; OCR crop pass around every symbol {'on' if rows[0]['crops'] else 'off'}"
+    crops = "" if not rows or rows[0].get("crops") is None else f"; OCR engine {rows[0].get('engine', '?')}, crop pass around every symbol {'on' if rows[0]['crops'] else 'off'}"
     return ("classical reader (shape tests)" if not d else f"trained reader: detector `{d['weights']}` on {on}, score threshold {d['score_threshold']}{src}, "
             f"NMS IoU {d['nms_iou']} per tile, tiles merged at IoU {d['merge_iou']}" +
             (f", boxes within {d['edge_px']} px of an inner tile edge dropped" if d.get("edge_px") is not None else "") +
@@ -216,7 +222,8 @@ def main(argv=None):
         raise SystemExit(f"{a.data}: no sheet-*.png with its answer key (.json) and specification (-spec.txt)")
     os.makedirs(a.out, exist_ok=True)
     json.dump(rows, open(os.path.join(a.out, "results.json"), "w"), indent=1)
-    title = f"## {os.path.normpath(a.data)}, {a.reader} reader" + (f" (`{a.weights}`)" if a.reader == "trained" else "")
+    # the engine and crop setting are in the title, so a run with another setting sits beside the earlier sections instead of replacing them
+    title = f"## {os.path.normpath(a.data)}, {a.reader} reader" + (f" (`{a.weights}`)" if a.reader == "trained" else "") + f", {rows[0]['engine']} OCR, crops {'on' if rows[0]['crops'] else 'off'}"
     L = section(rows)
     write_section(os.path.join(a.out, "RESULTS.md"), title, L)
     print("\n".join([title, ""] + L[:next(i for i, l in enumerate(L) if l.startswith("<details>"))]))
