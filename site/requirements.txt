@@ -14,3 +14,4 @@ scipy==1.14.1
 rapidocr-onnxruntime==1.4.4
 onnxruntime==1.31.0
 opencv-python==5.0.0.93
+safetensors==0.4.5

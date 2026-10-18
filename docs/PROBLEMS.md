@@ -267,6 +267,34 @@ cleaned up by hand.
 **For the real project.** These are the kind of details that decide whether a training run fits in a night; they are recorded with the
 run so they are not rediscovered.
 
+## 17a. The graphics chip was computing some gradients wrongly
+
+**What happened (18 Oct, late).** A training run crashed within a minute with "matrix contains invalid numeric entries" inside the
+matching step: the model's outputs had become NaN. The losses had all been finite, so the damage had come in through the gradients. On a
+fixed batch, the trainer's engineer compared every parameter's gradient on the Mac's graphics chip (MPS, PyTorch 2.5.1) with a float64
+recomputation on the CPU. Every gradient agreed except one kind: the weight gradient of the three large linear layers in the decoder's
+deformable attention (256 by 256 over 134,400 rows), which was wrong by anywhere from 0.08 to 10^36 in six of six repeats, and in one
+repeat two different layers returned the identical wrong value, as if stale memory were being read. A standalone product of two plain
+matrices was wrong above 65,536 rows and right at or below it.
+
+**Why it mattered.** When the wrong value is finite, gradient clipping divides the whole update by it, so those steps do almost nothing
+(norms of 30,000 against true norms of 30 to 700). When it is infinite, the clip produces NaN weights and the next forward pass fails.
+Every graphics-chip run of this project trained through this, which likely explains part of the pass-to-pass swings seen earlier.
+
+**What was done.** A workaround in the trainer: on the graphics chip, every linear layer runs in pieces of at most 65,536 rows during
+training (gradients add up across pieces), which brings the error to 10^-7 at under 1 percent cost; inference is untouched. A finite loss
+with a non-finite gradient now skips that one update and names the tiles, as mixed-precision training does. The crashed run was relaunched
+once with the fix, and a clean rerun of the best recipe is queued so that the recipe is measured with correct gradients.
+
+**Public record.** PyTorch's own tracker holds related silent-correctness reports for MPS matrix products: a batched product returning
+wrong entries once a dimension reaches 32,769 ([issue 111634](https://github.com/pytorch/pytorch/issues/111634), marked high priority), a
+follow-up saying earlier fixes were partial ([issue 122123](https://github.com/pytorch/pytorch/issues/122123)), and wrong results from a
+linear layer with a non-contiguous weight ([issue 162730](https://github.com/pytorch/pytorch/issues/162730)). None names this exact case;
+our evidence is the CPU comparison above.
+
+**For the real project.** Train on hardware whose numerics are verified, and verify them: a one-batch gradient check against the CPU
+before a long run is cheap, and the only reason this was found at all was that a crash forced the look.
+
 ## 18. Licences decide what can ship
 
 **What happened.** The most popular detector family (Ultralytics YOLO) is AGPL, which would oblige a company building on it to publish its

@@ -364,6 +364,23 @@ too weak for the encoder's proposals to keep them (PROBLEMS 10c). Plan, in order
 class` on data/coco_fonts (about 3.3 h, can run in daytime while step 6 is cpu work); drawing-level thresholds; only then more relays in
 the generator.
 
+**Deadline moved, 18 Oct 23:30 (Adnan): the application is submitted on 19 Oct with the live site link.** Five agents launched at 23:40
+for tonight: site back end and site front end (Fable 5.1 at max, authorised by Adnan for these two), precomputed samples, deployment
+(model to `itsmoadnan/sld2quote-detector`, Space `itsmoadnan/sld2quote`, private until his word) and packaging (README from the numbers,
+MIT in his name, CITATION, CHANGELOG, 0.2.0), all told to apply the ponytail skill and keep to the aim. Step 6 only if an agent finishes
+early; the full link rule, the scorecard by cause, the real-drawing labels and the Space benchmark are reported as the road map, not done.
+Drawing-level threshold now stored with the weights (`score_threshold_drawing`, r18_full 0.11). Night2b finished 23:27 (see below).
+
+**Night2b and the MPS fault, 18 Oct 23:30 to 19 Oct 00:10.** Run 3 (`weights/rtdetr_r18_plain_ema`, plain plus EMA 0.999/200) is the first
+model to beat r18_full per tile: test_unseen mAP@0.5 0.950 (pass 8, threshold 0.07) and 0.956 at pass 10, mean recall 0.904 / 0.921,
+val curve monotonic 0.793 to 0.949; generator recall 0.74 to 0.85 and false positives 202 to 222 are the watch points; drawing-level
+check running. Run 4 (fonts plus EMA) crashed at step 5 with NaN outputs; root cause: an MPS fault in the weight gradient of linears over
+65,536 rows (PROBLEMS 17a), affecting every MPS run so far; workaround in the trainer (`split_linear`, `mps_safe`, skip of non-finite
+gradient updates), run 4 relaunched 23:50 with it (ends 03:40 to 07:00 depending on cpu contention). The model repo
+`itsmoadnan/sld2quote-detector` (private) holds r18_full. Hugging Face refused the Docker Space on the free plan (HTTP 402: Docker and
+Gradio Spaces on cpu-basic need PRO, about 9 dollars a month); Adnan decides; a free static Space with the precomputed samples is prepared
+as the fallback, with the front end given a static mode.
+
 ## 8. Metrics (as implemented in `evaluate.py`; keep the names)
 
 symbol precision and recall (IoU >= 0.3, same type); rating accuracy, poles accuracy, kA accuracy over matched devices; notes accuracy over
