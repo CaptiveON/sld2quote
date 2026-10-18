@@ -122,7 +122,8 @@ def rule_line(name: str, n: int, pt: dict) -> str:
 def describe(rows: list) -> str:
     d = rows[0]["detector"] if rows else None
     on = d and (d["device"] + (f" ({d['threads']} threads)" if d["device"] == "cpu" and d.get("threads") else ""))
-    return ("classical reader (shape tests)" if not d else f"trained reader: detector `{d['weights']}` on {on}, score threshold {d['score_threshold']}, "
+    src = {"drawing": " (chosen on whole validation drawings)", "tile": " (chosen per tile at training)", "argument": " (given)"}.get(d.get("score_threshold_source"), "") if d else ""
+    return ("classical reader (shape tests)" if not d else f"trained reader: detector `{d['weights']}` on {on}, score threshold {d['score_threshold']}{src}, "
             f"NMS IoU {d['nms_iou']} per tile, tiles merged at IoU {d['merge_iou']}" +
             (f", boxes within {d['edge_px']} px of an inner tile edge dropped" if d.get("edge_px") is not None else "") +
             (f", a box holding {d['contain']} of a better box's area dropped" if d.get("contain") is not None else ""))
@@ -164,12 +165,22 @@ def write_section(path: str, title: str, lines: list):
     open(path, "w").write(head.rstrip("\n") + "\n\n" + "\n\n".join(sections.values()) + "\n")
 
 
-def make_sets(coco: str = "data/coco", out: str = "data/eval") -> dict:
-    """<out>/test and <out>/unseen: the sheets of the export's test and test_unseen splits, both copies with their answer keys
-    and specifications, hard-linked from the pool the manifest names, so drawing-level and tile-level numbers come from the
-    same sheets. Each set is rebuilt from scratch, so it follows the manifest when a split is widened."""
-    man = json.load(open(os.path.join(coco, "manifest.json"))); sp, pool = man["splits"], man["pool"]["path"]
-    sets = {"test": dict.fromkeys(sp["test_clean"]["sheet_ids"] + sp["test_scan"]["sheet_ids"]), "unseen": dict.fromkeys(sp["test_unseen"]["sheet_ids"])}
+SETS = {"test": ("test_clean", "test_scan"), "unseen": ("test_unseen",), "val": ("val",), "val_unseen": ("val_unseen",)}  # set: the export's splits
+
+
+def sets_dir(coco: str) -> str:
+    """where an export's evaluation sets go: data/coco's in data/eval, data/coco_fonts's in data/eval_fonts"""
+    coco = os.path.normpath(coco); name = os.path.basename(coco)
+    return os.path.join(os.path.dirname(coco), "eval" + (name[4:] if name.startswith("coco") else "_" + name))
+
+
+def make_sets(coco: str = "data/coco", out: str | None = None) -> dict:
+    """<out>/test, unseen, val and val_unseen: the sheets of the export's splits (SETS), both copies with their answer keys
+    and specifications, hard-linked from the pool its manifest names, so drawing-level and tile-level numbers come from the
+    same sheets and a threshold can be chosen on whole validation drawings. Each set is rebuilt from scratch, so it follows
+    the manifest when a split is widened; a split the manifest lacks gives no set."""
+    man = json.load(open(os.path.join(coco, "manifest.json"))); sp, pool = man["splits"], man["pool"]["path"]; out = out or sets_dir(coco)
+    sets = {name: dict.fromkeys(i for k in splits for i in sp[k]["sheet_ids"]) for name, splits in SETS.items() if all(k in sp for k in splits)}
     for name, ids in sets.items():
         d = os.path.join(out, name); shutil.rmtree(d, ignore_errors=True); os.makedirs(d)
         for f in (s + c + e for s in ids for c in ("", "-scan") for e in (".png", ".json", "-spec.txt")):
@@ -179,19 +190,20 @@ def make_sets(coco: str = "data/coco", out: str = "data/eval") -> dict:
                 if not os.path.exists(os.path.join(pool, f)):
                     raise FileNotFoundError(f"{pool}/{f}: named by {coco}/manifest.json but not in the pool") from e
                 shutil.copy2(os.path.join(pool, f), os.path.join(d, f))  # another file system: copy instead
-    return {name: len(ids) for name, ids in sets.items()}
+    return {os.path.join(out, name): len(ids) for name, ids in sets.items()}
 
 
 def main(argv=None):
     ap = argparse.ArgumentParser(prog="python3 -m sld2quote.evaluate", description=__doc__.splitlines()[0])
     ap.add_argument("--data", default="data"); ap.add_argument("--out", default="eval")
     add_reader_args(ap)
-    ap.add_argument("--make-sets", action="store_true", help="build data/eval/test and data/eval/unseen from the manifest in --coco, then stop")
-    ap.add_argument("--coco", default="data/coco", help="the COCO export whose manifest names the test and test_unseen sheets")
+    ap.add_argument("--make-sets", action="store_true", help="build the test, unseen, val and val_unseen sets from the manifest in --coco, then stop")
+    ap.add_argument("--coco", default="data/coco", help="the COCO export whose manifest names the sheets of each split")
+    ap.add_argument("--sets", help="where --make-sets puts the sets (default data/eval for data/coco, data/eval_fonts for data/coco_fonts)")
     a = ap.parse_args(argv)
     if a.make_sets:
-        for name, n in make_sets(a.coco).items():
-            print(f"data/eval/{name}: {n} sheets, clean and scan copies")
+        for d, n in make_sets(a.coco, a.sets).items():
+            print(f"{d}: {n} sheets, clean and scan copies")
         return
     read = choose(a.reader, a.weights, a.device)
     rows = []

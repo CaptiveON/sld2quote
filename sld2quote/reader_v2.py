@@ -87,14 +87,19 @@ def merge(origins: list, results: list, size: tuple, iou: float = MERGE_IOU, edg
 
 
 @torch.no_grad()
-def detect_page(page: Image.Image, model, proc, device: str, score_threshold: float, nms_iou: float) -> dict:
-    """the detector on a whole page: its tiles through detect() in batches, merged into page pixels"""
+def tile_detections(page: Image.Image, model, proc, device: str, score_threshold: float, nms_iou: float) -> tuple:
+    """the detector on every tile of a page, in batches through detect(): the tile origins, each tile's detections, the page size"""
     rgb = page.convert("RGB"); grid = tile_grid(*rgb.size, TILE, OVERLAP); results = []
     for i in range(0, len(grid), BATCH):
         tiles = [cut_tile(rgb, x, y, TILE) for x, y in grid[i:i + BATCH]]
         pv = proc(images=tiles, return_tensors="pt")["pixel_values"].to(device)
         results += detect(model, proc, pv, [(TILE, TILE)] * len(tiles), score_threshold, nms_iou)
-    return merge(grid, results, rgb.size)
+    return grid, results, rgb.size
+
+
+def detect_page(page: Image.Image, model, proc, device: str, score_threshold: float, nms_iou: float) -> dict:
+    """the detector on a whole page, merged into page pixels"""
+    return merge(*tile_detections(page, model, proc, device, score_threshold, nms_iou))
 
 
 def to_symbols(r: dict) -> list[dict]:
@@ -105,16 +110,26 @@ def to_symbols(r: dict) -> list[dict]:
             for i, ((x0, y0, x1, y1), s, c) in enumerate(dets)]
 
 
+def threshold(config, given: float | None = None) -> tuple:
+    """the operating score threshold and its source: the caller's, else the one chosen on whole validation drawings
+    (select_threshold.py writes score_threshold_drawing), else the per-tile one chosen at training"""
+    for value, source in ((given, "argument"), (getattr(config, "score_threshold_drawing", None), "drawing"), (getattr(config, "score_threshold", None), "tile")):
+        if value is not None:
+            return value, source
+    return None, None
+
+
 def read_sheet(image_path: str, texts: list[dict] | None = None, weights: str = WEIGHTS, device: str | None = None,
                score_threshold: float | None = None, nms_iou: float | None = None) -> dict:
-    """the section 5 extraction with the detector's symbols; score_threshold and nms_iou default to the model's config.json"""
+    """the section 5 extraction with the detector's symbols; score_threshold defaults to threshold()'s choice and nms_iou to
+    the model's config.json"""
     device = device or default_device()
     model, proc = load(weights, device)
-    st = getattr(model.config, "score_threshold", None) if score_threshold is None else score_threshold
+    st, source = threshold(model.config, score_threshold)
     ni = getattr(model.config, "nms_iou", None) if nms_iou is None else nms_iou
     if st is None or ni is None:
         raise ValueError(f"{weights}: config.json has no score_threshold or nms_iou (trained before they were saved); pass both")
     ex = reader.read_sheet(image_path, texts, finder=lambda page, ink, texts: to_symbols(detect_page(page, model, proc, device, st, ni)), reader="trained")
-    ex["detector"] = {"weights": weights, "device": device, "threads": torch.get_num_threads(), "score_threshold": st, "nms_iou": ni, "merge_iou": MERGE_IOU,
+    ex["detector"] = {"weights": weights, "device": device, "threads": torch.get_num_threads(), "score_threshold": st, "score_threshold_source": source, "nms_iou": ni, "merge_iou": MERGE_IOU,
                      "edge_px": EDGE_PX, "contain": CONTAIN}
     return ex

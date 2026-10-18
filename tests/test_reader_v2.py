@@ -1,9 +1,10 @@
 """Trained reader and the shared reading pipeline: merging detections across overlapping tiles, dropping boxes cut by an
 inner tile edge and boxes holding a better box, mapping tile boxes back to the page, detector classes to device types with the three breaker roles, deskew levelling a scan, the classical reader
-unchanged by the refactor (against an extraction of a clean sheet saved before it), the RESULTS.md section writer, and one
-end-to-end run of the trained reader on a generated sheet (the one slow test, about 15 s; skipped without trained weights;
+unchanged by the refactor (against an extraction of a clean sheet saved before it), the RESULTS.md section writer, the
+evaluation sets, the threshold chosen on whole validation drawings, and one end-to-end run of the trained reader on a generated sheet (the one slow test, about 15 s; skipped without trained weights;
 deselect with -k "not end_to_end")."""
 import hashlib, json, math, os, sys
+from types import SimpleNamespace
 import numpy as np
 import pytest
 import torch
@@ -11,9 +12,9 @@ from PIL import Image, ImageDraw
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 sys.path.insert(0, ROOT)
-from sld2quote import reader, reader_v2 as rv2
+from sld2quote import reader, reader_v2 as rv2, select_threshold as sel
 from sld2quote.classes import CLASSES, CLASS_ID
-from sld2quote.evaluate import iou, write_section
+from sld2quote.evaluate import iou, make_sets, write_section
 from sld2quote.generate import make_sheet, write_sheet
 from sld2quote.tiles import tile_grid
 
@@ -148,6 +149,46 @@ def test_a_rerun_replaces_only_its_own_section_of_results_md(tmp_path):
     assert text.index("## data/a, classical reader\n\nrerun") < text.index("## data/b, trained reader\n\nsecond")
 
 
+def test_the_drawing_sweep_keeps_a_weak_ghost_out_and_counts_it_on_blank_paper():
+    # one tile: a breaker, a motor and a capacitor where the answer key has them, and a weak ghost capacitor on blank paper
+    dets = tile((0.9, "breaker", 100, 100, 130, 130), (0.3, "motor", 300, 100, 340, 140), (0.5, "capacitor", 500, 100, 530, 140),
+                (0.08, "capacitor", 100, 400, 200, 500))
+    gts = [("breaker", [100, 100, 30, 30]), ("motor", [300, 100, 40, 40]), ("capacitor", [500, 100, 30, 40])]
+    ink = np.zeros((1000, 1600), bool)
+    for _, (x, y, w, h) in gts:
+        ink[y: y + h, x: x + w] = True
+    table = sel.sweep([([(0, 0)], [dets], (1600, 1000), gts, ink)], [0.05, 0.1, 0.2, 0.35])
+    # mean class F1: the ghost halves the capacitor's precision at 0.05; at 0.35 the motor is lost
+    assert [table[t]["mean_f1"] for t in (0.05, 0.1, 0.2, 0.35)] == [pytest.approx(v, abs=1e-4) for v in (8 / 9, 1, 1, 2 / 3)]
+    assert [table[t]["blank_fp"] for t in (0.05, 0.1)] == [1, 0]
+    assert sel.choose(table) == 0.2  # 0.1 and 0.2 tie: the middle of the tie, as the trainer chooses per tile
+    assert json.loads(json.dumps(table))  # plain numbers only, so the sweep can be written beside the weights
+
+
+def test_the_drawing_threshold_goes_beside_the_per_tile_one_and_the_reader_prefers_it(tmp_path):
+    (tmp_path / "config.json").write_text(json.dumps({"score_threshold": 0.1, "nms_iou": 0.5}))
+    sel.write(str(tmp_path), 0.2, {0.2: {"mean_f1": 1.0, "blank_fp": 0, "classes": {}}}, {"sets": ["data/eval/val"]})
+    cfg = json.loads((tmp_path / "config.json").read_text())
+    assert (cfg["score_threshold"], cfg["score_threshold_drawing"]) == (0.1, 0.2) and json.load(open(tmp_path / "threshold_drawing.json"))["chosen"] == 0.2
+    assert rv2.threshold(SimpleNamespace(**cfg)) == (0.2, "drawing") and rv2.threshold(SimpleNamespace(**cfg), 0.3) == (0.3, "argument")
+    assert rv2.threshold(SimpleNamespace(score_threshold=0.1)) == (0.1, "tile")
+    with pytest.raises(SystemExit):  # never on a test set
+        sel.main(["--weights", str(tmp_path), "--sets", "data/eval/test"])
+
+
+def test_make_sets_takes_each_split_from_the_export_s_own_pool_into_its_own_folder(tmp_path):
+    pool, coco = tmp_path / "pool_fonts", tmp_path / "coco_fonts"; pool.mkdir(); coco.mkdir()
+    ids = {"val": ["sheet-20001"], "val_unseen": ["sheet-20002"], "test_clean": ["sheet-20003"], "test_scan": ["sheet-20003"], "test_unseen": ["sheet-20004"], "train": ["sheet-20005"]}
+    names = lambda i: [f"{i}{c}{e}" for c in ("", "-scan") for e in (".png", ".json", "-spec.txt")]
+    for i in {i for v in ids.values() for i in v}:
+        for f in names(i):
+            (pool / f).write_text("x")
+    (coco / "manifest.json").write_text(json.dumps({"pool": {"path": str(pool)}, "splits": {k: {"sheet_ids": v} for k, v in ids.items()}}))
+    assert make_sets(str(coco)) == {str(tmp_path / "eval_fonts" / n): 1 for n in ("test", "unseen", "val", "val_unseen")}  # data/coco_fonts: data/eval_fonts
+    assert sorted(os.listdir(tmp_path / "eval_fonts" / "val_unseen")) == sorted(names("sheet-20002"))
+    assert os.path.samefile(tmp_path / "eval_fonts" / "val" / "sheet-20001.png", pool / "sheet-20001.png")  # hard links, not copies
+
+
 @pytest.mark.skipif(not os.path.isfile(os.path.join(WEIGHTS, "config.json")), reason=f"no trained detector at {WEIGHTS} (weights are not committed; "
                     "train them with sld2quote.train_detector)")
 def test_end_to_end_the_trained_reader_finds_the_transformer_and_the_incomer_breaker(tmp_path):
@@ -157,7 +198,7 @@ def test_end_to_end_the_trained_reader_finds_the_transformer_and_the_incomer_bre
     assert {"image", "size", "deskew_deg", "texts", "busbars", "symbols", "devices", "notes"} <= set(ex) and ex["reader"] == "trained"
     assert all(s["kind"] in CLASSES and 0 <= s["shape_score"] <= 1 and len(s["box"]) == 4 for s in ex["symbols"]) and ex["symbols"]
     assert all({"id", "symbol", "type", "box", "rating", "label", "label_texts", "conf", "on_bus", "connected"} <= set(d) for d in ex["devices"])
-    assert set(ex["seconds"]) == {"total", "ocr", "detector"} and ex["detector"]["score_threshold"] > 0
+    assert set(ex["seconds"]) == {"total", "ocr", "detector"} and ex["detector"]["score_threshold"] > 0 and ex["detector"]["score_threshold_source"] in ("drawing", "tile")
     assert (ex["detector"]["edge_px"], ex["detector"]["contain"], ex["detector"]["merge_iou"]) == (rv2.EDGE_PX, rv2.CONTAIN, rv2.MERGE_IOU)
     for want in ("TX-1", "ACB-1"):
         g = next(d for d in gt["devices"] if d["id"] == want)
