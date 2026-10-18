@@ -10,7 +10,7 @@ The export at data/coco holds manifest.json and <split>/annotations.json with <s
 NMS); evaluation reports every split with NMS and raw. Precision and recall match greedily by score, as evaluate.py does, at
 IoU >= 0.5; mAP comes from pycocotools. The data is synthetic: every tile is cut from a sheet drawn by generate.py."""
 from __future__ import annotations
-import argparse, contextlib, hashlib, importlib.metadata as md, io, json, logging, math, os, platform, random, shlex, shutil, statistics, subprocess, sys, time
+import argparse, contextlib, copy, glob, hashlib, importlib.metadata as md, io, json, logging, math, os, platform, random, shlex, shutil, statistics, subprocess, sys, time
 from collections import Counter, defaultdict
 from types import SimpleNamespace
 import numpy as np
@@ -107,13 +107,21 @@ def jitter(img, anns, rng, brightness: float, contrast: float, scale: float, min
     return out, kept
 
 
-def repeat_factors(ds: Tiles, t: float) -> tuple[list, dict]:
-    """repeat-factor sampling, the LVIS rule: per class r(c) = max(1, sqrt(t / f(c))), f(c) the fraction of the split's tiles holding
-    class c; per tile the largest factor among its classes, 1 for a tile with none. Returns the tile factors and the class factors."""
-    held = [{a["category_id"] for a in ds.anns[im["id"]]} for im in ds.images]
-    f = Counter(c for h in held for c in h)
-    rc = {c: max(1.0, math.sqrt(t * len(held) / f[c])) for c in f}
-    return [max((rc[c] for c in h), default=1.0) for h in held], rc
+GROUPS = {"class": lambda a: CLASSES[a["category_id"]], "device_type": lambda a: a.get("device_type")}  # --rare-group: what a frequency counts
+
+
+def held_groups(ds: Tiles, group: str) -> list:
+    """per tile, the set of frequency groups it holds: classes, or device types (the export's extra key), which keep the
+    bus-section apart from the other breakers"""
+    return [{GROUPS[group](a) for a in ds.anns[im["id"]]} - {None} for im in ds.images]
+
+
+def repeat_factors(ds: Tiles, t: float, group: str = "class") -> tuple[list, dict]:
+    """repeat-factor sampling, the LVIS rule: per group g r(g) = max(1, sqrt(t / f(g))), f(g) the fraction of the split's tiles
+    holding g; per tile the largest factor among its groups, 1 for a tile with none. Returns the tile factors and the group factors."""
+    held = held_groups(ds, group); f = Counter(g for h in held for g in h)
+    rg = {g: max(1.0, math.sqrt(t * len(held) / f[g])) for g in f}
+    return [max((rg[g] for g in h), default=1.0) for h in held], rg
 
 
 def repeat_indices(factors: list, seed: int, epoch: int) -> list:
@@ -164,14 +172,37 @@ def optimiser(model, lr: float, backbone_lr: float, weight_decay: float):
     return torch.optim.AdamW([{"params": groups[0], "lr": backbone_lr}, {"params": groups[1], "lr": lr}], weight_decay=weight_decay)
 
 
-def step(model, opt, sched, batch: dict, device: str, grad_clip: float) -> float:
-    """one optimisation step; a non-finite loss stops the run before it can reach a checkpoint"""
+class EMA:
+    """the RT-DETR authors' weight average (lyuwenyu/RT-DETR, src/optim/ema.py): after every optimiser step v = d * v + (1 - d) * w over
+    every floating-point entry of the state dict, parameters and buffers, with d = decay * (1 - exp(-updates / warmup)). The Hugging
+    Face model ties its class and box heads to the decoder's, so a storage met twice in the state dict is averaged once."""
+
+    def __init__(self, model, decay: float, warmup: int, updates: int = 0):
+        self.module, self.decay, self.warmup, self.updates = copy.deepcopy(model).eval(), decay, warmup, updates
+        for q in self.module.parameters():
+            q.requires_grad_(False)
+
+    def d(self, updates: int) -> float:
+        return self.decay * (1 - math.exp(-updates / self.warmup))
+
+    @torch.no_grad()
+    def update(self, model):
+        self.updates += 1; d, w, seen = self.d(self.updates), model.state_dict(), set()
+        for k, v in self.module.state_dict().items():
+            if v.dtype.is_floating_point and v.data_ptr() not in seen:
+                seen.add(v.data_ptr()); v.mul_(d).add_(w[k].detach(), alpha=1 - d)
+
+
+def step(model, opt, sched, batch: dict, device: str, grad_clip: float, ema: EMA | None = None) -> float:
+    """one optimisation step, and the weight average's update after it; a non-finite loss stops the run before it can reach a checkpoint"""
     out = model(pixel_values=batch["pixel_values"].to(device), labels=[{k: v.to(device) for k, v in l.items()} for l in batch["labels"]])
     loss = out.loss.item()
     if not math.isfinite(loss):
         raise FloatingPointError(f"loss became {loss}; the last checkpoint is untouched")
     opt.zero_grad(set_to_none=True); out.loss.backward()
     torch.nn.utils.clip_grad_norm_(model.parameters(), grad_clip); opt.step(); sched.step()
+    if ema:
+        ema.update(model)
     return loss
 
 
@@ -368,12 +399,12 @@ def sha256(path: str) -> str:
     return hashlib.sha256(open(path, "rb").read()).hexdigest()
 
 
-def train_epoch(model, opt, sched, ds: Tiles, a, epoch: int, hist: dict) -> tuple[float, float]:
+def train_epoch(model, opt, sched, ds: Tiles, a, epoch: int, hist: dict, ema: EMA | None = None) -> tuple[float, float]:
     """one pass over the train split; logs the loss and images per second every --log-every steps; returns mean loss, images/s"""
     set_seed(a.seed + epoch); ds.epoch = epoch; model.train()
     dl = loader(ds, a, train=True); n = len(dl); total, win, seen, t_ep = 0.0, [], 0, time.time(); t0 = t_ep
     for i, b in enumerate(dl, 1):
-        win.append(step(model, opt, sched, b, a.device, a.grad_clip)); seen += len(b["labels"])
+        win.append(step(model, opt, sched, b, a.device, a.grad_clip, ema)); seen += len(b["labels"])
         if i % a.log_every == 0 or i == n:
             ips = seen / (time.time() - t0); total += sum(win)
             rec = {"epoch": epoch + 1, "step": epoch * n + i, "loss": r4(statistics.mean(win)), "lr": opt.param_groups[1]["lr"], "images_per_s": r4(ips)}
@@ -384,18 +415,22 @@ def train_epoch(model, opt, sched, ds: Tiles, a, epoch: int, hist: dict) -> tupl
     return total / n, n * a.batch / (time.time() - t_ep)
 
 
-def save_dir(dst: str, model, proc, state: dict | None = None):
-    """model and processor by save_pretrained, and the trainer state if given, written aside, then swapped in"""
+def save_dir(dst: str, model, proc, state: dict | None = None, ema: EMA | None = None):
+    """model and processor by save_pretrained, the trainer state and the weight average (in ema/) if given, written aside, then swapped in"""
     tmp = dst + "-tmp"
     shutil.rmtree(tmp, ignore_errors=True); model.save_pretrained(tmp); proc.save_pretrained(tmp)
     if state:
         torch.save(state, os.path.join(tmp, "trainer_state.pt"))
+    if ema:
+        ema.module.save_pretrained(os.path.join(tmp, "ema"))
     shutil.rmtree(dst, ignore_errors=True); os.rename(tmp, dst)
 
 
-def save_checkpoint(model, proc, opt, sched, epoch: int, hist: dict, out: str):
-    """checkpoint-last: model and processor, optimiser, scheduler and epoch for --resume"""
-    save_dir(os.path.join(out, "checkpoint-last"), model, proc, {"epoch": epoch, "optimizer": opt.state_dict(), "scheduler": sched.state_dict(), "history": hist})
+def save_checkpoint(model, proc, opt, sched, epoch: int, hist: dict, out: str, ema: EMA | None = None):
+    """checkpoint-last: the raw model and processor, optimiser, scheduler and epoch for --resume, and the weight average with its
+    update count, so a resume continues the average"""
+    state = {"epoch": epoch, "optimizer": opt.state_dict(), "scheduler": sched.state_dict(), "history": hist} | ({"ema_updates": ema.updates} if ema else {})
+    save_dir(os.path.join(out, "checkpoint-last"), model, proc, state, ema)
 
 
 def curve(a, hist: dict) -> list:
@@ -445,13 +480,13 @@ def over_budget(a, hist: dict, epoch: int) -> str | None:
     return None
 
 
-def presentations(ds: Tiles, rc: dict, a) -> dict:
-    """what repeat-factor sampling does to the first epoch: per class its factor, the tiles holding it and how many of the first
+def presentations(ds: Tiles, rg: dict, a) -> dict:
+    """what repeat-factor sampling does to the first epoch: per group its factor, the tiles holding it and how many of the first
     epoch's draws hold it"""
-    held = [{x["category_id"] for x in ds.anns[im["id"]]} for im in ds.images]; idx = repeat_indices(ds.factors, a.seed, 0)
-    plain, shown = Counter(c for h in held for c in h), Counter(c for i in idx for c in held[i % len(held)])
-    return {"t": a.rare_repeat, "epoch_tiles": len(idx), "split_tiles": len(held),
-            "per_class": {CLASSES[c]: {"factor": r4(rc[c]), "tiles": plain[c], "epoch1": shown[c]} for c in sorted(rc, key=lambda c: -rc[c])}}
+    held = held_groups(ds, a.rare_group); idx = repeat_indices(ds.factors, a.seed, 0)
+    plain, shown = Counter(g for h in held for g in h), Counter(g for i in idx for g in held[i % len(held)])
+    return {"t": a.rare_repeat, "group": a.rare_group, "epoch_tiles": len(idx), "split_tiles": len(held),
+            "per_group": {g: {"factor": r4(rg[g]), "tiles": plain[g], "epoch1": shown[g]} for g in sorted(rg, key=lambda g: -rg[g])}}
 
 
 def base_of(model: str) -> str:
@@ -496,34 +531,42 @@ def cmd_train(a, argv: list):
     if len(ds) < a.batch:
         raise SystemExit(f"{len(ds)} training tiles make no full batch of {a.batch}")
     if a.rare_repeat:
-        ds.factors, rc = repeat_factors(ds, a.rare_repeat); hist["rare_repeat"] = presentations(ds, rc, a)
-        log.info(f"repeat-factor sampling at T {a.rare_repeat:g}: an epoch shows about {hist['rare_repeat']['epoch_tiles']} tiles instead of {len(ds)}; "
-                 "per class factor, tiles holding it and presentations in the first epoch: " +
-                 ", ".join(f"{n} x{v['factor']} {v['tiles']} -> {v['epoch1']}" for n, v in hist["rare_repeat"]["per_class"].items() if v["factor"] > 1))
+        ds.factors, rg = repeat_factors(ds, a.rare_repeat, a.rare_group); hist["rare_repeat"] = presentations(ds, rg, a)
+        log.info(f"repeat-factor sampling at T {a.rare_repeat:g} by {a.rare_group}: an epoch shows about {hist['rare_repeat']['epoch_tiles']} tiles instead "
+                 f"of {len(ds)}; per group factor, tiles holding it and presentations in the first epoch: " +
+                 ", ".join(f"{n} x{v['factor']} {v['tiles']} -> {v['epoch1']}" for n, v in hist["rare_repeat"]["per_group"].items()))
     steps = [(len(repeat_indices(ds.factors, a.seed, e)) if ds.factors else len(ds)) // a.batch for e in range(a.epochs)]  # each draw is known
     opt = optimiser(model, a.lr, a.backbone_lr, a.weight_decay); sched = get_cosine_schedule_with_warmup(opt, a.warmup_steps, sum(steps))
     if a.resume:
         opt.load_state_dict(st["optimizer"]); sched.load_state_dict(st["scheduler"]); log.info(f"resumed {a.model} from {ck}: {start} epochs done")
+    if a.ema and a.resume and not os.path.isdir(os.path.join(ck, "ema")):
+        raise SystemExit(f"--resume with --ema: no weight average at {ck}/ema")
+    ema = (EMA(load_model(os.path.join(ck, "ema")).to(a.device), a.ema, a.ema_warmup, st.get("ema_updates", 0)) if a.resume else
+           EMA(model, a.ema, a.ema_warmup)) if a.ema else None
+    judged = ema.module if ema else model  # what is evaluated, chosen, kept and finished with: the average when there is one
+    if ema:
+        log.info(f"weight average: decay {a.ema:g} with {a.ema_warmup} warm-up updates, {ema.updates} updates so far; the average is what is evaluated and kept")
     log.info(f"{cmd}\n{src} on {a.device}: {sum(p.numel() for p in model.parameters()) / 1e6:.1f} M parameters; {len(ds)} train tiles, "
              f"{steps[0]} steps in the first epoch, {sum(steps)} in all; versions {versions()}")
     hist["stopped"] = None
     for epoch in range(start, a.epochs):
         if stop := over_budget(a, hist, epoch) or patience_stop(a, hist, epoch):
             hist["stopped"] = stop; log.info(stop); break
-        t_ep = time.time(); loss, ips = train_epoch(model, opt, sched, ds, a, epoch, hist)
+        t_ep = time.time(); loss, ips = train_epoch(model, opt, sched, ds, a, epoch, hist, ema)
         rec = {"epoch": epoch + 1, "train_loss": r4(loss), "images_per_s": r4(ips)}
         if a.eval_every and (epoch + 1) % a.eval_every == 0:
-            sel = [s for s in SELECT if os.path.isdir(os.path.join(a.data, s))]; ts, m, chosen = evaluate(model, proc, a, sel)
+            sel = [s for s in SELECT if os.path.isdir(os.path.join(a.data, s))]; ts, m, chosen = evaluate(judged, proc, a, sel)
             rec |= {s: {v: {k: m[v][s][k] for k in VAL_KEYS} | {"threshold": ts[v]} for v in m} for s in sel} | {"selection": chosen}
         rec["seconds"] = round(time.time() - t_ep, 1); hist["epochs"].append(rec)
         c = curve(a, hist); best, since = early_stop([s for _, s in c], a.min_delta)
         if c and not since and c[best][0] == epoch + 1:  # this pass is the best so far: keep its weights
-            hist["best_epoch"], hist["best_score"] = c[best][0], r4(c[best][1]); save_dir(best_dir, model, proc)
+            hist["best_epoch"], hist["best_score"] = c[best][0], r4(c[best][1]); save_dir(best_dir, judged, proc)
         if a.keep_passes:  # every pass's weights, so another selection rule can be applied without training again
-            save_dir(os.path.join(a.out, f"pass-{epoch + 1}"), model, proc)
-        save_checkpoint(model, proc, opt, sched, epoch, hist, a.out); json.dump(hist, open(os.path.join(a.out, "history.json"), "w"), indent=1)
+            save_dir(os.path.join(a.out, f"pass-{epoch + 1}"), judged, proc)
+        save_checkpoint(model, proc, opt, sched, epoch, hist, a.out, ema); json.dump(hist, open(os.path.join(a.out, "history.json"), "w"), indent=1)
         log.info(f"epoch {epoch + 1} done in {rec['seconds'] / 60:.1f} min: train loss {rec['train_loss']:.4f}, {ips:.2f} images/s, val {rec.get('val')}; "
                  f"best pass so far: epoch {hist.get('best_epoch')}")
+    model = judged  # with no best pass to load, the run ends on the average, or the raw weights without one
     if hist.get("best_epoch") and os.path.isdir(best_dir):  # the final weights are the best pass's, not the last
         model = load_model(best_dir).to(a.device)
         log.info(f"final weights: the best pass, epoch {hist['best_epoch']} ({watched(a, hist)} {hist['best_score']}), from {best_dir}")
@@ -536,6 +579,7 @@ def cmd_train(a, argv: list):
                "threshold_chosen_on": " and ".join(s for s in SELECT if s in out[vs[0]]) + (" pooled" if "val_unseen" in out[vs[0]] else ""),
                "epochs_cap": a.epochs, "epochs_run": len(hist["epochs"]), "best_epoch": hist.get("best_epoch"), "best_score": hist.get("best_score"),
                "patience": a.patience, "min_delta": a.min_delta, "stopped": hist["stopped"], "rare_repeat": a.rare_repeat, "repeat_sampling": hist.get("rare_repeat"),
+               "ema": a.ema, "ema_warmup": a.ema_warmup if a.ema else None, "ema_updates": ema.updates if ema else None,
                "train_images_per_s": r4(statistics.mean(e["images_per_s"] for e in hist["epochs"])) if hist["epochs"] else None,
                "train_minutes": r4(sum(e["seconds"] for e in hist["epochs"]) / 60), "final_eval_minutes": r4((time.time() - t_ev) / 60),
                "variants": {v: {"threshold": ts[v], "splits": out[v]} for v in vs}}
@@ -564,11 +608,14 @@ def card(a, man: dict, metrics: dict, hist: dict) -> str:
          f"- Command: `{hist['command']}`" + "".join(f"; resumed with `{c}`" for c in hist.get("resumed", [])),
          f"- Seed {a.seed}; device {a.device}; epochs run {run}; {best}; early stopping with patience {a.patience} (0 is off) and min delta {a.min_delta:g}; "
          f"{metrics['train_images_per_s']} training images/s; {metrics['train_minutes']:.0f} min of training, about {per:.0f} min per pass with its val",
-         *([f"- Rare-class sampling: repeat factors by the LVIS rule at T {a.rare_repeat:g}, r(c) = max(1, sqrt(T / f(c))) with f(c) the share of "
-            f"training tiles holding class c, a tile drawn by its largest factor; an epoch shows about {rs['epoch_tiles']} tiles instead of {rs['split_tiles']}; "
-            "per class factor, tiles holding it, presentations in the first epoch: " + ", ".join(f"{n} x{v['factor']} ({v['tiles']} -> {v['epoch1']})"
-                                                                                        for n, v in rs["per_class"].items() if v["factor"] > 1)]
+         *([f"- Rare-class sampling: repeat factors by the LVIS rule at T {a.rare_repeat:g}, grouped by {rs.get('group', 'class')}, r(g) = max(1, sqrt(T / f(g))) "
+            f"with f(g) the share of training tiles holding group g, a tile drawn by its largest factor; an epoch shows about {rs['epoch_tiles']} tiles instead of "
+            f"{rs['split_tiles']}; per group factor, tiles holding it, presentations in the first epoch: " + ", ".join(f"{n} x{v['factor']} ({v['tiles']} -> {v['epoch1']})"
+                                                                                for n, v in (rs.get("per_group") or rs["per_class"]).items() if v["factor"] > 1)]
            if (rs := metrics.get("repeat_sampling")) else []),
+         *([f"- Weight average: EMA as the RT-DETR authors run it, decay {a.ema:g} with {a.ema_warmup} warm-up updates "
+            f"(d = decay * (1 - exp(-updates / warm-up)), {metrics['ema_updates']} updates, d {a.ema * (1 - math.exp(-metrics['ema_updates'] / a.ema_warmup)):.4f} at the end); "
+            "the evaluated, chosen, kept and final weights are the average, the raw weights stay in checkpoint-last for --resume"] if a.ema else []),
          "- Libraries: " + ", ".join(f"{k} {v}" for k, v in versions().items()),
          f"- Post-processing: {post}; each at its own threshold, chosen on {metrics['threshold_chosen_on']} to maximise the mean per-class F1 ("
          + ", ".join(f"{LABEL[v]} {r['threshold']:.2f}" for v, r in V.items()) + f"). A detection counts when it has the box's class and IoU >= {MATCH_IOU}, "
@@ -654,6 +701,21 @@ def latest(d: str, m: dict) -> tuple[dict, str]:
     return V, "; ".join(parts) or "eval was not run after training"
 
 
+def extra_evals(d: str, m: dict) -> list:
+    """the run's evaluations beyond its final weights on its own export: eval files naming other weights (a kept pass) or another
+    export, as (label, data, split, metrics per variant, threshold per variant, own weights)"""
+    own_w, own_d, out = os.path.normpath(d), os.path.normpath(m["data"]), []
+    for p in sorted(glob.glob(os.path.join(d, "eval-*.json"))):
+        e = json.load(open(p)); w, data = os.path.normpath(e.get("weights", d)), os.path.normpath(e.get("data", m["data"]))
+        if (w, data) == (own_w, own_d):
+            continue
+        for s in next(iter(e["variants"].values()))["splits"]:
+            label = s + (f" on `{e['data']}`" if data != own_d else "") + (f", `{os.path.basename(w)}`" if w != own_w else "")
+            out.append((label, data, s, {v: r["splits"][s] for v, r in e["variants"].items() if s in r["splits"]},
+                        {v: r["threshold"] for v, r in e["variants"].items()}, w == own_w))
+    return out
+
+
 def plain_words(name: str, V: dict) -> str:
     """what the model still gets wrong, in plain words for the project owner, on test_unseen (val if absent) as it would run"""
     op = next(iter(V)); S = V[op]["splits"]; s = "test_unseen" if "test_unseen" in S else "val"; m = S[s]; pc = m["per_class"]
@@ -695,7 +757,9 @@ def summarise(d: str, target: float) -> list:
                                        f"and test_unseen {pm['variants'][op]['splits']['test_unseen']['map50']}"] if pm and op in pm.get("variants", {}) else []) + [
          f"- {m['epochs_run']} pass{'es' if m['epochs_run'] != 1 else ''} of a cap of {g['epochs']} at batch {g['batch']}, lr {g['lr']:.0e} (backbone {g['backbone_lr']:.0e}), warm-up "
          f"{g['warmup_steps']} steps, seed {g['seed']}, early stopping patience {g.get('patience', 0)}" +
-         (f", rare-class sampling at T {g['rare_repeat']:g}" if g.get("rare_repeat") else "") + ": " + (m["stopped"] if m["stopped"] else "ended by the cap"),
+         (f", rare-class sampling at T {g['rare_repeat']:g} by {g.get('rare_group', 'class')}" if g.get("rare_repeat") else "") +
+         (f", EMA decay {g['ema']:g} with {g.get('ema_warmup')} warm-up updates (the evaluated weights are the average)" if g.get("ema") else "") + ": " +
+         (m["stopped"] if m["stopped"] else "ended by the cap"),
          "- Scored with " + (f"the best pass's weights, epoch {m['best_epoch']} ({m.get('selection', 'val mAP@0.5 ' + LABEL[op])} {m.get('best_score', m.get('best_val_map50'))})" if m.get("best_epoch")
                              else "the last pass's weights") +
          f"; {m['train_minutes']:.0f} min of training and {m['final_eval_minutes']:.1f} min of final evaluation, {m['train_images_per_s']} training images/s",
@@ -703,8 +767,11 @@ def summarise(d: str, target: float) -> list:
          f"; NMS is class-agnostic at IoU {m['nms_iou']}",
          f"- {note}", "",
          "| split | tiles | post-processing | mAP@0.5 | mean P | worst P | mean R | worst R |", "|---|---|---|---|---|---|---|---|"]
+    X = extra_evals(d, m)
     L += [f"| {s} | {r['splits'][s]['images']} | {LABEL[v]} | {fmt(r['splits'][s]['map50'])} | {fmt(r['splits'][s]['mean_precision'])} | {worst(r['splits'][s], 'precision')} | "
           f"{fmt(r['splits'][s]['mean_recall'])} | {worst(r['splits'][s], 'recall')} |" for s in S for v, r in V.items()]
+    L += [f"| {label}, threshold {th[v]:.2f} | {x['images']} | {LABEL[v]} | {fmt(x['map50'])} | {fmt(x['mean_precision'])} | {worst(x, 'precision')} | "
+          f"{fmt(x['mean_recall'])} | {worst(x, 'recall')} |" for label, _, _, xs, th, _ in X for v, x in xs.items()]
     if "val" in S and "test_unseen" in S:
         rule = size_rule(S["val"], S["test_unseen"], target); fails = [c for c, x in rule.items() if x == "fail"]
         L += ["", f"Per class {LABEL[op]}, and the size rule (precision and recall at least {target} on val and on test_unseen):", "",
@@ -715,12 +782,25 @@ def summarise(d: str, target: float) -> list:
               (f", {na} cannot be judged (no boxes in val or test_unseen)" if na else "") + "; " + (f"fails on {', '.join(fails)}." if fails else "no class fails.")]
     vu, sc = any("val_unseen" in e for e in h["epochs"]), any("selection" in e for e in h["epochs"])
     at = lambda e, s, v: fmt(e.get(s, {}).get(v, {}).get("map50")); pick = lambda e, k: fmt(e.get("selection", {}).get(op, {}).get(k))
+    for data in dict.fromkeys(x[1] for x in X if x[5] and x[1] != os.path.normpath(m["data"])):
+        o = {x[2]: x[3][op] for x in X if x[1] == data and x[5] and op in x[3]}
+        if "val" in o and "test_unseen" in o:
+            rule = size_rule(o["val"], o["test_unseen"], target)
+            L += ["", f"Per class on `{data}` {LABEL[op]}, comparable with the runs trained there, and the size rule on its val and test_unseen:", "",
+                  "| class | val P | val R | test_unseen P | test_unseen R | rule |", "|---|---|---|---|---|---|"]
+            L += [f"| {c} | " + " | ".join(fmt(o[s]["per_class"][c][k]) for s in ("val", "test_unseen") for k in ("precision", "recall")) + f" | {rule[c]} |" for c in CLASSES]
+            L += ["", f"Size rule on `{data}`: {sum(x == 'pass' for x in rule.values())} of {len(CLASSES)} classes pass."]
     L += ["", "Training curve, val after each epoch:", "", "| epoch | train loss | val mAP@0.5 with NMS |" + (" val_unseen mAP@0.5 with NMS |" if vu else "") +
-          (" pooled mean F1 | val_unseen worst min(P, R) |" if sc else "") + " val mAP@0.5 raw | images/s | minutes |",
-          "|---|---|---|" + ("---|" if vu else "") + ("---|---|" if sc else "") + "---|---|---|"]
+          (" pooled mean F1 | mean mAP@0.5 | val_unseen worst min(P, R) |" if sc else "") + " val mAP@0.5 raw | images/s | minutes |",
+          "|---|---|---|" + ("---|" if vu else "") + ("---|---|---|" if sc else "") + "---|---|---|"]
     L += [f"| {e['epoch']}{' (best)' if e['epoch'] == m.get('best_epoch') else ''} | {e['train_loss']} | {at(e, 'val', 'nms')} |" + (f" {at(e, 'val_unseen', 'nms')} |" if vu else "") +
-          (f" {pick(e, 'pooled_mean_f1')} | {pick(e, 'val_unseen_worst_min_pr')} |" if sc else "") +
+          (f" {pick(e, 'pooled_mean_f1')} | {pick(e, 'mean_map50')} | {pick(e, 'val_unseen_worst_min_pr')} |" if sc else "") +
           f" {at(e, 'val', 'raw')} | {e['images_per_s']} | {e['seconds'] / 60:.1f} |" for e in h["epochs"]]
+    kept = [e["epoch"] for e in h["epochs"] if os.path.isdir(os.path.join(d, f"pass-{e['epoch']}"))]
+    if kept and m.get("best_epoch"):
+        L += ["", f"Candidates for the drawing-level check: the pass chosen by {m.get('selection', 'the selection score')}, pass {m['best_epoch']} (`{d}`, "
+              f"the final weights), and the last pass, pass {kept[-1]} (`{d}/pass-{kept[-1]}`), " +
+              ("fully annealed" if kept[-1] == g["epochs"] else "before the schedule's end") + "; every pass's weights are kept."]
     if slow := slowed(h):
         L += ["", f"Pass{'es' if len(slow) > 1 else ''} {', '.join(map(str, slow))} ran below {SLOWED:.0%} of the run's best rate "
               f"({max(e['images_per_s'] for e in h['epochs'])} images/s), slowed by other work on the machine: those minutes are contended."]
@@ -833,9 +913,14 @@ def main(argv=None):
     t.add_argument("--select", choices=sorted(SCORE), default="map50", help="the score that picks the best pass, averaged over val and val_unseen: "
                    "map50 is mAP@0.5, f1 the mean per-class F1 at the operating threshold")
     t.add_argument("--keep-passes", action="store_true", help="also keep every pass's weights in <out>/pass-<n>")
+    t.add_argument("--ema", type=float, default=0, help="weight-average decay, the RT-DETR authors' rule (they use 0.9999); the average is what is "
+                   "evaluated, chosen, kept and finished with; 0 is off")
+    t.add_argument("--ema-warmup", type=int, default=2000, help="updates over which the average's decay rises: d = decay * (1 - exp(-updates / N))")
     t.add_argument("--rare-repeat", type=float, default=0, help="repeat-factor sampling threshold T, the LVIS rule: a class in a share f of the "
                    "training tiles gets factor max(1, sqrt(T / f)), a tile its largest class factor, and each epoch draws every tile its factor "
                    "times in expectation (seeded, so the epoch is a little longer than the split); 0 is off")
+    t.add_argument("--rare-group", choices=sorted(GROUPS), default="class", help="what --rare-repeat counts frequencies of: classes, or the "
+                   "annotations' device types, which keep the bus-section, ACB and MCCB apart within the breaker class")
     t.add_argument("--brightness", type=float, default=0.2); t.add_argument("--contrast", type=float, default=0.2)
     t.add_argument("--scale-jitter", type=float, default=0.1, help="zoom by up to this fraction either way")
     t.add_argument("--min-visible", type=float, default=0.6, help="keep a box the zoom cuts while this fraction of its symbol shows, as the export's tiling")

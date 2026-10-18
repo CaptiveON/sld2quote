@@ -1,13 +1,14 @@
 """Trainer checks: the precision and recall matcher, the threshold chooser, selection on val and val_unseen, the split report, NMS, the size rule, early stopping, repeat-factor sampling, the dataset,
 collate and augmentation on a two-tile COCO fixture, and one optimisation step plus the shared inference path of rtdetr_r18vd on
 cpu, and reloading trained weights for more passes (skipped unless the weights are already in the Hugging Face cache)."""
-import json, math, os, statistics, sys, time
+import json, math, os, shutil, statistics, sys, time
 from types import SimpleNamespace
 import numpy as np
 import pytest
 import torch
 from PIL import Image, ImageDraw
 from torchvision import ops
+from safetensors.torch import load_file
 from transformers import RTDetrImageProcessor, get_cosine_schedule_with_warmup
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
@@ -150,18 +151,22 @@ def test_early_stopping_keeps_the_best_pass_and_stops_after_patience_passes_with
     assert run_curve([0.1, 0.2, 0.3, 0.4], 3) == (4, None, 4) and run_curve([0.5, 0.4, 0.3, 0.2, 0.1], 0) == (5, None, 1)
 
 
-def test_repeat_factors_lift_a_rare_class_leave_common_ones_at_one_and_draw_by_seed(tmp_path):
-    # ten blank tiles, each with a breaker, and a relay on the last one only: the relay is in a tenth of the tiles, the breaker in all
+def test_repeat_factors_lift_a_rare_group_leave_common_ones_at_one_and_draw_by_seed(tmp_path):
+    # ten blank tiles, each with a breaker, and a relay on the last one only: the relay is in a tenth of the tiles, the breaker in all.
+    # The breakers are MCCBs except a bus-section on tile 4, so by device type the bus-section is as rare as the relay
     R, d = CLASS_ID["relay"], tmp_path / "train"; (d / "images").mkdir(parents=True)
     for i in range(10):
         Image.new("L", (640, 640), 255).save(d / "images" / f"t{i}.png")
-    anns = [{"id": i + 1, "image_id": i + 1, "category_id": B, "bbox": [100, 100, 40, 20], "area": 800, "iscrowd": 0} for i in range(10)]
-    anns.append({"id": 11, "image_id": 10, "category_id": R, "bbox": [400, 300, 30, 30], "area": 900, "iscrowd": 0})
+    anns = [{"id": i + 1, "image_id": i + 1, "category_id": B, "bbox": [100, 100, 40, 20], "area": 800, "iscrowd": 0,
+             "device_type": "BUS_SECTION" if i == 4 else "MCCB"} for i in range(10)]
+    anns.append({"id": 11, "image_id": 10, "category_id": R, "bbox": [400, 300, 30, 30], "area": 900, "iscrowd": 0, "device_type": "RELAY"})
     json.dump({"images": [{"id": i + 1, "file_name": f"t{i}.png", "width": 640, "height": 640} for i in range(10)], "annotations": anns,
                "categories": [{"id": i, "name": n} for i, n in enumerate(CLASSES)]}, open(d / "annotations.json", "w"))
     ds = td.Tiles(str(tmp_path), "train", RTDetrImageProcessor(do_resize=False), aug=(0.2, 0.2, 0.1, 0.6))
     factors, rc = td.repeat_factors(ds, 0.4)  # relay sqrt(0.4 / 0.1) = 2 exactly, breaker max(1, sqrt(0.4 / 1)) = 1
-    assert rc == pytest.approx({B: 1.0, R: 2.0}) and factors == pytest.approx([1.0] * 9 + [2.0])
+    assert rc == pytest.approx({"breaker": 1.0, "relay": 2.0}) and factors == pytest.approx([1.0] * 9 + [2.0])
+    by_type, rt = td.repeat_factors(ds, 0.4, "device_type")  # the bus-section, a rare device type of the common breaker class, now counts too
+    assert rt == pytest.approx({"MCCB": 1.0, "BUS_SECTION": 2.0, "RELAY": 2.0}) and by_type == pytest.approx([1.0] * 4 + [2.0] + [1.0] * 4 + [2.0])
     assert sorted(td.repeat_indices(factors, 0, 0)) == list(range(10)) + [19]  # every tile once and the relay tile again, as 9 + 10
     first, again = ds[9][1], ds[19][1]  # the repeat is the same tile with its own augmentation
     assert first["class_labels"].tolist() == again["class_labels"].tolist() == [B, R] and not torch.equal(first["boxes"], again["boxes"])
@@ -211,6 +216,33 @@ def test_trained_weights_load_for_more_passes_without_a_new_head(tmp_path):
     assert not (info["missing_keys"] or info["mismatched_keys"] or info["unexpected_keys"])  # nothing newly initialised
     assert torch.equal(again.class_embed[-1].weight, model.class_embed[-1].weight) and torch.equal(again.model.enc_score_head.weight, model.model.enc_score_head.weight)
     assert td.load_processor(str(tmp_path)).do_resize is False
+
+
+def test_ema_follows_the_authors_rule_once_per_storage():
+    lin = torch.nn.Linear(1, 1); tied = torch.nn.ModuleDict({"a": lin, "b": lin})  # one layer under two names, as the model's heads are tied
+    lin.weight.data.fill_(1.0)
+    e = td.EMA(tied, 0.9999, 2000)
+    assert e.d(1) == pytest.approx(0.9999 * (1 - math.exp(-1 / 2000))) and e.d(2000) == pytest.approx(0.9999 * (1 - math.exp(-1)))  # 0.0005, then 0.632
+    lin.weight.data.fill_(3.0); e.update(tied)  # update 1: v = d v + (1 - d) w, and once, although the storage shows up twice
+    assert e.module["a"].weight.item() == pytest.approx(e.d(1) * 1.0 + (1 - e.d(1)) * 3.0) and e.module["b"] is e.module["a"]
+    e.updates, before = 1999, e.module["a"].weight.item(); lin.weight.data.fill_(5.0); e.update(tied)  # update 2000
+    assert e.module["a"].weight.item() == pytest.approx(e.d(2000) * before + (1 - e.d(2000)) * 5.0) and lin.weight.item() == 5.0  # the model is left as it is
+
+
+def test_training_with_ema_evaluates_chooses_and_keeps_the_average(tmp_path):
+    try:
+        td.load_model("PekingU/rtdetr_r18vd", local_files_only=True)
+    except OSError as e:
+        pytest.skip(f"PekingU/rtdetr_r18vd is not in the Hugging Face cache, and this test does not download it ({type(e).__name__})")
+    root = coco_fixture(tmp_path / "data"); shutil.copytree(tmp_path / "data" / "train", tmp_path / "data" / "val")
+    json.dump({"classes": CLASSES}, open(tmp_path / "data" / "manifest.json", "w")); out = tmp_path / "run"
+    td.main(["train", "--data", root, "--out", str(out), "--model", "PekingU/rtdetr_r18vd", "--epochs", "1", "--batch", "2", "--workers", "0",
+             "--device", "cpu", "--warmup-steps", "0", "--ema", "0.9999", "--ema-warmup", "1", "--keep-passes"])  # warm-up 1: d is 0.632 at update 1
+    w = {k: load_file(os.path.join(out, k, "model.safetensors")) for k in ("checkpoint-best", "pass-1", "checkpoint-last/ema", "checkpoint-last", ".")}
+    same = lambda x, y: all(torch.equal(x[k], y[k]) for k in x)
+    assert same(w["checkpoint-best"], w["checkpoint-last/ema"]) and same(w["pass-1"], w["checkpoint-last/ema"]) and same(w["."], w["checkpoint-best"])
+    assert not same(w["checkpoint-best"], w["checkpoint-last"])  # the average was judged, chosen and kept; the raw weights stay for --resume
+    m = json.load(open(out / "metrics.json")); assert (m["ema"], m["ema_warmup"], m["ema_updates"]) == (0.9999, 1, 1)
 
 
 def test_one_optimisation_step_on_cpu(tmp_path):
