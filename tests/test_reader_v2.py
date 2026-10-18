@@ -1,0 +1,139 @@
+"""Trained reader and the shared reading pipeline: merging detections across overlapping tiles, mapping tile boxes back to
+the page, detector classes to device types with the three breaker roles, deskew levelling a scan, the classical reader
+unchanged by the refactor (against an extraction of a clean sheet saved before it), the RESULTS.md section writer, and one
+end-to-end run of the trained reader on a generated sheet (the one slow test, about 15 s; skipped without trained weights;
+deselect with -k "not end_to_end")."""
+import hashlib, json, math, os, sys
+import numpy as np
+import pytest
+import torch
+from PIL import Image, ImageDraw
+
+ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+sys.path.insert(0, ROOT)
+from sld2quote import reader, reader_v2 as rv2
+from sld2quote.classes import CLASSES, CLASS_ID
+from sld2quote.evaluate import iou, write_section
+from sld2quote.generate import make_sheet, write_sheet
+from sld2quote.tiles import tile_grid
+
+WEIGHTS = os.path.join(ROOT, "weights", "rtdetr_r18_full")
+
+
+def tile(*dets):
+    """one tile's detections as detect() gives them, from (score, class name, x0, y0, x1, y1) in tile pixels"""
+    return {"scores": torch.tensor([d[0] for d in dets]), "labels": torch.tensor([CLASS_ID[d[1]] for d in dets]),
+            "boxes": torch.tensor([d[2:] for d in dets], dtype=torch.float32).reshape(-1, 4)}
+
+
+def test_a_symbol_in_the_overlap_of_two_tiles_becomes_one_box_with_the_higher_score():
+    # a breaker at page x 500 to 540 lies in the tile at x 0 and in the one at x 480, seen a pixel apart by each
+    r = rv2.merge([(0, 0), (480, 0)], [tile((0.6, "breaker", 500, 100, 540, 140)), tile((0.9, "breaker", 21, 101, 61, 141))])
+    assert r["scores"].tolist() == [pytest.approx(0.9)] and r["boxes"].tolist() == [[501, 101, 541, 141]]
+
+
+def test_two_symbols_that_overlap_less_than_half_both_survive():
+    # page boxes 100..140 and 125..165 by 100..140 overlap at IoU 600 / 2600 = 0.23, here each from its own tile
+    r = rv2.merge([(0, 0), (100, 0)], [tile((0.9, "contactor", 100, 100, 140, 140)), tile((0.5, "motor", 25, 100, 65, 140))])
+    assert sorted(r["scores"].tolist()) == pytest.approx([0.5, 0.9]) and sorted(r["labels"].tolist()) == sorted([CLASS_ID["contactor"], CLASS_ID["motor"]])
+
+
+def test_a_box_at_a_tile_edge_maps_back_to_page_pixels_in_reading_order():
+    x0, y0 = tile_grid(3138, 1000)[-1]  # the last tile, flush with the page's bottom-right corner
+    assert (x0, y0) == (3138 - 640, 1000 - 640)
+    r = rv2.merge([(0, 0), (x0, y0)], [tile((0.7, "meter", 300.2, 50.1, 330.0, 80.4)), tile((0.8, "earth", 610.2, 600.3, 638.1, 639.2))])
+    assert rv2.to_symbols(r) == [{"id": "S1", "kind": "meter", "box": [300, 50, 30, 30], "shape_score": 0.7},
+                                 {"id": "S2", "kind": "earth", "box": [x0 + 610, y0 + 600, 28, 39], "shape_score": 0.8}]
+
+
+def text(s, x, y, w=120):
+    return {"text": s, "conf": 1.0, "box": [x, y, w, 20], "src": "page"}
+
+
+def test_detector_classes_become_device_types_and_a_breaker_takes_its_role(tmp_path, monkeypatch):
+    monkeypatch.setattr(reader, "_ocr_image", lambda img, scale, tag: [])  # no OCR: the texts given are the only ones
+    page = tmp_path / "layout.png"; im = Image.new("L", (1600, 1000), 255)
+    ImageDraw.Draw(im).line([140, 400, 1460, 400], fill=0, width=6); im.save(page)  # one busbar at y = 400
+    box = lambda kind, x, y: {"kind": kind, "box": [x, y, 30, 30], "shape_score": 0.9}
+    others = [c for c in CLASSES if c != "breaker"]
+    syms = [box("breaker", 200, 200), box("breaker", 785, 385), box("breaker", 300, 520), box("breaker", 600, 520)] + \
+           [box(c, 40 + 120 * k, 760) for k, c in enumerate(others)]
+    for i, s in enumerate(syms):
+        s["id"] = f"S{i + 1}"
+    texts = [text("MCCB 250 A 3P", 340, 525), text("ACB-2 1600 A 4P", 640, 525),  # right of the two breakers below the busbar
+             text("FSW 400 A 4P", 80, 765, 70), text("PFC 200 kVAr", 40 + 120 * others.index("capacitor") + 40, 765, 70)]
+    ex = reader.read_sheet(str(page), texts, finder=lambda page_img, ink, t: syms)
+    dev = [(d["type"], d.get("rating"), d.get("poles")) for d in ex["devices"]]
+    assert dev[:4] == [("ACB", None, None),          # above the busbar: an incomer
+                       ("BUS_SECTION", None, None),  # in the busbar
+                       ("MCCB", 250, 3),             # below it: an outgoing way
+                       ("ACB", 1600, 4)]             # below it, but its label says ACB
+    assert {c: t for c, (t, _, _) in zip(others, dev[4:])} == {
+        "fuse_switch": "FUSE_SWITCH", "isolator": "ISOLATOR", "contactor": "CONTACTOR", "transformer": "TRANSFORMER", "generator": "GENERATOR",
+        "motor": "MOTOR", "board": "BOARD", "ct": "CT", "meter": "METER", "relay": "RELAY", "spd": "SPD", "capacitor": "CAPACITOR", "earth": "EARTH"}
+    assert dev[4] == ("FUSE_SWITCH", 400, 4) and dev[4 + others.index("capacitor")] == ("CAPACITOR", None, None)  # amps are read, kVAr not yet
+
+
+def bus_tilt(ink, x0: int, x1: int, y: int = 400, half: int = 80, win: int = 40) -> float:
+    """the busbar's tilt in degrees (positive when its right end is lower) from two windows on it: in each, the centre of the
+    rows that are nearly all ink, which only the busbar is (feeder lines and text cross a window but do not fill it)"""
+    def row(x):
+        return y - half + np.nonzero(ink[y - half: y + half, x: x + win].sum(axis=1) >= 0.8 * win)[0].mean()
+    return math.degrees(math.atan2(row(x1) - row(x0), x1 - x0))
+
+
+def test_deskew_levels_a_scan_instead_of_doubling_its_tilt(tmp_path):
+    im, sh = make_sheet(1, scan=True); im.save(tmp_path / "scan.png"); W = im.width  # its busbar runs at y 400 from x 140 to W - 140
+    raw = reader.binarise(reader.load_gray(str(tmp_path / "scan.png")))
+    assert abs(bus_tilt(raw, 180, W - 220) + sh.style["rotate_deg"]) < 0.1  # the measure sees the 0.752 degrees the scan was turned by
+    g, b, ang = reader.prepare(str(tmp_path / "scan.png"))
+    assert abs(bus_tilt(b, 180, W - 220)) < 0.15, (sh.style["rotate_deg"], ang)  # 1.47 while prepare turned the page the wrong way
+
+
+# the classical reader on make_sheet(1, level="medium") (box breakers, every breaker role), saved before the refactor:
+# its devices, and the sha256 of the whole extraction as compact JSON in key order, without the keys added since
+BEFORE_DEVICES = [
+    ("ACB", [207, 200, 28, 28], 3200, ["T3", "T4"]), ("ACB", [1437, 200, 28, 28], 3200, ["T10", "T11"]),
+    ("GENERATOR", [255, 281, 23, 24], None, ["T7", "T6"]), ("GENERATOR", [300, 283, 20, 20], None, ["T5"]),
+    ("BUS_SECTION", [1344, 387, 28, 28], 3200, ["T12", "T13"]), ("MCCB", [768, 520, 22, 22], 630, ["T27", "T26"]),
+    ("MCCB", [1154, 550, 22, 22], 800, ["T33", "T32"]), ("MCCB", [1733, 550, 22, 22], 800, ["T39", "T38"]),
+    ("MCCB", [2119, 550, 22, 22], 630, ["T45", "T44"]), ("MCCB", [382, 580, 22, 22], 100, ["T21", "T20"]),
+    ("MCCB", [575, 580, 22, 22], 250, ["T24", "T23"]), ("MCCB", [961, 580, 22, 22], 630, ["T30", "T29"]),
+    ("MCCB", [1540, 580, 22, 22], 400, ["T36", "T35"]), ("MCCB", [2312, 580, 22, 22], 250, ["T48", "T47"])]
+BEFORE_SHA256 = "943997a5aa67856b66a364dc8c99505a420e6c6a7aeb0886721f7ae94963ad71"
+
+
+def test_the_classical_reader_reads_a_generated_sheet_exactly_as_before_the_refactor(tmp_path, monkeypatch):
+    """page texts from the answer key and no window OCR, so the run is exact and needs no OCR engine"""
+    monkeypatch.setattr(reader, "_ocr_image", lambda img, scale, tag: [])
+    im, sh = make_sheet(1, level="medium"); im.save(tmp_path / "sheet-medium-1.png")
+    ex = reader.read_sheet(str(tmp_path / "sheet-medium-1.png"), [{"text": t["text"], "conf": 1.0, "box": list(t["box"]), "src": "page"} for t in sh.texts])
+    assert [(d["type"], d["box"], d.get("rating"), d["label_texts"]) for d in ex["devices"]] == BEFORE_DEVICES
+    old = {k: v for k, v in ex.items() if k not in ("reader", "seconds")}
+    assert hashlib.sha256(json.dumps(old, separators=(",", ":")).encode()).hexdigest() == BEFORE_SHA256
+    assert ex["reader"] == "classical" and set(ex["seconds"]) == {"total", "ocr", "detector"}
+
+
+def test_a_rerun_replaces_only_its_own_section_of_results_md(tmp_path):
+    path = str(tmp_path / "RESULTS.md")
+    write_section(path, "## data/a, classical reader", ["first", "", "### Per type", "x"])
+    write_section(path, "## data/b, trained reader", ["second"])
+    write_section(path, "## data/a, classical reader", ["rerun"])
+    text = open(path).read()
+    assert text.startswith("# sld2quote evaluation") and "first" not in text and "### Per type" not in text
+    assert text.index("## data/a, classical reader\n\nrerun") < text.index("## data/b, trained reader\n\nsecond")
+
+
+@pytest.mark.skipif(not os.path.isfile(os.path.join(WEIGHTS, "config.json")), reason=f"no trained detector at {WEIGHTS} (weights are not committed; "
+                    "train them with sld2quote.train_detector)")
+def test_end_to_end_the_trained_reader_finds_the_transformer_and_the_incomer_breaker(tmp_path):
+    """detector on cpu, the real OCR engine, a sheet drawn here that the detector never saw"""
+    stem = write_sheet(str(tmp_path), 7, level="simple"); gt = json.load(open(stem + ".json"))
+    ex = rv2.read_sheet(stem + ".png", weights=WEIGHTS, device="cpu")
+    assert {"image", "size", "deskew_deg", "texts", "busbars", "symbols", "devices", "notes"} <= set(ex) and ex["reader"] == "trained"
+    assert all(s["kind"] in CLASSES and 0 <= s["shape_score"] <= 1 and len(s["box"]) == 4 for s in ex["symbols"]) and ex["symbols"]
+    assert all({"id", "symbol", "type", "box", "rating", "label", "label_texts", "conf", "on_bus", "connected"} <= set(d) for d in ex["devices"])
+    assert set(ex["seconds"]) == {"total", "ocr", "detector"} and ex["detector"]["score_threshold"] > 0
+    for want in ("TX-1", "ACB-1"):
+        g = next(d for d in gt["devices"] if d["id"] == want)
+        assert any(d["type"] == g["type"] and iou(d["box"], g["box"]) >= 0.3 for d in ex["devices"]), (want, ex["devices"])

@@ -2,39 +2,27 @@
 
 Classical computer vision on purpose: busbars and connection lines by run-length analysis, symbols by connected
 components after the lines are removed, classification by simple shape tests, labels by proximity to the symbol.
-This is the module a trained detector replaces in the KTP; everything downstream keeps the same interface.
+read_sheet is the one pipeline of both readers (prepare, page OCR, busbars and lines, symbols, OCR around each symbol,
+label association, roles, notes); only the symbol finder is swapped: find_symbols here, the trained detector in
+reader_v2.py. So the two readers are compared like for like, and everything downstream keeps the same interface.
 """
 from __future__ import annotations
-import json, math, re, subprocess, os
+import json, math, re, os, time
+from functools import partial
 import numpy as np
 from PIL import Image
 from scipy import ndimage
-
-HERE = os.path.dirname(os.path.abspath(__file__))
-OCR_BIN = os.path.join(os.path.dirname(HERE), "ocr", "ocr")
+from .classes import DEVICE_TO_CLASS
 
 # OCR sometimes returns Cyrillic look-alikes for Latin capitals on isolated words; map them back.
 LOOKALIKE = str.maketrans({"А": "A", "В": "B", "С": "C", "Е": "E", "Н": "H", "К": "K", "М": "M", "О": "O", "Р": "P", "Т": "T", "Х": "X", "а": "a", "е": "e", "о": "o", "р": "p", "с": "c", "х": "x", "у": "y"})
 
 
 def _ocr_image(img: Image.Image, scale: float, tag: str) -> list[dict]:
-    """OCR a PIL image at an upscale factor (Vision reads small CAD text far better when enlarged)."""
-    import tempfile
-    if scale != 1:
-        img = img.resize((int(img.width * scale), int(img.height * scale)), Image.LANCZOS)
-    with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as fh:
-        tmp = fh.name
-    img.save(tmp)
-    out = subprocess.run([OCR_BIN, tmp], capture_output=True, text=True, timeout=180)
-    os.unlink(tmp)
-    if out.returncode != 0:
-        raise RuntimeError("ocr failed: " + out.stderr)
-    boxes = json.loads(out.stdout)
-    res = []
-    for b in boxes:
-        res.append({"text": b["text"].translate(LOOKALIKE), "conf": float(b["conf"]),
-                    "box": [b["x"] / scale, b["y"] / scale, b["w"] / scale, b["h"] / scale], "src": tag})
-    return res
+    """OCR a PIL image at an upscale factor through the one OCR interface (ocr.py: Apple Vision on a Mac, RapidOCR
+    elsewhere, or SLD2QUOTE_OCR), with look-alike letters mapped back."""
+    from .ocr import ocr_image
+    return [dict(b, text=b["text"].translate(LOOKALIKE)) for b in ocr_image(img, scale, tag)]
 
 
 def run_ocr(image_path: str, scale: float = 2.0) -> list[dict]:
@@ -93,8 +81,8 @@ def prepare(path: str):
     g = load_gray(path)
     b = binarise(g)
     ang = deskew_angle(b)
-    if abs(ang) >= 0.15:
-        im = Image.fromarray(g.astype(np.uint8)).rotate(-ang, resample=Image.BICUBIC, fillcolor=255)
+    if abs(ang) >= 0.15:  # ang is the rotation that levels the page, counter-clockwise positive in ndimage and PIL alike
+        im = Image.fromarray(g.astype(np.uint8)).rotate(ang, resample=Image.BICUBIC, fillcolor=255)
         g = np.asarray(im).astype(np.float32)
         b = binarise(g)
     return g, b, ang
@@ -273,87 +261,106 @@ def nearest_texts(sym, texts, used):
     return [t for _, t in sorted(cands, key=lambda c: c[0])]
 
 
-def read_sheet(image_path: str, texts: list[dict] | None = None) -> dict:
-    g, b, ang = prepare(image_path)
-    H, W = b.shape
-    page_img = Image.fromarray(g.astype(np.uint8))
-    texts = texts if texts is not None else _ocr_image(page_img, 2.0, "page")
-    for i, tb in enumerate(texts):
-        tb["id"] = f"T{i + 1}"
-    busbars = find_busbars(b)
-    vlines = find_vertical_lines(b)
-    b2 = remove_lines(b, busbars, vlines)
-    symbols = find_symbols(b2, texts)
-    # second OCR pass: a window around every symbol, upscaled, so small rating text is read reliably
+def bus_for_x(x, busbars):
+    for bb in busbars:
+        if bb["x1"] - 6 <= x <= bb["x2"] + 6:
+            return bb
+    return None
+
+
+def touches_bus(sym, busbars):
+    sx, sy, sw, sh = sym["box"]
+    return any(not (sx + sw < bb["x1"] or sx > bb["x2"]) and bb["y1"] - 2 <= sy + sh / 2 <= bb["y2"] + 2 for bb in busbars)
+
+
+def line_from_symbol(sym, direction, vlines):
+    """is there a vertical line leaving the symbol upward (-1) or downward (+1) that reaches a busbar?"""
+    sx, sy, sw, sh = sym["box"]; cx = sx + sw / 2
+    for v in vlines:
+        if abs((v["x1"] + v["x2"]) / 2 - cx) <= 6:
+            if direction < 0 and abs(v["y2"] - sy) <= 8:
+                return v
+            if direction > 0 and abs(v["y1"] - (sy + sh)) <= 8:
+                return v
+    return None
+
+
+# symbol kind -> device type: the classical finder's shapes and the detector's classes; a breaker's type is its role
+KIND_TYPE = {"TRANSFORMER": "TRANSFORMER", "CIRCLE": "GENERATOR"} | {c: t for t, c in DEVICE_TO_CLASS.items() if c != "breaker"}
+SOURCES = {"TRANSFORMER", "GENERATOR"}                              # rated in kVA
+AMPS = {"ACB", "MCCB", "BUS_SECTION", "FUSE_SWITCH", "ISOLATOR", "CT"}  # rated in amps, as the ground truth rates them
+SWITCHES = {"ACB", "MCCB", "BUS_SECTION", "FUSE_SWITCH", "ISOLATOR"}   # poles and kA from the label
+WAYS = {"MCCB", "FUSE_SWITCH", "ISOLATOR"}                           # an outgoing way names what it feeds
+# kW (contactor, motor) and kVAr (capacitor) are not parsed by parse_label yet, so those ratings stay None
+
+
+def role(sym, parsed, busbars, main_bus_y) -> str:
+    """a breaker's device type from where it sits: in the busbar a bus-section, above it an incomer ACB, below it an
+    outgoing MCCB unless its label says ACB"""
+    if touches_bus(sym, busbars):
+        return "BUS_SECTION"
+    if _center(sym["box"])[1] < main_bus_y:
+        return "ACB"
+    return "MCCB" if parsed.get("type_word") != "ACB" else "ACB"
+
+
+def make_device(sym, labels, busbars, vlines, main_bus_y) -> dict:
+    """one symbol with its label texts as a device: type, ratings parsed from the labels, busbar and connection"""
+    parsed = {}
+    for t in labels:
+        parsed.update({k: v for k, v in parse_label(t["text"]).items() if k not in parsed})
+    dev = {"symbol": sym["id"], "box": sym["box"], "label_texts": [t["id"] for t in labels], "label": " | ".join(t["text"] for t in labels),
+           "conf": round(float(min([sym["shape_score"]] + [t["conf"] for t in labels])), 2) if labels else round(sym["shape_score"] * 0.5, 2)}
+    typ = role(sym, parsed, busbars, main_bus_y) if sym["kind"].lower() == "breaker" else KIND_TYPE[sym["kind"]]
+    dev.update(type=typ, rating=parsed.get("kva") if typ in SOURCES else parsed.get("rating") if typ in AMPS else None)
+    if typ in SWITCHES:
+        dev.update(poles=parsed.get("poles"), kA=parsed.get("kA"))
+    if typ in WAYS:
+        # destination: the lower of the two labels when both are "below", else the second label
+        dests = [t["text"] for t in labels if not RX_AMPS.search(t["text"]) and not RX_KVA.search(t["text"])]
+        dev["dest"] = dests[0] if dests else ""
+    cx, cy = _center(sym["box"]); bb = bus_for_x(cx, busbars)
+    dev["on_bus"] = bb["id"] if bb else None
+    dev["connected"] = bool(line_from_symbol(sym, +1 if cy < main_bus_y else -1, vlines)) or dev["type"] == "BUS_SECTION"
+    return dev
+
+
+def make_devices(symbols, local, texts, busbars, vlines, H) -> list[dict]:
+    """label association, in the finder's order: each symbol's own OCR window first, else the nearest unused page texts"""
+    devices, used = [], set()
+    main_bus_y = np.median([bb["y"] for bb in busbars]) if busbars else H / 2
+    for sym in symbols:
+        labels = nearest_texts(sym, local.get(sym["id"], []), set())[:2] or nearest_texts(sym, texts, used)[:2]
+        devices.append(make_device(sym, labels, busbars, vlines, main_bus_y))
+        for t in labels:
+            used.add(t["id"])
+    for i, dv in enumerate(devices):
+        dv["id"] = f"D{i + 1}"
+    return devices
+
+
+def symbol_texts(page_img, symbols) -> dict:
+    """second OCR pass: a window around every symbol, upscaled, so small rating text is read reliably"""
     local = {}
     for sym in symbols:
         reg = ocr_region(page_img, sym["box"])
         for k, tb in enumerate(reg):
             tb["id"] = f"{sym['id']}t{k + 1}"
         local[sym["id"]] = reg
+    return local
 
-    # busbar label (rating, kA) from the text that says BUSBAR
+
+def label_busbars(busbars, texts):
+    """busbar label (rating, kA) from the text that says BUSBAR"""
     for bb in busbars:
         bb["rating"] = None; bb["kA"] = None; bb["label_text"] = None
         for t in texts:
             if "BUSBAR" in t["text"].upper() and bb["y1"] - 60 <= t["box"][1] + t["box"][3] <= bb["y1"] + 5:
                 p = parse_label(t["text"]); bb["rating"] = p.get("rating"); bb["kA"] = p.get("kA"); bb["label_text"] = t["id"]
 
-    def bus_for_x(x):
-        for bb in busbars:
-            if bb["x1"] - 6 <= x <= bb["x2"] + 6:
-                return bb
-        return None
 
-    def touches_bus(sym):
-        sx, sy, sw, sh = sym["box"]
-        return any(not (sx + sw < bb["x1"] or sx > bb["x2"]) and bb["y1"] - 2 <= sy + sh / 2 <= bb["y2"] + 2 for bb in busbars)
-
-    def line_from_symbol(sym, direction):
-        """is there a vertical line leaving the symbol upward (-1) or downward (+1) that reaches a busbar?"""
-        sx, sy, sw, sh = sym["box"]; cx = sx + sw / 2
-        for v in vlines:
-            if abs((v["x1"] + v["x2"]) / 2 - cx) <= 6:
-                if direction < 0 and abs(v["y2"] - sy) <= 8:
-                    return v
-                if direction > 0 and abs(v["y1"] - (sy + sh)) <= 8:
-                    return v
-        return None
-
-    devices, used = [], set()
-    main_bus_y = np.median([bb["y"] for bb in busbars]) if busbars else H / 2
-    for sym in symbols:
-        sx, sy, sw, sh = sym["box"]; cx, cy = _center(sym["box"])
-        labels = nearest_texts(sym, local.get(sym["id"], []), set())[:2] or nearest_texts(sym, texts, used)[:2]
-        parsed = {}
-        for t in labels:
-            parsed.update({k: v for k, v in parse_label(t["text"]).items() if k not in parsed})
-        dev = {"symbol": sym["id"], "box": sym["box"], "label_texts": [t["id"] for t in labels], "label": " | ".join(t["text"] for t in labels),
-               "conf": round(float(min([sym["shape_score"]] + [t["conf"] for t in labels])), 2) if labels else round(sym["shape_score"] * 0.5, 2)}
-        if sym["kind"] == "TRANSFORMER":
-            dev.update(type="TRANSFORMER", rating=parsed.get("kva"))
-        elif sym["kind"] == "CIRCLE":
-            dev.update(type="GENERATOR", rating=parsed.get("kva"))
-        else:  # breaker-shaped
-            if touches_bus(sym):
-                dev.update(type="BUS_SECTION")
-            elif cy < main_bus_y:
-                dev.update(type="ACB")
-            else:
-                dev.update(type="MCCB" if parsed.get("type_word") != "ACB" else "ACB")
-            dev.update(rating=parsed.get("rating"), poles=parsed.get("poles"), kA=parsed.get("kA"))
-            if dev["type"] == "MCCB":
-                # destination: the lower of the two labels when both are "below", else the second label
-                dests = [t["text"] for t in labels if not RX_AMPS.search(t["text"]) and not RX_KVA.search(t["text"])]
-                dev["dest"] = dests[0] if dests else ""
-        bb = bus_for_x(cx)
-        dev["on_bus"] = bb["id"] if bb else None
-        dev["connected"] = bool(line_from_symbol(sym, +1 if cy < main_bus_y else -1)) or dev["type"] == "BUS_SECTION"
-        for t in labels:
-            used.add(t["id"])
-        devices.append(dev)
-
-    # notes block, anchored on the word NOTES
+def read_notes(texts) -> dict:
+    """notes block, anchored on the word NOTES"""
     notes = {"form": None, "ip": None, "fault_kA": None, "poles_default": None, "evidence": []}
     anchor = next((t for t in texts if t["text"].strip().upper() == "NOTES"), None)
     if anchor:
@@ -374,12 +381,61 @@ def read_sheet(image_path: str, texts: list[dict] | None = None) -> dict:
                 m = RX_POLE_DEFAULT.search(s)
                 if m and notes["poles_default"] is None:
                     notes["poles_default"] = int(m.group(1)); notes["evidence"].append(t["id"])
-    # ids
-    for i, dv in enumerate(devices):
-        dv["id"] = f"D{i + 1}"
+    return notes
+
+
+def classical(page_img, ink, texts) -> list[dict]:
+    """the classical symbol finder: shape tests on the ink that is left once the lines are removed"""
+    return find_symbols(ink, texts)
+
+
+def _timed(clock: dict, key: str, fn, *args):
+    t = time.perf_counter(); out = fn(*args); clock[key] += time.perf_counter() - t
+    return out
+
+
+def read_sheet(image_path: str, texts: list[dict] | None = None, finder=classical, reader: str = "classical") -> dict:
+    """the reading pipeline of both readers. finder(page_img, ink_without_lines, texts) returns the symbols in the pixels
+    of the prepared (deskewed) page, the frame of the OCR and the line finders; every OCR call goes through _ocr_image.
+    "seconds" splits the time into OCR and the symbol finder ("detector")."""
+    t0, clock = time.perf_counter(), {"ocr": 0.0, "detector": 0.0}
+    g, b, ang = prepare(image_path)
+    H, W = b.shape
+    page_img = Image.fromarray(g.astype(np.uint8))
+    texts = texts if texts is not None else _timed(clock, "ocr", _ocr_image, page_img, 2.0, "page")
+    for i, tb in enumerate(texts):
+        tb["id"] = f"T{i + 1}"
+    busbars = find_busbars(b)
+    vlines = find_vertical_lines(b)
+    ink = remove_lines(b, busbars, vlines)
+    symbols = _timed(clock, "detector", finder, page_img, ink, texts)
+    local = _timed(clock, "ocr", symbol_texts, page_img, symbols)
+    label_busbars(busbars, texts)
+    devices = make_devices(symbols, local, texts, busbars, vlines, H)
+    notes = read_notes(texts)
     all_texts = texts + [tb for reg in local.values() for tb in reg]
     return {"image": os.path.basename(image_path), "size": [int(W), int(H)], "deskew_deg": round(float(ang), 2),
-            "texts": all_texts, "busbars": busbars, "vlines_count": len(vlines), "symbols": symbols, "devices": devices, "notes": notes}
+            "texts": all_texts, "busbars": busbars, "vlines_count": len(vlines), "symbols": symbols, "devices": devices, "notes": notes,
+            "reader": reader, "seconds": {"total": round(time.perf_counter() - t0, 2), **{k: round(v, 2) for k, v in clock.items()}}}
+
+
+READERS = ("classical", "trained")
+WEIGHTS = "weights/rtdetr_r18_full"  # the trained reader's detector unless --weights says otherwise
+
+
+def add_reader_args(ap):
+    """--reader, --weights and --device, shared by the command line and the evaluation"""
+    ap.add_argument("--reader", choices=READERS, default="classical", help="symbol finder: classical shape tests or the trained detector")
+    ap.add_argument("--weights", default=WEIGHTS, help="trained reader: detector weights directory")
+    ap.add_argument("--device", help="trained reader: cpu or mps (default mps when available, else cpu)")
+
+
+def choose(name: str = "classical", weights: str = WEIGHTS, device: str | None = None):
+    """read_sheet of the named reader; the trained one is imported only when chosen, since it loads torch"""
+    if name == "classical":
+        return read_sheet
+    from . import reader_v2
+    return partial(reader_v2.read_sheet, weights=weights, device=device)
 
 
 if __name__ == "__main__":

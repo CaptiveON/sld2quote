@@ -52,10 +52,12 @@ def _overlay(image_path: str, ex: dict, bom: dict) -> str:
         f = ImageFont.truetype("/System/Library/Fonts/Supplemental/Arial Bold.ttf", 16)
     except Exception:
         f = ImageFont.load_default()
+    sym = {s["id"]: s for s in ex.get("symbols", [])}
     for dv in ex["devices"]:
         x, y, w, h = dv["box"]; c = "#1d7a43" if dv.get("conf", 0) >= 0.8 else ("#8a6400" if dv.get("conf", 0) >= 0.6 else "#b03024")
         d.rectangle([x - 4, y - 4, x + w + 4, y + h + 4], outline=c, width=3)
-        d.text((x - 4, y - 24), dv["id"], fill=c, font=f)
+        score = sym.get(dv["symbol"], {}).get("shape_score")
+        d.text((x - 4, y - 24), dv["id"] + ("" if score is None else f" {score:.2f}"), fill=c, font=f)
     tmap = {t["id"]: t for t in ex["texts"]}
     for dv in ex["devices"]:
         for tid in dv.get("label_texts", []):
@@ -75,21 +77,26 @@ def review_html(image_path: str, ex: dict, bom: dict, spec: dict | None, conflic
     esc = html.escape
     rows = "".join(f"<tr class='{'low' if l['conf'] < 0.6 else ''}'><td>{l['line']}</td><td>{esc(l['part'])}</td><td>{esc(l['description'])}</td><td>{l['qty']}</td><td class='n'>{l['unit_gbp']:,.2f}</td><td class='n'>{l['total_gbp']:,.2f}</td><td>{l['conf']}</td><td>{esc(' '.join(str(e) for e in l['evidence'] if e))} <i>{esc(l['rule'])}</i></td></tr>" for l in bom["lines"])
     issues = "".join(f"<li><b>{esc(i['kind'])}</b>: {esc(i['what'])}. <i>{esc(i['action'])}</i> <span class='ev'>{esc(' '.join(str(e) for e in i.get('evidence', []) if e))}</span></li>" for i in bom["issues"]) or "<li>none</li>"
-    devs = "".join(f"<tr><td>{dv['id']}</td><td>{dv['type']}</td><td>{dv.get('rating') or ''}</td><td>{dv.get('poles') or ''}</td><td>{dv.get('kA') or ''}</td><td>{esc(dv.get('dest', '') or '')}</td><td>{dv['conf']}</td><td>{esc(dv.get('label', ''))}</td></tr>" for dv in ex["devices"])
+    sym = {s["id"]: s for s in ex.get("symbols", [])}
+    found = lambda dv: f"{sym[dv['symbol']]['kind']} {sym[dv['symbol']]['shape_score']:.2f}" if dv["symbol"] in sym else ""
+    devs = "".join(f"<tr><td>{dv['id']}</td><td>{esc(found(dv))}</td><td>{dv['type']}</td><td>{dv.get('rating') or ''}</td><td>{dv.get('poles') or ''}</td><td>{dv.get('kA') or ''}</td><td>{esc(dv.get('dest', '') or '')}</td><td>{dv['conf']}</td><td>{esc(dv.get('label', ''))}</td></tr>" for dv in ex["devices"])
     clauses = "".join(f"<li><b>{esc(c['id'])}</b> {esc(c['text'])}</li>" for c in (spec or {}).get("clauses", []))
     n = ex["notes"]
+    det = ex.get("detector") or {}
+    who = (f"trained reader (RT-DETR detector {det.get('weights', '')}) + Apple Vision OCR · the KTP retrains the detector on real drawings and replaces"
+           if ex.get("reader") == "trained" else "classical reader + Apple Vision OCR · the KTP replaces the reader with a trained detector and")
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Review: {esc(ex['image'])}</title>
 <style>body{{font:15px/1.5 -apple-system,Segoe UI,sans-serif;margin:0;padding:16px 20px;color:#1d2226;background:#f2f3f0}} h1,h2{{font-weight:600}} img{{max-width:100%;border:1px solid #d3d7d1;background:#fff}}
 table{{border-collapse:collapse;width:100%;font-size:14px;background:#fff}} th,td{{border-bottom:1px solid #d3d7d1;padding:6px 8px;text-align:left;vertical-align:top}} th{{background:#e8eae5;font-size:12px;text-transform:uppercase;letter-spacing:.04em}}
 td.n{{text-align:right;font-variant-numeric:tabular-nums}} tr.low td{{background:#fbe4e1}} .ev{{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#6c7681}} .legend span{{display:inline-block;margin-right:14px}} .box{{display:inline-block;width:12px;height:12px;border:3px solid;vertical-align:middle;margin-right:4px}}
 .grid{{display:grid;grid-template-columns:1fr;gap:18px}} .card{{background:#fff;border:1px solid #d3d7d1;border-radius:4px;padding:12px 16px}} .total{{font-size:18px}}</style></head><body>
 <h1>Review workbench (prototype): {esc(ex['image'])}</h1>
-<p>What the reader found, with the evidence drawn on the sheet. Green boxes are devices read with high confidence, amber medium, red low; blue boxes are the rating text used for each device; copper boxes are the notes the board parameters came from. The estimator accepts, corrects or rejects each line; in the prototype this page is static.</p>
+<p>What the reader found, with the evidence drawn on the sheet. Green boxes are devices read with high confidence, amber medium, red low; blue boxes are the rating text used for each device; copper boxes are the notes the board parameters came from. Each device box carries its id and the confidence with which its symbol was found (the detector's score for the trained reader, the shape test's for the classical one), also in the table's symbol column. The estimator accepts, corrects or rejects each line; in the prototype this page is static.</p>
 <div class="grid">
 <div class="card"><img src="data:image/png;base64,{b64}" alt="sheet with overlays"><p class="legend"><span><i class="box" style="border-color:#1d7a43"></i>device, high confidence</span><span><i class="box" style="border-color:#8a6400"></i>medium</span><span><i class="box" style="border-color:#b03024"></i>low</span><span><i class="box" style="border-color:#215e8a"></i>rating text used</span><span><i class="box" style="border-color:#b4582a"></i>notes used</span></p></div>
 <div class="card"><h2>Board parameters as read</h2><p>Fault level <b>{n.get('fault_kA')}</b> kA, <b>{esc(str(n.get('form')))}</b>, <b>{esc(str(n.get('ip')))}</b>, default <b>{n.get('poles_default')}</b>-pole (notes evidence {esc(' '.join(n.get('evidence', [])))}); busbars {esc(', '.join(f"{bb['id']} {bb.get('rating')} A" for bb in ex['busbars']))}; deskew {ex.get('deskew_deg')} deg.</p>
-<h2>Devices</h2><table><tr><th>id</th><th>type</th><th>A</th><th>poles</th><th>kA</th><th>feeds</th><th>conf</th><th>label read</th></tr>{devs}</table></div>
+<h2>Devices</h2><table><tr><th>id</th><th>symbol found</th><th>type</th><th>A</th><th>poles</th><th>kA</th><th>feeds</th><th>conf</th><th>label read</th></tr>{devs}</table></div>
 <div class="card"><h2>Bill of materials and price</h2><table><tr><th>#</th><th>part</th><th>description</th><th>qty</th><th>unit £</th><th>total £</th><th>conf</th><th>evidence and rule</th></tr>{rows}</table>
 <p class="total">Subtotal £{bom['subtotal_gbp']:,.2f}, margin £{bom['margin_gbp']:,.2f}, <b>total £{bom['total_gbp']:,.2f}</b> (illustrative catalogue prices)</p></div>
 <div class="card"><h2>Flagged for the estimator</h2><ul>{issues}</ul><h2>Specification clauses read</h2><ul>{clauses}</ul><p>Conflicts drawing vs specification: {len(conflicts)}</p></div>
-</div><p class="ev">sld2quote {esc(str((meta or {}).get('version', '')))} · synthetic sheet · classical reader + Apple Vision OCR · the KTP replaces the reader with a trained detector and the spec parser with a cited LLM extractor; the rules, evidence and review stay.</p></body></html>"""
+</div><p class="ev">sld2quote {esc(str((meta or {}).get('version', '')))} · synthetic sheet · {esc(who)} the spec parser with a cited LLM extractor; the rules, evidence and review stay.</p></body></html>"""
