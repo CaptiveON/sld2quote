@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>sld2quote</title>
+<meta name="description" content="Reads a switchboard drawing and its specification, prices a bill of materials with the evidence behind every line, and flags what a person must decide. Synthetic data only.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/15.0.12/marked.min.js" defer></script>
+<script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#try">Skip to the demo</a>
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="#top"><span class="mono">sld2quote</span> <span class="sub">a switchboard drawing to a priced bill of materials, with the evidence</span></a>
+    <nav aria-label="Sections"><a href="#try">Try it</a><a href="#how">How it works</a><a href="#real">The real project</a></nav>
+  </div>
+</header>
+
+<main class="wrap" id="top">
+<p class="honest">Synthetic drawings only; an invented catalogue with invented prices; nothing from R&amp;B Switchgear. A miniature of the drawing-to-quotation system, built by Muhammad Adnan as evidence for the University of Salford and R&amp;B Switchgear KTP application.</p>
+
+<section id="try" aria-labelledby="h-try">
+<h1 id="h-try">Try it</h1>
+<p class="lede">A single-line diagram is the drawing of a switchboard: one line per circuit, a symbol for each device, its rating written beside it. An estimator reads it, counts the parts and prices them. This page does the same, step by step, and shows the evidence for every number. Pick a sample, make a new drawing from a seed, or upload one of your own.</p>
+<p id="status" class="status" role="status" aria-live="polite"></p>
+
+<div class="controls">
+  <fieldset class="panel"><legend>Choose a sample drawing</legend>
+    <p class="meta">Clean and scan-like synthetic sheets carry an answer key and are scored; the unseen-style ones use fonts the model never trained on; the real public-domain drawings have no answer key and are marked not scored.</p>
+    <div id="samples" class="cards"></div>
+  </fieldset>
+  <div id="live" class="two">
+  <form id="gen" class="panel"><fieldset><legend>Or make a new drawing</legend>
+    <p class="meta">The generator draws a new switchboard from the seed and writes its answer key, so the result is scored.</p>
+    <label>Seed <input type="number" name="seed" min="0" max="999999" step="1" required></label>
+    <label>Board <select name="level"><option value="simple">simple</option><option value="medium">medium</option></select></label>
+    <label class="check"><input type="checkbox" name="scan"> Scan-like copy (blur, noise, a slight tilt)</label>
+    <button type="submit">Make and read</button>
+  </fieldset></form>
+  <form id="up" class="panel"><fieldset><legend>Or upload your own</legend>
+    <p class="meta">A PNG or JPEG of a drawing, and optionally its specification as a text file. Uploads have no answer key, so they are not scored.</p>
+    <label>Drawing (PNG or JPEG) <input type="file" name="file" accept="image/png,image/jpeg" required></label>
+    <label>Specification (text file, optional) <input type="file" name="spec" accept=".txt,text/plain"></label>
+    <button type="submit">Upload and read</button>
+  </fieldset></form>
+  </div>
+  <p id="nolive" class="panel" hidden>Live runs need the server; the repository runs it in one command.</p>
+</div>
+
+<div id="progress" class="progress" hidden>
+  <progress aria-label="Working"></progress>
+  <p><strong>Working</strong>, <span id="elapsed">0</span> s so far; a run takes about 10 to 25 seconds on the free server. The server is straightening the page, reading the words, finding the symbols, pairing labels with symbols, reading the specification, choosing parts and pricing them.</p>
+</div>
+
+<div id="result" hidden>
+  <h2 id="rtitle" tabindex="-1"></h2>
+  <p id="rmeta" class="meta"></p>
+  <ol id="parts" class="steps"></ol>
+  <p id="files" class="files"></p>
+</div>
+</section>
+
+<section id="how" aria-labelledby="h-how">
+<h2 id="h-how">How it works</h2>
+<p class="honest">Everything on this page was measured on synthetic drawings with invented prices. Nothing is an R&amp;B drawing, part number or price.</p>
+<p>The pipeline is the estimator's take-off, one stage at a time. For each stage: how this miniature does it, and how the real system would do it better.</p>
+<ol class="pipe">
+  <li><h3>Read the words</h3>
+    <p><b>Here:</b> an open text reader (RapidOCR on the server; Apple Vision when run on a Mac) reads every label and note on the page as text with a box, after the page is straightened. The engine was chosen by measuring several against the generator's own text, as the text-reader card below shows.</p>
+    <p><b>In the real system:</b> a document reader tuned on the company's own drawings; vector PDFs read as text directly, so nothing is recognised from pixels that was already text; native CAD files read by their block attributes with no vision at all.</p></li>
+  <li><h3>Find the symbols</h3>
+    <p><b>Here:</b> a detector (RT-DETR, under an Apache-2.0 licence) fine-tuned on synthetic drawings cut into overlapping tiles. Duplicates are removed inside each tile and again when the tiles are merged, and the operating threshold is chosen on whole validation drawings, never on the test set.</p>
+    <p><b>In the real system:</b> the same kind of detector trained on the company's real drawings labelled by its estimators, spanning every consultant's symbol style, with the lines traced so the symbols become a circuit (sections, incomers, outgoing ways) rather than a list of boxes.</p></li>
+  <li><h3>Pair labels with symbols</h3>
+    <p><b>Here:</b> a rule. The nearest text to the right of or below a symbol is its label; the type, rating, poles and fault rating are parsed from the words; missing poles or fault ratings come from the notes and are marked as assumed.</p>
+    <p><b>In the real system:</b> a learned link trained on the estimators' corrections, with device schedules joined by tag, and measured with its own precision and recall apart from symbol finding and text reading, because a right label on the wrong device was the largest error source here.</p></li>
+  <li><h3>Read the specification and compare</h3>
+    <p><b>Here:</b> the specification is split into clauses; a rule for each requirement (standard, form of separation, fault level, IP rating, poles, busbar material, certificates) pulls the value out with the clause number as its evidence; each is compared with the drawing, and a disagreement is raised as a question, never resolved silently.</p>
+    <p><b>In the real system:</b> a language model that extracts into the same fixed schema and must cite the clause for every value or abstain, with similar clauses retrieved from past tenders to flag the unusual, running inside the company's own boundary.</p></li>
+  <li><h3>Pick parts and price</h3>
+    <p><b>Here:</b> deterministic rules choose a catalogue part for each device within the board's fault level, add busbars by weight, enclosure sections by form and ways, labour, documents and delivery, and give every line its evidence and the rule that chose it. The catalogue is invented and says so.</p>
+    <p><b>In the real system:</b> the company's own design rules and supplier price lists, within the licensed system's verified limits, labour from its norms per functional unit, and every line pointing to a price-list row with its date.</p></li>
+  <li><h3>Write the quote and the questions</h3>
+    <p><b>Here:</b> a quotation in Markdown, a CSV bill of materials, a review page with the boxes drawn on the sheet, and the list of questions a person must decide: a rating not read, a disagreement with the specification, a symbol found with low confidence.</p>
+    <p><b>In the real system:</b> the estimator's workbench, where each correction is captured as training data and as an audit entry, and the quotation comes from the company's templates with clarifications and exclusions generated from the flagged items.</p></li>
+</ol>
+
+<h3>The measured results</h3>
+<p>Every number below is written by the evaluation code, never typed by hand; the live server serves the same files this page renders, so the cards are always the current ones. Scores are read at drawing level, which is what a quotation is judged by, and per tile for the detector's training runs. The scorecards are long; each card opens on demand under a short plain reading.</p>
+<section class="card-md" id="sc-results" aria-labelledby="h-sc-results">
+  <h4 id="h-sc-results">Scorecard: classical reader against trained reader, per evaluation set</h4>
+  <p class="reading"></p>
+  <details class="mdbox"><summary>Open the full scorecard (eval/RESULTS.md)</summary><div class="md"></div></details>
+</section>
+<section class="card-md" id="sc-ocr" aria-labelledby="h-sc-ocr">
+  <h4 id="h-sc-ocr">Text readers compared</h4>
+  <p class="reading"></p>
+  <details class="mdbox"><summary>Open the full comparison (eval/OCR.md)</summary><div class="md"></div></details>
+</section>
+<section class="card-md" id="sc-detector" aria-labelledby="h-sc-detector">
+  <h4 id="h-sc-detector">Detector training runs</h4>
+  <p class="reading"></p>
+  <details class="mdbox"><summary>Open the full record (eval/DETECTOR.md)</summary><div class="md"></div></details>
+</section>
+
+<h3>The problems met</h3>
+<section class="card-md" id="sc-problems" aria-labelledby="h-sc-problems">
+  <h4 id="h-sc-problems">A running record, in plain language</h4>
+  <p class="reading"></p>
+  <details class="mdbox"><summary>Open the full record (docs/PROBLEMS.md)</summary><div class="md"></div></details>
+</section>
+</section>
+
+<section id="real" aria-labelledby="h-real">
+<h2 id="h-real">The real project</h2>
+<p class="lede">What follows is the plan the author would follow in the KTP: each part of the miniature replaced by its real version, in the order the evidence suggests, with what each stage delivers, what it needs from the company, how it is measured and where it can go wrong. No stage promises a number; each says what would be measured.</p>
+<p>Before any of it, a short measurement with the estimators: a handful of recent enquiries timed step by step, counting where the hours and the later errors actually go (reading dense PDFs and scans, reconciling drawing and specification, chasing missing ratings, re-keying device lists into pricing sheets, re-work when a revision arrives). The first thing built is the step that costs the most, and the baseline is recorded before anything changes.</p>
+
+<article class="stage"><h4>1. Data and labelling with the estimators</h4><dl>
+  <dt>Delivers</dt><dd>A labelled set of the company's own past enquiries: a box and a type on every symbol, each rating text linked to its device, the specification clauses, and the estimator's final bill of materials as the answer key. A labelling tool an estimator can use in minutes. A written symbol vocabulary agreed with the estimators first, since a detector only finds what it was trained on. The input class of every enquiry recorded (native CAD, vector PDF, scan), because accuracy differs by class.</dd>
+  <dt>Needs from the company</dt><dd>Access to past enquiries and their quotations under the company's data rules; a few hours a week of estimator time; a decision on which consultants' styles to cover first; a check on what may be used from consultants' drawings.</dd>
+  <dt>Measured by</dt><dd>Sheets labelled per week; agreement between two labellers on the same sheet; coverage of symbol types and drawing styles; every label checked against the pixels it claims to describe, as this miniature's tests do.</dd>
+  <dt>Risks</dt><dd>Too few or too uniform drawings, in which case synthetic drawings seeded from real topologies fill the gap, as they do here; labelling fatigue if the tool is slow; rare symbols thin in every set, so test-set sizes are set from the rarest type and the rule's margin, not from convenience.</dd>
+</dl></article>
+
+<article class="stage"><h4>2. The detector trained on real drawings</h4><dl>
+  <dt>Delivers</dt><dd>A symbol detector trained on the labelled sheets, run per tile and merged across tiles with duplicates made impossible, its operating threshold chosen on whole drawings, and a per-type scorecard at drawing level. Synthetic drawings generated from real topologies to cover the rare symbols. A connectivity trace so the output is a circuit graph with a confidence and a supporting box on every element.</dd>
+  <dt>Needs from the company</dt><dd>The labelled set; a machine with a graphics card inside the company's boundary, or a UK-region service agreed with it; the symbol vocabulary.</dd>
+  <dt>Measured by</dt><dd>Precision and recall per symbol type at drawing level on drawings from consultants held out of training; false boxes on blank paper counted as their own number, because each one is a line on a quote; run-to-run and pass-to-pass variance measured before any change is called an improvement.</dd>
+  <dt>Risks</dt><dd>A new consultant's style arriving unseen, met by a validation set of unseen styles and a style check on every new enquiry; the rarest symbols staying weak as the styles widen, met by more examples in proportion and a per-type recall curve as the early warning; a licence that would oblige the company to publish its code, avoided by choosing permissive models from the first day.</dd>
+</dl></article>
+
+<article class="stage"><h4>3. The learned symbol-to-label link, trained on estimator corrections</h4><dl>
+  <dt>Delivers</dt><dd>A model that assigns each piece of text to the device it belongs to, replacing the nearest-text rule, and joins device schedules to symbols by tag. It is trained on the corrections the estimators make in the workbench, so it keeps learning the company's consultants.</dd>
+  <dt>Needs from the company</dt><dd>Corrections flowing from the review workbench; a sample of device schedules; estimators' time to settle the hard cases (a label block shared by a chain of devices, ratings that belong to a device with no label of its own).</dd>
+  <dt>Measured by</dt><dd>Link precision and recall on their own, apart from symbol finding and text reading, so a wrong link is told apart from a missed symbol or a misread; rating accuracy per device type as the product number.</dd>
+  <dt>Risks</dt><dd>This was the largest error source in the miniature (more wrong ratings came from a right label on the wrong device than from misread text), so under-investing here caps the whole system; without corrections from the workbench there is nothing to train on, which is why the workbench comes early.</dd>
+</dl></article>
+
+<article class="stage"><h4>4. The specification reader with clause citations</h4><dl>
+  <dt>Delivers</dt><dd>Clause splitting; a fixed schema of requirements (standards, form of separation, fault level, IP, poles, enclosure and finish, metering, testing, documentation, spares, commercial terms); an extractor that must cite the clause for every value or abstain; retrieval of similar clauses from past tenders to flag the unusual; the cross-check against the drawing, with every disagreement raised for the estimator; a draft compliance statement built from the matched clauses.</dd>
+  <dt>Needs from the company</dt><dd>Past specifications with the compliance statements and clarifications written for them; the sector overlays the company meets (healthcare, marine, nuclear sites, data centres, utilities); a decision on whether any model may run outside the company's boundary, and for which customers.</dd>
+  <dt>Measured by</dt><dd>Per-field accuracy against estimator-read values, each with its clause as evidence; disagreements found and false disagreements; abstentions counted, since an honest blank beats a confident guess; time saved on the compliance statement.</dd>
+  <dt>Risks</dt><dd>A model that answers confidently without evidence, met by the citation rule, abstention and a measured hallucination rate; prompt injection through document text, so clauses are treated as data and never as instructions; sector clauses that depend on knowledge the model lacks, met by the retrieval of past clauses and by routing the unusual to a person.</dd>
+</dl></article>
+
+<article class="stage"><h4>5. The rules and the catalogue, as the estimators own them</h4><dl>
+  <dt>Delivers</dt><dd>The company's design rules written down as rules the estimators can read, test and change: device selection within the fault level and the licensed system's verified limits, busbars, enclosure and forms, metering and protection, accessories, labour norms per functional unit and form; supplier price lists connected with their dates and discounts; a test for every rule. The language model drafts and explains; it never chooses a fault rating.</dd>
+  <dt>Needs from the company</dt><dd>Estimators' time to state the rules and to check them on past jobs; the licensed system's limits; current price lists and the negotiated discounts; the company's quotation templates.</dd>
+  <dt>Measured by</dt><dd>The rules reproduce past quotations from the estimators' own device lists within an agreed band; every line carries a rule and a price-list row; nothing outside the verified envelope is ever selected silently.</dd>
+  <dt>Risks</dt><dd>Rules that live in people's heads and differ between estimators, which written down become the company's property and survive the project; price-list drift, met by dating and versioning every list; rules written for one symbol style breaking on another, which is why they get the same per-type scorecard as the detector.</dd>
+</dl></article>
+
+<article class="stage"><h4>6. The review workbench and the human in the loop</h4><dl>
+  <dt>Delivers</dt><dd>The estimator's screen: the drawing with its boxes beside the extracted schedule, low-confidence lines and disagreements first, correction in place, and nothing reaching a customer without an estimator's acceptance. Every correction logged (who, what, when, from what value to what value) as the audit trail and as the training data for stages 2 and 3. Thresholds for automatic acceptance calibrated per field and per input class on real enquiries before any automation is switched on.</dd>
+  <dt>Needs from the company</dt><dd>Estimators as the designers and testers of the screen; integration with the estimating sheets and the Microsoft 365 tools already in use, with the in-house developer; the enterprise system later.</dd>
+  <dt>Measured by</dt><dd>Time per enquiry; the share of lines accepted without an edit; the error catch rate; and whether the estimators trust and use it, asked rather than assumed.</dd>
+  <dt>Risks</dt><dd>A tool slower than the sheet it replaces; automatic acceptance switched on before the thresholds are calibrated; a draft treated as the answer, met by showing the confidence and the evidence on every line so judgement stays in the loop.</dd>
+</dl></article>
+
+<article class="stage"><h4>7. Evaluation gates and the regression set</h4><dl>
+  <dt>Delivers</dt><dd>A golden set of real enquiries with estimator-verified bills of materials; metrics at three levels (symbols and ratings; bill-of-materials lines with exact ratings; price against the human quote), reported per input class and per sector; a regression test run on every model, prompt or rule change; a report to the project's management committee each quarter.</dd>
+  <dt>Needs from the company</dt><dd>Estimator-verified answer keys; agreement on the acceptance band for each field and each sector.</dd>
+  <dt>Measured by</dt><dd>The gates themselves: no change ships that lowers a gated metric; test-set sizes set from the rarest symbol type; every threshold chosen on the unit the product is judged by, a whole enquiry, on validation data that is never the test data.</dd>
+  <dt>Risks</dt><dd>Small test sets making pass or fail a coin toss; per-tile or per-field scores that look better while the quote gets worse, so the price and line-item numbers are the deciding ones; the test set leaking into training.</dd>
+</dl></article>
+
+<article class="stage"><h4>8. Secure on-premise deployment and explainability</h4><dl>
+  <dt>Delivers</dt><dd>A service inside the company's existing security boundary, with open-weight models for anything that sees customer drawings unless a customer contract and a data-protection impact assessment allow otherwise; role-based access, encrypted storage, versioned models and prompts, logging, and monitoring for drift (a new consultant's style, a price-list change); a disposal plan for data and models; a threat model following the UK code of practice for the cyber security of AI, the NCSC guidelines for secure AI development and the OWASP list of risks for language-model applications. Explanation at the evidence level: every value points to its box on the drawing or its clause, every line to its rule and its price-list row, and disagreements are visible, never resolved silently.</dd>
+  <dt>Needs from the company</dt><dd>The IT provider and the in-house developer; the data-protection impact assessment; decisions on what may leave the building and under which contracts.</dd>
+  <dt>Measured by</dt><dd>A security review against the code of practice before go-live and after each model change; an explanation test with the estimators, asking which explanations they actually use to accept or reject a line.</dd>
+  <dt>Risks</dt><dd>Data residency with API models, met by open-weight models on the premises as the default; a model change that silently shifts behaviour, met by re-testing after every change; personal data in specifications and correspondence, handled under the data-protection rules the company already follows.</dd>
+</dl></article>
+
+<article class="stage"><h4>9. Roll-out, and measuring hours saved and tender win rate</h4><dl>
+  <dt>Delivers</dt><dd>Shadow mode first, where the system quotes beside the estimator and nobody outside the team sees it; then assisted mode, where the estimator starts from the draft, one sector at a time; estimators trained as reviewers and labellers; an internal champion; runbooks; the capability written into the company's quality procedures so it outlives the project.</dd>
+  <dt>Needs from the company</dt><dd>The baseline measured before anything changes (time per enquiry, errors found later, enquiries quoted, tenders won); management support for the change; patience through shadow mode.</dd>
+  <dt>Measured by</dt><dd>Hours per quotation before and after; re-work on revisions; enquiries quoted per week; the tender win rate tracked over time, with the plain caveat that many things move it and the tool is one of them.</dd>
+  <dt>Risks</dt><dd>Measuring after without a before; attributing a change in win rate to the tool alone; a roll-out that skips shadow mode and loses the estimators' trust on the first wrong quote.</dd>
+</dl></article>
+</section>
+
+<footer>
+<p>sld2quote, October 2026, by Muhammad Adnan. Synthetic data only; nothing from R&amp;B Switchgear. Symbol artwork: IEC 60617 drawings from the QElectroTech elements library (CC BY 3.0). Detector: RT-DETR through Hugging Face transformers (Apache-2.0). Text reader: RapidOCR. This page: plain HTML, CSS and JavaScript; the scorecards are rendered with marked.</p>
+</footer>
+</main>
+</body>
+</html>

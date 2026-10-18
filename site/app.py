@@ -7,7 +7,8 @@ files, the scorecards and the static front end.
 Environment: SLD2QUOTE_RUNS (run directories, default /tmp/sld2quote-runs, pruned to the last 50); SLD2QUOTE_WEIGHTS
 (default weights/rtdetr_r18_full; when missing, downloaded once at start-up from the model repo SLD2QUOTE_MODEL_REPO
 with HF_TOKEN); SLD2QUOTE_OCR (the OCR engine: vision on a Mac with the tool, else rapidocr); SLD2QUOTE_READER=classical
-(tests only: the shape-test reader, no weights). The detector and the OCR engine warm up in a thread at start-up; live
+(tests only: the shape-test reader, no weights); SLD2QUOTE_CROPS=0 or 1 (the OCR pass around every symbol; default: the
+engine's own, on for vision, off for rapidocr). The detector and the OCR engine warm up in a thread at start-up; live
 runs answer 503 until they are ready, and run one at a time."""
 from __future__ import annotations
 import contextlib, io, json, os, re, secrets, shutil, sys, threading, time
@@ -28,6 +29,7 @@ RUNS = os.environ.get("SLD2QUOTE_RUNS", "/tmp/sld2quote-runs")
 WEIGHTS = os.environ.get("SLD2QUOTE_WEIGHTS", os.path.join(ROOT, "weights", "rtdetr_r18_full"))
 READER = os.environ.get("SLD2QUOTE_READER", "trained")
 ENGINE = os.environ.get("SLD2QUOTE_OCR") or ocr.default_engine()
+CROPS = {"0": False, "1": True}.get(os.environ.get("SLD2QUOTE_CROPS", ""))  # None: the engine's default
 KEEP = 50                                                     # run directories kept
 MAX_UPLOAD, MAX_SPEC, MAX_PIXELS = 12 << 20, 100 << 10, 12_000_000  # bytes, bytes, pixels (a 4000 x 3000 drawing)
 SCORECARDS = {"results_md": "eval/RESULTS.md", "ocr_md": "eval/OCR.md", "detector_md": "eval/DETECTOR.md", "problems_md": "docs/PROBLEMS.md"}
@@ -160,7 +162,7 @@ def prune():
 def live(rid: str, d: str, image: str, spec: str | None, gt: str | None, source: dict) -> dict:
     with LOCK:
         try:
-            res = result.build_result(image, spec, d, gt, READER, WEIGHTS, "cpu", source)
+            res = result.build_result(image, spec, d, gt, READER, WEIGHTS, "cpu", source, CROPS)
         except Exception as e:
             shutil.rmtree(d, ignore_errors=True)
             raise HTTPException(500, f"the run failed: {type(e).__name__}: {e}")
@@ -219,3 +221,9 @@ def static(path: str):
     if not p.startswith(os.path.realpath(STATIC) + os.sep):
         raise HTTPException(400, "bad path")
     return serve(p)
+
+
+# the page's own assets (style.css, app.js, mock/) are referenced from the root, as on the static Space; last, so the API routes win
+if os.path.isdir(STATIC):
+    from fastapi.staticfiles import StaticFiles
+    app.mount("/", StaticFiles(directory=STATIC, html=True), name="site")
