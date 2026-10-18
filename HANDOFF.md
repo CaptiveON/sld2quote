@@ -262,6 +262,25 @@ Library of Congress were unreachable (HTTP 403). Doubts recorded: the VA manual 
 17 U.S.C. 105 alone); tm5-693-p87 nearly duplicates part of tm5-694-p76. Rendered at 200 dpi (300 where symbols are small), breakers mostly
 20 to 80 px. Still to do in step 11: a labelling helper and hand labels (device boxes and types), then scoring both readers.
 
+**Step 4 done, 18 Oct (`sld2quote/reader_v2.py`, shared pipeline in `reader.py`, `--reader classical|trained`, `evaluate.py --make-sets`
+builds `data/eval/test` and `data/eval/unseen` from the manifest; `eval/RESULTS.md` holds every set and reader by section).** Drawing-level
+symbol precision / recall (same type, IoU 0.3), trained r18_full against classical: test clean 0.934 / 0.961 vs 0.238 / 0.059; test scan
+0.928 / 0.880 vs 0.240 / 0.079; unseen clean (60) 0.912 / 0.966 vs 0.428 / 0.133; unseen scan 0.835 / 0.808 vs 0.251 / 0.100; baseline clean
+0.933 / 0.967 vs 0.350 / 0.090. Types at or above 0.95 both ways: 7 of 16 on test clean (MCCB, FUSE_SWITCH, ISOLATOR, TRANSFORMER,
+GENERATOR, MOTOR, METER), 7 on test scan, 5 on unseen; classical none. Price error 0.29 vs 0.83 (test clean); BoM recall 0.68 vs 0.19. The
+deskew sign bug is fixed (rotate by +ang; a scan's residual tilt is now 0.05 degrees, was 1.47) and roughly doubled every scan number; the
+continuation weights lose generators at drawing level too (recall 0.40 to 0.65). Seconds per sheet on cpu, 4 threads, machine shared:
+trained 9.6 to 11.1 (OCR 6 to 7 of it: the per-symbol crop pass, about 0.3 s each for about 25 symbols; detector 3 to 4), classical 2 to 3.
+Faults diagnosed for step 6 (shared code): (1) bus-section role allows 2 px around the busbar band but IEC bus-section boxes sit 4.5 to 6 px
+off the line, so 14 of 38 are typed ACB; (2) on scans the 3 px notes and title borders blur to 4 px and pass `find_busbars(min_thick=4)`,
+the median "main bus" lands at y about 790 and MCCBs are typed ACB (choose the longest or thickest band); (3) low-score false positives
+(0.11 to 0.25): Courier New label blocks as boards, tall boxes over stacked symbols as contactors; (4) ratings: kW and kVAr labels are not
+parsed (contactor, motor, capacitor rated 0), the generator's label sits to its left outside the OCR window, meters take the CT ratio text.
+Decided 18 Oct: two merge filters at the cross-tile merge (drop boxes cut by an inner tile edge; suppress a box that mostly contains a
+better-scoring one), measured at +2 to +6 points of precision for at most half a point of recall (unseen clean 0.919 / 0.974 to 0.952 /
+0.974, classes passing 4 to 8 at detector level). For the live site: drop the crop pass when the engine is RapidOCR (step 6) and keep the
+detector on r18, so a sheet should take about 6 to 9 s on the Space; rerun the bench there.
+
 ## 8. Metrics (as implemented in `evaluate.py`; keep the names)
 
 symbol precision and recall (IoU >= 0.3, same type); rating accuracy, poles accuracy, kA accuracy over matched devices; notes accuracy over

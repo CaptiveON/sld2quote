@@ -1,5 +1,5 @@
-"""Trained reader and the shared reading pipeline: merging detections across overlapping tiles, mapping tile boxes back to
-the page, detector classes to device types with the three breaker roles, deskew levelling a scan, the classical reader
+"""Trained reader and the shared reading pipeline: merging detections across overlapping tiles, dropping boxes cut by an
+inner tile edge and boxes holding a better box, mapping tile boxes back to the page, detector classes to device types with the three breaker roles, deskew levelling a scan, the classical reader
 unchanged by the refactor (against an extraction of a clean sheet saved before it), the RESULTS.md section writer, and one
 end-to-end run of the trained reader on a generated sheet (the one slow test, about 15 s; skipped without trained weights;
 deselect with -k "not end_to_end")."""
@@ -28,22 +28,46 @@ def tile(*dets):
 
 def test_a_symbol_in_the_overlap_of_two_tiles_becomes_one_box_with_the_higher_score():
     # a breaker at page x 500 to 540 lies in the tile at x 0 and in the one at x 480, seen a pixel apart by each
-    r = rv2.merge([(0, 0), (480, 0)], [tile((0.6, "breaker", 500, 100, 540, 140)), tile((0.9, "breaker", 21, 101, 61, 141))])
+    r = rv2.merge([(0, 0), (480, 0)], [tile((0.6, "breaker", 500, 100, 540, 140)), tile((0.9, "breaker", 21, 101, 61, 141))], (1600, 1000))
     assert r["scores"].tolist() == [pytest.approx(0.9)] and r["boxes"].tolist() == [[501, 101, 541, 141]]
 
 
 def test_two_symbols_that_overlap_less_than_half_both_survive():
     # page boxes 100..140 and 125..165 by 100..140 overlap at IoU 600 / 2600 = 0.23, here each from its own tile
-    r = rv2.merge([(0, 0), (100, 0)], [tile((0.9, "contactor", 100, 100, 140, 140)), tile((0.5, "motor", 25, 100, 65, 140))])
+    r = rv2.merge([(0, 0), (100, 0)], [tile((0.9, "contactor", 100, 100, 140, 140)), tile((0.5, "motor", 25, 100, 65, 140))], (1600, 1000))
     assert sorted(r["scores"].tolist()) == pytest.approx([0.5, 0.9]) and sorted(r["labels"].tolist()) == sorted([CLASS_ID["contactor"], CLASS_ID["motor"]])
 
 
 def test_a_box_at_a_tile_edge_maps_back_to_page_pixels_in_reading_order():
     x0, y0 = tile_grid(3138, 1000)[-1]  # the last tile, flush with the page's bottom-right corner
     assert (x0, y0) == (3138 - 640, 1000 - 640)
-    r = rv2.merge([(0, 0), (x0, y0)], [tile((0.7, "meter", 300.2, 50.1, 330.0, 80.4)), tile((0.8, "earth", 610.2, 600.3, 638.1, 639.2))])
+    # the earth touches that tile's right and bottom borders, which are the page edge, so it is not a cut symbol
+    r = rv2.merge([(0, 0), (x0, y0)], [tile((0.7, "meter", 300.2, 50.1, 330.0, 80.4)), tile((0.8, "earth", 610.2, 600.3, 638.1, 639.2))], (3138, 1000))
     assert rv2.to_symbols(r) == [{"id": "S1", "kind": "meter", "box": [300, 50, 30, 30], "shape_score": 0.7},
                                  {"id": "S2", "kind": "earth", "box": [x0 + 610, y0 + 600, 28, 39], "shape_score": 0.8}]
+
+
+def test_a_box_cut_by_an_inner_tile_edge_is_dropped_and_one_at_the_page_edge_is_kept():
+    size = (1600, 1000)
+    assert tile_grid(*size) == [(x, y) for y in (0, 360) for x in (0, 480, 960)]
+    origins = [(480, 0), (960, 0), (0, 360)]
+    res = [tile((0.9, "breaker", 0, 100, 30, 140),      # on the tile's left border, inner: a sliver of a symbol whole in the tile at x 0
+                (0.8, "breaker", 610, 300, 640, 340),   # on its right border, inner as well
+                (0.7, "breaker", 300, 300, 330, 340)),  # clear of every border
+           tile((0.9, "motor", 610, 100, 640, 140)),    # on the right border of the last column, which is the page edge
+           tile((0.9, "earth", 300, 0, 330, 25),        # on the top border of the bottom row, inner
+                (0.8, "earth", 300, 610, 330, 640))]    # on its bottom border, the page edge
+    assert sorted(rv2.merge(origins, res, size)["boxes"].tolist()) == [[300, 970, 330, 1000], [780, 300, 810, 340], [1570, 100, 1600, 140]]
+    assert len(rv2.merge(origins, res, size, edge_px=None)["scores"]) == 6  # the filter off: all six stay
+
+
+def test_a_box_holding_a_better_box_is_dropped_and_partial_overlaps_are_kept():
+    # a contactor above a motor on one feeder, a weaker tall box spanning both (IoU 0.38 and 0.39 with them, so NMS keeps it),
+    # and a meter and a relay that share a quarter of their area
+    dets = tile((0.9, "contactor", 100, 100, 130, 140), (0.8, "motor", 98, 152, 132, 190), (0.2, "contactor", 99, 98, 133, 192),
+                (0.7, "meter", 300, 100, 340, 140), (0.6, "relay", 330, 100, 370, 140))
+    assert sorted(rv2.merge([(0, 0)], [dets], (1600, 1000))["scores"].tolist()) == pytest.approx([0.6, 0.7, 0.8, 0.9])
+    assert len(rv2.merge([(0, 0)], [dets], (1600, 1000), contain=None)["scores"]) == 5  # the filter off: the spanning box stays
 
 
 def text(s, x, y, w=120):
@@ -134,6 +158,7 @@ def test_end_to_end_the_trained_reader_finds_the_transformer_and_the_incomer_bre
     assert all(s["kind"] in CLASSES and 0 <= s["shape_score"] <= 1 and len(s["box"]) == 4 for s in ex["symbols"]) and ex["symbols"]
     assert all({"id", "symbol", "type", "box", "rating", "label", "label_texts", "conf", "on_bus", "connected"} <= set(d) for d in ex["devices"])
     assert set(ex["seconds"]) == {"total", "ocr", "detector"} and ex["detector"]["score_threshold"] > 0
+    assert (ex["detector"]["edge_px"], ex["detector"]["contain"], ex["detector"]["merge_iou"]) == (rv2.EDGE_PX, rv2.CONTAIN, rv2.MERGE_IOU)
     for want in ("TX-1", "ACB-1"):
         g = next(d for d in gt["devices"] if d["id"] == want)
         assert any(d["type"] == g["type"] and iou(d["box"], g["box"]) >= 0.3 for d in ex["devices"]), (want, ex["devices"])

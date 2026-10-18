@@ -123,7 +123,9 @@ def describe(rows: list) -> str:
     d = rows[0]["detector"] if rows else None
     on = d and (d["device"] + (f" ({d['threads']} threads)" if d["device"] == "cpu" and d.get("threads") else ""))
     return ("classical reader (shape tests)" if not d else f"trained reader: detector `{d['weights']}` on {on}, score threshold {d['score_threshold']}, "
-            f"NMS IoU {d['nms_iou']} per tile, tiles merged at IoU {d['merge_iou']}")
+            f"NMS IoU {d['nms_iou']} per tile, tiles merged at IoU {d['merge_iou']}" +
+            (f", boxes within {d['edge_px']} px of an inner tile edge dropped" if d.get("edge_px") is not None else "") +
+            (f", a box holding {d['contain']} of a better box's area dropped" if d.get("contain") is not None else ""))
 
 
 def section(rows: list) -> list[str]:
