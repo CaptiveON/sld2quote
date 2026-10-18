@@ -243,6 +243,11 @@ def test_training_with_ema_evaluates_chooses_and_keeps_the_average(tmp_path):
     assert same(w["checkpoint-best"], w["checkpoint-last/ema"]) and same(w["pass-1"], w["checkpoint-last/ema"]) and same(w["."], w["checkpoint-best"])
     assert not same(w["checkpoint-best"], w["checkpoint-last"])  # the average was judged, chosen and kept; the raw weights stay for --resume
     m = json.load(open(out / "metrics.json")); assert (m["ema"], m["ema_warmup"], m["ema_updates"]) == (0.9999, 1, 1)
+    assert "an average over about" in open(out / "card.md").read()
+    # the window the card reports: the authors' setting ends at d 0.9429 on ten passes of 573 steps, about 18 steps; 0.999 with 200 spans 1.7 passes
+    assert td.ema_window(0.9999, 2000, 5730, 10).startswith("d 0.9429 after 5730 updates, an average over about 18 steps, 0.0 passes of 573 steps")
+    w = td.ema_window(0.999, 200, 5730, 10)
+    assert w.startswith("d 0.9990 after 5730 updates, an average over about 1000 steps, 1.7 passes") and "would average about 18 steps on this run" in w
 
 
 def test_one_optimisation_step_on_cpu(tmp_path):

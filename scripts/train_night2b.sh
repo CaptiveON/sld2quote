@@ -1,8 +1,12 @@
 #!/bin/bash
 # Night 2b queue (18 Oct 2026) for the sld2quote symbol detector, synthetic tiles only: night 2's two recipes again with one change,
-# the RT-DETR authors' weight average (lyuwenyu/RT-DETR: use_ema, ModelEMA decay 0.9999 with 2000 warm-up updates), so that
-# EMA is the only difference from rtdetr_r18_plain and rtdetr_r18_fonts:
-#   run 3, rtdetr_r18_plain_ema: the plain recipe on data/coco with --ema 0.9999;
+# a weight average by the RT-DETR authors' rule (lyuwenyu/RT-DETR, src/optim/ema.py: d = decay * (1 - exp(-updates / warm-up)),
+# v = d * v + (1 - d) * w after every optimiser step), so that EMA is the only difference from rtdetr_r18_plain and rtdetr_r18_fonts.
+# The window is scaled to our run length, not the authors' step count: they use decay 0.9999 with 2000 warm-up updates, tuned to
+# 72 epochs of hundreds of thousands of steps, which on our ten passes of about 5,700 steps would end at d of about 0.943, an
+# average over about 18 steps. Here decay 0.999 with 200 warm-up updates gives a time constant of about 1,000 steps, roughly 1.7
+# passes, which is what the pass-to-pass swings in per-type recall span (decided 18 Oct 2026):
+#   run 3, rtdetr_r18_plain_ema: the plain recipe on data/coco with --ema 0.999 --ema-warmup 200;
 #   run 4, rtdetr_r18_fonts_ema: the same on data/coco_fonts (the regenerated fonts export).
 # It starts once weights/night2_summary.md exists, which night 2 writes last (polled every minute, given up with a logged error
 # after 12 hours), so the two queues never share the machine. Recipe as night 2: r18vd from the hub, 10 passes at batch 16, lr 1e-4
@@ -11,8 +15,6 @@
 # Afterwards, as night 2: each run's every split on its own export and its last pass on test_unseen, run 4 also on data/coco's val
 # and test_unseen, then weights/night2b_summary.md over rtdetr_r18_full, rtdetr_r18_rare, rtdetr_r18_plain, rtdetr_r18_fonts,
 # rtdetr_r18_plain_ema and rtdetr_r18_fonts_ema, with the F1 pick and the last pass as candidates per run.
-# Note: at 2000 warm-up updates the decay rises as 0.9999 * (1 - exp(-updates / 2000)), so after a ten-pass run of about 5,700
-# steps it is about 0.943 and the average spans about the last 18 steps; the authors' 72 epochs reach 0.9999.
 # Expected with MPS to itself: about 3.8 hours per run, about 8 hours for the queue after night 2 ends.
 #   scripts/train_night2b.sh           the queue, outputs under weights/
 #   scripts/train_night2b.sh --smoke   the same steps end to end in a few minutes (16 tiles per split, 1 pass per run, no wait for
@@ -32,7 +34,7 @@ done
 mkdir -p "$OUT"; exec > >(tee -a "$OUT/night2b_queue.log") 2>&1
 TD="python3 -m sld2quote.train_detector"
 RECIPE="--model PekingU/rtdetr_r18vd --epochs $CAP --batch 16 --lr 1e-4 --backbone-lr 1e-5 --weight-decay 1e-4 --warmup-steps 300 --grad-clip 0.1
-  --patience 0 --select f1 --keep-passes --eval-every 1 --nms-iou 0.5 --device $DEVICE --seed 0 --time-budget-min 420 --ema 0.9999 --ema-warmup 2000"
+  --patience 0 --select f1 --keep-passes --eval-every 1 --nms-iou 0.5 --device $DEVICE --seed 0 --time-budget-min 420 --ema 0.999 --ema-warmup 200"
 step() { echo "$(date '+%F %T') start: $*"; "$@"; local s=$?; echo "$(date '+%F %T') exit $s: $*"; }
 wait_for() {  # wait_for <file> <minutes>: poll every minute; 0 when it is there
   local waited=0
@@ -51,6 +53,8 @@ evals() {  # every split of a run on its export, then its last kept pass on test
 }
 
 if [ -n "$SMOKE" ]; then echo "smoke: not waiting for $AFTER"
+else echo "$(date '+%F %T') waiting for $AFTER, polled every minute for up to $WAIT_AFTER_MIN min"; fi
+if [ -n "$SMOKE" ]; then :
 elif ! wait_for "$AFTER" $WAIT_AFTER_MIN; then echo "$(date '+%F %T') night 2 did not finish in time, so night 2b does not start"; exit 1; fi
 step $TD train --data data/coco --out "$R3" $RECIPE $LIMIT
 if [ -n "$SMOKE" ] && [ ! -f "$FONTS/manifest.json" ]; then echo "smoke: $FONTS is not there, so run 4 uses data/coco"; FONTS=data/coco; fi

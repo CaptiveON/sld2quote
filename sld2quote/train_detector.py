@@ -193,6 +193,15 @@ class EMA:
                 seen.add(v.data_ptr()); v.mul_(d).add_(w[k].detach(), alpha=1 - d)
 
 
+def ema_window(decay: float, warmup: int, updates: int, passes: int) -> str:
+    """what an average by the authors' rule spans at the end of a run, in steps and in passes; and, when the decay is not the
+    authors', what theirs would span on this run, since 0.9999 with 2000 warm-up updates is tuned to hundreds of thousands of steps"""
+    end = lambda dc, wu: dc * (1 - math.exp(-updates / wu)); d = end(decay, warmup); tau, per = 1 / (1 - d), updates / max(passes, 1)
+    why = ("" if (decay, warmup) == (0.9999, 2000) else f"; the authors' 0.9999 with 2000 warm-up updates, tuned to 72 epochs of hundreds of thousands "
+           f"of steps, would average about {1 / (1 - end(0.9999, 2000)):.0f} steps on this run, so the decay is set for its length")
+    return f"d {d:.4f} after {updates} updates, an average over about {tau:.0f} steps, {tau / per:.1f} passes of {per:.0f} steps{why}"
+
+
 def step(model, opt, sched, batch: dict, device: str, grad_clip: float, ema: EMA | None = None) -> float:
     """one optimisation step, and the weight average's update after it; a non-finite loss stops the run before it can reach a checkpoint"""
     out = model(pixel_values=batch["pixel_values"].to(device), labels=[{k: v.to(device) for k, v in l.items()} for l in batch["labels"]])
@@ -613,8 +622,8 @@ def card(a, man: dict, metrics: dict, hist: dict) -> str:
             f"{rs['split_tiles']}; per group factor, tiles holding it, presentations in the first epoch: " + ", ".join(f"{n} x{v['factor']} ({v['tiles']} -> {v['epoch1']})"
                                                                                 for n, v in (rs.get("per_group") or rs["per_class"]).items() if v["factor"] > 1)]
            if (rs := metrics.get("repeat_sampling")) else []),
-         *([f"- Weight average: EMA as the RT-DETR authors run it, decay {a.ema:g} with {a.ema_warmup} warm-up updates "
-            f"(d = decay * (1 - exp(-updates / warm-up)), {metrics['ema_updates']} updates, d {a.ema * (1 - math.exp(-metrics['ema_updates'] / a.ema_warmup)):.4f} at the end); "
+         *([f"- Weight average: EMA by the RT-DETR authors' rule (d = decay * (1 - exp(-updates / warm-up)), v = d * v + (1 - d) * w after every "
+            f"optimiser step) at decay {a.ema:g} with {a.ema_warmup} warm-up updates: {ema_window(a.ema, a.ema_warmup, metrics['ema_updates'], metrics['epochs_run'])}; "
             "the evaluated, chosen, kept and final weights are the average, the raw weights stay in checkpoint-last for --resume"] if a.ema else []),
          "- Libraries: " + ", ".join(f"{k} {v}" for k, v in versions().items()),
          f"- Post-processing: {post}; each at its own threshold, chosen on {metrics['threshold_chosen_on']} to maximise the mean per-class F1 ("
@@ -758,7 +767,8 @@ def summarise(d: str, target: float) -> list:
          f"- {m['epochs_run']} pass{'es' if m['epochs_run'] != 1 else ''} of a cap of {g['epochs']} at batch {g['batch']}, lr {g['lr']:.0e} (backbone {g['backbone_lr']:.0e}), warm-up "
          f"{g['warmup_steps']} steps, seed {g['seed']}, early stopping patience {g.get('patience', 0)}" +
          (f", rare-class sampling at T {g['rare_repeat']:g} by {g.get('rare_group', 'class')}" if g.get("rare_repeat") else "") +
-         (f", EMA decay {g['ema']:g} with {g.get('ema_warmup')} warm-up updates (the evaluated weights are the average)" if g.get("ema") else "") + ": " +
+         (f", EMA decay {g['ema']:g} with {g['ema_warmup']} warm-up updates ({ema_window(g['ema'], g['ema_warmup'], m.get('ema_updates') or 0, m['epochs_run'])}; "
+          "the evaluated weights are the average)" if g.get("ema") else "") + ": " +
          (m["stopped"] if m["stopped"] else "ended by the cap"),
          "- Scored with " + (f"the best pass's weights, epoch {m['best_epoch']} ({m.get('selection', 'val mAP@0.5 ' + LABEL[op])} {m.get('best_score', m.get('best_val_map50'))})" if m.get("best_epoch")
                              else "the last pass's weights") +
