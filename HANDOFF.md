@@ -379,6 +379,12 @@ gradient updates), run 4 relaunched 23:50 with it (ends 03:40 to 07:00 depending
 Gradio Spaces on cpu-basic need PRO, about 9 dollars a month); Adnan decides; a free static Space with the precomputed samples is prepared
 as the fallback, with the front end given a static mode.
 
+**19 Oct 00:20, Adnan: deploy on Google Cloud Run instead.** Project `sld2quote-demo` created, linked to his open billing account,
+APIs enabled (run, cloudbuild, artifactregistry, secretmanager); his other projects and the default gcloud configuration are never
+touched (every command carries `--project sld2quote-demo`). Service `sld2quote`, region europe-west1 (Tier 1, free-tier pricing),
+2 vCPU, 4 GiB, concurrency 1, scale to zero, max 1 instance, public URL; model fetched from the private Hugging Face model repo with the
+token in Secret Manager; the whole site under one URL; the Hugging Face static Space stays as the free fallback.
+
 ## 8. Metrics (as implemented in `evaluate.py`; keep the names)
 
 symbol precision and recall (IoU >= 0.3, same type); rating accuracy, poles accuracy, kA accuracy over matched devices; notes accuracy over
