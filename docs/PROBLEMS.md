@@ -158,6 +158,23 @@ which the earlier comparisons lacked.
 **For the real project.** Read the authors' recipe, not only the paper; a port of a model is not a port of its training. And measure
 run-to-run and pass-to-pass variance before claiming that one change beat another.
 
+## 10b. A threshold chosen on tiles hallucinates parts on whole drawings
+
+**What happened (18 Oct).** The full-schedule control model's operating threshold, chosen per tile to maximise accuracy on validation
+tiles, came out at 0.06. On whole drawings that let through 35 to 45 "capacitors" per test set, scored 0.06 to 0.08, sitting on blank paper
+with no symbol or text under them, some over 100 pixels wide. The price barely moved only because capacitor ratings (kVAr) are not read yet;
+once they are, every ghost becomes a priced power-factor-correction line.
+
+**Why.** Tiles with symbols dominate the tile score, and a low threshold costs little there. A whole drawing is mostly blank paper, where a
+low threshold has far more room to invent things. The two measurements disagree, and the product lives at the drawing level.
+
+**What was done.** The operating threshold is now chosen on whole validation drawings (seen and unseen styles pooled), by a sweep over the
+detector and the tile merge, and stored with the weights as a separate value from the per-tile one. Test sets are never used for choosing.
+
+**For the real project.** Every threshold and every selection is made on the unit the product is judged by, a whole drawing, on
+validation drawings that are not the test drawings; and "false positives on blank paper" is reported as its own number, because each one
+is a line on a quote.
+
 ## 11. Tile edges: the per-tile score is a floor, and a tempting fix was wrong
 
 **What happened (18 Oct).** Pages are cut into 640-pixel tiles with a quarter overlap. A symbol cut by a tile edge is found only 40 to 50
