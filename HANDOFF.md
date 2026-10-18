@@ -280,6 +280,10 @@ Decided 18 Oct: two merge filters at the cross-tile merge (drop boxes cut by an 
 better-scoring one), measured at +2 to +6 points of precision for at most half a point of recall (unseen clean 0.919 / 0.974 to 0.952 /
 0.974, classes passing 4 to 8 at detector level). For the live site: drop the crop pass when the engine is RapidOCR (step 6) and keep the
 detector on r18, so a sheet should take about 6 to 9 s on the Space; rerun the bench there.
+Merge filters built and committed (41107bc): drawing-level precision test clean 0.934 to 0.958, unseen clean 0.912 to 0.942, baseline
+clean 0.933 to 0.959, recall unchanged; types passing 0.95 on unseen clean 5 to 8. A refinement that keeps a cut box when no whole
+counterpart exists in another tile was measured and rejected: it regains about 3 true symbols per set but adds 6 to 15 false boxes (cut-box
+detections with no counterpart are mostly false), costing 0.4 to 1.1 points of precision on every set; the unconditional edge rule stands.
 
 ## 8. Metrics (as implemented in `evaluate.py`; keep the names)
 
