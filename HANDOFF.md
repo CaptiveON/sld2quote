@@ -313,6 +313,18 @@ under the default "classic" font set. Morning: both scored at drawing level agai
 product model. Step 6 starts after that, with Adnan's go. Errors in any run are handled by diagnosing the root cause, fixing, testing and
 recording; no run is restarted more than once without a report.
 
+**Revised 18 Oct 11:45.** The sampling-weight hypothesis for the bus-section loss was tested and withdrawn (BUS_SECTION is in 16.7% of
+training tiles, so device-type grouping changes nothing); run 1 became the plain control `rtdetr_r18_plain` (same recipe as the fonts run,
+full schedule, no sampling). The queue launched at 11:33 (`scripts/train_night2.sh`, log `weights/night2_queue.log`): run 1 done about
+15:20, run 2 `rtdetr_r18_fonts` after `data/coco_fonts` appears, summary `weights/night2_summary.md` about 19:30. Diagnosis over r18_rare's
+ten kept passes: per-type recall swings up to 0.3 between adjacent passes; no pass keeps bus-sections with the other gains (pass 5 the
+nearest partial candidate, bus-section 0.77 but motor, contactor and relay down 0.2 to 0.35). Industrial fix from the authors' recipe
+(lyuwenyu/RT-DETR: rtdetr_pytorch/configs/rtdetr/include/optimizer.yml, src/optim/ema.py): EMA of the weights, decay 0.9999, 2000-step
+warm-up, evaluated instead of the live weights; the authors also train at a constant learning rate (MultiStepLR milestone 1000) for 72
+epochs and set weight decay 0 on norm weights and biases (noted, not applied yet). Added to the trainer as `--ema`; a second queue
+(`scripts/train_night2b.sh`) runs `rtdetr_r18_plain_ema` and `rtdetr_r18_fonts_ema` after night2 (each about 3.8 h), summary
+`weights/night2b_summary.md` over six runs, expected early 19 Oct. Morning: drawing-level check of the candidates.
+
 ## 8. Metrics (as implemented in `evaluate.py`; keep the names)
 
 symbol precision and recall (IoU >= 0.3, same type); rating accuracy, poles accuracy, kA accuracy over matched devices; notes accuracy over

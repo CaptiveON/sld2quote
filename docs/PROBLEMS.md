@@ -132,6 +132,25 @@ that was missing.
 **For the real project.** Per-tile scores are not the product score; a model that looks better on tiles can price worse. And every
 hypothesis about a model gets measured before it is acted on, including the orchestrator's.
 
+## 10a. The result depends on which pass you pick, far more than it should
+
+**What happened (18 Oct).** Across the ten kept passes of one run, recall for a device type swung by up to 0.3 between adjacent passes,
+even late in the schedule (motor 0.84 then 0.60; bus-section 0.43 then 0.77). The pass picked by the selection rule happened to be the
+worst pass for bus-sections. So "which pass" was dominating the per-type results, and comparisons between runs were partly comparisons
+between lucky and unlucky passes.
+
+**What the authors do.** RT-DETR's own training recipe (checked at its source, the lyuwenyu/RT-DETR repository: optimizer.yml and
+ema.py) keeps an exponential moving average of the weights (decay 0.9999 with a 2,000-step warm-up, updated after every optimiser step)
+and evaluates the averaged weights, not the live ones; it even trains at a constant learning rate for 72 passes and lets the average do
+the smoothing. The Hugging Face port used here provides the model but not that part of the recipe, so the trainer had no averaging.
+
+**What was done.** Weight averaging added to the trainer as a single, separately measured change: two runs with it (plain data, wider
+fonts) queued behind the two without it, so its effect is attributed cleanly. Also a control run of the plain recipe with the full schedule,
+which the earlier comparisons lacked.
+
+**For the real project.** Read the authors' recipe, not only the paper; a port of a model is not a port of its training. And measure
+run-to-run and pass-to-pass variance before claiming that one change beat another.
+
 ## 11. Tile edges: the per-tile score is a floor, and a tempting fix was wrong
 
 **What happened (18 Oct).** Pages are cut into 640-pixel tiles with a quarter overlap. A symbol cut by a tile edge is found only 40 to 50
