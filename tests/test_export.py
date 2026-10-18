@@ -1,6 +1,6 @@
 """COCO export checks: tiles cover every pixel, every label survives tiling where the ground truth puts it, the held-out
-styles stay out of training, val_unseen takes the next held-out sheets without moving any other split, and the manifest matches
-what is on disk."""
+styles stay out of training (one held-out font or several, with or without a held-out layout), val_unseen takes the next held-out sheets without moving any other
+split, and the manifest matches what is on disk."""
 import json, os, shutil, sys
 import pytest
 from PIL import Image
@@ -136,6 +136,41 @@ def test_val_unseen_takes_the_next_held_out_sheets_and_leaves_every_other_split_
     assert m["requested"]["val_unseen"] == 1 and "val_unseen" not in m0["requested"] and "val_unseen" not in m0["splits"]  # off by default
     _, _, m2, _ = _export(pool, out)  # a rerun without it removes the old val_unseen
     assert not os.path.exists(os.path.join(out, "val_unseen")) and "val_unseen" not in m2["splits"]
+
+
+def test_two_held_out_fonts_keep_both_out_of_training_and_the_manifest_lists_them(ds, tmp_path):
+    # Verdana, a regular font under the default hold-out (seeds 7 and 16, labels right), is held out beside Courier New; the
+    # pool then has 7 regular and 6 held-out-style sheets, so train is one sheet shorter and one held-out sheet is left over
+    pool, _, m0, _ = ds
+    fonts = ["Courier New.ttf", "Verdana.ttf"]
+    _, out, m, coco = _export(pool, str(tmp_path / "coco"), "--held-out-font", ",".join(fonts), "--train", "4", "--unseen", "4", "--val-unseen", "1")
+    _counts_match_disk(pool, out, m, coco, 640)
+    assert m0["held_out"]["font"] == ["Courier New.ttf"] and m["held_out"] == {"font": fonts, "label_pos": "below"}
+    style = {f"sheet-{s:04d}": _gt(pool, f"sheet-{s:04d}", "clean")["style"] for s in SEEDS}
+    held2 = lambda st: st["font"] in fonts or st["label_pos"] == "below"
+    regular, unseen = [i for i in style if not held2(style[i])], [i for i in style if held2(style[i])]
+    want = {"train": regular[:4], "val": regular[4:5], "test_clean": regular[5:7], "test_scan": regular[5:7], "test_unseen": unseen[:4], "val_unseen": unseen[4:5]}
+    assert {s: m["splits"][s]["sheet_ids"] for s in want} == want and m["unused_sheets"] == {"held_out_style": 1, "regular": 0}
+    assert {"sheet-0007", "sheet-0016"} <= {i for s in ("train", "test_clean") for i in m0["splits"][s]["sheet_ids"]}  # regular before
+    assert not any(held2(im) for s in ("train", "val", "test_clean", "test_scan") for im in coco[s]["images"])
+    assert all(held2(im) for s in ("test_unseen", "val_unseen") for im in coco[s]["images"])
+    assert {im["font"] for im in coco["test_unseen"]["images"] + coco["val_unseen"]["images"]} >= {"Courier New.ttf", "Verdana.ttf"}
+    with pytest.raises(SystemExit) as stop:  # a font the generator does not draw stops at the argument check
+        main(["--pool", pool, "--out", str(tmp_path / "bad"), "--held-out-font", "Courier New.ttf,Comic Sans.ttf"])
+    assert stop.value.code == 2 and not os.path.exists(tmp_path / "bad")
+
+
+def test_label_pos_none_holds_out_fonts_only_so_both_layouts_train(ds, tmp_path):
+    # with no layout held out only the Courier New sheets (11 and 12) are unseen, and the labels-below sheets 2 and 3 train
+    pool = ds[0]
+    _, out, m, coco = _export(pool, str(tmp_path / "coco"), "--held-out-label-pos", "none", "--unseen", "2")
+    _counts_match_disk(pool, out, m, coco, 640)
+    regular = [f"sheet-{s:04d}" for s in SEEDS if _gt(pool, f"sheet-{s:04d}", "clean")["style"]["font"] != "Courier New.ttf"]
+    assert m["held_out"] == {"font": ["Courier New.ttf"], "label_pos": "none"} and m["unused_sheets"] == {"held_out_style": 0, "regular": 3}
+    assert m["splits"]["test_unseen"]["sheet_ids"] == ["sheet-0011", "sheet-0012"] and m["splits"]["train"]["sheet_ids"] == regular[:5]
+    assert {"sheet-0002", "sheet-0003"} <= set(m["splits"]["train"]["sheet_ids"])  # labels below, held out by default, now train
+    assert {im["label_pos"] for im in coco["train"]["images"]} == {"right", "below"}
+    assert {im["font"] for s in ("test_unseen",) for im in coco[s]["images"]} == {"Courier New.ttf"}
 
 
 def test_manifest_counts_match_the_files_and_annotations_on_disk(ds):

@@ -5,7 +5,8 @@ reader's inference shares). A symbol's box goes into each tile that holds at lea
 box are kept at --empty-keep, so the notes block, title block and busbar labels are also seen as background. Scan boxes go
 through generate.image_box() so that they match the rotated image; clean boxes are used as drawn.
 
-Splits are by whole sheet, in ascending seed order. A sheet drawn in the held-out font or label layout joins the unseen pool, and
+Splits are by whole sheet, in ascending seed order. A sheet drawn in a held-out font (--held-out-font takes one font file or a
+comma-separated list) or in the held-out label layout (--held-out-label-pos none holds out no layout) joins the unseen pool, and
 test_unseen takes the first --unseen of those and val_unseen, when --val-unseen asks for it, the next ones, so that a model can
 be selected on an unseen style without touching test_unseen; the others fill train, val and test in turn. train, val, test_unseen
 and val_unseen hold both copies of their sheets; test_clean and test_scan are the two copies of the same test sheets, so those columns compare like for
@@ -27,12 +28,13 @@ from datetime import datetime
 from PIL import Image, ImageDraw
 from . import __version__
 from .classes import CLASSES, CLASS_ID, DEVICE_TO_CLASS
-from .generate import FONTS, font, image_box
+from .generate import FONT_SETS, font, image_box
 from .tiles import clip_box, cut_tile, tile_grid
 
 SPLITS = ["train", "val", "test_clean", "test_scan", "test_unseen"]
 VAL_UNSEEN = "val_unseen"  # written only when --val-unseen asks for sheets, so an export without it is as before
 MIN_VISIBLE = 0.6  # share of a symbol's box that must lie inside a tile for the tile to carry its label
+KNOWN_FONTS = {f for fonts in FONT_SETS.values() for f in fonts}
 PALETTE = [(230, 25, 75), (60, 180, 75), (0, 130, 200), (245, 130, 48), (145, 30, 180), (0, 128, 128), (240, 50, 230),
            (128, 128, 0), (170, 110, 40), (0, 0, 128), (128, 0, 0), (200, 160, 0), (0, 170, 220), (110, 110, 110)]  # by class
 
@@ -55,11 +57,11 @@ def read_pool(pool: str) -> list[dict]:
     return sorted(sheets.values(), key=lambda s: s["seed"])
 
 
-def assign(sheets: list, held_font: str, held_pos: str, n_train: int, n_val: int, n_test: int, n_unseen: int,
+def assign(sheets: list, held_fonts: list, held_pos: str, n_train: int, n_val: int, n_test: int, n_unseen: int,
            n_val_unseen: int = 0) -> tuple[dict, dict]:
     """the splits as (sheet, copy) pairs, filled in ascending seed order, and the count of sheets left over; a pool too small
     for the requested sizes stops the export before anything is written, rather than train or score on short splits"""
-    unseen_style = lambda s: s["font"] == held_font or s["label_pos"] == held_pos
+    unseen_style = lambda s: s["font"] in held_fonts or s["label_pos"] == held_pos
     held, rest = [s for s in sheets if unseen_style(s)], [s for s in sheets if not unseen_style(s)]
     a, b, c = n_train, n_train + n_val, n_train + n_val + n_test
     u = n_unseen + n_val_unseen
@@ -168,7 +170,7 @@ def contact_sheet(out: str, seed: int, held: str, n_train: int = 20, n_unseen: i
         x += 40 + d.textlength(name, font=f_cap)
     for k, (split, im, anns) in enumerate(picks):
         cx, cy = g + k % cols * (cell + g), head + k // cols * (cap + cell + g) + cap
-        caption = f"{split} | {im['sheet']} | {im['copy']} | tile {im['tile_x']}, {im['tile_y']} | {len(anns)} boxes"
+        caption = f"{split} | {im['sheet']} {im['copy']} | {im['tile_x']}, {im['tile_y']} | {im['font'].rsplit('.', 1)[0]} | {len(anns)} boxes"
         d.text((cx, cy - 6), caption, fill="black", font=f_cap, anchor="ls")
         with Image.open(os.path.join(out, split, "images", im["file_name"])) as t:
             sheet.paste(t.convert("RGB").resize((cell, cell), Image.LANCZOS), (cx, cy))
@@ -183,7 +185,7 @@ def contact_sheet(out: str, seed: int, held: str, n_train: int = 20, n_unseen: i
     return path
 
 
-def export(pool: str, out: str, tile: int = 640, overlap: float = 0.25, held_out_font: str = "Courier New.ttf",
+def export(pool: str, out: str, tile: int = 640, overlap: float = 0.25, held_out_font: tuple = ("Courier New.ttf",),
            held_out_label_pos: str = "below", train: int = 400, val: int = 40, test: int = 30, unseen: int = 20,
            empty_keep: float = 0.15, seed: int = 0, val_unseen: int = 0) -> dict:
     """the whole export (splits, tiles, COCO files, contact sheet, manifest); returns the manifest"""
@@ -193,10 +195,10 @@ def export(pool: str, out: str, tile: int = 640, overlap: float = 0.25, held_out
     for name in SPLITS + [VAL_UNSEEN]:
         shutil.rmtree(os.path.join(out, name), ignore_errors=True)  # a rerun never mixes in tiles from an older export
     stats = {name: export_split(name, splits[name], out, tile, overlap, empty_keep, seed) for name in splits}
-    contact_sheet(out, seed, f"held-out font {held_out_font}, labels {held_out_label_pos}")
+    contact_sheet(out, seed, f"held-out font {' and '.join(held_out_font)}, labels {held_out_label_pos}")
     seeds = [s["seed"] for s in sheets]
     m = {"note": "tiles cut from synthetic drawings (sld2quote/generate.py); no real data", "classes": CLASSES, "tile": tile,
-         "overlap": overlap, "min_visible": MIN_VISIBLE, "held_out": {"font": held_out_font, "label_pos": held_out_label_pos},
+         "overlap": overlap, "min_visible": MIN_VISIBLE, "held_out": {"font": list(held_out_font), "label_pos": held_out_label_pos},
          "empty_keep": empty_keep, "seed": seed, "requested": {"train": train, "val": val, "test": test, "unseen": unseen} | ({VAL_UNSEEN: val_unseen} if val_unseen else {}),
          "pool": {"path": pool, "sheets": len(sheets), "seeds": [min(seeds), max(seeds)]}, "unused_sheets": unused, "splits": stats,
          "created": datetime.now().astimezone().isoformat(timespec="seconds"), "export_seconds": round(time.time() - t0, 1)}
@@ -211,7 +213,7 @@ def summary(m: dict) -> str:
     want, names = {"train": "train", "val": "val", "test_clean": "test", "test_scan": "test", "test_unseen": "unseen", VAL_UNSEEN: VAL_UNSEEN}, list(sp)
     row = lambda label, vals: f"{label:<20}" + "".join(f"{v:>12}" for v in vals)
     L = [f"sld2quote COCO export of synthetic drawings, {m['export_seconds']} s: {p['sheets']} sheets in {p['path']} (seeds {p['seeds'][0]} to {p['seeds'][1]})",
-         f"tile {m['tile']} px, overlap {m['overlap']}; held out: font {m['held_out']['font']}, labels {m['held_out']['label_pos']}; "
+         f"tile {m['tile']} px, overlap {m['overlap']}; held out: font {' and '.join(m['held_out']['font'])}, labels {m['held_out']['label_pos']}; "
          f"unused: {u['held_out_style']} held-out-style and {u['regular']} regular sheets", "",
          row("", names), row("sheets requested", [m["requested"][want[s]] for s in names])]
     L += [row(k, [sp[s][k] for s in names]) for k in ("sheets", "images", "boxes", "empty_tiles_kept", "empty_tiles_dropped")]
@@ -219,12 +221,21 @@ def summary(m: dict) -> str:
     return "\n".join(L)
 
 
+def font_list(arg: str) -> list[str]:
+    """--held-out-font: one font file name or several, comma-separated, each from a generator font set"""
+    names = list(dict.fromkeys(n.strip() for n in arg.split(",") if n.strip()))
+    unknown = [n for n in names if n not in KNOWN_FONTS]
+    if not names or unknown:
+        raise argparse.ArgumentTypeError(f"{', '.join(unknown) or 'no font named'}; the generator's fonts are {', '.join(sorted(KNOWN_FONTS))}")
+    return names
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description="cut generated sheets into a COCO tile set for the symbol detector")
     ap.add_argument("--pool", default="data/pool"); ap.add_argument("--out", default="data/coco")
     ap.add_argument("--tile", type=int, default=640); ap.add_argument("--overlap", type=float, default=0.25)
-    ap.add_argument("--held-out-font", default="Courier New.ttf", choices=FONTS)
-    ap.add_argument("--held-out-label-pos", default="below", choices=["right", "below"])
+    ap.add_argument("--held-out-font", default="Courier New.ttf", type=font_list, help="font file(s) held out of training, comma-separated")
+    ap.add_argument("--held-out-label-pos", default="below", choices=["right", "below", "none"], help="label layout held out of training; none trains on both")
     ap.add_argument("--train", type=int, default=400); ap.add_argument("--val", type=int, default=40)
     ap.add_argument("--test", type=int, default=30); ap.add_argument("--unseen", type=int, default=20)
     ap.add_argument("--val-unseen", type=int, default=0, help="held-out-style sheets after test_unseen's, for selecting a model on an unseen style")

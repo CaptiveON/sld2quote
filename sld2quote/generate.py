@@ -14,18 +14,29 @@ power-factor correction (capacitor and earth) or surge protection (arrester and 
 transformer with a meter and sometimes a protection relay; some feeders end at a downstream board. Seven symbol bodies
 come from an open library (assets/symbols, CC BY 3.0, see ATTRIBUTION.md); the rest are drawn here the same way.
 Ground-truth coordinates are in the drawing frame: a scan copy is rotated by style["rotate_deg"] about the page centre
-after drawing, and image_box() maps a box into the saved image.
+after drawing, and image_box() maps a box into the saved image. A sheet's font comes from a named set (--fonts, FONT_SETS):
+"classic", the default, is the five fonts every earlier sheet was drawn from, so earlier seeds reproduce byte for byte;
+"wide" adds eleven more and is recorded as style["font_set"]. A wide sheet also writes the letters inside its symbols (G, M,
+the meter units, I>) in its font's bold face, sizes its notes box to the longest note, and starts a plain feeder's labels
+below its cable stub; classic sheets keep the earlier drawing (Arial Bold inside symbols, a 560 px notes box).
 
 Nothing here is an R&B drawing. Ratings, names and prices are plausible, not real.
 """
 from __future__ import annotations
-import json, math, os, random
+import json, logging, math, os, random
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass, field, asdict
+from functools import lru_cache
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
-FONT_DIR = "/System/Library/Fonts/Supplemental"
-FONTS = ["Arial.ttf", "Arial Narrow.ttf", "Verdana.ttf", "Courier New.ttf", "Trebuchet MS.ttf"]
+FONT_DIRS = ["/System/Library/Fonts/Supplemental", "/System/Library/Fonts"]
+FONTS = ["Arial.ttf", "Arial Narrow.ttf", "Verdana.ttf", "Courier New.ttf", "Trebuchet MS.ttf"]  # every sheet drawn before 18 Oct
+# a sheet draws its labels, notes and title block in one font from its set (a wide sheet also the letters inside its symbols, in
+# that font's bold); "wide" adds faces a consultant's CAD drawing could use (a .ttc collection gives its first face: Avenir
+# Next's is its bold); every one covers the text drawn here, "²" included
+FONT_SETS = {"classic": FONTS,
+             "wide": FONTS + ["Tahoma.ttf", "Georgia.ttf", "Times New Roman.ttf", "Futura.ttc", "Helvetica.ttc", "HelveticaNeue.ttc",
+                              "Avenir Next.ttc", "Optima.ttc", "Geneva.ttf", "Menlo.ttc", "Monaco.ttf"]}
 W, H = 1600, 1000
 
 ACB_RATINGS = [1600, 2000, 2500, 3200, 4000]
@@ -40,12 +51,39 @@ MOTOR_KW = [11, 15, 22, 30, 37, 45, 55, 75]
 MOTOR_LOADS = ["pump P-{n}", "fan F-{n}", "chiller CH-{n}", "compressor C-{n}"]
 PFC_KVAR = [100, 150, 200, 250, 300]
 WAY_WORD = {"MCCB": "MCCB", "FUSE_SWITCH": "FSW", "ISOLATOR": "ISOL"}  # how the label names each way device
+log = logging.getLogger("sld2quote.generate")
 ASSETS = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "assets", "symbols")
 
 
-def font(name: str, size: int):
-    p = os.path.join(FONT_DIR, name)
-    return ImageFont.truetype(p if os.path.exists(p) else os.path.join(FONT_DIR, "Arial.ttf"), size)
+@lru_cache(maxsize=None)
+def font_path(name: str) -> str:
+    """the font file in the first macOS font folder that holds it; a missing one is drawn in Arial, with one warning per name"""
+    for p in (os.path.join(d, name) for d in FONT_DIRS):
+        if os.path.exists(p):
+            return p
+    log.warning("font %s is not in %s; drawing in Arial instead", name, " or ".join(FONT_DIRS))
+    return os.path.join(FONT_DIRS[0], "Arial.ttf")
+
+
+def font(name: str, size: int, index: int = 0):
+    return ImageFont.truetype(font_path(name), size, index=index)  # index: the face in a .ttc collection
+
+
+@lru_cache(maxsize=None)
+def glyph_face(name: str) -> tuple[str, int]:
+    """(file, face index) a wide sheet writes inside its symbols: the font's bold, as '<name> Bold.ttf' beside it or the face
+    styled Bold in its .ttc collection, else its own face (Geneva and Monaco have no bold on this Mac)"""
+    stem, ext = os.path.splitext(name)
+    if os.path.exists(os.path.join(os.path.dirname(font_path(name)), stem + " Bold.ttf")):
+        return stem + " Bold.ttf", 0
+    if ext == ".ttc":
+        for i in range(32):
+            try:
+                if font(name, 10, i).getname()[1] == "Bold":
+                    return name, i
+            except OSError:  # past the collection's last face
+                break
+    return name, 0
 
 
 @dataclass
@@ -188,15 +226,20 @@ def image_box(box: list, size: list, rotate_deg: float = 0.0) -> list:
     return [round(x0), round(y0), round(max(p[0] for p in pts) - x0), round(max(p[1] for p in pts) - y0)]
 
 
-def make_sheet(seed: int, scan: bool = False, level: str | None = None) -> tuple[Image.Image, Sheet]:
+def make_sheet(seed: int, scan: bool = False, level: str | None = None, fonts: str = "classic") -> tuple[Image.Image, Sheet]:
     rnd = random.Random(seed)
     level = level or ("medium" if random.Random(f"level-{seed}").random() < 0.5 else "simple")
     medium = level == "medium"
-    style = {"font": rnd.choice(FONTS), "size": rnd.choice([17, 18, 20, 22]), "lw": rnd.choice([2, 2, 3]),
+    style = {"font": rnd.choice(FONT_SETS[fonts]), "size": rnd.choice([17, 18, 20, 22]), "lw": rnd.choice([2, 2, 3]),
              "sym": rnd.choice([26, 30, 34]), "bus_lw": rnd.choice([5, 6, 8]), "label_pos": rnd.choice(["right", "right", "below"]),
              "scan": scan, "level": level, "breaker": rnd.choice(["iec", "box"])}
+    wide = fonts != "classic"  # the wide set's own drawing rules (see the module notes); classic sheets stay as first drawn
+    if wide:  # a classic sheet leaves the key out, so it stays byte-identical with those drawn before it existed
+        style["font_set"] = fonts
     sh = Sheet(id=f"sheet-{seed:04d}", style=style)
     f = font(style["font"], style["size"]); fs = font(style["font"], max(13, style["size"] - 5)); fb = font("Arial Bold.ttf", 20)
+    gname, gi = glyph_face(style["font"]) if wide else ("Arial Bold.ttf", 0)
+    gf = lambda size: font(gname, size, gi)  # the letters inside symbols
     lw, s = style["lw"], style["sym"]
     ss = max(20, s - 6)  # outgoing breakers are drawn a little smaller than incomers
     u_in, u_out = s / 36, ss / 36  # px per symbol-library unit for incomers and outgoing ways
@@ -239,7 +282,7 @@ def make_sheet(seed: int, scan: bool = False, level: str | None = None) -> tuple
         kind, unit, mw, mh = ("energy-meter", "kWh", 40, 30) if rnd.random() < 0.4 else ("meter", rnd.choice(["A", "V", "kW"]), 36, 36)
         mb, _ = draw_symbol(d, kind, ctb[0] + ctb[2] + 26 + mw * um / 2, yc - mh * um / 2, um, lw)
         dashed(d, (ctb[0] + ctb[2] + 2, yc), (mb[0] - 2, yc))
-        fm = font("Arial Bold.ttf", max(10, round(mh * um * (0.34 if kind == "energy-meter" else 0.42))))
+        fm = gf(max(10, round(mh * um * (0.34 if kind == "energy-meter" else 0.42))))
         text(d, sh, (mb[0] + mb[2] / 2, mb[1] + mb[3] * (0.66 if kind == "energy-meter" else 0.5)), unit, fm, anchor="mm")
         sh.devices.append(Device(f"{acb_id}-PM", "METER", mb, label=unit))
         sh.connections.append([f"{acb_id}-CT", f"{acb_id}-PM"])
@@ -297,7 +340,7 @@ def make_sheet(seed: int, scan: bool = False, level: str | None = None) -> tuple
     # --- generator incomer on busbar B
     if has_gen:
         g_cx = bus_x2 - 80; circle(d, g_cx, 90, 24, lw)
-        text(d, sh, (g_cx, 90), "G", fb, anchor="mm")
+        text(d, sh, (g_cx, 90), "G", gf(20), anchor="mm")
         gk = rnd.choice([500, 630, 800, 1000])
         text(d, sh, (g_cx - 36, 60), f"GEN-1 {gk} kVA", f, anchor="ra"); text(d, sh, (g_cx - 36, 86), "standby", fs, anchor="ra")
         sh.devices.append(Device("GEN-1", "GENERATOR", [g_cx - 24, 66, 48, 48], rating=gk, label=f"GEN-1 {gk} kVA", on_bus="BUS-B"))
@@ -356,13 +399,15 @@ def make_sheet(seed: int, scan: bool = False, level: str | None = None) -> tuple
             d.line([x, bottom, x, bottom + gap], fill="black", width=lw)
             pb, (_, bottom) = draw_symbol(d, name, x, bottom + gap, u_out, lw)
             if typ == "MOTOR":
-                text(d, sh, (pb[0] + pb[2] / 2, pb[1] + pb[3] / 2), "M", font("Arial Bold.ttf", max(10, round(pb[3] * 0.42))), anchor="mm")
+                text(d, sh, (pb[0] + pb[2] / 2, pb[1] + pb[3] / 2), "M", gf(max(10, round(pb[3] * 0.42))), anchor="mm")
             sh.devices.append(Device(f"{did}-{suffix}", typ, pb, rating=rating, label=lbl))
             sh.connections.append([prev, f"{did}-{suffix}"]); prev = f"{did}-{suffix}"
         if not parts:  # a plain feeder: the outgoing cable, sometimes ending at a drawn downstream board
             board = style["boards"] and dest[:3] in ("DB-", "MCC", "sub") and rnd.random() < 0.6
             stub = 60 if board else 40
             d.line([x, yb, x, yb + stub], fill="black", width=lw)
+            if wide:  # labels below start under the stub, so the cable never runs through them (boards come with labels right)
+                bottom = yb + stub
             if board:
                 name = f"SB-{i + 1}" if dest.startswith("sub") else dest.split(" ")[0]
                 bw, bh = max(round(76 * u_out), round(fs.getlength(name)) + 14), max(round(34 * u_out), fs.size + 10)
@@ -381,13 +426,14 @@ def make_sheet(seed: int, scan: bool = False, level: str | None = None) -> tuple
 
     # --- notes block (the rules), title block
     nx, ny = 60, 760
-    d.rectangle([nx, ny, nx + 560, ny + 150], outline="black", width=lw)
-    text(d, sh, (nx + 12, ny + 10), "NOTES", fb)
     std = rnd.choice(["BS EN 61439-2", "BS EN IEC 61439-2:2021"])
     note_lines = [f"1. Switchboard to {std}, {form}, {ip}.",
                   f"2. Prospective fault level {fault} kA for 1 s at the busbars.",
                   f"3. All MCCBs {poles_default}-pole unless stated.",
                   "4. Busbars hard-drawn copper, ratings as shown."]
+    nw = 24 + math.ceil(max(fs.getlength(t) for t in note_lines)) if wide else 560  # 12 px either side of the longest note
+    d.rectangle([nx, ny, nx + nw, ny + 150], outline="black", width=lw)
+    text(d, sh, (nx + 12, ny + 10), "NOTES", fb)
     for k, ln in enumerate(note_lines):
         text(d, sh, (nx + 12, ny + 40 + k * 26), ln, fs)
     sh.notes = {"form": form, "ip": ip, "fault_kA": fault, "poles_default": poles_default, "standard": std}
@@ -430,8 +476,8 @@ def make_sheet(seed: int, scan: bool = False, level: str | None = None) -> tuple
     return im, sh
 
 
-def write_sheet(out_dir: str, seed: int, scan: bool = False, level: str | None = None) -> str:
-    im, sh = make_sheet(seed, scan, level)
+def write_sheet(out_dir: str, seed: int, scan: bool = False, level: str | None = None, fonts: str = "classic") -> str:
+    im, sh = make_sheet(seed, scan, level, fonts)
     os.makedirs(out_dir, exist_ok=True)
     stem = os.path.join(out_dir, sh.id + ("-scan" if scan else ""))
     im.save(stem + ".png")
@@ -452,10 +498,11 @@ if __name__ == "__main__":
     ap.add_argument("--out", default="data"); ap.add_argument("--n", type=int, default=10); ap.add_argument("--seed", type=int, default=1)
     ap.add_argument("--scan", action="store_true", help="also write a scan-like degraded copy of each sheet")
     ap.add_argument("--level", choices=["simple", "medium", "mix"], default="mix", help="drawing complexity; mix picks one per seed")
+    ap.add_argument("--fonts", choices=list(FONT_SETS), default="classic", help="the font set a sheet's font is drawn from")
     a = ap.parse_args()
     level = None if a.level == "mix" else a.level
     for i in range(a.n):
-        stem = write_sheet(a.out, a.seed + i, level=level)
+        stem = write_sheet(a.out, a.seed + i, level=level, fonts=a.fonts)
         if a.scan:
-            write_sheet(a.out, a.seed + i, scan=True, level=level)
+            write_sheet(a.out, a.seed + i, scan=True, level=level, fonts=a.fonts)
         print("wrote", stem)
