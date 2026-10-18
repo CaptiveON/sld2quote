@@ -269,3 +269,35 @@ def test_one_optimisation_step_on_cpu(tmp_path):
     assert all(len(k["scores"]) <= len(r["scores"]) for r, k in zip(raw, kept))
     assert all(float(ops.box_iou(k["boxes"], k["boxes"]).fill_diagonal_(0).max()) <= 0.5 for k in kept if len(k["boxes"]) > 1)
     assert time.time() - t0 < 60
+
+
+def test_split_linear_computes_in_pieces_with_the_same_outputs_and_gradients(monkeypatch):
+    monkeypatch.setattr(td, "MPS_ROWS", 4)  # 2 x 5 = 10 rows: pieces of 4, 4 and 2 while training, one product of 10 without gradients
+    torch.manual_seed(0); plain = torch.nn.Linear(3, 2); split = td.mps_safe(torch.nn.Sequential(torch.nn.Linear(3, 2)))[0]
+    split.load_state_dict(plain.state_dict()); x = torch.randn(2, 5, 3); xs, xp = x.clone().requires_grad_(), x.clone().requires_grad_()
+    rows, linear = [], torch.nn.functional.linear
+    with monkeypatch.context() as m:
+        m.setattr(torch.nn.functional, "linear", lambda v, w, b=None: rows.append(v.numel() // v.shape[-1]) or linear(v, w, b))
+        ys = split(xs)
+        with torch.no_grad():
+            split(x)
+    assert rows == [4, 4, 2, 10]
+    yp = plain(xp); (ys ** 2).sum().backward(); (yp ** 2).sum().backward()
+    assert ys.shape == yp.shape == (2, 5, 2) and torch.allclose(ys, yp) and torch.allclose(xs.grad, xp.grad)
+    assert torch.allclose(split.weight.grad, plain.weight.grad) and torch.allclose(split.bias.grad, plain.bias.grad)
+
+
+def test_a_finite_loss_with_a_gradient_that_is_not_finite_skips_the_update(caplog):
+    class Toy(torch.nn.Module):
+        def __init__(self):
+            super().__init__(); self.w = torch.nn.Parameter(torch.ones(1))
+
+        def forward(self, pixel_values, labels):
+            return SimpleNamespace(loss=(self.w * pixel_values).sum())
+    model = Toy(); opt = torch.optim.AdamW(model.parameters(), lr=0.1); sched = torch.optim.lr_scheduler.LambdaLR(opt, lambda s: 1.0)
+    b = {"pixel_values": torch.ones(1), "labels": [{"image_id": torch.tensor(7)}]}
+    hook = model.w.register_hook(lambda g: g * math.inf)  # what the MPS fault did to a few weight gradients
+    assert td.step(model, opt, sched, b, "cpu", 0.1) == 1.0 and model.w.item() == 1.0 and sched.last_epoch == 1
+    assert "update skipped; tiles [7]" in caplog.text
+    hook.remove(); td.step(model, opt, sched, b, "cpu", 0.1)
+    assert model.w.item() < 1.0  # a sound gradient updates as before
