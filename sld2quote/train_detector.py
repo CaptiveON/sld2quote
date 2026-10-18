@@ -18,21 +18,23 @@ import torch
 from PIL import Image, ImageEnhance
 from pycocotools.coco import COCO
 from pycocotools.cocoeval import COCOeval
-from torch.utils.data import DataLoader, Dataset
+from torch.utils.data import DataLoader, Dataset, SubsetRandomSampler
 from torchvision import ops
 from transformers import RTDetrForObjectDetection, RTDetrImageProcessor, get_cosine_schedule_with_warmup, set_seed
 from transformers.utils import logging as hf_logging
 from .classes import CLASSES, CLASS_ID
-from .evaluate import iou
 from .tiles import cut_tile, tile_grid
 
 log = logging.getLogger("sld2quote.train_detector")
 MATCH_IOU = 0.5                                                # a detection finds a box of its class when they overlap this much
 THRESHOLDS = np.round(np.arange(0.05, 0.951, 0.01), 2)         # operating thresholds tried on val
-EVAL_SPLITS = ("val", "test_clean", "test_scan", "test_unseen")
+EVAL_SPLITS = ("val", "val_unseen", "test_clean", "test_scan", "test_unseen")
+SELECT = ("val", "val_unseen")  # the splits a pass and the thresholds are chosen on, where present; test_unseen stays for the final numbers
 STYLE_KEYS = ("copy", "breaker", "level", "font", "label_pos")  # image keys the export adds, for recall by style
 EDGE_PX = 2                                                    # a detection this close to the tile border touches the edge
-VAL_KEYS = ("map50", "map", "mean_precision", "mean_recall", "min_precision", "min_recall")  # kept per epoch in history.json
+SLOWED = 0.85                                                  # a pass below this share of its run's best rate was slowed by other work
+VAL_KEYS = ("map50", "map", "mean_precision", "mean_recall", "min_precision", "min_recall", "mean_f1")  # kept per epoch in history.json
+SCORE = {"map50": ("mean_map50", "mAP@0.5"), "f1": ("pooled_mean_f1", "mean per-class F1 at the operating threshold")}  # --select: key, wording
 LABEL = {"nms": "with NMS", "raw": "raw"}
 PLAIN = {"breaker": "breakers", "fuse_switch": "fuse switches", "isolator": "isolators", "contactor": "contactors", "transformer": "transformers",
          "generator": "generators", "motor": "motors", "board": "downstream boards", "ct": "current transformers", "meter": "meters",
@@ -41,6 +43,13 @@ PLAIN = {"breaker": "breakers", "fuse_switch": "fuse switches", "isolator": "iso
 
 def r4(v):
     return None if v is None else round(float(v), 4)
+
+
+def iou(a, b) -> float:
+    """IoU of two [x, y, w, h] boxes, as evaluate.py computes it; kept here because the readers that evaluate.py runs import this module"""
+    ax, ay, aw, ah = a; bx, by, bw, bh = b
+    ix = max(0, min(ax + aw, bx + bw) - max(ax, bx)); iy = max(0, min(ay + ah, by + bh) - max(ay, by))
+    inter = ix * iy; return inter / float(aw * ah + bw * bh - inter + 1e-9)
 
 
 def fmt(v) -> str:
@@ -56,7 +65,7 @@ class Tiles(Dataset):
         js = json.load(open(os.path.join(root, split, "annotations.json")))
         if {c["id"]: c["name"] for c in js["categories"]} != dict(enumerate(CLASSES)):
             raise ValueError(f"{root}/{split}: categories do not match sld2quote/classes.py")
-        self.dir, self.proc, self.aug, self.seed, self.epoch = os.path.join(root, split, "images"), proc, aug, seed, 0
+        self.dir, self.proc, self.aug, self.seed, self.epoch, self.factors = os.path.join(root, split, "images"), proc, aug, seed, 0, None
         self.images, self.categories = sorted(js["images"], key=lambda im: im["id"])[:limit], js["categories"]
         keep, self.anns = {im["id"] for im in self.images}, defaultdict(list)
         for an in js["annotations"]:
@@ -70,10 +79,11 @@ class Tiles(Dataset):
         return [an for im in self.images for an in self.anns[im["id"]]]
 
     def __getitem__(self, i):
+        i, rep = i % len(self.images), i // len(self.images)  # repeat k of tile i (repeat-factor sampling) comes as i + k * len
         im = self.images[i]; anns = self.anns[im["id"]]
         img = Image.open(os.path.join(self.dir, os.path.basename(im["file_name"]))).convert("RGB")
-        if self.aug:  # seeded by tile and epoch, so a run repeats whatever the number of workers and survives a resume
-            img, anns = jitter(img, anns, random.Random(f"{self.seed}:{self.epoch}:{i}"), *self.aug)
+        if self.aug:  # seeded by tile, repeat and epoch, so a run repeats whatever the number of workers and survives a resume
+            img, anns = jitter(img, anns, random.Random(f"{self.seed}:{self.epoch}:{i}" + (f":{rep}" if rep else "")), *self.aug)
         enc = self.proc(images=img, annotations={"image_id": im["id"], "annotations": anns}, return_tensors="pt")
         return enc["pixel_values"][0], enc["labels"][0]
 
@@ -97,15 +107,38 @@ def jitter(img, anns, rng, brightness: float, contrast: float, scale: float, min
     return out, kept
 
 
+def repeat_factors(ds: Tiles, t: float) -> tuple[list, dict]:
+    """repeat-factor sampling, the LVIS rule: per class r(c) = max(1, sqrt(t / f(c))), f(c) the fraction of the split's tiles holding
+    class c; per tile the largest factor among its classes, 1 for a tile with none. Returns the tile factors and the class factors."""
+    held = [{a["category_id"] for a in ds.anns[im["id"]]} for im in ds.images]
+    f = Counter(c for h in held for c in h)
+    rc = {c: max(1.0, math.sqrt(t * len(held) / f[c])) for c in f}
+    return [max((rc[c] for c in h), default=1.0) for h in held], rc
+
+
+def repeat_indices(factors: list, seed: int, epoch: int) -> list:
+    """one epoch's draw: tile i appears floor(r) times and once more with probability r - floor(r), so its expected count is its
+    factor r; seeded by seed and epoch, so a run repeats and survives a resume. Repeat k of tile i is index i + k * len(factors),
+    so each repeat gets its own augmentation; the epoch is a little longer than the split."""
+    rng, n, out = random.Random(f"{seed}:repeat:{epoch}"), len(factors), []
+    for i, r in enumerate(factors):
+        out += [i + k * n for k in range(int(r) + (rng.random() < r - int(r)))]
+    return out
+
+
 def collate(batch):
     return {"pixel_values": torch.stack([b[0] for b in batch]), "labels": [b[1] for b in batch]}
 
 
 def loader(ds: Tiles, a, train: bool) -> DataLoader:
     """workers come from a fork server: under spawn, on this Mac (torch 2.5.1, macOS 27), every pass ended with a 5 s join
-    timeout per worker although the workers had exited, 20 s per split or epoch with 4 workers"""
-    return DataLoader(ds, batch_size=a.batch, shuffle=train, drop_last=train, num_workers=a.workers, collate_fn=collate,
-                      multiprocessing_context="forkserver" if a.workers else None, generator=torch.Generator().manual_seed(ds.seed + ds.epoch))
+    timeout per worker although the workers had exited, 20 s per split or epoch with 4 workers. With repeat factors, a training
+    pass shuffles that epoch's repeated draw instead of the plain split."""
+    g = torch.Generator().manual_seed(ds.seed + ds.epoch)
+    rep = train and ds.factors is not None
+    return DataLoader(ds, batch_size=a.batch, shuffle=train and not rep, drop_last=train, num_workers=a.workers, collate_fn=collate,
+                      sampler=SubsetRandomSampler(repeat_indices(ds.factors, ds.seed, ds.epoch), generator=g) if rep else None,
+                      multiprocessing_context="forkserver" if a.workers else None, generator=g)
 
 
 # model
@@ -226,6 +259,12 @@ def choose_threshold(sc) -> float:
     return float(THRESHOLDS[best[len(best) // 2]])
 
 
+def pool(scs: list):
+    """several splits' scored detections as one, for choosing a threshold: each split was matched on its own tiles, so only the
+    per-box and per-detection arrays are joined"""
+    return SimpleNamespace(**{k: np.concatenate([getattr(s, k) for s in scs]) for k in ("gt_cls", "got", "det_cls", "det_score")})
+
+
 def recall_by(anns: list, found, key) -> dict:
     """recall over the boxes grouped by key(box); boxes whose key is None are left out"""
     n, hit = Counter(), Counter()
@@ -278,22 +317,31 @@ def split_metrics(ds: Tiles, dets: list, images_per_s: float, sc, t: float) -> d
 
 def evaluate(model, proc, a, splits: list, ts: dict | None = None) -> tuple[dict, dict]:
     """metrics per variant and split, each variant at its own operating threshold: ts[variant] if given, otherwise the one that
-    maximises mean F1 on val under that variant's post-processing"""
-    if not ts and "val" not in splits:
-        raise ValueError("the operating thresholds are chosen on val, which is not among the splits")
+    maximises mean F1 under that variant's post-processing on val, pooled with val_unseen where it is among the splits"""
+    if not ts and not set(SELECT) & set(splits):
+        raise ValueError("the operating thresholds are chosen on val and val_unseen, and neither is among the splits")
     runs = {}
     for s in splits:
         ds = Tiles(a.data, s, proc, limit=a.limit); dets, ips = predict(model, proc, ds, a)
         runs[s] = (ds, ips, {v: (d, scored(ds.annotations(), d)) for v, d in dets.items()})
-    ts = ts or {v: choose_threshold(runs["val"][2][v][1]) for v in variants(a)}
-    out = {v: {} for v in variants(a)}
+    ts = ts or {v: choose_threshold(pool([runs[s][2][v][1] for s in SELECT if s in runs])) for v in variants(a)}
+    out, sel = {v: {} for v in variants(a)}, [s for s in SELECT if s in runs]
     for s, (ds, ips, vs) in runs.items():
         for v, (d, sc) in vs.items():
             m = out[v][s] = split_metrics(ds, d, ips, sc, ts[v])
             log.info(f"{s} {LABEL[v]}: {m['images']} tiles, {m['boxes']} boxes; mAP@0.5 {m['map50']}, mAP@0.5:0.95 {m['map']}; at threshold {ts[v]:.2f}: "
                      f"mean P {m['mean_precision']}, mean R {m['mean_recall']}, min P {m['min_precision']}, min R {m['min_recall']}; "
                      f"{m['false_positives']['count']} false positives, {m['false_positives']['at_tile_edge']} at a tile edge; {m['images_per_s']:.1f} images/s")
-    return ts, out
+    return ts, out, ({v: selection(pool([runs[s][2][v][1] for s in sel]), ts[v], out[v]) for v in out} if sel else {})
+
+
+def selection(sc, t: float, out: dict) -> dict:
+    """the scores a pass can be chosen by: the mean per-class F1 at the operating threshold on val and val_unseen pooled, the mean
+    of their mAP@0.5, and val_unseen's worst class, the smaller of its precision and recall"""
+    f1, ngt = pr(sc, [t])[2][:, 0], np.bincount(sc.gt_cls, minlength=len(CLASSES)); vu = out.get("val_unseen")
+    worst = min((min(c["precision"] or 0.0, c["recall"]) for c in vu["per_class"].values() if c["gt"]), default=None) if vu else None
+    return {"pooled_mean_f1": r4(f1[ngt > 0].mean()) if ngt.any() else None, "mean_map50": r4(statistics.mean(out[s]["map50"] or 0.0 for s in SELECT if s in out)),
+            "val_unseen_worst_min_pr": r4(worst)}
 
 
 # train
@@ -351,9 +399,18 @@ def save_checkpoint(model, proc, opt, sched, epoch: int, hist: dict, out: str):
 
 
 def curve(a, hist: dict) -> list:
-    """(epoch, val mAP@0.5 under the operating post-processing) for every pass that ran val: the score early stopping watches"""
-    v = variants(a)[0]
-    return [(e["epoch"], e["val"][v]["map50"] or 0.0) for e in hist["epochs"] if "val" in e]
+    """(epoch, selection score) for every pass that ran val: mAP@0.5 under the operating post-processing on val, averaged with
+    val_unseen where the pass scored it; the score early stopping and the best pass watch"""
+    v, k = variants(a)[0], SCORE[getattr(a, "select", "map50")][0]
+    old = "map50" if k == "mean_map50" else "mean_f1"  # a history from before the selection scores were recorded
+    score = lambda e: (e["selection"][v][k] if "selection" in e else statistics.mean(e[s][v].get(old) or 0.0 for s in SELECT if s in e)) or 0.0
+    return [(e["epoch"], score(e)) for e in hist["epochs"] if "val" in e]
+
+
+def watched(a, hist: dict) -> str:
+    e, f1 = next((e for e in reversed(hist["epochs"]) if "val" in e), {}), getattr(a, "select", "map50") == "f1"
+    both = ("val and val_unseen pooled: " if f1 else "the mean of val and val_unseen ") if "val_unseen" in e else "val "
+    return both + SCORE["f1" if f1 else "map50"][1] + " " + LABEL[variants(a)[0]]
 
 
 def early_stop(scores: list, min_delta: float) -> tuple:
@@ -370,8 +427,8 @@ def patience_stop(a, hist: dict, epoch: int) -> str | None:
     """why to stop before this epoch: --patience val passes in a row without an improvement of --min-delta (0 never stops)"""
     c = curve(a, hist); best, since = early_stop([s for _, s in c], a.min_delta)
     if a.patience and c and since >= a.patience:
-        return (f"early stop after epoch {epoch} of {a.epochs}: {since} val pass{'es' if since > 1 else ''} in a row without an improvement of {a.min_delta:g} in val "
-                f"mAP@0.5 {LABEL[variants(a)[0]]}; the best pass was epoch {c[best][0]} at {c[best][1]}")
+        return (f"early stop after epoch {epoch} of {a.epochs}: {since} val pass{'es' if since > 1 else ''} in a row without an improvement of {a.min_delta:g} in "
+                f"{watched(a, hist)}; the best pass was epoch {c[best][0]} at {r4(c[best][1])}")
     return None
 
 
@@ -386,6 +443,15 @@ def over_budget(a, hist: dict, epoch: int) -> str | None:
         return (f"time budget of {a.time_budget_min:g} min: stopped cleanly after epoch {epoch} of {a.epochs}, {used / 60:.1f} min "
                 f"of training used and an epoch takes {last / 60:.1f} min")
     return None
+
+
+def presentations(ds: Tiles, rc: dict, a) -> dict:
+    """what repeat-factor sampling does to the first epoch: per class its factor, the tiles holding it and how many of the first
+    epoch's draws hold it"""
+    held = [{x["category_id"] for x in ds.anns[im["id"]]} for im in ds.images]; idx = repeat_indices(ds.factors, a.seed, 0)
+    plain, shown = Counter(c for h in held for c in h), Counter(c for i in idx for c in held[i % len(held)])
+    return {"t": a.rare_repeat, "epoch_tiles": len(idx), "split_tiles": len(held),
+            "per_class": {CLASSES[c]: {"factor": r4(rc[c]), "tiles": plain[c], "epoch1": shown[c]} for c in sorted(rc, key=lambda c: -rc[c])}}
 
 
 def base_of(model: str) -> str:
@@ -427,14 +493,19 @@ def cmd_train(a, argv: list):
     src = ck if a.resume else a.model
     model, proc = load_model(src).to(a.device), load_processor(src)
     ds = Tiles(a.data, "train", proc, aug=(a.brightness, a.contrast, a.scale_jitter, a.min_visible), limit=a.limit, seed=a.seed)
-    steps = len(ds) // a.batch
-    if not steps:
+    if len(ds) < a.batch:
         raise SystemExit(f"{len(ds)} training tiles make no full batch of {a.batch}")
-    opt = optimiser(model, a.lr, a.backbone_lr, a.weight_decay); sched = get_cosine_schedule_with_warmup(opt, a.warmup_steps, a.epochs * steps)
+    if a.rare_repeat:
+        ds.factors, rc = repeat_factors(ds, a.rare_repeat); hist["rare_repeat"] = presentations(ds, rc, a)
+        log.info(f"repeat-factor sampling at T {a.rare_repeat:g}: an epoch shows about {hist['rare_repeat']['epoch_tiles']} tiles instead of {len(ds)}; "
+                 "per class factor, tiles holding it and presentations in the first epoch: " +
+                 ", ".join(f"{n} x{v['factor']} {v['tiles']} -> {v['epoch1']}" for n, v in hist["rare_repeat"]["per_class"].items() if v["factor"] > 1))
+    steps = [(len(repeat_indices(ds.factors, a.seed, e)) if ds.factors else len(ds)) // a.batch for e in range(a.epochs)]  # each draw is known
+    opt = optimiser(model, a.lr, a.backbone_lr, a.weight_decay); sched = get_cosine_schedule_with_warmup(opt, a.warmup_steps, sum(steps))
     if a.resume:
         opt.load_state_dict(st["optimizer"]); sched.load_state_dict(st["scheduler"]); log.info(f"resumed {a.model} from {ck}: {start} epochs done")
     log.info(f"{cmd}\n{src} on {a.device}: {sum(p.numel() for p in model.parameters()) / 1e6:.1f} M parameters; {len(ds)} train tiles, "
-             f"{steps} steps per epoch, {a.epochs * steps} in all; versions {versions()}")
+             f"{steps[0]} steps in the first epoch, {sum(steps)} in all; versions {versions()}")
     hist["stopped"] = None
     for epoch in range(start, a.epochs):
         if stop := over_budget(a, hist, epoch) or patience_stop(a, hist, epoch):
@@ -442,26 +513,29 @@ def cmd_train(a, argv: list):
         t_ep = time.time(); loss, ips = train_epoch(model, opt, sched, ds, a, epoch, hist)
         rec = {"epoch": epoch + 1, "train_loss": r4(loss), "images_per_s": r4(ips)}
         if a.eval_every and (epoch + 1) % a.eval_every == 0:
-            ts, m = evaluate(model, proc, a, ["val"])
-            rec["val"] = {v: {k: m[v]["val"][k] for k in VAL_KEYS} | {"threshold": ts[v]} for v in m}
+            sel = [s for s in SELECT if os.path.isdir(os.path.join(a.data, s))]; ts, m, chosen = evaluate(model, proc, a, sel)
+            rec |= {s: {v: {k: m[v][s][k] for k in VAL_KEYS} | {"threshold": ts[v]} for v in m} for s in sel} | {"selection": chosen}
         rec["seconds"] = round(time.time() - t_ep, 1); hist["epochs"].append(rec)
         c = curve(a, hist); best, since = early_stop([s for _, s in c], a.min_delta)
         if c and not since and c[best][0] == epoch + 1:  # this pass is the best so far: keep its weights
-            hist["best_epoch"], hist["best_val_map50"] = c[best]; save_dir(best_dir, model, proc)
+            hist["best_epoch"], hist["best_score"] = c[best][0], r4(c[best][1]); save_dir(best_dir, model, proc)
+        if a.keep_passes:  # every pass's weights, so another selection rule can be applied without training again
+            save_dir(os.path.join(a.out, f"pass-{epoch + 1}"), model, proc)
         save_checkpoint(model, proc, opt, sched, epoch, hist, a.out); json.dump(hist, open(os.path.join(a.out, "history.json"), "w"), indent=1)
         log.info(f"epoch {epoch + 1} done in {rec['seconds'] / 60:.1f} min: train loss {rec['train_loss']:.4f}, {ips:.2f} images/s, val {rec.get('val')}; "
                  f"best pass so far: epoch {hist.get('best_epoch')}")
     if hist.get("best_epoch") and os.path.isdir(best_dir):  # the final weights are the best pass's, not the last
         model = load_model(best_dir).to(a.device)
-        log.info(f"final weights: the best pass, epoch {hist['best_epoch']} (val mAP@0.5 {LABEL[variants(a)[0]]} {hist['best_val_map50']}), from {best_dir}")
+        log.info(f"final weights: the best pass, epoch {hist['best_epoch']} ({watched(a, hist)} {hist['best_score']}), from {best_dir}")
     t_ev = time.time(); vs = variants(a)
-    ts, out = evaluate(model, proc, a, [s for s in EVAL_SPLITS if os.path.isdir(os.path.join(a.data, s))])
+    ts, out, chosen = evaluate(model, proc, a, [s for s in EVAL_SPLITS if os.path.isdir(os.path.join(a.data, s))])
     model.config.update({"score_threshold": ts[vs[0]], "score_threshold_raw": ts["raw"], "nms_iou": a.nms_iou})  # they travel with the weights
     model.save_pretrained(a.out); proc.save_pretrained(a.out)
     metrics = {"model": a.model, "base_model": base_of(a.model), "weights": a.out, "data": a.data, "manifest_sha256": sha256(os.path.join(a.data, "manifest.json")),
-               "device": a.device, "nms_iou": a.nms_iou, "threshold": ts[vs[0]], "threshold_chosen_on": "val", "match_iou": MATCH_IOU,
-               "epochs_cap": a.epochs, "epochs_run": len(hist["epochs"]), "best_epoch": hist.get("best_epoch"), "best_val_map50": hist.get("best_val_map50"),
-               "patience": a.patience, "min_delta": a.min_delta, "stopped": hist["stopped"],
+               "device": a.device, "nms_iou": a.nms_iou, "threshold": ts[vs[0]], "match_iou": MATCH_IOU, "selection": watched(a, hist), "selection_scores": chosen,
+               "threshold_chosen_on": " and ".join(s for s in SELECT if s in out[vs[0]]) + (" pooled" if "val_unseen" in out[vs[0]] else ""),
+               "epochs_cap": a.epochs, "epochs_run": len(hist["epochs"]), "best_epoch": hist.get("best_epoch"), "best_score": hist.get("best_score"),
+               "patience": a.patience, "min_delta": a.min_delta, "stopped": hist["stopped"], "rare_repeat": a.rare_repeat, "repeat_sampling": hist.get("rare_repeat"),
                "train_images_per_s": r4(statistics.mean(e["images_per_s"] for e in hist["epochs"])) if hist["epochs"] else None,
                "train_minutes": r4(sum(e["seconds"] for e in hist["epochs"]) / 60), "final_eval_minutes": r4((time.time() - t_ev) / 60),
                "variants": {v: {"threshold": ts[v], "splits": out[v]} for v in vs}}
@@ -474,7 +548,7 @@ def cmd_train(a, argv: list):
 def card(a, man: dict, metrics: dict, hist: dict) -> str:
     """the model card: what was trained on what, how, and how well, with NMS and raw"""
     V = metrics["variants"]; run = f"{metrics['epochs_run']} of a cap of {a.epochs}" + (f" ({hist['stopped']})" if hist["stopped"] else ", ended by the cap")
-    best = (f"final weights from the best pass, epoch {metrics['best_epoch']} (val mAP@0.5 {LABEL[next(iter(V))]} {metrics['best_val_map50']})"
+    best = (f"final weights from the best pass, epoch {metrics['best_epoch']} ({metrics['selection']} {metrics['best_score']})"
             if metrics["best_epoch"] else "final weights from the last pass")
     per = statistics.mean(e["seconds"] for e in hist["epochs"]) / 60 if hist["epochs"] else 0
     counts = lambda c: ", ".join(f"{v} {k.replace('_', ' ')}" for k, v in c.items() if isinstance(v, (int, float)))
@@ -490,8 +564,13 @@ def card(a, man: dict, metrics: dict, hist: dict) -> str:
          f"- Command: `{hist['command']}`" + "".join(f"; resumed with `{c}`" for c in hist.get("resumed", [])),
          f"- Seed {a.seed}; device {a.device}; epochs run {run}; {best}; early stopping with patience {a.patience} (0 is off) and min delta {a.min_delta:g}; "
          f"{metrics['train_images_per_s']} training images/s; {metrics['train_minutes']:.0f} min of training, about {per:.0f} min per pass with its val",
+         *([f"- Rare-class sampling: repeat factors by the LVIS rule at T {a.rare_repeat:g}, r(c) = max(1, sqrt(T / f(c))) with f(c) the share of "
+            f"training tiles holding class c, a tile drawn by its largest factor; an epoch shows about {rs['epoch_tiles']} tiles instead of {rs['split_tiles']}; "
+            "per class factor, tiles holding it, presentations in the first epoch: " + ", ".join(f"{n} x{v['factor']} ({v['tiles']} -> {v['epoch1']})"
+                                                                                        for n, v in rs["per_class"].items() if v["factor"] > 1)]
+           if (rs := metrics.get("repeat_sampling")) else []),
          "- Libraries: " + ", ".join(f"{k} {v}" for k, v in versions().items()),
-         f"- Post-processing: {post}; each at its own threshold, chosen on val to maximise the mean per-class F1 ("
+         f"- Post-processing: {post}; each at its own threshold, chosen on {metrics['threshold_chosen_on']} to maximise the mean per-class F1 ("
          + ", ".join(f"{LABEL[v]} {r['threshold']:.2f}" for v, r in V.items()) + f"). A detection counts when it has the box's class and IoU >= {MATCH_IOU}, "
          "matched greedily by score; scores are per tile, so a symbol in two tiles counts twice, and a symbol cut below the export's "
          "min_visible is unlabelled, so a detection of it at a tile edge counts against precision (the reader merges tiles)"]
@@ -526,7 +605,8 @@ def cmd_eval(a, argv: list):
         ts = {v: c.score_threshold if v == vs[0] else c.score_threshold_raw for v in vs}
     else:
         ts = None
-    ts, out = evaluate(model, proc, a, [a.split] if ts else list(dict.fromkeys(["val", a.split])), ts)
+    sel = [s for s in SELECT if os.path.isdir(os.path.join(a.data, s))]
+    ts, out, _ = evaluate(model, proc, a, [a.split] if ts else list(dict.fromkeys(sel + [a.split])), ts)
     res = {"weights": a.weights, "data": a.data, "manifest_sha256": sha256(os.path.join(a.data, "manifest.json")), "device": a.device,
            "nms_iou": a.nms_iou, "match_iou": MATCH_IOU, "variants": {v: {"threshold": ts[v], "splits": {a.split: out[v][a.split]}} for v in vs}}
     path = a.out or os.path.join(a.weights, f"eval-{a.split}.json"); json.dump(res, open(path, "w"), indent=1); log.info(f"wrote {path}")
@@ -549,18 +629,29 @@ def worst(m: dict, k: str) -> str:
     return f"{min(vals)[0]} ({min(vals)[1]})" if vals else "-"
 
 
-def reproduced(d: str, V: dict) -> str:
-    """whether eval, run on every split after training, gives the training-time metrics (timings aside)"""
+def latest(d: str, m: dict) -> tuple[dict, str]:
+    """the run's metrics per variant and split, each split from its latest eval (eval-<split>.json) where there is one, and a line on
+    where they come from: an eval on the export the run trained on must reproduce the training-time metrics (timings aside); one on
+    a newer export, with another manifest, replaces them"""
     same = lambda x, y: {k: v for k, v in x.items() if k != "images_per_s"} == {k: v for k, v in y.items() if k != "images_per_s"}
-    got = {}
-    for s in next(iter(V.values()))["splits"]:
+    V = {v: {"threshold": r["threshold"], "splits": dict(r["splits"])} for v, r in m["variants"].items()}
+    kept, differs, newer = [], [], []
+    for s in dict.fromkeys(list(EVAL_SPLITS) + list(next(iter(V.values()))["splits"])):
         p = os.path.join(d, f"eval-{s}.json")
-        if os.path.isfile(p):
-            e = json.load(open(p))["variants"]
-            got[s] = all(s in e.get(v, {}).get("splits", {}) and same(e[v]["splits"][s], r["splits"][s]) for v, r in V.items())
-    bad = [s for s, ok in got.items() if not ok]
-    return ("eval was not run after training" if not got else f"eval of {', '.join(got)} after training " +
-            ("reproduces the training-time metrics exactly" if not bad else f"differs from the training-time metrics on {', '.join(bad)}"))
+        e = json.load(open(p)) if os.path.isfile(p) else {}
+        if not all(s in e.get("variants", {}).get(v, {}).get("splits", {}) for v in V):
+            continue
+        ev = {v: e["variants"][v]["splits"][s] for v in V}
+        if e.get("manifest_sha256") != m.get("manifest_sha256") or s not in next(iter(V.values()))["splits"]:
+            newer.append(f"{s} ({next(iter(ev.values()))['images']} tiles, export {e['manifest_sha256'][:8]})")
+        else:
+            (kept if all(same(ev[v], V[v]["splits"][s]) for v in V) else differs).append(s)
+        for v in V:
+            V[v]["splits"][s] = ev[v]
+    parts = ([f"eval of {', '.join(kept)} after training reproduces the training-time metrics exactly"] if kept else []) + \
+            ([f"eval of {', '.join(differs)} differs from the training-time metrics on the same export"] if differs else []) + \
+            ([f"evaluated after training on a newer export, at the thresholds chosen then, and shown so: {', '.join(newer)}"] if newer else [])
+    return V, "; ".join(parts) or "eval was not run after training"
 
 
 def plain_words(name: str, V: dict) -> str:
@@ -596,17 +687,23 @@ def summarise(d: str, target: float) -> list:
     if not os.path.isfile(os.path.join(d, "metrics.json")):
         return [f"## `{d}`", "", f"No metrics.json: the run did not finish; see `{d}/train.log`.", ""]
     m, h = json.load(open(os.path.join(d, "metrics.json"))), json.load(open(os.path.join(d, "history.json")))
-    V, g = m["variants"], h["args"]; op = next(iter(V)); S = V[op]["splits"]; name = os.path.basename(m["model"])
-    L = [f"## {name} (`{d}`)", "",
+    (V, note), g = latest(d, m), h["args"]; op = next(iter(V)); S = V[op]["splits"]; base = m.get("base_model") or m["model"]
+    name = os.path.basename(base) + (f" continued from {os.path.basename(m['model'])}" if base != m["model"] else "")
+    parent = os.path.join(m["model"], "metrics.json")  # a run from trained weights is shown beside the run it continues
+    pm = json.load(open(parent)) if base != m["model"] and os.path.isfile(parent) else None
+    L = [f"## {name} (`{d}`)", ""] + ([f"- Continues `{m['model']}`, whose best pass scored val mAP@0.5 {LABEL[op]} {pm['variants'][op]['splits']['val']['map50']} "
+                                       f"and test_unseen {pm['variants'][op]['splits']['test_unseen']['map50']}"] if pm and op in pm.get("variants", {}) else []) + [
          f"- {m['epochs_run']} pass{'es' if m['epochs_run'] != 1 else ''} of a cap of {g['epochs']} at batch {g['batch']}, lr {g['lr']:.0e} (backbone {g['backbone_lr']:.0e}), warm-up "
-         f"{g['warmup_steps']} steps, seed {g['seed']}, early stopping patience {g.get('patience', 0)}: " + (m["stopped"] if m["stopped"] else "ended by the cap"),
-         "- Scored with " + (f"the best pass's weights, epoch {m['best_epoch']} (val mAP@0.5 {LABEL[op]} {m['best_val_map50']})" if m.get("best_epoch")
+         f"{g['warmup_steps']} steps, seed {g['seed']}, early stopping patience {g.get('patience', 0)}" +
+         (f", rare-class sampling at T {g['rare_repeat']:g}" if g.get("rare_repeat") else "") + ": " + (m["stopped"] if m["stopped"] else "ended by the cap"),
+         "- Scored with " + (f"the best pass's weights, epoch {m['best_epoch']} ({m.get('selection', 'val mAP@0.5 ' + LABEL[op])} {m.get('best_score', m.get('best_val_map50'))})" if m.get("best_epoch")
                              else "the last pass's weights") +
          f"; {m['train_minutes']:.0f} min of training and {m['final_eval_minutes']:.1f} min of final evaluation, {m['train_images_per_s']} training images/s",
-         f"- Thresholds chosen on val: " + ", ".join(f"{LABEL[v]} {r['threshold']:.2f}" for v, r in V.items()) + f"; NMS is class-agnostic at IoU {m['nms_iou']}",
-         f"- {reproduced(d, V)}", "",
-         "| split | post-processing | mAP@0.5 | mean P | worst P | mean R | worst R |", "|---|---|---|---|---|---|---|"]
-    L += [f"| {s} | {LABEL[v]} | {fmt(r['splits'][s]['map50'])} | {fmt(r['splits'][s]['mean_precision'])} | {worst(r['splits'][s], 'precision')} | "
+         f"- Thresholds chosen on {m.get('threshold_chosen_on', 'val')} at training time: " + ", ".join(f"{LABEL[v]} {r['threshold']:.2f}" for v, r in V.items()) +
+         f"; NMS is class-agnostic at IoU {m['nms_iou']}",
+         f"- {note}", "",
+         "| split | tiles | post-processing | mAP@0.5 | mean P | worst P | mean R | worst R |", "|---|---|---|---|---|---|---|---|"]
+    L += [f"| {s} | {r['splits'][s]['images']} | {LABEL[v]} | {fmt(r['splits'][s]['map50'])} | {fmt(r['splits'][s]['mean_precision'])} | {worst(r['splits'][s], 'precision')} | "
           f"{fmt(r['splits'][s]['mean_recall'])} | {worst(r['splits'][s], 'recall')} |" for s in S for v, r in V.items()]
     if "val" in S and "test_unseen" in S:
         rule = size_rule(S["val"], S["test_unseen"], target); fails = [c for c, x in rule.items() if x == "fail"]
@@ -616,10 +713,24 @@ def summarise(d: str, target: float) -> list:
         na = sum(x == "n/a" for x in rule.values())
         L += ["", f"Size rule: {sum(x == 'pass' for x in rule.values())} of {len(CLASSES)} classes pass" +
               (f", {na} cannot be judged (no boxes in val or test_unseen)" if na else "") + "; " + (f"fails on {', '.join(fails)}." if fails else "no class fails.")]
-    L += ["", "Training curve, val after each epoch:", "", "| epoch | train loss | val mAP@0.5 with NMS | val mAP@0.5 raw | images/s | minutes |", "|---|---|---|---|---|---|"]
-    L += [f"| {e['epoch']}{' (best)' if e['epoch'] == m.get('best_epoch') else ''} | {e['train_loss']} | {fmt(e.get('val', {}).get('nms', {}).get('map50'))} | "
-          f"{fmt(e.get('val', {}).get('raw', {}).get('map50'))} | {e['images_per_s']} | {e['seconds'] / 60:.1f} |" for e in h["epochs"]]
+    vu, sc = any("val_unseen" in e for e in h["epochs"]), any("selection" in e for e in h["epochs"])
+    at = lambda e, s, v: fmt(e.get(s, {}).get(v, {}).get("map50")); pick = lambda e, k: fmt(e.get("selection", {}).get(op, {}).get(k))
+    L += ["", "Training curve, val after each epoch:", "", "| epoch | train loss | val mAP@0.5 with NMS |" + (" val_unseen mAP@0.5 with NMS |" if vu else "") +
+          (" pooled mean F1 | val_unseen worst min(P, R) |" if sc else "") + " val mAP@0.5 raw | images/s | minutes |",
+          "|---|---|---|" + ("---|" if vu else "") + ("---|---|" if sc else "") + "---|---|---|"]
+    L += [f"| {e['epoch']}{' (best)' if e['epoch'] == m.get('best_epoch') else ''} | {e['train_loss']} | {at(e, 'val', 'nms')} |" + (f" {at(e, 'val_unseen', 'nms')} |" if vu else "") +
+          (f" {pick(e, 'pooled_mean_f1')} | {pick(e, 'val_unseen_worst_min_pr')} |" if sc else "") +
+          f" {at(e, 'val', 'raw')} | {e['images_per_s']} | {e['seconds'] / 60:.1f} |" for e in h["epochs"]]
+    if slow := slowed(h):
+        L += ["", f"Pass{'es' if len(slow) > 1 else ''} {', '.join(map(str, slow))} ran below {SLOWED:.0%} of the run's best rate "
+              f"({max(e['images_per_s'] for e in h['epochs'])} images/s), slowed by other work on the machine: those minutes are contended."]
     return L + ["", "What it still gets wrong: " + plain_words(name, V), ""]
+
+
+def slowed(h: dict) -> list:
+    """the passes that ran below SLOWED of the run's best training rate: the machine was shared, so their minutes are no measure"""
+    best = max((e["images_per_s"] for e in h["epochs"]), default=0)
+    return [e["epoch"] for e in h["epochs"] if e["images_per_s"] < SLOWED * best]
 
 
 def more_passes(runs: list) -> list:
@@ -631,8 +742,9 @@ def more_passes(runs: list) -> list:
     for d in runs:
         if os.path.isfile(os.path.join(d, "metrics.json")):
             m, h = json.load(open(os.path.join(d, "metrics.json"))), json.load(open(os.path.join(d, "history.json")))
-            per = statistics.mean(e["seconds"] for e in h["epochs"]) / 60
-            L += [f"- {os.path.basename(m['model'])}: one pass with its val took about {per:.0f} min tonight, so N passes take about N times {per:.0f} min, "
+            per = (min if slowed(h) else statistics.mean)(e["seconds"] for e in h["epochs"]) / 60
+            L += [f"- {os.path.basename(m['model'])}: one pass with its val took about {per:.0f} min tonight" +
+                  (" at its fastest (other passes were slowed by other work)" if slowed(h) else "") + f", so N passes take about N times {per:.0f} min, "
                   f"then about {m['final_eval_minutes']:.0f} min of final evaluation:", "", f"  `{more_command(d, h['args'])}`", ""]
     return L
 
@@ -642,7 +754,8 @@ def cmd_summary(a, argv: list):
     L = ["# Overnight detector runs", "",
          "Synthetic data only: every tile was cut from a sheet drawn by `sld2quote/generate.py`. Scores are per 640 px tile, so a symbol in two "
          "tiles counts twice. \"With NMS\" is the operating post-processing (class-agnostic duplicate suppression); \"raw\" is without it; each "
-         "uses its own threshold chosen on val.", ""]
+         "uses its own threshold, chosen at training time on val (and val_unseen, pooled, for runs that had it), which also picks the best "
+         "pass; test_unseen is never used for choosing, only for the final numbers and the size rule.", ""]
     for d in runs:
         L += summarise(d, a.target)
     open(a.out, "w").write("\n".join(L + more_passes(runs)) + "\n"); print(f"wrote {a.out}")
@@ -717,6 +830,12 @@ def main(argv=None):
                    "when NMS is off) by --min-delta; 0 never stops early. Whenever val runs, checkpoint-best keeps the best pass and the final "
                    "weights, evaluation, metrics and card use it")
     t.add_argument("--min-delta", type=float, default=0.002, help="the smallest rise in the watched val score that counts as an improvement")
+    t.add_argument("--select", choices=sorted(SCORE), default="map50", help="the score that picks the best pass, averaged over val and val_unseen: "
+                   "map50 is mAP@0.5, f1 the mean per-class F1 at the operating threshold")
+    t.add_argument("--keep-passes", action="store_true", help="also keep every pass's weights in <out>/pass-<n>")
+    t.add_argument("--rare-repeat", type=float, default=0, help="repeat-factor sampling threshold T, the LVIS rule: a class in a share f of the "
+                   "training tiles gets factor max(1, sqrt(T / f)), a tile its largest class factor, and each epoch draws every tile its factor "
+                   "times in expectation (seeded, so the epoch is a little longer than the split); 0 is off")
     t.add_argument("--brightness", type=float, default=0.2); t.add_argument("--contrast", type=float, default=0.2)
     t.add_argument("--scale-jitter", type=float, default=0.1, help="zoom by up to this fraction either way")
     t.add_argument("--min-visible", type=float, default=0.6, help="keep a box the zoom cuts while this fraction of its symbol shows, as the export's tiling")

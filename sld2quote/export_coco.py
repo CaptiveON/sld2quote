@@ -6,8 +6,9 @@ box are kept at --empty-keep, so the notes block, title block and busbar labels 
 through generate.image_box() so that they match the rotated image; clean boxes are used as drawn.
 
 Splits are by whole sheet, in ascending seed order. A sheet drawn in the held-out font or label layout joins the unseen pool, and
-test_unseen takes the first --unseen of those; the others fill train, val and test in turn. train, val and test_unseen hold both
-copies of their sheets; test_clean and test_scan are the two copies of the same test sheets, so those columns compare like for
+test_unseen takes the first --unseen of those and val_unseen, when --val-unseen asks for it, the next ones, so that a model can
+be selected on an unseen style without touching test_unseen; the others fill train, val and test in turn. train, val, test_unseen
+and val_unseen hold both copies of their sheets; test_clean and test_scan are the two copies of the same test sheets, so those columns compare like for
 like. Sheets beyond the requested counts are left out and counted in the manifest.
 
 Writes, under --out: <split>/images/<sheet-id>[-scan]_<x>_<y>.png (grey, mode L) and <split>/annotations.json in standard COCO
@@ -30,6 +31,7 @@ from .generate import FONTS, font, image_box
 from .tiles import clip_box, cut_tile, tile_grid
 
 SPLITS = ["train", "val", "test_clean", "test_scan", "test_unseen"]
+VAL_UNSEEN = "val_unseen"  # written only when --val-unseen asks for sheets, so an export without it is as before
 MIN_VISIBLE = 0.6  # share of a symbol's box that must lie inside a tile for the tile to carry its label
 PALETTE = [(230, 25, 75), (60, 180, 75), (0, 130, 200), (245, 130, 48), (145, 30, 180), (0, 128, 128), (240, 50, 230),
            (128, 128, 0), (170, 110, 40), (0, 0, 128), (128, 0, 0), (200, 160, 0), (0, 170, 220), (110, 110, 110)]  # by class
@@ -53,18 +55,22 @@ def read_pool(pool: str) -> list[dict]:
     return sorted(sheets.values(), key=lambda s: s["seed"])
 
 
-def assign(sheets: list, held_font: str, held_pos: str, n_train: int, n_val: int, n_test: int, n_unseen: int) -> tuple[dict, dict]:
+def assign(sheets: list, held_font: str, held_pos: str, n_train: int, n_val: int, n_test: int, n_unseen: int,
+           n_val_unseen: int = 0) -> tuple[dict, dict]:
     """the splits as (sheet, copy) pairs, filled in ascending seed order, and the count of sheets left over; a pool too small
     for the requested sizes stops the export before anything is written, rather than train or score on short splits"""
     unseen_style = lambda s: s["font"] == held_font or s["label_pos"] == held_pos
     held, rest = [s for s in sheets if unseen_style(s)], [s for s in sheets if not unseen_style(s)]
     a, b, c = n_train, n_train + n_val, n_train + n_val + n_test
-    if len(rest) < c or len(held) < n_unseen:
-        raise SystemExit(f"the pool has {len(rest)} regular and {len(held)} held-out-style sheets; {c} and {n_unseen} were asked for")
+    u = n_unseen + n_val_unseen
+    if len(rest) < c or len(held) < u:
+        raise SystemExit(f"the pool has {len(rest)} regular and {len(held)} held-out-style sheets; {c} and {u} were asked for")
     both = lambda group: [(s, copy) for s in group for copy in ("clean", "scan")]
     splits = {"train": both(rest[:a]), "val": both(rest[a:b]), "test_clean": [(s, "clean") for s in rest[b:c]],
               "test_scan": [(s, "scan") for s in rest[b:c]], "test_unseen": both(held[:n_unseen])}
-    return splits, {"held_out_style": len(held[n_unseen:]), "regular": len(rest[c:])}
+    if n_val_unseen:
+        splits[VAL_UNSEEN] = both(held[n_unseen:u])
+    return splits, {"held_out_style": len(held[u:]), "regular": len(rest[c:])}
 
 
 def keep_empty(name: str, seed: int, frac: float) -> bool:
@@ -179,19 +185,19 @@ def contact_sheet(out: str, seed: int, held: str, n_train: int = 20, n_unseen: i
 
 def export(pool: str, out: str, tile: int = 640, overlap: float = 0.25, held_out_font: str = "Courier New.ttf",
            held_out_label_pos: str = "below", train: int = 400, val: int = 40, test: int = 30, unseen: int = 20,
-           empty_keep: float = 0.15, seed: int = 0) -> dict:
+           empty_keep: float = 0.15, seed: int = 0, val_unseen: int = 0) -> dict:
     """the whole export (splits, tiles, COCO files, contact sheet, manifest); returns the manifest"""
     t0 = time.time()
     sheets = read_pool(pool)
-    splits, unused = assign(sheets, held_out_font, held_out_label_pos, train, val, test, unseen)
-    for name in SPLITS:
+    splits, unused = assign(sheets, held_out_font, held_out_label_pos, train, val, test, unseen, val_unseen)
+    for name in SPLITS + [VAL_UNSEEN]:
         shutil.rmtree(os.path.join(out, name), ignore_errors=True)  # a rerun never mixes in tiles from an older export
-    stats = {name: export_split(name, splits[name], out, tile, overlap, empty_keep, seed) for name in SPLITS}
+    stats = {name: export_split(name, splits[name], out, tile, overlap, empty_keep, seed) for name in splits}
     contact_sheet(out, seed, f"held-out font {held_out_font}, labels {held_out_label_pos}")
     seeds = [s["seed"] for s in sheets]
     m = {"note": "tiles cut from synthetic drawings (sld2quote/generate.py); no real data", "classes": CLASSES, "tile": tile,
          "overlap": overlap, "min_visible": MIN_VISIBLE, "held_out": {"font": held_out_font, "label_pos": held_out_label_pos},
-         "empty_keep": empty_keep, "seed": seed, "requested": {"train": train, "val": val, "test": test, "unseen": unseen},
+         "empty_keep": empty_keep, "seed": seed, "requested": {"train": train, "val": val, "test": test, "unseen": unseen} | ({VAL_UNSEEN: val_unseen} if val_unseen else {}),
          "pool": {"path": pool, "sheets": len(sheets), "seeds": [min(seeds), max(seeds)]}, "unused_sheets": unused, "splits": stats,
          "created": datetime.now().astimezone().isoformat(timespec="seconds"), "export_seconds": round(time.time() - t0, 1)}
     with open(os.path.join(out, "manifest.json"), "w") as fh:
@@ -202,14 +208,14 @@ def export(pool: str, out: str, tile: int = 640, overlap: float = 0.25, held_out
 def summary(m: dict) -> str:
     """the one-screen report printed after an export"""
     sp, p, u = m["splits"], m["pool"], m["unused_sheets"]
-    want = {"train": "train", "val": "val", "test_clean": "test", "test_scan": "test", "test_unseen": "unseen"}
+    want, names = {"train": "train", "val": "val", "test_clean": "test", "test_scan": "test", "test_unseen": "unseen", VAL_UNSEEN: VAL_UNSEEN}, list(sp)
     row = lambda label, vals: f"{label:<20}" + "".join(f"{v:>12}" for v in vals)
     L = [f"sld2quote COCO export of synthetic drawings, {m['export_seconds']} s: {p['sheets']} sheets in {p['path']} (seeds {p['seeds'][0]} to {p['seeds'][1]})",
          f"tile {m['tile']} px, overlap {m['overlap']}; held out: font {m['held_out']['font']}, labels {m['held_out']['label_pos']}; "
          f"unused: {u['held_out_style']} held-out-style and {u['regular']} regular sheets", "",
-         row("", SPLITS), row("sheets requested", [m["requested"][want[s]] for s in SPLITS])]
-    L += [row(k, [sp[s][k] for s in SPLITS]) for k in ("sheets", "images", "boxes", "empty_tiles_kept", "empty_tiles_dropped")]
-    L += ["", "boxes per class"] + [row(c, [sp[s]["boxes_per_class"][c] for s in SPLITS]) for c in CLASSES]
+         row("", names), row("sheets requested", [m["requested"][want[s]] for s in names])]
+    L += [row(k, [sp[s][k] for s in names]) for k in ("sheets", "images", "boxes", "empty_tiles_kept", "empty_tiles_dropped")]
+    L += ["", "boxes per class"] + [row(c, [sp[s]["boxes_per_class"][c] for s in names]) for c in CLASSES]
     return "\n".join(L)
 
 
@@ -221,12 +227,13 @@ def main(argv=None):
     ap.add_argument("--held-out-label-pos", default="below", choices=["right", "below"])
     ap.add_argument("--train", type=int, default=400); ap.add_argument("--val", type=int, default=40)
     ap.add_argument("--test", type=int, default=30); ap.add_argument("--unseen", type=int, default=20)
+    ap.add_argument("--val-unseen", type=int, default=0, help="held-out-style sheets after test_unseen's, for selecting a model on an unseen style")
     ap.add_argument("--empty-keep", type=float, default=0.15, help="share of tiles with no symbol that are kept")
     ap.add_argument("--seed", type=int, default=0, help="picks the empty tiles kept and the contact-sheet tiles")
     a = ap.parse_args(argv)
     if a.tile < 1 or not 0 <= a.overlap < 1:
         ap.error("--tile must be positive and --overlap at least 0 and below 1")
-    if not 0 <= a.empty_keep <= 1 or min(a.train, a.val, a.test, a.unseen) < 0:
+    if not 0 <= a.empty_keep <= 1 or min(a.train, a.val, a.test, a.unseen, a.val_unseen) < 0:
         ap.error("--empty-keep must lie between 0 and 1, and no split size may be negative")
     print(summary(export(**vars(a))))
     print(f"wrote {a.out}: <split>/images, <split>/annotations.json, manifest.json, contact_sheet.png")

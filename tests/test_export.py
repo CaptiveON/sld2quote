@@ -1,5 +1,6 @@
 """COCO export checks: tiles cover every pixel, every label survives tiling where the ground truth puts it, the held-out
-styles stay out of training, and the manifest matches what is on disk."""
+styles stay out of training, val_unseen takes the next held-out sheets without moving any other split, and the manifest matches
+what is on disk."""
 import json, os, shutil, sys
 import pytest
 from PIL import Image
@@ -15,7 +16,8 @@ from sld2quote.tiles import tile_grid, tile_starts
 # each kind is left over, so the unused counts are exercised too.
 SEEDS = [1, 2, 3, 4, 6, 7, 10, 11, 12, 14, 15, 16, 17]
 SIZES = {"train": 5, "val": 1, "test": 2, "unseen": 3}
-KINDS = {"train": ("clean", "scan"), "val": ("clean", "scan"), "test_clean": ("clean",), "test_scan": ("scan",), "test_unseen": ("clean", "scan")}
+KINDS = {"train": ("clean", "scan"), "val": ("clean", "scan"), "test_clean": ("clean",), "test_scan": ("scan",), "test_unseen": ("clean", "scan"),
+         "val_unseen": ("clean", "scan")}
 held = lambda st: st["font"] == "Courier New.ttf" or st["label_pos"] == "below"  # the export's default hold-out
 
 
@@ -26,12 +28,13 @@ def _gt(pool, sheet, copy):
 
 def _export(pool, out, *extra):
     main(["--pool", pool, "--out", out] + [x for k, v in SIZES.items() for x in (f"--{k}", str(v))] + list(extra))
+    with open(os.path.join(out, "manifest.json")) as fh:
+        m = json.load(fh)
     coco = {}
-    for s in SPLITS:
+    for s in m["splits"]:
         with open(os.path.join(out, s, "annotations.json")) as fh:
             coco[s] = json.load(fh)
-    with open(os.path.join(out, "manifest.json")) as fh:
-        return pool, out, json.load(fh), coco
+    return pool, out, m, coco
 
 
 @pytest.fixture(scope="module")
@@ -44,7 +47,7 @@ def ds(tmp_path_factory):
 
 
 def _counts_match_disk(pool, out, m, coco, tile):
-    for s in SPLITS:
+    for s in m["splits"]:
         e, c = m["splits"][s], coco[s]
         files = sorted(os.listdir(os.path.join(out, s, "images")))
         assert e["images"] == len(c["images"]) == len(files) and files == sorted(im["file_name"] for im in c["images"]), s
@@ -117,6 +120,22 @@ def test_splits_are_whole_sheets_in_seed_order_and_keep_the_held_out_styles_out_
     assert all(not (g & h) for i, g in enumerate(groups) for h in groups[i + 1:])
     for s in SPLITS:
         assert {(im["sheet"], im["copy"]) for im in coco[s]["images"]} == {(i, k) for i in want[s] for k in KINDS[s]}, s
+
+
+def test_val_unseen_takes_the_next_held_out_sheets_and_leaves_every_other_split_as_it_was(ds, tmp_path):
+    pool, _, m0, coco0 = ds
+    _, out, m, coco = _export(pool, str(tmp_path / "coco"), "--val-unseen", "1")
+    _counts_match_disk(pool, out, m, coco, 640)
+    style = {f"sheet-{s:04d}": _gt(pool, f"sheet-{s:04d}", "clean")["style"] for s in SEEDS}
+    unseen = [i for i in style if held(style[i])]
+    assert m["splits"]["val_unseen"]["sheet_ids"] == unseen[SIZES["unseen"]:SIZES["unseen"] + 1]  # the held-out sheet after test_unseen's
+    assert {s: m["splits"][s]["sheet_ids"] for s in SPLITS} == {s: m0["splits"][s]["sheet_ids"] for s in SPLITS}
+    assert all(coco[s] == coco0[s] for s in SPLITS)  # every other split exactly as before
+    assert not set(m["splits"]["val_unseen"]["sheet_ids"]) & {i for s in SPLITS for i in m["splits"][s]["sheet_ids"]}
+    assert all(held(im) for im in coco["val_unseen"]["images"]) and m["unused_sheets"]["held_out_style"] == 0
+    assert m["requested"]["val_unseen"] == 1 and "val_unseen" not in m0["requested"] and "val_unseen" not in m0["splits"]  # off by default
+    _, _, m2, _ = _export(pool, out)  # a rerun without it removes the old val_unseen
+    assert not os.path.exists(os.path.join(out, "val_unseen")) and "val_unseen" not in m2["splits"]
 
 
 def test_manifest_counts_match_the_files_and_annotations_on_disk(ds):

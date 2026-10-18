@@ -1,7 +1,7 @@
-"""Trainer checks: the precision and recall matcher, the threshold chooser, the split report, NMS, the size rule, early stopping, the dataset,
+"""Trainer checks: the precision and recall matcher, the threshold chooser, selection on val and val_unseen, the split report, NMS, the size rule, early stopping, repeat-factor sampling, the dataset,
 collate and augmentation on a two-tile COCO fixture, and one optimisation step plus the shared inference path of rtdetr_r18vd on
 cpu, and reloading trained weights for more passes (skipped unless the weights are already in the Hugging Face cache)."""
-import json, math, os, sys, time
+import json, math, os, statistics, sys, time
 from types import SimpleNamespace
 import numpy as np
 import pytest
@@ -68,6 +68,31 @@ def test_threshold_chooser_maximises_mean_f1_and_takes_the_middle_of_a_tie():
     assert td.choose_threshold(td.scored(anns, dets)) == 0.36
 
 
+def test_selection_pools_val_and_val_unseen_for_the_threshold_and_averages_them_for_the_best_pass():
+    v = td.scored([gt(1, B, [0, 0, 10, 10])], [det(1, B, [0, 0, 10, 10], 0.9), det(2, B, [0, 0, 10, 10], 0.6)])  # found at 0.9, a false positive at 0.6
+    u = td.scored([gt(1, B, [0, 0, 10, 10])], [det(1, B, [0, 0, 10, 10], 0.5)])  # on val_unseen (its own tile 1) found only at 0.5
+    # val alone has F1 1 from 0.61 to 0.90 (middle 0.76); pooled, F1 0.8 up to 0.50 beats 0.67 above 0.60 (middle of 0.05..0.50 is 0.28)
+    assert td.choose_threshold(v) == 0.76 and td.choose_threshold(td.pool([v, u])) == 0.28
+    a = SimpleNamespace(nms_iou=0.5)
+    hist = {"epochs": [{"epoch": 1, "val": {"nms": {"map50": 0.9}}, "val_unseen": {"nms": {"map50": 0.7}}},
+                       {"epoch": 2, "val": {"nms": {"map50": 0.95}}, "val_unseen": {"nms": {"map50": 0.6}}}]}
+    c = td.curve(a, hist)  # pass 2 is better on val alone, pass 1 on the mean the best pass is chosen by
+    assert [e for e, _ in c] == [1, 2] and [s for _, s in c] == pytest.approx([0.8, 0.775]) and td.early_stop([s for _, s in c], 0.002)[0] == 0
+    assert td.watched(a, hist) == "the mean of val and val_unseen mAP@0.5 with NMS"
+    for e, f1 in zip(hist["epochs"], ((0.80, 0.70), (0.85, 0.70))):  # selecting on F1 instead, pass 2 wins: (0.85 + 0.70) / 2 > (0.80 + 0.70) / 2
+        e["val"]["nms"]["mean_f1"], e["val_unseen"]["nms"]["mean_f1"] = f1
+    f = SimpleNamespace(nms_iou=0.5, select="f1")
+    assert td.early_stop([s for _, s in td.curve(f, hist)], 0.002)[0] == 1 and td.watched(f, hist).startswith("val and val_unseen pooled: mean per-class F1")
+    hist["epochs"][0]["selection"] = {"nms": {"pooled_mean_f1": 0.9, "mean_map50": 0.5}}; hist["epochs"][1]["selection"] = {"nms": {"pooled_mean_f1": 0.8, "mean_map50": 0.6}}
+    assert [s for _, s in td.curve(f, hist)] == [0.9, 0.8] and [s for _, s in td.curve(a, hist)] == [0.5, 0.6]  # recorded scores are used as they are
+    # what a pass records: at 0.28 the pooled breakers give F1 2 x 2 / (3 + 2) = 0.8; val_unseen's worst class is min(P, R) = 0.5
+    out = {"val": {"map50": 0.9}, "val_unseen": {"map50": 0.7, "per_class": {"breaker": {"gt": 1, "precision": 1.0, "recall": 1.0},
+           "transformer": {"gt": 2, "precision": 0.5, "recall": 0.9}, "relay": {"gt": 0, "precision": 0.0, "recall": None}}}}
+    assert td.selection(td.pool([v, u]), 0.28, out) == {"pooled_mean_f1": 0.8, "mean_map50": 0.8, "val_unseen_worst_min_pr": 0.5}
+    old = {"epochs": [{"epoch": 1, "val": {"nms": {"map50": 0.9}}}]}  # a run without val_unseen keeps the plain val score
+    assert td.curve(a, old) == [(1, 0.9)] and td.watched(a, old) == "val mAP@0.5 with NMS"
+
+
 def test_split_report_counts_false_positives_of_absent_classes_and_leaves_empty_ratios_undefined(tmp_path):
     ds = td.Tiles(coco_fixture(tmp_path), "train", RTDetrImageProcessor(do_resize=False))
     dets = [det(1, B, [100, 200, 40, 20], 0.9), det(1, T, [400, 300, 60, 80], 0.8), det(2, B, [100, 200, 40, 20], 0.7),  # tile 2's transformer is missed
@@ -123,6 +148,27 @@ def test_early_stopping_keeps_the_best_pass_and_stops_after_patience_passes_with
     assert run_curve([0.5, 0.7, 0.8, 0.8, 0.8, 0.85, 0.85, 0.849], 3) == (8, None, 6)
     # on a curve that keeps improving patience never triggers and the cap ends it; patience 0 never stops, even on a falling curve
     assert run_curve([0.1, 0.2, 0.3, 0.4], 3) == (4, None, 4) and run_curve([0.5, 0.4, 0.3, 0.2, 0.1], 0) == (5, None, 1)
+
+
+def test_repeat_factors_lift_a_rare_class_leave_common_ones_at_one_and_draw_by_seed(tmp_path):
+    # ten blank tiles, each with a breaker, and a relay on the last one only: the relay is in a tenth of the tiles, the breaker in all
+    R, d = CLASS_ID["relay"], tmp_path / "train"; (d / "images").mkdir(parents=True)
+    for i in range(10):
+        Image.new("L", (640, 640), 255).save(d / "images" / f"t{i}.png")
+    anns = [{"id": i + 1, "image_id": i + 1, "category_id": B, "bbox": [100, 100, 40, 20], "area": 800, "iscrowd": 0} for i in range(10)]
+    anns.append({"id": 11, "image_id": 10, "category_id": R, "bbox": [400, 300, 30, 30], "area": 900, "iscrowd": 0})
+    json.dump({"images": [{"id": i + 1, "file_name": f"t{i}.png", "width": 640, "height": 640} for i in range(10)], "annotations": anns,
+               "categories": [{"id": i, "name": n} for i, n in enumerate(CLASSES)]}, open(d / "annotations.json", "w"))
+    ds = td.Tiles(str(tmp_path), "train", RTDetrImageProcessor(do_resize=False), aug=(0.2, 0.2, 0.1, 0.6))
+    factors, rc = td.repeat_factors(ds, 0.4)  # relay sqrt(0.4 / 0.1) = 2 exactly, breaker max(1, sqrt(0.4 / 1)) = 1
+    assert rc == pytest.approx({B: 1.0, R: 2.0}) and factors == pytest.approx([1.0] * 9 + [2.0])
+    assert sorted(td.repeat_indices(factors, 0, 0)) == list(range(10)) + [19]  # every tile once and the relay tile again, as 9 + 10
+    first, again = ds[9][1], ds[19][1]  # the repeat is the same tile with its own augmentation
+    assert first["class_labels"].tolist() == again["class_labels"].tolist() == [B, R] and not torch.equal(first["boxes"], again["boxes"])
+    f2 = td.repeat_factors(ds, 0.25)[0]  # a factor of sqrt(2.5) = 1.58: the relay tile shows once or twice, by seed and epoch
+    counts = [sum(i % 10 == 9 for i in td.repeat_indices(f2, 0, e)) for e in range(400)]
+    assert td.repeat_indices(f2, 0, 3) == td.repeat_indices(f2, 0, 3)  # the same seed and epoch draw the same epoch
+    assert set(counts) == {1, 2} and abs(statistics.mean(counts) - math.sqrt(2.5)) < 0.06  # its expected count is its factor
 
 
 def test_dataset_and_collate_give_the_model_its_inputs(tmp_path):
