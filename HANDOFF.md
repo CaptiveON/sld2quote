@@ -285,6 +285,16 @@ clean 0.933 to 0.959, recall unchanged; types passing 0.95 on unseen clean 5 to 
 counterpart exists in another tile was measured and rejected: it regains about 3 true symbols per set but adds 6 to 15 false boxes (cut-box
 detections with no counterpart are mostly false), costing 0.4 to 1.1 points of precision on every set; the unconditional edge rule stands.
 
+**B result, 18 Oct 09:58 (`weights/rtdetr_r18_rare`, best pass 4 of 10 by pooled F1 0.920; every pass kept; `eval/DETECTOR.md` is the
+four-run summary).** Per tile on the 60-sheet test_unseen, B against r18_full: mAP@0.5 0.919 / 0.922, mean precision 0.968 / 0.932, mean
+recall 0.873 / 0.880, false positives 88 / 166, classes passing the 0.95 rule 4 (fuse switch, transformer, generator, meter) / 3. Rare
+classes: capacitor recall 0.67 to 0.81; relay precision 0.74 to 0.97 but recall 0.93 to 0.76; SPD recall 0.80 to 0.66; earth unchanged at
+0.71 (in 20% of tiles, so sampling does not reach it); generator passes in both. The remaining misses on the unseen style are the symbols
+with a glyph inside (breaker 0.82, motor 0.84, isolator 0.85) and small ones (SPD, earth), consistent with the font hold-out, not with
+class frequency. All ten passes ran (294 min); passes 1 to 7 were slowed by the other engineers' jobs. Options not started: more fonts in
+the generator and a retrain (a dataset change, about 4 h); per-class thresholds chosen on val and val_unseen; the product decision at
+drawing level, which is being measured now by the reader engineer.
+
 ## 8. Metrics (as implemented in `evaluate.py`; keep the names)
 
 symbol precision and recall (IoU >= 0.3, same type); rating accuracy, poles accuracy, kA accuracy over matched devices; notes accuracy over

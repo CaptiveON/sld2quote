@@ -743,7 +743,7 @@ def more_passes(runs: list) -> list:
         if os.path.isfile(os.path.join(d, "metrics.json")):
             m, h = json.load(open(os.path.join(d, "metrics.json"))), json.load(open(os.path.join(d, "history.json")))
             per = (min if slowed(h) else statistics.mean)(e["seconds"] for e in h["epochs"]) / 60
-            L += [f"- {os.path.basename(m['model'])}: one pass with its val took about {per:.0f} min tonight" +
+            L += [f"- `{d}` ({os.path.basename(m.get('base_model') or m['model'])}): one pass with its val took about {per:.0f} min tonight" +
                   (" at its fastest (other passes were slowed by other work)" if slowed(h) else "") + f", so N passes take about N times {per:.0f} min, "
                   f"then about {m['final_eval_minutes']:.0f} min of final evaluation:", "", f"  `{more_command(d, h['args'])}`", ""]
     return L
