@@ -1,4 +1,10 @@
-data/
+data/*
+!data/real/
+data/real/*
+!data/real/sheets/
+!data/real/SOURCES.md
+!data/real/manifest.json
+!data/real/contact_sheet.png
 out/
 eval/results.json
 ocr/ocr

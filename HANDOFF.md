@@ -250,6 +250,18 @@ dot between a number and its unit, so the label regexes must tolerate both; (5) 
 the engine at start-up (or the file is vendored). Space lines: requirements rapidocr-onnxruntime==1.4.4, onnxruntime==1.31.0,
 opencv-python==5.0.0.93; packages.txt libgl1, libglib2.0-0. Homebrew tesseract was installed only to measure it and can be removed.
 
+**Step 11, first half done, 18 Oct (`data/real/`, versioned except the raw PDFs; rebuild with `scripts/real_sheets/build.py` and `spec.json`,
+needs pypdfium2, BSD/Apache).** 19 genuine one-line diagrams from 8 US federal documents, public domain under 17 U.S.C. 105 with each
+document's own statement recorded in `data/real/SOURCES.md`: UFC 3-540-01 (4 sheets, clean CAD rasters), TM 5-693 (2), TM 5-694 (3, the ones
+with the most ratings), VA PG 18-10 (2, 90 dpi), NAVFAC MO-201 (5 scans, 1990), UFC 3-520-01 2002 (1 vector), UFC 3-550-03FA (1 scan),
+TM 5-698-1 (1 vector). Mix: 3 vector, 7 clean rasters, 3 low-resolution rasters, 6 scans; all ANSI/IEEE 315 symbols; two are medium-voltage
+switchgear; only the TM 5-694, VA and one TM 5-693 sheet carry ampere ratings, so real-sheet scores will be far below the synthetic ones and
+are reported as such. Excluded with reasons: figures credited to firms (Pope, Evans and Robbins in TM 5-811-6; Liebert, Exide, HITEC,
+McGraw-Hill), national-laboratory reports (contractor-written), NRC licensee drawings, block diagrams, illegible pages; USACE, DTIC and the
+Library of Congress were unreachable (HTTP 403). Doubts recorded: the VA manual and MO-201 carry no explicit public-domain sentence (basis is
+17 U.S.C. 105 alone); tm5-693-p87 nearly duplicates part of tm5-694-p76. Rendered at 200 dpi (300 where symbols are small), breakers mostly
+20 to 80 px. Still to do in step 11: a labelling helper and hand labels (device boxes and types), then scoring both readers.
+
 ## 8. Metrics (as implemented in `evaluate.py`; keep the names)
 
 symbol precision and recall (IoU >= 0.3, same type); rating accuracy, poles accuracy, kA accuracy over matched devices; notes accuracy over
