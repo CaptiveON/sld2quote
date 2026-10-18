@@ -334,6 +334,12 @@ labels-below start below the cable stub (wide set only, so classic stays byte-id
 Times New Roman; `--held-out-label-pos none`), with both layouts in training. `data/pool_fonts` (seeds 20000 to 20899) and
 `data/coco_fonts` are regenerated accordingly before run 2 starts. Known and left: Georgia has old-style figures; Avenir Next's first
 face is bold; `evaluate --make-sets` writes to a fixed folder, so it must gain an output option before it is used with another export.
+Done 11:58 and committed: `data/coco_fonts` train 400 sheets / 8,528 tiles (labels-below pages are narrower, so passes are about 7%
+shorter), val 40, test 30 + 30, test_unseen 60 (Courier New 25, Tahoma 19, Times New Roman 16; 44 labels right, 16 below), val_unseen 20;
+13 fonts in training with both layouts. Caveats for the morning comparison: run 2 scored on data/coco's test_unseen is not like for like
+(that set holds out labels below, which run 2 trained on; only Courier New is unseen for both); every held-out font has a near relative in
+training (Tahoma and Verdana, Times New Roman and Georgia, Courier New and Menlo or Monaco), so the unseen score is kinder than a truly
+new font would be; rare classes are thin in the unseen splits (24 relay boxes in test_unseen, 6 in val_unseen).
 
 ## 8. Metrics (as implemented in `evaluate.py`; keep the names)
 
