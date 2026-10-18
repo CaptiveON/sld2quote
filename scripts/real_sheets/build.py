@@ -5,7 +5,7 @@ import pypdfium2 as pdfium
 import pypdfium2.raw as raw
 from PIL import Image, ImageDraw, ImageFont
 
-ROOT = "/Users/captiveon/Documents/techproject/experimental/thmillion/practical/sld2quote/data/real"
+ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "data", "real")  # the repo's data/real
 FONT = "/System/Library/Fonts/Supplemental/Arial.ttf"
 
 

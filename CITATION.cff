@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: sld2quote
+abstract: "A miniature single-line-diagram-to-quotation pipeline, measured end to end on synthetic switchboard drawings with invented prices."
+authors:
+  - given-names: Muhammad
+    family-names: Adnan
+version: 0.2.0
+date-released: 2026-10-19
+license: MIT
+repository-code: "https://github.com/CaptiveON/sld2quote"

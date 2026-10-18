@@ -1,7 +1,7 @@
 #!/bin/zsh
 # usage: dl.sh <source-id> <url> [filename]   -> data/real/raw/<source-id>/<filename> + note.txt
 set -e
-R=/Users/captiveon/Documents/techproject/experimental/thmillion/practical/sld2quote/data/real/raw
+R="$(cd "$(dirname "$0")/../.." && pwd)/data/real/raw"
 id=$1; url=$2; name=${3:-${url:t}}
 d=$R/$id; mkdir -p $d
 out=$(curl -sS -L --fail --max-time 300 -A "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15" \

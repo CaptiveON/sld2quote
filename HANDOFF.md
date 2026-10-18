@@ -1,10 +1,8 @@
 # sld2quote: build handoff (locked 14 October 2026, build not started)
 
 Written for the next build session and for Muhammad Adnan. Read this file first; it is self-contained.
-Context lives in the job-hunt workspace at
-`~/Documents/Work/TechJob/Portfolio/LinkedIn/Profile/04-Applications/2026-10-13_Salford-RB-Switchgear_AI-ML-Engineer-KTP-Associate_1049/`
-(research 01 to 08; `01-Research/04-technology-deep-dive-multimodal-document-ai-and-safe-ai.md` holds the reference architecture this repo
-miniaturises; the readable brief is in the same folder as `01-Research/RB-Switchgear-KTP-Brief-v1.html`, second tab "The business").
+Context lives in Adnan's private application workspace, outside this repository (research notes 01 to 08; the technology deep-dive
+holds the reference architecture this repo miniaturises; the readable brief's "The business" tab describes the company's problem).
 
 ## 1. What this is, in one paragraph
 
