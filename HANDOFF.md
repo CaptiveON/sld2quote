@@ -217,6 +217,39 @@ Proposals to Adnan: keep r18vd; run the 1-hour annealing continuation from its b
 sampling of rare classes and a schedule that completes its decay (cap plus best pass, no early stop); widen test_unseen to 60 sheets; judge
 the rule at sheet level in step 4 as well as per tile. NMS stays: without it false positives on test_unseen are 159 instead of 93.
 
+**18 Oct morning, Adnan's go:** A (3-pass annealing continuation of r18vd, `weights/rtdetr_r18_more`) running; then C (test_unseen widened to 60
+sheets, every model re-scored on it) and B (repeat-factor sampling `--rare-repeat`, fresh r18vd, cap 10, no early stop, best pass kept,
+`weights/rtdetr_r18_rare`); steps 4 (reader_v2, shared pipeline, `--reader`, drawing-level per-type scorecard on data/eval/test and
+data/eval/unseen) and 5 (Linux OCR behind `sld2quote/ocr.py`, chosen by measurement on data/baseline against Vision, `eval/OCR.md`) in
+parallel with two more staff agents (three in all). Sourcing the real drawings for step 11 is deferred to the first free agent slot.
+
+**A and C results, 18 Oct 04:40.** A (`weights/rtdetr_r18_more`, best pass 2): val 0.936 but test_unseen 0.912 against the parent's 0.926,
+generator recall 0.98 to 0.50 and earth 0.72 to 0.55 on the unseen style; the symbols with a letter inside (G, M, meter units, I>) depend on
+the font, and the gentle passes fitted the four seen fonts. The parent `weights/rtdetr_r18_full` stays the current model. C: test_unseen is
+now 60 sheets (1,140 tiles, 5,495 boxes; the first 20 sheets and their tiles byte-identical to before; train, val, test byte-identical, checked by
+sha256); on it r18vd full mAP@0.5 0.922, mean P 0.93, mean R 0.88, 3 classes pass; continuation 0.918, 0 pass; r50vd 0.887, 2 pass, relay
+recall 0.14, twice the false positives. A `val_unseen` split (20 further held-out-style sheets, disjoint from test_unseen; `--val-unseen 20`)
+now exists for model selection, so test_unseen is never used for choosing. Selection rule for B (decided 04:45 on the agent's evidence): the
+best pass is the one with the highest mean per-class F1 at the operating threshold pooled over val and val_unseen (mean mAP@0.5 would have
+preferred the continuation, which test_unseen shows is worse); every pass's weights are kept (`--keep-passes`) with its pooled F1, mean mAP
+and worst-class min(P, R) recorded, so any rule can be applied later without retraining. Export command now:
+`python3 -m sld2quote.export_coco --pool data/pool --out data/coco --unseen 60 --val-unseen 20`.
+
+**Step 5 done, 18 Oct (`sld2quote/ocr.py`, `sld2quote/evaluate_ocr.py`, `eval/OCR.md`, `tests/test_ocr.py`).** Linux engine: RapidOCR
+(rapidocr-onnxruntime 1.4.4, PP-OCRv4 detector with the English PP-OCRv3 recogniser from the hub, CPU, 2 threads). Measured on data/baseline
+against the generator's own text ground truth, character accuracy on the label and notes strings, clean and scan pooled: RapidOCR 0.960,
+Apple Vision 0.868, Tesseract 0.868, docTR 0.727, EasyOCR 0.732 (and 30 s per sheet); RapidOCR 2.5 s per standard sheet on 2 threads,
+Vision 0.5 s. RapidOCR reads the held-out font (Courier New) at 0.98 against Vision's 0.72, and reads the single letters inside symbols that
+Vision misses. The bundled Chinese recogniser drops spaces ("ACB-13200A4P"), hence the English one. Vision stays the Mac default;
+`SLD2QUOTE_OCR` picks the engine; the engine loads once per process. Findings for other steps: (1) `reader.prepare()` rotates by `-ang`
+where it should rotate by `+ang`, so a scan's tilt is doubled instead of removed (0.77 degrees became 1.43); assigned to the step 4 engineer;
+(2) with RapidOCR the 3x crop pass is worse than its own page pass (0.914 against 0.964: strokes inside the window are read as text) and
+costs 4.75 s per sheet, so the crop pass should become engine-dependent in step 6; (3) on a 10-sheet probe, 26 of 42 wrong ratings had the
+label read exactly but attached to another device, which is the step 6 link rule's job; (4) "mm²" reads as "mm2" and scan noise can put a
+dot between a number and its unit, so the label regexes must tolerate both; (5) the recogniser downloads on first use, so the Space warms
+the engine at start-up (or the file is vendored). Space lines: requirements rapidocr-onnxruntime==1.4.4, onnxruntime==1.31.0,
+opencv-python==5.0.0.93; packages.txt libgl1, libglib2.0-0. Homebrew tesseract was installed only to measure it and can be removed.
+
 ## 8. Metrics (as implemented in `evaluate.py`; keep the names)
 
 symbol precision and recall (IoU >= 0.3, same type); rating accuracy, poles accuracy, kA accuracy over matched devices; notes accuracy over

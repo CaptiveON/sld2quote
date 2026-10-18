@@ -28,7 +28,7 @@ python3 sld2quote/generate.py --out data --n 10 --seed 1 --scan
 python3 -m sld2quote.cli run data/sheet-0001.png          # writes out/sheet-0001/{quotation.md,bom.csv,review.html,extraction.json}
 python3 -m sld2quote.evaluate --data data --out eval      # writes eval/RESULTS.md
 ```
-Requires macOS (Apple Vision for OCR), Python 3.12 with numpy, Pillow and scipy; the trained symbol detector adds torch, torchvision, transformers and pycocotools (`python3 -m sld2quote.train_detector`); `swiftc -O ocr/ocr.swift -o ocr/ocr -framework Vision -framework AppKit` rebuilds the OCR tool.
+Requires Python 3.12 with numpy, Pillow and scipy; the trained symbol detector adds torch, torchvision, transformers and pycocotools (`python3 -m sld2quote.train_detector`); text reading uses Apple Vision on macOS by default and RapidOCR anywhere (`rapidocr-onnxruntime`, `onnxruntime`, `opencv-python`, plus a 9 MB English recogniser fetched once from the Hugging Face hub; `SLD2QUOTE_OCR=rapidocr` or `vision` picks the engine; on Linux also `libgl1` and `libglib2.0-0`); on our sheets RapidOCR reads labels and notes better than Vision (`eval/OCR.md`); `swiftc -O ocr/ocr.swift -o ocr/ocr -framework Vision -framework AppKit` rebuilds the OCR tool.
 
 ## Honesty notes
 - Prices and part numbers are invented and labelled as such. The catalogue exists so the pipeline has somewhere to go.
