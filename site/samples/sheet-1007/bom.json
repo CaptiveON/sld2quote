@@ -5,8 +5,8 @@
   "ip": "IP31",
   "poles_default": 4,
   "busbar_rating": 4000,
-  "sections": 6,
-  "ways": 10
+  "sections": 7,
+  "ways": 12
  },
  "lines": [
   {
@@ -18,12 +18,12 @@
    "total_gbp": 11956.0,
    "evidence": [
     "S4",
-    "S4t2",
-    "S4t1"
+    "T11",
+    "T8"
    ],
    "rule": "R-ACB-SELECT",
    "conf": 0.32,
-   "basis": "rating 4000 A from ['S4t2']; poles 4; kA 36"
+   "basis": "rating 4000 A from ['T11']; poles 4; kA 36"
   },
   {
    "line": 2,
@@ -34,8 +34,8 @@
    "total_gbp": 1400,
    "evidence": [
     "S4",
-    "S4t2",
-    "S4t1"
+    "T11",
+    "T8"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.32,
@@ -50,12 +50,12 @@
    "total_gbp": 11956.0,
    "evidence": [
     "S5",
-    "S5t1",
-    "S5t2"
+    "T12",
+    "T9"
    ],
    "rule": "R-ACB-SELECT",
    "conf": 0.25,
-   "basis": "rating 4000 A from ['S5t1']; poles 4; kA 36"
+   "basis": "rating 4000 A from ['T12']; poles 4; kA 36"
   },
   {
    "line": 4,
@@ -66,8 +66,8 @@
    "total_gbp": 1400,
    "evidence": [
     "S5",
-    "S5t1",
-    "S5t2"
+    "T12",
+    "T9"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.25,
@@ -75,6 +75,51 @@
   },
   {
    "line": 5,
+   "part": "ACB-2500-4P-N",
+   "description": "Air circuit breaker 2500 A 4-pole, 36 kA band N, withdrawable, electronic trip",
+   "qty": 1,
+   "unit_gbp": 6832.0,
+   "total_gbp": 6832.0,
+   "evidence": [
+    "S6",
+    "T10"
+   ],
+   "rule": "R-ACB-SELECT",
+   "conf": 0.24,
+   "basis": "rating 2500 A from ['T10']; poles 4; kA 36"
+  },
+  {
+   "line": 6,
+   "part": "FU-KIT-ACB",
+   "description": "Incomer functional unit: compartment, shutters, terminals, controls",
+   "qty": 1,
+   "unit_gbp": 1400,
+   "total_gbp": 1400,
+   "evidence": [
+    "S6",
+    "T10"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.24,
+   "basis": ""
+  },
+  {
+   "line": 7,
+   "part": "ATS-CTRL",
+   "description": "Automatic transfer switch controller and interlocks",
+   "qty": 1,
+   "unit_gbp": 1850,
+   "total_gbp": 1850,
+   "evidence": [
+    "S6",
+    "T10"
+   ],
+   "rule": "R-ATS",
+   "conf": 0.24,
+   "basis": ""
+  },
+  {
+   "line": 8,
    "part": "METER-CT 2500/5A",
    "description": "Panel meter (CT 2500/5A)",
    "qty": 1,
@@ -82,14 +127,14 @@
    "total_gbp": 260,
    "evidence": [
     "S7",
-    "S7t1"
+    "T15"
    ],
    "rule": "R-METERING",
    "conf": 0.57,
    "basis": ""
   },
   {
-   "line": 6,
+   "line": 9,
    "part": "CT-SET",
    "description": "Current transformers 4000/5 A, set of three, class 1",
    "qty": 1,
@@ -97,31 +142,30 @@
    "total_gbp": 280,
    "evidence": [
     "S8",
-    "S8t1",
-    "S8t3"
+    "T13",
+    "T16"
    ],
    "rule": "R-METERING",
    "conf": 0.12,
    "basis": ""
   },
   {
-   "line": 7,
-   "part": "METER-CT 4000/5A | 3AR A 4000 A Cu 36 kA/1s",
-   "description": "Panel meter (CT 4000/5A | 3AR A 4000 A Cu 36 kA/1s)",
+   "line": 10,
+   "part": "METER-CT 4000/5A",
+   "description": "Panel meter (CT 4000/5A)",
    "qty": 1,
    "unit_gbp": 260,
    "total_gbp": 260,
    "evidence": [
     "S9",
-    "S9t2",
-    "S9t3"
+    "T14"
    ],
    "rule": "R-METERING",
    "conf": 0.45,
    "basis": ""
   },
   {
-   "line": 8,
+   "line": 11,
    "part": "CT-SET",
    "description": "Current transformers, set of three, class 1",
    "qty": 1,
@@ -135,7 +179,7 @@
    "basis": ""
   },
   {
-   "line": 9,
+   "line": 12,
    "part": "BSS-4000-4P",
    "description": "Bus-section switch 4000 A 4-pole, 36 kA",
    "qty": 1,
@@ -143,14 +187,14 @@
    "total_gbp": 6600.0,
    "evidence": [
     "S11",
-    "S11t2"
+    "T18"
    ],
    "rule": "R-BUS-SECTION",
    "conf": 0.29,
    "basis": ""
   },
   {
-   "line": 10,
+   "line": 13,
    "part": "FU-KIT-BS",
    "description": "Bus-section functional unit and interlocking",
    "qty": 1,
@@ -158,14 +202,46 @@
    "total_gbp": 900,
    "evidence": [
     "S11",
-    "S11t2"
+    "T18"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.29,
    "basis": ""
   },
   {
-   "line": 11,
+   "line": 14,
+   "part": "MCCB-100-4P-N",
+   "description": "Moulded-case circuit breaker 100 A 4-pole, 36 kA band N, adjustable trip; feeds SPD Type 1+2",
+   "qty": 1,
+   "unit_gbp": 378.2,
+   "total_gbp": 378.2,
+   "evidence": [
+    "S12",
+    "T24",
+    "T19"
+   ],
+   "rule": "R-MCCB-SELECT",
+   "conf": 0.53,
+   "basis": "rating 100 A; poles 4; kA 36"
+  },
+  {
+   "line": 15,
+   "part": "FU-KIT-MCCB",
+   "description": "Outgoing functional unit: compartment door, terminals, labels",
+   "qty": 1,
+   "unit_gbp": 420,
+   "total_gbp": 420,
+   "evidence": [
+    "S12",
+    "T24",
+    "T19"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.53,
+   "basis": ""
+  },
+  {
+   "line": 16,
    "part": "MCCB-250-4P-N",
    "description": "Moulded-case circuit breaker 250 A 4-pole, 36 kA band N, adjustable trip; feeds pumps",
    "qty": 1,
@@ -173,15 +249,15 @@
    "total_gbp": 634.4,
    "evidence": [
     "S13",
-    "S13t3",
-    "S13t1"
+    "T25",
+    "T20"
    ],
    "rule": "R-MCCB-SELECT",
    "conf": 0.59,
    "basis": "rating 250 A; poles 4; kA 36"
   },
   {
-   "line": 12,
+   "line": 17,
    "part": "FU-KIT-MCCB",
    "description": "Outgoing functional unit: compartment door, terminals, labels",
    "qty": 1,
@@ -189,15 +265,15 @@
    "total_gbp": 420,
    "evidence": [
     "S13",
-    "S13t3",
-    "S13t1"
+    "T25",
+    "T20"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.59,
    "basis": ""
   },
   {
-   "line": 13,
+   "line": 18,
    "part": "ISOL-400-3P",
    "description": "Switch-disconnector 400 A 3-pole; feeds UPS input",
    "qty": 1,
@@ -205,15 +281,15 @@
    "total_gbp": 520.0,
    "evidence": [
     "S14",
-    "S14t3",
-    "S14t1"
+    "T26",
+    "T21"
    ],
    "rule": "R-ISOL-SELECT",
    "conf": 0.69,
    "basis": "rating 400 A; poles 3"
   },
   {
-   "line": 14,
+   "line": 19,
    "part": "FU-KIT-ISOLATOR",
    "description": "Outgoing functional unit: compartment door, terminals, labels",
    "qty": 1,
@@ -221,15 +297,15 @@
    "total_gbp": 340,
    "evidence": [
     "S14",
-    "S14t3",
-    "S14t1"
+    "T26",
+    "T21"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.69,
    "basis": ""
   },
   {
-   "line": 15,
+   "line": 20,
    "part": "MCCB-250-4P-N",
    "description": "Moulded-case circuit breaker 250 A 4-pole, 36 kA band N, adjustable trip; feeds kitchen",
    "qty": 1,
@@ -237,15 +313,15 @@
    "total_gbp": 634.4,
    "evidence": [
     "S15",
-    "S15t2",
-    "S15t1"
+    "T27",
+    "T22"
    ],
    "rule": "R-MCCB-SELECT",
    "conf": 0.29,
    "basis": "rating 250 A; poles 4; kA 36"
   },
   {
-   "line": 16,
+   "line": 21,
    "part": "FU-KIT-MCCB",
    "description": "Outgoing functional unit: compartment door, terminals, labels",
    "qty": 1,
@@ -253,15 +329,15 @@
    "total_gbp": 420,
    "evidence": [
     "S15",
-    "S15t2",
-    "S15t1"
+    "T27",
+    "T22"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.29,
    "basis": ""
   },
   {
-   "line": 17,
+   "line": 22,
    "part": "ISOL-800-4P",
    "description": "Switch-disconnector 800 A 4-pole; feeds lifts",
    "qty": 1,
@@ -269,15 +345,15 @@
    "total_gbp": 1207.8,
    "evidence": [
     "S16",
-    "S16t2",
-    "S16t1"
+    "T28",
+    "T23"
    ],
    "rule": "R-ISOL-SELECT",
    "conf": 0.73,
    "basis": "rating 800 A; poles 4"
   },
   {
-   "line": 18,
+   "line": 23,
    "part": "FU-KIT-ISOLATOR",
    "description": "Outgoing functional unit: compartment door, terminals, labels",
    "qty": 1,
@@ -285,15 +361,15 @@
    "total_gbp": 340,
    "evidence": [
     "S16",
-    "S16t2",
-    "S16t1"
+    "T28",
+    "T23"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.73,
    "basis": ""
   },
   {
-   "line": 19,
+   "line": 24,
    "part": "MCCB-400-4P-N",
    "description": "Moulded-case circuit breaker 400 A 4-pole, 36 kA band N, adjustable trip; feeds DB-1 theatres",
    "qty": 1,
@@ -301,15 +377,15 @@
    "total_gbp": 1195.6,
    "evidence": [
     "S17",
-    "S17t5",
-    "S17t3"
+    "T38",
+    "T29"
    ],
    "rule": "R-MCCB-SELECT",
    "conf": 0.25,
    "basis": "rating 400 A; poles 4; kA 36"
   },
   {
-   "line": 20,
+   "line": 25,
    "part": "FU-KIT-MCCB",
    "description": "Outgoing functional unit: compartment door, terminals, labels",
    "qty": 1,
@@ -317,15 +393,15 @@
    "total_gbp": 420,
    "evidence": [
     "S17",
-    "S17t5",
-    "S17t3"
+    "T38",
+    "T29"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.25,
    "basis": ""
   },
   {
-   "line": 21,
+   "line": 26,
    "part": "MCCB-630-4P-N",
    "description": "Moulded-case circuit breaker 630 A 4-pole, 36 kA band N, adjustable trip; feeds DB-7 theatres",
    "qty": 1,
@@ -333,15 +409,15 @@
    "total_gbp": 1769.0,
    "evidence": [
     "S18",
-    "S18t4",
-    "S18t1"
+    "T39",
+    "T30"
    ],
    "rule": "R-MCCB-SELECT",
    "conf": 0.49,
    "basis": "rating 630 A; poles 4; kA 36"
   },
   {
-   "line": 22,
+   "line": 27,
    "part": "FU-KIT-MCCB",
    "description": "Outgoing functional unit: compartment door, terminals, labels",
    "qty": 1,
@@ -349,15 +425,15 @@
    "total_gbp": 420,
    "evidence": [
     "S18",
-    "S18t4",
-    "S18t1"
+    "T39",
+    "T30"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.49,
    "basis": ""
   },
   {
-   "line": 23,
+   "line": 28,
    "part": "MCCB-250-4P-L",
    "description": "Moulded-case circuit breaker 250 A 4-pole, 80 kA band L, adjustable trip; feeds lighting",
    "qty": 1,
@@ -365,90 +441,12 @@
    "total_gbp": 888.16,
    "evidence": [
     "S19",
-    "S19t4",
-    "S19t3"
+    "T41",
+    "T32"
    ],
    "rule": "R-MCCB-SELECT",
    "conf": 0.18,
    "basis": "rating 250 A; poles 4; kA 80"
-  },
-  {
-   "line": 24,
-   "part": "FU-KIT-MCCB",
-   "description": "Outgoing functional unit: compartment door, terminals, labels",
-   "qty": 1,
-   "unit_gbp": 420,
-   "total_gbp": 420,
-   "evidence": [
-    "S19",
-    "S19t4",
-    "S19t3"
-   ],
-   "rule": "R-FU-KIT",
-   "conf": 0.18,
-   "basis": ""
-  },
-  {
-   "line": 25,
-   "part": "MCCB-630-4P-N",
-   "description": "Moulded-case circuit breaker 630 A 4-pole, 36 kA band N, adjustable trip",
-   "qty": 1,
-   "unit_gbp": 1769.0,
-   "total_gbp": 1769.0,
-   "evidence": [
-    "S20",
-    "S20t1"
-   ],
-   "rule": "R-MCCB-SELECT",
-   "conf": 0.34,
-   "basis": "rating 630 A; poles 4; kA 36"
-  },
-  {
-   "line": 26,
-   "part": "FU-KIT-MCCB",
-   "description": "Outgoing functional unit: compartment door, terminals, labels",
-   "qty": 1,
-   "unit_gbp": 420,
-   "total_gbp": 420,
-   "evidence": [
-    "S20",
-    "S20t1"
-   ],
-   "rule": "R-FU-KIT",
-   "conf": 0.34,
-   "basis": ""
-  },
-  {
-   "line": 27,
-   "part": "SPD-T12",
-   "description": "Surge protective device, Type 1+2, with status indication",
-   "qty": 1,
-   "unit_gbp": 690,
-   "total_gbp": 690,
-   "evidence": [
-    "S22",
-    "S22t3",
-    "S22t2"
-   ],
-   "rule": "R-SPD",
-   "conf": 0.15,
-   "basis": ""
-  },
-  {
-   "line": 28,
-   "part": "MCCB-400-3P-N",
-   "description": "Moulded-case circuit breaker 400 A 3-pole, 36 kA band N, adjustable trip; feeds MCC-5 AHU",
-   "qty": 1,
-   "unit_gbp": 980.0,
-   "total_gbp": 980.0,
-   "evidence": [
-    "S23",
-    "S23t4",
-    "S23t3"
-   ],
-   "rule": "R-MCCB-SELECT",
-   "conf": 0.55,
-   "basis": "rating 400 A; poles 3; kA 36"
   },
   {
    "line": 29,
@@ -458,29 +456,29 @@
    "unit_gbp": 420,
    "total_gbp": 420,
    "evidence": [
-    "S23",
-    "S23t4",
-    "S23t3"
+    "S19",
+    "T41",
+    "T32"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.55,
+   "conf": 0.18,
    "basis": ""
   },
   {
    "line": 30,
-   "part": "MCCB-100-4P-H",
-   "description": "Moulded-case circuit breaker 100 A 4-pole, 65 kA band H, adjustable trip; feeds spare",
+   "part": "MCCB-630-4P-N",
+   "description": "Moulded-case circuit breaker 630 A 4-pole, 36 kA band N, adjustable trip; feeds DB-8 theatres",
    "qty": 1,
-   "unit_gbp": 446.28,
-   "total_gbp": 446.28,
+   "unit_gbp": 1769.0,
+   "total_gbp": 1769.0,
    "evidence": [
-    "S24",
-    "S24t5",
-    "S24t3"
+    "S20",
+    "T40",
+    "T31"
    ],
    "rule": "R-MCCB-SELECT",
-   "conf": 0.62,
-   "basis": "rating 100 A; poles 4; kA 65"
+   "conf": 0.34,
+   "basis": "rating 630 A; poles 4; kA 36"
   },
   {
    "line": 31,
@@ -490,36 +488,146 @@
    "unit_gbp": 420,
    "total_gbp": 420,
    "evidence": [
+    "S20",
+    "T40",
+    "T31"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.34,
+   "basis": ""
+  },
+  {
+   "line": 32,
+   "part": "MCCB-250-4P-N",
+   "description": "Moulded-case circuit breaker 250 A 4-pole, 36 kA band N, adjustable trip; feeds sub-board 12",
+   "qty": 1,
+   "unit_gbp": 634.4,
+   "total_gbp": 634.4,
+   "evidence": [
+    "S21",
+    "T42",
+    "T33"
+   ],
+   "rule": "R-MCCB-SELECT",
+   "conf": 0.22,
+   "basis": "rating 250 A; poles 4; kA 36"
+  },
+  {
+   "line": 33,
+   "part": "FU-KIT-MCCB",
+   "description": "Outgoing functional unit: compartment door, terminals, labels",
+   "qty": 1,
+   "unit_gbp": 420,
+   "total_gbp": 420,
+   "evidence": [
+    "S21",
+    "T42",
+    "T33"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.22,
+   "basis": ""
+  },
+  {
+   "line": 34,
+   "part": "SPD-T12",
+   "description": "Surge protective device, Type 1+2, with status indication",
+   "qty": 1,
+   "unit_gbp": 690,
+   "total_gbp": 690,
+   "evidence": [
+    "S22"
+   ],
+   "rule": "R-SPD",
+   "conf": 0.07,
+   "basis": ""
+  },
+  {
+   "line": 35,
+   "part": "MCCB-400-3P-N",
+   "description": "Moulded-case circuit breaker 400 A 3-pole, 36 kA band N, adjustable trip; feeds MCC-5 AHU",
+   "qty": 1,
+   "unit_gbp": 980.0,
+   "total_gbp": 980.0,
+   "evidence": [
+    "S23",
+    "T50",
+    "T43"
+   ],
+   "rule": "R-MCCB-SELECT",
+   "conf": 0.55,
+   "basis": "rating 400 A; poles 3; kA 36"
+  },
+  {
+   "line": 36,
+   "part": "FU-KIT-MCCB",
+   "description": "Outgoing functional unit: compartment door, terminals, labels",
+   "qty": 1,
+   "unit_gbp": 420,
+   "total_gbp": 420,
+   "evidence": [
+    "S23",
+    "T50",
+    "T43"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.55,
+   "basis": ""
+  },
+  {
+   "line": 37,
+   "part": "MCCB-100-4P-H",
+   "description": "Moulded-case circuit breaker 100 A 4-pole, 65 kA band H, adjustable trip; feeds spare",
+   "qty": 1,
+   "unit_gbp": 446.28,
+   "total_gbp": 446.28,
+   "evidence": [
     "S24",
-    "S24t5",
-    "S24t3"
+    "T51",
+    "T44"
+   ],
+   "rule": "R-MCCB-SELECT",
+   "conf": 0.62,
+   "basis": "rating 100 A; poles 4; kA 65"
+  },
+  {
+   "line": 38,
+   "part": "FU-KIT-MCCB",
+   "description": "Outgoing functional unit: compartment door, terminals, labels",
+   "qty": 1,
+   "unit_gbp": 420,
+   "total_gbp": 420,
+   "evidence": [
+    "S24",
+    "T51",
+    "T44"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.62,
    "basis": ""
   },
   {
-   "line": 32,
+   "line": 39,
    "part": "BUSBAR-CU-4000",
-   "description": "Copper busbar set 4000 A (4-bar), 6 sections, about 461 kg",
+   "description": "Copper busbar set 4000 A (4-bar), 7 sections, about 538 kg",
    "qty": 1,
-   "unit_gbp": 5299.2,
-   "total_gbp": 5299.2,
+   "unit_gbp": 6182.4,
+   "total_gbp": 6182.4,
    "evidence": [
     "T17",
     "T17"
    ],
    "rule": "R-BUSBAR-SIZE",
    "conf": 0.9,
-   "basis": "4000 A busbar label; 6 sections"
+   "basis": "4000 A busbar label; 7 sections"
   },
   {
-   "line": 33,
+   "line": 40,
    "part": "ENC-SECTION",
    "description": "Enclosure section, Form 4 Type 2, IP31, RAL 7035",
-   "qty": 6,
+   "qty": 7,
    "unit_gbp": 2912.0,
-   "total_gbp": 17472.0,
+   "total_gbp": 20384.0,
    "evidence": [
     "T55",
     "T55",
@@ -528,22 +636,22 @@
    ],
    "rule": "R-ENCLOSURE",
    "conf": 0.95,
-   "basis": "10 ways at 4 per section plus incomers"
+   "basis": "12 ways at 4 per section plus incomers"
   },
   {
-   "line": 34,
+   "line": 41,
    "part": "LAB-ASSY",
-   "description": "Assembly, wiring and routine verification: 245 hours",
+   "description": "Assembly, wiring and routine verification: 263 hours",
    "qty": 1,
-   "unit_gbp": 11760,
-   "total_gbp": 11760,
+   "unit_gbp": 12624,
+   "total_gbp": 12624,
    "evidence": [],
    "rule": "R-LABOUR",
    "conf": 0.9,
    "basis": ""
   },
   {
-   "line": 35,
+   "line": 42,
    "part": "DOC",
    "description": "Documentation, as-built drawings, test certificates",
    "qty": 1,
@@ -555,7 +663,7 @@
    "basis": ""
   },
   {
-   "line": 36,
+   "line": 43,
    "part": "CERT",
    "description": "Design-verification certificates per specification",
    "qty": 1,
@@ -569,7 +677,7 @@
    "basis": ""
   },
   {
-   "line": 37,
+   "line": 44,
    "part": "DEL",
    "description": "Delivery to site, crane and offload excluded",
    "qty": 1,
@@ -581,39 +689,10 @@
    "basis": ""
   }
  ],
- "subtotal_gbp": 86047.84,
- "margin_gbp": 12907.18,
- "total_gbp": 98955.02,
+ "subtotal_gbp": 102641.64,
+ "margin_gbp": 15396.25,
+ "total_gbp": 118037.89,
  "issues": [
-  {
-   "kind": "missing",
-   "what": "D6 (ACB): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S6",
-    "S6t1"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D12 (MCCB): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S12",
-    "S12t3",
-    "S12t2"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D21 (MCCB): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S21",
-    "S21t3",
-    "S21t2"
-   ]
-  },
   {
    "kind": "low_confidence",
    "what": "devices read with low confidence: D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D15, D17, D18, D19, D20, D21, D22, D23",

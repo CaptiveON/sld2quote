@@ -22,22 +22,22 @@
    "key": "text",
    "title": "Read the words",
    "count": 5,
-   "seconds": 5.88,
-   "plain": "Read 5 pieces of text in 5.88 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 1.97,
+   "plain": "Read 5 pieces of text in 1.97 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
    "count": 10,
-   "seconds": 2.15,
-   "plain": "Found 10 symbols in 2.15 s: 6 incoming air circuit breakers, 2 current transformers, 1 generator, 1 motor starter. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "seconds": 1.51,
+   "plain": "Found 10 symbols in 1.51 s: 6 incoming air circuit breakers, 2 current transformers, 1 generator, 1 motor starter. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
-   "count": 3,
-   "seconds": 0.11,
-   "plain": "Paired 3 of 10 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
+   "count": 2,
+   "seconds": 0.07,
+   "plain": "Paired 2 of 10 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
    "key": "spec",
@@ -136,14 +136,14 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.11,
+   "conf": 0.06,
    "box": [
     1162,
     137,
     16,
     19
    ],
-   "label": "1"
+   "label": ""
   },
   {
    "id": "D6",
@@ -179,7 +179,7 @@
     22,
     68
    ],
-   "label": "utput A"
+   "label": "Output A"
   },
   {
    "id": "D8",
@@ -377,8 +377,7 @@
    "what": "D5 (ACB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S5",
-    "S5t1"
+    "S5"
    ]
   },
   {
@@ -395,7 +394,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S8",
-    "S8t1"
+    "T5"
    ]
   },
   {
@@ -426,9 +425,9 @@
  "spec": null,
  "score": null,
  "timing": {
-  "total": 8.25,
-  "ocr": 5.88,
-  "detector": 2.15
+  "total": 3.63,
+  "ocr": 1.97,
+  "detector": 1.51
  },
  "reader": "trained",
  "engine": "rapidocr",

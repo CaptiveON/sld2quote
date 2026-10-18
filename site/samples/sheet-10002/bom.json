@@ -5,8 +5,8 @@
   "ip": "IP42",
   "poles_default": 4,
   "busbar_rating": 2000,
-  "sections": 4,
-  "ways": 2
+  "sections": 5,
+  "ways": 4
  },
  "lines": [
   {
@@ -18,12 +18,12 @@
    "total_gbp": 5978.0,
    "evidence": [
     "S4",
-    "S4t1",
-    "S4t2"
+    "T9",
+    "T12"
    ],
    "rule": "R-ACB-SELECT",
    "conf": 0.41,
-   "basis": "rating 2000 A from ['S4t1']; poles 4; kA 36"
+   "basis": "rating 2000 A from ['T9']; poles 4; kA 36"
   },
   {
    "line": 2,
@@ -34,8 +34,8 @@
    "total_gbp": 1400,
    "evidence": [
     "S4",
-    "S4t1",
-    "S4t2"
+    "T9",
+    "T12"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.41,
@@ -50,12 +50,12 @@
    "total_gbp": 5978.0,
    "evidence": [
     "S5",
-    "S5t3",
-    "S5t1"
+    "T13",
+    "T8"
    ],
    "rule": "R-ACB-SELECT",
    "conf": 0.57,
-   "basis": "rating 2000 A from ['S5t3']; poles 4; kA 36"
+   "basis": "rating 2000 A from ['T13']; poles 4; kA 36"
   },
   {
    "line": 4,
@@ -66,8 +66,8 @@
    "total_gbp": 1400,
    "evidence": [
     "S5",
-    "S5t3",
-    "S5t1"
+    "T13",
+    "T8"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.57,
@@ -75,22 +75,67 @@
   },
   {
    "line": 5,
-   "part": "METER-CT 2000/5A | 3AR B 2000 A Cu 36 kA/1s",
-   "description": "Panel meter (CT 2000/5A | 3AR B 2000 A Cu 36 kA/1s)",
+   "part": "ACB-1600-4P-N",
+   "description": "Air circuit breaker 1600 A 4-pole, 36 kA band N, withdrawable, electronic trip",
+   "qty": 1,
+   "unit_gbp": 5124.0,
+   "total_gbp": 5124.0,
+   "evidence": [
+    "S6",
+    "T10"
+   ],
+   "rule": "R-ACB-SELECT",
+   "conf": 0.18,
+   "basis": "rating 1600 A from ['T10']; poles 4; kA 36"
+  },
+  {
+   "line": 6,
+   "part": "FU-KIT-ACB",
+   "description": "Incomer functional unit: compartment, shutters, terminals, controls",
+   "qty": 1,
+   "unit_gbp": 1400,
+   "total_gbp": 1400,
+   "evidence": [
+    "S6",
+    "T10"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.18,
+   "basis": ""
+  },
+  {
+   "line": 7,
+   "part": "ATS-CTRL",
+   "description": "Automatic transfer switch controller and interlocks",
+   "qty": 1,
+   "unit_gbp": 1850,
+   "total_gbp": 1850,
+   "evidence": [
+    "S6",
+    "T10"
+   ],
+   "rule": "R-ATS",
+   "conf": 0.18,
+   "basis": ""
+  },
+  {
+   "line": 8,
+   "part": "METER-CT 2000/5A | BUSBAR B 2000 A Cu 36 kA/1s",
+   "description": "Panel meter (CT 2000/5A | BUSBAR B 2000 A Cu 36 kA/1s)",
    "qty": 1,
    "unit_gbp": 260,
    "total_gbp": 260,
    "evidence": [
     "S7",
-    "S7t1",
-    "S7t2"
+    "T15",
+    "T18"
    ],
    "rule": "R-METERING",
    "conf": 0.32,
    "basis": ""
   },
   {
-   "line": 6,
+   "line": 9,
    "part": "METER-CT 1600/5A",
    "description": "Panel meter (CT 1600/5A)",
    "qty": 1,
@@ -98,14 +143,14 @@
    "total_gbp": 260,
    "evidence": [
     "S8",
-    "S8t2"
+    "T16"
    ],
    "rule": "R-METERING",
    "conf": 0.33,
    "basis": ""
   },
   {
-   "line": 7,
+   "line": 10,
    "part": "RELAY-OC",
    "description": "Overcurrent and earth-fault protection relay",
    "qty": 1,
@@ -113,77 +158,71 @@
    "total_gbp": 950,
    "evidence": [
     "S9",
-    "S9t3",
-    "S9t1"
+    "T14",
+    "T17"
    ],
    "rule": "R-PROTECTION",
    "conf": 0.14,
    "basis": ""
   },
   {
-   "line": 8,
-   "part": "METER-CT 2000/5A | 3AR A 2000 A Cu 36 kA/1s",
-   "description": "Panel meter (CT 2000/5A | 3AR A 2000 A Cu 36 kA/1s)",
+   "line": 11,
+   "part": "METER-MF",
+   "description": "Panel meter (multifunction)",
    "qty": 1,
    "unit_gbp": 260,
    "total_gbp": 260,
    "evidence": [
-    "S10",
-    "S10t2",
-    "S10t3"
+    "S10"
    ],
    "rule": "R-METERING",
-   "conf": 0.61,
+   "conf": 0.3,
    "basis": ""
   },
   {
-   "line": 9,
-   "part": "CT-SET",
-   "description": "Current transformers 2000/5 A, set of three, class 1",
-   "qty": 1,
-   "unit_gbp": 280,
-   "total_gbp": 280,
-   "evidence": [
-    "S11",
-    "S11t1",
-    "S11t3"
-   ],
-   "rule": "R-METERING",
-   "conf": 0.13,
-   "basis": ""
-  },
-  {
-   "line": 10,
-   "part": "CT-SET",
-   "description": "Current transformers 2000/5 A, set of three, class 1",
-   "qty": 1,
-   "unit_gbp": 280,
-   "total_gbp": 280,
-   "evidence": [
-    "S12",
-    "S12t2"
-   ],
-   "rule": "R-METERING",
-   "conf": 0.34,
-   "basis": ""
-  },
-  {
-   "line": 11,
+   "line": 12,
    "part": "CT-SET",
    "description": "Current transformers, set of three, class 1",
    "qty": 1,
    "unit_gbp": 280,
    "total_gbp": 280,
    "evidence": [
-    "S13",
-    "S13t1"
+    "S11"
    ],
    "rule": "R-METERING",
-   "conf": 0.43,
+   "conf": 0.07,
    "basis": ""
   },
   {
-   "line": 12,
+   "line": 13,
+   "part": "CT-SET",
+   "description": "Current transformers, set of three, class 1",
+   "qty": 1,
+   "unit_gbp": 280,
+   "total_gbp": 280,
+   "evidence": [
+    "S12"
+   ],
+   "rule": "R-METERING",
+   "conf": 0.17,
+   "basis": ""
+  },
+  {
+   "line": 14,
+   "part": "CT-SET",
+   "description": "Current transformers, set of three, class 1",
+   "qty": 1,
+   "unit_gbp": 280,
+   "total_gbp": 280,
+   "evidence": [
+    "S13"
+   ],
+   "rule": "R-METERING",
+   "conf": 0.21,
+   "basis": ""
+  },
+  {
+   "line": 15,
    "part": "RELAY-OC",
    "description": "Overcurrent and earth-fault protection relay",
    "qty": 1,
@@ -197,7 +236,7 @@
    "basis": ""
   },
   {
-   "line": 13,
+   "line": 16,
    "part": "BSS-2000-4P",
    "description": "Bus-section switch 2000 A 4-pole, 36 kA",
    "qty": 1,
@@ -205,15 +244,14 @@
    "total_gbp": 3600.0,
    "evidence": [
     "S15",
-    "S15t2",
-    "S15t1"
+    "T19"
    ],
    "rule": "R-BUS-SECTION",
    "conf": 0.14,
    "basis": ""
   },
   {
-   "line": 14,
+   "line": 17,
    "part": "FU-KIT-BS",
    "description": "Bus-section functional unit and interlocking",
    "qty": 1,
@@ -221,31 +259,30 @@
    "total_gbp": 900,
    "evidence": [
     "S15",
-    "S15t2",
-    "S15t1"
+    "T19"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.14,
    "basis": ""
   },
   {
-   "line": 15,
-   "part": "MCCB-100-3P-N",
-   "description": "Moulded-case circuit breaker 100 A 3-pole, 36 kA band N, adjustable trip; feeds lighEing",
+   "line": 18,
+   "part": "MCCB-250-3P-N",
+   "description": "Moulded-case circuit breaker 250 A 3-pole, 36 kA band N, adjustable trip; feeds lighking",
    "qty": 1,
-   "unit_gbp": 310.0,
-   "total_gbp": 310.0,
+   "unit_gbp": 520.0,
+   "total_gbp": 520.0,
    "evidence": [
     "S20",
-    "S20t1",
-    "S20t3"
+    "T21",
+    "T24"
    ],
    "rule": "R-MCCB-SELECT",
    "conf": 0.57,
-   "basis": "rating 20 A; poles 3; kA 36"
+   "basis": "rating 250 A; poles 3; kA 36"
   },
   {
-   "line": 16,
+   "line": 19,
    "part": "FU-KIT-MCCB",
    "description": "Outgoing functional unit: compartment door, terminals, labels",
    "qty": 1,
@@ -253,15 +290,15 @@
    "total_gbp": 420,
    "evidence": [
     "S20",
-    "S20t1",
-    "S20t3"
+    "T21",
+    "T24"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.57,
    "basis": ""
   },
   {
-   "line": 17,
+   "line": 20,
    "part": "MCCB-250-4P-N",
    "description": "Moulded-case circuit breaker 250 A 4-pole, 36 kA band N, adjustable trip; feeds datalhall",
    "qty": 1,
@@ -269,15 +306,15 @@
    "total_gbp": 634.4,
    "evidence": [
     "S21",
-    "S21t1",
-    "S21t2"
+    "T22",
+    "T25"
    ],
    "rule": "R-MCCB-SELECT",
    "conf": 0.58,
-   "basis": "rating 230 A; poles 4; kA 36"
+   "basis": "rating 250 A; poles 4; kA 36"
   },
   {
-   "line": 18,
+   "line": 21,
    "part": "FU-KIT-MCCB",
    "description": "Outgoing functional unit: compartment door, terminals, labels",
    "qty": 1,
@@ -285,15 +322,15 @@
    "total_gbp": 420,
    "evidence": [
     "S21",
-    "S21t1",
-    "S21t2"
+    "T22",
+    "T25"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.58,
    "basis": ""
   },
   {
-   "line": 19,
+   "line": 22,
    "part": "SPD-T12",
    "description": "Surge protective device, Type 1+2, with status indication",
    "qty": 1,
@@ -301,35 +338,99 @@
    "total_gbp": 690,
    "evidence": [
     "S24",
-    "S24t3",
-    "S24t5"
+    "T38",
+    "T46"
    ],
    "rule": "R-SPD",
    "conf": 0.39,
    "basis": ""
   },
   {
-   "line": 20,
-   "part": "BUSBAR-CU-2000",
-   "description": "Copper busbar set 2000 A (4-bar), 4 sections, about 144 kg",
+   "line": 23,
+   "part": "MCCB-800-3P-N",
+   "description": "Moulded-case circuit breaker 800 A 3-pole, 36 kA band N, adjustable trip; feeds lifts",
    "qty": 1,
-   "unit_gbp": 1656.0,
-   "total_gbp": 1656.0,
+   "unit_gbp": 1900.0,
+   "total_gbp": 1900.0,
+   "evidence": [
+    "S26",
+    "T26",
+    "T33"
+   ],
+   "rule": "R-MCCB-SELECT",
+   "conf": 0.22,
+   "basis": "rating 890 A; poles 3; kA 36"
+  },
+  {
+   "line": 24,
+   "part": "FU-KIT-MCCB",
+   "description": "Outgoing functional unit: compartment door, terminals, labels",
+   "qty": 1,
+   "unit_gbp": 420,
+   "total_gbp": 420,
+   "evidence": [
+    "S26",
+    "T26",
+    "T33"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.22,
+   "basis": ""
+  },
+  {
+   "line": 25,
+   "part": "MCCB-630-4P-N",
+   "description": "Moulded-case circuit breaker 630 A 4-pole, 36 kA band N, adjustable trip; feeds MCC-2 chillers",
+   "qty": 1,
+   "unit_gbp": 1769.0,
+   "total_gbp": 1769.0,
+   "evidence": [
+    "S28",
+    "T37",
+    "T44"
+   ],
+   "rule": "R-MCCB-SELECT",
+   "conf": 0.21,
+   "basis": "rating 490 A; poles 4; kA 36"
+  },
+  {
+   "line": 26,
+   "part": "FU-KIT-MCCB",
+   "description": "Outgoing functional unit: compartment door, terminals, labels",
+   "qty": 1,
+   "unit_gbp": 420,
+   "total_gbp": 420,
+   "evidence": [
+    "S28",
+    "T37",
+    "T44"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.21,
+   "basis": ""
+  },
+  {
+   "line": 27,
+   "part": "BUSBAR-CU-2000",
+   "description": "Copper busbar set 2000 A (4-bar), 5 sections, about 180 kg",
+   "qty": 1,
+   "unit_gbp": 2070.0,
+   "total_gbp": 2070.0,
    "evidence": [
     "T18",
     "T18"
    ],
    "rule": "R-BUSBAR-SIZE",
    "conf": 0.9,
-   "basis": "2000 A busbar label; 4 sections"
+   "basis": "2000 A busbar label; 5 sections"
   },
   {
-   "line": 21,
+   "line": 28,
    "part": "ENC-SECTION",
    "description": "Enclosure section, Form 4, IP42, RAL 7035",
-   "qty": 4,
+   "qty": 5,
    "unit_gbp": 3549.0,
-   "total_gbp": 14196.0,
+   "total_gbp": 17745.0,
    "evidence": [
     "T60",
     "T60",
@@ -338,22 +439,22 @@
    ],
    "rule": "R-ENCLOSURE",
    "conf": 0.95,
-   "basis": "2 ways at 4 per section plus incomers"
+   "basis": "4 ways at 4 per section plus incomers"
   },
   {
-   "line": 22,
+   "line": 29,
    "part": "LAB-ASSY",
-   "description": "Assembly, wiring and routine verification: 240 hours",
+   "description": "Assembly, wiring and routine verification: 258 hours",
    "qty": 1,
-   "unit_gbp": 11520,
-   "total_gbp": 11520,
+   "unit_gbp": 12384,
+   "total_gbp": 12384,
    "evidence": [],
    "rule": "R-LABOUR",
    "conf": 0.9,
    "basis": ""
   },
   {
-   "line": 23,
+   "line": 30,
    "part": "DOC",
    "description": "Documentation, as-built drawings, test certificates",
    "qty": 1,
@@ -365,7 +466,7 @@
    "basis": ""
   },
   {
-   "line": 24,
+   "line": 31,
    "part": "CERT",
    "description": "Design-verification certificates per specification",
    "qty": 1,
@@ -379,7 +480,7 @@
    "basis": ""
   },
   {
-   "line": 25,
+   "line": 32,
    "part": "DEL",
    "description": "Delivery to site, crane and offload excluded",
    "qty": 1,
@@ -391,20 +492,10 @@
    "basis": ""
   }
  ],
- "subtotal_gbp": 54072.4,
- "margin_gbp": 8110.86,
- "total_gbp": 62183.26,
+ "subtotal_gbp": 71992.4,
+ "margin_gbp": 10798.86,
+ "total_gbp": 82791.26,
  "issues": [
-  {
-   "kind": "missing",
-   "what": "D6 (ACB): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S6",
-    "S6t1",
-    "S6t2"
-   ]
-  },
   {
    "kind": "missing",
    "what": "D16 (MCCB): rating not read",
@@ -435,8 +526,8 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S19",
-    "S19t1",
-    "S19t2"
+    "T20",
+    "T23"
    ]
   },
   {
@@ -445,8 +536,8 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S22",
-    "S22t2",
-    "S22t5"
+    "T29",
+    "T45"
    ]
   },
   {
@@ -455,8 +546,8 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S23",
-    "S23t3",
-    "S23t6"
+    "T35",
+    "T48"
    ]
   },
   {
@@ -465,18 +556,8 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S25",
-    "S25t1",
-    "S25t2"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D26 (MCCB): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S26",
-    "S26t1",
-    "S26t2"
+    "T28",
+    "T36"
    ]
   },
   {
@@ -485,18 +566,8 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S27",
-    "S27t2",
-    "S27t5"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D28 (MCCB): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S28",
-    "S28t3",
-    "S28t5"
+    "T27",
+    "T34"
    ]
   },
   {
@@ -505,8 +576,8 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S29",
-    "S29t5",
-    "S29t7"
+    "T39",
+    "T47"
    ]
   },
   {
@@ -515,8 +586,8 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S30",
-    "S30t4",
-    "S30t5"
+    "T40",
+    "T49"
    ]
   },
   {
@@ -533,7 +604,7 @@
   },
   {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D2, D4, D5, D6, D7, D8, D9, D11, D12, D13, D14, D15, D16, D17, D18, D19, D20, D21, D22, D23, D24, D25, D26, D27, D28, D29, D30, D31, D32, D33",
+   "what": "devices read with low confidence: D2, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15, D16, D17, D18, D19, D20, D21, D22, D23, D24, D25, D26, D27, D28, D29, D30, D31, D32, D33",
    "action": "check against the drawing",
    "evidence": [
     "D2",
@@ -543,6 +614,7 @@
     "D7",
     "D8",
     "D9",
+    "D10",
     "D11",
     "D12",
     "D13",

@@ -1,26 +1,33 @@
 line,part,description,qty,unit_gbp,total_gbp,conf,rule,evidence
-1,ACB-2000-4P-N,"Air circuit breaker 2000 A 4-pole, 36 kA band N, withdrawable, electronic trip",1,5978.0,5978.0,0.41,R-ACB-SELECT,S4 S4t1 S4t2
-2,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.41,R-FU-KIT,S4 S4t1 S4t2
-3,ACB-2000-4P-N,"Air circuit breaker 2000 A 4-pole, 36 kA band N, withdrawable, electronic trip",1,5978.0,5978.0,0.57,R-ACB-SELECT,S5 S5t3 S5t1
-4,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.57,R-FU-KIT,S5 S5t3 S5t1
-5,METER-CT 2000/5A | 3AR B 2000 A Cu 36 kA/1s,Panel meter (CT 2000/5A | 3AR B 2000 A Cu 36 kA/1s),1,260,260,0.32,R-METERING,S7 S7t1 S7t2
-6,METER-CT 1600/5A,Panel meter (CT 1600/5A),1,260,260,0.33,R-METERING,S8 S8t2
-7,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.14,R-PROTECTION,S9 S9t3 S9t1
-8,METER-CT 2000/5A | 3AR A 2000 A Cu 36 kA/1s,Panel meter (CT 2000/5A | 3AR A 2000 A Cu 36 kA/1s),1,260,260,0.61,R-METERING,S10 S10t2 S10t3
-9,CT-SET,"Current transformers 2000/5 A, set of three, class 1",1,280,280,0.13,R-METERING,S11 S11t1 S11t3
-10,CT-SET,"Current transformers 2000/5 A, set of three, class 1",1,280,280,0.34,R-METERING,S12 S12t2
-11,CT-SET,"Current transformers, set of three, class 1",1,280,280,0.43,R-METERING,S13 S13t1
-12,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.06,R-PROTECTION,S14
-13,BSS-2000-4P,"Bus-section switch 2000 A 4-pole, 36 kA",1,3600.0,3600.0,0.14,R-BUS-SECTION,S15 S15t2 S15t1
-14,FU-KIT-BS,Bus-section functional unit and interlocking,1,900,900,0.14,R-FU-KIT,S15 S15t2 S15t1
-15,MCCB-100-3P-N,"Moulded-case circuit breaker 100 A 3-pole, 36 kA band N, adjustable trip; feeds lighEing",1,310.0,310.0,0.57,R-MCCB-SELECT,S20 S20t1 S20t3
-16,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.57,R-FU-KIT,S20 S20t1 S20t3
-17,MCCB-250-4P-N,"Moulded-case circuit breaker 250 A 4-pole, 36 kA band N, adjustable trip; feeds datalhall",1,634.4,634.4,0.58,R-MCCB-SELECT,S21 S21t1 S21t2
-18,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.58,R-FU-KIT,S21 S21t1 S21t2
-19,SPD-T12,"Surge protective device, Type 1+2, with status indication",1,690,690,0.39,R-SPD,S24 S24t3 S24t5
-20,BUSBAR-CU-2000,"Copper busbar set 2000 A (4-bar), 4 sections, about 144 kg",1,1656.0,1656.0,0.9,R-BUSBAR-SIZE,T18 T18
-21,ENC-SECTION,"Enclosure section, Form 4, IP42, RAL 7035",4,3549.0,14196.0,0.95,R-ENCLOSURE,T60 T60 T62 T65
-22,LAB-ASSY,"Assembly, wiring and routine verification: 240 hours",1,11520,11520,0.9,R-LABOUR,
-23,DOC,"Documentation, as-built drawings, test certificates",1,600,600,1.0,R-DOC,
-24,CERT,Design-verification certificates per specification,1,0.0,0.0,1.0,R-SPEC-CERT,7.7
-25,DEL,"Delivery to site, crane and offload excluded",1,850,850,1.0,R-DELIVERY,
+1,ACB-2000-4P-N,"Air circuit breaker 2000 A 4-pole, 36 kA band N, withdrawable, electronic trip",1,5978.0,5978.0,0.41,R-ACB-SELECT,S4 T9 T12
+2,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.41,R-FU-KIT,S4 T9 T12
+3,ACB-2000-4P-N,"Air circuit breaker 2000 A 4-pole, 36 kA band N, withdrawable, electronic trip",1,5978.0,5978.0,0.57,R-ACB-SELECT,S5 T13 T8
+4,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.57,R-FU-KIT,S5 T13 T8
+5,ACB-1600-4P-N,"Air circuit breaker 1600 A 4-pole, 36 kA band N, withdrawable, electronic trip",1,5124.0,5124.0,0.18,R-ACB-SELECT,S6 T10
+6,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.18,R-FU-KIT,S6 T10
+7,ATS-CTRL,Automatic transfer switch controller and interlocks,1,1850,1850,0.18,R-ATS,S6 T10
+8,METER-CT 2000/5A | BUSBAR B 2000 A Cu 36 kA/1s,Panel meter (CT 2000/5A | BUSBAR B 2000 A Cu 36 kA/1s),1,260,260,0.32,R-METERING,S7 T15 T18
+9,METER-CT 1600/5A,Panel meter (CT 1600/5A),1,260,260,0.33,R-METERING,S8 T16
+10,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.14,R-PROTECTION,S9 T14 T17
+11,METER-MF,Panel meter (multifunction),1,260,260,0.3,R-METERING,S10
+12,CT-SET,"Current transformers, set of three, class 1",1,280,280,0.07,R-METERING,S11
+13,CT-SET,"Current transformers, set of three, class 1",1,280,280,0.17,R-METERING,S12
+14,CT-SET,"Current transformers, set of three, class 1",1,280,280,0.21,R-METERING,S13
+15,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.06,R-PROTECTION,S14
+16,BSS-2000-4P,"Bus-section switch 2000 A 4-pole, 36 kA",1,3600.0,3600.0,0.14,R-BUS-SECTION,S15 T19
+17,FU-KIT-BS,Bus-section functional unit and interlocking,1,900,900,0.14,R-FU-KIT,S15 T19
+18,MCCB-250-3P-N,"Moulded-case circuit breaker 250 A 3-pole, 36 kA band N, adjustable trip; feeds lighking",1,520.0,520.0,0.57,R-MCCB-SELECT,S20 T21 T24
+19,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.57,R-FU-KIT,S20 T21 T24
+20,MCCB-250-4P-N,"Moulded-case circuit breaker 250 A 4-pole, 36 kA band N, adjustable trip; feeds datalhall",1,634.4,634.4,0.58,R-MCCB-SELECT,S21 T22 T25
+21,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.58,R-FU-KIT,S21 T22 T25
+22,SPD-T12,"Surge protective device, Type 1+2, with status indication",1,690,690,0.39,R-SPD,S24 T38 T46
+23,MCCB-800-3P-N,"Moulded-case circuit breaker 800 A 3-pole, 36 kA band N, adjustable trip; feeds lifts",1,1900.0,1900.0,0.22,R-MCCB-SELECT,S26 T26 T33
+24,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.22,R-FU-KIT,S26 T26 T33
+25,MCCB-630-4P-N,"Moulded-case circuit breaker 630 A 4-pole, 36 kA band N, adjustable trip; feeds MCC-2 chillers",1,1769.0,1769.0,0.21,R-MCCB-SELECT,S28 T37 T44
+26,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.21,R-FU-KIT,S28 T37 T44
+27,BUSBAR-CU-2000,"Copper busbar set 2000 A (4-bar), 5 sections, about 180 kg",1,2070.0,2070.0,0.9,R-BUSBAR-SIZE,T18 T18
+28,ENC-SECTION,"Enclosure section, Form 4, IP42, RAL 7035",5,3549.0,17745.0,0.95,R-ENCLOSURE,T60 T60 T62 T65
+29,LAB-ASSY,"Assembly, wiring and routine verification: 258 hours",1,12384,12384,0.9,R-LABOUR,
+30,DOC,"Documentation, as-built drawings, test certificates",1,600,600,1.0,R-DOC,
+31,CERT,Design-verification certificates per specification,1,0.0,0.0,1.0,R-SPEC-CERT,7.7
+32,DEL,"Delivery to site, crane and offload excluded",1,850,850,1.0,R-DELIVERY,

@@ -1,5 +1,5 @@
 line,part,description,qty,unit_gbp,total_gbp,conf,rule,evidence
-1,CT-SET,"Current transformers, set of three, class 1",1,280,280,0.11,R-METERING,S3 S3t1
+1,CT-SET,"Current transformers, set of three, class 1",1,280,280,0.06,R-METERING,S3
 2,BUSBAR-CU-1600,"Copper busbar set 1600 A (4-bar), 1 sections, about 29 kg",1,331.2,331.2,0.9,R-BUSBAR-SIZE,
 3,ENC-SECTION,"Enclosure section, Form 4 Type 6, IP31, RAL 7035",1,3380.0,3380.0,0.95,R-ENCLOSURE,
 4,LAB-ASSY,"Assembly, wiring and routine verification: 80 hours",1,3840,3840,0.9,R-LABOUR,

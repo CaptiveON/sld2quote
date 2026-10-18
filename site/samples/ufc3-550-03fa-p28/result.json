@@ -22,22 +22,22 @@
    "key": "text",
    "title": "Read the words",
    "count": 19,
-   "seconds": 15.43,
-   "plain": "Read 19 pieces of text in 15.43 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 3.51,
+   "plain": "Read 19 pieces of text in 3.51 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
    "count": 30,
-   "seconds": 4.39,
-   "plain": "Found 30 symbols in 4.39 s: 8 outgoing moulded-case breakers, 6 fuse switches, 6 current transformers, 3 motor starters, 2 incoming air circuit breakers, 2 transformers, 1 power-factor correction bank, 1 motor, 1 earth. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "seconds": 2.52,
+   "plain": "Found 30 symbols in 2.52 s: 8 outgoing moulded-case breakers, 6 fuse switches, 6 current transformers, 3 motor starters, 2 incoming air circuit breakers, 2 transformers, 1 power-factor correction bank, 1 motor, 1 earth. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
-   "count": 9,
-   "seconds": 0.11,
-   "plain": "Paired 9 of 30 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
+   "count": 5,
+   "seconds": 0.13,
+   "plain": "Paired 5 of 30 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
    "key": "spec",
@@ -171,15 +171,15 @@
    "unit": "A",
    "poles": null,
    "kA": null,
-   "dest": "0",
-   "conf": 0.16,
+   "dest": "",
+   "conf": 0.08,
    "box": [
     786,
     129,
     22,
     56
    ],
-   "label": "0 | M"
+   "label": ""
   },
   {
    "id": "D8",
@@ -208,14 +208,14 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.15,
+   "conf": 0.07,
    "box": [
     1132,
     176,
     83,
     83
    ],
-   "label": "MMM"
+   "label": ""
   },
   {
    "id": "D10",
@@ -251,7 +251,7 @@
     33,
     31
    ],
-   "label": "WM | Transforuer"
+   "label": "Transforuer"
   },
   {
    "id": "D12",
@@ -261,15 +261,15 @@
    "unit": "A",
    "poles": null,
    "kA": null,
-   "dest": ".",
-   "conf": 0.13,
+   "dest": "",
+   "conf": 0.07,
    "box": [
     1211,
     268,
     44,
     28
    ],
-   "label": "."
+   "label": ""
   },
   {
    "id": "D13",
@@ -341,7 +341,7 @@
     20,
     19
    ],
-   "label": "is ansion easy"
+   "label": "expansion is easy"
   },
   {
    "id": "D17",
@@ -549,7 +549,7 @@
    "unit": "A",
    "poles": null,
    "kA": null,
-   "dest": "eders",
+   "dest": "Feeders",
    "conf": 0.14,
    "box": [
     879,
@@ -557,7 +557,7 @@
     22,
     38
    ],
-   "label": "eders"
+   "label": "Feeders"
   },
   {
    "id": "D29",
@@ -567,7 +567,7 @@
    "unit": "A",
    "poles": null,
    "kA": null,
-   "dest": "Feeders",
+   "dest": "ARRANGEMENT TWO",
    "conf": 0.18,
    "box": [
     766,
@@ -575,7 +575,7 @@
     21,
     35
    ],
-   "label": "Feeders | TWO"
+   "label": "ARRANGEMENT TWO"
   },
   {
    "id": "D30",
@@ -585,15 +585,15 @@
    "unit": "A",
    "poles": null,
    "kA": null,
-   "dest": "eders",
-   "conf": 0.18,
+   "dest": "",
+   "conf": 0.09,
    "box": [
     502,
     934,
     23,
     38
    ],
-   "label": "eders | ARRANGEMENT TWO"
+   "label": ""
   }
  ],
  "board": {
@@ -789,9 +789,7 @@
    "what": "D7 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S7",
-    "S7t1",
-    "S7t3"
+    "S7"
    ]
   },
   {
@@ -807,8 +805,7 @@
    "what": "D9 (CONTACTOR): kW not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S9",
-    "S9t1"
+    "S9"
    ]
   },
   {
@@ -817,8 +814,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S11",
-    "S11t4",
-    "S11t3"
+    "T1"
    ]
   },
   {
@@ -826,8 +822,7 @@
    "what": "D12 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S12",
-    "S12t1"
+    "S12"
    ]
   },
   {
@@ -892,7 +887,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S27",
-    "S27t1"
+    "T11"
    ]
   },
   {
@@ -901,7 +896,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S28",
-    "S28t1"
+    "T12"
    ]
   },
   {
@@ -910,8 +905,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S29",
-    "S29t1",
-    "S29t2"
+    "T13"
    ]
   },
   {
@@ -919,9 +913,7 @@
    "what": "D30 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S30",
-    "S30t1",
-    "S30t3"
+    "S30"
    ]
   },
   {
@@ -972,9 +964,9 @@
  "spec": null,
  "score": null,
  "timing": {
-  "total": 20.17,
-  "ocr": 15.43,
-  "detector": 4.39
+  "total": 6.44,
+  "ocr": 3.51,
+  "detector": 2.52
  },
  "reader": "trained",
  "engine": "rapidocr",

@@ -385,6 +385,20 @@ touched (every command carries `--project sld2quote-demo`). Service `sld2quote`,
 2 vCPU, 4 GiB, concurrency 1, scale to zero, max 1 instance, public URL; model fetched from the private Hugging Face model repo with the
 token in Secret Manager; the whole site under one URL; the Hugging Face static Space stays as the free fallback.
 
+**State at 00:50, 19 Oct (saved before a context compaction).** Done and committed: back end, front end (three parts, live, static and
+file modes), 34 precomputed samples (being rebuilt with RapidOCR and crops off so they match live runs), packaging 0.2.0 (README from the
+eval files, MIT, CITATION, CHANGELOG, run_demo, screenshots), crop pass engine-dependent (RapidOCR crops off: rating accuracy 0.67 to
+0.76, price error 0.32 to 0.18, half the time), MPS gradient fix, EMA. In flight: Cloud Run deploy (project sld2quote-demo) and the HF
+static fallback; RapidOCR-crops-off scorecard sections for test, unseen and baseline; the overnight chain (fonts+EMA+fix slow under
+contention, then plain+EMA+fix with patience 3, auto-resume). Drawing-level verdict on `rtdetr_r18_plain_ema` (threshold 0.07 by the
+sweep; 0.08 costs 0.002 F1 for 8 fewer blank boxes): against r18_full at 0.11, recall up on all six columns (+1.2 to +4.4), types passing
+0.95 up or level on all six (test clean 8 to 11, baseline scan 6 to 11), BoM recall up on five, price error better on three, level on two,
+worse on baseline scan (0.388 to 0.413); precision down 1 to 4 points, mostly scans; watch bus-section precision 0.593, motor 0.847,
+earth 0.779, generator recall 0.806 on unseen clean (the bus-section drop is probably the step 6 role rule). Recommendation to Adnan:
+switch the site to r18_plain_ema at 0.08 (fewer invented parts for 0.002 of F1); his decision. Pending from Adnan: that decision, the
+Cloud Run URL review, front-end review, README AI sentence [CONFIRM], CITATION name split (Muhammad / Adnan), the go-public checklist
+(model repo public or a read token in the secret, GitHub repo public, README "Live demo" URL).
+
 ## 8. Metrics (as implemented in `evaluate.py`; keep the names)
 
 symbol precision and recall (IoU >= 0.3, same type); rating accuracy, poles accuracy, kA accuracy over matched devices; notes accuracy over

@@ -1,10 +1,10 @@
 line,part,description,qty,unit_gbp,total_gbp,conf,rule,evidence
-1,METER-CT1600/5A | 3AR A 1600 ACu 36 kA/1s,Panel meter (CT1600/5A | 3AR A 1600 ACu 36 kA/1s),1,260,260,0.33,R-METERING,S2 S2t1 S2t2
-2,CT-SET,"Current transformers, set of three, class 1",1,280,280,0.4,R-METERING,S3 S3t2
-3,ACB-1600-3P-N,"Air circuit breaker 1600 A 3-pole, 36 kA band N, withdrawable, electronic trip",1,4200.0,4200.0,0.12,R-ACB-SELECT,S4 S4t5 S4t1
-4,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.12,R-FU-KIT,S4 S4t5 S4t1
-5,ACB-1600-4P-N,"Air circuit breaker 1600 A 4-pole, 36 kA band N, withdrawable, electronic trip",1,5124.0,5124.0,0.18,R-ACB-SELECT,S5 S5t1
-6,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.18,R-FU-KIT,S5 S5t1
+1,METER-CT 1600/5A | BUSBAR A 1600 ACu 36 kA/1s,Panel meter (CT 1600/5A | BUSBAR A 1600 ACu 36 kA/1s),1,260,260,0.33,R-METERING,S2 T5 T6
+2,CT-SET,"Current transformers, set of three, class 1",1,280,280,0.2,R-METERING,S3
+3,ACB-1600-3P-N,"Air circuit breaker 1600 A 3-pole, 36 kA band N, withdrawable, electronic trip",1,4200.0,4200.0,0.12,R-ACB-SELECT,S4 T9 T7
+4,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.12,R-FU-KIT,S4 T9 T7
+5,ACB-1600-4P-N,"Air circuit breaker 1600 A 4-pole, 36 kA band N, withdrawable, electronic trip",1,5124.0,5124.0,0.18,R-ACB-SELECT,S5 T8
+6,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.18,R-FU-KIT,S5 T8
 7,ACB-1600-4P-N,"Air circuit breaker 1600 A 4-pole, 36 kA band N, withdrawable, electronic trip",1,5124.0,5124.0,0.25,R-ACB-SELECT,S8 T11
 8,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.25,R-FU-KIT,S8 T11
 9,BUSBAR-CU-1600,"Copper busbar set 1600 A (4-bar), 3 sections, about 86 kg",1,993.6,993.6,0.9,R-BUSBAR-SIZE,T6 T24 T24

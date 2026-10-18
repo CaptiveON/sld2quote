@@ -186,11 +186,10 @@
    "unit_gbp": 950,
    "total_gbp": 950,
    "evidence": [
-    "S47",
-    "S47t1"
+    "S47"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.13,
+   "conf": 0.07,
    "basis": ""
   },
   {
@@ -209,18 +208,16 @@
   },
   {
    "line": 15,
-   "part": "METER-SENTIAL LOADS | -",
-   "description": "Panel meter (SENTIAL LOADS | -)",
+   "part": "METER-MF",
+   "description": "Panel meter (multifunction)",
    "qty": 1,
    "unit_gbp": 260,
    "total_gbp": 260,
    "evidence": [
-    "S57",
-    "S57t1",
-    "S57t2"
+    "S57"
    ],
    "rule": "R-METERING",
-   "conf": 0.19,
+   "conf": 0.1,
    "basis": ""
   },
   {
@@ -246,8 +243,8 @@
    "total_gbp": 950,
    "evidence": [
     "S61",
-    "S61t4",
-    "S61t5"
+    "T47",
+    "T49"
    ],
    "rule": "R-PROTECTION",
    "conf": 0.2,
@@ -262,8 +259,7 @@
    "total_gbp": 950,
    "evidence": [
     "S62",
-    "S62t3",
-    "S62t4"
+    "T45"
    ],
    "rule": "R-PROTECTION",
    "conf": 0.13,
@@ -277,12 +273,10 @@
    "unit_gbp": 950,
    "total_gbp": 950,
    "evidence": [
-    "S63",
-    "S63t3",
-    "S63t4"
+    "S63"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.11,
+   "conf": 0.06,
    "basis": ""
   },
   {
@@ -293,12 +287,10 @@
    "unit_gbp": 950,
    "total_gbp": 950,
    "evidence": [
-    "S64",
-    "S64t5",
-    "S64t6"
+    "S64"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.18,
+   "conf": 0.09,
    "basis": ""
   },
   {
@@ -310,8 +302,7 @@
    "total_gbp": 950,
    "evidence": [
     "S69",
-    "S69t4",
-    "S69t3"
+    "T52"
    ],
    "rule": "R-PROTECTION",
    "conf": 0.11,
@@ -325,12 +316,10 @@
    "unit_gbp": 950,
    "total_gbp": 950,
    "evidence": [
-    "S70",
-    "S70t4",
-    "S70t5"
+    "S70"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.24,
+   "conf": 0.12,
    "basis": ""
   },
   {
@@ -355,11 +344,10 @@
    "unit_gbp": 950,
    "total_gbp": 950,
    "evidence": [
-    "S72",
-    "S72t3"
+    "S72"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.15,
+   "conf": 0.07,
    "basis": ""
   },
   {
@@ -575,7 +563,8 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S21",
-    "S21t1"
+    "T9",
+    "T8"
    ]
   },
   {
@@ -632,9 +621,7 @@
    "what": "D36 (CAPACITOR): kVAr not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S36",
-    "S36t1",
-    "S36t3"
+    "S36"
    ]
   },
   {
@@ -731,7 +718,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S54",
-    "S54t3"
+    "T30"
    ]
   },
   {
@@ -740,8 +727,8 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S56",
-    "S56t1",
-    "S56t2"
+    "T28",
+    "T31"
    ]
   },
   {
@@ -750,8 +737,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S58",
-    "S58t2",
-    "S58t4"
+    "T29"
    ]
   },
   {
@@ -760,7 +746,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S60",
-    "S60t2"
+    "T36"
    ]
   },
   {
@@ -779,7 +765,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S68",
-    "S68t3"
+    "T55"
    ]
   },
   {
@@ -803,8 +789,7 @@
    "what": "D75 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S75",
-    "T55"
+    "S75"
    ]
   },
   {
@@ -815,7 +800,7 @@
   },
   {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15, D16, D17, D18, D19, D20, D21, D22, D23, D24, D25, D26, D27, D28, D29, D30, D31, D32, D33, D34, D35, D36, D37, D38, D39, D40, D41, D42, D43, D44, D45, D46, D47, D48, D49, D50, D51, D52, D53, D54, D55, D56, D57, D58, D59, D60, D61, D62, D63, D64, D65, D66, D68, D69, D70, D71, D72, D73, D74, D75",
+   "what": "devices read with low confidence: D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15, D16, D17, D18, D19, D20, D21, D22, D23, D24, D25, D26, D27, D28, D29, D30, D31, D32, D33, D34, D35, D36, D37, D38, D39, D40, D41, D42, D43, D44, D45, D46, D47, D48, D49, D50, D51, D52, D53, D54, D55, D56, D57, D58, D59, D60, D61, D62, D63, D64, D65, D66, D67, D68, D69, D70, D71, D72, D73, D74, D75",
    "action": "check against the drawing",
    "evidence": [
     "D1",
@@ -884,6 +869,7 @@
     "D64",
     "D65",
     "D66",
+    "D67",
     "D68",
     "D69",
     "D70",

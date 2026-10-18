@@ -22,21 +22,21 @@
    "key": "text",
    "title": "Read the words",
    "count": 53,
-   "seconds": 21.82,
-   "plain": "Read 53 pieces of text in 21.82 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 16.27,
+   "plain": "Read 53 pieces of text in 16.27 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
    "count": 17,
-   "seconds": 13.18,
-   "plain": "Found 17 symbols in 13.18 s: 5 panel meters, 3 earths, 3 protection relays, 3 power-factor correction banks, 1 generator, 1 incoming air circuit breaker, 1 current transformer. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "seconds": 18.52,
+   "plain": "Found 17 symbols in 18.52 s: 5 panel meters, 3 earths, 3 protection relays, 3 power-factor correction banks, 1 generator, 1 incoming air circuit breaker, 1 current transformer. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
    "count": 5,
-   "seconds": 0.3,
+   "seconds": 0.34,
    "plain": "Paired 5 of 17 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
@@ -71,7 +71,7 @@
     66,
     58
    ],
-   "label": "or and Circuit Breaker"
+   "label": "Generator and Circuit Breaker"
   },
   {
    "id": "D2",
@@ -89,7 +89,7 @@
     23,
     16
    ],
-   "label": "Backup ie | Breaker"
+   "label": "200 kW.480V,3 Phase Backup"
   },
   {
    "id": "D3",
@@ -107,7 +107,7 @@
     15,
     19
    ],
-   "label": "r/Battery | rgerE B"
+   "label": "Rectifier/Battery | ChargerB"
   },
   {
    "id": "D4",
@@ -251,7 +251,7 @@
     87,
     26
    ],
-   "label": "125 VDC"
+   "label": "125VDC"
   },
   {
    "id": "D12",
@@ -383,8 +383,8 @@
     "conf": 0.35,
     "evidence": [
      "S3",
-     "S3t3",
-     "S3t4"
+     "T22",
+     "T25"
     ],
     "rule": "R-PROTECTION"
    },
@@ -581,7 +581,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S11",
-    "S11t1"
+    "T30"
    ]
   },
   {
@@ -627,9 +627,9 @@
  "spec": null,
  "score": null,
  "timing": {
-  "total": 35.94,
-  "ocr": 21.82,
-  "detector": 13.18
+  "total": 35.88,
+  "ocr": 16.27,
+  "detector": 18.52
  },
  "reader": "trained",
  "engine": "rapidocr",

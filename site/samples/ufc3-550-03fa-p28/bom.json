@@ -201,9 +201,7 @@
    "what": "D7 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S7",
-    "S7t1",
-    "S7t3"
+    "S7"
    ]
   },
   {
@@ -219,8 +217,7 @@
    "what": "D9 (CONTACTOR): kW not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S9",
-    "S9t1"
+    "S9"
    ]
   },
   {
@@ -229,8 +226,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S11",
-    "S11t4",
-    "S11t3"
+    "T1"
    ]
   },
   {
@@ -238,8 +234,7 @@
    "what": "D12 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S12",
-    "S12t1"
+    "S12"
    ]
   },
   {
@@ -304,7 +299,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S27",
-    "S27t1"
+    "T11"
    ]
   },
   {
@@ -313,7 +308,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S28",
-    "S28t1"
+    "T12"
    ]
   },
   {
@@ -322,8 +317,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S29",
-    "S29t1",
-    "S29t2"
+    "T13"
    ]
   },
   {
@@ -331,9 +325,7 @@
    "what": "D30 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S30",
-    "S30t1",
-    "S30t3"
+    "S30"
    ]
   },
   {

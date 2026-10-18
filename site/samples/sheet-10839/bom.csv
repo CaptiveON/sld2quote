@@ -1,28 +1,31 @@
 line,part,description,qty,unit_gbp,total_gbp,conf,rule,evidence
-1,ACB-2500-3P-H,"Air circuit breaker 2500 A 3-pole, 65 kA band H, withdrawable, electronic trip",1,6608.0,6608.0,0.3,R-ACB-SELECT,S2 S2t1 S2t2
-2,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.3,R-FU-KIT,S2 S2t1 S2t2
-3,METER-CT2500/5A | 3AR A 2500 A Cu 65 kA/1s,Panel meter (CT2500/5A | 3AR A 2500 A Cu 65 kA/1s),1,260,260,0.49,R-METERING,S3 S3t1 S3t2
-4,CT-SET,"Current transformers 2500/5 A, set of three, class 1",1,280,280,0.16,R-METERING,S4 S4t2
-5,BSS-2500-3P,"Bus-section switch 2500 A 3-pole, 65 kA",1,4838.0,4838.0,0.73,R-BUS-SECTION,S5 S5t2
-6,FU-KIT-BS,Bus-section functional unit and interlocking,1,900,900,0.73,R-FU-KIT,S5 S5t2
-7,FSW-250-3P,Fuse-switch-disconnector 250 A 3-pole,1,430.0,430.0,0.6,R-FSW-SELECT,S6 S6t1
-8,FUSE-250,"Fuse links 250 A, one per pole",3,29,87,0.6,R-FUSE-LINKS,S6 S6t1
-9,FU-KIT-FUSE_SWITCH,"Outgoing functional unit: compartment door, terminals, labels",1,380,380,0.6,R-FU-KIT,S6 S6t1
-10,FSW-250-3P,Fuse-switch-disconnector 250 A 3-pole; feeds data hall,1,430.0,430.0,0.79,R-FSW-SELECT,S8 S8t5 S8t2
-11,FUSE-250,"Fuse links 250 A, one per pole",3,29,87,0.79,R-FUSE-LINKS,S8 S8t5 S8t2
-12,FU-KIT-FUSE_SWITCH,"Outgoing functional unit: compartment door, terminals, labels",1,380,380,0.79,R-FU-KIT,S8 S8t5 S8t2
-13,FSW-400-3P,Fuse-switch-disconnector 400 A 3-pole; feeds lighting,1,780.0,780.0,0.47,R-FSW-SELECT,S9 S9t2 S9t1
-14,FUSE-400,"Fuse links 400 A, one per pole",3,46,138,0.47,R-FUSE-LINKS,S9 S9t2 S9t1
-15,FU-KIT-FUSE_SWITCH,"Outgoing functional unit: compartment door, terminals, labels",1,380,380,0.47,R-FU-KIT,S9 S9t2 S9t1
-16,FSW-630-3P,Fuse-switch-disconnector 630 A 3-pole; feeds UPS input,1,1180.0,1180.0,0.54,R-FSW-SELECT,S11 S11t4 S11t3
-17,FUSE-630,"Fuse links 630 A, one per pole",3,72,216,0.54,R-FUSE-LINKS,S11 S11t4 S11t3
-18,FU-KIT-FUSE_SWITCH,"Outgoing functional unit: compartment door, terminals, labels",1,380,380,0.54,R-FU-KIT,S11 S11t4 S11t3
-19,FSW-800-3P,Fuse-switch-disconnector 800 A 3-pole; feeds data hall,1,1520.0,1520.0,0.56,R-FSW-SELECT,S12 S12t5 S12t4
-20,FUSE-800,"Fuse links 800 A, one per pole",3,94,282,0.56,R-FUSE-LINKS,S12 S12t5 S12t4
-21,FU-KIT-FUSE_SWITCH,"Outgoing functional unit: compartment door, terminals, labels",1,380,380,0.56,R-FU-KIT,S12 S12t5 S12t4
-22,BUSBAR-CU-2500,"Copper busbar set 2500 A (4-bar), 4 sections, about 182 kg",1,2097.6,2097.6,0.9,R-BUSBAR-SIZE,T7 T7
-23,ENC-SECTION,"Enclosure section, Form 4 Type 6, IP42, RAL 7035",4,3549.0,14196.0,0.95,R-ENCLOSURE,T24 T24 T26 T28
-24,LAB-ASSY,"Assembly, wiring and routine verification: 146 hours",1,7008,7008,0.9,R-LABOUR,
-25,DOC,"Documentation, as-built drawings, test certificates",1,600,600,1.0,R-DOC,
-26,CERT,Design-verification certificates per specification,1,0.0,0.0,1.0,R-SPEC-CERT,7.7
-27,DEL,"Delivery to site, crane and offload excluded",1,850,850,1.0,R-DELIVERY,
+1,ACB-2500-3P-H,"Air circuit breaker 2500 A 3-pole, 65 kA band H, withdrawable, electronic trip",1,6608.0,6608.0,0.3,R-ACB-SELECT,S2 T3 T4
+2,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.3,R-FU-KIT,S2 T3 T4
+3,METER-CT 2500/5A | BUSBAR A 2500 A Cu 65 kA/1s,Panel meter (CT 2500/5A | BUSBAR A 2500 A Cu 65 kA/1s),1,260,260,0.49,R-METERING,S3 T5 T6
+4,CT-SET,"Current transformers, set of three, class 1",1,280,280,0.08,R-METERING,S4
+5,BSS-2500-3P,"Bus-section switch 2500 A 3-pole, 65 kA",1,4838.0,4838.0,0.73,R-BUS-SECTION,S5 T8
+6,FU-KIT-BS,Bus-section functional unit and interlocking,1,900,900,0.73,R-FU-KIT,S5 T8
+7,FSW-250-3P,Fuse-switch-disconnector 250 A 3-pole; feeds S/D 55 kW,1,430.0,430.0,0.6,R-FSW-SELECT,S6 T12 T9
+8,FUSE-250,"Fuse links 250 A, one per pole",3,29,87,0.6,R-FUSE-LINKS,S6 T12 T9
+9,FU-KIT-FUSE_SWITCH,"Outgoing functional unit: compartment door, terminals, labels",1,380,380,0.6,R-FU-KIT,S6 T12 T9
+10,FSW-400-3P,Fuse-switch-disconnector 400 A 3-pole,1,780.0,780.0,0.44,R-FSW-SELECT,S7 T14 T10
+11,FUSE-400,"Fuse links 400 A, one per pole",3,46,138,0.44,R-FUSE-LINKS,S7 T14 T10
+12,FU-KIT-FUSE_SWITCH,"Outgoing functional unit: compartment door, terminals, labels",1,380,380,0.44,R-FU-KIT,S7 T14 T10
+13,FSW-250-3P,Fuse-switch-disconnector 250 A 3-pole; feeds data hall,1,430.0,430.0,0.79,R-FSW-SELECT,S8 T17 T13
+14,FUSE-250,"Fuse links 250 A, one per pole",3,29,87,0.79,R-FUSE-LINKS,S8 T17 T13
+15,FU-KIT-FUSE_SWITCH,"Outgoing functional unit: compartment door, terminals, labels",1,380,380,0.79,R-FU-KIT,S8 T17 T13
+16,FSW-400-3P,Fuse-switch-disconnector 400 A 3-pole; feeds lighting,1,780.0,780.0,0.47,R-FSW-SELECT,S9 T15 T11
+17,FUSE-400,"Fuse links 400 A, one per pole",3,46,138,0.47,R-FUSE-LINKS,S9 T15 T11
+18,FU-KIT-FUSE_SWITCH,"Outgoing functional unit: compartment door, terminals, labels",1,380,380,0.47,R-FU-KIT,S9 T15 T11
+19,FSW-630-3P,Fuse-switch-disconnector 630 A 3-pole; feeds UPS input,1,1180.0,1180.0,0.54,R-FSW-SELECT,S11 T20 T18
+20,FUSE-630,"Fuse links 630 A, one per pole",3,72,216,0.54,R-FUSE-LINKS,S11 T20 T18
+21,FU-KIT-FUSE_SWITCH,"Outgoing functional unit: compartment door, terminals, labels",1,380,380,0.54,R-FU-KIT,S11 T20 T18
+22,FSW-800-3P,Fuse-switch-disconnector 800 A 3-pole; feeds data hall,1,1520.0,1520.0,0.56,R-FSW-SELECT,S12 T21 T19
+23,FUSE-800,"Fuse links 800 A, one per pole",3,94,282,0.56,R-FUSE-LINKS,S12 T21 T19
+24,FU-KIT-FUSE_SWITCH,"Outgoing functional unit: compartment door, terminals, labels",1,380,380,0.56,R-FU-KIT,S12 T21 T19
+25,BUSBAR-CU-2500,"Copper busbar set 2500 A (4-bar), 4 sections, about 182 kg",1,2097.6,2097.6,0.9,R-BUSBAR-SIZE,T7 T7
+26,ENC-SECTION,"Enclosure section, Form 4 Type 6, IP42, RAL 7035",4,3549.0,14196.0,0.95,R-ENCLOSURE,T24 T24 T26 T28
+27,LAB-ASSY,"Assembly, wiring and routine verification: 146 hours",1,7008,7008,0.9,R-LABOUR,
+28,DOC,"Documentation, as-built drawings, test certificates",1,600,600,1.0,R-DOC,
+29,CERT,Design-verification certificates per specification,1,0.0,0.0,1.0,R-SPEC-CERT,7.7
+30,DEL,"Delivery to site, crane and offload excluded",1,850,850,1.0,R-DELIVERY,

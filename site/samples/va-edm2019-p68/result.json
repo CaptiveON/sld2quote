@@ -22,22 +22,22 @@
    "key": "text",
    "title": "Read the words",
    "count": 87,
-   "seconds": 49.61,
-   "plain": "Read 87 pieces of text in 49.61 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 17.0,
+   "plain": "Read 87 pieces of text in 17.0 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
    "count": 62,
-   "seconds": 19.37,
-   "plain": "Found 62 symbols in 19.37 s: 16 outgoing moulded-case breakers, 12 protection relays, 11 power-factor correction banks, 6 motor starters, 4 panel meters, 4 downstream boards, 4 fuse switches, 3 motors, 1 earth, 1 transformer. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "seconds": 23.67,
+   "plain": "Found 62 symbols in 23.67 s: 16 outgoing moulded-case breakers, 12 protection relays, 11 power-factor correction banks, 6 motor starters, 4 panel meters, 4 downstream boards, 4 fuse switches, 3 motors, 1 earth, 1 transformer. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
-   "count": 28,
-   "seconds": 0.35,
-   "plain": "Paired 28 of 62 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
+   "count": 17,
+   "seconds": 0.42,
+   "plain": "Paired 17 of 62 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
    "key": "spec",
@@ -136,14 +136,14 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.2,
+   "conf": 0.1,
    "box": [
     1577,
     262,
     37,
     31
    ],
-   "label": "4"
+   "label": ""
   },
   {
    "id": "D6",
@@ -280,14 +280,14 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.13,
+   "conf": 0.07,
    "box": [
     1799,
     466,
     32,
     38
    ],
-   "label": "11"
+   "label": ""
   },
   {
    "id": "D14",
@@ -341,7 +341,7 @@
     36,
     96
    ],
-   "label": "B | NO"
+   "label": "NO"
   },
   {
    "id": "D17",
@@ -352,14 +352,14 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.12,
+   "conf": 0.06,
    "box": [
     2414,
     512,
     30,
     84
    ],
-   "label": "OR MULTIPLE MISS | RGY CENTER"
+   "label": ""
   },
   {
    "id": "D18",
@@ -549,15 +549,15 @@
    "unit": "A",
    "poles": null,
    "kA": null,
-   "dest": ">",
-   "conf": 0.37,
+   "dest": "",
+   "conf": 0.18,
    "box": [
     572,
     863,
     22,
     18
    ],
-   "label": ">"
+   "label": ""
   },
   {
    "id": "D29",
@@ -586,14 +586,14 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.18,
+   "conf": 0.09,
    "box": [
     2543,
     919,
     20,
     42
    ],
-   "label": "SCALEN"
+   "label": ""
   },
   {
    "id": "D31",
@@ -604,14 +604,14 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.17,
+   "conf": 0.09,
    "box": [
     2543,
     941,
     20,
     19
    ],
-   "label": "SCALE"
+   "label": ""
   },
   {
    "id": "D32",
@@ -693,15 +693,15 @@
    "unit": "A",
    "poles": null,
    "kA": null,
-   "dest": "19",
-   "conf": 0.22,
+   "dest": "",
+   "conf": 0.11,
    "box": [
     2062,
     947,
     37,
     31
    ],
-   "label": "19"
+   "label": ""
   },
   {
    "id": "D37",
@@ -827,7 +827,7 @@
     21,
     14
    ],
-   "label": "LOADS"
+   "label": "E"
   },
   {
    "id": "D44",
@@ -909,7 +909,7 @@
    "unit": "A",
    "poles": null,
    "kA": null,
-   "dest": "NDRMAL POWER",
+   "dest": "NDRMAL PDWER",
    "conf": 0.22,
    "box": [
     804,
@@ -917,7 +917,7 @@
     42,
     23
    ],
-   "label": "NDRMAL POWER"
+   "label": "NDRMAL PDWER"
   },
   {
    "id": "D49",
@@ -935,7 +935,7 @@
     38,
     33
    ],
-   "label": "HEDIUM VOLTAGE INCOMING SERV | PREIERABLY FROM SEPARATE SU"
+   "label": "MEDIUM VOLTAGE INCIMING SERVICE. 15KV OR GRFATER | PREFERABLY FROM SEPARATE SUBSTATICNS AND 1O0 FT APART."
   },
   {
    "id": "D50",
@@ -953,7 +953,7 @@
     32,
     19
    ],
-   "label": "E DISTRIBUTIDH T+ CNE"
+   "label": "ENGINE-GENERATDRS. PAROLLEUNG SWITCHGEAR, AND SITE DISIRIBUTIDH T+ CNE"
   },
   {
    "id": "D51",
@@ -971,7 +971,7 @@
     13,
     17
    ],
-   "label": "PATIENT-CARE BUILDING, | 2. TOPOLOY FOR NN-PATIENT C CARE"
+   "label": "2. | 3."
   },
   {
    "id": "D52",
@@ -981,7 +981,7 @@
    "unit": "A",
    "poles": null,
    "kA": null,
-   "dest": "EC",
+   "dest": "SEPARATE ROOM OR Zx NEC",
    "conf": 0.12,
    "box": [
     1169,
@@ -989,7 +989,7 @@
     22,
     44
    ],
-   "label": "EC"
+   "label": "SEPARATE ROOM OR Zx NEC"
   },
   {
    "id": "D53",
@@ -1007,7 +1007,7 @@
     26,
     20
    ],
-   "label": "IDRS. | NATTS PER GRCSS BUILDING SCUARE FOOT"
+   "label": "OF 1D WATTS PER GRCSS BUILDING SCUARE FODT IS | SUGGESTED FOR PRFLIMINARY SIZING THE CAPACITY OF THE"
   },
   {
    "id": "D54",
@@ -1025,7 +1025,7 @@
     12,
     19
    ],
-   "label": "LIMINARY SIZING THE CAPACITY OF THE | FOR MISSION CRITICAL BUILDINGS. FOR"
+   "label": "DUAL FEEDERS ARE FCR MISSION CRITICAL BUILDINGS.FOR"
   },
   {
    "id": "D55",
@@ -1071,7 +1071,7 @@
    "unit": "A",
    "poles": null,
    "kA": null,
-   "dest": "RENCENLY.",
+   "dest": "IS FCR REFERENCE +NLY.",
    "conf": 0.19,
    "box": [
     1748,
@@ -1079,7 +1079,7 @@
     23,
     19
    ],
-   "label": "RENCENLY. | CTRICAL POWER DISTRIBUTION AND RELATED"
+   "label": "IS FCR REFERENCE +NLY. | NCRMAL TO ESSENTIAL TRANSFER TIME PER NATIQNAL ELECTRIC OIOE"
   },
   {
    "id": "D58",
@@ -1089,15 +1089,15 @@
    "unit": "A",
    "poles": null,
    "kA": null,
-   "dest": "IS FOR REFERENCE +NLY.",
-   "conf": 0.3,
+   "dest": "",
+   "conf": 0.15,
    "box": [
     1582,
     1555,
     32,
     18
    ],
-   "label": "IS FOR REFERENCE +NLY. | 4. NCRMAL TO ESSENTIAL TRANSFER TIME"
+   "label": ""
   },
   {
    "id": "D59",
@@ -1108,14 +1108,14 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.17,
+   "conf": 0.09,
    "box": [
     1659,
     1579,
     11,
     18
    ],
-   "label": "FCR REFERENCE NLY. | RMAL TO ESSENTIAL TRANSFER TIME PER"
+   "label": ""
   },
   {
    "id": "D60",
@@ -1126,14 +1126,14 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.14,
+   "conf": 0.07,
    "box": [
     1809,
     1579,
     25,
     17
    ],
-   "label": "NLY. | ITIAL TRANSFER TIME PER NATIQNAL ELECTR"
+   "label": ""
   },
   {
    "id": "D61",
@@ -1161,15 +1161,15 @@
    "unit": "A",
    "poles": null,
    "kA": null,
-   "dest": "NCRMAL TO ESSENTIAL TRANSFE 4.",
-   "conf": 0.15,
+   "dest": "",
+   "conf": 0.07,
    "box": [
     1535,
     1629,
     15,
     20
    ],
-   "label": "NCRMAL TO ESSENTIAL TRANSFE 4."
+   "label": ""
   }
  ],
  "board": {
@@ -1243,11 +1243,9 @@
     "qty": 1,
     "unit_gbp": 950,
     "total_gbp": 950,
-    "conf": 0.12,
+    "conf": 0.06,
     "evidence": [
-     "S17",
-     "S17t1",
-     "S17t3"
+     "S17"
     ],
     "rule": "R-PROTECTION"
    },
@@ -1274,7 +1272,7 @@
     "conf": 0.7,
     "evidence": [
      "S25",
-     "S25t2"
+     "T27"
     ],
     "rule": "R-METERING"
    },
@@ -1288,7 +1286,7 @@
     "conf": 0.12,
     "evidence": [
      "S29",
-     "S29t2"
+     "T36"
     ],
     "rule": "R-PROTECTION"
    },
@@ -1299,10 +1297,9 @@
     "qty": 1,
     "unit_gbp": 950,
     "total_gbp": 950,
-    "conf": 0.18,
+    "conf": 0.09,
     "evidence": [
-     "S30",
-     "S30t1"
+     "S30"
     ],
     "rule": "R-PROTECTION"
    },
@@ -1313,10 +1310,9 @@
     "qty": 1,
     "unit_gbp": 950,
     "total_gbp": 950,
-    "conf": 0.17,
+    "conf": 0.09,
     "evidence": [
-     "S31",
-     "S31t1"
+     "S31"
     ],
     "rule": "R-PROTECTION"
    },
@@ -1330,7 +1326,7 @@
     "conf": 0.18,
     "evidence": [
      "S50",
-     "S50t3"
+     "T66"
     ],
     "rule": "R-PROTECTION"
    },
@@ -1344,8 +1340,8 @@
     "conf": 0.16,
     "evidence": [
      "S51",
-     "S51t3",
-     "S51t4"
+     "T71",
+     "T76"
     ],
     "rule": "R-PROTECTION"
    },
@@ -1359,8 +1355,8 @@
     "conf": 0.26,
     "evidence": [
      "S53",
-     "S53t5",
-     "S53t3"
+     "T70",
+     "T73"
     ],
     "rule": "R-PROTECTION"
    },
@@ -1374,8 +1370,7 @@
     "conf": 0.15,
     "evidence": [
      "S54",
-     "S54t3",
-     "S54t4"
+     "T81"
     ],
     "rule": "R-PROTECTION"
    },
@@ -1386,11 +1381,9 @@
     "qty": 1,
     "unit_gbp": 950,
     "total_gbp": 950,
-    "conf": 0.17,
+    "conf": 0.09,
     "evidence": [
-     "S59",
-     "S59t3",
-     "S59t4"
+     "S59"
     ],
     "rule": "R-PROTECTION"
    },
@@ -1401,11 +1394,9 @@
     "qty": 1,
     "unit_gbp": 950,
     "total_gbp": 950,
-    "conf": 0.14,
+    "conf": 0.07,
     "evidence": [
-     "S60",
-     "S60t3",
-     "S60t4"
+     "S60"
     ],
     "rule": "R-PROTECTION"
    },
@@ -1530,7 +1521,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S12",
-    "S12t3"
+    "T14"
    ]
   },
   {
@@ -1538,8 +1529,7 @@
    "what": "D13 (CONTACTOR): kW not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S13",
-    "S13t3"
+    "S13"
    ]
   },
   {
@@ -1548,7 +1538,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S14",
-    "S14t2"
+    "T21"
    ]
   },
   {
@@ -1628,8 +1618,7 @@
    "what": "D28 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S28",
-    "S28t4"
+    "S28"
    ]
   },
   {
@@ -1654,8 +1643,8 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S34",
-    "S34t2",
-    "S34t3"
+    "T37",
+    "T38"
    ]
   },
   {
@@ -1663,8 +1652,7 @@
    "what": "D36 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S36",
-    "T36"
+    "S36"
    ]
   },
   {
@@ -1713,7 +1701,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S43",
-    "S43t2"
+    "T44"
    ]
   },
   {
@@ -1738,7 +1726,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S48",
-    "S48t2"
+    "T58"
    ]
   },
   {
@@ -1747,7 +1735,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S52",
-    "S52t1"
+    "T65"
    ]
   },
   {
@@ -1756,8 +1744,8 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S57",
-    "S57t4",
-    "S57t3"
+    "T85",
+    "T87"
    ]
   },
   {
@@ -1765,9 +1753,7 @@
    "what": "D58 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S58",
-    "S58t4",
-    "S58t5"
+    "S58"
    ]
   },
   {
@@ -1783,8 +1769,7 @@
    "what": "D62 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S62",
-    "S62t2"
+    "S62"
    ]
   },
   {
@@ -1866,9 +1851,9 @@
  "spec": null,
  "score": null,
  "timing": {
-  "total": 70.03,
-  "ocr": 49.61,
-  "detector": 19.37
+  "total": 41.93,
+  "ocr": 17.0,
+  "detector": 23.67
  },
  "reader": "trained",
  "engine": "rapidocr",

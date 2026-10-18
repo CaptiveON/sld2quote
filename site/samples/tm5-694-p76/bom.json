@@ -18,8 +18,8 @@
    "total_gbp": 950,
    "evidence": [
     "S3",
-    "S3t3",
-    "S3t4"
+    "T22",
+    "T25"
    ],
    "rule": "R-PROTECTION",
    "conf": 0.35,
@@ -230,7 +230,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S11",
-    "S11t1"
+    "T30"
    ]
   },
   {

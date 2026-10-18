@@ -22,22 +22,22 @@
    "key": "text",
    "title": "Read the words",
    "count": 10,
-   "seconds": 10.45,
-   "plain": "Read 10 pieces of text in 10.45 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 2.79,
+   "plain": "Read 10 pieces of text in 2.79 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
    "count": 24,
-   "seconds": 1.8,
-   "plain": "Found 24 symbols in 1.8 s: 18 fuse switches, 2 current transformers, 2 outgoing moulded-case breakers, 1 power-factor correction bank, 1 protection relay. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "seconds": 3.39,
+   "plain": "Found 24 symbols in 3.39 s: 18 fuse switches, 2 current transformers, 2 outgoing moulded-case breakers, 1 power-factor correction bank, 1 protection relay. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
-   "count": 10,
-   "seconds": 0.1,
-   "plain": "Paired 10 of 24 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
+   "count": 3,
+   "seconds": 0.14,
+   "plain": "Paired 3 of 24 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
    "key": "spec",
@@ -81,15 +81,15 @@
    "unit": "A",
    "poles": null,
    "kA": null,
-   "dest": "--CIRCUIT BREAKER",
-   "conf": 0.17,
+   "dest": "",
+   "conf": 0.09,
    "box": [
     688,
     111,
     13,
     25
    ],
-   "label": "--CIRCUIT BREAKER"
+   "label": ""
   },
   {
    "id": "D3",
@@ -135,15 +135,15 @@
    "unit": "A",
    "poles": null,
    "kA": null,
-   "dest": "8",
-   "conf": 0.32,
+   "dest": "",
+   "conf": 0.16,
    "box": [
     405,
     287,
     22,
     36
    ],
-   "label": "8"
+   "label": ""
   },
   {
    "id": "D6",
@@ -297,15 +297,15 @@
    "unit": "A",
    "poles": null,
    "kA": null,
-   "dest": "T",
-   "conf": 0.16,
+   "dest": "",
+   "conf": 0.08,
    "box": [
     415,
     518,
     24,
     29
    ],
-   "label": "T"
+   "label": ""
   },
   {
    "id": "D15",
@@ -315,15 +315,15 @@
    "unit": "A",
    "poles": null,
    "kA": null,
-   "dest": "J",
-   "conf": 0.22,
+   "dest": "",
+   "conf": 0.11,
    "box": [
     122,
     598,
     14,
     30
    ],
-   "label": "J"
+   "label": ""
   },
   {
    "id": "D16",
@@ -333,7 +333,7 @@
    "unit": "A",
    "poles": null,
    "kA": null,
-   "dest": "AD CIRCUITS",
+   "dest": "LOAD CIRCUITS",
    "conf": 0.48,
    "box": [
     286,
@@ -341,7 +341,7 @@
     12,
     28
    ],
-   "label": "AD CIRCUITS"
+   "label": "LOAD CIRCUITS"
   },
   {
    "id": "D17",
@@ -351,15 +351,15 @@
    "unit": "A",
    "poles": null,
    "kA": null,
-   "dest": "TS",
-   "conf": 0.2,
+   "dest": "",
+   "conf": 0.1,
    "box": [
     396,
     600,
     13,
     28
    ],
-   "label": "TS"
+   "label": ""
   },
   {
    "id": "D18",
@@ -387,15 +387,15 @@
    "unit": "A",
    "poles": null,
    "kA": null,
-   "dest": "TS",
-   "conf": 0.32,
+   "dest": "",
+   "conf": 0.16,
    "box": [
     1056,
     601,
     13,
     28
    ],
-   "label": "TS"
+   "label": ""
   },
   {
    "id": "D20",
@@ -441,7 +441,7 @@
    "unit": "A",
    "poles": null,
    "kA": null,
-   "dest": "AD CIRCUITS",
+   "dest": "LOAD CIRCUITS",
    "conf": 0.32,
    "box": [
     947,
@@ -449,7 +449,7 @@
     14,
     27
    ],
-   "label": "AD CIRCUITS"
+   "label": "LOAD CIRCUITS"
   },
   {
    "id": "D23",
@@ -477,15 +477,15 @@
    "unit": "A",
    "poles": null,
    "kA": null,
-   "dest": "LOAD CIRCUITS",
-   "conf": 0.24,
+   "dest": "",
+   "conf": 0.12,
    "box": [
     888,
     603,
     14,
     26
    ],
-   "label": "LOAD CIRCUITS"
+   "label": ""
   }
  ],
  "board": {
@@ -618,8 +618,7 @@
    "what": "D2 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S2",
-    "S2t1"
+    "S2"
    ]
   },
   {
@@ -635,8 +634,7 @@
    "what": "D5 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S5",
-    "S5t1"
+    "S5"
    ]
   },
   {
@@ -693,8 +691,7 @@
    "what": "D14 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S14",
-    "S14t2"
+    "S14"
    ]
   },
   {
@@ -702,8 +699,7 @@
    "what": "D15 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S15",
-    "S15t2"
+    "S15"
    ]
   },
   {
@@ -712,7 +708,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S16",
-    "S16t2"
+    "T9"
    ]
   },
   {
@@ -720,8 +716,7 @@
    "what": "D17 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S17",
-    "S17t1"
+    "S17"
    ]
   },
   {
@@ -737,8 +732,7 @@
    "what": "D19 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S19",
-    "S19t2"
+    "S19"
    ]
   },
   {
@@ -763,7 +757,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S22",
-    "S22t1"
+    "T10"
    ]
   },
   {
@@ -779,8 +773,7 @@
    "what": "D24 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S24",
-    "S24t1"
+    "S24"
    ]
   },
   {
@@ -825,9 +818,9 @@
  "spec": null,
  "score": null,
  "timing": {
-  "total": 12.48,
-  "ocr": 10.45,
-  "detector": 1.8
+  "total": 6.49,
+  "ocr": 2.79,
+  "detector": 3.39
  },
  "reader": "trained",
  "engine": "rapidocr",

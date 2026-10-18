@@ -132,7 +132,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S6",
-    "S6t1"
+    "T7"
    ]
   },
   {
@@ -141,7 +141,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S7",
-    "S7t1"
+    "T8"
    ]
   },
   {
@@ -181,8 +181,7 @@
    "what": "D12 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S12",
-    "S12t1"
+    "S12"
    ]
   },
   {
@@ -214,9 +213,7 @@
    "what": "D16 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S16",
-    "S16t1",
-    "S16t2"
+    "S16"
    ]
   },
   {

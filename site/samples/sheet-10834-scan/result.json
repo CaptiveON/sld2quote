@@ -22,22 +22,22 @@
    "key": "text",
    "title": "Read the words",
    "count": 26,
-   "seconds": 8.26,
-   "plain": "Read 26 pieces of text in 8.26 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 3.3,
+   "plain": "Read 26 pieces of text in 3.3 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
    "count": 10,
-   "seconds": 2.47,
-   "plain": "Found 10 symbols in 2.47 s: 3 incoming air circuit breakers, 2 isolators, 1 transformer, 1 panel meter, 1 current transformer, 1 motor starter, 1 motor. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "seconds": 3.07,
+   "plain": "Found 10 symbols in 3.07 s: 3 incoming air circuit breakers, 2 isolators, 1 transformer, 1 panel meter, 1 current transformer, 1 motor starter, 1 motor. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
-   "count": 9,
-   "seconds": 0.12,
-   "plain": "Paired 9 of 10 symbols with the label text beside them; 4 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
+   "count": 8,
+   "seconds": 0.16,
+   "plain": "Paired 8 of 10 symbols with the label text beside them; 4 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
    "key": "spec",
@@ -71,7 +71,7 @@
     45,
     73
    ],
-   "label": "11kV/415V | TX-1:1250 kVA"
+   "label": "11 kV/415V | TX-11250 kVA"
   },
   {
    "id": "D2",
@@ -89,7 +89,7 @@
     26,
     26
    ],
-   "label": "CT1600/5A | 3AR A 1600 ACu 36 kA/1s"
+   "label": "CT 1600/5A | BUSBAR A 1600 ACu 36 kA/1s"
   },
   {
    "id": "D3",
@@ -100,14 +100,14 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.4,
+   "conf": 0.2,
    "box": [
     210,
     282,
     21,
     22
    ],
-   "label": "BUSBAR A 1600 ACu 36 kA/1s"
+   "label": ""
   },
   {
    "id": "D4",
@@ -125,7 +125,7 @@
     25,
     24
    ],
-   "label": "M | MCCB250 A 3P"
+   "label": "S/D'45 kW | MCCB:250 A 3P"
   },
   {
    "id": "D5",
@@ -143,7 +143,7 @@
     25,
     24
    ],
-   "label": "MCCB250 A.4P"
+   "label": "MCCB 250 A.4P"
   },
   {
    "id": "D6",
@@ -161,7 +161,7 @@
     21,
     38
    ],
-   "label": "M | p-d dpnd"
+   "label": "pump p-4"
   },
   {
    "id": "D7",
@@ -249,16 +249,16 @@
   "lines": [
    {
     "line": 1,
-    "part": "METER-CT1600/5A | 3AR A 1600 ACu 36 kA/1s",
-    "description": "Panel meter (CT1600/5A | 3AR A 1600 ACu 36 kA/1s)",
+    "part": "METER-CT 1600/5A | BUSBAR A 1600 ACu 36 kA/1s",
+    "description": "Panel meter (CT 1600/5A | BUSBAR A 1600 ACu 36 kA/1s)",
     "qty": 1,
     "unit_gbp": 260,
     "total_gbp": 260,
     "conf": 0.33,
     "evidence": [
      "S2",
-     "S2t1",
-     "S2t2"
+     "T5",
+     "T6"
     ],
     "rule": "R-METERING"
    },
@@ -269,10 +269,9 @@
     "qty": 1,
     "unit_gbp": 280,
     "total_gbp": 280,
-    "conf": 0.4,
+    "conf": 0.2,
     "evidence": [
-     "S3",
-     "S3t2"
+     "S3"
     ],
     "rule": "R-METERING"
    },
@@ -286,8 +285,8 @@
     "conf": 0.12,
     "evidence": [
      "S4",
-     "S4t5",
-     "S4t1"
+     "T9",
+     "T7"
     ],
     "rule": "R-ACB-SELECT"
    },
@@ -301,8 +300,8 @@
     "conf": 0.12,
     "evidence": [
      "S4",
-     "S4t5",
-     "S4t1"
+     "T9",
+     "T7"
     ],
     "rule": "R-FU-KIT"
    },
@@ -316,7 +315,7 @@
     "conf": 0.18,
     "evidence": [
      "S5",
-     "S5t1"
+     "T8"
     ],
     "rule": "R-ACB-SELECT"
    },
@@ -330,7 +329,7 @@
     "conf": 0.18,
     "evidence": [
      "S5",
-     "S5t1"
+     "T8"
     ],
     "rule": "R-FU-KIT"
    },
@@ -451,8 +450,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S6",
-    "S6t6",
-    "S6t3"
+    "T12"
    ]
   },
   {
@@ -471,8 +469,8 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S9",
-    "S9t2",
-    "S9t1"
+    "T17",
+    "T14"
    ]
   },
   {
@@ -597,9 +595,9 @@
   "notes_accuracy": 1.0
  },
  "timing": {
-  "total": 11.09,
-  "ocr": 8.26,
-  "detector": 2.47
+  "total": 6.81,
+  "ocr": 3.3,
+  "detector": 3.07
  },
  "reader": "trained",
  "engine": "rapidocr",

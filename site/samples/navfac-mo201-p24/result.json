@@ -22,15 +22,15 @@
    "key": "text",
    "title": "Read the words",
    "count": 9,
-   "seconds": 8.39,
-   "plain": "Read 9 pieces of text in 8.39 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 1.87,
+   "plain": "Read 9 pieces of text in 1.87 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
    "count": 16,
-   "seconds": 1.25,
-   "plain": "Found 16 symbols in 1.25 s: 6 fuse switches, 4 outgoing moulded-case breakers, 3 incoming air circuit breakers, 2 motor starters, 1 power-factor correction bank. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "seconds": 2.73,
+   "plain": "Found 16 symbols in 2.73 s: 6 fuse switches, 4 outgoing moulded-case breakers, 3 incoming air circuit breakers, 2 motor starters, 1 power-factor correction bank. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
@@ -161,7 +161,7 @@
     65,
     19
    ],
-   "label": "TRANSFORMER"
+   "label": "TPP?T | -TRANSFORMER"
   },
   {
    "id": "D7",
@@ -468,7 +468,8 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S6",
-    "S6t1"
+    "T7",
+    "T4"
    ]
   },
   {
@@ -509,7 +510,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S11",
-    "S11t1"
+    "T8"
    ]
   },
   {
@@ -586,9 +587,9 @@
  "spec": null,
  "score": null,
  "timing": {
-  "total": 9.81,
-  "ocr": 8.39,
-  "detector": 1.25
+  "total": 4.81,
+  "ocr": 1.87,
+  "detector": 2.73
  },
  "reader": "trained",
  "engine": "rapidocr",

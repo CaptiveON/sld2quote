@@ -5,8 +5,8 @@
   "ip": "IP41",
   "poles_default": 3,
   "busbar_rating": 2500,
-  "sections": 1,
-  "ways": 0
+  "sections": 2,
+  "ways": 1
  },
  "lines": [
   {
@@ -18,7 +18,7 @@
    "total_gbp": 260,
    "evidence": [
     "S3",
-    "S3t1"
+    "T10"
    ],
    "rule": "R-METERING",
    "conf": 0.49,
@@ -26,15 +26,15 @@
   },
   {
    "line": 2,
-   "part": "METER-CT 2500/5A | BAR A 2500 A Cu 50 kA/1s",
-   "description": "Panel meter (CT 2500/5A | BAR A 2500 A Cu 50 kA/1s)",
+   "part": "METER-CT 2500/5A | BUSBAR A 2500 A Cu 50 kA/1s",
+   "description": "Panel meter (CT 2500/5A | BUSBAR A 2500 A Cu 50 kA/1s)",
    "qty": 1,
    "unit_gbp": 260,
    "total_gbp": 260,
    "evidence": [
     "S4",
-    "S4t2",
-    "S4t3"
+    "T9",
+    "T11"
    ],
    "rule": "R-METERING",
    "conf": 0.59,
@@ -43,17 +43,15 @@
   {
    "line": 3,
    "part": "CT-SET",
-   "description": "Current transformers 2500/5 A, set of three, class 1",
+   "description": "Current transformers, set of three, class 1",
    "qty": 1,
    "unit_gbp": 280,
    "total_gbp": 280,
    "evidence": [
-    "S5",
-    "S5t1",
-    "S5t3"
+    "S5"
    ],
    "rule": "R-METERING",
-   "conf": 0.42,
+   "conf": 0.21,
    "basis": ""
   },
   {
@@ -79,8 +77,8 @@
    "total_gbp": 4100.0,
    "evidence": [
     "S7",
-    "S7t2",
-    "S7t1"
+    "T13",
+    "T12"
    ],
    "rule": "R-BUS-SECTION",
    "conf": 0.14,
@@ -95,8 +93,8 @@
    "total_gbp": 900,
    "evidence": [
     "S7",
-    "S7t2",
-    "S7t1"
+    "T13",
+    "T12"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.14,
@@ -111,8 +109,8 @@
    "total_gbp": 690,
    "evidence": [
     "S9",
-    "S9t1",
-    "S9t2"
+    "T20",
+    "T21"
    ],
    "rule": "R-SPD",
    "conf": 0.13,
@@ -120,26 +118,58 @@
   },
   {
    "line": 8,
-   "part": "BUSBAR-CU-2500",
-   "description": "Copper busbar set 2500 A (4-bar), 1 sections, about 46 kg",
+   "part": "MCCB-250-3P-N",
+   "description": "Moulded-case circuit breaker 250 A 3-pole, 50 kA band N, adjustable trip; feeds spare",
    "qty": 1,
-   "unit_gbp": 524.4,
-   "total_gbp": 524.4,
+   "unit_gbp": 520.0,
+   "total_gbp": 520.0,
+   "evidence": [
+    "S12",
+    "T16",
+    "T19"
+   ],
+   "rule": "R-MCCB-SELECT",
+   "conf": 0.35,
+   "basis": "rating 250 A; poles 3; kA 50"
+  },
+  {
+   "line": 9,
+   "part": "FU-KIT-MCCB",
+   "description": "Outgoing functional unit: compartment door, terminals, labels",
+   "qty": 1,
+   "unit_gbp": 420,
+   "total_gbp": 420,
+   "evidence": [
+    "S12",
+    "T16",
+    "T19"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.35,
+   "basis": ""
+  },
+  {
+   "line": 10,
+   "part": "BUSBAR-CU-2500",
+   "description": "Copper busbar set 2500 A (4-bar), 2 sections, about 91 kg",
+   "qty": 1,
+   "unit_gbp": 1048.8,
+   "total_gbp": 1048.8,
    "evidence": [
     "T12",
     "T12"
    ],
    "rule": "R-BUSBAR-SIZE",
    "conf": 0.9,
-   "basis": "2500 A busbar label; 1 sections"
+   "basis": "2500 A busbar label; 2 sections"
   },
   {
-   "line": 9,
+   "line": 11,
    "part": "ENC-SECTION",
    "description": "Enclosure section, Form 4 Type 7, IP41, RAL 7035",
-   "qty": 1,
+   "qty": 2,
    "unit_gbp": 3802.76,
-   "total_gbp": 3802.76,
+   "total_gbp": 7605.52,
    "evidence": [
     "T23",
     "T23",
@@ -148,22 +178,22 @@
    ],
    "rule": "R-ENCLOSURE",
    "conf": 0.95,
-   "basis": "0 ways at 4 per section plus incomers"
+   "basis": "1 ways at 4 per section plus incomers"
   },
   {
-   "line": 10,
+   "line": 12,
    "part": "LAB-ASSY",
-   "description": "Assembly, wiring and routine verification: 63 hours",
+   "description": "Assembly, wiring and routine verification: 81 hours",
    "qty": 1,
-   "unit_gbp": 3024,
-   "total_gbp": 3024,
+   "unit_gbp": 3888,
+   "total_gbp": 3888,
    "evidence": [],
    "rule": "R-LABOUR",
    "conf": 0.9,
    "basis": ""
   },
   {
-   "line": 11,
+   "line": 13,
    "part": "DOC",
    "description": "Documentation, as-built drawings, test certificates",
    "qty": 1,
@@ -175,7 +205,7 @@
    "basis": ""
   },
   {
-   "line": 12,
+   "line": 14,
    "part": "CERT",
    "description": "Design-verification certificates per specification",
    "qty": 1,
@@ -189,7 +219,7 @@
    "basis": ""
   },
   {
-   "line": 13,
+   "line": 15,
    "part": "WITNESS",
    "description": "Witness testing at works (specification)",
    "qty": 1,
@@ -203,7 +233,7 @@
    "basis": ""
   },
   {
-   "line": 14,
+   "line": 16,
    "part": "DEL",
    "description": "Delivery to site, crane and offload excluded",
    "qty": 1,
@@ -215,9 +245,9 @@
    "basis": ""
   }
  ],
- "subtotal_gbp": 16771.16,
- "margin_gbp": 2515.67,
- "total_gbp": 19286.83,
+ "subtotal_gbp": 22902.32,
+ "margin_gbp": 3435.35,
+ "total_gbp": 26337.67,
  "issues": [
   {
    "kind": "missing",
@@ -233,8 +263,8 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S10",
-    "S10t1",
-    "S10t2"
+    "T14",
+    "T17"
    ]
   },
   {
@@ -243,18 +273,8 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S11",
-    "S11t1",
-    "S11t2"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D12 (MCCB): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S12",
-    "S12t1",
-    "S12t2"
+    "T15",
+    "T18"
    ]
   },
   {

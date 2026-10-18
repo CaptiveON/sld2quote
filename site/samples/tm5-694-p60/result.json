@@ -22,22 +22,22 @@
    "key": "text",
    "title": "Read the words",
    "count": 74,
-   "seconds": 25.3,
-   "plain": "Read 74 pieces of text in 25.3 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 15.43,
+   "plain": "Read 74 pieces of text in 15.43 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
    "count": 35,
-   "seconds": 5.76,
-   "plain": "Found 35 symbols in 5.76 s: 14 protection relays, 6 incoming air circuit breakers, 4 panel meters, 3 downstream boards, 2 transformers, 2 motor starters, 1 surge protector, 1 generator, 1 fuse switch, 1 earth. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "seconds": 9.54,
+   "plain": "Found 35 symbols in 9.54 s: 14 protection relays, 6 incoming air circuit breakers, 4 panel meters, 3 downstream boards, 2 transformers, 2 motor starters, 1 surge protector, 1 generator, 1 fuse switch, 1 earth. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
-   "count": 19,
-   "seconds": 0.28,
-   "plain": "Paired 19 of 35 symbols with the label text beside them; 3 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
+   "count": 18,
+   "seconds": 0.38,
+   "plain": "Paired 18 of 35 symbols with the label text beside them; 3 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
    "key": "spec",
@@ -359,7 +359,7 @@
     42,
     16
    ],
-   "label": "3E"
+   "label": "3"
   },
   {
    "id": "D18",
@@ -377,7 +377,7 @@
     73,
     109
    ],
-   "label": "38 | on"
+   "label": "38 | Regulator"
   },
   {
    "id": "D19",
@@ -395,7 +395,7 @@
     75,
     113
    ],
-   "label": "3E | ilator"
+   "label": "3E | Regulator"
   },
   {
    "id": "D20",
@@ -413,7 +413,7 @@
     75,
     112
    ],
-   "label": "3E | lator"
+   "label": "3E | Regulator"
   },
   {
    "id": "D21",
@@ -449,7 +449,7 @@
     22,
     70
    ],
-   "label": "on"
+   "label": "pue | Metering"
   },
   {
    "id": "D23",
@@ -467,7 +467,7 @@
     18,
     12
    ],
-   "label": "lity Connection"
+   "label": "Utility Connection"
   },
   {
    "id": "D24",
@@ -604,14 +604,14 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.14,
+   "conf": 0.07,
    "box": [
     1858,
     901,
     109,
     79
    ],
-   "label": "80V 60Hz"
+   "label": ""
   },
   {
    "id": "D32",
@@ -665,7 +665,7 @@
     83,
     55
    ],
-   "label": "Solid State Trip | Long Time, Short Time"
+   "label": "Cs | Solid State Trip"
   },
   {
    "id": "D35",
@@ -774,7 +774,7 @@
     "conf": 0.17,
     "evidence": [
      "S5",
-     "S5t1"
+     "T8"
     ],
     "rule": "R-ACB-SELECT"
    },
@@ -788,7 +788,7 @@
     "conf": 0.17,
     "evidence": [
      "S5",
-     "S5t1"
+     "T8"
     ],
     "rule": "R-FU-KIT"
    },
@@ -802,7 +802,7 @@
     "conf": 0.12,
     "evidence": [
      "S6",
-     "S6t1"
+     "T9"
     ],
     "rule": "R-ACB-SELECT"
    },
@@ -816,7 +816,7 @@
     "conf": 0.12,
     "evidence": [
      "S6",
-     "S6t1"
+     "T9"
     ],
     "rule": "R-FU-KIT"
    },
@@ -830,7 +830,7 @@
     "conf": 0.16,
     "evidence": [
      "S8",
-     "S8t3"
+     "T23"
     ],
     "rule": "R-METERING"
    },
@@ -896,8 +896,8 @@
     "conf": 0.38,
     "evidence": [
      "S18",
-     "S18t1",
-     "S18t4"
+     "T27",
+     "T52"
     ],
     "rule": "R-PROTECTION"
    },
@@ -911,8 +911,8 @@
     "conf": 0.24,
     "evidence": [
      "S19",
-     "S19t1",
-     "S19t6"
+     "T29",
+     "T53"
     ],
     "rule": "R-PROTECTION"
    },
@@ -926,8 +926,8 @@
     "conf": 0.2,
     "evidence": [
      "S20",
-     "S20t1",
-     "S20t6"
+     "T30",
+     "T54"
     ],
     "rule": "R-PROTECTION"
    },
@@ -956,7 +956,8 @@
     "conf": 0.11,
     "evidence": [
      "S22",
-     "S22t4"
+     "T37",
+     "T28"
     ],
     "rule": "R-PROTECTION"
    },
@@ -1019,10 +1020,9 @@
     "qty": 1,
     "unit_gbp": 950,
     "total_gbp": 950,
-    "conf": 0.14,
+    "conf": 0.07,
     "evidence": [
-     "S31",
-     "S31t2"
+     "S31"
     ],
     "rule": "R-PROTECTION"
    },
@@ -1121,7 +1121,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S14",
-    "S14t2"
+    "T17"
    ]
   },
   {
@@ -1130,7 +1130,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S15",
-    "S15t2"
+    "T15"
    ]
   },
   {
@@ -1139,7 +1139,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S17",
-    "S17t2"
+    "T25"
    ]
   },
   {
@@ -1211,9 +1211,9 @@
  "spec": null,
  "score": null,
  "timing": {
-  "total": 31.92,
-  "ocr": 25.3,
-  "detector": 5.76
+  "total": 26.06,
+  "ocr": 15.43,
+  "detector": 9.54
  },
  "reader": "trained",
  "engine": "rapidocr",

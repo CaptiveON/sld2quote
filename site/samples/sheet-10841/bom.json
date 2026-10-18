@@ -18,12 +18,12 @@
    "total_gbp": 8732.0,
    "evidence": [
     "S2",
-    "S2t1",
-    "S2t2"
+    "T3",
+    "T4"
    ],
    "rule": "R-ACB-SELECT",
    "conf": 0.13,
-   "basis": "rating 3200 A from ['S2t1']; poles 3; kA 65"
+   "basis": "rating 3200 A from ['T3']; poles 3; kA 65"
   },
   {
    "line": 2,
@@ -34,8 +34,8 @@
    "total_gbp": 1400,
    "evidence": [
     "S2",
-    "S2t1",
-    "S2t2"
+    "T3",
+    "T4"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.13,
@@ -43,15 +43,15 @@
   },
   {
    "line": 3,
-   "part": "METER-CT 3200/5A | 3AR A 3200 A Cu 65 kA/1s",
-   "description": "Panel meter (CT 3200/5A | 3AR A 3200 A Cu 65 kA/1s)",
+   "part": "METER-CT 3200/5A | BUSBAR A 3200 A Cu 65 kA/1s",
+   "description": "Panel meter (CT 3200/5A | BUSBAR A 3200 A Cu 65 kA/1s)",
    "qty": 1,
    "unit_gbp": 260,
    "total_gbp": 260,
    "evidence": [
     "S3",
-    "S3t1",
-    "S3t2"
+    "T5",
+    "T6"
    ],
    "rule": "R-METERING",
    "conf": 0.33,
@@ -60,16 +60,15 @@
   {
    "line": 4,
    "part": "CT-SET",
-   "description": "Current transformers 3200/5 A, set of three, class 1",
+   "description": "Current transformers, set of three, class 1",
    "qty": 1,
    "unit_gbp": 280,
    "total_gbp": 280,
    "evidence": [
-    "S4",
-    "S4t2"
+    "S4"
    ],
    "rule": "R-METERING",
-   "conf": 0.29,
+   "conf": 0.14,
    "basis": ""
   },
   {
@@ -81,8 +80,8 @@
    "total_gbp": 6136.0,
    "evidence": [
     "S5",
-    "S5t2",
-    "S5t1"
+    "T8",
+    "T7"
    ],
    "rule": "R-BUS-SECTION",
    "conf": 0.34,
@@ -97,8 +96,8 @@
    "total_gbp": 900,
    "evidence": [
     "S5",
-    "S5t2",
-    "S5t1"
+    "T8",
+    "T7"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.34,
@@ -113,8 +112,8 @@
    "total_gbp": 780.0,
    "evidence": [
     "S8",
-    "S8t2",
-    "S8t1"
+    "T13",
+    "T10"
    ],
    "rule": "R-FSW-SELECT",
    "conf": 0.44,
@@ -129,8 +128,8 @@
    "total_gbp": 138,
    "evidence": [
     "S8",
-    "S8t2",
-    "S8t1"
+    "T13",
+    "T10"
    ],
    "rule": "R-FUSE-LINKS",
    "conf": 0.44,
@@ -145,8 +144,8 @@
    "total_gbp": 380,
    "evidence": [
     "S8",
-    "S8t2",
-    "S8t1"
+    "T13",
+    "T10"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.44,
@@ -161,8 +160,8 @@
    "total_gbp": 1854.4,
    "evidence": [
     "S9",
-    "S9t2",
-    "S9t1"
+    "T14",
+    "T11"
    ],
    "rule": "R-FSW-SELECT",
    "conf": 0.27,
@@ -177,8 +176,8 @@
    "total_gbp": 376,
    "evidence": [
     "S9",
-    "S9t2",
-    "S9t1"
+    "T14",
+    "T11"
    ],
    "rule": "R-FUSE-LINKS",
    "conf": 0.27,
@@ -193,8 +192,8 @@
    "total_gbp": 380,
    "evidence": [
     "S9",
-    "S9t2",
-    "S9t1"
+    "T14",
+    "T11"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.27,
@@ -209,8 +208,8 @@
    "total_gbp": 300.0,
    "evidence": [
     "S11",
-    "S11t2",
-    "S11t1"
+    "T17",
+    "T16"
    ],
    "rule": "R-FSW-SELECT",
    "conf": 0.51,
@@ -225,8 +224,8 @@
    "total_gbp": 63,
    "evidence": [
     "S11",
-    "S11t2",
-    "S11t1"
+    "T17",
+    "T16"
    ],
    "rule": "R-FUSE-LINKS",
    "conf": 0.51,
@@ -241,8 +240,8 @@
    "total_gbp": 380,
    "evidence": [
     "S11",
-    "S11t2",
-    "S11t1"
+    "T17",
+    "T16"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.51,
@@ -257,8 +256,8 @@
    "total_gbp": 1439.6,
    "evidence": [
     "S12",
-    "S12t2",
-    "S12t1"
+    "T21",
+    "T18"
    ],
    "rule": "R-FSW-SELECT",
    "conf": 0.6,
@@ -273,8 +272,8 @@
    "total_gbp": 288,
    "evidence": [
     "S12",
-    "S12t2",
-    "S12t1"
+    "T21",
+    "T18"
    ],
    "rule": "R-FUSE-LINKS",
    "conf": 0.6,
@@ -289,8 +288,8 @@
    "total_gbp": 380,
    "evidence": [
     "S12",
-    "S12t2",
-    "S12t1"
+    "T21",
+    "T18"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.6,
@@ -305,8 +304,8 @@
    "total_gbp": 1180.0,
    "evidence": [
     "S13",
-    "S13t2",
-    "S13t1"
+    "T22",
+    "T19"
    ],
    "rule": "R-FSW-SELECT",
    "conf": 0.59,
@@ -321,8 +320,8 @@
    "total_gbp": 216,
    "evidence": [
     "S13",
-    "S13t2",
-    "S13t1"
+    "T22",
+    "T19"
    ],
    "rule": "R-FUSE-LINKS",
    "conf": 0.59,
@@ -337,8 +336,8 @@
    "total_gbp": 380,
    "evidence": [
     "S13",
-    "S13t2",
-    "S13t1"
+    "T22",
+    "T19"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.59,
@@ -437,8 +436,8 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S6",
-    "S6t2",
-    "S6t4"
+    "T12",
+    "T20"
    ]
   },
   {
@@ -446,8 +445,7 @@
    "what": "D7 (CAPACITOR): kVAr not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S7",
-    "S7t2"
+    "S7"
    ]
   },
   {
@@ -456,8 +454,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S10",
-    "S10t4",
-    "S10t3"
+    "T15"
    ]
   },
   {

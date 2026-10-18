@@ -5,8 +5,8 @@
   "ip": "IP41",
   "poles_default": 4,
   "busbar_rating": 1600,
-  "sections": 5,
-  "ways": 8
+  "sections": 6,
+  "ways": 10
  },
  "lines": [
   {
@@ -18,12 +18,12 @@
    "total_gbp": 7173.6,
    "evidence": [
     "S3",
-    "S3t1",
-    "S3t2"
+    "T5",
+    "T7"
    ],
    "rule": "R-ACB-SELECT",
    "conf": 0.27,
-   "basis": "rating 1600 A from ['S3t1']; poles 4; kA 80"
+   "basis": "rating 1600 A from ['T5']; poles 4; kA 80"
   },
   {
    "line": 2,
@@ -34,8 +34,8 @@
    "total_gbp": 1400,
    "evidence": [
     "S3",
-    "S3t1",
-    "S3t2"
+    "T5",
+    "T7"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.27,
@@ -50,12 +50,12 @@
    "total_gbp": 7173.6,
    "evidence": [
     "S4",
-    "S4t1",
-    "S4t2"
+    "T6",
+    "T8"
    ],
    "rule": "R-ACB-SELECT",
    "conf": 0.35,
-   "basis": "rating 1600 A from ['S4t1']; poles 4; kA 80"
+   "basis": "rating 1600 A from ['T6']; poles 4; kA 80"
   },
   {
    "line": 4,
@@ -66,8 +66,8 @@
    "total_gbp": 1400,
    "evidence": [
     "S4",
-    "S4t1",
-    "S4t2"
+    "T6",
+    "T8"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.35,
@@ -75,15 +75,15 @@
   },
   {
    "line": 5,
-   "part": "METER-CT 1600/5A | BAR B 1600 A Cu 80 kA/1s",
-   "description": "Panel meter (CT 1600/5A | BAR B 1600 A Cu 80 kA/1s)",
+   "part": "METER-CT 1600/5A | BUSBAR B 1600 A Cu 80 kA/1s",
+   "description": "Panel meter (CT 1600/5A | BUSBAR B 1600 A Cu 80 kA/1s)",
    "qty": 1,
    "unit_gbp": 260,
    "total_gbp": 260,
    "evidence": [
     "S5",
-    "S5t2",
-    "S5t3"
+    "T10",
+    "T12"
    ],
    "rule": "R-METERING",
    "conf": 0.54,
@@ -91,15 +91,15 @@
   },
   {
    "line": 6,
-   "part": "METER-CT 1600/5A | 3AR A 1600 A Cu 80 kA/1s",
-   "description": "Panel meter (CT 1600/5A | 3AR A 1600 A Cu 80 kA/1s)",
+   "part": "METER-CT 1600/5A | BUSBAR A 1600 A Cu 80 kA/1s",
+   "description": "Panel meter (CT 1600/5A | BUSBAR A 1600 A Cu 80 kA/1s)",
    "qty": 1,
    "unit_gbp": 260,
    "total_gbp": 260,
    "evidence": [
     "S6",
-    "S6t1",
-    "S6t2"
+    "T9",
+    "T11"
    ],
    "rule": "R-METERING",
    "conf": 0.44,
@@ -108,32 +108,29 @@
   {
    "line": 7,
    "part": "CT-SET",
-   "description": "Current transformers 1600/5 A, set of three, class 1",
+   "description": "Current transformers, set of three, class 1",
    "qty": 1,
    "unit_gbp": 280,
    "total_gbp": 280,
    "evidence": [
-    "S7",
-    "S7t2"
+    "S7"
    ],
    "rule": "R-METERING",
-   "conf": 0.41,
+   "conf": 0.2,
    "basis": ""
   },
   {
    "line": 8,
    "part": "CT-SET",
-   "description": "Current transformers 1600/5 A, set of three, class 1",
+   "description": "Current transformers, set of three, class 1",
    "qty": 1,
    "unit_gbp": 280,
    "total_gbp": 280,
    "evidence": [
-    "S8",
-    "S8t1",
-    "S8t3"
+    "S8"
    ],
    "rule": "R-METERING",
-   "conf": 0.3,
+   "conf": 0.15,
    "basis": ""
   },
   {
@@ -145,7 +142,7 @@
    "total_gbp": 4340.0,
    "evidence": [
     "S10",
-    "S10t2"
+    "T13"
    ],
    "rule": "R-BUS-SECTION",
    "conf": 0.31,
@@ -160,7 +157,7 @@
    "total_gbp": 900,
    "evidence": [
     "S10",
-    "S10t2"
+    "T13"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.31,
@@ -175,8 +172,8 @@
    "total_gbp": 317.2,
    "evidence": [
     "S11",
-    "S11t3",
-    "S11t1"
+    "T18",
+    "T14"
    ],
    "rule": "R-FSW-SELECT",
    "conf": 0.42,
@@ -191,8 +188,8 @@
    "total_gbp": 64,
    "evidence": [
     "S11",
-    "S11t3",
-    "S11t1"
+    "T18",
+    "T14"
    ],
    "rule": "R-FUSE-LINKS",
    "conf": 0.42,
@@ -207,8 +204,8 @@
    "total_gbp": 380,
    "evidence": [
     "S11",
-    "S11t3",
-    "S11t1"
+    "T18",
+    "T14"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.42,
@@ -223,8 +220,8 @@
    "total_gbp": 532.0,
    "evidence": [
     "S12",
-    "S12t2",
-    "S12t1"
+    "T19",
+    "T15"
    ],
    "rule": "R-MCCB-SELECT",
    "conf": 0.3,
@@ -239,8 +236,8 @@
    "total_gbp": 420,
    "evidence": [
     "S12",
-    "S12t2",
-    "S12t1"
+    "T19",
+    "T15"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.3,
@@ -248,34 +245,34 @@
   },
   {
    "line": 16,
-   "part": "FSW-250-3P",
-   "description": "Fuse-switch-disconnector 250 A 3-pole; feeds S/D 55 kW",
+   "part": "FSW-400-3P",
+   "description": "Fuse-switch-disconnector 400 A 3-pole",
    "qty": 1,
-   "unit_gbp": 430.0,
-   "total_gbp": 430.0,
+   "unit_gbp": 780.0,
+   "total_gbp": 780.0,
    "evidence": [
-    "S14",
-    "S14t2",
-    "S14t1"
+    "S13",
+    "T20",
+    "T16"
    ],
    "rule": "R-FSW-SELECT",
-   "conf": 0.8,
-   "basis": "rating 250 A; poles 3"
+   "conf": 0.4,
+   "basis": "rating 400 A; poles 3"
   },
   {
    "line": 17,
-   "part": "FUSE-250",
-   "description": "Fuse links 250 A, one per pole",
+   "part": "FUSE-400",
+   "description": "Fuse links 400 A, one per pole",
    "qty": 3,
-   "unit_gbp": 29,
-   "total_gbp": 87,
+   "unit_gbp": 46,
+   "total_gbp": 138,
    "evidence": [
-    "S14",
-    "S14t2",
-    "S14t1"
+    "S13",
+    "T20",
+    "T16"
    ],
    "rule": "R-FUSE-LINKS",
-   "conf": 0.8,
+   "conf": 0.4,
    "basis": ""
   },
   {
@@ -286,31 +283,110 @@
    "unit_gbp": 380,
    "total_gbp": 380,
    "evidence": [
+    "S13",
+    "T20",
+    "T16"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.4,
+   "basis": ""
+  },
+  {
+   "line": 19,
+   "part": "FSW-250-3P",
+   "description": "Fuse-switch-disconnector 250 A 3-pole; feeds S/D 55 kW",
+   "qty": 1,
+   "unit_gbp": 430.0,
+   "total_gbp": 430.0,
+   "evidence": [
     "S14",
-    "S14t2",
-    "S14t1"
+    "T23",
+    "T17"
+   ],
+   "rule": "R-FSW-SELECT",
+   "conf": 0.8,
+   "basis": "rating 250 A; poles 3"
+  },
+  {
+   "line": 20,
+   "part": "FUSE-250",
+   "description": "Fuse links 250 A, one per pole",
+   "qty": 3,
+   "unit_gbp": 29,
+   "total_gbp": 87,
+   "evidence": [
+    "S14",
+    "T23",
+    "T17"
+   ],
+   "rule": "R-FUSE-LINKS",
+   "conf": 0.8,
+   "basis": ""
+  },
+  {
+   "line": 21,
+   "part": "FU-KIT-FUSE_SWITCH",
+   "description": "Outgoing functional unit: compartment door, terminals, labels",
+   "qty": 1,
+   "unit_gbp": 380,
+   "total_gbp": 380,
+   "evidence": [
+    "S14",
+    "T23",
+    "T17"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.8,
    "basis": ""
   },
   {
-   "line": 19,
+   "line": 22,
    "part": "SPD-T12",
    "description": "Surge protective device, Type 1+2, with status indication",
    "qty": 1,
    "unit_gbp": 690,
    "total_gbp": 690,
    "evidence": [
-    "S20",
-    "S20t3"
+    "S20"
    ],
    "rule": "R-SPD",
-   "conf": 0.25,
+   "conf": 0.12,
    "basis": ""
   },
   {
-   "line": 20,
+   "line": 23,
+   "part": "MCCB-630-4P-L",
+   "description": "Moulded-case circuit breaker 630 A 4-pole, 80 kA band L, adjustable trip; feeds lighting",
+   "qty": 1,
+   "unit_gbp": 2476.6,
+   "total_gbp": 2476.6,
+   "evidence": [
+    "S21",
+    "T33",
+    "T29"
+   ],
+   "rule": "R-MCCB-SELECT",
+   "conf": 0.37,
+   "basis": "rating 630 A; poles 4; kA 80"
+  },
+  {
+   "line": 24,
+   "part": "FU-KIT-MCCB",
+   "description": "Outgoing functional unit: compartment door, terminals, labels",
+   "qty": 1,
+   "unit_gbp": 420,
+   "total_gbp": 420,
+   "evidence": [
+    "S21",
+    "T33",
+    "T29"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.37,
+   "basis": ""
+  },
+  {
+   "line": 25,
    "part": "FSW-800-4P",
    "description": "Fuse-switch-disconnector 800 A 4-pole; feeds kitchen",
    "qty": 1,
@@ -318,15 +394,15 @@
    "total_gbp": 1854.4,
    "evidence": [
     "S25",
-    "S25t3",
-    "S25t2"
+    "T41",
+    "T35"
    ],
    "rule": "R-FSW-SELECT",
    "conf": 0.79,
    "basis": "rating 800 A; poles 4"
   },
   {
-   "line": 21,
+   "line": 26,
    "part": "FUSE-800",
    "description": "Fuse links 800 A, one per pole",
    "qty": 4,
@@ -334,15 +410,15 @@
    "total_gbp": 376,
    "evidence": [
     "S25",
-    "S25t3",
-    "S25t2"
+    "T41",
+    "T35"
    ],
    "rule": "R-FUSE-LINKS",
    "conf": 0.79,
    "basis": ""
   },
   {
-   "line": 22,
+   "line": 27,
    "part": "FU-KIT-FUSE_SWITCH",
    "description": "Outgoing functional unit: compartment door, terminals, labels",
    "qty": 1,
@@ -350,15 +426,15 @@
    "total_gbp": 380,
    "evidence": [
     "S25",
-    "S25t3",
-    "S25t2"
+    "T41",
+    "T35"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.79,
    "basis": ""
   },
   {
-   "line": 23,
+   "line": 28,
    "part": "FSW-100-4P",
    "description": "Fuse-switch-disconnector 100 A 4-pole; feeds spare",
    "qty": 1,
@@ -366,15 +442,15 @@
    "total_gbp": 317.2,
    "evidence": [
     "S26",
-    "S26t2",
-    "S26t1"
+    "T42",
+    "T36"
    ],
    "rule": "R-FSW-SELECT",
    "conf": 0.59,
    "basis": "rating 100 A; poles 4"
   },
   {
-   "line": 24,
+   "line": 29,
    "part": "FUSE-100",
    "description": "Fuse links 100 A, one per pole",
    "qty": 4,
@@ -382,15 +458,15 @@
    "total_gbp": 64,
    "evidence": [
     "S26",
-    "S26t2",
-    "S26t1"
+    "T42",
+    "T36"
    ],
    "rule": "R-FUSE-LINKS",
    "conf": 0.59,
    "basis": ""
   },
   {
-   "line": 25,
+   "line": 30,
    "part": "FU-KIT-FUSE_SWITCH",
    "description": "Outgoing functional unit: compartment door, terminals, labels",
    "qty": 1,
@@ -398,15 +474,15 @@
    "total_gbp": 380,
    "evidence": [
     "S26",
-    "S26t2",
-    "S26t1"
+    "T42",
+    "T36"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.59,
    "basis": ""
   },
   {
-   "line": 26,
+   "line": 31,
    "part": "FSW-400-3P",
    "description": "Fuse-switch-disconnector 400 A 3-pole; feeds MCC-7 chillers",
    "qty": 1,
@@ -414,15 +490,15 @@
    "total_gbp": 780.0,
    "evidence": [
     "S27",
-    "S27t4",
-    "S27t3"
+    "T43",
+    "T37"
    ],
    "rule": "R-FSW-SELECT",
    "conf": 0.56,
    "basis": "rating 400 A; poles 3"
   },
   {
-   "line": 27,
+   "line": 32,
    "part": "FUSE-400",
    "description": "Fuse links 400 A, one per pole",
    "qty": 3,
@@ -430,15 +506,15 @@
    "total_gbp": 138,
    "evidence": [
     "S27",
-    "S27t4",
-    "S27t3"
+    "T43",
+    "T37"
    ],
    "rule": "R-FUSE-LINKS",
    "conf": 0.56,
    "basis": ""
   },
   {
-   "line": 28,
+   "line": 33,
    "part": "FU-KIT-FUSE_SWITCH",
    "description": "Outgoing functional unit: compartment door, terminals, labels",
    "qty": 1,
@@ -446,15 +522,15 @@
    "total_gbp": 380,
    "evidence": [
     "S27",
-    "S27t4",
-    "S27t3"
+    "T43",
+    "T37"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.56,
    "basis": ""
   },
   {
-   "line": 29,
+   "line": 34,
    "part": "FSW-250-4P",
    "description": "Fuse-switch-disconnector 250 A 4-pole; feeds DB-9 theatres",
    "qty": 1,
@@ -462,15 +538,15 @@
    "total_gbp": 524.6,
    "evidence": [
     "S28",
-    "S28t4",
-    "S28t3"
+    "T45",
+    "T38"
    ],
    "rule": "R-FSW-SELECT",
    "conf": 0.25,
    "basis": "rating 250 A; poles 4"
   },
   {
-   "line": 30,
+   "line": 35,
    "part": "FUSE-250",
    "description": "Fuse links 250 A, one per pole",
    "qty": 4,
@@ -478,15 +554,15 @@
    "total_gbp": 116,
    "evidence": [
     "S28",
-    "S28t4",
-    "S28t3"
+    "T45",
+    "T38"
    ],
    "rule": "R-FUSE-LINKS",
    "conf": 0.25,
    "basis": ""
   },
   {
-   "line": 31,
+   "line": 36,
    "part": "FU-KIT-FUSE_SWITCH",
    "description": "Outgoing functional unit: compartment door, terminals, labels",
    "qty": 1,
@@ -494,15 +570,15 @@
    "total_gbp": 380,
    "evidence": [
     "S28",
-    "S28t4",
-    "S28t3"
+    "T45",
+    "T38"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.25,
    "basis": ""
   },
   {
-   "line": 32,
+   "line": 37,
    "part": "FSW-250-4P",
    "description": "Fuse-switch-disconnector 250 A 4-pole; feeds kitchen",
    "qty": 1,
@@ -510,15 +586,15 @@
    "total_gbp": 524.6,
    "evidence": [
     "S30",
-    "S30t2",
-    "S30t1"
+    "T47",
+    "T39"
    ],
    "rule": "R-FSW-SELECT",
    "conf": 0.55,
    "basis": "rating 250 A; poles 4"
   },
   {
-   "line": 33,
+   "line": 38,
    "part": "FUSE-250",
    "description": "Fuse links 250 A, one per pole",
    "qty": 4,
@@ -526,15 +602,15 @@
    "total_gbp": 116,
    "evidence": [
     "S30",
-    "S30t2",
-    "S30t1"
+    "T47",
+    "T39"
    ],
    "rule": "R-FUSE-LINKS",
    "conf": 0.55,
    "basis": ""
   },
   {
-   "line": 34,
+   "line": 39,
    "part": "FU-KIT-FUSE_SWITCH",
    "description": "Outgoing functional unit: compartment door, terminals, labels",
    "qty": 1,
@@ -542,35 +618,35 @@
    "total_gbp": 380,
    "evidence": [
     "S30",
-    "S30t2",
-    "S30t1"
+    "T47",
+    "T39"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.55,
    "basis": ""
   },
   {
-   "line": 35,
+   "line": 40,
    "part": "BUSBAR-CU-1600",
-   "description": "Copper busbar set 1600 A (4-bar), 5 sections, about 144 kg",
+   "description": "Copper busbar set 1600 A (4-bar), 6 sections, about 173 kg",
    "qty": 1,
-   "unit_gbp": 1656.0,
-   "total_gbp": 1656.0,
+   "unit_gbp": 1987.2,
+   "total_gbp": 1987.2,
    "evidence": [
     "T12",
     "T12"
    ],
    "rule": "R-BUSBAR-SIZE",
    "conf": 0.9,
-   "basis": "1600 A busbar label; 5 sections"
+   "basis": "1600 A busbar label; 6 sections"
   },
   {
-   "line": 36,
+   "line": 41,
    "part": "ENC-SECTION",
    "description": "Enclosure section, Form 4 Type 4, IP41, RAL 7035",
-   "qty": 5,
+   "qty": 6,
    "unit_gbp": 3160.04,
-   "total_gbp": 15800.2,
+   "total_gbp": 18960.24,
    "evidence": [
     "T54",
     "T54",
@@ -579,22 +655,22 @@
    ],
    "rule": "R-ENCLOSURE",
    "conf": 0.95,
-   "basis": "8 ways at 4 per section plus incomers"
+   "basis": "10 ways at 4 per section plus incomers"
   },
   {
-   "line": 37,
+   "line": 42,
    "part": "LAB-ASSY",
-   "description": "Assembly, wiring and routine verification: 243 hours",
+   "description": "Assembly, wiring and routine verification: 261 hours",
    "qty": 1,
-   "unit_gbp": 11664,
-   "total_gbp": 11664,
+   "unit_gbp": 12528,
+   "total_gbp": 12528,
    "evidence": [],
    "rule": "R-LABOUR",
    "conf": 0.9,
    "basis": ""
   },
   {
-   "line": 38,
+   "line": 43,
    "part": "DOC",
    "description": "Documentation, as-built drawings, test certificates",
    "qty": 1,
@@ -606,7 +682,7 @@
    "basis": ""
   },
   {
-   "line": 39,
+   "line": 44,
    "part": "CERT",
    "description": "Design-verification certificates per specification",
    "qty": 1,
@@ -620,7 +696,7 @@
    "basis": ""
   },
   {
-   "line": 40,
+   "line": 45,
    "part": "DEL",
    "description": "Delivery to site, crane and offload excluded",
    "qty": 1,
@@ -632,9 +708,9 @@
    "basis": ""
   }
  ],
- "subtotal_gbp": 64048.4,
- "margin_gbp": 9607.26,
- "total_gbp": 73655.66,
+ "subtotal_gbp": 72598.24,
+ "margin_gbp": 10889.74,
+ "total_gbp": 83487.98,
  "issues": [
   {
    "kind": "missing",
@@ -646,22 +722,12 @@
   },
   {
    "kind": "missing",
-   "what": "D13 (FUSE_SWITCH): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S13",
-    "S13t3",
-    "S13t2"
-   ]
-  },
-  {
-   "kind": "missing",
    "what": "D15 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
     "S15",
-    "S15t8",
-    "S15t4"
+    "T46",
+    "T27"
    ]
   },
   {
@@ -670,8 +736,8 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S16",
-    "S16t5",
-    "S16t2"
+    "T44",
+    "T26"
    ]
   },
   {
@@ -680,8 +746,8 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S17",
-    "S17t2",
-    "S17t3"
+    "T24",
+    "T30"
    ]
   },
   {
@@ -698,17 +764,8 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S19",
-    "S19t5",
-    "S19t3"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D21 (MCCB): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S21",
-    "S21t4"
+    "T28",
+    "T34"
    ]
   },
   {

@@ -18,8 +18,8 @@
    "total_gbp": 950,
    "evidence": [
     "S1",
-    "S1t3",
-    "S1t2"
+    "T5",
+    "T4"
    ],
    "rule": "R-PROTECTION",
    "conf": 0.13,
@@ -34,8 +34,8 @@
    "total_gbp": 260,
    "evidence": [
     "S2",
-    "S2t4",
-    "S2t3"
+    "T12",
+    "T8"
    ],
    "rule": "R-METERING",
    "conf": 0.23,

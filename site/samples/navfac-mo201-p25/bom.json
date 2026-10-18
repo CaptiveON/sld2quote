@@ -135,8 +135,7 @@
    "what": "D2 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S2",
-    "S2t1"
+    "S2"
    ]
   },
   {
@@ -152,8 +151,7 @@
    "what": "D5 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S5",
-    "S5t1"
+    "S5"
    ]
   },
   {
@@ -210,8 +208,7 @@
    "what": "D14 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S14",
-    "S14t2"
+    "S14"
    ]
   },
   {
@@ -219,8 +216,7 @@
    "what": "D15 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S15",
-    "S15t2"
+    "S15"
    ]
   },
   {
@@ -229,7 +225,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S16",
-    "S16t2"
+    "T9"
    ]
   },
   {
@@ -237,8 +233,7 @@
    "what": "D17 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S17",
-    "S17t1"
+    "S17"
    ]
   },
   {
@@ -254,8 +249,7 @@
    "what": "D19 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S19",
-    "S19t2"
+    "S19"
    ]
   },
   {
@@ -280,7 +274,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S22",
-    "S22t1"
+    "T10"
    ]
   },
   {
@@ -296,8 +290,7 @@
    "what": "D24 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S24",
-    "S24t1"
+    "S24"
    ]
   },
   {

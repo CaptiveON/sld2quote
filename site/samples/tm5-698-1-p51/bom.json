@@ -145,8 +145,7 @@
    "what": "D5 (ACB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S5",
-    "S5t1"
+    "S5"
    ]
   },
   {
@@ -163,7 +162,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S8",
-    "S8t1"
+    "T5"
    ]
   },
   {

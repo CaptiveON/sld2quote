@@ -22,22 +22,22 @@
    "key": "text",
    "title": "Read the words",
    "count": 27,
-   "seconds": 6.84,
-   "plain": "Read 27 pieces of text in 6.84 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 6.56,
+   "plain": "Read 27 pieces of text in 6.56 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
    "count": 14,
-   "seconds": 1.25,
-   "plain": "Found 14 symbols in 1.25 s: 7 motor starters, 3 protection relays, 2 panel meters, 2 generators. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "seconds": 2.29,
+   "plain": "Found 14 symbols in 2.29 s: 7 motor starters, 3 protection relays, 2 panel meters, 2 generators. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
-   "count": 7,
-   "seconds": 0.11,
-   "plain": "Paired 7 of 14 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
+   "count": 4,
+   "seconds": 0.32,
+   "plain": "Paired 4 of 14 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
    "key": "spec",
@@ -71,7 +71,7 @@
     13,
     16
    ],
-   "label": "TRANSFORMER Y"
+   "label": "TRANSFORMER"
   },
   {
    "id": "D2",
@@ -100,14 +100,14 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.15,
+   "conf": 0.07,
    "box": [
     120,
     149,
     60,
     71
    ],
-   "label": "TRANSFORMER"
+   "label": ""
   },
   {
    "id": "D4",
@@ -280,14 +280,14 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.16,
+   "conf": 0.08,
    "box": [
     668,
     833,
     59,
     29
    ],
-   "label": "- | -"
+   "label": ""
   },
   {
    "id": "D14",
@@ -298,14 +298,14 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.12,
+   "conf": 0.06,
    "box": [
     776,
     833,
     58,
     28
    ],
-   "label": ". | -"
+   "label": ""
   }
  ],
  "board": {
@@ -329,7 +329,7 @@
     "conf": 0.14,
     "evidence": [
      "S1",
-     "S1t3"
+     "T7"
     ],
     "rule": "R-PROTECTION"
    },
@@ -343,7 +343,7 @@
     "conf": 0.15,
     "evidence": [
      "S2",
-     "S2t2"
+     "T8"
     ],
     "rule": "R-PROTECTION"
    },
@@ -357,7 +357,7 @@
     "conf": 0.24,
     "evidence": [
      "S4",
-     "S4t2"
+     "T11"
     ],
     "rule": "R-METERING"
    },
@@ -459,8 +459,7 @@
    "what": "D3 (CONTACTOR): kW not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S3",
-    "S3t1"
+    "S3"
    ]
   },
   {
@@ -500,9 +499,7 @@
    "what": "D13 (CONTACTOR): kW not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S13",
-    "S13t2",
-    "S13t4"
+    "S13"
    ]
   },
   {
@@ -510,9 +507,7 @@
    "what": "D14 (CONTACTOR): kW not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S14",
-    "S14t1",
-    "S14t2"
+    "S14"
    ]
   },
   {
@@ -546,9 +541,9 @@
  "spec": null,
  "score": null,
  "timing": {
-  "total": 8.44,
-  "ocr": 6.84,
-  "detector": 1.25
+  "total": 9.43,
+  "ocr": 6.56,
+  "detector": 2.29
  },
  "reader": "trained",
  "engine": "rapidocr",

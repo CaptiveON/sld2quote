@@ -22,22 +22,22 @@
    "key": "text",
    "title": "Read the words",
    "count": 9,
-   "seconds": 7.59,
-   "plain": "Read 9 pieces of text in 7.59 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 2.37,
+   "plain": "Read 9 pieces of text in 2.37 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
    "count": 17,
-   "seconds": 3.43,
-   "plain": "Found 17 symbols in 3.43 s: 11 fuse switches, 3 outgoing moulded-case breakers, 1 incoming air circuit breaker, 1 protection relay, 1 motor starter. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "seconds": 2.74,
+   "plain": "Found 17 symbols in 2.74 s: 11 fuse switches, 3 outgoing moulded-case breakers, 1 incoming air circuit breaker, 1 protection relay, 1 motor starter. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
-   "count": 4,
-   "seconds": 0.11,
-   "plain": "Paired 4 of 17 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
+   "count": 2,
+   "seconds": 0.12,
+   "plain": "Paired 2 of 17 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
    "key": "spec",
@@ -261,15 +261,15 @@
    "unit": "A",
    "poles": null,
    "kA": null,
-   "dest": "1",
-   "conf": 0.28,
+   "dest": "",
+   "conf": 0.14,
    "box": [
     990,
     548,
     14,
     31
    ],
-   "label": "1"
+   "label": ""
   },
   {
    "id": "D13",
@@ -333,15 +333,15 @@
    "unit": "A",
    "poles": null,
    "kA": null,
-   "dest": "1",
-   "conf": 0.17,
+   "dest": "",
+   "conf": 0.09,
    "box": [
     1028,
     549,
     13,
     30
    ],
-   "label": "1 | )"
+   "label": ""
   },
   {
    "id": "D17",
@@ -491,7 +491,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S6",
-    "S6t1"
+    "T7"
    ]
   },
   {
@@ -500,7 +500,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S7",
-    "S7t1"
+    "T8"
    ]
   },
   {
@@ -540,8 +540,7 @@
    "what": "D12 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S12",
-    "S12t1"
+    "S12"
    ]
   },
   {
@@ -573,9 +572,7 @@
    "what": "D16 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S16",
-    "S16t1",
-    "S16t2"
+    "S16"
    ]
   },
   {
@@ -621,9 +618,9 @@
  "spec": null,
  "score": null,
  "timing": {
-  "total": 11.26,
-  "ocr": 7.59,
-  "detector": 3.43
+  "total": 5.42,
+  "ocr": 2.37,
+  "detector": 2.74
  },
  "reader": "trained",
  "engine": "rapidocr",

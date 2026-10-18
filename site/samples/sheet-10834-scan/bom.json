@@ -11,15 +11,15 @@
  "lines": [
   {
    "line": 1,
-   "part": "METER-CT1600/5A | 3AR A 1600 ACu 36 kA/1s",
-   "description": "Panel meter (CT1600/5A | 3AR A 1600 ACu 36 kA/1s)",
+   "part": "METER-CT 1600/5A | BUSBAR A 1600 ACu 36 kA/1s",
+   "description": "Panel meter (CT 1600/5A | BUSBAR A 1600 ACu 36 kA/1s)",
    "qty": 1,
    "unit_gbp": 260,
    "total_gbp": 260,
    "evidence": [
     "S2",
-    "S2t1",
-    "S2t2"
+    "T5",
+    "T6"
    ],
    "rule": "R-METERING",
    "conf": 0.33,
@@ -33,11 +33,10 @@
    "unit_gbp": 280,
    "total_gbp": 280,
    "evidence": [
-    "S3",
-    "S3t2"
+    "S3"
    ],
    "rule": "R-METERING",
-   "conf": 0.4,
+   "conf": 0.2,
    "basis": ""
   },
   {
@@ -49,12 +48,12 @@
    "total_gbp": 4200.0,
    "evidence": [
     "S4",
-    "S4t5",
-    "S4t1"
+    "T9",
+    "T7"
    ],
    "rule": "R-ACB-SELECT",
    "conf": 0.12,
-   "basis": "rating 250 A from ['S4t5']; poles 3; kA 36"
+   "basis": "rating 250 A from ['T9']; poles 3; kA 36"
   },
   {
    "line": 4,
@@ -65,8 +64,8 @@
    "total_gbp": 1400,
    "evidence": [
     "S4",
-    "S4t5",
-    "S4t1"
+    "T9",
+    "T7"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.12,
@@ -81,11 +80,11 @@
    "total_gbp": 5124.0,
    "evidence": [
     "S5",
-    "S5t1"
+    "T8"
    ],
    "rule": "R-ACB-SELECT",
    "conf": 0.18,
-   "basis": "rating 250 A from ['S5t1']; poles 4; kA 36"
+   "basis": "rating 250 A from ['T8']; poles 4; kA 36"
   },
   {
    "line": 6,
@@ -96,7 +95,7 @@
    "total_gbp": 1400,
    "evidence": [
     "S5",
-    "S5t1"
+    "T8"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.18,
@@ -226,8 +225,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S6",
-    "S6t6",
-    "S6t3"
+    "T12"
    ]
   },
   {
@@ -246,8 +244,8 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S9",
-    "S9t2",
-    "S9t1"
+    "T17",
+    "T14"
    ]
   },
   {

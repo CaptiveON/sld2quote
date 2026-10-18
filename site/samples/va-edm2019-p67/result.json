@@ -22,22 +22,22 @@
    "key": "text",
    "title": "Read the words",
    "count": 55,
-   "seconds": 44.76,
-   "plain": "Read 55 pieces of text in 44.76 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 18.59,
+   "plain": "Read 55 pieces of text in 18.59 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
    "count": 75,
-   "seconds": 14.15,
-   "plain": "Found 75 symbols in 14.15 s: 19 power-factor correction banks, 19 protection relays, 10 motor starters, 6 incoming air circuit breakers, 6 fuse switches, 4 panel meters, 4 outgoing moulded-case breakers, 3 downstream boards, 2 earths, 1 current transformer, 1 transformer. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "seconds": 22.1,
+   "plain": "Found 75 symbols in 22.1 s: 19 power-factor correction banks, 19 protection relays, 10 motor starters, 6 incoming air circuit breakers, 6 fuse switches, 4 panel meters, 4 outgoing moulded-case breakers, 3 downstream boards, 2 earths, 1 current transformer, 1 transformer. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
-   "count": 22,
-   "seconds": 0.32,
-   "plain": "Paired 22 of 75 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
+   "count": 12,
+   "seconds": 0.34,
+   "plain": "Paired 12 of 75 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
    "key": "spec",
@@ -431,7 +431,7 @@
     24,
     28
    ],
-   "label": "RATORS AT P ULTIPLE MISS"
+   "label": "SINGLE OR MULTIPLE MISSION CRITICAL BUIL | SYSTEN GENERATORS AT PATIENT CARE BUILDI"
   },
   {
    "id": "D22",
@@ -694,14 +694,14 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.16,
+   "conf": 0.08,
    "box": [
     2398,
     741,
     24,
     20
    ],
-   "label": "SYSTI | TLE"
+   "label": ""
   },
   {
    "id": "D37",
@@ -874,14 +874,14 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.24,
+   "conf": 0.12,
    "box": [
     2493,
     925,
     22,
     40
    ],
-   "label": "DATE SS"
+   "label": ""
   },
   {
    "id": "D47",
@@ -892,14 +892,14 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.13,
+   "conf": 0.07,
    "box": [
     2552,
     935,
     19,
     30
    ],
-   "label": "SCALE"
+   "label": ""
   },
   {
    "id": "D48",
@@ -1025,7 +1025,7 @@
     21,
     17
    ],
-   "label": "LOADS"
+   "label": "ESSENTIAL LOADS"
   },
   {
    "id": "D55",
@@ -1061,7 +1061,7 @@
     18,
     10
    ],
-   "label": "OTHER | BLDGS"
+   "label": "OTHER | BLDOS"
   },
   {
    "id": "D57",
@@ -1072,14 +1072,14 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.19,
+   "conf": 0.1,
    "box": [
     456,
     1240,
     16,
     19
    ],
-   "label": "SENTIAL LOADS | -"
+   "label": ""
   },
   {
    "id": "D58",
@@ -1097,7 +1097,7 @@
     52,
     19
    ],
-   "label": "CONNECTION | -"
+   "label": "CONNECTICN"
   },
   {
    "id": "D59",
@@ -1125,7 +1125,7 @@
    "unit": "A",
    "poles": null,
    "kA": null,
-   "dest": "NDRMAL POWER",
+   "dest": "NDRMAL POUER",
    "conf": 0.27,
    "box": [
     767,
@@ -1133,7 +1133,7 @@
     42,
     23
    ],
-   "label": "NDRMAL POWER"
+   "label": "NDRMAL POUER"
   },
   {
    "id": "D61",
@@ -1151,7 +1151,7 @@
     24,
     20
    ],
-   "label": "OGS IS NOT SHOWN. | THE A/E BY PROMDING A GRAPHICAL"
+   "label": "THIS CRAWING IS INTENOEO TD ASSST THE A/E BY PROMDING A GRAPHICAL | REPRESENTATION CF GENERAL CONNECTIWTY AND/CR TOPOLOGY RECUIREHENTS"
   },
   {
    "id": "D62",
@@ -1169,7 +1169,7 @@
     28,
     18
    ],
-   "label": "LOGY FOR NON-PATIENT ARE BLDGS IS NO | CRAWING IS INTENOED TD ASSST THE A/E"
+   "label": "TOPOLOGY FOR NON-PATIENT OARE BLDGS IS NOT SHOWN."
   },
   {
    "id": "D63",
@@ -1180,14 +1180,14 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.11,
+   "conf": 0.06,
    "box": [
     2087,
     1456,
     16,
     17
    ],
-   "label": "'NNOHS HON | E BY PROMDING A GRAPHICAL"
+   "label": ""
   },
   {
    "id": "D64",
@@ -1198,14 +1198,14 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.18,
+   "conf": 0.09,
    "box": [
     2173,
     1457,
     14,
     17
    ],
-   "label": "hN. | PMDING A GRAPHICAL"
+   "label": ""
   },
   {
    "id": "D65",
@@ -1252,14 +1252,14 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.83,
+   "conf": 0.41,
    "box": [
     739,
     1522,
     59,
     39
    ],
-   "label": "=0 DELAYED | AUTOHATIC SWITCHING EQUIPHEN"
+   "label": ""
   },
   {
    "id": "D68",
@@ -1277,7 +1277,7 @@
     35,
     57
    ],
-   "label": "IME PER NATICNAL ELECTRIC CODE."
+   "label": "NORHAL TO ESSENTIAL TRANSFER TIME PER NATICNAL ELECTRIC CODE."
   },
   {
    "id": "D69",
@@ -1295,7 +1295,7 @@
     20,
     19
    ],
-   "label": "ER NATICNAL ELECTRIC CODE, | AND RELATED SYSTEMS. THIS DRAYINC"
+   "label": "CF THE ELECTRICAL POWER DISTRIBUTICN AND RELATED SYSTEHS. THIS DRAYINC"
   },
   {
    "id": "D70",
@@ -1306,14 +1306,14 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.24,
+   "conf": 0.12,
    "box": [
     2290,
     1537,
     21,
     17
    ],
-   "label": "SIH DRAYING | DE."
+   "label": ""
   },
   {
    "id": "D71",
@@ -1342,14 +1342,14 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.15,
+   "conf": 0.07,
    "box": [
     2083,
     1561,
     27,
     18
    ],
-   "label": "ATICNAL ELECTRIC CODE."
+   "label": ""
   },
   {
    "id": "D73",
@@ -1395,15 +1395,15 @@
    "unit": "A",
    "poles": null,
    "kA": null,
-   "dest": "NORHAL TO ESSENTIAL TRANSFER TIME PER NATICNAL ELECTRIC CODE.",
-   "conf": 0.15,
+   "dest": "",
+   "conf": 0.07,
    "box": [
     1539,
     1611,
     19,
     21
    ],
-   "label": "NORHAL TO ESSENTIAL TRANSFER TIME PER NATICNAL ELECTRIC CODE."
+   "label": ""
   }
  ],
  "board": {
@@ -1581,10 +1581,9 @@
     "qty": 1,
     "unit_gbp": 950,
     "total_gbp": 950,
-    "conf": 0.13,
+    "conf": 0.07,
     "evidence": [
-     "S47",
-     "S47t1"
+     "S47"
     ],
     "rule": "R-PROTECTION"
    },
@@ -1603,16 +1602,14 @@
    },
    {
     "line": 15,
-    "part": "METER-SENTIAL LOADS | -",
-    "description": "Panel meter (SENTIAL LOADS | -)",
+    "part": "METER-MF",
+    "description": "Panel meter (multifunction)",
     "qty": 1,
     "unit_gbp": 260,
     "total_gbp": 260,
-    "conf": 0.19,
+    "conf": 0.1,
     "evidence": [
-     "S57",
-     "S57t1",
-     "S57t2"
+     "S57"
     ],
     "rule": "R-METERING"
    },
@@ -1639,8 +1636,8 @@
     "conf": 0.2,
     "evidence": [
      "S61",
-     "S61t4",
-     "S61t5"
+     "T47",
+     "T49"
     ],
     "rule": "R-PROTECTION"
    },
@@ -1654,8 +1651,7 @@
     "conf": 0.13,
     "evidence": [
      "S62",
-     "S62t3",
-     "S62t4"
+     "T45"
     ],
     "rule": "R-PROTECTION"
    },
@@ -1666,11 +1662,9 @@
     "qty": 1,
     "unit_gbp": 950,
     "total_gbp": 950,
-    "conf": 0.11,
+    "conf": 0.06,
     "evidence": [
-     "S63",
-     "S63t3",
-     "S63t4"
+     "S63"
     ],
     "rule": "R-PROTECTION"
    },
@@ -1681,11 +1675,9 @@
     "qty": 1,
     "unit_gbp": 950,
     "total_gbp": 950,
-    "conf": 0.18,
+    "conf": 0.09,
     "evidence": [
-     "S64",
-     "S64t5",
-     "S64t6"
+     "S64"
     ],
     "rule": "R-PROTECTION"
    },
@@ -1699,8 +1691,7 @@
     "conf": 0.11,
     "evidence": [
      "S69",
-     "S69t4",
-     "S69t3"
+     "T52"
     ],
     "rule": "R-PROTECTION"
    },
@@ -1711,11 +1702,9 @@
     "qty": 1,
     "unit_gbp": 950,
     "total_gbp": 950,
-    "conf": 0.24,
+    "conf": 0.12,
     "evidence": [
-     "S70",
-     "S70t4",
-     "S70t5"
+     "S70"
     ],
     "rule": "R-PROTECTION"
    },
@@ -1739,10 +1728,9 @@
     "qty": 1,
     "unit_gbp": 950,
     "total_gbp": 950,
-    "conf": 0.15,
+    "conf": 0.07,
     "evidence": [
-     "S72",
-     "S72t3"
+     "S72"
     ],
     "rule": "R-PROTECTION"
    },
@@ -1955,7 +1943,8 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S21",
-    "S21t1"
+    "T9",
+    "T8"
    ]
   },
   {
@@ -2012,9 +2001,7 @@
    "what": "D36 (CAPACITOR): kVAr not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S36",
-    "S36t1",
-    "S36t3"
+    "S36"
    ]
   },
   {
@@ -2111,7 +2098,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S54",
-    "S54t3"
+    "T30"
    ]
   },
   {
@@ -2120,8 +2107,8 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S56",
-    "S56t1",
-    "S56t2"
+    "T28",
+    "T31"
    ]
   },
   {
@@ -2130,8 +2117,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S58",
-    "S58t2",
-    "S58t4"
+    "T29"
    ]
   },
   {
@@ -2140,7 +2126,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S60",
-    "S60t2"
+    "T36"
    ]
   },
   {
@@ -2159,7 +2145,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S68",
-    "S68t3"
+    "T55"
    ]
   },
   {
@@ -2183,8 +2169,7 @@
    "what": "D75 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S75",
-    "T55"
+    "S75"
    ]
   },
   {
@@ -2195,7 +2180,7 @@
   },
   {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15, D16, D17, D18, D19, D20, D21, D22, D23, D24, D25, D26, D27, D28, D29, D30, D31, D32, D33, D34, D35, D36, D37, D38, D39, D40, D41, D42, D43, D44, D45, D46, D47, D48, D49, D50, D51, D52, D53, D54, D55, D56, D57, D58, D59, D60, D61, D62, D63, D64, D65, D66, D68, D69, D70, D71, D72, D73, D74, D75",
+   "what": "devices read with low confidence: D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15, D16, D17, D18, D19, D20, D21, D22, D23, D24, D25, D26, D27, D28, D29, D30, D31, D32, D33, D34, D35, D36, D37, D38, D39, D40, D41, D42, D43, D44, D45, D46, D47, D48, D49, D50, D51, D52, D53, D54, D55, D56, D57, D58, D59, D60, D61, D62, D63, D64, D65, D66, D67, D68, D69, D70, D71, D72, D73, D74, D75",
    "action": "check against the drawing",
    "evidence": [
     "D1",
@@ -2264,6 +2249,7 @@
     "D64",
     "D65",
     "D66",
+    "D67",
     "D68",
     "D69",
     "D70",
@@ -2279,9 +2265,9 @@
  "spec": null,
  "score": null,
  "timing": {
-  "total": 59.81,
-  "ocr": 44.76,
-  "detector": 14.15
+  "total": 41.72,
+  "ocr": 18.59,
+  "detector": 22.1
  },
  "reader": "trained",
  "engine": "rapidocr",

@@ -22,22 +22,22 @@
    "key": "text",
    "title": "Read the words",
    "count": 27,
-   "seconds": 6.74,
-   "plain": "Read 27 pieces of text in 6.74 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 5.35,
+   "plain": "Read 27 pieces of text in 5.35 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
    "count": 11,
-   "seconds": 1.34,
-   "plain": "Found 11 symbols in 1.34 s: 3 outgoing moulded-case breakers, 2 isolators, 1 transformer, 1 incoming air circuit breaker, 1 panel meter, 1 current transformer, 1 motor starter, 1 motor. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "seconds": 4.26,
+   "plain": "Found 11 symbols in 4.26 s: 3 outgoing moulded-case breakers, 2 isolators, 1 transformer, 1 incoming air circuit breaker, 1 panel meter, 1 current transformer, 1 motor starter, 1 motor. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
-   "count": 10,
-   "seconds": 0.1,
-   "plain": "Paired 10 of 11 symbols with the label text beside them; 7 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
+   "count": 9,
+   "seconds": 0.15,
+   "plain": "Paired 9 of 11 symbols with the label text beside them; 6 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
    "key": "spec",
@@ -107,25 +107,25 @@
     26,
     26
    ],
-   "label": "CT 1600/5A | 3AR A 1600 A Cu 36 kA/1s"
+   "label": "CT 1600/5A | BUSBAR A 1600 A Cu 36 kA/1s"
   },
   {
    "id": "D4",
    "type": "CT",
    "type_plain": "current transformer",
-   "rating": 1600,
+   "rating": null,
    "unit": "A",
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.38,
+   "conf": 0.19,
    "box": [
     209,
     285,
     22,
     20
    ],
-   "label": "BUSBAR A 1600 A Cu 36 kA/1s"
+   "label": ""
   },
   {
    "id": "D5",
@@ -179,7 +179,7 @@
     22,
     37
    ],
-   "label": "M | pump p-4"
+   "label": "pump P-4"
   },
   {
    "id": "D8",
@@ -189,7 +189,7 @@
    "unit": "A",
    "poles": 4,
    "kA": null,
-   "dest": "",
+   "dest": "sdwnd",
    "conf": 0.77,
    "box": [
     467,
@@ -197,7 +197,7 @@
     19,
     33
    ],
-   "label": "ISOL 400 A 4P"
+   "label": "sdwnd | ISOL 400 A 4P"
   },
   {
    "id": "D9",
@@ -275,8 +275,8 @@
     "conf": 0.46,
     "evidence": [
      "S2",
-     "S2t1",
-     "S2t2"
+     "T3",
+     "T4"
     ],
     "rule": "R-ACB-SELECT"
    },
@@ -290,37 +290,36 @@
     "conf": 0.46,
     "evidence": [
      "S2",
-     "S2t1",
-     "S2t2"
+     "T3",
+     "T4"
     ],
     "rule": "R-FU-KIT"
    },
    {
     "line": 3,
-    "part": "METER-CT 1600/5A | 3AR A 1600 A Cu 36 kA/1s",
-    "description": "Panel meter (CT 1600/5A | 3AR A 1600 A Cu 36 kA/1s)",
+    "part": "METER-CT 1600/5A | BUSBAR A 1600 A Cu 36 kA/1s",
+    "description": "Panel meter (CT 1600/5A | BUSBAR A 1600 A Cu 36 kA/1s)",
     "qty": 1,
     "unit_gbp": 260,
     "total_gbp": 260,
     "conf": 0.56,
     "evidence": [
      "S3",
-     "S3t1",
-     "S3t2"
+     "T5",
+     "T6"
     ],
     "rule": "R-METERING"
    },
    {
     "line": 4,
     "part": "CT-SET",
-    "description": "Current transformers 1600/5 A, set of three, class 1",
+    "description": "Current transformers, set of three, class 1",
     "qty": 1,
     "unit_gbp": 280,
     "total_gbp": 280,
-    "conf": 0.38,
+    "conf": 0.19,
     "evidence": [
-     "S4",
-     "S4t2"
+     "S4"
     ],
     "rule": "R-METERING"
    },
@@ -334,7 +333,7 @@
     "conf": 0.38,
     "evidence": [
      "S6",
-     "S6t1"
+     "T8"
     ],
     "rule": "R-MCCB-SELECT"
    },
@@ -348,21 +347,22 @@
     "conf": 0.38,
     "evidence": [
      "S6",
-     "S6t1"
+     "T8"
     ],
     "rule": "R-FU-KIT"
    },
    {
     "line": 7,
     "part": "ISOL-400-4P",
-    "description": "Switch-disconnector 400 A 4-pole",
+    "description": "Switch-disconnector 400 A 4-pole; feeds sdwnd",
     "qty": 1,
     "unit_gbp": 634.4,
     "total_gbp": 634.4,
     "conf": 0.77,
     "evidence": [
      "S8",
-     "S8t1"
+     "T15",
+     "T12"
     ],
     "rule": "R-ISOL-SELECT"
    },
@@ -376,7 +376,8 @@
     "conf": 0.77,
     "evidence": [
      "S8",
-     "S8t1"
+     "T15",
+     "T12"
     ],
     "rule": "R-FU-KIT"
    },
@@ -390,8 +391,8 @@
     "conf": 0.75,
     "evidence": [
      "S9",
-     "S9t2",
-     "S9t1"
+     "T17",
+     "T14"
     ],
     "rule": "R-ISOL-SELECT"
    },
@@ -405,8 +406,8 @@
     "conf": 0.75,
     "evidence": [
      "S9",
-     "S9t2",
-     "S9t1"
+     "T17",
+     "T14"
     ],
     "rule": "R-FU-KIT"
    },
@@ -525,8 +526,8 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S5",
-    "S5t2",
-    "S5t6"
+    "T9",
+    "T18"
    ]
   },
   {
@@ -535,8 +536,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S7",
-    "S7t6",
-    "S7t3"
+    "T11"
    ]
   },
   {
@@ -650,13 +650,13 @@
   ],
   "reference_total_gbp": 37007.46,
   "price_error": 0.2298,
-  "rating_accuracy": 0.727,
+  "rating_accuracy": 0.636,
   "notes_accuracy": 1.0
  },
  "timing": {
-  "total": 8.35,
-  "ocr": 6.74,
-  "detector": 1.34
+  "total": 10.0,
+  "ocr": 5.35,
+  "detector": 4.26
  },
  "reader": "trained",
  "engine": "rapidocr",

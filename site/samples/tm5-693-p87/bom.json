@@ -88,8 +88,8 @@
    "total_gbp": 260,
    "evidence": [
     "S12",
-    "S12t2",
-    "S12t3"
+    "T13",
+    "T14"
    ],
    "rule": "R-METERING",
    "conf": 0.17,
@@ -186,7 +186,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S1",
-    "S1t1"
+    "T3"
    ]
   },
   {
@@ -195,7 +195,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S3",
-    "S3t2"
+    "T8"
    ]
   },
   {
@@ -204,7 +204,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S5",
-    "S5t1"
+    "T6"
    ]
   },
   {
@@ -229,7 +229,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S11",
-    "S11t3"
+    "T11"
    ]
   },
   {

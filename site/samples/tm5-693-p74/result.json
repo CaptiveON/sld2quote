@@ -22,22 +22,22 @@
    "key": "text",
    "title": "Read the words",
    "count": 40,
-   "seconds": 6.46,
-   "plain": "Read 40 pieces of text in 6.46 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 8.42,
+   "plain": "Read 40 pieces of text in 8.42 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
    "count": 8,
-   "seconds": 2.27,
-   "plain": "Found 8 symbols in 2.27 s: 3 motor starters, 2 incoming air circuit breakers, 1 current transformer, 1 isolator, 1 earth. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "seconds": 6.57,
+   "plain": "Found 8 symbols in 6.57 s: 3 motor starters, 2 incoming air circuit breakers, 1 current transformer, 1 isolator, 1 earth. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
-   "count": 2,
-   "seconds": 0.14,
-   "plain": "Paired 2 of 8 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
+   "count": 1,
+   "seconds": 0.27,
+   "plain": "Paired 1 of 8 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
    "key": "spec",
@@ -100,14 +100,14 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.11,
+   "conf": 0.06,
    "box": [
     284,
     398,
     18,
     13
    ],
-   "label": "BUS"
+   "label": ""
   },
   {
    "id": "D4",
@@ -197,7 +197,7 @@
     61,
     7
    ],
-   "label": "IMPUTER LOADS ONLY"
+   "label": "COMPUTER LOADS ONLY"
   }
  ],
  "board": {
@@ -218,10 +218,9 @@
     "qty": 1,
     "unit_gbp": 280,
     "total_gbp": 280,
-    "conf": 0.11,
+    "conf": 0.06,
     "evidence": [
-     "S3",
-     "S3t1"
+     "S3"
     ],
     "rule": "R-METERING"
    },
@@ -366,9 +365,9 @@
  "spec": null,
  "score": null,
  "timing": {
-  "total": 9.1,
-  "ocr": 6.46,
-  "detector": 2.27
+  "total": 15.65,
+  "ocr": 8.42,
+  "detector": 6.57
  },
  "reader": "trained",
  "engine": "rapidocr",

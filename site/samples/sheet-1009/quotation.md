@@ -3,34 +3,35 @@
 Prices are from the prototype's illustrative catalogue, not a supplier price list. Every line names the evidence it rests on: S = symbol box, T = text box, clause numbers from the specification, R = rule.
 
 ## Board as read
-- Busbar rating 2500 A; fault level 50 kA; Form 4 Type 7; IP41; default 3-pole; 0 outgoing ways in 1 sections.
+- Busbar rating 2500 A; fault level 50 kA; Form 4 Type 7; IP41; default 3-pole; 1 outgoing ways in 2 sections.
 
 ## Bill of materials
 
 | # | Part | Description | Qty | Unit £ | Total £ | Conf | Evidence |
 |---|---|---|---|---|---|---|---|
-| 1 | METER-CT 2500/5A | Panel meter (CT 2500/5A) | 1 | 260.00 | 260.00 | 0.49 | S3 S3t1 R-METERING |
-| 2 | METER-CT 2500/5A | BAR A 2500 A Cu 50 kA/1s | Panel meter (CT 2500/5A | BAR A 2500 A Cu 50 kA/1s) | 1 | 260.00 | 260.00 | 0.59 | S4 S4t2 S4t3 R-METERING |
-| 3 | CT-SET | Current transformers 2500/5 A, set of three, class 1 | 1 | 280.00 | 280.00 | 0.42 | S5 S5t1 S5t3 R-METERING |
+| 1 | METER-CT 2500/5A | Panel meter (CT 2500/5A) | 1 | 260.00 | 260.00 | 0.49 | S3 T10 R-METERING |
+| 2 | METER-CT 2500/5A | BUSBAR A 2500 A Cu 50 kA/1s | Panel meter (CT 2500/5A | BUSBAR A 2500 A Cu 50 kA/1s) | 1 | 260.00 | 260.00 | 0.59 | S4 T9 T11 R-METERING |
+| 3 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.21 | S5 R-METERING |
 | 4 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.2 | S6 R-METERING |
-| 5 | BSS-2500-3P | Bus-section switch 2500 A 3-pole, 50 kA | 1 | 4,100.00 | 4,100.00 | 0.14 | S7 S7t2 S7t1 R-BUS-SECTION |
-| 6 | FU-KIT-BS | Bus-section functional unit and interlocking | 1 | 900.00 | 900.00 | 0.14 | S7 S7t2 S7t1 R-FU-KIT |
-| 7 | SPD-T12 | Surge protective device, Type 1+2, with status indication | 1 | 690.00 | 690.00 | 0.13 | S9 S9t1 S9t2 R-SPD |
-| 8 | BUSBAR-CU-2500 | Copper busbar set 2500 A (4-bar), 1 sections, about 46 kg | 1 | 524.40 | 524.40 | 0.9 | T12 T12 R-BUSBAR-SIZE |
-| 9 | ENC-SECTION | Enclosure section, Form 4 Type 7, IP41, RAL 7035 | 1 | 3,802.76 | 3,802.76 | 0.95 | T23 T23 T25 T27 R-ENCLOSURE |
-| 10 | LAB-ASSY | Assembly, wiring and routine verification: 63 hours | 1 | 3,024.00 | 3,024.00 | 0.9 |  R-LABOUR |
-| 11 | DOC | Documentation, as-built drawings, test certificates | 1 | 600.00 | 600.00 | 1.0 |  R-DOC |
-| 12 | CERT | Design-verification certificates per specification | 1 | 0.00 | 0.00 | 1.0 | 7.7 R-SPEC-CERT |
-| 13 | WITNESS | Witness testing at works (specification) | 1 | 1,200.00 | 1,200.00 | 1.0 | 7.8 R-SPEC-WITNESS |
-| 14 | DEL | Delivery to site, crane and offload excluded | 1 | 850.00 | 850.00 | 1.0 |  R-DELIVERY |
+| 5 | BSS-2500-3P | Bus-section switch 2500 A 3-pole, 50 kA | 1 | 4,100.00 | 4,100.00 | 0.14 | S7 T13 T12 R-BUS-SECTION |
+| 6 | FU-KIT-BS | Bus-section functional unit and interlocking | 1 | 900.00 | 900.00 | 0.14 | S7 T13 T12 R-FU-KIT |
+| 7 | SPD-T12 | Surge protective device, Type 1+2, with status indication | 1 | 690.00 | 690.00 | 0.13 | S9 T20 T21 R-SPD |
+| 8 | MCCB-250-3P-N | Moulded-case circuit breaker 250 A 3-pole, 50 kA band N, adjustable trip; feeds spare | 1 | 520.00 | 520.00 | 0.35 | S12 T16 T19 R-MCCB-SELECT |
+| 9 | FU-KIT-MCCB | Outgoing functional unit: compartment door, terminals, labels | 1 | 420.00 | 420.00 | 0.35 | S12 T16 T19 R-FU-KIT |
+| 10 | BUSBAR-CU-2500 | Copper busbar set 2500 A (4-bar), 2 sections, about 91 kg | 1 | 1,048.80 | 1,048.80 | 0.9 | T12 T12 R-BUSBAR-SIZE |
+| 11 | ENC-SECTION | Enclosure section, Form 4 Type 7, IP41, RAL 7035 | 2 | 3,802.76 | 7,605.52 | 0.95 | T23 T23 T25 T27 R-ENCLOSURE |
+| 12 | LAB-ASSY | Assembly, wiring and routine verification: 81 hours | 1 | 3,888.00 | 3,888.00 | 0.9 |  R-LABOUR |
+| 13 | DOC | Documentation, as-built drawings, test certificates | 1 | 600.00 | 600.00 | 1.0 |  R-DOC |
+| 14 | CERT | Design-verification certificates per specification | 1 | 0.00 | 0.00 | 1.0 | 7.7 R-SPEC-CERT |
+| 15 | WITNESS | Witness testing at works (specification) | 1 | 1,200.00 | 1,200.00 | 1.0 | 7.8 R-SPEC-WITNESS |
+| 16 | DEL | Delivery to site, crane and offload excluded | 1 | 850.00 | 850.00 | 1.0 |  R-DELIVERY |
 
-Subtotal £16,771.16; margin £2,515.67; **total £19,286.83**
+Subtotal £22,902.32; margin £3,435.35; **total £26,337.67**
 
 ## Clarifications and exclusions (from flagged items)
 - [missing] D8 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S8
-- [missing] D10 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S10 S10t1 S10t2
-- [missing] D11 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S11 S11t1 S11t2
-- [missing] D12 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S12 S12t1 S12t2
+- [missing] D10 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S10 T14 T17
+- [missing] D11 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S11 T15 T18
 - [conflict] form: drawing says Form 4 Type 7, specification clause 7.2 says Form 4 Type 4. Action: clarify with the consultant before order; priced to the drawing. Evidence: T23 T23 T25 T27 7.2
 - [low_confidence] devices read with low confidence: D1, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13. Action: check against the drawing. Evidence: D1 D3 D4 D5 D6 D7 D8 D9 D10 D11 D12 D13
 
@@ -45,4 +46,4 @@ Subtotal £16,771.16; margin £2,515.67; **total £19,286.83**
 - certificates: clause 7.7 -> True
 - other (not priced automatically): clause 7.8: Witness testing at the manufacturer's works shall be allowed for.
 
-Generated by sld2quote 0.1.0 in 7.3 s; reader deskew -0.1 deg.
+Generated by sld2quote 0.2.0 in 6.6 s; reader deskew -0.1 deg.

@@ -85,8 +85,7 @@
    "what": "D2 (CONTACTOR): kW not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S2",
-    "S2t5"
+    "S2"
    ]
   },
   {
@@ -118,8 +117,7 @@
    "what": "D6 (CAPACITOR): kVAr not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S6",
-    "S6t2"
+    "S6"
    ]
   },
   {
@@ -128,8 +126,8 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S7",
-    "S7t1",
-    "S7t2"
+    "T23",
+    "T24"
    ]
   },
   {

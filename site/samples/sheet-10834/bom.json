@@ -18,12 +18,12 @@
    "total_gbp": 5124.0,
    "evidence": [
     "S2",
-    "S2t1",
-    "S2t2"
+    "T3",
+    "T4"
    ],
    "rule": "R-ACB-SELECT",
    "conf": 0.46,
-   "basis": "rating 1600 A from ['S2t1']; poles 4; kA 36"
+   "basis": "rating 1600 A from ['T3']; poles 4; kA 36"
   },
   {
    "line": 2,
@@ -34,8 +34,8 @@
    "total_gbp": 1400,
    "evidence": [
     "S2",
-    "S2t1",
-    "S2t2"
+    "T3",
+    "T4"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.46,
@@ -43,15 +43,15 @@
   },
   {
    "line": 3,
-   "part": "METER-CT 1600/5A | 3AR A 1600 A Cu 36 kA/1s",
-   "description": "Panel meter (CT 1600/5A | 3AR A 1600 A Cu 36 kA/1s)",
+   "part": "METER-CT 1600/5A | BUSBAR A 1600 A Cu 36 kA/1s",
+   "description": "Panel meter (CT 1600/5A | BUSBAR A 1600 A Cu 36 kA/1s)",
    "qty": 1,
    "unit_gbp": 260,
    "total_gbp": 260,
    "evidence": [
     "S3",
-    "S3t1",
-    "S3t2"
+    "T5",
+    "T6"
    ],
    "rule": "R-METERING",
    "conf": 0.56,
@@ -60,16 +60,15 @@
   {
    "line": 4,
    "part": "CT-SET",
-   "description": "Current transformers 1600/5 A, set of three, class 1",
+   "description": "Current transformers, set of three, class 1",
    "qty": 1,
    "unit_gbp": 280,
    "total_gbp": 280,
    "evidence": [
-    "S4",
-    "S4t2"
+    "S4"
    ],
    "rule": "R-METERING",
-   "conf": 0.38,
+   "conf": 0.19,
    "basis": ""
   },
   {
@@ -81,7 +80,7 @@
    "total_gbp": 634.4,
    "evidence": [
     "S6",
-    "S6t1"
+    "T8"
    ],
    "rule": "R-MCCB-SELECT",
    "conf": 0.38,
@@ -96,7 +95,7 @@
    "total_gbp": 420,
    "evidence": [
     "S6",
-    "S6t1"
+    "T8"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.38,
@@ -105,13 +104,14 @@
   {
    "line": 7,
    "part": "ISOL-400-4P",
-   "description": "Switch-disconnector 400 A 4-pole",
+   "description": "Switch-disconnector 400 A 4-pole; feeds sdwnd",
    "qty": 1,
    "unit_gbp": 634.4,
    "total_gbp": 634.4,
    "evidence": [
     "S8",
-    "S8t1"
+    "T15",
+    "T12"
    ],
    "rule": "R-ISOL-SELECT",
    "conf": 0.77,
@@ -126,7 +126,8 @@
    "total_gbp": 340,
    "evidence": [
     "S8",
-    "S8t1"
+    "T15",
+    "T12"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.77,
@@ -141,8 +142,8 @@
    "total_gbp": 207.4,
    "evidence": [
     "S9",
-    "S9t2",
-    "S9t1"
+    "T17",
+    "T14"
    ],
    "rule": "R-ISOL-SELECT",
    "conf": 0.75,
@@ -157,8 +158,8 @@
    "total_gbp": 340,
    "evidence": [
     "S9",
-    "S9t2",
-    "S9t1"
+    "T17",
+    "T14"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.75,
@@ -286,8 +287,8 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S5",
-    "S5t2",
-    "S5t6"
+    "T9",
+    "T18"
    ]
   },
   {
@@ -296,8 +297,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S7",
-    "S7t6",
-    "S7t3"
+    "T11"
    ]
   },
   {

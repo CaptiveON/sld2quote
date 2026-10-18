@@ -159,8 +159,7 @@
    "what": "D7 (ACB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S7",
-    "S7t1"
+    "S7"
    ]
   },
   {
@@ -208,8 +207,7 @@
    "what": "D15 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S15",
-    "S15t1"
+    "S15"
    ]
   },
   {
@@ -218,7 +216,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S16",
-    "S16t1"
+    "T6"
    ]
   },
   {
@@ -226,8 +224,7 @@
    "what": "D17 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S17",
-    "S17t1"
+    "S17"
    ]
   },
   {
@@ -236,7 +233,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S18",
-    "S18t1"
+    "T7"
    ]
   },
   {

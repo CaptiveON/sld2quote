@@ -1,5 +1,5 @@
 line,part,description,qty,unit_gbp,total_gbp,conf,rule,evidence
-1,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.35,R-PROTECTION,S3 S3t3 S3t4
+1,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.35,R-PROTECTION,S3 T22 T25
 2,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.1,R-PROTECTION,S5
 3,METER-MF,Panel meter (multifunction),1,260,260,0.14,R-METERING,S6
 4,METER-MF,Panel meter (multifunction),1,260,260,0.06,R-METERING,S7

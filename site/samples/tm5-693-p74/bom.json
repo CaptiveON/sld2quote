@@ -17,11 +17,10 @@
    "unit_gbp": 280,
    "total_gbp": 280,
    "evidence": [
-    "S3",
-    "S3t1"
+    "S3"
    ],
    "rule": "R-METERING",
-   "conf": 0.11,
+   "conf": 0.06,
    "basis": ""
   },
   {

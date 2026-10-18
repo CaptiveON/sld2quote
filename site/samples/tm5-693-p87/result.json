@@ -22,21 +22,21 @@
    "key": "text",
    "title": "Read the words",
    "count": 21,
-   "seconds": 7.88,
-   "plain": "Read 21 pieces of text in 7.88 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 7.26,
+   "plain": "Read 21 pieces of text in 7.26 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
    "count": 16,
-   "seconds": 1.87,
-   "plain": "Found 16 symbols in 1.87 s: 4 panel meters, 3 motor starters, 2 incoming air circuit breakers, 2 fuse switches, 2 protection relays, 1 current transformer, 1 outgoing moulded-case breaker, 1 earth. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "seconds": 7.96,
+   "plain": "Found 16 symbols in 7.96 s: 4 panel meters, 3 motor starters, 2 incoming air circuit breakers, 2 fuse switches, 2 protection relays, 1 current transformer, 1 outgoing moulded-case breaker, 1 earth. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
    "count": 5,
-   "seconds": 0.12,
+   "seconds": 0.27,
    "plain": "Paired 5 of 16 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
@@ -430,8 +430,8 @@
     "conf": 0.17,
     "evidence": [
      "S12",
-     "S12t2",
-     "S12t3"
+     "T13",
+     "T14"
     ],
     "rule": "R-METERING"
    },
@@ -521,7 +521,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S1",
-    "S1t1"
+    "T3"
    ]
   },
   {
@@ -530,7 +530,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S3",
-    "S3t2"
+    "T8"
    ]
   },
   {
@@ -539,7 +539,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S5",
-    "S5t1"
+    "T6"
    ]
   },
   {
@@ -564,7 +564,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S11",
-    "S11t3"
+    "T11"
    ]
   },
   {
@@ -617,9 +617,9 @@
  "spec": null,
  "score": null,
  "timing": {
-  "total": 10.11,
-  "ocr": 7.88,
-  "detector": 1.87
+  "total": 15.83,
+  "ocr": 7.26,
+  "detector": 7.96
  },
  "reader": "trained",
  "engine": "rapidocr",

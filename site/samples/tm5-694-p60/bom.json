@@ -90,11 +90,11 @@
    "total_gbp": 5124.0,
    "evidence": [
     "S5",
-    "S5t1"
+    "T8"
    ],
    "rule": "R-ACB-SELECT",
    "conf": 0.17,
-   "basis": "rating 800 A from ['S5t1']; poles 4; kA None"
+   "basis": "rating 800 A from ['T8']; poles 4; kA None"
   },
   {
    "line": 7,
@@ -105,7 +105,7 @@
    "total_gbp": 1400,
    "evidence": [
     "S5",
-    "S5t1"
+    "T8"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.17,
@@ -120,11 +120,11 @@
    "total_gbp": 5124.0,
    "evidence": [
     "S6",
-    "S6t1"
+    "T9"
    ],
    "rule": "R-ACB-SELECT",
    "conf": 0.12,
-   "basis": "rating 800 A from ['S6t1']; poles 4; kA None"
+   "basis": "rating 800 A from ['T9']; poles 4; kA None"
   },
   {
    "line": 9,
@@ -135,7 +135,7 @@
    "total_gbp": 1400,
    "evidence": [
     "S6",
-    "S6t1"
+    "T9"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.12,
@@ -150,7 +150,7 @@
    "total_gbp": 260,
    "evidence": [
     "S8",
-    "S8t3"
+    "T23"
    ],
    "rule": "R-METERING",
    "conf": 0.16,
@@ -221,8 +221,8 @@
    "total_gbp": 950,
    "evidence": [
     "S18",
-    "S18t1",
-    "S18t4"
+    "T27",
+    "T52"
    ],
    "rule": "R-PROTECTION",
    "conf": 0.38,
@@ -237,8 +237,8 @@
    "total_gbp": 950,
    "evidence": [
     "S19",
-    "S19t1",
-    "S19t6"
+    "T29",
+    "T53"
    ],
    "rule": "R-PROTECTION",
    "conf": 0.24,
@@ -253,8 +253,8 @@
    "total_gbp": 950,
    "evidence": [
     "S20",
-    "S20t1",
-    "S20t6"
+    "T30",
+    "T54"
    ],
    "rule": "R-PROTECTION",
    "conf": 0.2,
@@ -285,7 +285,8 @@
    "total_gbp": 950,
    "evidence": [
     "S22",
-    "S22t4"
+    "T37",
+    "T28"
    ],
    "rule": "R-PROTECTION",
    "conf": 0.11,
@@ -355,11 +356,10 @@
    "unit_gbp": 950,
    "total_gbp": 950,
    "evidence": [
-    "S31",
-    "S31t2"
+    "S31"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.14,
+   "conf": 0.07,
    "basis": ""
   },
   {
@@ -462,7 +462,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S14",
-    "S14t2"
+    "T17"
    ]
   },
   {
@@ -471,7 +471,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S15",
-    "S15t2"
+    "T15"
    ]
   },
   {
@@ -480,7 +480,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S17",
-    "S17t2"
+    "T25"
    ]
   },
   {

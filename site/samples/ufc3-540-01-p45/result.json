@@ -22,22 +22,22 @@
    "key": "text",
    "title": "Read the words",
    "count": 24,
-   "seconds": 4.36,
-   "plain": "Read 24 pieces of text in 4.36 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 4.21,
+   "plain": "Read 24 pieces of text in 4.21 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
    "count": 7,
-   "seconds": 1.35,
-   "plain": "Found 7 symbols in 1.35 s: 3 motor starters, 2 power-factor correction banks, 1 generator, 1 incoming air circuit breaker. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "seconds": 3.24,
+   "plain": "Found 7 symbols in 3.24 s: 3 motor starters, 2 power-factor correction banks, 1 generator, 1 incoming air circuit breaker. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
-   "count": 3,
-   "seconds": 0.1,
-   "plain": "Paired 3 of 7 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
+   "count": 1,
+   "seconds": 0.19,
+   "plain": "Paired 1 of 7 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
    "key": "spec",
@@ -82,14 +82,14 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.21,
+   "conf": 0.1,
    "box": [
     174,
     333,
     53,
     26
    ],
-   "label": "-"
+   "label": ""
   },
   {
    "id": "D3",
@@ -154,14 +154,14 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.11,
+   "conf": 0.06,
    "box": [
     852,
     825,
     52,
     27
    ],
-   "label": "D"
+   "label": ""
   },
   {
    "id": "D7",
@@ -265,8 +265,7 @@
    "what": "D2 (CONTACTOR): kW not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S2",
-    "S2t5"
+    "S2"
    ]
   },
   {
@@ -298,8 +297,7 @@
    "what": "D6 (CAPACITOR): kVAr not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S6",
-    "S6t2"
+    "S6"
    ]
   },
   {
@@ -308,8 +306,8 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S7",
-    "S7t1",
-    "S7t2"
+    "T23",
+    "T24"
    ]
   },
   {
@@ -337,9 +335,9 @@
  "spec": null,
  "score": null,
  "timing": {
-  "total": 6.03,
-  "ocr": 4.36,
-  "detector": 1.35
+  "total": 7.98,
+  "ocr": 4.21,
+  "detector": 3.24
  },
  "reader": "trained",
  "engine": "rapidocr",

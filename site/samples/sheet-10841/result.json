@@ -22,22 +22,22 @@
    "key": "text",
    "title": "Read the words",
    "count": 31,
-   "seconds": 8.51,
-   "plain": "Read 31 pieces of text in 8.51 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 7.25,
+   "plain": "Read 31 pieces of text in 7.25 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
    "count": 15,
-   "seconds": 2.02,
-   "plain": "Found 15 symbols in 2.02 s: 6 fuse switches, 1 transformer, 1 incoming air circuit breaker, 1 panel meter, 1 current transformer, 1 bus-section switch, 1 power-factor correction bank, 1 motor starter, 1 motor, 1 earth. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "seconds": 8.07,
+   "plain": "Found 15 symbols in 8.07 s: 6 fuse switches, 1 transformer, 1 incoming air circuit breaker, 1 panel meter, 1 current transformer, 1 bus-section switch, 1 power-factor correction bank, 1 motor starter, 1 motor, 1 earth. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
-   "count": 14,
-   "seconds": 0.14,
-   "plain": "Paired 14 of 15 symbols with the label text beside them; 9 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
+   "count": 11,
+   "seconds": 0.2,
+   "plain": "Paired 11 of 15 symbols with the label text beside them; 8 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
    "key": "spec",
@@ -64,7 +64,7 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.96,
+   "conf": 0.97,
    "box": [
     198,
     69,
@@ -89,7 +89,7 @@
     30,
     30
    ],
-   "label": "ACB-1 3200 A 3P | Icu 65 kA, withdrawable"
+   "label": "ACB-1 3200 A 3P | Icu 65 kA, withdrawabIe"
   },
   {
    "id": "D3",
@@ -107,25 +107,25 @@
     26,
     26
    ],
-   "label": "CT 3200/5A | 3AR A 3200 A Cu 65 kA/1s"
+   "label": "CT 3200/5A | BUSBAR A 3200 A Cu 65 kA/1s"
   },
   {
    "id": "D4",
    "type": "CT",
    "type_plain": "current transformer",
-   "rating": 3200,
+   "rating": null,
    "unit": "A",
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.29,
+   "conf": 0.14,
    "box": [
     209,
     285,
     22,
     21
    ],
-   "label": "BUSBAR A 3200 A Cu 65 kA/1s"
+   "label": ""
   },
   {
    "id": "D5",
@@ -172,14 +172,14 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.16,
+   "conf": 0.08,
    "box": [
     1856,
     512,
     29,
     17
    ],
-   "label": "kW"
+   "label": ""
   },
   {
    "id": "D8",
@@ -233,7 +233,7 @@
     20,
     36
    ],
-   "label": "M | fan F-5"
+   "label": "fan F-5"
   },
   {
    "id": "D11",
@@ -316,14 +316,14 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.16,
+   "conf": 0.08,
    "box": [
     2154,
     591,
     31,
     18
    ],
-   "label": "ards"
+   "label": ""
   }
  ],
  "board": {
@@ -347,8 +347,8 @@
     "conf": 0.13,
     "evidence": [
      "S2",
-     "S2t1",
-     "S2t2"
+     "T3",
+     "T4"
     ],
     "rule": "R-ACB-SELECT"
    },
@@ -362,37 +362,36 @@
     "conf": 0.13,
     "evidence": [
      "S2",
-     "S2t1",
-     "S2t2"
+     "T3",
+     "T4"
     ],
     "rule": "R-FU-KIT"
    },
    {
     "line": 3,
-    "part": "METER-CT 3200/5A | 3AR A 3200 A Cu 65 kA/1s",
-    "description": "Panel meter (CT 3200/5A | 3AR A 3200 A Cu 65 kA/1s)",
+    "part": "METER-CT 3200/5A | BUSBAR A 3200 A Cu 65 kA/1s",
+    "description": "Panel meter (CT 3200/5A | BUSBAR A 3200 A Cu 65 kA/1s)",
     "qty": 1,
     "unit_gbp": 260,
     "total_gbp": 260,
     "conf": 0.33,
     "evidence": [
      "S3",
-     "S3t1",
-     "S3t2"
+     "T5",
+     "T6"
     ],
     "rule": "R-METERING"
    },
    {
     "line": 4,
     "part": "CT-SET",
-    "description": "Current transformers 3200/5 A, set of three, class 1",
+    "description": "Current transformers, set of three, class 1",
     "qty": 1,
     "unit_gbp": 280,
     "total_gbp": 280,
-    "conf": 0.29,
+    "conf": 0.14,
     "evidence": [
-     "S4",
-     "S4t2"
+     "S4"
     ],
     "rule": "R-METERING"
    },
@@ -406,8 +405,8 @@
     "conf": 0.34,
     "evidence": [
      "S5",
-     "S5t2",
-     "S5t1"
+     "T8",
+     "T7"
     ],
     "rule": "R-BUS-SECTION"
    },
@@ -421,8 +420,8 @@
     "conf": 0.34,
     "evidence": [
      "S5",
-     "S5t2",
-     "S5t1"
+     "T8",
+     "T7"
     ],
     "rule": "R-FU-KIT"
    },
@@ -436,8 +435,8 @@
     "conf": 0.44,
     "evidence": [
      "S8",
-     "S8t2",
-     "S8t1"
+     "T13",
+     "T10"
     ],
     "rule": "R-FSW-SELECT"
    },
@@ -451,8 +450,8 @@
     "conf": 0.44,
     "evidence": [
      "S8",
-     "S8t2",
-     "S8t1"
+     "T13",
+     "T10"
     ],
     "rule": "R-FUSE-LINKS"
    },
@@ -466,8 +465,8 @@
     "conf": 0.44,
     "evidence": [
      "S8",
-     "S8t2",
-     "S8t1"
+     "T13",
+     "T10"
     ],
     "rule": "R-FU-KIT"
    },
@@ -481,8 +480,8 @@
     "conf": 0.27,
     "evidence": [
      "S9",
-     "S9t2",
-     "S9t1"
+     "T14",
+     "T11"
     ],
     "rule": "R-FSW-SELECT"
    },
@@ -496,8 +495,8 @@
     "conf": 0.27,
     "evidence": [
      "S9",
-     "S9t2",
-     "S9t1"
+     "T14",
+     "T11"
     ],
     "rule": "R-FUSE-LINKS"
    },
@@ -511,8 +510,8 @@
     "conf": 0.27,
     "evidence": [
      "S9",
-     "S9t2",
-     "S9t1"
+     "T14",
+     "T11"
     ],
     "rule": "R-FU-KIT"
    },
@@ -526,8 +525,8 @@
     "conf": 0.51,
     "evidence": [
      "S11",
-     "S11t2",
-     "S11t1"
+     "T17",
+     "T16"
     ],
     "rule": "R-FSW-SELECT"
    },
@@ -541,8 +540,8 @@
     "conf": 0.51,
     "evidence": [
      "S11",
-     "S11t2",
-     "S11t1"
+     "T17",
+     "T16"
     ],
     "rule": "R-FUSE-LINKS"
    },
@@ -556,8 +555,8 @@
     "conf": 0.51,
     "evidence": [
      "S11",
-     "S11t2",
-     "S11t1"
+     "T17",
+     "T16"
     ],
     "rule": "R-FU-KIT"
    },
@@ -571,8 +570,8 @@
     "conf": 0.6,
     "evidence": [
      "S12",
-     "S12t2",
-     "S12t1"
+     "T21",
+     "T18"
     ],
     "rule": "R-FSW-SELECT"
    },
@@ -586,8 +585,8 @@
     "conf": 0.6,
     "evidence": [
      "S12",
-     "S12t2",
-     "S12t1"
+     "T21",
+     "T18"
     ],
     "rule": "R-FUSE-LINKS"
    },
@@ -601,8 +600,8 @@
     "conf": 0.6,
     "evidence": [
      "S12",
-     "S12t2",
-     "S12t1"
+     "T21",
+     "T18"
     ],
     "rule": "R-FU-KIT"
    },
@@ -616,8 +615,8 @@
     "conf": 0.59,
     "evidence": [
      "S13",
-     "S13t2",
-     "S13t1"
+     "T22",
+     "T19"
     ],
     "rule": "R-FSW-SELECT"
    },
@@ -631,8 +630,8 @@
     "conf": 0.59,
     "evidence": [
      "S13",
-     "S13t2",
-     "S13t1"
+     "T22",
+     "T19"
     ],
     "rule": "R-FUSE-LINKS"
    },
@@ -646,8 +645,8 @@
     "conf": 0.59,
     "evidence": [
      "S13",
-     "S13t2",
-     "S13t1"
+     "T22",
+     "T19"
     ],
     "rule": "R-FU-KIT"
    },
@@ -739,8 +738,8 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S6",
-    "S6t2",
-    "S6t4"
+    "T12",
+    "T20"
    ]
   },
   {
@@ -748,8 +747,7 @@
    "what": "D7 (CAPACITOR): kVAr not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S7",
-    "S7t2"
+    "S7"
    ]
   },
   {
@@ -758,8 +756,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S10",
-    "S10t4",
-    "S10t3"
+    "T15"
    ]
   },
   {
@@ -888,13 +885,13 @@
   ],
   "reference_total_gbp": 56433.95,
   "price_error": 0.0183,
-  "rating_accuracy": 0.769,
+  "rating_accuracy": 0.692,
   "notes_accuracy": 1.0
  },
  "timing": {
-  "total": 10.91,
-  "ocr": 8.51,
-  "detector": 2.02
+  "total": 15.88,
+  "ocr": 7.25,
+  "detector": 8.07
  },
  "reader": "trained",
  "engine": "rapidocr",

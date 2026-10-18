@@ -74,12 +74,10 @@
    "unit_gbp": 950,
    "total_gbp": 950,
    "evidence": [
-    "S17",
-    "S17t1",
-    "S17t3"
+    "S17"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.12,
+   "conf": 0.06,
    "basis": ""
   },
   {
@@ -105,7 +103,7 @@
    "total_gbp": 260,
    "evidence": [
     "S25",
-    "S25t2"
+    "T27"
    ],
    "rule": "R-METERING",
    "conf": 0.7,
@@ -120,7 +118,7 @@
    "total_gbp": 950,
    "evidence": [
     "S29",
-    "S29t2"
+    "T36"
    ],
    "rule": "R-PROTECTION",
    "conf": 0.12,
@@ -134,11 +132,10 @@
    "unit_gbp": 950,
    "total_gbp": 950,
    "evidence": [
-    "S30",
-    "S30t1"
+    "S30"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.18,
+   "conf": 0.09,
    "basis": ""
   },
   {
@@ -149,11 +146,10 @@
    "unit_gbp": 950,
    "total_gbp": 950,
    "evidence": [
-    "S31",
-    "S31t1"
+    "S31"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.17,
+   "conf": 0.09,
    "basis": ""
   },
   {
@@ -165,7 +161,7 @@
    "total_gbp": 950,
    "evidence": [
     "S50",
-    "S50t3"
+    "T66"
    ],
    "rule": "R-PROTECTION",
    "conf": 0.18,
@@ -180,8 +176,8 @@
    "total_gbp": 950,
    "evidence": [
     "S51",
-    "S51t3",
-    "S51t4"
+    "T71",
+    "T76"
    ],
    "rule": "R-PROTECTION",
    "conf": 0.16,
@@ -196,8 +192,8 @@
    "total_gbp": 950,
    "evidence": [
     "S53",
-    "S53t5",
-    "S53t3"
+    "T70",
+    "T73"
    ],
    "rule": "R-PROTECTION",
    "conf": 0.26,
@@ -212,8 +208,7 @@
    "total_gbp": 950,
    "evidence": [
     "S54",
-    "S54t3",
-    "S54t4"
+    "T81"
    ],
    "rule": "R-PROTECTION",
    "conf": 0.15,
@@ -227,12 +222,10 @@
    "unit_gbp": 950,
    "total_gbp": 950,
    "evidence": [
-    "S59",
-    "S59t3",
-    "S59t4"
+    "S59"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.17,
+   "conf": 0.09,
    "basis": ""
   },
   {
@@ -243,12 +236,10 @@
    "unit_gbp": 950,
    "total_gbp": 950,
    "evidence": [
-    "S60",
-    "S60t3",
-    "S60t4"
+    "S60"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.14,
+   "conf": 0.07,
    "basis": ""
   },
   {
@@ -376,7 +367,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S12",
-    "S12t3"
+    "T14"
    ]
   },
   {
@@ -384,8 +375,7 @@
    "what": "D13 (CONTACTOR): kW not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S13",
-    "S13t3"
+    "S13"
    ]
   },
   {
@@ -394,7 +384,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S14",
-    "S14t2"
+    "T21"
    ]
   },
   {
@@ -474,8 +464,7 @@
    "what": "D28 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S28",
-    "S28t4"
+    "S28"
    ]
   },
   {
@@ -500,8 +489,8 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S34",
-    "S34t2",
-    "S34t3"
+    "T37",
+    "T38"
    ]
   },
   {
@@ -509,8 +498,7 @@
    "what": "D36 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S36",
-    "T36"
+    "S36"
    ]
   },
   {
@@ -559,7 +547,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S43",
-    "S43t2"
+    "T44"
    ]
   },
   {
@@ -584,7 +572,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S48",
-    "S48t2"
+    "T58"
    ]
   },
   {
@@ -593,7 +581,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S52",
-    "S52t1"
+    "T65"
    ]
   },
   {
@@ -602,8 +590,8 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S57",
-    "S57t4",
-    "S57t3"
+    "T85",
+    "T87"
    ]
   },
   {
@@ -611,9 +599,7 @@
    "what": "D58 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S58",
-    "S58t4",
-    "S58t5"
+    "S58"
    ]
   },
   {
@@ -629,8 +615,7 @@
    "what": "D62 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S62",
-    "S62t2"
+    "S62"
    ]
   },
   {

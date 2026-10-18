@@ -126,7 +126,8 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S6",
-    "S6t1"
+    "T7",
+    "T4"
    ]
   },
   {
@@ -167,7 +168,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S11",
-    "S11t1"
+    "T8"
    ]
   },
   {

@@ -22,21 +22,21 @@
    "key": "text",
    "title": "Read the words",
    "count": 18,
-   "seconds": 6.14,
-   "plain": "Read 18 pieces of text in 6.14 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 3.36,
+   "plain": "Read 18 pieces of text in 3.36 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
    "count": 8,
-   "seconds": 1.15,
-   "plain": "Found 8 symbols in 1.15 s: 6 fuse switches, 1 protection relay, 1 panel meter. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "seconds": 1.75,
+   "plain": "Found 8 symbols in 1.75 s: 6 fuse switches, 1 protection relay, 1 panel meter. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
    "count": 2,
-   "seconds": 0.08,
+   "seconds": 0.11,
    "plain": "Paired 2 of 8 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
@@ -221,8 +221,8 @@
     "conf": 0.13,
     "evidence": [
      "S1",
-     "S1t3",
-     "S1t2"
+     "T5",
+     "T4"
     ],
     "rule": "R-PROTECTION"
    },
@@ -236,8 +236,8 @@
     "conf": 0.23,
     "evidence": [
      "S2",
-     "S2t4",
-     "S2t3"
+     "T12",
+     "T8"
     ],
     "rule": "R-METERING"
    },
@@ -382,9 +382,9 @@
  "spec": null,
  "score": null,
  "timing": {
-  "total": 7.46,
-  "ocr": 6.14,
-  "detector": 1.15
+  "total": 5.34,
+  "ocr": 3.36,
+  "detector": 1.75
  },
  "reader": "trained",
  "engine": "rapidocr",

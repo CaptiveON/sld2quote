@@ -5,8 +5,8 @@
   "ip": "IP42",
   "poles_default": 3,
   "busbar_rating": 2500,
-  "sections": 2,
-  "ways": 0
+  "sections": 4,
+  "ways": 3
  },
  "lines": [
   {
@@ -18,12 +18,12 @@
    "total_gbp": 5600.0,
    "evidence": [
     "S3",
-    "S3t1",
-    "S3t2"
+    "T6",
+    "T8"
    ],
    "rule": "R-ACB-SELECT",
    "conf": 0.63,
-   "basis": "rating 2500 A from ['S3t1']; poles 3; kA 50"
+   "basis": "rating 2500 A from ['T6']; poles 3; kA 50"
   },
   {
    "line": 2,
@@ -34,8 +34,8 @@
    "total_gbp": 1400,
    "evidence": [
     "S3",
-    "S3t1",
-    "S3t2"
+    "T6",
+    "T8"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.63,
@@ -43,6 +43,51 @@
   },
   {
    "line": 3,
+   "part": "ACB-1600-3P-N",
+   "description": "Air circuit breaker 1600 A 3-pole, 50 kA band N, withdrawable, electronic trip",
+   "qty": 1,
+   "unit_gbp": 4200.0,
+   "total_gbp": 4200.0,
+   "evidence": [
+    "S4",
+    "T7"
+   ],
+   "rule": "R-ACB-SELECT",
+   "conf": 0.2,
+   "basis": "rating 1600 A from ['T7']; poles 3; kA 50"
+  },
+  {
+   "line": 4,
+   "part": "FU-KIT-ACB",
+   "description": "Incomer functional unit: compartment, shutters, terminals, controls",
+   "qty": 1,
+   "unit_gbp": 1400,
+   "total_gbp": 1400,
+   "evidence": [
+    "S4",
+    "T7"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.2,
+   "basis": ""
+  },
+  {
+   "line": 5,
+   "part": "ATS-CTRL",
+   "description": "Automatic transfer switch controller and interlocks",
+   "qty": 1,
+   "unit_gbp": 1850,
+   "total_gbp": 1850,
+   "evidence": [
+    "S4",
+    "T7"
+   ],
+   "rule": "R-ATS",
+   "conf": 0.2,
+   "basis": ""
+  },
+  {
+   "line": 6,
    "part": "METER-CT 1600/5A",
    "description": "Panel meter (CT 1600/5A)",
    "qty": 1,
@@ -50,14 +95,14 @@
    "total_gbp": 260,
    "evidence": [
     "S5",
-    "S5t1"
+    "T9"
    ],
    "rule": "R-METERING",
    "conf": 0.64,
    "basis": ""
   },
   {
-   "line": 4,
+   "line": 7,
    "part": "CT-SET",
    "description": "Current transformers, set of three, class 1",
    "qty": 1,
@@ -71,7 +116,7 @@
    "basis": ""
   },
   {
-   "line": 5,
+   "line": 8,
    "part": "BSS-2500-3P",
    "description": "Bus-section switch 2500 A 3-pole, 50 kA",
    "qty": 1,
@@ -79,14 +124,14 @@
    "total_gbp": 4100.0,
    "evidence": [
     "S7",
-    "S7t2"
+    "T12"
    ],
    "rule": "R-BUS-SECTION",
    "conf": 0.56,
    "basis": ""
   },
   {
-   "line": 6,
+   "line": 9,
    "part": "FU-KIT-BS",
    "description": "Bus-section functional unit and interlocking",
    "qty": 1,
@@ -94,34 +139,128 @@
    "total_gbp": 900,
    "evidence": [
     "S7",
-    "S7t2"
+    "T12"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.56,
    "basis": ""
   },
   {
-   "line": 7,
-   "part": "BUSBAR-CU-2500",
-   "description": "Copper busbar set 2500 A (4-bar), 2 sections, about 91 kg",
+   "line": 10,
+   "part": "MCCB-400-3P-N",
+   "description": "Moulded-case circuit breaker 400 A 3-pole, 50 kA band N, adjustable trip",
    "qty": 1,
-   "unit_gbp": 1048.8,
-   "total_gbp": 1048.8,
+   "unit_gbp": 980.0,
+   "total_gbp": 980.0,
+   "evidence": [
+    "S9",
+    "T16"
+   ],
+   "rule": "R-MCCB-SELECT",
+   "conf": 0.34,
+   "basis": "rating 400 A; poles 3; kA 50"
+  },
+  {
+   "line": 11,
+   "part": "FU-KIT-MCCB",
+   "description": "Outgoing functional unit: compartment door, terminals, labels",
+   "qty": 1,
+   "unit_gbp": 420,
+   "total_gbp": 420,
+   "evidence": [
+    "S9",
+    "T16"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.34,
+   "basis": ""
+  },
+  {
+   "line": 12,
+   "part": "MCCB-160-4P-N",
+   "description": "Moulded-case circuit breaker 160 A 4-pole, 50 kA band N, adjustable trip; feeds Mcc-4/chillers",
+   "qty": 1,
+   "unit_gbp": 463.6,
+   "total_gbp": 463.6,
+   "evidence": [
+    "S14",
+    "T20",
+    "T23"
+   ],
+   "rule": "R-MCCB-SELECT",
+   "conf": 0.4,
+   "basis": "rating 150 A; poles 4; kA 50"
+  },
+  {
+   "line": 13,
+   "part": "FU-KIT-MCCB",
+   "description": "Outgoing functional unit: compartment door, terminals, labels",
+   "qty": 1,
+   "unit_gbp": 420,
+   "total_gbp": 420,
+   "evidence": [
+    "S14",
+    "T20",
+    "T23"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.4,
+   "basis": ""
+  },
+  {
+   "line": 14,
+   "part": "ISOL-630-3P",
+   "description": "Switch-disconnector 630 A 3-pole; feeds lighting",
+   "qty": 1,
+   "unit_gbp": 790.0,
+   "total_gbp": 790.0,
+   "evidence": [
+    "S15",
+    "T21",
+    "T24"
+   ],
+   "rule": "R-ISOL-SELECT",
+   "conf": 0.13,
+   "basis": "rating 630 A; poles 3"
+  },
+  {
+   "line": 15,
+   "part": "FU-KIT-ISOLATOR",
+   "description": "Outgoing functional unit: compartment door, terminals, labels",
+   "qty": 1,
+   "unit_gbp": 340,
+   "total_gbp": 340,
+   "evidence": [
+    "S15",
+    "T21",
+    "T24"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.13,
+   "basis": ""
+  },
+  {
+   "line": 16,
+   "part": "BUSBAR-CU-2500",
+   "description": "Copper busbar set 2500 A (4-bar), 4 sections, about 182 kg",
+   "qty": 1,
+   "unit_gbp": 2097.6,
+   "total_gbp": 2097.6,
    "evidence": [
     "T11",
     "T11"
    ],
    "rule": "R-BUSBAR-SIZE",
    "conf": 0.9,
-   "basis": "2500 A busbar label; 2 sections"
+   "basis": "2500 A busbar label; 4 sections"
   },
   {
-   "line": 8,
+   "line": 17,
    "part": "ENC-SECTION",
    "description": "Enclosure section, Form 3b, IP42, RAL 7035",
-   "qty": 2,
+   "qty": 4,
    "unit_gbp": 2730.0,
-   "total_gbp": 5460.0,
+   "total_gbp": 10920.0,
    "evidence": [
     "T28",
     "T28",
@@ -130,22 +269,22 @@
    ],
    "rule": "R-ENCLOSURE",
    "conf": 0.95,
-   "basis": "0 ways at 4 per section plus incomers"
+   "basis": "3 ways at 4 per section plus incomers"
   },
   {
-   "line": 9,
+   "line": 18,
    "part": "LAB-ASSY",
-   "description": "Assembly, wiring and routine verification: 130 hours",
+   "description": "Assembly, wiring and routine verification: 166 hours",
    "qty": 1,
-   "unit_gbp": 6240,
-   "total_gbp": 6240,
+   "unit_gbp": 7968,
+   "total_gbp": 7968,
    "evidence": [],
    "rule": "R-LABOUR",
    "conf": 0.9,
    "basis": ""
   },
   {
-   "line": 10,
+   "line": 19,
    "part": "DOC",
    "description": "Documentation, as-built drawings, test certificates",
    "qty": 1,
@@ -157,7 +296,7 @@
    "basis": ""
   },
   {
-   "line": 11,
+   "line": 20,
    "part": "CERT",
    "description": "Design-verification certificates per specification",
    "qty": 1,
@@ -171,7 +310,7 @@
    "basis": ""
   },
   {
-   "line": 12,
+   "line": 21,
    "part": "DEL",
    "description": "Delivery to site, crane and offload excluded",
    "qty": 1,
@@ -183,19 +322,10 @@
    "basis": ""
   }
  ],
- "subtotal_gbp": 26738.8,
- "margin_gbp": 4010.82,
- "total_gbp": 30749.62,
+ "subtotal_gbp": 45839.2,
+ "margin_gbp": 6875.88,
+ "total_gbp": 52715.08,
  "issues": [
-  {
-   "kind": "missing",
-   "what": "D4 (ACB): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S4",
-    "S4t1"
-   ]
-  },
   {
    "kind": "missing",
    "what": "D8 (MCCB): rating not read",
@@ -206,22 +336,12 @@
   },
   {
    "kind": "missing",
-   "what": "D9 (MCCB): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S9",
-    "S9t1",
-    "S9t2"
-   ]
-  },
-  {
-   "kind": "missing",
    "what": "D10 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
     "S10",
-    "S10t1",
-    "S10t2"
+    "T13",
+    "T14"
    ]
   },
   {
@@ -230,7 +350,8 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S11",
-    "S11t1"
+    "T15",
+    "T17"
    ]
   },
   {
@@ -239,8 +360,7 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S12",
-    "S12t1",
-    "S12t2"
+    "T19"
    ]
   },
   {
@@ -249,27 +369,8 @@
    "action": "read from drawing / schedule",
    "evidence": [
     "S13",
-    "S13t1",
-    "S13t2"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D14 (MCCB): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S14",
-    "S14t3"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D15 (ISOLATOR): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S15",
-    "S15t1",
-    "S15t2"
+    "T18",
+    "T22"
    ]
   },
   {
