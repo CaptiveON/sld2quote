@@ -356,7 +356,13 @@ sweep and stored as score_threshold_drawing; being built by the reader engineer 
 0.919 (4, loses bus-sections), r18_plain pass 10 0.913 (3), r18_fonts pass 4 0.865 (2; relay recall 0.24, capacitor 0.56; on its own
 test_unseen 0.863 with relay 0.08 at pass 10; its pooled F1 declines after pass 4), so the wider font set did not improve generalisation
 as measured per tile and the fonts engineer is checking the regenerated data for a fault (relays first). Night2b started 19:02: plain+EMA,
-then fonts+EMA, six-run summary about 03:00.
+then fonts+EMA, six-run summary about 05:00 (the threshold sweep shares the cpu).
+Fonts audit (21:30): no data fault (counts, sizes, glyphs, box-hug over all 900 sheets, trainer targets all correct); the fonts model never
+learned relays (38 of 40 training relays unboxed at pass 10; 8 of 40 at pass 4; the plain control finds 25 of the same 40 unseen), and its
+capacitor and earth scores deflated below the fixed threshold late in training; inferred cause: 270 relays spread over 13 glyph faces start
+too weak for the encoder's proposals to keep them (PROBLEMS 10c). Plan, in order: fonts+EMA result; else `--rare-repeat 0.15 --rare-group
+class` on data/coco_fonts (about 3.3 h, can run in daytime while step 6 is cpu work); drawing-level thresholds; only then more relays in
+the generator.
 
 ## 8. Metrics (as implemented in `evaluate.py`; keep the names)
 

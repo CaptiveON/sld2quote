@@ -175,6 +175,29 @@ detector and the tile merge, and stored with the weights as a separate value fro
 validation drawings that are not the test drawings; and "false positives on blank paper" is reported as its own number, because each one
 is a line on a quote.
 
+## 10c. More variety made the rarest symbol unlearnable with the same number of examples
+
+**What happened (18 Oct, evening).** The run on the wider font set never learned protection relays at all: at its last pass it puts no
+box of any class on 38 of 40 of its own training relays, even with the score floor removed, and it lost capacitors and earths in its late
+passes. Its validation score fell from pass 4 onwards, which a healthy run never does. A full audit of the data found nothing wrong: relay
+counts, box sizes and the drawn "I>" glyph are correct in every font; every box sits on its ink across all 900 drawings; the trainer's own
+targets keep 99 percent of the relay boxes with the right class.
+
+**Why, as far as it can be inferred.** Relay is the rarest class (270 training boxes). In the classic set all 270 carry one glyph in one
+font; in the wide set they are spread over 13 faces, about 21 each. The same number of examples now has to cover far more variety, so
+the class starts weak, and this kind of detector only refines the regions its first stage proposes: a class that is weak early can drop out
+for good. Meters vary their glyph too, but there are five times as many of them, and they were learned. Capacitors and earths are a
+milder version: their scores drifted below the fixed threshold as training went on, at precision near 0.96, so a threshold chosen later
+recovers most of them.
+
+**What was done, in order.** Confirmed first that it was not the data. Then: let the queued run with weight averaging show whether it
+keeps relays; if not, show tiles with rare classes more often on this set; choose per-class or drawing-level thresholds; and only as a last
+resort draw more relays in the generator.
+
+**For the real project.** Variety and sample size trade off per class, not per dataset: when the drawing styles widen, the rare symbols
+need more examples in proportion, and a per-class recall curve across passes is the early warning. One run per condition is not enough
+to be sure of a cause; the mechanism here is inferred from the outputs and will be confirmed only by the next runs.
+
 ## 11. Tile edges: the per-tile score is a floor, and a tempting fix was wrong
 
 **What happened (18 Oct).** Pages are cut into 640-pixel tiles with a quarter overlap. A symbol cut by a tile edge is found only 40 to 50
