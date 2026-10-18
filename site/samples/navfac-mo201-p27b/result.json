@@ -1,0 +1,715 @@
+{
+ "id": "navfac-mo201-p27b",
+ "source": {
+  "kind": "sample",
+  "title": "NAVFAC MO-201: FIGURE 1-10 Secondary Network Distribution System",
+  "seed": null,
+  "level": null,
+  "copy": "scan",
+  "has_answer_key": false,
+  "note": "Real public-domain drawing (US federal document), American symbol style the model never trained on; not scored, because it has no answer key yet"
+ },
+ "images": {
+  "sheet": "sheet.png",
+  "overlay": "overlay.png"
+ },
+ "size": [
+  1253,
+  790
+ ],
+ "steps": [
+  {
+   "key": "text",
+   "title": "Read the words",
+   "count": 10,
+   "seconds": 10.92,
+   "plain": "Read 10 pieces of text in 10.92 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+  },
+  {
+   "key": "symbols",
+   "title": "Find the symbols",
+   "count": 20,
+   "seconds": 2.73,
+   "plain": "Found 20 symbols in 2.73 s: 5 incoming air circuit breakers, 4 outgoing moulded-case breakers, 4 fuse switches, 3 current transformers, 2 motor starters, 1 motor, 1 earth. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+  },
+  {
+   "key": "labels",
+   "title": "Pair labels with symbols",
+   "count": 5,
+   "seconds": 0.11,
+   "plain": "Paired 5 of 20 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
+  },
+  {
+   "key": "spec",
+   "title": "Read the specification and compare",
+   "count": 0,
+   "seconds": 0.0,
+   "plain": "No specification was supplied, so the board's form, protection and fault level come from the drawing notes alone (Form 4 Type 6, IP31, fault level not found). An estimator would check these against the specification before pricing."
+  },
+  {
+   "key": "price",
+   "title": "Pick parts and price",
+   "count": 8,
+   "seconds": 0.0,
+   "plain": "Chose 8 catalogue lines and priced the board at \u00a315,954 (illustrative prices, 15% margin included); 18 items flagged for the estimator. Every line names the symbol, text or clause it rests on, so a reviewer can check it on the drawing."
+  }
+ ],
+ "devices": [
+  {
+   "id": "D1",
+   "type": "ACB",
+   "type_plain": "incoming air circuit breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.06,
+   "box": [
+    637,
+    101,
+    32,
+    23
+   ],
+   "label": ""
+  },
+  {
+   "id": "D2",
+   "type": "ACB",
+   "type_plain": "incoming air circuit breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.15,
+   "box": [
+    568,
+    102,
+    32,
+    21
+   ],
+   "label": ""
+  },
+  {
+   "id": "D3",
+   "type": "ACB",
+   "type_plain": "incoming air circuit breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.17,
+   "box": [
+    705,
+    102,
+    32,
+    20
+   ],
+   "label": ""
+  },
+  {
+   "id": "D4",
+   "type": "CT",
+   "type_plain": "current transformer",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.06,
+   "box": [
+    646,
+    176,
+    12,
+    15
+   ],
+   "label": ""
+  },
+  {
+   "id": "D5",
+   "type": "CT",
+   "type_plain": "current transformer",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.06,
+   "box": [
+    718,
+    212,
+    7,
+    22
+   ],
+   "label": ""
+  },
+  {
+   "id": "D6",
+   "type": "ACB",
+   "type_plain": "incoming air circuit breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.07,
+   "box": [
+    1097,
+    232,
+    18,
+    13
+   ],
+   "label": ""
+  },
+  {
+   "id": "D7",
+   "type": "ACB",
+   "type_plain": "incoming air circuit breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.12,
+   "box": [
+    960,
+    235,
+    26,
+    36
+   ],
+   "label": "5"
+  },
+  {
+   "id": "D8",
+   "type": "CONTACTOR",
+   "type_plain": "motor starter",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.09,
+   "box": [
+    1097,
+    252,
+    20,
+    19
+   ],
+   "label": ""
+  },
+  {
+   "id": "D9",
+   "type": "MOTOR",
+   "type_plain": "motor",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.06,
+   "box": [
+    1104,
+    331,
+    24,
+    25
+   ],
+   "label": ""
+  },
+  {
+   "id": "D10",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.12,
+   "box": [
+    248,
+    394,
+    71,
+    24
+   ],
+   "label": ""
+  },
+  {
+   "id": "D11",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.1,
+   "box": [
+    387,
+    394,
+    71,
+    25
+   ],
+   "label": ""
+  },
+  {
+   "id": "D12",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.11,
+   "box": [
+    727,
+    428,
+    19,
+    14
+   ],
+   "label": ""
+  },
+  {
+   "id": "D13",
+   "type": "CONTACTOR",
+   "type_plain": "motor starter",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.06,
+   "box": [
+    418,
+    439,
+    25,
+    31
+   ],
+   "label": ""
+  },
+  {
+   "id": "D14",
+   "type": "CT",
+   "type_plain": "current transformer",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.07,
+   "box": [
+    144,
+    441,
+    24,
+    24
+   ],
+   "label": ""
+  },
+  {
+   "id": "D15",
+   "type": "FUSE_SWITCH",
+   "type_plain": "fuse switch",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "UITS",
+   "conf": 0.11,
+   "box": [
+    376,
+    519,
+    14,
+    24
+   ],
+   "label": "UITS"
+  },
+  {
+   "id": "D16",
+   "type": "FUSE_SWITCH",
+   "type_plain": "fuse switch",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "LOAD CIRCUITS",
+   "conf": 0.29,
+   "box": [
+    252,
+    520,
+    15,
+    25
+   ],
+   "label": "LOAD CIRCUITS"
+  },
+  {
+   "id": "D17",
+   "type": "FUSE_SWITCH",
+   "type_plain": "fuse switch",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "AD CIRCUITS",
+   "conf": 0.24,
+   "box": [
+    292,
+    520,
+    14,
+    26
+   ],
+   "label": "AD CIRCUITS"
+  },
+  {
+   "id": "D18",
+   "type": "FUSE_SWITCH",
+   "type_plain": "fuse switch",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "SCONNECT SWITCH-",
+   "conf": 0.12,
+   "box": [
+    582,
+    535,
+    15,
+    25
+   ],
+   "label": "SCONNECT SWITCH-"
+  },
+  {
+   "id": "D19",
+   "type": "EARTH",
+   "type_plain": "earth",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.1,
+   "box": [
+    320,
+    581,
+    49,
+    15
+   ],
+   "label": ""
+  },
+  {
+   "id": "D20",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.07,
+   "box": [
+    937,
+    625,
+    72,
+    24
+   ],
+   "label": ""
+  }
+ ],
+ "board": {
+  "fault_kA": null,
+  "form": "Form 4 Type 6",
+  "ip": "IP31",
+  "poles_default": 4,
+  "busbar_rating": 0,
+  "sections": 1,
+  "ways": 0
+ },
+ "bom": {
+  "lines": [
+   {
+    "line": 1,
+    "part": "CT-SET",
+    "description": "Current transformers, set of three, class 1",
+    "qty": 1,
+    "unit_gbp": 280,
+    "total_gbp": 280,
+    "conf": 0.06,
+    "evidence": [
+     "S4"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 2,
+    "part": "CT-SET",
+    "description": "Current transformers, set of three, class 1",
+    "qty": 1,
+    "unit_gbp": 280,
+    "total_gbp": 280,
+    "conf": 0.06,
+    "evidence": [
+     "S5"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 3,
+    "part": "CT-SET",
+    "description": "Current transformers, set of three, class 1",
+    "qty": 1,
+    "unit_gbp": 280,
+    "total_gbp": 280,
+    "conf": 0.07,
+    "evidence": [
+     "S14"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 4,
+    "part": "BUSBAR-CU-1600",
+    "description": "Copper busbar set 1600 A (4-bar), 1 sections, about 29 kg",
+    "qty": 1,
+    "unit_gbp": 331.2,
+    "total_gbp": 331.2,
+    "conf": 0.9,
+    "evidence": [],
+    "rule": "R-BUSBAR-SIZE"
+   },
+   {
+    "line": 5,
+    "part": "ENC-SECTION",
+    "description": "Enclosure section, Form 4 Type 6, IP31, RAL 7035",
+    "qty": 1,
+    "unit_gbp": 3380.0,
+    "total_gbp": 3380.0,
+    "conf": 0.95,
+    "evidence": [],
+    "rule": "R-ENCLOSURE"
+   },
+   {
+    "line": 6,
+    "part": "LAB-ASSY",
+    "description": "Assembly, wiring and routine verification: 164 hours",
+    "qty": 1,
+    "unit_gbp": 7872,
+    "total_gbp": 7872,
+    "conf": 0.9,
+    "evidence": [],
+    "rule": "R-LABOUR"
+   },
+   {
+    "line": 7,
+    "part": "DOC",
+    "description": "Documentation, as-built drawings, test certificates",
+    "qty": 1,
+    "unit_gbp": 600,
+    "total_gbp": 600,
+    "conf": 1.0,
+    "evidence": [],
+    "rule": "R-DOC"
+   },
+   {
+    "line": 8,
+    "part": "DEL",
+    "description": "Delivery to site, crane and offload excluded",
+    "qty": 1,
+    "unit_gbp": 850,
+    "total_gbp": 850,
+    "conf": 1.0,
+    "evidence": [],
+    "rule": "R-DELIVERY"
+   }
+  ],
+  "subtotal_gbp": 13873.2,
+  "margin_gbp": 2080.98,
+  "total_gbp": 15954.18
+ },
+ "issues": [
+  {
+   "kind": "missing",
+   "what": "fault level not found on the drawing notes",
+   "action": "confirm with the consultant",
+   "evidence": []
+  },
+  {
+   "kind": "missing",
+   "what": "D1 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S1"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D2 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S2"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D3 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S3"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D6 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S6"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D7 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S7",
+    "S7t1"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D8 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S8"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D10 (MCCB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S10"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D11 (MCCB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S11"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D12 (MCCB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S12"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D13 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S13"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D15 (FUSE_SWITCH): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S15",
+    "S15t1"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D16 (FUSE_SWITCH): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S16",
+    "S16t1"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D17 (FUSE_SWITCH): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S17",
+    "S17t1"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D18 (FUSE_SWITCH): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S18",
+    "S18t1"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D20 (MCCB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S20"
+   ]
+  },
+  {
+   "kind": "assumed",
+   "what": "busbar rating not read; assumed 0 A from the largest incomer",
+   "action": "confirm",
+   "evidence": []
+  },
+  {
+   "kind": "low_confidence",
+   "what": "devices read with low confidence: D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15, D16, D17, D18, D19, D20",
+   "action": "check against the drawing",
+   "evidence": [
+    "D1",
+    "D2",
+    "D3",
+    "D4",
+    "D5",
+    "D6",
+    "D7",
+    "D8",
+    "D9",
+    "D10",
+    "D11",
+    "D12",
+    "D13",
+    "D14",
+    "D15",
+    "D16",
+    "D17",
+    "D18",
+    "D19",
+    "D20"
+   ]
+  }
+ ],
+ "conflicts": [],
+ "spec": null,
+ "score": null,
+ "timing": {
+  "total": 13.94,
+  "ocr": 10.92,
+  "detector": 2.73
+ },
+ "reader": "trained",
+ "engine": "rapidocr",
+ "model": {
+  "weights": "weights/rtdetr_r18_full",
+  "threshold": 0.11
+ },
+ "files": {
+  "quotation_md": "quotation.md",
+  "bom_csv": "bom.csv",
+  "review_html": "review.html",
+  "extraction_json": "extraction.json"
+ }
+}

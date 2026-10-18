@@ -1,0 +1,15 @@
+line,part,description,qty,unit_gbp,total_gbp,conf,rule,evidence
+1,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.35,R-PROTECTION,S3 S3t3 S3t4
+2,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.1,R-PROTECTION,S5
+3,METER-MF,Panel meter (multifunction),1,260,260,0.14,R-METERING,S6
+4,METER-MF,Panel meter (multifunction),1,260,260,0.06,R-METERING,S7
+5,METER-MF,Panel meter (multifunction),1,260,260,0.1,R-METERING,S8
+6,METER-MF,Panel meter (multifunction),1,260,260,0.08,R-METERING,S12
+7,METER-MF,Panel meter (multifunction),1,260,260,0.07,R-METERING,S13
+8,CT-SET,"Current transformers, set of three, class 1",1,280,280,0.1,R-METERING,S15
+9,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.08,R-PROTECTION,S17
+10,BUSBAR-CU-1600,"Copper busbar set 1600 A (4-bar), 1 sections, about 29 kg",1,331.2,331.2,0.9,R-BUSBAR-SIZE,
+11,ENC-SECTION,"Enclosure section, Form 4 Type 6, IP31, RAL 7035",1,3380.0,3380.0,0.95,R-ENCLOSURE,
+12,LAB-ASSY,"Assembly, wiring and routine verification: 76 hours",1,3648,3648,0.9,R-LABOUR,
+13,DOC,"Documentation, as-built drawings, test certificates",1,600,600,1.0,R-DOC,
+14,DEL,"Delivery to site, crane and offload excluded",1,850,850,1.0,R-DELIVERY,

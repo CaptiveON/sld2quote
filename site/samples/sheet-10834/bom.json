@@ -1,0 +1,319 @@
+{
+ "board": {
+  "fault_kA": 36,
+  "form": "Form 4 Type 6",
+  "ip": "IP42",
+  "poles_default": 4,
+  "busbar_rating": 1600,
+  "sections": 2,
+  "ways": 4
+ },
+ "lines": [
+  {
+   "line": 1,
+   "part": "ACB-1600-4P-N",
+   "description": "Air circuit breaker 1600 A 4-pole, 36 kA band N, withdrawable, electronic trip",
+   "qty": 1,
+   "unit_gbp": 5124.0,
+   "total_gbp": 5124.0,
+   "evidence": [
+    "S2",
+    "S2t1",
+    "S2t2"
+   ],
+   "rule": "R-ACB-SELECT",
+   "conf": 0.46,
+   "basis": "rating 1600 A from ['S2t1']; poles 4; kA 36"
+  },
+  {
+   "line": 2,
+   "part": "FU-KIT-ACB",
+   "description": "Incomer functional unit: compartment, shutters, terminals, controls",
+   "qty": 1,
+   "unit_gbp": 1400,
+   "total_gbp": 1400,
+   "evidence": [
+    "S2",
+    "S2t1",
+    "S2t2"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.46,
+   "basis": ""
+  },
+  {
+   "line": 3,
+   "part": "METER-CT 1600/5A | 3AR A 1600 A Cu 36 kA/1s",
+   "description": "Panel meter (CT 1600/5A | 3AR A 1600 A Cu 36 kA/1s)",
+   "qty": 1,
+   "unit_gbp": 260,
+   "total_gbp": 260,
+   "evidence": [
+    "S3",
+    "S3t1",
+    "S3t2"
+   ],
+   "rule": "R-METERING",
+   "conf": 0.56,
+   "basis": ""
+  },
+  {
+   "line": 4,
+   "part": "CT-SET",
+   "description": "Current transformers 1600/5 A, set of three, class 1",
+   "qty": 1,
+   "unit_gbp": 280,
+   "total_gbp": 280,
+   "evidence": [
+    "S4",
+    "S4t2"
+   ],
+   "rule": "R-METERING",
+   "conf": 0.38,
+   "basis": ""
+  },
+  {
+   "line": 5,
+   "part": "MCCB-250-4P-N",
+   "description": "Moulded-case circuit breaker 250 A 4-pole, 36 kA band N, adjustable trip",
+   "qty": 1,
+   "unit_gbp": 634.4,
+   "total_gbp": 634.4,
+   "evidence": [
+    "S6",
+    "S6t1"
+   ],
+   "rule": "R-MCCB-SELECT",
+   "conf": 0.38,
+   "basis": "rating 250 A; poles 4; kA 36"
+  },
+  {
+   "line": 6,
+   "part": "FU-KIT-MCCB",
+   "description": "Outgoing functional unit: compartment door, terminals, labels",
+   "qty": 1,
+   "unit_gbp": 420,
+   "total_gbp": 420,
+   "evidence": [
+    "S6",
+    "S6t1"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.38,
+   "basis": ""
+  },
+  {
+   "line": 7,
+   "part": "ISOL-400-4P",
+   "description": "Switch-disconnector 400 A 4-pole",
+   "qty": 1,
+   "unit_gbp": 634.4,
+   "total_gbp": 634.4,
+   "evidence": [
+    "S8",
+    "S8t1"
+   ],
+   "rule": "R-ISOL-SELECT",
+   "conf": 0.77,
+   "basis": "rating 400 A; poles 4"
+  },
+  {
+   "line": 8,
+   "part": "FU-KIT-ISOLATOR",
+   "description": "Outgoing functional unit: compartment door, terminals, labels",
+   "qty": 1,
+   "unit_gbp": 340,
+   "total_gbp": 340,
+   "evidence": [
+    "S8",
+    "S8t1"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.77,
+   "basis": ""
+  },
+  {
+   "line": 9,
+   "part": "ISOL-100-4P",
+   "description": "Switch-disconnector 100 A 4-pole; feeds pumps",
+   "qty": 1,
+   "unit_gbp": 207.4,
+   "total_gbp": 207.4,
+   "evidence": [
+    "S9",
+    "S9t2",
+    "S9t1"
+   ],
+   "rule": "R-ISOL-SELECT",
+   "conf": 0.75,
+   "basis": "rating 100 A; poles 4"
+  },
+  {
+   "line": 10,
+   "part": "FU-KIT-ISOLATOR",
+   "description": "Outgoing functional unit: compartment door, terminals, labels",
+   "qty": 1,
+   "unit_gbp": 340,
+   "total_gbp": 340,
+   "evidence": [
+    "S9",
+    "S9t2",
+    "S9t1"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.75,
+   "basis": ""
+  },
+  {
+   "line": 11,
+   "part": "MCCB-400-4P-N",
+   "description": "Moulded-case circuit breaker 400 A 4-pole, 36 kA band N, adjustable trip",
+   "qty": 1,
+   "unit_gbp": 1195.6,
+   "total_gbp": 1195.6,
+   "evidence": [
+    "S10",
+    "T13"
+   ],
+   "rule": "R-MCCB-SELECT",
+   "conf": 0.27,
+   "basis": "rating 400 A; poles 4; kA 36"
+  },
+  {
+   "line": 12,
+   "part": "FU-KIT-MCCB",
+   "description": "Outgoing functional unit: compartment door, terminals, labels",
+   "qty": 1,
+   "unit_gbp": 420,
+   "total_gbp": 420,
+   "evidence": [
+    "S10",
+    "T13"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.27,
+   "basis": ""
+  },
+  {
+   "line": 13,
+   "part": "BUSBAR-CU-1600",
+   "description": "Copper busbar set 1600 A (4-bar), 2 sections, about 58 kg",
+   "qty": 1,
+   "unit_gbp": 662.4,
+   "total_gbp": 662.4,
+   "evidence": [
+    "T6"
+   ],
+   "rule": "R-BUSBAR-SIZE",
+   "conf": 0.9,
+   "basis": "1600 A busbar label; 2 sections"
+  },
+  {
+   "line": 14,
+   "part": "ENC-SECTION",
+   "description": "Enclosure section, Form 4 Type 6, IP42, RAL 7035",
+   "qty": 2,
+   "unit_gbp": 3549.0,
+   "total_gbp": 7098.0,
+   "evidence": [
+    "T20",
+    "T20",
+    "T22",
+    "T24"
+   ],
+   "rule": "R-ENCLOSURE",
+   "conf": 0.95,
+   "basis": "4 ways at 4 per section plus incomers"
+  },
+  {
+   "line": 15,
+   "part": "LAB-ASSY",
+   "description": "Assembly, wiring and routine verification: 90 hours",
+   "qty": 1,
+   "unit_gbp": 4320,
+   "total_gbp": 4320,
+   "evidence": [],
+   "rule": "R-LABOUR",
+   "conf": 0.9,
+   "basis": ""
+  },
+  {
+   "line": 16,
+   "part": "DOC",
+   "description": "Documentation, as-built drawings, test certificates",
+   "qty": 1,
+   "unit_gbp": 600,
+   "total_gbp": 600,
+   "evidence": [],
+   "rule": "R-DOC",
+   "conf": 1.0,
+   "basis": ""
+  },
+  {
+   "line": 17,
+   "part": "CERT",
+   "description": "Design-verification certificates per specification",
+   "qty": 1,
+   "unit_gbp": 0.0,
+   "total_gbp": 0.0,
+   "evidence": [
+    "7.7"
+   ],
+   "rule": "R-SPEC-CERT",
+   "conf": 1.0,
+   "basis": ""
+  },
+  {
+   "line": 18,
+   "part": "DEL",
+   "description": "Delivery to site, crane and offload excluded",
+   "qty": 1,
+   "unit_gbp": 850,
+   "total_gbp": 850,
+   "evidence": [],
+   "rule": "R-DELIVERY",
+   "conf": 1.0,
+   "basis": ""
+  }
+ ],
+ "subtotal_gbp": 24786.2,
+ "margin_gbp": 3717.93,
+ "total_gbp": 28504.13,
+ "issues": [
+  {
+   "kind": "missing",
+   "what": "D5 (MCCB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S5",
+    "S5t2",
+    "S5t6"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D7 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S7",
+    "S7t6",
+    "S7t3"
+   ]
+  },
+  {
+   "kind": "low_confidence",
+   "what": "devices read with low confidence: D2, D3, D4, D5, D6, D7, D10, D11",
+   "action": "check against the drawing",
+   "evidence": [
+    "D2",
+    "D3",
+    "D4",
+    "D5",
+    "D6",
+    "D7",
+    "D10",
+    "D11"
+   ]
+  }
+ ]
+}

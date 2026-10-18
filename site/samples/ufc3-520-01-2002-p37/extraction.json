@@ -1,0 +1,671 @@
+{
+ "image": "ufc3-520-01-2002-p37.png",
+ "size": [
+  1122,
+  610
+ ],
+ "deskew_deg": -0.2,
+ "texts": [
+  {
+   "text": "Separated Commercial",
+   "conf": 0.9983221769332886,
+   "box": [
+    502.5,
+    26.5,
+    282.0,
+    27.5
+   ],
+   "src": "page",
+   "id": "T1"
+  },
+  {
+   "text": "Power Feeds",
+   "conf": 0.9926592328331687,
+   "box": [
+    554.0,
+    57.5,
+    163.5,
+    25.5
+   ],
+   "src": "page",
+   "id": "T2"
+  },
+  {
+   "text": "Each transformer capable of",
+   "conf": 0.9985455738173591,
+   "box": [
+    482.5,
+    151.0,
+    349.0,
+    29.0
+   ],
+   "src": "page",
+   "id": "T3"
+  },
+  {
+   "text": "carrying total critical load",
+   "conf": 0.9991567837340491,
+   "box": [
+    483.5,
+    181.5,
+    304.0,
+    28.0
+   ],
+   "src": "page",
+   "id": "T4"
+  },
+  {
+   "text": "480Y/277V",
+   "conf": 0.9995862576696608,
+   "box": [
+    428.5,
+    232.0,
+    138.0,
+    23.5
+   ],
+   "src": "page",
+   "id": "T5"
+  },
+  {
+   "text": "480Y/277V",
+   "conf": 0.9993182288275825,
+   "box": [
+    877.0,
+    234.0,
+    137.0,
+    22.0
+   ],
+   "src": "page",
+   "id": "T6"
+  },
+  {
+   "text": "Only 2 of 3 breakers",
+   "conf": 0.9951081335544586,
+   "box": [
+    47.0,
+    249.5,
+    251.5,
+    29.0
+   ],
+   "src": "page",
+   "id": "T7"
+  },
+  {
+   "text": "closed at one time",
+   "conf": 0.9870656033356985,
+   "box": [
+    47.5,
+    281.5,
+    221.5,
+    24.5
+   ],
+   "src": "page",
+   "id": "T8"
+  },
+  {
+   "text": ">NC",
+   "conf": 0.9571162462234497,
+   "box": [
+    427.0,
+    289.0,
+    58.5,
+    29.5
+   ],
+   "src": "page",
+   "id": "T9"
+  },
+  {
+   "text": "NO",
+   "conf": 0.9989151656627655,
+   "box": [
+    619.5,
+    292.5,
+    43.0,
+    26.5
+   ],
+   "src": "page",
+   "id": "T10"
+  },
+  {
+   "text": "NC",
+   "conf": 0.9967155158519745,
+   "box": [
+    882.5,
+    291.0,
+    53.0,
+    28.0
+   ],
+   "src": "page",
+   "id": "T11"
+  },
+  {
+   "text": "and interlocked",
+   "conf": 0.9980427900950114,
+   "box": [
+    46.0,
+    311.0,
+    187.5,
+    24.0
+   ],
+   "src": "page",
+   "id": "T12"
+  },
+  {
+   "text": "To steady-state loads",
+   "conf": 0.9872388981637501,
+   "box": [
+    263.0,
+    488.5,
+    261.5,
+    30.5
+   ],
+   "src": "page",
+   "id": "T13"
+  },
+  {
+   "text": "To loads that create the most",
+   "conf": 0.9822710608613903,
+   "box": [
+    687.0,
+    496.0,
+    357.0,
+    24.5
+   ],
+   "src": "page",
+   "id": "T14"
+  },
+  {
+   "text": "that produce the least",
+   "conf": 0.9888435249978845,
+   "box": [
+    264.0,
+    521.5,
+    266.5,
+    27.0
+   ],
+   "src": "page",
+   "id": "T15"
+  },
+  {
+   "text": "disturbances such as large",
+   "conf": 0.9974159483726208,
+   "box": [
+    686.0,
+    522.5,
+    333.0,
+    34.0
+   ],
+   "src": "page",
+   "id": "T16"
+  },
+  {
+   "text": "power quality problems",
+   "conf": 0.9915910715406592,
+   "box": [
+    264.5,
+    553.0,
+    288.0,
+    29.5
+   ],
+   "src": "page",
+   "id": "T17"
+  },
+  {
+   "text": "motors or rectifiers",
+   "conf": 0.9795125395059585,
+   "box": [
+    687.5,
+    559.0,
+    230.5,
+    23.0
+   ],
+   "src": "page",
+   "id": "T18"
+  },
+  {
+   "text": "Each transformer capable of",
+   "conf": 0.9921376285729585,
+   "box": [
+    482.6666666666667,
+    150.66666666666666,
+    348.0,
+    31.0
+   ],
+   "src": "crop",
+   "id": "S1t1"
+  },
+  {
+   "text": "carrying total critical load",
+   "conf": 0.9976194479635784,
+   "box": [
+    481.0,
+    179.33333333333331,
+    306.6666666666667,
+    33.0
+   ],
+   "src": "crop",
+   "id": "S1t2"
+  },
+  {
+   "text": "480Y/277V",
+   "conf": 0.9979539381133186,
+   "box": [
+    429.0,
+    233.0,
+    137.33333333333334,
+    21.0
+   ],
+   "src": "crop",
+   "id": "S1t3"
+  },
+  {
+   "text": "FX",
+   "conf": 0.57242551445961,
+   "box": [
+    331.6666666666667,
+    218.0,
+    38.0,
+    48.333333333333336
+   ],
+   "src": "crop",
+   "id": "S2t1"
+  },
+  {
+   "text": "Only 2 of 3 breakers",
+   "conf": 0.9903204917907715,
+   "box": [
+    45.666666666666664,
+    250.0,
+    254.66666666666666,
+    29.0
+   ],
+   "src": "crop",
+   "id": "S2t2"
+  },
+  {
+   "text": "closed at one time",
+   "conf": 0.9993172436952591,
+   "box": [
+    46.666666666666664,
+    282.6666666666667,
+    222.33333333333334,
+    23.999999999999943
+   ],
+   "src": "crop",
+   "id": "S2t3"
+  },
+  {
+   "text": "and interlocked",
+   "conf": 0.9982952872912089,
+   "box": [
+    45.666666666666664,
+    312.0,
+    187.66666666666666,
+    24.666666666666668
+   ],
+   "src": "crop",
+   "id": "S2t4"
+  },
+  {
+   "text": "NO",
+   "conf": 0.9985033571720123,
+   "box": [
+    619.3333333333334,
+    292.0,
+    44.333333333333336,
+    31.333333333333332
+   ],
+   "src": "crop",
+   "id": "S3t1"
+  },
+  {
+   "text": "> NC",
+   "conf": 0.7715445160865784,
+   "box": [
+    869.0,
+    289.0,
+    69.66666666666667,
+    36.333333333333336
+   ],
+   "src": "crop",
+   "id": "S3t2"
+  },
+  {
+   "text": ">",
+   "conf": 0.8933827877044678,
+   "box": [
+    353.0,
+    359.3333333333333,
+    28.333333333333332,
+    38.666666666666664
+   ],
+   "src": "crop",
+   "id": "S4t1"
+  },
+  {
+   "text": ">",
+   "conf": 0.5281181335449219,
+   "box": [
+    459.6666666666667,
+    361.0,
+    25.0,
+    36.666666666666664
+   ],
+   "src": "crop",
+   "id": "S5t1"
+  },
+  {
+   "text": "5",
+   "conf": 0.7148019075393677,
+   "box": [
+    904.6666666666666,
+    357.0,
+    32.333333333333336,
+    44.666666666666664
+   ],
+   "src": "crop",
+   "id": "S7t1"
+  }
+ ],
+ "busbars": [
+  {
+   "x1": 204,
+   "x2": 630,
+   "y1": 339,
+   "y2": 345,
+   "y": 342.0,
+   "id": "BUS-1",
+   "rating": null,
+   "kA": null,
+   "label_text": null
+  },
+  {
+   "x1": 654,
+   "x2": 1080,
+   "y1": 341,
+   "y2": 347,
+   "y": 344.0,
+   "id": "BUS-2",
+   "rating": null,
+   "kA": null,
+   "label_text": null
+  }
+ ],
+ "vlines_count": 14,
+ "symbols": [
+  {
+   "id": "S1",
+   "kind": "relay",
+   "box": [
+    484,
+    154,
+    17,
+    19
+   ],
+   "shape_score": 0.13
+  },
+  {
+   "id": "S2",
+   "kind": "meter",
+   "box": [
+    47,
+    252,
+    20,
+    20
+   ],
+   "shape_score": 0.23
+  },
+  {
+   "id": "S3",
+   "kind": "fuse_switch",
+   "box": [
+    626,
+    322,
+    32,
+    27
+   ],
+   "shape_score": 0.12
+  },
+  {
+   "id": "S4",
+   "kind": "fuse_switch",
+   "box": [
+    361,
+    364,
+    17,
+    30
+   ],
+   "shape_score": 0.22
+  },
+  {
+   "id": "S5",
+   "kind": "fuse_switch",
+   "box": [
+    465,
+    364,
+    18,
+    30
+   ],
+   "shape_score": 0.3
+  },
+  {
+   "id": "S6",
+   "kind": "fuse_switch",
+   "box": [
+    565,
+    364,
+    17,
+    32
+   ],
+   "shape_score": 0.45
+  },
+  {
+   "id": "S7",
+   "kind": "fuse_switch",
+   "box": [
+    811,
+    365,
+    17,
+    30
+   ],
+   "shape_score": 0.43
+  },
+  {
+   "id": "S8",
+   "kind": "fuse_switch",
+   "box": [
+    915,
+    366,
+    17,
+    30
+   ],
+   "shape_score": 0.36
+  }
+ ],
+ "devices": [
+  {
+   "symbol": "S1",
+   "box": [
+    484,
+    154,
+    17,
+    19
+   ],
+   "label_texts": [
+    "S1t3",
+    "S1t2"
+   ],
+   "label": "480Y/277V | carrying total critical load",
+   "conf": 0.13,
+   "type": "RELAY",
+   "rating": null,
+   "on_bus": "BUS-1",
+   "connected": false,
+   "id": "D1"
+  },
+  {
+   "symbol": "S2",
+   "box": [
+    47,
+    252,
+    20,
+    20
+   ],
+   "label_texts": [
+    "S2t4",
+    "S2t3"
+   ],
+   "label": "and interlocked | closed at one time",
+   "conf": 0.23,
+   "type": "METER",
+   "rating": null,
+   "on_bus": null,
+   "connected": false,
+   "id": "D2"
+  },
+  {
+   "symbol": "S3",
+   "box": [
+    626,
+    322,
+    32,
+    27
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.06,
+   "type": "FUSE_SWITCH",
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "on_bus": null,
+   "connected": false,
+   "id": "D3"
+  },
+  {
+   "symbol": "S4",
+   "box": [
+    361,
+    364,
+    17,
+    30
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.11,
+   "type": "FUSE_SWITCH",
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "on_bus": "BUS-1",
+   "connected": false,
+   "id": "D4"
+  },
+  {
+   "symbol": "S5",
+   "box": [
+    465,
+    364,
+    18,
+    30
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.15,
+   "type": "FUSE_SWITCH",
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "on_bus": "BUS-1",
+   "connected": false,
+   "id": "D5"
+  },
+  {
+   "symbol": "S6",
+   "box": [
+    565,
+    364,
+    17,
+    32
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.23,
+   "type": "FUSE_SWITCH",
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "on_bus": "BUS-1",
+   "connected": false,
+   "id": "D6"
+  },
+  {
+   "symbol": "S7",
+   "box": [
+    811,
+    365,
+    17,
+    30
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.21,
+   "type": "FUSE_SWITCH",
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "on_bus": "BUS-2",
+   "connected": false,
+   "id": "D7"
+  },
+  {
+   "symbol": "S8",
+   "box": [
+    915,
+    366,
+    17,
+    30
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.18,
+   "type": "FUSE_SWITCH",
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "on_bus": "BUS-2",
+   "connected": false,
+   "id": "D8"
+  }
+ ],
+ "notes": {
+  "form": null,
+  "ip": null,
+  "fault_kA": null,
+  "poles_default": null,
+  "evidence": []
+ },
+ "reader": "trained",
+ "seconds": {
+  "total": 7.37,
+  "ocr": 6.14,
+  "detector": 1.15
+ },
+ "detector": {
+  "weights": "weights/rtdetr_r18_full",
+  "device": "cpu",
+  "threads": 4,
+  "score_threshold": 0.11,
+  "score_threshold_source": "drawing",
+  "nms_iou": 0.5,
+  "merge_iou": 0.5,
+  "edge_px": 2,
+  "contain": 0.8
+ }
+}

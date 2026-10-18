@@ -1,0 +1,38 @@
+line,part,description,qty,unit_gbp,total_gbp,conf,rule,evidence
+1,ACB-2000-4P-H,"Air circuit breaker 2000 A 4-pole, 65 kA band H, withdrawable, electronic trip",1,7054.04,7054.04,0.28,R-ACB-SELECT,S4 S4t1 S4t2
+2,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.28,R-FU-KIT,S4 S4t1 S4t2
+3,ACB-2000-4P-H,"Air circuit breaker 2000 A 4-pole, 65 kA band H, withdrawable, electronic trip",1,7054.04,7054.04,0.34,R-ACB-SELECT,S6 S6t1 S6t2
+4,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.34,R-FU-KIT,S6 S6t1 S6t2
+5,METER-CT2000/5A | 3AR A 2000 A Cu 65 kA/1s,Panel meter (CT2000/5A | 3AR A 2000 A Cu 65 kA/1s),1,260,260,0.63,R-METERING,S7 S7t1 S7t2
+6,CT-SET,"Current transformers 2000/5 A, set of three, class 1",1,280,280,0.12,R-METERING,S8 S8t2
+7,BSS-2000-4P,"Bus-section switch 2000 A 4-pole, 65 kA",1,4248.0,4248.0,0.15,R-BUS-SECTION,S9 S9t2 S9t1
+8,FU-KIT-BS,Bus-section functional unit and interlocking,1,900,900,0.15,R-FU-KIT,S9 S9t2 S9t1
+9,MCCB-250-3P-L,"Moulded-case circuit breaker 250 A 3-pole, 80 kA band L, adjustable trip",1,728.0,728.0,0.42,R-MCCB-SELECT,S10 S10t1
+10,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.42,R-FU-KIT,S10 S10t1
+11,ISOL-400-4P,Switch-disconnector 400 A 4-pole; feeds kitchen,1,634.4,634.4,0.69,R-ISOL-SELECT,S12 S12t2 S12t1
+12,FU-KIT-ISOLATOR,"Outgoing functional unit: compartment door, terminals, labels",1,340,340,0.69,R-FU-KIT,S12 S12t2 S12t1
+13,MCCB-630-4P-H,"Moulded-case circuit breaker 630 A 4-pole, 65 kA band H, adjustable trip; feeds kA",1,2087.42,2087.42,0.4,R-MCCB-SELECT,S15 S15t1 S15t2
+14,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.4,R-FU-KIT,S15 S15t1 S15t2
+15,MCCB-400-4P-H,"Moulded-case circuit breaker 400 A 4-pole, 65 kA band H, adjustable trip",1,1410.81,1410.81,0.37,R-MCCB-SELECT,S16 T24
+16,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.37,R-FU-KIT,S16 T24
+17,MCCB-400-4P-H,"Moulded-case circuit breaker 400 A 4-pole, 65 kA band H, adjustable trip; feeds lifts",1,1410.81,1410.81,0.69,R-MCCB-SELECT,S17 S17t2 S17t1
+18,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.69,R-FU-KIT,S17 S17t2 S17t1
+19,MCCB-400-4P-H,"Moulded-case circuit breaker 400 A 4-pole, 65 kA band H, adjustable trip",1,1410.81,1410.81,0.58,R-MCCB-SELECT,S18 S18t1
+20,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.58,R-FU-KIT,S18 S18t1
+21,MCCB-250-3P-H,"Moulded-case circuit breaker 250 A 3-pole, 65 kA band H, adjustable trip",1,613.6,613.6,0.29,R-MCCB-SELECT,S21 S21t1
+22,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.29,R-FU-KIT,S21 S21t1
+23,MCCB-400-4P-H,"Moulded-case circuit breaker 400 A 4-pole, 65 kA band H, adjustable trip",1,1410.81,1410.81,0.42,R-MCCB-SELECT,S24 S24t3
+24,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.42,R-FU-KIT,S24 S24t3
+25,MCCB-250-4P-H,"Moulded-case circuit breaker 250 A 4-pole, 65 kA band H, adjustable trip; feeds SB-4",1,748.59,748.59,0.35,R-MCCB-SELECT,S25 S25t6 S25t3
+26,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.35,R-FU-KIT,S25 S25t6 S25t3
+27,MCCB-630-4P-H,"Moulded-case circuit breaker 630 A 4-pole, 65 kA band H, adjustable trip",1,2087.42,2087.42,0.55,R-MCCB-SELECT,S26 S26t1
+28,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.55,R-FU-KIT,S26 S26t1
+29,MCCB-800-4P-H,"Moulded-case circuit breaker 800 A 4-pole, 65 kA band H, adjustable trip",1,2735.24,2735.24,0.25,R-MCCB-SELECT,S27 S27t3
+30,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.25,R-FU-KIT,S27 S27t3
+31,BUSBAR-CU-2000,"Copper busbar set 2000 A (4-bar), 6 sections, about 216 kg",1,2484.0,2484.0,0.9,R-BUSBAR-SIZE,T15 T15
+32,ENC-SECTION,"Enclosure section, Form 3b, IP42, RAL 7035",6,2730.0,16380.0,0.95,R-ENCLOSURE,T64 T64 T66 T68
+33,LAB-ASSY,"Assembly, wiring and routine verification: 264 hours",1,12672,12672,0.9,R-LABOUR,
+34,DOC,"Documentation, as-built drawings, test certificates",1,600,600,1.0,R-DOC,
+35,CERT,Design-verification certificates per specification,1,0.0,0.0,1.0,R-SPEC-CERT,7.7
+36,WITNESS,Witness testing at works (specification),1,1200,1200,1.0,R-SPEC-WITNESS,7.8
+37,DEL,"Delivery to site, crane and offload excluded",1,850,850,1.0,R-DELIVERY,

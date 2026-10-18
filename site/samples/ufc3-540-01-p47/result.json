@@ -1,0 +1,565 @@
+{
+ "id": "ufc3-540-01-p47",
+ "source": {
+  "kind": "sample",
+  "title": "UFC 3-540-01: Figure B-6 Selection Between Redundant Utility Supply and Dual Generators",
+  "seed": null,
+  "level": null,
+  "copy": "clean",
+  "has_answer_key": false,
+  "note": "Real public-domain drawing (US federal document), American symbol style the model never trained on; not scored, because it has no answer key yet"
+ },
+ "images": {
+  "sheet": "sheet.png",
+  "overlay": "overlay.png"
+ },
+ "size": [
+  1492,
+  1093
+ ],
+ "steps": [
+  {
+   "key": "text",
+   "title": "Read the words",
+   "count": 27,
+   "seconds": 6.84,
+   "plain": "Read 27 pieces of text in 6.84 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+  },
+  {
+   "key": "symbols",
+   "title": "Find the symbols",
+   "count": 14,
+   "seconds": 1.25,
+   "plain": "Found 14 symbols in 1.25 s: 7 motor starters, 3 protection relays, 2 panel meters, 2 generators. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+  },
+  {
+   "key": "labels",
+   "title": "Pair labels with symbols",
+   "count": 7,
+   "seconds": 0.11,
+   "plain": "Paired 7 of 14 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
+  },
+  {
+   "key": "spec",
+   "title": "Read the specification and compare",
+   "count": 0,
+   "seconds": 0.0,
+   "plain": "No specification was supplied, so the board's form, protection and fault level come from the drawing notes alone (Form 4 Type 6, IP31, fault level not found). An estimator would check these against the specification before pricing."
+  },
+  {
+   "key": "price",
+   "title": "Pick parts and price",
+   "count": 10,
+   "seconds": 0.0,
+   "plain": "Chose 10 catalogue lines and priced the board at \u00a315,001 (illustrative prices, 15% margin included); 10 items flagged for the estimator. Every line names the symbol, text or clause it rests on, so a reviewer can check it on the drawing."
+  }
+ ],
+ "devices": [
+  {
+   "id": "D1",
+   "type": "RELAY",
+   "type_plain": "protection relay",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.14,
+   "box": [
+    212,
+    85,
+    13,
+    16
+   ],
+   "label": "TRANSFORMER Y"
+  },
+  {
+   "id": "D2",
+   "type": "RELAY",
+   "type_plain": "protection relay",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.15,
+   "box": [
+    587,
+    85,
+    16,
+    17
+   ],
+   "label": "TRANSFORMER"
+  },
+  {
+   "id": "D3",
+   "type": "CONTACTOR",
+   "type_plain": "motor starter",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.15,
+   "box": [
+    120,
+    149,
+    60,
+    71
+   ],
+   "label": "TRANSFORMER"
+  },
+  {
+   "id": "D4",
+   "type": "METER",
+   "type_plain": "panel meter",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.24,
+   "box": [
+    871,
+    149,
+    27,
+    18
+   ],
+   "label": "G"
+  },
+  {
+   "id": "D5",
+   "type": "METER",
+   "type_plain": "panel meter",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.11,
+   "box": [
+    1311,
+    149,
+    16,
+    18
+   ],
+   "label": ""
+  },
+  {
+   "id": "D6",
+   "type": "GENERATOR",
+   "type_plain": "generator",
+   "rating": null,
+   "unit": "kVA",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.63,
+   "box": [
+    899,
+    173,
+    85,
+    86
+   ],
+   "label": "*"
+  },
+  {
+   "id": "D7",
+   "type": "GENERATOR",
+   "type_plain": "generator",
+   "rating": null,
+   "unit": "kVA",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.42,
+   "box": [
+    1339,
+    174,
+    83,
+    85
+   ],
+   "label": ""
+  },
+  {
+   "id": "D8",
+   "type": "CONTACTOR",
+   "type_plain": "motor starter",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.06,
+   "box": [
+    72,
+    295,
+    31,
+    59
+   ],
+   "label": ""
+  },
+  {
+   "id": "D9",
+   "type": "CONTACTOR",
+   "type_plain": "motor starter",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.25,
+   "box": [
+    306,
+    400,
+    42,
+    56
+   ],
+   "label": ""
+  },
+  {
+   "id": "D10",
+   "type": "CONTACTOR",
+   "type_plain": "motor starter",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.07,
+   "box": [
+    1126,
+    400,
+    41,
+    55
+   ],
+   "label": ""
+  },
+  {
+   "id": "D11",
+   "type": "RELAY",
+   "type_plain": "protection relay",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.07,
+   "box": [
+    923,
+    515,
+    15,
+    19
+   ],
+   "label": ""
+  },
+  {
+   "id": "D12",
+   "type": "CONTACTOR",
+   "type_plain": "motor starter",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.12,
+   "box": [
+    715,
+    535,
+    42,
+    56
+   ],
+   "label": ""
+  },
+  {
+   "id": "D13",
+   "type": "CONTACTOR",
+   "type_plain": "motor starter",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.16,
+   "box": [
+    668,
+    833,
+    59,
+    29
+   ],
+   "label": "- | -"
+  },
+  {
+   "id": "D14",
+   "type": "CONTACTOR",
+   "type_plain": "motor starter",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.12,
+   "box": [
+    776,
+    833,
+    58,
+    28
+   ],
+   "label": ". | -"
+  }
+ ],
+ "board": {
+  "fault_kA": null,
+  "form": "Form 4 Type 6",
+  "ip": "IP31",
+  "poles_default": 4,
+  "busbar_rating": 2500,
+  "sections": 1,
+  "ways": 0
+ },
+ "bom": {
+  "lines": [
+   {
+    "line": 1,
+    "part": "RELAY-OC",
+    "description": "Overcurrent and earth-fault protection relay",
+    "qty": 1,
+    "unit_gbp": 950,
+    "total_gbp": 950,
+    "conf": 0.14,
+    "evidence": [
+     "S1",
+     "S1t3"
+    ],
+    "rule": "R-PROTECTION"
+   },
+   {
+    "line": 2,
+    "part": "RELAY-OC",
+    "description": "Overcurrent and earth-fault protection relay",
+    "qty": 1,
+    "unit_gbp": 950,
+    "total_gbp": 950,
+    "conf": 0.15,
+    "evidence": [
+     "S2",
+     "S2t2"
+    ],
+    "rule": "R-PROTECTION"
+   },
+   {
+    "line": 3,
+    "part": "METER-G",
+    "description": "Panel meter (G)",
+    "qty": 1,
+    "unit_gbp": 260,
+    "total_gbp": 260,
+    "conf": 0.24,
+    "evidence": [
+     "S4",
+     "S4t2"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 4,
+    "part": "METER-MF",
+    "description": "Panel meter (multifunction)",
+    "qty": 1,
+    "unit_gbp": 260,
+    "total_gbp": 260,
+    "conf": 0.11,
+    "evidence": [
+     "S5"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 5,
+    "part": "RELAY-OC",
+    "description": "Overcurrent and earth-fault protection relay",
+    "qty": 1,
+    "unit_gbp": 950,
+    "total_gbp": 950,
+    "conf": 0.07,
+    "evidence": [
+     "S11"
+    ],
+    "rule": "R-PROTECTION"
+   },
+   {
+    "line": 6,
+    "part": "BUSBAR-CU-2500",
+    "description": "Copper busbar set 2500 A (4-bar), 1 sections, about 46 kg",
+    "qty": 1,
+    "unit_gbp": 524.4,
+    "total_gbp": 524.4,
+    "conf": 0.9,
+    "evidence": [],
+    "rule": "R-BUSBAR-SIZE"
+   },
+   {
+    "line": 7,
+    "part": "ENC-SECTION",
+    "description": "Enclosure section, Form 4 Type 6, IP31, RAL 7035",
+    "qty": 1,
+    "unit_gbp": 3380.0,
+    "total_gbp": 3380.0,
+    "conf": 0.95,
+    "evidence": [],
+    "rule": "R-ENCLOSURE"
+   },
+   {
+    "line": 8,
+    "part": "LAB-ASSY",
+    "description": "Assembly, wiring and routine verification: 90 hours",
+    "qty": 1,
+    "unit_gbp": 4320,
+    "total_gbp": 4320,
+    "conf": 0.9,
+    "evidence": [],
+    "rule": "R-LABOUR"
+   },
+   {
+    "line": 9,
+    "part": "DOC",
+    "description": "Documentation, as-built drawings, test certificates",
+    "qty": 1,
+    "unit_gbp": 600,
+    "total_gbp": 600,
+    "conf": 1.0,
+    "evidence": [],
+    "rule": "R-DOC"
+   },
+   {
+    "line": 10,
+    "part": "DEL",
+    "description": "Delivery to site, crane and offload excluded",
+    "qty": 1,
+    "unit_gbp": 850,
+    "total_gbp": 850,
+    "conf": 1.0,
+    "evidence": [],
+    "rule": "R-DELIVERY"
+   }
+  ],
+  "subtotal_gbp": 13044.4,
+  "margin_gbp": 1956.66,
+  "total_gbp": 15001.06
+ },
+ "issues": [
+  {
+   "kind": "missing",
+   "what": "fault level not found on the drawing notes",
+   "action": "confirm with the consultant",
+   "evidence": []
+  },
+  {
+   "kind": "missing",
+   "what": "D3 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S3",
+    "S3t1"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D8 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S8"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D9 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S9"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D10 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S10"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D12 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S12"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D13 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S13",
+    "S13t2",
+    "S13t4"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D14 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S14",
+    "S14t1",
+    "S14t2"
+   ]
+  },
+  {
+   "kind": "assumed",
+   "what": "busbar rating not read; assumed 2500 A from the largest incomer",
+   "action": "confirm",
+   "evidence": []
+  },
+  {
+   "kind": "low_confidence",
+   "what": "devices read with low confidence: D1, D2, D3, D4, D5, D7, D8, D9, D10, D11, D12, D13, D14",
+   "action": "check against the drawing",
+   "evidence": [
+    "D1",
+    "D2",
+    "D3",
+    "D4",
+    "D5",
+    "D7",
+    "D8",
+    "D9",
+    "D10",
+    "D11",
+    "D12",
+    "D13",
+    "D14"
+   ]
+  }
+ ],
+ "conflicts": [],
+ "spec": null,
+ "score": null,
+ "timing": {
+  "total": 8.44,
+  "ocr": 6.84,
+  "detector": 1.25
+ },
+ "reader": "trained",
+ "engine": "rapidocr",
+ "model": {
+  "weights": "weights/rtdetr_r18_full",
+  "threshold": 0.11
+ },
+ "files": {
+  "quotation_md": "quotation.md",
+  "bom_csv": "bom.csv",
+  "review_html": "review.html",
+  "extraction_json": "extraction.json"
+ }
+}

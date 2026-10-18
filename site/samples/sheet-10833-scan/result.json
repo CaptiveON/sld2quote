@@ -1,0 +1,1141 @@
+{
+ "id": "sheet-10833-scan",
+ "source": {
+  "kind": "sample",
+  "title": "Scan-like drawing, medium board, IEC breakers (sheet 10833)",
+  "seed": 10833,
+  "level": "medium",
+  "copy": "scan",
+  "has_answer_key": true,
+  "note": "Scan-like copy of a synthetic test drawing (tilt, blur, noise); scored against its answer key"
+ },
+ "images": {
+  "sheet": "sheet.png",
+  "overlay": "overlay.png"
+ },
+ "size": [
+  3539,
+  1000
+ ],
+ "steps": [
+  {
+   "key": "text",
+   "title": "Read the words",
+   "count": 61,
+   "seconds": 17.48,
+   "plain": "Read 61 pieces of text in 17.48 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+  },
+  {
+   "key": "symbols",
+   "title": "Find the symbols",
+   "count": 27,
+   "seconds": 10.12,
+   "plain": "Found 27 symbols in 10.12 s: 10 fuse switches, 3 incoming air circuit breakers, 2 transformers, 2 panel meters, 2 current transformers, 2 motor starters, 2 motors, 2 downstream boards, 1 bus-section switch, 1 earth. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+  },
+  {
+   "key": "labels",
+   "title": "Pair labels with symbols",
+   "count": 24,
+   "seconds": 0.37,
+   "plain": "Paired 24 of 27 symbols with the label text beside them; 7 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
+  },
+  {
+   "key": "spec",
+   "title": "Read the specification and compare",
+   "count": 8,
+   "seconds": 0.0,
+   "plain": "Read 8 clauses of the specification and compared them with the drawing notes (Form 4 Type 4, IP41, 80 kA): 1 conflict. An estimator checks the drawing against the specification before pricing, because a conflict is a question for the consultant, not a guess."
+  },
+  {
+   "key": "price",
+   "title": "Pick parts and price",
+   "count": 18,
+   "seconds": 0.0,
+   "plain": "Chose 18 catalogue lines and priced the board at \u00a330,734 (illustrative prices, 15% margin included); 15 items flagged for the estimator. Every line names the symbol, text or clause it rests on, so a reviewer can check it on the drawing."
+  }
+ ],
+ "devices": [
+  {
+   "id": "D1",
+   "type": "TRANSFORMER",
+   "type_plain": "transformer",
+   "rating": 2500,
+   "unit": "kVA",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.94,
+   "box": [
+    197,
+    68,
+    46,
+    74
+   ],
+   "label": "11kV/415V | TX-12500 kVA"
+  },
+  {
+   "id": "D2",
+   "type": "TRANSFORMER",
+   "type_plain": "transformer",
+   "rating": 2000,
+   "unit": "kVA",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.41,
+   "box": [
+    1842,
+    69,
+    45,
+    73
+   ],
+   "label": "11kV/415V | TX-2 2000 kVA"
+  },
+  {
+   "id": "D3",
+   "type": "ACB",
+   "type_plain": "incoming air circuit breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": 80,
+   "dest": "",
+   "conf": 0.23,
+   "box": [
+    207,
+    199,
+    18,
+    35
+   ],
+   "label": "ACB-11600 A4P | Icu 80 kA.withdrawable"
+  },
+  {
+   "id": "D4",
+   "type": "ACB",
+   "type_plain": "incoming air circuit breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": 80,
+   "dest": "",
+   "conf": 0.34,
+   "box": [
+    1851,
+    199,
+    19,
+    37
+   ],
+   "label": "ACB-21600 A4P | Icu 80 kA.withdrawable."
+  },
+  {
+   "id": "D5",
+   "type": "METER",
+   "type_plain": "panel meter",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.27,
+   "box": [
+    255,
+    285,
+    23,
+    24
+   ],
+   "label": "CT 1600/5A | BAR A 1600A Cu 80 kA/1s"
+  },
+  {
+   "id": "D6",
+   "type": "METER",
+   "type_plain": "panel meter",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.52,
+   "box": [
+    1899,
+    285,
+    24,
+    24
+   ],
+   "label": "CT1600/5A | 1600 A Cu 80 kA/1s BARB"
+  },
+  {
+   "id": "D7",
+   "type": "CT",
+   "type_plain": "current transformer",
+   "rating": 1600,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.29,
+   "box": [
+    211,
+    288,
+    18,
+    17
+   ],
+   "label": "BUSBARA 1600A Cu 80 kA/1s"
+  },
+  {
+   "id": "D8",
+   "type": "CT",
+   "type_plain": "current transformer",
+   "rating": 1600,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.41,
+   "box": [
+    1856,
+    289,
+    18,
+    17
+   ],
+   "label": "BUSBARB 1600 A Cu  80 kA/1s"
+  },
+  {
+   "id": "D9",
+   "type": "BUS_SECTION",
+   "type_plain": "bus-section switch",
+   "rating": 1600,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.24,
+   "box": [
+    1751,
+    396,
+    37,
+    18
+   ],
+   "label": "BS-11600A"
+  },
+  {
+   "id": "D10",
+   "type": "FUSE_SWITCH",
+   "type_plain": "fuse switch",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "ZH!",
+   "conf": 0.34,
+   "box": [
+    444,
+    499,
+    17,
+    28
+   ],
+   "label": "ZH! | SPD Type 1+2"
+  },
+  {
+   "id": "D11",
+   "type": "FUSE_SWITCH",
+   "type_plain": "fuse switch",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "THI",
+   "conf": 0.34,
+   "box": [
+    1215,
+    499,
+    17,
+    28
+   ],
+   "label": "THI | PFC200 kVAr"
+  },
+  {
+   "id": "D12",
+   "type": "FUSE_SWITCH",
+   "type_plain": "fuse switch",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "M",
+   "conf": 0.53,
+   "box": [
+    3014,
+    500,
+    18,
+    27
+   ],
+   "label": "M | S/D55kW"
+  },
+  {
+   "id": "D13",
+   "type": "FUSE_SWITCH",
+   "type_plain": "fuse switch",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "DB-8",
+   "conf": 0.3,
+   "box": [
+    2243,
+    519,
+    16,
+    28
+   ],
+   "label": "DB-8 | DB-8 theatres"
+  },
+  {
+   "id": "D14",
+   "type": "FUSE_SWITCH",
+   "type_plain": "fuse switch",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "SB-10",
+   "conf": 0.73,
+   "box": [
+    2757,
+    519,
+    18,
+    29
+   ],
+   "label": "SB-10 | sub-board10"
+  },
+  {
+   "id": "D15",
+   "type": "CONTACTOR",
+   "type_plain": "motor starter",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.71,
+   "box": [
+    3015,
+    539,
+    18,
+    31
+   ],
+   "label": "M | fan F-11"
+  },
+  {
+   "id": "D16",
+   "type": "CONTACTOR",
+   "type_plain": "motor starter",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.28,
+   "box": [
+    702,
+    540,
+    16,
+    30
+   ],
+   "label": "M | DOL37 kW"
+  },
+  {
+   "id": "D17",
+   "type": "ACB",
+   "type_plain": "incoming air circuit breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.23,
+   "box": [
+    189,
+    549,
+    16,
+    28
+   ],
+   "label": "lighting | MCCB 630 A4P"
+  },
+  {
+   "id": "D18",
+   "type": "MOTOR",
+   "type_plain": "motor",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.17,
+   "box": [
+    698,
+    578,
+    29,
+    29
+   ],
+   "label": "3C 70mmXLPE/SWA"
+  },
+  {
+   "id": "D19",
+   "type": "FUSE_SWITCH",
+   "type_plain": "fuse switch",
+   "rating": 400,
+   "unit": "A",
+   "poles": 3,
+   "kA": null,
+   "dest": "MCC-7chillers",
+   "conf": 0.39,
+   "box": [
+    1986,
+    578,
+    19,
+    30
+   ],
+   "label": "MCC-7chillers | FSW.400 A 3P"
+  },
+  {
+   "id": "D20",
+   "type": "EARTH",
+   "type_plain": "earth",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.12,
+   "box": [
+    445,
+    579,
+    21,
+    16
+   ],
+   "label": ""
+  },
+  {
+   "id": "D21",
+   "type": "FUSE_SWITCH",
+   "type_plain": "fuse switch",
+   "rating": 800,
+   "unit": "A",
+   "poles": 4,
+   "kA": null,
+   "dest": "kitchen",
+   "conf": 0.31,
+   "box": [
+    959,
+    579,
+    15,
+    28
+   ],
+   "label": "kitchen | FSW 800 A 4P"
+  },
+  {
+   "id": "D22",
+   "type": "FUSE_SWITCH",
+   "type_plain": "fuse switch",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "spare",
+   "conf": 0.47,
+   "box": [
+    1472,
+    579,
+    17,
+    30
+   ],
+   "label": "spare | FSW 100A4P"
+  },
+  {
+   "id": "D23",
+   "type": "MOTOR",
+   "type_plain": "motor",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.3,
+   "box": [
+    3011,
+    579,
+    29,
+    28
+   ],
+   "label": "3C 120mmXLPE/SWA"
+  },
+  {
+   "id": "D24",
+   "type": "FUSE_SWITCH",
+   "type_plain": "fuse switch",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "kitchen",
+   "conf": 0.53,
+   "box": [
+    3271,
+    579,
+    18,
+    29
+   ],
+   "label": "kitchen | FSW250 A4P"
+  },
+  {
+   "id": "D25",
+   "type": "FUSE_SWITCH",
+   "type_plain": "fuse switch",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "DB-9.theatres",
+   "conf": 0.27,
+   "box": [
+    2500,
+    580,
+    17,
+    28
+   ],
+   "label": "DB-9.theatres | FSW 250 A4P"
+  },
+  {
+   "id": "D26",
+   "type": "BOARD",
+   "type_plain": "downstream board",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.34,
+   "box": [
+    2233,
+    606,
+    44,
+    25
+   ],
+   "label": ""
+  },
+  {
+   "id": "D27",
+   "type": "BOARD",
+   "type_plain": "downstream board",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.39,
+   "box": [
+    2744,
+    606,
+    50,
+    25
+   ],
+   "label": ""
+  }
+ ],
+ "board": {
+  "fault_kA": 80,
+  "form": "Form 4 Type 4",
+  "ip": "IP41",
+  "poles_default": 4,
+  "busbar_rating": 1600,
+  "sections": 2,
+  "ways": 2
+ },
+ "bom": {
+  "lines": [
+   {
+    "line": 1,
+    "part": "METER-CT 1600/5A | BAR A 1600A Cu 80 kA/1s",
+    "description": "Panel meter (CT 1600/5A | BAR A 1600A Cu 80 kA/1s)",
+    "qty": 1,
+    "unit_gbp": 260,
+    "total_gbp": 260,
+    "conf": 0.27,
+    "evidence": [
+     "S5",
+     "S5t1",
+     "S5t2"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 2,
+    "part": "METER-CT1600/5A | 1600 A Cu 80 kA/1s BARB",
+    "description": "Panel meter (CT1600/5A | 1600 A Cu 80 kA/1s BARB)",
+    "qty": 1,
+    "unit_gbp": 260,
+    "total_gbp": 260,
+    "conf": 0.52,
+    "evidence": [
+     "S6",
+     "S6t1",
+     "S6t2"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 3,
+    "part": "CT-SET",
+    "description": "Current transformers 1600/5 A, set of three, class 1",
+    "qty": 1,
+    "unit_gbp": 280,
+    "total_gbp": 280,
+    "conf": 0.29,
+    "evidence": [
+     "S7",
+     "S7t2"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 4,
+    "part": "CT-SET",
+    "description": "Current transformers 1600/5 A, set of three, class 1",
+    "qty": 1,
+    "unit_gbp": 280,
+    "total_gbp": 280,
+    "conf": 0.41,
+    "evidence": [
+     "S8",
+     "S8t2"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 5,
+    "part": "BSS-1600-4P",
+    "description": "Bus-section switch 1600 A 4-pole, 80 kA",
+    "qty": 1,
+    "unit_gbp": 4340.0,
+    "total_gbp": 4340.0,
+    "conf": 0.24,
+    "evidence": [
+     "S9",
+     "S9t2"
+    ],
+    "rule": "R-BUS-SECTION"
+   },
+   {
+    "line": 6,
+    "part": "FU-KIT-BS",
+    "description": "Bus-section functional unit and interlocking",
+    "qty": 1,
+    "unit_gbp": 900,
+    "total_gbp": 900,
+    "conf": 0.24,
+    "evidence": [
+     "S9",
+     "S9t2"
+    ],
+    "rule": "R-FU-KIT"
+   },
+   {
+    "line": 7,
+    "part": "FSW-400-3P",
+    "description": "Fuse-switch-disconnector 400 A 3-pole; feeds MCC-7chillers",
+    "qty": 1,
+    "unit_gbp": 780.0,
+    "total_gbp": 780.0,
+    "conf": 0.39,
+    "evidence": [
+     "S19",
+     "S19t4",
+     "S19t3"
+    ],
+    "rule": "R-FSW-SELECT"
+   },
+   {
+    "line": 8,
+    "part": "FUSE-400",
+    "description": "Fuse links 400 A, one per pole",
+    "qty": 3,
+    "unit_gbp": 46,
+    "total_gbp": 138,
+    "conf": 0.39,
+    "evidence": [
+     "S19",
+     "S19t4",
+     "S19t3"
+    ],
+    "rule": "R-FUSE-LINKS"
+   },
+   {
+    "line": 9,
+    "part": "FU-KIT-FUSE_SWITCH",
+    "description": "Outgoing functional unit: compartment door, terminals, labels",
+    "qty": 1,
+    "unit_gbp": 380,
+    "total_gbp": 380,
+    "conf": 0.39,
+    "evidence": [
+     "S19",
+     "S19t4",
+     "S19t3"
+    ],
+    "rule": "R-FU-KIT"
+   },
+   {
+    "line": 10,
+    "part": "FSW-800-4P",
+    "description": "Fuse-switch-disconnector 800 A 4-pole; feeds kitchen",
+    "qty": 1,
+    "unit_gbp": 1854.4,
+    "total_gbp": 1854.4,
+    "conf": 0.31,
+    "evidence": [
+     "S21",
+     "S21t4",
+     "S21t3"
+    ],
+    "rule": "R-FSW-SELECT"
+   },
+   {
+    "line": 11,
+    "part": "FUSE-800",
+    "description": "Fuse links 800 A, one per pole",
+    "qty": 4,
+    "unit_gbp": 94,
+    "total_gbp": 376,
+    "conf": 0.31,
+    "evidence": [
+     "S21",
+     "S21t4",
+     "S21t3"
+    ],
+    "rule": "R-FUSE-LINKS"
+   },
+   {
+    "line": 12,
+    "part": "FU-KIT-FUSE_SWITCH",
+    "description": "Outgoing functional unit: compartment door, terminals, labels",
+    "qty": 1,
+    "unit_gbp": 380,
+    "total_gbp": 380,
+    "conf": 0.31,
+    "evidence": [
+     "S21",
+     "S21t4",
+     "S21t3"
+    ],
+    "rule": "R-FU-KIT"
+   },
+   {
+    "line": 13,
+    "part": "BUSBAR-CU-1600",
+    "description": "Copper busbar set 1600 A (4-bar), 2 sections, about 58 kg",
+    "qty": 1,
+    "unit_gbp": 662.4,
+    "total_gbp": 662.4,
+    "conf": 0.9,
+    "evidence": [
+     "T12",
+     "T12",
+     "T60"
+    ],
+    "rule": "R-BUSBAR-SIZE"
+   },
+   {
+    "line": 14,
+    "part": "ENC-SECTION",
+    "description": "Enclosure section, Form 4 Type 4, IP41, RAL 7035",
+    "qty": 2,
+    "unit_gbp": 3160.04,
+    "total_gbp": 6320.08,
+    "conf": 0.95,
+    "evidence": [
+     "T54",
+     "T54",
+     "T56",
+     "T58"
+    ],
+    "rule": "R-ENCLOSURE"
+   },
+   {
+    "line": 15,
+    "part": "LAB-ASSY",
+    "description": "Assembly, wiring and routine verification: 168 hours",
+    "qty": 1,
+    "unit_gbp": 8064,
+    "total_gbp": 8064,
+    "conf": 0.9,
+    "evidence": [],
+    "rule": "R-LABOUR"
+   },
+   {
+    "line": 16,
+    "part": "DOC",
+    "description": "Documentation, as-built drawings, test certificates",
+    "qty": 1,
+    "unit_gbp": 600,
+    "total_gbp": 600,
+    "conf": 1.0,
+    "evidence": [],
+    "rule": "R-DOC"
+   },
+   {
+    "line": 17,
+    "part": "CERT",
+    "description": "Design-verification certificates per specification",
+    "qty": 1,
+    "unit_gbp": 0.0,
+    "total_gbp": 0.0,
+    "conf": 1.0,
+    "evidence": [
+     "7.7"
+    ],
+    "rule": "R-SPEC-CERT"
+   },
+   {
+    "line": 18,
+    "part": "DEL",
+    "description": "Delivery to site, crane and offload excluded",
+    "qty": 1,
+    "unit_gbp": 850,
+    "total_gbp": 850,
+    "conf": 1.0,
+    "evidence": [],
+    "rule": "R-DELIVERY"
+   }
+  ],
+  "subtotal_gbp": 26724.88,
+  "margin_gbp": 4008.73,
+  "total_gbp": 30733.61
+ },
+ "issues": [
+  {
+   "kind": "missing",
+   "what": "D3 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S3",
+    "S3t1",
+    "S3t2"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D4 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S4",
+    "S4t1",
+    "S4t2"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D10 (FUSE_SWITCH): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S10",
+    "S10t5",
+    "S10t3"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D11 (FUSE_SWITCH): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S11",
+    "S11t3",
+    "S11t2"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D12 (FUSE_SWITCH): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S12",
+    "S12t5",
+    "S12t2"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D13 (FUSE_SWITCH): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S13",
+    "S13t5",
+    "S13t2"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D14 (FUSE_SWITCH): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S14",
+    "S14t9",
+    "S14t4"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D15 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S15",
+    "S15t5",
+    "S15t3"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D16 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S16",
+    "S16t5",
+    "S16t2"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D17 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S17",
+    "S17t4",
+    "S17t3"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D22 (FUSE_SWITCH): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S22",
+    "S22t2",
+    "S22t1"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D24 (FUSE_SWITCH): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S24",
+    "S24t2",
+    "S24t1"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D25 (FUSE_SWITCH): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S25",
+    "S25t4",
+    "S25t3"
+   ]
+  },
+  {
+   "kind": "conflict",
+   "what": "fault_kA: drawing says 80, specification clause 7.3 says 50",
+   "action": "clarify with the consultant before order; priced to the drawing",
+   "evidence": [
+    "T54",
+    "T54",
+    "T56",
+    "T58",
+    "7.3"
+   ]
+  },
+  {
+   "kind": "low_confidence",
+   "what": "devices read with low confidence: D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D16, D17, D18, D19, D20, D21, D22, D23, D24, D25, D26, D27",
+   "action": "check against the drawing",
+   "evidence": [
+    "D2",
+    "D3",
+    "D4",
+    "D5",
+    "D6",
+    "D7",
+    "D8",
+    "D9",
+    "D10",
+    "D11",
+    "D12",
+    "D13",
+    "D16",
+    "D17",
+    "D18",
+    "D19",
+    "D20",
+    "D21",
+    "D22",
+    "D23",
+    "D24",
+    "D25",
+    "D26",
+    "D27"
+   ]
+  }
+ ],
+ "conflicts": [
+  {
+   "field": "fault_kA",
+   "drawing": 80,
+   "spec": 50,
+   "spec_clause": "7.3"
+  }
+ ],
+ "spec": {
+  "clauses": [
+   {
+    "id": "7.1",
+    "text": "The switchboard shall be designed, manufactured and verified in accordance with BS EN 61439-2."
+   },
+   {
+    "id": "7.2",
+    "text": "Internal separation shall be Form 4 Type 4 as defined in the UK National Annex."
+   },
+   {
+    "id": "7.3",
+    "text": "The assembly shall withstand a prospective short-circuit current of 50 kA for 1 second at the main busbars."
+   },
+   {
+    "id": "7.4",
+    "text": "Outgoing moulded-case circuit breakers shall be 4-pole with adjustable thermal-magnetic or electronic trip units."
+   },
+   {
+    "id": "7.5",
+    "text": "Degree of protection shall be not less than IP41 with doors closed."
+   },
+   {
+    "id": "7.6",
+    "text": "Main busbars shall be hard-drawn high-conductivity copper, tin-plated at joints."
+   },
+   {
+    "id": "7.7",
+    "text": "The contractor shall provide type-test or design-verification certificates prior to manufacture."
+   },
+   {
+    "id": "7.8",
+    "text": "Two years' spares for all trip units shall be included."
+   }
+  ]
+ },
+ "score": {
+  "symbols_total": 31,
+  "symbols_found": 26,
+  "symbols_reported": 27,
+  "precision": 0.963,
+  "recall": 0.839,
+  "per_type": [
+   {
+    "type": "ACB",
+    "total": 2,
+    "found": 2,
+    "reported": 3
+   },
+   {
+    "type": "MCCB",
+    "total": 2,
+    "found": 0,
+    "reported": 0
+   },
+   {
+    "type": "BUS_SECTION",
+    "total": 1,
+    "found": 1,
+    "reported": 1
+   },
+   {
+    "type": "FUSE_SWITCH",
+    "total": 10,
+    "found": 10,
+    "reported": 10
+   },
+   {
+    "type": "CONTACTOR",
+    "total": 2,
+    "found": 2,
+    "reported": 2
+   },
+   {
+    "type": "TRANSFORMER",
+    "total": 2,
+    "found": 2,
+    "reported": 2
+   },
+   {
+    "type": "MOTOR",
+    "total": 2,
+    "found": 2,
+    "reported": 2
+   },
+   {
+    "type": "BOARD",
+    "total": 2,
+    "found": 2,
+    "reported": 2
+   },
+   {
+    "type": "CT",
+    "total": 2,
+    "found": 2,
+    "reported": 2
+   },
+   {
+    "type": "METER",
+    "total": 2,
+    "found": 2,
+    "reported": 2
+   },
+   {
+    "type": "SPD",
+    "total": 1,
+    "found": 0,
+    "reported": 0
+   },
+   {
+    "type": "CAPACITOR",
+    "total": 1,
+    "found": 0,
+    "reported": 0
+   },
+   {
+    "type": "EARTH",
+    "total": 2,
+    "found": 1,
+    "reported": 1
+   }
+  ],
+  "reference_total_gbp": 101764.74,
+  "price_error": 0.698,
+  "rating_accuracy": 0.462,
+  "notes_accuracy": 1.0
+ },
+ "timing": {
+  "total": 28.43,
+  "ocr": 17.48,
+  "detector": 10.12
+ },
+ "reader": "trained",
+ "engine": "rapidocr",
+ "model": {
+  "weights": "weights/rtdetr_r18_full",
+  "threshold": 0.11
+ },
+ "files": {
+  "quotation_md": "quotation.md",
+  "bom_csv": "bom.csv",
+  "review_html": "review.html",
+  "extraction_json": "extraction.json"
+ }
+}

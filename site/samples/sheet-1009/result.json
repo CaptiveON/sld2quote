@@ -1,0 +1,699 @@
+{
+ "id": "sheet-1009",
+ "source": {
+  "kind": "sample",
+  "title": "Preview drawing, simple board, box-style breakers (sheet 1009)",
+  "seed": 1009,
+  "level": "simple",
+  "copy": "clean",
+  "has_answer_key": true,
+  "note": "Synthetic drawing from the generator's preview set, not in the training pool; scored against its answer key"
+ },
+ "images": {
+  "sheet": "sheet.png",
+  "overlay": "overlay.png"
+ },
+ "size": [
+  1600,
+  1000
+ ],
+ "steps": [
+  {
+   "key": "text",
+   "title": "Read the words",
+   "count": 30,
+   "seconds": 5.91,
+   "plain": "Read 30 pieces of text in 5.91 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+  },
+  {
+   "key": "symbols",
+   "title": "Find the symbols",
+   "count": 13,
+   "seconds": 1.27,
+   "plain": "Found 13 symbols in 1.27 s: 4 outgoing moulded-case breakers, 2 panel meters, 2 current transformers, 1 generator, 1 transformer, 1 bus-section switch, 1 surge protector, 1 earth. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+  },
+  {
+   "key": "labels",
+   "title": "Pair labels with symbols",
+   "count": 11,
+   "seconds": 0.11,
+   "plain": "Paired 11 of 13 symbols with the label text beside them; 3 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
+  },
+  {
+   "key": "spec",
+   "title": "Read the specification and compare",
+   "count": 8,
+   "seconds": 0.0,
+   "plain": "Read 8 clauses of the specification and compared them with the drawing notes (Form 4 Type 7, IP41, 50 kA): 1 conflict. An estimator checks the drawing against the specification before pricing, because a conflict is a question for the consultant, not a guess."
+  },
+  {
+   "key": "price",
+   "title": "Pick parts and price",
+   "count": 14,
+   "seconds": 0.0,
+   "plain": "Chose 14 catalogue lines and priced the board at \u00a319,287 (illustrative prices, 15% margin included); 6 items flagged for the estimator. Every line names the symbol, text or clause it rests on, so a reviewer can check it on the drawing."
+  }
+ ],
+ "devices": [
+  {
+   "id": "D1",
+   "type": "GENERATOR",
+   "type_plain": "generator",
+   "rating": null,
+   "unit": "kVA",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.59,
+   "box": [
+    1356,
+    66,
+    49,
+    48
+   ],
+   "label": "i30 kVA"
+  },
+  {
+   "id": "D2",
+   "type": "TRANSFORMER",
+   "type_plain": "transformer",
+   "rating": 2500,
+   "unit": "kVA",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.94,
+   "box": [
+    198,
+    69,
+    46,
+    72
+   ],
+   "label": "11 kV/415V | TX-1 2500 kVA"
+  },
+  {
+   "id": "D3",
+   "type": "METER",
+   "type_plain": "panel meter",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.49,
+   "box": [
+    1415,
+    281,
+    23,
+    24
+   ],
+   "label": "CT 2500/5A"
+  },
+  {
+   "id": "D4",
+   "type": "METER",
+   "type_plain": "panel meter",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.59,
+   "box": [
+    254,
+    283,
+    27,
+    20
+   ],
+   "label": "CT 2500/5A | BAR A 2500 A Cu 50 kA/1s"
+  },
+  {
+   "id": "D5",
+   "type": "CT",
+   "type_plain": "current transformer",
+   "rating": 2500,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.42,
+   "box": [
+    211,
+    284,
+    18,
+    18
+   ],
+   "label": "kWh | BUSBAR A 2500 A Cu 5 50 kA/1s"
+  },
+  {
+   "id": "D6",
+   "type": "CT",
+   "type_plain": "current transformer",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.2,
+   "box": [
+    1370,
+    284,
+    20,
+    18
+   ],
+   "label": ""
+  },
+  {
+   "id": "D7",
+   "type": "BUS_SECTION",
+   "type_plain": "bus-section switch",
+   "rating": 2500,
+   "unit": "A",
+   "poles": null,
+   "kA": 50,
+   "dest": "",
+   "conf": 0.14,
+   "box": [
+    787,
+    387,
+    27,
+    26
+   ],
+   "label": "BS-12500A | BUSBAR B 2500 A Cu 50 kA/1s"
+  },
+  {
+   "id": "D8",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.17,
+   "box": [
+    1389,
+    499,
+    22,
+    22
+   ],
+   "label": ""
+  },
+  {
+   "id": "D9",
+   "type": "SPD",
+   "type_plain": "surge protector",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.13,
+   "box": [
+    1391,
+    536,
+    18,
+    27
+   ],
+   "label": "MCCB 100 A 4P 36 kA | SPD Type 1+2"
+  },
+  {
+   "id": "D10",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": 3,
+   "kA": null,
+   "dest": "MCCB4D0 A 3P",
+   "conf": 0.43,
+   "box": [
+    190,
+    550,
+    21,
+    20
+   ],
+   "label": "MCCB4D0 A 3P | lifls"
+  },
+  {
+   "id": "D11",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": 4,
+   "kA": null,
+   "dest": "MCCB4D0 A 4P",
+   "conf": 0.4,
+   "box": [
+    590,
+    550,
+    20,
+    20
+   ],
+   "label": "MCCB4D0 A 4P | datalhall"
+  },
+  {
+   "id": "D12",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "MCCB250 A3P",
+   "conf": 0.35,
+   "box": [
+    988,
+    550,
+    22,
+    21
+   ],
+   "label": "MCCB250 A3P | spare"
+  },
+  {
+   "id": "D13",
+   "type": "EARTH",
+   "type_plain": "earth",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.36,
+   "box": [
+    1388,
+    572,
+    23,
+    18
+   ],
+   "label": "MCCB 100A4P 36 kA | SPD Type 1+2"
+  }
+ ],
+ "board": {
+  "fault_kA": 50,
+  "form": "Form 4 Type 7",
+  "ip": "IP41",
+  "poles_default": 3,
+  "busbar_rating": 2500,
+  "sections": 1,
+  "ways": 0
+ },
+ "bom": {
+  "lines": [
+   {
+    "line": 1,
+    "part": "METER-CT 2500/5A",
+    "description": "Panel meter (CT 2500/5A)",
+    "qty": 1,
+    "unit_gbp": 260,
+    "total_gbp": 260,
+    "conf": 0.49,
+    "evidence": [
+     "S3",
+     "S3t1"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 2,
+    "part": "METER-CT 2500/5A | BAR A 2500 A Cu 50 kA/1s",
+    "description": "Panel meter (CT 2500/5A | BAR A 2500 A Cu 50 kA/1s)",
+    "qty": 1,
+    "unit_gbp": 260,
+    "total_gbp": 260,
+    "conf": 0.59,
+    "evidence": [
+     "S4",
+     "S4t2",
+     "S4t3"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 3,
+    "part": "CT-SET",
+    "description": "Current transformers 2500/5 A, set of three, class 1",
+    "qty": 1,
+    "unit_gbp": 280,
+    "total_gbp": 280,
+    "conf": 0.42,
+    "evidence": [
+     "S5",
+     "S5t1",
+     "S5t3"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 4,
+    "part": "CT-SET",
+    "description": "Current transformers, set of three, class 1",
+    "qty": 1,
+    "unit_gbp": 280,
+    "total_gbp": 280,
+    "conf": 0.2,
+    "evidence": [
+     "S6"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 5,
+    "part": "BSS-2500-3P",
+    "description": "Bus-section switch 2500 A 3-pole, 50 kA",
+    "qty": 1,
+    "unit_gbp": 4100.0,
+    "total_gbp": 4100.0,
+    "conf": 0.14,
+    "evidence": [
+     "S7",
+     "S7t2",
+     "S7t1"
+    ],
+    "rule": "R-BUS-SECTION"
+   },
+   {
+    "line": 6,
+    "part": "FU-KIT-BS",
+    "description": "Bus-section functional unit and interlocking",
+    "qty": 1,
+    "unit_gbp": 900,
+    "total_gbp": 900,
+    "conf": 0.14,
+    "evidence": [
+     "S7",
+     "S7t2",
+     "S7t1"
+    ],
+    "rule": "R-FU-KIT"
+   },
+   {
+    "line": 7,
+    "part": "SPD-T12",
+    "description": "Surge protective device, Type 1+2, with status indication",
+    "qty": 1,
+    "unit_gbp": 690,
+    "total_gbp": 690,
+    "conf": 0.13,
+    "evidence": [
+     "S9",
+     "S9t1",
+     "S9t2"
+    ],
+    "rule": "R-SPD"
+   },
+   {
+    "line": 8,
+    "part": "BUSBAR-CU-2500",
+    "description": "Copper busbar set 2500 A (4-bar), 1 sections, about 46 kg",
+    "qty": 1,
+    "unit_gbp": 524.4,
+    "total_gbp": 524.4,
+    "conf": 0.9,
+    "evidence": [
+     "T12",
+     "T12"
+    ],
+    "rule": "R-BUSBAR-SIZE"
+   },
+   {
+    "line": 9,
+    "part": "ENC-SECTION",
+    "description": "Enclosure section, Form 4 Type 7, IP41, RAL 7035",
+    "qty": 1,
+    "unit_gbp": 3802.76,
+    "total_gbp": 3802.76,
+    "conf": 0.95,
+    "evidence": [
+     "T23",
+     "T23",
+     "T25",
+     "T27"
+    ],
+    "rule": "R-ENCLOSURE"
+   },
+   {
+    "line": 10,
+    "part": "LAB-ASSY",
+    "description": "Assembly, wiring and routine verification: 63 hours",
+    "qty": 1,
+    "unit_gbp": 3024,
+    "total_gbp": 3024,
+    "conf": 0.9,
+    "evidence": [],
+    "rule": "R-LABOUR"
+   },
+   {
+    "line": 11,
+    "part": "DOC",
+    "description": "Documentation, as-built drawings, test certificates",
+    "qty": 1,
+    "unit_gbp": 600,
+    "total_gbp": 600,
+    "conf": 1.0,
+    "evidence": [],
+    "rule": "R-DOC"
+   },
+   {
+    "line": 12,
+    "part": "CERT",
+    "description": "Design-verification certificates per specification",
+    "qty": 1,
+    "unit_gbp": 0.0,
+    "total_gbp": 0.0,
+    "conf": 1.0,
+    "evidence": [
+     "7.7"
+    ],
+    "rule": "R-SPEC-CERT"
+   },
+   {
+    "line": 13,
+    "part": "WITNESS",
+    "description": "Witness testing at works (specification)",
+    "qty": 1,
+    "unit_gbp": 1200,
+    "total_gbp": 1200,
+    "conf": 1.0,
+    "evidence": [
+     "7.8"
+    ],
+    "rule": "R-SPEC-WITNESS"
+   },
+   {
+    "line": 14,
+    "part": "DEL",
+    "description": "Delivery to site, crane and offload excluded",
+    "qty": 1,
+    "unit_gbp": 850,
+    "total_gbp": 850,
+    "conf": 1.0,
+    "evidence": [],
+    "rule": "R-DELIVERY"
+   }
+  ],
+  "subtotal_gbp": 16771.16,
+  "margin_gbp": 2515.67,
+  "total_gbp": 19286.83
+ },
+ "issues": [
+  {
+   "kind": "missing",
+   "what": "D8 (MCCB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S8"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D10 (MCCB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S10",
+    "S10t1",
+    "S10t2"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D11 (MCCB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S11",
+    "S11t1",
+    "S11t2"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D12 (MCCB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S12",
+    "S12t1",
+    "S12t2"
+   ]
+  },
+  {
+   "kind": "conflict",
+   "what": "form: drawing says Form 4 Type 7, specification clause 7.2 says Form 4 Type 4",
+   "action": "clarify with the consultant before order; priced to the drawing",
+   "evidence": [
+    "T23",
+    "T23",
+    "T25",
+    "T27",
+    "7.2"
+   ]
+  },
+  {
+   "kind": "low_confidence",
+   "what": "devices read with low confidence: D1, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13",
+   "action": "check against the drawing",
+   "evidence": [
+    "D1",
+    "D3",
+    "D4",
+    "D5",
+    "D6",
+    "D7",
+    "D8",
+    "D9",
+    "D10",
+    "D11",
+    "D12",
+    "D13"
+   ]
+  }
+ ],
+ "conflicts": [
+  {
+   "field": "form",
+   "drawing": "Form 4 Type 7",
+   "spec": "Form 4 Type 4",
+   "spec_clause": "7.2"
+  }
+ ],
+ "spec": {
+  "clauses": [
+   {
+    "id": "7.1",
+    "text": "The switchboard shall be designed, manufactured and verified in accordance with BS EN 61439-2."
+   },
+   {
+    "id": "7.2",
+    "text": "Internal separation shall be Form 4 Type 4 as defined in the UK National Annex."
+   },
+   {
+    "id": "7.3",
+    "text": "The assembly shall withstand a prospective short-circuit current of 50 kA for 1 second at the main busbars."
+   },
+   {
+    "id": "7.4",
+    "text": "Outgoing moulded-case circuit breakers shall be 3-pole with adjustable thermal-magnetic or electronic trip units."
+   },
+   {
+    "id": "7.5",
+    "text": "Degree of protection shall be not less than IP41 with doors closed."
+   },
+   {
+    "id": "7.6",
+    "text": "Main busbars shall be hard-drawn high-conductivity copper, tin-plated at joints."
+   },
+   {
+    "id": "7.7",
+    "text": "The contractor shall provide type-test or design-verification certificates prior to manufacture."
+   },
+   {
+    "id": "7.8",
+    "text": "Witness testing at the manufacturer's works shall be allowed for."
+   }
+  ]
+ },
+ "score": {
+  "symbols_total": 15,
+  "symbols_found": 13,
+  "symbols_reported": 13,
+  "precision": 1.0,
+  "recall": 0.867,
+  "per_type": [
+   {
+    "type": "ACB",
+    "total": 2,
+    "found": 0,
+    "reported": 0
+   },
+   {
+    "type": "MCCB",
+    "total": 4,
+    "found": 4,
+    "reported": 4
+   },
+   {
+    "type": "BUS_SECTION",
+    "total": 1,
+    "found": 1,
+    "reported": 1
+   },
+   {
+    "type": "TRANSFORMER",
+    "total": 1,
+    "found": 1,
+    "reported": 1
+   },
+   {
+    "type": "GENERATOR",
+    "total": 1,
+    "found": 1,
+    "reported": 1
+   },
+   {
+    "type": "CT",
+    "total": 2,
+    "found": 2,
+    "reported": 2
+   },
+   {
+    "type": "METER",
+    "total": 2,
+    "found": 2,
+    "reported": 2
+   },
+   {
+    "type": "SPD",
+    "total": 1,
+    "found": 1,
+    "reported": 1
+   },
+   {
+    "type": "EARTH",
+    "total": 1,
+    "found": 1,
+    "reported": 1
+   }
+  ],
+  "reference_total_gbp": 62588.11,
+  "price_error": 0.6918,
+  "rating_accuracy": 0.538,
+  "notes_accuracy": 1.0
+ },
+ "timing": {
+  "total": 7.45,
+  "ocr": 5.91,
+  "detector": 1.27
+ },
+ "reader": "trained",
+ "engine": "rapidocr",
+ "model": {
+  "weights": "weights/rtdetr_r18_full",
+  "threshold": 0.11
+ },
+ "files": {
+  "quotation_md": "quotation.md",
+  "bom_csv": "bom.csv",
+  "review_html": "review.html",
+  "extraction_json": "extraction.json"
+ }
+}

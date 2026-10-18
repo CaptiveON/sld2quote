@@ -1,0 +1,30 @@
+line,part,description,qty,unit_gbp,total_gbp,conf,rule,evidence
+1,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.07,R-PROTECTION,S10
+2,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.07,R-PROTECTION,S11
+3,CT-SET,"Current transformers, set of three, class 1",1,280,280,0.11,R-METERING,S14
+4,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.17,R-PROTECTION,S23
+5,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.12,R-PROTECTION,S24
+6,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.1,R-PROTECTION,S25
+7,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.08,R-PROTECTION,S26
+8,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.09,R-PROTECTION,S27
+9,METER-MF,Panel meter (multifunction),1,260,260,0.06,R-METERING,S32
+10,METER-MF,Panel meter (multifunction),1,260,260,0.07,R-METERING,S33
+11,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.06,R-PROTECTION,S40
+12,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.17,R-PROTECTION,S43 T14
+13,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.13,R-PROTECTION,S47 S47t1
+14,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.12,R-PROTECTION,S51
+15,METER-SENTIAL LOADS | -,Panel meter (SENTIAL LOADS | -),1,260,260,0.19,R-METERING,S57 S57t1 S57t2
+16,METER-MF,Panel meter (multifunction),1,260,260,0.06,R-METERING,S59
+17,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.2,R-PROTECTION,S61 S61t4 S61t5
+18,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.13,R-PROTECTION,S62 S62t3 S62t4
+19,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.11,R-PROTECTION,S63 S63t3 S63t4
+20,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.18,R-PROTECTION,S64 S64t5 S64t6
+21,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.11,R-PROTECTION,S69 S69t4 S69t3
+22,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.24,R-PROTECTION,S70 S70t4 S70t5
+23,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.1,R-PROTECTION,S71
+24,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.15,R-PROTECTION,S72 S72t3
+25,BUSBAR-CU-1600,"Copper busbar set 1600 A (4-bar), 1 sections, about 29 kg",1,331.2,331.2,0.9,R-BUSBAR-SIZE,
+26,ENC-SECTION,"Enclosure section, Form 4 Type 6, IP31, RAL 7035",1,3380.0,3380.0,0.95,R-ENCLOSURE,
+27,LAB-ASSY,"Assembly, wiring and routine verification: 448 hours",1,21504,21504,0.9,R-LABOUR,
+28,DOC,"Documentation, as-built drawings, test certificates",1,600,600,1.0,R-DOC,
+29,DEL,"Delivery to site, crane and offload excluded",1,850,850,1.0,R-DELIVERY,

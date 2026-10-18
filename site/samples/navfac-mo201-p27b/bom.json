@@ -1,0 +1,284 @@
+{
+ "board": {
+  "fault_kA": null,
+  "form": "Form 4 Type 6",
+  "ip": "IP31",
+  "poles_default": 4,
+  "busbar_rating": 0,
+  "sections": 1,
+  "ways": 0
+ },
+ "lines": [
+  {
+   "line": 1,
+   "part": "CT-SET",
+   "description": "Current transformers, set of three, class 1",
+   "qty": 1,
+   "unit_gbp": 280,
+   "total_gbp": 280,
+   "evidence": [
+    "S4"
+   ],
+   "rule": "R-METERING",
+   "conf": 0.06,
+   "basis": ""
+  },
+  {
+   "line": 2,
+   "part": "CT-SET",
+   "description": "Current transformers, set of three, class 1",
+   "qty": 1,
+   "unit_gbp": 280,
+   "total_gbp": 280,
+   "evidence": [
+    "S5"
+   ],
+   "rule": "R-METERING",
+   "conf": 0.06,
+   "basis": ""
+  },
+  {
+   "line": 3,
+   "part": "CT-SET",
+   "description": "Current transformers, set of three, class 1",
+   "qty": 1,
+   "unit_gbp": 280,
+   "total_gbp": 280,
+   "evidence": [
+    "S14"
+   ],
+   "rule": "R-METERING",
+   "conf": 0.07,
+   "basis": ""
+  },
+  {
+   "line": 4,
+   "part": "BUSBAR-CU-1600",
+   "description": "Copper busbar set 1600 A (4-bar), 1 sections, about 29 kg",
+   "qty": 1,
+   "unit_gbp": 331.2,
+   "total_gbp": 331.2,
+   "evidence": [],
+   "rule": "R-BUSBAR-SIZE",
+   "conf": 0.9,
+   "basis": "0 A busbar label; 1 sections"
+  },
+  {
+   "line": 5,
+   "part": "ENC-SECTION",
+   "description": "Enclosure section, Form 4 Type 6, IP31, RAL 7035",
+   "qty": 1,
+   "unit_gbp": 3380.0,
+   "total_gbp": 3380.0,
+   "evidence": [],
+   "rule": "R-ENCLOSURE",
+   "conf": 0.95,
+   "basis": "0 ways at 4 per section plus incomers"
+  },
+  {
+   "line": 6,
+   "part": "LAB-ASSY",
+   "description": "Assembly, wiring and routine verification: 164 hours",
+   "qty": 1,
+   "unit_gbp": 7872,
+   "total_gbp": 7872,
+   "evidence": [],
+   "rule": "R-LABOUR",
+   "conf": 0.9,
+   "basis": ""
+  },
+  {
+   "line": 7,
+   "part": "DOC",
+   "description": "Documentation, as-built drawings, test certificates",
+   "qty": 1,
+   "unit_gbp": 600,
+   "total_gbp": 600,
+   "evidence": [],
+   "rule": "R-DOC",
+   "conf": 1.0,
+   "basis": ""
+  },
+  {
+   "line": 8,
+   "part": "DEL",
+   "description": "Delivery to site, crane and offload excluded",
+   "qty": 1,
+   "unit_gbp": 850,
+   "total_gbp": 850,
+   "evidence": [],
+   "rule": "R-DELIVERY",
+   "conf": 1.0,
+   "basis": ""
+  }
+ ],
+ "subtotal_gbp": 13873.2,
+ "margin_gbp": 2080.98,
+ "total_gbp": 15954.18,
+ "issues": [
+  {
+   "kind": "missing",
+   "what": "fault level not found on the drawing notes",
+   "action": "confirm with the consultant",
+   "evidence": []
+  },
+  {
+   "kind": "missing",
+   "what": "D1 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S1"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D2 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S2"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D3 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S3"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D6 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S6"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D7 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S7",
+    "S7t1"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D8 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S8"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D10 (MCCB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S10"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D11 (MCCB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S11"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D12 (MCCB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S12"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D13 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S13"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D15 (FUSE_SWITCH): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S15",
+    "S15t1"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D16 (FUSE_SWITCH): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S16",
+    "S16t1"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D17 (FUSE_SWITCH): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S17",
+    "S17t1"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D18 (FUSE_SWITCH): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S18",
+    "S18t1"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D20 (MCCB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S20"
+   ]
+  },
+  {
+   "kind": "assumed",
+   "what": "busbar rating not read; assumed 0 A from the largest incomer",
+   "action": "confirm",
+   "evidence": []
+  },
+  {
+   "kind": "low_confidence",
+   "what": "devices read with low confidence: D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15, D16, D17, D18, D19, D20",
+   "action": "check against the drawing",
+   "evidence": [
+    "D1",
+    "D2",
+    "D3",
+    "D4",
+    "D5",
+    "D6",
+    "D7",
+    "D8",
+    "D9",
+    "D10",
+    "D11",
+    "D12",
+    "D13",
+    "D14",
+    "D15",
+    "D16",
+    "D17",
+    "D18",
+    "D19",
+    "D20"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,899 @@
+{
+ "image": "tm5-693-p74.png",
+ "size": [
+  1322,
+  1657
+ ],
+ "deskew_deg": -0.1,
+ "texts": [
+  {
+   "text": "DUAL UTILITY",
+   "conf": 0.9797369738419851,
+   "box": [
+    462.0,
+    154.5,
+    128.0,
+    15.0
+   ],
+   "src": "page",
+   "id": "T1"
+  },
+  {
+   "text": "POWER SOURCES",
+   "conf": 0.9771547913551331,
+   "box": [
+    450.5,
+    172.5,
+    150.0,
+    16.0
+   ],
+   "src": "page",
+   "id": "T2"
+  },
+  {
+   "text": "NOTE 1",
+   "conf": 0.9939492543538412,
+   "box": [
+    73.0,
+    211.0,
+    66.5,
+    15.5
+   ],
+   "src": "page",
+   "id": "T3"
+  },
+  {
+   "text": "OPTIONAL STANDBY",
+   "conf": 0.9857070855796337,
+   "box": [
+    437.0,
+    246.0,
+    176.0,
+    15.0
+   ],
+   "src": "page",
+   "id": "T4"
+  },
+  {
+   "text": "GENERATORS",
+   "conf": 0.9595507264137269,
+   "box": [
+    470.0,
+    265.0,
+    112.0,
+    15.0
+   ],
+   "src": "page",
+   "id": "T5"
+  },
+  {
+   "text": "G",
+   "conf": 0.9772303700447083,
+   "box": [
+    446.0,
+    303.0,
+    10.5,
+    12.0
+   ],
+   "src": "page",
+   "id": "T6"
+  },
+  {
+   "text": "NOTE 2",
+   "conf": 0.9606094559033712,
+   "box": [
+    125.0,
+    423.0,
+    71.5,
+    18.5
+   ],
+   "src": "page",
+   "id": "T7"
+  },
+  {
+   "text": "NOTE 3",
+   "conf": 0.9543144702911377,
+   "box": [
+    791.5,
+    423.0,
+    70.0,
+    18.5
+   ],
+   "src": "page",
+   "id": "T8"
+  },
+  {
+   "text": "\"NDN-TECH\" BUS",
+   "conf": 0.9777805251734597,
+   "box": [
+    119.5,
+    446.5,
+    149.5,
+    16.5
+   ],
+   "src": "page",
+   "id": "T9"
+  },
+  {
+   "text": "480V",
+   "conf": 0.9996043145656586,
+   "box": [
+    343.0,
+    445.5,
+    49.0,
+    19.0
+   ],
+   "src": "page",
+   "id": "T10"
+  },
+  {
+   "text": "480V",
+   "conf": 0.9997936487197876,
+   "box": [
+    664.5,
+    445.5,
+    49.5,
+    19.0
+   ],
+   "src": "page",
+   "id": "T11"
+  },
+  {
+   "text": "\"NON-TECH' BUS",
+   "conf": 0.9295392632484436,
+   "box": [
+    785.5,
+    446.0,
+    150.0,
+    17.5
+   ],
+   "src": "page",
+   "id": "T12"
+  },
+  {
+   "text": "BLDG BUS",
+   "conf": 0.9984924718737602,
+   "box": [
+    1182.0,
+    446.5,
+    91.0,
+    17.0
+   ],
+   "src": "page",
+   "id": "T13"
+  },
+  {
+   "text": "NORMALLY",
+   "conf": 0.9827012792229652,
+   "box": [
+    479.5,
+    473.5,
+    91.0,
+    16.5
+   ],
+   "src": "page",
+   "id": "T14"
+  },
+  {
+   "text": "OPENED",
+   "conf": 0.9877717693646749,
+   "box": [
+    491.5,
+    492.0,
+    68.5,
+    17.0
+   ],
+   "src": "page",
+   "id": "T15"
+  },
+  {
+   "text": "NON-REDUNDANT",
+   "conf": 0.9786714407113882,
+   "box": [
+    213.0,
+    601.5,
+    146.0,
+    15.0
+   ],
+   "src": "page",
+   "id": "T16"
+  },
+  {
+   "text": "SDLID-STATE",
+   "conf": 0.9615322730757974,
+   "box": [
+    226.0,
+    620.5,
+    120.0,
+    15.0
+   ],
+   "src": "page",
+   "id": "T17"
+  },
+  {
+   "text": "UPS",
+   "conf": 0.9982253909111023,
+   "box": [
+    268.0,
+    638.5,
+    36.5,
+    18.0
+   ],
+   "src": "page",
+   "id": "T18"
+  },
+  {
+   "text": "STATIC BYPASS CIRCUIT",
+   "conf": 0.979646501087007,
+   "box": [
+    374.5,
+    638.0,
+    222.5,
+    14.5
+   ],
+   "src": "page",
+   "id": "T19"
+  },
+  {
+   "text": "A/C",
+   "conf": 0.9946776628494263,
+   "box": [
+    103.0,
+    656.5,
+    37.5,
+    18.5
+   ],
+   "src": "page",
+   "id": "T20"
+  },
+  {
+   "text": "LIGHTS",
+   "conf": 0.9958752393722534,
+   "box": [
+    732.0,
+    656.5,
+    66.5,
+    18.5
+   ],
+   "src": "page",
+   "id": "T21"
+  },
+  {
+   "text": "OTHER BLDG",
+   "conf": 0.9904639184474945,
+   "box": [
+    1113.0,
+    656.0,
+    113.0,
+    16.5
+   ],
+   "src": "page",
+   "id": "T22"
+  },
+  {
+   "text": "TENANTS LOADS",
+   "conf": 0.9833559668981112,
+   "box": [
+    1097.5,
+    675.5,
+    144.5,
+    15.0
+   ],
+   "src": "page",
+   "id": "T23"
+  },
+  {
+   "text": "480V UPS BUS",
+   "conf": 0.9896035939455032,
+   "box": [
+    134.5,
+    734.0,
+    137.5,
+    19.5
+   ],
+   "src": "page",
+   "id": "T24"
+  },
+  {
+   "text": "120/208V",
+   "conf": 0.9996461719274521,
+   "box": [
+    829.0,
+    781.0,
+    88.5,
+    17.0
+   ],
+   "src": "page",
+   "id": "T25"
+  },
+  {
+   "text": "RECEPTACLES",
+   "conf": 0.9965338490226052,
+   "box": [
+    808.0,
+    916.5,
+    125.0,
+    16.5
+   ],
+   "src": "page",
+   "id": "T26"
+  },
+  {
+   "text": "OTHER",
+   "conf": 0.9926538348197937,
+   "box": [
+    960.0,
+    914.0,
+    58.5,
+    17.5
+   ],
+   "src": "page",
+   "id": "T27"
+  },
+  {
+   "text": "TECHNICAL",
+   "conf": 0.9990938040945265,
+   "box": [
+    940.0,
+    933.0,
+    98.5,
+    18.5
+   ],
+   "src": "page",
+   "id": "T28"
+  },
+  {
+   "text": "LOADS",
+   "conf": 0.9940482974052429,
+   "box": [
+    960.0,
+    952.5,
+    58.5,
+    17.0
+   ],
+   "src": "page",
+   "id": "T29"
+  },
+  {
+   "text": "120/208V",
+   "conf": 0.9991592466831207,
+   "box": [
+    51.5,
+    1009.0,
+    87.0,
+    18.5
+   ],
+   "src": "page",
+   "id": "T30"
+  },
+  {
+   "text": "120/208V",
+   "conf": 0.9994385540485382,
+   "box": [
+    432.5,
+    1009.0,
+    88.0,
+    18.5
+   ],
+   "src": "page",
+   "id": "T31"
+  },
+  {
+   "text": "COMPUTER LOADS ONLY",
+   "conf": 0.9930000524771841,
+   "box": [
+    180.0,
+    1053.5,
+    212.0,
+    16.5
+   ],
+   "src": "page",
+   "id": "T32"
+  },
+  {
+   "text": "NOTES",
+   "conf": 0.9966278791427612,
+   "box": [
+    433.0,
+    1219.0,
+    58.5,
+    17.5
+   ],
+   "src": "page",
+   "id": "T33"
+  },
+  {
+   "text": "1. Utility source is double-ended substation connected in secondary selective",
+   "conf": 0.9895034564005865,
+   "box": [
+    433.5,
+    1256.5,
+    791.5,
+    18.0
+   ],
+   "src": "page",
+   "id": "T34"
+  },
+  {
+   "text": "configuration with either BUS capable of carryingthe entire load.",
+   "conf": 0.9866853970747728,
+   "box": [
+    433.5,
+    1274.0,
+    669.0,
+    21.0
+   ],
+   "src": "page",
+   "id": "T35"
+  },
+  {
+   "text": "loads.",
+   "conf": 0.9931350946426392,
+   "box": [
+    432.0,
+    1333.0,
+    58.0,
+    18.0
+   ],
+   "src": "page",
+   "id": "T36"
+  },
+  {
+   "text": "3. \"TECH\" Bus feeds non-cyclic loads, light receptacles and other techincal",
+   "conf": 0.9840510948499044,
+   "box": [
+    432.0,
+    1369.5,
+    775.0,
+    21.0
+   ],
+   "src": "page",
+   "id": "T37"
+  },
+  {
+   "text": "'spoo,",
+   "conf": 0.5735685080289841,
+   "box": [
+    432.5,
+    1390.5,
+    57.0,
+    17.0
+   ],
+   "src": "page",
+   "id": "T38"
+  },
+  {
+   "text": "transient supressed branch circuit breakers and meterings.",
+   "conf": 0.9934839421305163,
+   "box": [
+    433.0,
+    1465.0,
+    617.0,
+    20.5
+   ],
+   "src": "page",
+   "id": "T39"
+  },
+  {
+   "text": "DNT/Ups-tm-1",
+   "conf": 0.9904282490412394,
+   "box": [
+    1130.5,
+    1536.5,
+    88.5,
+    16.0
+   ],
+   "src": "page",
+   "id": "T40"
+  },
+  {
+   "text": "----",
+   "conf": 0.7624500244855881,
+   "box": [
+    968.6666666666667,
+    293.6666666666667,
+    14.0,
+    90.66666666666667
+   ],
+   "src": "crop",
+   "id": "S1t1"
+  },
+  {
+   "text": "BUS",
+   "conf": 0.9993618130683899,
+   "box": [
+    235.33333333333334,
+    447.0,
+    33.666666666666664,
+    17.666666666666668
+   ],
+   "src": "crop",
+   "id": "S3t1"
+  },
+  {
+   "text": "480V",
+   "conf": 0.9988513290882111,
+   "box": [
+    344.0,
+    447.6666666666667,
+    46.333333333333336,
+    16.333333333333332
+   ],
+   "src": "crop",
+   "id": "S3t2"
+  },
+  {
+   "text": "NORMALLY",
+   "conf": 0.9291505366563797,
+   "box": [
+    480.0,
+    474.3333333333333,
+    89.33333333333333,
+    15.0
+   ],
+   "src": "crop",
+   "id": "S3t3"
+  },
+  {
+   "text": "IDENED",
+   "conf": 0.8097652693589529,
+   "box": [
+    499.6666666666667,
+    492.33333333333337,
+    59.333333333333336,
+    8.333333333333334
+   ],
+   "src": "crop",
+   "id": "S3t4"
+  },
+  {
+   "text": "LY",
+   "conf": 0.8695933222770691,
+   "box": [
+    541.6666666666666,
+    478.6666666666667,
+    27.0,
+    9.666666666666666
+   ],
+   "src": "crop",
+   "id": "S5t1"
+  },
+  {
+   "text": "ED",
+   "conf": 0.9928475618362427,
+   "box": [
+    538.0,
+    491.6666666666667,
+    22.0,
+    18.0
+   ],
+   "src": "crop",
+   "id": "S5t2"
+  },
+  {
+   "text": "OTHER BLDG",
+   "conf": 0.9798848628997803,
+   "box": [
+    1113.6666666666667,
+    657.0,
+    111.33333333333326,
+    15.0
+   ],
+   "src": "crop",
+   "id": "S6t1"
+  },
+  {
+   "text": "LOADS TENANTS",
+   "conf": 0.9604219113077436,
+   "box": [
+    1182.3333333333333,
+    676.0,
+    59.0,
+    14.0
+   ],
+   "src": "crop",
+   "id": "S6t2"
+  },
+  {
+   "text": "120/208V",
+   "conf": 0.9988421946763992,
+   "box": [
+    433.6666666666667,
+    1009.3333333333334,
+    86.0,
+    18.666666666666668
+   ],
+   "src": "crop",
+   "id": "S7t1"
+  },
+  {
+   "text": "120/208V",
+   "conf": 0.9971198439598083,
+   "box": [
+    434.33333333333337,
+    1010.6666666666666,
+    84.66666666666667,
+    16.0
+   ],
+   "src": "crop",
+   "id": "S8t1"
+  },
+  {
+   "text": "IMPUTER LOADS ONLY",
+   "conf": 0.9282052602086749,
+   "box": [
+    196.0,
+    1054.0,
+    196.00000000000006,
+    15.666666666666742
+   ],
+   "src": "crop",
+   "id": "S8t2"
+  }
+ ],
+ "busbars": [],
+ "vlines_count": 48,
+ "symbols": [
+  {
+   "id": "S1",
+   "kind": "contactor",
+   "box": [
+    715,
+    307,
+    42,
+    26
+   ],
+   "shape_score": 0.12
+  },
+  {
+   "id": "S2",
+   "kind": "contactor",
+   "box": [
+    1120,
+    307,
+    32,
+    25
+   ],
+   "shape_score": 0.17
+  },
+  {
+   "id": "S3",
+   "kind": "ct",
+   "box": [
+    284,
+    398,
+    18,
+    13
+   ],
+   "shape_score": 0.11
+  },
+  {
+   "id": "S4",
+   "kind": "breaker",
+   "box": [
+    1243,
+    497,
+    17,
+    33
+   ],
+   "shape_score": 0.13
+  },
+  {
+   "id": "S5",
+   "kind": "breaker",
+   "box": [
+    598,
+    518,
+    18,
+    14
+   ],
+   "shape_score": 0.15
+  },
+  {
+   "id": "S6",
+   "kind": "contactor",
+   "box": [
+    881,
+    603,
+    42,
+    25
+   ],
+   "shape_score": 0.16
+  },
+  {
+   "id": "S7",
+   "kind": "isolator",
+   "box": [
+    482,
+    1001,
+    38,
+    28
+   ],
+   "shape_score": 0.16
+  },
+  {
+   "id": "S8",
+   "kind": "earth",
+   "box": [
+    255,
+    1029,
+    61,
+    7
+   ],
+   "shape_score": 0.11
+  }
+ ],
+ "devices": [
+  {
+   "symbol": "S1",
+   "box": [
+    715,
+    307,
+    42,
+    26
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.06,
+   "type": "CONTACTOR",
+   "rating": null,
+   "on_bus": null,
+   "connected": false,
+   "id": "D1"
+  },
+  {
+   "symbol": "S2",
+   "box": [
+    1120,
+    307,
+    32,
+    25
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.09,
+   "type": "CONTACTOR",
+   "rating": null,
+   "on_bus": null,
+   "connected": false,
+   "id": "D2"
+  },
+  {
+   "symbol": "S3",
+   "box": [
+    284,
+    398,
+    18,
+    13
+   ],
+   "label_texts": [
+    "S3t1"
+   ],
+   "label": "BUS",
+   "conf": 0.11,
+   "type": "CT",
+   "rating": null,
+   "on_bus": null,
+   "connected": false,
+   "id": "D3"
+  },
+  {
+   "symbol": "S4",
+   "box": [
+    1243,
+    497,
+    17,
+    33
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.07,
+   "type": "ACB",
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "on_bus": null,
+   "connected": false,
+   "id": "D4"
+  },
+  {
+   "symbol": "S5",
+   "box": [
+    598,
+    518,
+    18,
+    14
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.07,
+   "type": "ACB",
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "on_bus": null,
+   "connected": false,
+   "id": "D5"
+  },
+  {
+   "symbol": "S6",
+   "box": [
+    881,
+    603,
+    42,
+    25
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.08,
+   "type": "CONTACTOR",
+   "rating": null,
+   "on_bus": null,
+   "connected": false,
+   "id": "D6"
+  },
+  {
+   "symbol": "S7",
+   "box": [
+    482,
+    1001,
+    38,
+    28
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.08,
+   "type": "ISOLATOR",
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "on_bus": null,
+   "connected": false,
+   "id": "D7"
+  },
+  {
+   "symbol": "S8",
+   "box": [
+    255,
+    1029,
+    61,
+    7
+   ],
+   "label_texts": [
+    "S8t2"
+   ],
+   "label": "IMPUTER LOADS ONLY",
+   "conf": 0.11,
+   "type": "EARTH",
+   "rating": null,
+   "on_bus": null,
+   "connected": true,
+   "id": "D8"
+  }
+ ],
+ "notes": {
+  "form": null,
+  "ip": null,
+  "fault_kA": null,
+  "poles_default": null,
+  "evidence": []
+ },
+ "reader": "trained",
+ "seconds": {
+  "total": 8.87,
+  "ocr": 6.46,
+  "detector": 2.27
+ },
+ "detector": {
+  "weights": "weights/rtdetr_r18_full",
+  "device": "cpu",
+  "threads": 4,
+  "score_threshold": 0.11,
+  "score_threshold_source": "drawing",
+  "nms_iou": 0.5,
+  "merge_iou": 0.5,
+  "edge_px": 2,
+  "contain": 0.8
+ }
+}

@@ -1,0 +1,646 @@
+{
+ "id": "tm5-694-p76",
+ "source": {
+  "kind": "sample",
+  "title": "TM 5-694: Figure 6-1. Uninterruptible power supply system single line diagram",
+  "seed": null,
+  "level": null,
+  "copy": "clean",
+  "has_answer_key": false,
+  "note": "Real public-domain drawing (US federal document), American symbol style the model never trained on; not scored, because it has no answer key yet"
+ },
+ "images": {
+  "sheet": "sheet.png",
+  "overlay": "overlay.png"
+ },
+ "size": [
+  2551,
+  1620
+ ],
+ "steps": [
+  {
+   "key": "text",
+   "title": "Read the words",
+   "count": 53,
+   "seconds": 21.82,
+   "plain": "Read 53 pieces of text in 21.82 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+  },
+  {
+   "key": "symbols",
+   "title": "Find the symbols",
+   "count": 17,
+   "seconds": 13.18,
+   "plain": "Found 17 symbols in 13.18 s: 5 panel meters, 3 earths, 3 protection relays, 3 power-factor correction banks, 1 generator, 1 incoming air circuit breaker, 1 current transformer. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+  },
+  {
+   "key": "labels",
+   "title": "Pair labels with symbols",
+   "count": 5,
+   "seconds": 0.3,
+   "plain": "Paired 5 of 17 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
+  },
+  {
+   "key": "spec",
+   "title": "Read the specification and compare",
+   "count": 0,
+   "seconds": 0.0,
+   "plain": "No specification was supplied, so the board's form, protection and fault level come from the drawing notes alone (Form 4 Type 6, IP31, fault level not found). An estimator would check these against the specification before pricing."
+  },
+  {
+   "key": "price",
+   "title": "Pick parts and price",
+   "count": 14,
+   "seconds": 0.0,
+   "plain": "Chose 14 catalogue lines and priced the board at \u00a315,225 (illustrative prices, 15% margin included); 7 items flagged for the estimator. Every line names the symbol, text or clause it rests on, so a reviewer can check it on the drawing."
+  }
+ ],
+ "devices": [
+  {
+   "id": "D1",
+   "type": "GENERATOR",
+   "type_plain": "generator",
+   "rating": null,
+   "unit": "kVA",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.84,
+   "box": [
+    382,
+    202,
+    66,
+    58
+   ],
+   "label": "or and Circuit Breaker"
+  },
+  {
+   "id": "D2",
+   "type": "EARTH",
+   "type_plain": "earth",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.17,
+   "box": [
+    546,
+    220,
+    23,
+    16
+   ],
+   "label": "Backup ie | Breaker"
+  },
+  {
+   "id": "D3",
+   "type": "RELAY",
+   "type_plain": "protection relay",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.35,
+   "box": [
+    1482,
+    400,
+    15,
+    19
+   ],
+   "label": "r/Battery | rgerE B"
+  },
+  {
+   "id": "D4",
+   "type": "EARTH",
+   "type_plain": "earth",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.07,
+   "box": [
+    360,
+    430,
+    34,
+    22
+   ],
+   "label": ""
+  },
+  {
+   "id": "D5",
+   "type": "RELAY",
+   "type_plain": "protection relay",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.1,
+   "box": [
+    1474,
+    476,
+    16,
+    20
+   ],
+   "label": ""
+  },
+  {
+   "id": "D6",
+   "type": "METER",
+   "type_plain": "panel meter",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.14,
+   "box": [
+    1481,
+    569,
+    20,
+    20
+   ],
+   "label": ""
+  },
+  {
+   "id": "D7",
+   "type": "METER",
+   "type_plain": "panel meter",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.06,
+   "box": [
+    751,
+    572,
+    34,
+    21
+   ],
+   "label": ""
+  },
+  {
+   "id": "D8",
+   "type": "METER",
+   "type_plain": "panel meter",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.1,
+   "box": [
+    1334,
+    597,
+    32,
+    20
+   ],
+   "label": ""
+  },
+  {
+   "id": "D9",
+   "type": "CAPACITOR",
+   "type_plain": "power-factor correction bank",
+   "rating": null,
+   "unit": "kVAr",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.14,
+   "box": [
+    206,
+    697,
+    81,
+    16
+   ],
+   "label": ""
+  },
+  {
+   "id": "D10",
+   "type": "CAPACITOR",
+   "type_plain": "power-factor correction bank",
+   "rating": null,
+   "unit": "kVAr",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.09,
+   "box": [
+    228,
+    706,
+    38,
+    14
+   ],
+   "label": ""
+  },
+  {
+   "id": "D11",
+   "type": "CAPACITOR",
+   "type_plain": "power-factor correction bank",
+   "rating": null,
+   "unit": "kVAr",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.29,
+   "box": [
+    203,
+    724,
+    87,
+    26
+   ],
+   "label": "125 VDC"
+  },
+  {
+   "id": "D12",
+   "type": "METER",
+   "type_plain": "panel meter",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.08,
+   "box": [
+    1461,
+    728,
+    35,
+    21
+   ],
+   "label": ""
+  },
+  {
+   "id": "D13",
+   "type": "METER",
+   "type_plain": "panel meter",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.07,
+   "box": [
+    746,
+    732,
+    35,
+    20
+   ],
+   "label": ""
+  },
+  {
+   "id": "D14",
+   "type": "ACB",
+   "type_plain": "incoming air circuit breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.25,
+   "box": [
+    1183,
+    963,
+    25,
+    39
+   ],
+   "label": "Static"
+  },
+  {
+   "id": "D15",
+   "type": "CT",
+   "type_plain": "current transformer",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.1,
+   "box": [
+    1916,
+    999,
+    14,
+    23
+   ],
+   "label": ""
+  },
+  {
+   "id": "D16",
+   "type": "EARTH",
+   "type_plain": "earth",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.07,
+   "box": [
+    979,
+    1041,
+    28,
+    41
+   ],
+   "label": ""
+  },
+  {
+   "id": "D17",
+   "type": "RELAY",
+   "type_plain": "protection relay",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.08,
+   "box": [
+    1232,
+    1113,
+    15,
+    19
+   ],
+   "label": ""
+  }
+ ],
+ "board": {
+  "fault_kA": null,
+  "form": "Form 4 Type 6",
+  "ip": "IP31",
+  "poles_default": 4,
+  "busbar_rating": 0,
+  "sections": 1,
+  "ways": 0
+ },
+ "bom": {
+  "lines": [
+   {
+    "line": 1,
+    "part": "RELAY-OC",
+    "description": "Overcurrent and earth-fault protection relay",
+    "qty": 1,
+    "unit_gbp": 950,
+    "total_gbp": 950,
+    "conf": 0.35,
+    "evidence": [
+     "S3",
+     "S3t3",
+     "S3t4"
+    ],
+    "rule": "R-PROTECTION"
+   },
+   {
+    "line": 2,
+    "part": "RELAY-OC",
+    "description": "Overcurrent and earth-fault protection relay",
+    "qty": 1,
+    "unit_gbp": 950,
+    "total_gbp": 950,
+    "conf": 0.1,
+    "evidence": [
+     "S5"
+    ],
+    "rule": "R-PROTECTION"
+   },
+   {
+    "line": 3,
+    "part": "METER-MF",
+    "description": "Panel meter (multifunction)",
+    "qty": 1,
+    "unit_gbp": 260,
+    "total_gbp": 260,
+    "conf": 0.14,
+    "evidence": [
+     "S6"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 4,
+    "part": "METER-MF",
+    "description": "Panel meter (multifunction)",
+    "qty": 1,
+    "unit_gbp": 260,
+    "total_gbp": 260,
+    "conf": 0.06,
+    "evidence": [
+     "S7"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 5,
+    "part": "METER-MF",
+    "description": "Panel meter (multifunction)",
+    "qty": 1,
+    "unit_gbp": 260,
+    "total_gbp": 260,
+    "conf": 0.1,
+    "evidence": [
+     "S8"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 6,
+    "part": "METER-MF",
+    "description": "Panel meter (multifunction)",
+    "qty": 1,
+    "unit_gbp": 260,
+    "total_gbp": 260,
+    "conf": 0.08,
+    "evidence": [
+     "S12"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 7,
+    "part": "METER-MF",
+    "description": "Panel meter (multifunction)",
+    "qty": 1,
+    "unit_gbp": 260,
+    "total_gbp": 260,
+    "conf": 0.07,
+    "evidence": [
+     "S13"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 8,
+    "part": "CT-SET",
+    "description": "Current transformers, set of three, class 1",
+    "qty": 1,
+    "unit_gbp": 280,
+    "total_gbp": 280,
+    "conf": 0.1,
+    "evidence": [
+     "S15"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 9,
+    "part": "RELAY-OC",
+    "description": "Overcurrent and earth-fault protection relay",
+    "qty": 1,
+    "unit_gbp": 950,
+    "total_gbp": 950,
+    "conf": 0.08,
+    "evidence": [
+     "S17"
+    ],
+    "rule": "R-PROTECTION"
+   },
+   {
+    "line": 10,
+    "part": "BUSBAR-CU-1600",
+    "description": "Copper busbar set 1600 A (4-bar), 1 sections, about 29 kg",
+    "qty": 1,
+    "unit_gbp": 331.2,
+    "total_gbp": 331.2,
+    "conf": 0.9,
+    "evidence": [],
+    "rule": "R-BUSBAR-SIZE"
+   },
+   {
+    "line": 11,
+    "part": "ENC-SECTION",
+    "description": "Enclosure section, Form 4 Type 6, IP31, RAL 7035",
+    "qty": 1,
+    "unit_gbp": 3380.0,
+    "total_gbp": 3380.0,
+    "conf": 0.95,
+    "evidence": [],
+    "rule": "R-ENCLOSURE"
+   },
+   {
+    "line": 12,
+    "part": "LAB-ASSY",
+    "description": "Assembly, wiring and routine verification: 76 hours",
+    "qty": 1,
+    "unit_gbp": 3648,
+    "total_gbp": 3648,
+    "conf": 0.9,
+    "evidence": [],
+    "rule": "R-LABOUR"
+   },
+   {
+    "line": 13,
+    "part": "DOC",
+    "description": "Documentation, as-built drawings, test certificates",
+    "qty": 1,
+    "unit_gbp": 600,
+    "total_gbp": 600,
+    "conf": 1.0,
+    "evidence": [],
+    "rule": "R-DOC"
+   },
+   {
+    "line": 14,
+    "part": "DEL",
+    "description": "Delivery to site, crane and offload excluded",
+    "qty": 1,
+    "unit_gbp": 850,
+    "total_gbp": 850,
+    "conf": 1.0,
+    "evidence": [],
+    "rule": "R-DELIVERY"
+   }
+  ],
+  "subtotal_gbp": 13239.2,
+  "margin_gbp": 1985.88,
+  "total_gbp": 15225.08
+ },
+ "issues": [
+  {
+   "kind": "missing",
+   "what": "fault level not found on the drawing notes",
+   "action": "confirm with the consultant",
+   "evidence": []
+  },
+  {
+   "kind": "missing",
+   "what": "D9 (CAPACITOR): kVAr not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S9"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D10 (CAPACITOR): kVAr not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S10"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D11 (CAPACITOR): kVAr not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S11",
+    "S11t1"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D14 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S14",
+    "T38"
+   ]
+  },
+  {
+   "kind": "assumed",
+   "what": "busbar rating not read; assumed 0 A from the largest incomer",
+   "action": "confirm",
+   "evidence": []
+  },
+  {
+   "kind": "low_confidence",
+   "what": "devices read with low confidence: D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15, D16, D17",
+   "action": "check against the drawing",
+   "evidence": [
+    "D2",
+    "D3",
+    "D4",
+    "D5",
+    "D6",
+    "D7",
+    "D8",
+    "D9",
+    "D10",
+    "D11",
+    "D12",
+    "D13",
+    "D14",
+    "D15",
+    "D16",
+    "D17"
+   ]
+  }
+ ],
+ "conflicts": [],
+ "spec": null,
+ "score": null,
+ "timing": {
+  "total": 35.94,
+  "ocr": 21.82,
+  "detector": 13.18
+ },
+ "reader": "trained",
+ "engine": "rapidocr",
+ "model": {
+  "weights": "weights/rtdetr_r18_full",
+  "threshold": 0.11
+ },
+ "files": {
+  "quotation_md": "quotation.md",
+  "bom_csv": "bom.csv",
+  "review_html": "review.html",
+  "extraction_json": "extraction.json"
+ }
+}

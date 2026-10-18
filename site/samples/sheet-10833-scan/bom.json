@@ -1,0 +1,462 @@
+{
+ "board": {
+  "fault_kA": 80,
+  "form": "Form 4 Type 4",
+  "ip": "IP41",
+  "poles_default": 4,
+  "busbar_rating": 1600,
+  "sections": 2,
+  "ways": 2
+ },
+ "lines": [
+  {
+   "line": 1,
+   "part": "METER-CT 1600/5A | BAR A 1600A Cu 80 kA/1s",
+   "description": "Panel meter (CT 1600/5A | BAR A 1600A Cu 80 kA/1s)",
+   "qty": 1,
+   "unit_gbp": 260,
+   "total_gbp": 260,
+   "evidence": [
+    "S5",
+    "S5t1",
+    "S5t2"
+   ],
+   "rule": "R-METERING",
+   "conf": 0.27,
+   "basis": ""
+  },
+  {
+   "line": 2,
+   "part": "METER-CT1600/5A | 1600 A Cu 80 kA/1s BARB",
+   "description": "Panel meter (CT1600/5A | 1600 A Cu 80 kA/1s BARB)",
+   "qty": 1,
+   "unit_gbp": 260,
+   "total_gbp": 260,
+   "evidence": [
+    "S6",
+    "S6t1",
+    "S6t2"
+   ],
+   "rule": "R-METERING",
+   "conf": 0.52,
+   "basis": ""
+  },
+  {
+   "line": 3,
+   "part": "CT-SET",
+   "description": "Current transformers 1600/5 A, set of three, class 1",
+   "qty": 1,
+   "unit_gbp": 280,
+   "total_gbp": 280,
+   "evidence": [
+    "S7",
+    "S7t2"
+   ],
+   "rule": "R-METERING",
+   "conf": 0.29,
+   "basis": ""
+  },
+  {
+   "line": 4,
+   "part": "CT-SET",
+   "description": "Current transformers 1600/5 A, set of three, class 1",
+   "qty": 1,
+   "unit_gbp": 280,
+   "total_gbp": 280,
+   "evidence": [
+    "S8",
+    "S8t2"
+   ],
+   "rule": "R-METERING",
+   "conf": 0.41,
+   "basis": ""
+  },
+  {
+   "line": 5,
+   "part": "BSS-1600-4P",
+   "description": "Bus-section switch 1600 A 4-pole, 80 kA",
+   "qty": 1,
+   "unit_gbp": 4340.0,
+   "total_gbp": 4340.0,
+   "evidence": [
+    "S9",
+    "S9t2"
+   ],
+   "rule": "R-BUS-SECTION",
+   "conf": 0.24,
+   "basis": ""
+  },
+  {
+   "line": 6,
+   "part": "FU-KIT-BS",
+   "description": "Bus-section functional unit and interlocking",
+   "qty": 1,
+   "unit_gbp": 900,
+   "total_gbp": 900,
+   "evidence": [
+    "S9",
+    "S9t2"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.24,
+   "basis": ""
+  },
+  {
+   "line": 7,
+   "part": "FSW-400-3P",
+   "description": "Fuse-switch-disconnector 400 A 3-pole; feeds MCC-7chillers",
+   "qty": 1,
+   "unit_gbp": 780.0,
+   "total_gbp": 780.0,
+   "evidence": [
+    "S19",
+    "S19t4",
+    "S19t3"
+   ],
+   "rule": "R-FSW-SELECT",
+   "conf": 0.39,
+   "basis": "rating 400 A; poles 3"
+  },
+  {
+   "line": 8,
+   "part": "FUSE-400",
+   "description": "Fuse links 400 A, one per pole",
+   "qty": 3,
+   "unit_gbp": 46,
+   "total_gbp": 138,
+   "evidence": [
+    "S19",
+    "S19t4",
+    "S19t3"
+   ],
+   "rule": "R-FUSE-LINKS",
+   "conf": 0.39,
+   "basis": ""
+  },
+  {
+   "line": 9,
+   "part": "FU-KIT-FUSE_SWITCH",
+   "description": "Outgoing functional unit: compartment door, terminals, labels",
+   "qty": 1,
+   "unit_gbp": 380,
+   "total_gbp": 380,
+   "evidence": [
+    "S19",
+    "S19t4",
+    "S19t3"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.39,
+   "basis": ""
+  },
+  {
+   "line": 10,
+   "part": "FSW-800-4P",
+   "description": "Fuse-switch-disconnector 800 A 4-pole; feeds kitchen",
+   "qty": 1,
+   "unit_gbp": 1854.4,
+   "total_gbp": 1854.4,
+   "evidence": [
+    "S21",
+    "S21t4",
+    "S21t3"
+   ],
+   "rule": "R-FSW-SELECT",
+   "conf": 0.31,
+   "basis": "rating 800 A; poles 4"
+  },
+  {
+   "line": 11,
+   "part": "FUSE-800",
+   "description": "Fuse links 800 A, one per pole",
+   "qty": 4,
+   "unit_gbp": 94,
+   "total_gbp": 376,
+   "evidence": [
+    "S21",
+    "S21t4",
+    "S21t3"
+   ],
+   "rule": "R-FUSE-LINKS",
+   "conf": 0.31,
+   "basis": ""
+  },
+  {
+   "line": 12,
+   "part": "FU-KIT-FUSE_SWITCH",
+   "description": "Outgoing functional unit: compartment door, terminals, labels",
+   "qty": 1,
+   "unit_gbp": 380,
+   "total_gbp": 380,
+   "evidence": [
+    "S21",
+    "S21t4",
+    "S21t3"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.31,
+   "basis": ""
+  },
+  {
+   "line": 13,
+   "part": "BUSBAR-CU-1600",
+   "description": "Copper busbar set 1600 A (4-bar), 2 sections, about 58 kg",
+   "qty": 1,
+   "unit_gbp": 662.4,
+   "total_gbp": 662.4,
+   "evidence": [
+    "T12",
+    "T12",
+    "T60"
+   ],
+   "rule": "R-BUSBAR-SIZE",
+   "conf": 0.9,
+   "basis": "1600 A busbar label; 2 sections"
+  },
+  {
+   "line": 14,
+   "part": "ENC-SECTION",
+   "description": "Enclosure section, Form 4 Type 4, IP41, RAL 7035",
+   "qty": 2,
+   "unit_gbp": 3160.04,
+   "total_gbp": 6320.08,
+   "evidence": [
+    "T54",
+    "T54",
+    "T56",
+    "T58"
+   ],
+   "rule": "R-ENCLOSURE",
+   "conf": 0.95,
+   "basis": "2 ways at 4 per section plus incomers"
+  },
+  {
+   "line": 15,
+   "part": "LAB-ASSY",
+   "description": "Assembly, wiring and routine verification: 168 hours",
+   "qty": 1,
+   "unit_gbp": 8064,
+   "total_gbp": 8064,
+   "evidence": [],
+   "rule": "R-LABOUR",
+   "conf": 0.9,
+   "basis": ""
+  },
+  {
+   "line": 16,
+   "part": "DOC",
+   "description": "Documentation, as-built drawings, test certificates",
+   "qty": 1,
+   "unit_gbp": 600,
+   "total_gbp": 600,
+   "evidence": [],
+   "rule": "R-DOC",
+   "conf": 1.0,
+   "basis": ""
+  },
+  {
+   "line": 17,
+   "part": "CERT",
+   "description": "Design-verification certificates per specification",
+   "qty": 1,
+   "unit_gbp": 0.0,
+   "total_gbp": 0.0,
+   "evidence": [
+    "7.7"
+   ],
+   "rule": "R-SPEC-CERT",
+   "conf": 1.0,
+   "basis": ""
+  },
+  {
+   "line": 18,
+   "part": "DEL",
+   "description": "Delivery to site, crane and offload excluded",
+   "qty": 1,
+   "unit_gbp": 850,
+   "total_gbp": 850,
+   "evidence": [],
+   "rule": "R-DELIVERY",
+   "conf": 1.0,
+   "basis": ""
+  }
+ ],
+ "subtotal_gbp": 26724.88,
+ "margin_gbp": 4008.73,
+ "total_gbp": 30733.61,
+ "issues": [
+  {
+   "kind": "missing",
+   "what": "D3 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S3",
+    "S3t1",
+    "S3t2"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D4 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S4",
+    "S4t1",
+    "S4t2"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D10 (FUSE_SWITCH): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S10",
+    "S10t5",
+    "S10t3"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D11 (FUSE_SWITCH): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S11",
+    "S11t3",
+    "S11t2"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D12 (FUSE_SWITCH): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S12",
+    "S12t5",
+    "S12t2"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D13 (FUSE_SWITCH): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S13",
+    "S13t5",
+    "S13t2"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D14 (FUSE_SWITCH): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S14",
+    "S14t9",
+    "S14t4"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D15 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S15",
+    "S15t5",
+    "S15t3"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D16 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S16",
+    "S16t5",
+    "S16t2"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D17 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S17",
+    "S17t4",
+    "S17t3"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D22 (FUSE_SWITCH): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S22",
+    "S22t2",
+    "S22t1"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D24 (FUSE_SWITCH): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S24",
+    "S24t2",
+    "S24t1"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D25 (FUSE_SWITCH): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S25",
+    "S25t4",
+    "S25t3"
+   ]
+  },
+  {
+   "kind": "conflict",
+   "what": "fault_kA: drawing says 80, specification clause 7.3 says 50",
+   "action": "clarify with the consultant before order; priced to the drawing",
+   "evidence": [
+    "T54",
+    "T54",
+    "T56",
+    "T58",
+    "7.3"
+   ]
+  },
+  {
+   "kind": "low_confidence",
+   "what": "devices read with low confidence: D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D16, D17, D18, D19, D20, D21, D22, D23, D24, D25, D26, D27",
+   "action": "check against the drawing",
+   "evidence": [
+    "D2",
+    "D3",
+    "D4",
+    "D5",
+    "D6",
+    "D7",
+    "D8",
+    "D9",
+    "D10",
+    "D11",
+    "D12",
+    "D13",
+    "D16",
+    "D17",
+    "D18",
+    "D19",
+    "D20",
+    "D21",
+    "D22",
+    "D23",
+    "D24",
+    "D25",
+    "D26",
+    "D27"
+   ]
+  }
+ ]
+}

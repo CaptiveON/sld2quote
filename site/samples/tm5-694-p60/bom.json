@@ -1,0 +1,551 @@
+{
+ "board": {
+  "fault_kA": null,
+  "form": "Form 4 Type 6",
+  "ip": "IP31",
+  "poles_default": 4,
+  "busbar_rating": 1600,
+  "sections": 3,
+  "ways": 0
+ },
+ "lines": [
+  {
+   "line": 1,
+   "part": "METER-MF",
+   "description": "Panel meter (multifunction)",
+   "qty": 1,
+   "unit_gbp": 260,
+   "total_gbp": 260,
+   "evidence": [
+    "S1"
+   ],
+   "rule": "R-METERING",
+   "conf": 0.09,
+   "basis": ""
+  },
+  {
+   "line": 2,
+   "part": "SPD-T12",
+   "description": "Surge protective device, Type 1+2, with status indication",
+   "qty": 1,
+   "unit_gbp": 690,
+   "total_gbp": 690,
+   "evidence": [
+    "S2"
+   ],
+   "rule": "R-SPD",
+   "conf": 0.06,
+   "basis": ""
+  },
+  {
+   "line": 3,
+   "part": "METER-MF",
+   "description": "Panel meter (multifunction)",
+   "qty": 1,
+   "unit_gbp": 260,
+   "total_gbp": 260,
+   "evidence": [
+    "S3"
+   ],
+   "rule": "R-METERING",
+   "conf": 0.14,
+   "basis": ""
+  },
+  {
+   "line": 4,
+   "part": "ACB-1600-4P-N",
+   "description": "Air circuit breaker 1600 A 4-pole, None kA band N, withdrawable, electronic trip",
+   "qty": 1,
+   "unit_gbp": 5124.0,
+   "total_gbp": 5124.0,
+   "evidence": [
+    "S4",
+    "T10"
+   ],
+   "rule": "R-ACB-SELECT",
+   "conf": 0.3,
+   "basis": "rating 1600 A from ['T10']; poles 4; kA None"
+  },
+  {
+   "line": 5,
+   "part": "FU-KIT-ACB",
+   "description": "Incomer functional unit: compartment, shutters, terminals, controls",
+   "qty": 1,
+   "unit_gbp": 1400,
+   "total_gbp": 1400,
+   "evidence": [
+    "S4",
+    "T10"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.3,
+   "basis": ""
+  },
+  {
+   "line": 6,
+   "part": "ACB-1600-4P-N",
+   "description": "Air circuit breaker 1600 A 4-pole, None kA band N, withdrawable, electronic trip",
+   "qty": 1,
+   "unit_gbp": 5124.0,
+   "total_gbp": 5124.0,
+   "evidence": [
+    "S5",
+    "S5t1"
+   ],
+   "rule": "R-ACB-SELECT",
+   "conf": 0.17,
+   "basis": "rating 800 A from ['S5t1']; poles 4; kA None"
+  },
+  {
+   "line": 7,
+   "part": "FU-KIT-ACB",
+   "description": "Incomer functional unit: compartment, shutters, terminals, controls",
+   "qty": 1,
+   "unit_gbp": 1400,
+   "total_gbp": 1400,
+   "evidence": [
+    "S5",
+    "S5t1"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.17,
+   "basis": ""
+  },
+  {
+   "line": 8,
+   "part": "ACB-1600-4P-N",
+   "description": "Air circuit breaker 1600 A 4-pole, None kA band N, withdrawable, electronic trip",
+   "qty": 1,
+   "unit_gbp": 5124.0,
+   "total_gbp": 5124.0,
+   "evidence": [
+    "S6",
+    "S6t1"
+   ],
+   "rule": "R-ACB-SELECT",
+   "conf": 0.12,
+   "basis": "rating 800 A from ['S6t1']; poles 4; kA None"
+  },
+  {
+   "line": 9,
+   "part": "FU-KIT-ACB",
+   "description": "Incomer functional unit: compartment, shutters, terminals, controls",
+   "qty": 1,
+   "unit_gbp": 1400,
+   "total_gbp": 1400,
+   "evidence": [
+    "S6",
+    "S6t1"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.12,
+   "basis": ""
+  },
+  {
+   "line": 10,
+   "part": "METER-Sync",
+   "description": "Panel meter (Sync)",
+   "qty": 1,
+   "unit_gbp": 260,
+   "total_gbp": 260,
+   "evidence": [
+    "S8",
+    "S8t3"
+   ],
+   "rule": "R-METERING",
+   "conf": 0.16,
+   "basis": ""
+  },
+  {
+   "line": 11,
+   "part": "RELAY-OC",
+   "description": "Overcurrent and earth-fault protection relay",
+   "qty": 1,
+   "unit_gbp": 950,
+   "total_gbp": 950,
+   "evidence": [
+    "S9"
+   ],
+   "rule": "R-PROTECTION",
+   "conf": 0.07,
+   "basis": ""
+  },
+  {
+   "line": 12,
+   "part": "RELAY-OC",
+   "description": "Overcurrent and earth-fault protection relay",
+   "qty": 1,
+   "unit_gbp": 950,
+   "total_gbp": 950,
+   "evidence": [
+    "S10"
+   ],
+   "rule": "R-PROTECTION",
+   "conf": 0.07,
+   "basis": ""
+  },
+  {
+   "line": 13,
+   "part": "RELAY-OC",
+   "description": "Overcurrent and earth-fault protection relay",
+   "qty": 1,
+   "unit_gbp": 950,
+   "total_gbp": 950,
+   "evidence": [
+    "S12"
+   ],
+   "rule": "R-PROTECTION",
+   "conf": 0.07,
+   "basis": ""
+  },
+  {
+   "line": 14,
+   "part": "RELAY-OC",
+   "description": "Overcurrent and earth-fault protection relay",
+   "qty": 1,
+   "unit_gbp": 950,
+   "total_gbp": 950,
+   "evidence": [
+    "S13"
+   ],
+   "rule": "R-PROTECTION",
+   "conf": 0.09,
+   "basis": ""
+  },
+  {
+   "line": 15,
+   "part": "RELAY-OC",
+   "description": "Overcurrent and earth-fault protection relay",
+   "qty": 1,
+   "unit_gbp": 950,
+   "total_gbp": 950,
+   "evidence": [
+    "S18",
+    "S18t1",
+    "S18t4"
+   ],
+   "rule": "R-PROTECTION",
+   "conf": 0.38,
+   "basis": ""
+  },
+  {
+   "line": 16,
+   "part": "RELAY-OC",
+   "description": "Overcurrent and earth-fault protection relay",
+   "qty": 1,
+   "unit_gbp": 950,
+   "total_gbp": 950,
+   "evidence": [
+    "S19",
+    "S19t1",
+    "S19t6"
+   ],
+   "rule": "R-PROTECTION",
+   "conf": 0.24,
+   "basis": ""
+  },
+  {
+   "line": 17,
+   "part": "RELAY-OC",
+   "description": "Overcurrent and earth-fault protection relay",
+   "qty": 1,
+   "unit_gbp": 950,
+   "total_gbp": 950,
+   "evidence": [
+    "S20",
+    "S20t1",
+    "S20t6"
+   ],
+   "rule": "R-PROTECTION",
+   "conf": 0.2,
+   "basis": ""
+  },
+  {
+   "line": 18,
+   "part": "RELAY-OC",
+   "description": "Overcurrent and earth-fault protection relay",
+   "qty": 1,
+   "unit_gbp": 950,
+   "total_gbp": 950,
+   "evidence": [
+    "S21",
+    "T38",
+    "T33"
+   ],
+   "rule": "R-PROTECTION",
+   "conf": 0.12,
+   "basis": ""
+  },
+  {
+   "line": 19,
+   "part": "RELAY-OC",
+   "description": "Overcurrent and earth-fault protection relay",
+   "qty": 1,
+   "unit_gbp": 950,
+   "total_gbp": 950,
+   "evidence": [
+    "S22",
+    "S22t4"
+   ],
+   "rule": "R-PROTECTION",
+   "conf": 0.11,
+   "basis": ""
+  },
+  {
+   "line": 20,
+   "part": "RELAY-OC",
+   "description": "Overcurrent and earth-fault protection relay",
+   "qty": 1,
+   "unit_gbp": 950,
+   "total_gbp": 950,
+   "evidence": [
+    "S24"
+   ],
+   "rule": "R-PROTECTION",
+   "conf": 0.14,
+   "basis": ""
+  },
+  {
+   "line": 21,
+   "part": "RELAY-OC",
+   "description": "Overcurrent and earth-fault protection relay",
+   "qty": 1,
+   "unit_gbp": 950,
+   "total_gbp": 950,
+   "evidence": [
+    "S25"
+   ],
+   "rule": "R-PROTECTION",
+   "conf": 0.15,
+   "basis": ""
+  },
+  {
+   "line": 22,
+   "part": "RELAY-OC",
+   "description": "Overcurrent and earth-fault protection relay",
+   "qty": 1,
+   "unit_gbp": 950,
+   "total_gbp": 950,
+   "evidence": [
+    "S26"
+   ],
+   "rule": "R-PROTECTION",
+   "conf": 0.12,
+   "basis": ""
+  },
+  {
+   "line": 23,
+   "part": "RELAY-OC",
+   "description": "Overcurrent and earth-fault protection relay",
+   "qty": 1,
+   "unit_gbp": 950,
+   "total_gbp": 950,
+   "evidence": [
+    "S27"
+   ],
+   "rule": "R-PROTECTION",
+   "conf": 0.1,
+   "basis": ""
+  },
+  {
+   "line": 24,
+   "part": "RELAY-OC",
+   "description": "Overcurrent and earth-fault protection relay",
+   "qty": 1,
+   "unit_gbp": 950,
+   "total_gbp": 950,
+   "evidence": [
+    "S31",
+    "S31t2"
+   ],
+   "rule": "R-PROTECTION",
+   "conf": 0.14,
+   "basis": ""
+  },
+  {
+   "line": 25,
+   "part": "METER-25",
+   "description": "Panel meter (25)",
+   "qty": 1,
+   "unit_gbp": 260,
+   "total_gbp": 260,
+   "evidence": [
+    "S35",
+    "T69"
+   ],
+   "rule": "R-METERING",
+   "conf": 0.15,
+   "basis": ""
+  },
+  {
+   "line": 26,
+   "part": "BUSBAR-CU-1600",
+   "description": "Copper busbar set 1600 A (4-bar), 3 sections, about 86 kg",
+   "qty": 1,
+   "unit_gbp": 993.6,
+   "total_gbp": 993.6,
+   "evidence": [],
+   "rule": "R-BUSBAR-SIZE",
+   "conf": 0.9,
+   "basis": "1600 A busbar label; 3 sections"
+  },
+  {
+   "line": 27,
+   "part": "ENC-SECTION",
+   "description": "Enclosure section, Form 4 Type 6, IP31, RAL 7035",
+   "qty": 3,
+   "unit_gbp": 3380.0,
+   "total_gbp": 10140.0,
+   "evidence": [],
+   "rule": "R-ENCLOSURE",
+   "conf": 0.95,
+   "basis": "0 ways at 4 per section plus incomers"
+  },
+  {
+   "line": 28,
+   "part": "LAB-ASSY",
+   "description": "Assembly, wiring and routine verification: 238 hours",
+   "qty": 1,
+   "unit_gbp": 11424,
+   "total_gbp": 11424,
+   "evidence": [],
+   "rule": "R-LABOUR",
+   "conf": 0.9,
+   "basis": ""
+  },
+  {
+   "line": 29,
+   "part": "DOC",
+   "description": "Documentation, as-built drawings, test certificates",
+   "qty": 1,
+   "unit_gbp": 600,
+   "total_gbp": 600,
+   "evidence": [],
+   "rule": "R-DOC",
+   "conf": 1.0,
+   "basis": ""
+  },
+  {
+   "line": 30,
+   "part": "DEL",
+   "description": "Delivery to site, crane and offload excluded",
+   "qty": 1,
+   "unit_gbp": 850,
+   "total_gbp": 850,
+   "evidence": [],
+   "rule": "R-DELIVERY",
+   "conf": 1.0,
+   "basis": ""
+  }
+ ],
+ "subtotal_gbp": 58609.6,
+ "margin_gbp": 8791.44,
+ "total_gbp": 67401.04,
+ "issues": [
+  {
+   "kind": "missing",
+   "what": "fault level not found on the drawing notes",
+   "action": "confirm with the consultant",
+   "evidence": []
+  },
+  {
+   "kind": "missing",
+   "what": "D7 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S7"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D14 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S14",
+    "S14t2"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D15 (FUSE_SWITCH): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S15",
+    "S15t2"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D17 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S17",
+    "S17t2"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D32 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S32"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D33 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S33"
+   ]
+  },
+  {
+   "kind": "assumed",
+   "what": "busbar rating not read; assumed 1600 A from the largest incomer",
+   "action": "confirm",
+   "evidence": []
+  },
+  {
+   "kind": "low_confidence",
+   "what": "devices read with low confidence: D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15, D16, D17, D18, D19, D20, D21, D22, D23, D24, D25, D26, D27, D28, D29, D30, D31, D32, D33, D34, D35",
+   "action": "check against the drawing",
+   "evidence": [
+    "D1",
+    "D2",
+    "D3",
+    "D4",
+    "D5",
+    "D6",
+    "D7",
+    "D8",
+    "D9",
+    "D10",
+    "D11",
+    "D12",
+    "D13",
+    "D14",
+    "D15",
+    "D16",
+    "D17",
+    "D18",
+    "D19",
+    "D20",
+    "D21",
+    "D22",
+    "D23",
+    "D24",
+    "D25",
+    "D26",
+    "D27",
+    "D28",
+    "D29",
+    "D30",
+    "D31",
+    "D32",
+    "D33",
+    "D34",
+    "D35"
+   ]
+  }
+ ]
+}

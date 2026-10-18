@@ -1,0 +1,63 @@
+{
+ "spec": {
+  "clauses": [
+   {
+    "id": "7.1",
+    "text": "The switchboard shall be designed, manufactured and verified in accordance with BS EN 61439-2."
+   },
+   {
+    "id": "7.2",
+    "text": "Internal separation shall be Form 4 Type 6 as defined in the UK National Annex."
+   },
+   {
+    "id": "7.3",
+    "text": "The assembly shall withstand a prospective short-circuit current of 36 kA for 1 second at the main busbars."
+   },
+   {
+    "id": "7.4",
+    "text": "Outgoing moulded-case circuit breakers shall be 4-pole with adjustable thermal-magnetic or electronic trip units."
+   },
+   {
+    "id": "7.5",
+    "text": "Degree of protection shall be not less than IP42 with doors closed."
+   },
+   {
+    "id": "7.6",
+    "text": "Main busbars shall be hard-drawn high-conductivity copper, tin-plated at joints."
+   },
+   {
+    "id": "7.7",
+    "text": "The contractor shall provide type-test or design-verification certificates prior to manufacture."
+   },
+   {
+    "id": "7.8",
+    "text": "Two years' spares for all trip units shall be included."
+   }
+  ],
+  "requirements": {
+   "standard": "BS EN 61439-2",
+   "form": "Form 4 Type 6",
+   "fault_kA": 36,
+   "poles": 4,
+   "ip": "IP42",
+   "busbar_material": "copper",
+   "certificates": true,
+   "other": [
+    {
+     "clause": "7.8",
+     "text": "Two years' spares for all trip units shall be included."
+    }
+   ]
+  },
+  "evidence": {
+   "standard": "7.1",
+   "form": "7.2",
+   "fault_kA": "7.3",
+   "poles": "7.4",
+   "ip": "7.5",
+   "busbar_material": "7.6",
+   "certificates": "7.7"
+  }
+ },
+ "conflicts": []
+}

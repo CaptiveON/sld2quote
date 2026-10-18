@@ -1,0 +1,2298 @@
+{
+ "id": "va-edm2019-p67",
+ "source": {
+  "kind": "sample",
+  "title": "PG 18-10: Single or multiple mission critical buildings, standby generators in energy center and essential electrical system generators at patient care building",
+  "seed": null,
+  "level": null,
+  "copy": "clean",
+  "has_answer_key": false,
+  "note": "Real public-domain drawing (US federal document), American symbol style the model never trained on; not scored, because it has no answer key yet"
+ },
+ "images": {
+  "sheet": "sheet.png",
+  "overlay": "overlay.png"
+ },
+ "size": [
+  2584,
+  1687
+ ],
+ "steps": [
+  {
+   "key": "text",
+   "title": "Read the words",
+   "count": 55,
+   "seconds": 44.76,
+   "plain": "Read 55 pieces of text in 44.76 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+  },
+  {
+   "key": "symbols",
+   "title": "Find the symbols",
+   "count": 75,
+   "seconds": 14.15,
+   "plain": "Found 75 symbols in 14.15 s: 19 power-factor correction banks, 19 protection relays, 10 motor starters, 6 incoming air circuit breakers, 6 fuse switches, 4 panel meters, 4 outgoing moulded-case breakers, 3 downstream boards, 2 earths, 1 current transformer, 1 transformer. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+  },
+  {
+   "key": "labels",
+   "title": "Pair labels with symbols",
+   "count": 22,
+   "seconds": 0.32,
+   "plain": "Paired 22 of 75 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
+  },
+  {
+   "key": "spec",
+   "title": "Read the specification and compare",
+   "count": 0,
+   "seconds": 0.0,
+   "plain": "No specification was supplied, so the board's form, protection and fault level come from the drawing notes alone (Form 4 Type 6, IP31, fault level not found). An estimator would check these against the specification before pricing."
+  },
+  {
+   "key": "price",
+   "title": "Pick parts and price",
+   "count": 29,
+   "seconds": 0.0,
+   "plain": "Chose 29 catalogue lines and priced the board at \u00a352,940 (illustrative prices, 15% margin included); 48 items flagged for the estimator. Every line names the symbol, text or clause it rests on, so a reviewer can check it on the drawing."
+  }
+ ],
+ "devices": [
+  {
+   "id": "D1",
+   "type": "ACB",
+   "type_plain": "incoming air circuit breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.07,
+   "box": [
+    915,
+    219,
+    20,
+    19
+   ],
+   "label": ""
+  },
+  {
+   "id": "D2",
+   "type": "ACB",
+   "type_plain": "incoming air circuit breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.06,
+   "box": [
+    1396,
+    219,
+    26,
+    21
+   ],
+   "label": ""
+  },
+  {
+   "id": "D3",
+   "type": "ACB",
+   "type_plain": "incoming air circuit breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.07,
+   "box": [
+    2255,
+    220,
+    18,
+    19
+   ],
+   "label": ""
+  },
+  {
+   "id": "D4",
+   "type": "ACB",
+   "type_plain": "incoming air circuit breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.08,
+   "box": [
+    910,
+    242,
+    33,
+    25
+   ],
+   "label": ""
+  },
+  {
+   "id": "D5",
+   "type": "CAPACITOR",
+   "type_plain": "power-factor correction bank",
+   "rating": null,
+   "unit": "kVAr",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.11,
+   "box": [
+    2399,
+    260,
+    22,
+    13
+   ],
+   "label": ""
+  },
+  {
+   "id": "D6",
+   "type": "CONTACTOR",
+   "type_plain": "motor starter",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.07,
+   "box": [
+    1663,
+    288,
+    34,
+    39
+   ],
+   "label": ""
+  },
+  {
+   "id": "D7",
+   "type": "CONTACTOR",
+   "type_plain": "motor starter",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.09,
+   "box": [
+    1393,
+    289,
+    31,
+    36
+   ],
+   "label": ""
+  },
+  {
+   "id": "D8",
+   "type": "CONTACTOR",
+   "type_plain": "motor starter",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.1,
+   "box": [
+    2226,
+    289,
+    32,
+    36
+   ],
+   "label": ""
+  },
+  {
+   "id": "D9",
+   "type": "CAPACITOR",
+   "type_plain": "power-factor correction bank",
+   "rating": null,
+   "unit": "kVAr",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.09,
+   "box": [
+    2398,
+    298,
+    24,
+    20
+   ],
+   "label": ""
+  },
+  {
+   "id": "D10",
+   "type": "RELAY",
+   "type_plain": "protection relay",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.07,
+   "box": [
+    1391,
+    335,
+    36,
+    43
+   ],
+   "label": ""
+  },
+  {
+   "id": "D11",
+   "type": "RELAY",
+   "type_plain": "protection relay",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.07,
+   "box": [
+    2227,
+    335,
+    33,
+    43
+   ],
+   "label": ""
+  },
+  {
+   "id": "D12",
+   "type": "CAPACITOR",
+   "type_plain": "power-factor correction bank",
+   "rating": null,
+   "unit": "kVAr",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.17,
+   "box": [
+    2424,
+    350,
+    25,
+    15
+   ],
+   "label": ""
+  },
+  {
+   "id": "D13",
+   "type": "ACB",
+   "type_plain": "incoming air circuit breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.09,
+   "box": [
+    910,
+    389,
+    33,
+    36
+   ],
+   "label": ""
+  },
+  {
+   "id": "D14",
+   "type": "CT",
+   "type_plain": "current transformer",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.11,
+   "box": [
+    1894,
+    431,
+    36,
+    33
+   ],
+   "label": ""
+  },
+  {
+   "id": "D15",
+   "type": "ACB",
+   "type_plain": "incoming air circuit breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.09,
+   "box": [
+    1990,
+    432,
+    39,
+    33
+   ],
+   "label": ""
+  },
+  {
+   "id": "D16",
+   "type": "CAPACITOR",
+   "type_plain": "power-factor correction bank",
+   "rating": null,
+   "unit": "kVAr",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.09,
+   "box": [
+    2421,
+    436,
+    59,
+    17
+   ],
+   "label": ""
+  },
+  {
+   "id": "D17",
+   "type": "CAPACITOR",
+   "type_plain": "power-factor correction bank",
+   "rating": null,
+   "unit": "kVAr",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.12,
+   "box": [
+    2398,
+    452,
+    23,
+    15
+   ],
+   "label": ""
+  },
+  {
+   "id": "D18",
+   "type": "CONTACTOR",
+   "type_plain": "motor starter",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.07,
+   "box": [
+    1010,
+    469,
+    34,
+    38
+   ],
+   "label": ""
+  },
+  {
+   "id": "D19",
+   "type": "CONTACTOR",
+   "type_plain": "motor starter",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.06,
+   "box": [
+    2083,
+    470,
+    32,
+    35
+   ],
+   "label": ""
+  },
+  {
+   "id": "D20",
+   "type": "CONTACTOR",
+   "type_plain": "motor starter",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.07,
+   "box": [
+    2183,
+    471,
+    32,
+    34
+   ],
+   "label": ""
+  },
+  {
+   "id": "D21",
+   "type": "CAPACITOR",
+   "type_plain": "power-factor correction bank",
+   "rating": null,
+   "unit": "kVAr",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.15,
+   "box": [
+    2425,
+    503,
+    24,
+    28
+   ],
+   "label": "RATORS AT P ULTIPLE MISS"
+  },
+  {
+   "id": "D22",
+   "type": "EARTH",
+   "type_plain": "earth",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.1,
+   "box": [
+    1704,
+    514,
+    35,
+    93
+   ],
+   "label": ""
+  },
+  {
+   "id": "D23",
+   "type": "RELAY",
+   "type_plain": "protection relay",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.17,
+   "box": [
+    1009,
+    515,
+    36,
+    44
+   ],
+   "label": ""
+  },
+  {
+   "id": "D24",
+   "type": "RELAY",
+   "type_plain": "protection relay",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.12,
+   "box": [
+    2082,
+    515,
+    33,
+    44
+   ],
+   "label": ""
+  },
+  {
+   "id": "D25",
+   "type": "RELAY",
+   "type_plain": "protection relay",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.1,
+   "box": [
+    2182,
+    515,
+    33,
+    44
+   ],
+   "label": ""
+  },
+  {
+   "id": "D26",
+   "type": "RELAY",
+   "type_plain": "protection relay",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.08,
+   "box": [
+    1290,
+    516,
+    35,
+    43
+   ],
+   "label": ""
+  },
+  {
+   "id": "D27",
+   "type": "RELAY",
+   "type_plain": "protection relay",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.09,
+   "box": [
+    1805,
+    516,
+    32,
+    44
+   ],
+   "label": ""
+  },
+  {
+   "id": "D28",
+   "type": "CAPACITOR",
+   "type_plain": "power-factor correction bank",
+   "rating": null,
+   "unit": "kVAr",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.11,
+   "box": [
+    2422,
+    545,
+    27,
+    13
+   ],
+   "label": ""
+  },
+  {
+   "id": "D29",
+   "type": "CAPACITOR",
+   "type_plain": "power-factor correction bank",
+   "rating": null,
+   "unit": "kVAr",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.1,
+   "box": [
+    2398,
+    566,
+    26,
+    11
+   ],
+   "label": ""
+  },
+  {
+   "id": "D30",
+   "type": "CAPACITOR",
+   "type_plain": "power-factor correction bank",
+   "rating": null,
+   "unit": "kVAr",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.14,
+   "box": [
+    2398,
+    598,
+    25,
+    10
+   ],
+   "label": ""
+  },
+  {
+   "id": "D31",
+   "type": "CAPACITOR",
+   "type_plain": "power-factor correction bank",
+   "rating": null,
+   "unit": "kVAr",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.09,
+   "box": [
+    2425,
+    645,
+    24,
+    16
+   ],
+   "label": ""
+  },
+  {
+   "id": "D32",
+   "type": "METER",
+   "type_plain": "panel meter",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.06,
+   "box": [
+    285,
+    721,
+    37,
+    26
+   ],
+   "label": ""
+  },
+  {
+   "id": "D33",
+   "type": "METER",
+   "type_plain": "panel meter",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.07,
+   "box": [
+    487,
+    722,
+    33,
+    24
+   ],
+   "label": ""
+  },
+  {
+   "id": "D34",
+   "type": "CAPACITOR",
+   "type_plain": "power-factor correction bank",
+   "rating": null,
+   "unit": "kVAr",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.18,
+   "box": [
+    2399,
+    729,
+    25,
+    15
+   ],
+   "label": "DETAIL TITLE"
+  },
+  {
+   "id": "D35",
+   "type": "CAPACITOR",
+   "type_plain": "power-factor correction bank",
+   "rating": null,
+   "unit": "kVAr",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.09,
+   "box": [
+    2398,
+    738,
+    25,
+    12
+   ],
+   "label": ""
+  },
+  {
+   "id": "D36",
+   "type": "CAPACITOR",
+   "type_plain": "power-factor correction bank",
+   "rating": null,
+   "unit": "kVAr",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.16,
+   "box": [
+    2398,
+    741,
+    24,
+    20
+   ],
+   "label": "SYSTI | TLE"
+  },
+  {
+   "id": "D37",
+   "type": "CONTACTOR",
+   "type_plain": "motor starter",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.15,
+   "box": [
+    502,
+    809,
+    29,
+    55
+   ],
+   "label": ""
+  },
+  {
+   "id": "D38",
+   "type": "CAPACITOR",
+   "type_plain": "power-factor correction bank",
+   "rating": null,
+   "unit": "kVAr",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.07,
+   "box": [
+    2396,
+    837,
+    25,
+    32
+   ],
+   "label": ""
+  },
+  {
+   "id": "D39",
+   "type": "CAPACITOR",
+   "type_plain": "power-factor correction bank",
+   "rating": null,
+   "unit": "kVAr",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.06,
+   "box": [
+    2397,
+    837,
+    24,
+    15
+   ],
+   "label": ""
+  },
+  {
+   "id": "D40",
+   "type": "RELAY",
+   "type_plain": "protection relay",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.06,
+   "box": [
+    2393,
+    862,
+    28,
+    104
+   ],
+   "label": ""
+  },
+  {
+   "id": "D41",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.12,
+   "box": [
+    1972,
+    869,
+    36,
+    36
+   ],
+   "label": ""
+  },
+  {
+   "id": "D42",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.14,
+   "box": [
+    2069,
+    870,
+    37,
+    35
+   ],
+   "label": ""
+  },
+  {
+   "id": "D43",
+   "type": "RELAY",
+   "type_plain": "protection relay",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.17,
+   "box": [
+    2552,
+    871,
+    19,
+    39
+   ],
+   "label": "SCALE :NONE"
+  },
+  {
+   "id": "D44",
+   "type": "FUSE_SWITCH",
+   "type_plain": "fuse switch",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.11,
+   "box": [
+    391,
+    883,
+    24,
+    23
+   ],
+   "label": ""
+  },
+  {
+   "id": "D45",
+   "type": "FUSE_SWITCH",
+   "type_plain": "fuse switch",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.13,
+   "box": [
+    492,
+    883,
+    23,
+    23
+   ],
+   "label": ""
+  },
+  {
+   "id": "D46",
+   "type": "EARTH",
+   "type_plain": "earth",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.24,
+   "box": [
+    2493,
+    925,
+    22,
+    40
+   ],
+   "label": "DATE SS"
+  },
+  {
+   "id": "D47",
+   "type": "RELAY",
+   "type_plain": "protection relay",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.13,
+   "box": [
+    2552,
+    935,
+    19,
+    30
+   ],
+   "label": "SCALE"
+  },
+  {
+   "id": "D48",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.06,
+   "box": [
+    248,
+    949,
+    26,
+    42
+   ],
+   "label": ""
+  },
+  {
+   "id": "D49",
+   "type": "FUSE_SWITCH",
+   "type_plain": "fuse switch",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.07,
+   "box": [
+    1268,
+    951,
+    22,
+    20
+   ],
+   "label": ""
+  },
+  {
+   "id": "D50",
+   "type": "TRANSFORMER",
+   "type_plain": "transformer",
+   "rating": null,
+   "unit": "kVA",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.07,
+   "box": [
+    449,
+    990,
+    31,
+    58
+   ],
+   "label": ""
+  },
+  {
+   "id": "D51",
+   "type": "RELAY",
+   "type_plain": "protection relay",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.12,
+   "box": [
+    241,
+    1002,
+    25,
+    46
+   ],
+   "label": ""
+  },
+  {
+   "id": "D52",
+   "type": "FUSE_SWITCH",
+   "type_plain": "fuse switch",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.11,
+   "box": [
+    543,
+    1063,
+    24,
+    23
+   ],
+   "label": ""
+  },
+  {
+   "id": "D53",
+   "type": "FUSE_SWITCH",
+   "type_plain": "fuse switch",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.12,
+   "box": [
+    1508,
+    1063,
+    24,
+    22
+   ],
+   "label": ""
+  },
+  {
+   "id": "D54",
+   "type": "CAPACITOR",
+   "type_plain": "power-factor correction bank",
+   "rating": null,
+   "unit": "kVAr",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.3,
+   "box": [
+    553,
+    1227,
+    21,
+    17
+   ],
+   "label": "LOADS"
+  },
+  {
+   "id": "D55",
+   "type": "BOARD",
+   "type_plain": "downstream board",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.1,
+   "box": [
+    1225,
+    1227,
+    71,
+    25
+   ],
+   "label": ""
+  },
+  {
+   "id": "D56",
+   "type": "CAPACITOR",
+   "type_plain": "power-factor correction bank",
+   "rating": null,
+   "unit": "kVAr",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.11,
+   "box": [
+    2138,
+    1233,
+    18,
+    10
+   ],
+   "label": "OTHER | BLDGS"
+  },
+  {
+   "id": "D57",
+   "type": "METER",
+   "type_plain": "panel meter",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.19,
+   "box": [
+    456,
+    1240,
+    16,
+    19
+   ],
+   "label": "SENTIAL LOADS | -"
+  },
+  {
+   "id": "D58",
+   "type": "CONTACTOR",
+   "type_plain": "motor starter",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.11,
+   "box": [
+    207,
+    1241,
+    52,
+    19
+   ],
+   "label": "CONNECTION | -"
+  },
+  {
+   "id": "D59",
+   "type": "METER",
+   "type_plain": "panel meter",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.06,
+   "box": [
+    2147,
+    1258,
+    72,
+    44
+   ],
+   "label": ""
+  },
+  {
+   "id": "D60",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "NDRMAL POWER",
+   "conf": 0.27,
+   "box": [
+    767,
+    1382,
+    42,
+    23
+   ],
+   "label": "NDRMAL POWER"
+  },
+  {
+   "id": "D61",
+   "type": "RELAY",
+   "type_plain": "protection relay",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.2,
+   "box": [
+    2017,
+    1455,
+    24,
+    20
+   ],
+   "label": "OGS IS NOT SHOWN. | THE A/E BY PROMDING A GRAPHICAL"
+  },
+  {
+   "id": "D62",
+   "type": "RELAY",
+   "type_plain": "protection relay",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.13,
+   "box": [
+    1691,
+    1456,
+    28,
+    18
+   ],
+   "label": "LOGY FOR NON-PATIENT ARE BLDGS IS NO | CRAWING IS INTENOED TD ASSST THE A/E"
+  },
+  {
+   "id": "D63",
+   "type": "RELAY",
+   "type_plain": "protection relay",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.11,
+   "box": [
+    2087,
+    1456,
+    16,
+    17
+   ],
+   "label": "'NNOHS HON | E BY PROMDING A GRAPHICAL"
+  },
+  {
+   "id": "D64",
+   "type": "RELAY",
+   "type_plain": "protection relay",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.18,
+   "box": [
+    2173,
+    1457,
+    14,
+    17
+   ],
+   "label": "hN. | PMDING A GRAPHICAL"
+  },
+  {
+   "id": "D65",
+   "type": "CONTACTOR",
+   "type_plain": "motor starter",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.13,
+   "box": [
+    989,
+    1483,
+    34,
+    18
+   ],
+   "label": "AUTOHATIC SYITCHING EOUIPHENT | [D = DELAYED TRANSMON]"
+  },
+  {
+   "id": "D66",
+   "type": "BOARD",
+   "type_plain": "downstream board",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.1,
+   "box": [
+    2401,
+    1504,
+    70,
+    74
+   ],
+   "label": ""
+  },
+  {
+   "id": "D67",
+   "type": "BOARD",
+   "type_plain": "downstream board",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.83,
+   "box": [
+    739,
+    1522,
+    59,
+    39
+   ],
+   "label": "=0 DELAYED | AUTOHATIC SWITCHING EQUIPHEN"
+  },
+  {
+   "id": "D68",
+   "type": "CONTACTOR",
+   "type_plain": "motor starter",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.12,
+   "box": [
+    1983,
+    1524,
+    35,
+    57
+   ],
+   "label": "IME PER NATICNAL ELECTRIC CODE."
+  },
+  {
+   "id": "D69",
+   "type": "RELAY",
+   "type_plain": "protection relay",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.11,
+   "box": [
+    2033,
+    1536,
+    20,
+    19
+   ],
+   "label": "ER NATICNAL ELECTRIC CODE, | AND RELATED SYSTEMS. THIS DRAYINC"
+  },
+  {
+   "id": "D70",
+   "type": "RELAY",
+   "type_plain": "protection relay",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.24,
+   "box": [
+    2290,
+    1537,
+    21,
+    17
+   ],
+   "label": "SIH DRAYING | DE."
+  },
+  {
+   "id": "D71",
+   "type": "RELAY",
+   "type_plain": "protection relay",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.1,
+   "box": [
+    939,
+    1561,
+    20,
+    18
+   ],
+   "label": ""
+  },
+  {
+   "id": "D72",
+   "type": "RELAY",
+   "type_plain": "protection relay",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.15,
+   "box": [
+    2083,
+    1561,
+    27,
+    18
+   ],
+   "label": "ATICNAL ELECTRIC CODE."
+  },
+  {
+   "id": "D73",
+   "type": "CAPACITOR",
+   "type_plain": "power-factor correction bank",
+   "rating": null,
+   "unit": "kVAr",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.1,
+   "box": [
+    2410,
+    1587,
+    52,
+    10
+   ],
+   "label": ""
+  },
+  {
+   "id": "D74",
+   "type": "CAPACITOR",
+   "type_plain": "power-factor correction bank",
+   "rating": null,
+   "unit": "kVAr",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.11,
+   "box": [
+    2415,
+    1600,
+    40,
+    43
+   ],
+   "label": ""
+  },
+  {
+   "id": "D75",
+   "type": "FUSE_SWITCH",
+   "type_plain": "fuse switch",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "NORHAL TO ESSENTIAL TRANSFER TIME PER NATICNAL ELECTRIC CODE.",
+   "conf": 0.15,
+   "box": [
+    1539,
+    1611,
+    19,
+    21
+   ],
+   "label": "NORHAL TO ESSENTIAL TRANSFER TIME PER NATICNAL ELECTRIC CODE."
+  }
+ ],
+ "board": {
+  "fault_kA": null,
+  "form": "Form 4 Type 6",
+  "ip": "IP31",
+  "poles_default": 4,
+  "busbar_rating": 0,
+  "sections": 1,
+  "ways": 0
+ },
+ "bom": {
+  "lines": [
+   {
+    "line": 1,
+    "part": "RELAY-OC",
+    "description": "Overcurrent and earth-fault protection relay",
+    "qty": 1,
+    "unit_gbp": 950,
+    "total_gbp": 950,
+    "conf": 0.07,
+    "evidence": [
+     "S10"
+    ],
+    "rule": "R-PROTECTION"
+   },
+   {
+    "line": 2,
+    "part": "RELAY-OC",
+    "description": "Overcurrent and earth-fault protection relay",
+    "qty": 1,
+    "unit_gbp": 950,
+    "total_gbp": 950,
+    "conf": 0.07,
+    "evidence": [
+     "S11"
+    ],
+    "rule": "R-PROTECTION"
+   },
+   {
+    "line": 3,
+    "part": "CT-SET",
+    "description": "Current transformers, set of three, class 1",
+    "qty": 1,
+    "unit_gbp": 280,
+    "total_gbp": 280,
+    "conf": 0.11,
+    "evidence": [
+     "S14"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 4,
+    "part": "RELAY-OC",
+    "description": "Overcurrent and earth-fault protection relay",
+    "qty": 1,
+    "unit_gbp": 950,
+    "total_gbp": 950,
+    "conf": 0.17,
+    "evidence": [
+     "S23"
+    ],
+    "rule": "R-PROTECTION"
+   },
+   {
+    "line": 5,
+    "part": "RELAY-OC",
+    "description": "Overcurrent and earth-fault protection relay",
+    "qty": 1,
+    "unit_gbp": 950,
+    "total_gbp": 950,
+    "conf": 0.12,
+    "evidence": [
+     "S24"
+    ],
+    "rule": "R-PROTECTION"
+   },
+   {
+    "line": 6,
+    "part": "RELAY-OC",
+    "description": "Overcurrent and earth-fault protection relay",
+    "qty": 1,
+    "unit_gbp": 950,
+    "total_gbp": 950,
+    "conf": 0.1,
+    "evidence": [
+     "S25"
+    ],
+    "rule": "R-PROTECTION"
+   },
+   {
+    "line": 7,
+    "part": "RELAY-OC",
+    "description": "Overcurrent and earth-fault protection relay",
+    "qty": 1,
+    "unit_gbp": 950,
+    "total_gbp": 950,
+    "conf": 0.08,
+    "evidence": [
+     "S26"
+    ],
+    "rule": "R-PROTECTION"
+   },
+   {
+    "line": 8,
+    "part": "RELAY-OC",
+    "description": "Overcurrent and earth-fault protection relay",
+    "qty": 1,
+    "unit_gbp": 950,
+    "total_gbp": 950,
+    "conf": 0.09,
+    "evidence": [
+     "S27"
+    ],
+    "rule": "R-PROTECTION"
+   },
+   {
+    "line": 9,
+    "part": "METER-MF",
+    "description": "Panel meter (multifunction)",
+    "qty": 1,
+    "unit_gbp": 260,
+    "total_gbp": 260,
+    "conf": 0.06,
+    "evidence": [
+     "S32"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 10,
+    "part": "METER-MF",
+    "description": "Panel meter (multifunction)",
+    "qty": 1,
+    "unit_gbp": 260,
+    "total_gbp": 260,
+    "conf": 0.07,
+    "evidence": [
+     "S33"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 11,
+    "part": "RELAY-OC",
+    "description": "Overcurrent and earth-fault protection relay",
+    "qty": 1,
+    "unit_gbp": 950,
+    "total_gbp": 950,
+    "conf": 0.06,
+    "evidence": [
+     "S40"
+    ],
+    "rule": "R-PROTECTION"
+   },
+   {
+    "line": 12,
+    "part": "RELAY-OC",
+    "description": "Overcurrent and earth-fault protection relay",
+    "qty": 1,
+    "unit_gbp": 950,
+    "total_gbp": 950,
+    "conf": 0.17,
+    "evidence": [
+     "S43",
+     "T14"
+    ],
+    "rule": "R-PROTECTION"
+   },
+   {
+    "line": 13,
+    "part": "RELAY-OC",
+    "description": "Overcurrent and earth-fault protection relay",
+    "qty": 1,
+    "unit_gbp": 950,
+    "total_gbp": 950,
+    "conf": 0.13,
+    "evidence": [
+     "S47",
+     "S47t1"
+    ],
+    "rule": "R-PROTECTION"
+   },
+   {
+    "line": 14,
+    "part": "RELAY-OC",
+    "description": "Overcurrent and earth-fault protection relay",
+    "qty": 1,
+    "unit_gbp": 950,
+    "total_gbp": 950,
+    "conf": 0.12,
+    "evidence": [
+     "S51"
+    ],
+    "rule": "R-PROTECTION"
+   },
+   {
+    "line": 15,
+    "part": "METER-SENTIAL LOADS | -",
+    "description": "Panel meter (SENTIAL LOADS | -)",
+    "qty": 1,
+    "unit_gbp": 260,
+    "total_gbp": 260,
+    "conf": 0.19,
+    "evidence": [
+     "S57",
+     "S57t1",
+     "S57t2"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 16,
+    "part": "METER-MF",
+    "description": "Panel meter (multifunction)",
+    "qty": 1,
+    "unit_gbp": 260,
+    "total_gbp": 260,
+    "conf": 0.06,
+    "evidence": [
+     "S59"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 17,
+    "part": "RELAY-OC",
+    "description": "Overcurrent and earth-fault protection relay",
+    "qty": 1,
+    "unit_gbp": 950,
+    "total_gbp": 950,
+    "conf": 0.2,
+    "evidence": [
+     "S61",
+     "S61t4",
+     "S61t5"
+    ],
+    "rule": "R-PROTECTION"
+   },
+   {
+    "line": 18,
+    "part": "RELAY-OC",
+    "description": "Overcurrent and earth-fault protection relay",
+    "qty": 1,
+    "unit_gbp": 950,
+    "total_gbp": 950,
+    "conf": 0.13,
+    "evidence": [
+     "S62",
+     "S62t3",
+     "S62t4"
+    ],
+    "rule": "R-PROTECTION"
+   },
+   {
+    "line": 19,
+    "part": "RELAY-OC",
+    "description": "Overcurrent and earth-fault protection relay",
+    "qty": 1,
+    "unit_gbp": 950,
+    "total_gbp": 950,
+    "conf": 0.11,
+    "evidence": [
+     "S63",
+     "S63t3",
+     "S63t4"
+    ],
+    "rule": "R-PROTECTION"
+   },
+   {
+    "line": 20,
+    "part": "RELAY-OC",
+    "description": "Overcurrent and earth-fault protection relay",
+    "qty": 1,
+    "unit_gbp": 950,
+    "total_gbp": 950,
+    "conf": 0.18,
+    "evidence": [
+     "S64",
+     "S64t5",
+     "S64t6"
+    ],
+    "rule": "R-PROTECTION"
+   },
+   {
+    "line": 21,
+    "part": "RELAY-OC",
+    "description": "Overcurrent and earth-fault protection relay",
+    "qty": 1,
+    "unit_gbp": 950,
+    "total_gbp": 950,
+    "conf": 0.11,
+    "evidence": [
+     "S69",
+     "S69t4",
+     "S69t3"
+    ],
+    "rule": "R-PROTECTION"
+   },
+   {
+    "line": 22,
+    "part": "RELAY-OC",
+    "description": "Overcurrent and earth-fault protection relay",
+    "qty": 1,
+    "unit_gbp": 950,
+    "total_gbp": 950,
+    "conf": 0.24,
+    "evidence": [
+     "S70",
+     "S70t4",
+     "S70t5"
+    ],
+    "rule": "R-PROTECTION"
+   },
+   {
+    "line": 23,
+    "part": "RELAY-OC",
+    "description": "Overcurrent and earth-fault protection relay",
+    "qty": 1,
+    "unit_gbp": 950,
+    "total_gbp": 950,
+    "conf": 0.1,
+    "evidence": [
+     "S71"
+    ],
+    "rule": "R-PROTECTION"
+   },
+   {
+    "line": 24,
+    "part": "RELAY-OC",
+    "description": "Overcurrent and earth-fault protection relay",
+    "qty": 1,
+    "unit_gbp": 950,
+    "total_gbp": 950,
+    "conf": 0.15,
+    "evidence": [
+     "S72",
+     "S72t3"
+    ],
+    "rule": "R-PROTECTION"
+   },
+   {
+    "line": 25,
+    "part": "BUSBAR-CU-1600",
+    "description": "Copper busbar set 1600 A (4-bar), 1 sections, about 29 kg",
+    "qty": 1,
+    "unit_gbp": 331.2,
+    "total_gbp": 331.2,
+    "conf": 0.9,
+    "evidence": [],
+    "rule": "R-BUSBAR-SIZE"
+   },
+   {
+    "line": 26,
+    "part": "ENC-SECTION",
+    "description": "Enclosure section, Form 4 Type 6, IP31, RAL 7035",
+    "qty": 1,
+    "unit_gbp": 3380.0,
+    "total_gbp": 3380.0,
+    "conf": 0.95,
+    "evidence": [],
+    "rule": "R-ENCLOSURE"
+   },
+   {
+    "line": 27,
+    "part": "LAB-ASSY",
+    "description": "Assembly, wiring and routine verification: 448 hours",
+    "qty": 1,
+    "unit_gbp": 21504,
+    "total_gbp": 21504,
+    "conf": 0.9,
+    "evidence": [],
+    "rule": "R-LABOUR"
+   },
+   {
+    "line": 28,
+    "part": "DOC",
+    "description": "Documentation, as-built drawings, test certificates",
+    "qty": 1,
+    "unit_gbp": 600,
+    "total_gbp": 600,
+    "conf": 1.0,
+    "evidence": [],
+    "rule": "R-DOC"
+   },
+   {
+    "line": 29,
+    "part": "DEL",
+    "description": "Delivery to site, crane and offload excluded",
+    "qty": 1,
+    "unit_gbp": 850,
+    "total_gbp": 850,
+    "conf": 1.0,
+    "evidence": [],
+    "rule": "R-DELIVERY"
+   }
+  ],
+  "subtotal_gbp": 46035.2,
+  "margin_gbp": 6905.28,
+  "total_gbp": 52940.48
+ },
+ "issues": [
+  {
+   "kind": "missing",
+   "what": "fault level not found on the drawing notes",
+   "action": "confirm with the consultant",
+   "evidence": []
+  },
+  {
+   "kind": "missing",
+   "what": "D1 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S1"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D2 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S2"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D3 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S3"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D4 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S4"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D5 (CAPACITOR): kVAr not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S5"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D6 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S6"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D7 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S7"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D8 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S8"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D9 (CAPACITOR): kVAr not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S9"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D12 (CAPACITOR): kVAr not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S12"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D13 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S13"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D15 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S15"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D16 (CAPACITOR): kVAr not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S16"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D17 (CAPACITOR): kVAr not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S17"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D18 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S18"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D19 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S19"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D20 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S20"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D21 (CAPACITOR): kVAr not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S21",
+    "S21t1"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D28 (CAPACITOR): kVAr not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S28"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D29 (CAPACITOR): kVAr not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S29"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D30 (CAPACITOR): kVAr not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S30"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D31 (CAPACITOR): kVAr not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S31"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D34 (CAPACITOR): kVAr not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S34",
+    "T13"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D35 (CAPACITOR): kVAr not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S35"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D36 (CAPACITOR): kVAr not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S36",
+    "S36t1",
+    "S36t3"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D37 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S37"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D38 (CAPACITOR): kVAr not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S38"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D39 (CAPACITOR): kVAr not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S39"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D41 (MCCB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S41"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D42 (MCCB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S42"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D44 (FUSE_SWITCH): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S44"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D45 (FUSE_SWITCH): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S45"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D48 (MCCB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S48"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D49 (FUSE_SWITCH): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S49"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D52 (FUSE_SWITCH): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S52"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D53 (FUSE_SWITCH): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S53"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D54 (CAPACITOR): kVAr not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S54",
+    "S54t3"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D56 (CAPACITOR): kVAr not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S56",
+    "S56t1",
+    "S56t2"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D58 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S58",
+    "S58t2",
+    "S58t4"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D60 (MCCB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S60",
+    "S60t2"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D65 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S65",
+    "T48",
+    "T50"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D68 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S68",
+    "S68t3"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D73 (CAPACITOR): kVAr not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S73"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D74 (CAPACITOR): kVAr not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S74"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D75 (FUSE_SWITCH): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S75",
+    "T55"
+   ]
+  },
+  {
+   "kind": "assumed",
+   "what": "busbar rating not read; assumed 0 A from the largest incomer",
+   "action": "confirm",
+   "evidence": []
+  },
+  {
+   "kind": "low_confidence",
+   "what": "devices read with low confidence: D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15, D16, D17, D18, D19, D20, D21, D22, D23, D24, D25, D26, D27, D28, D29, D30, D31, D32, D33, D34, D35, D36, D37, D38, D39, D40, D41, D42, D43, D44, D45, D46, D47, D48, D49, D50, D51, D52, D53, D54, D55, D56, D57, D58, D59, D60, D61, D62, D63, D64, D65, D66, D68, D69, D70, D71, D72, D73, D74, D75",
+   "action": "check against the drawing",
+   "evidence": [
+    "D1",
+    "D2",
+    "D3",
+    "D4",
+    "D5",
+    "D6",
+    "D7",
+    "D8",
+    "D9",
+    "D10",
+    "D11",
+    "D12",
+    "D13",
+    "D14",
+    "D15",
+    "D16",
+    "D17",
+    "D18",
+    "D19",
+    "D20",
+    "D21",
+    "D22",
+    "D23",
+    "D24",
+    "D25",
+    "D26",
+    "D27",
+    "D28",
+    "D29",
+    "D30",
+    "D31",
+    "D32",
+    "D33",
+    "D34",
+    "D35",
+    "D36",
+    "D37",
+    "D38",
+    "D39",
+    "D40",
+    "D41",
+    "D42",
+    "D43",
+    "D44",
+    "D45",
+    "D46",
+    "D47",
+    "D48",
+    "D49",
+    "D50",
+    "D51",
+    "D52",
+    "D53",
+    "D54",
+    "D55",
+    "D56",
+    "D57",
+    "D58",
+    "D59",
+    "D60",
+    "D61",
+    "D62",
+    "D63",
+    "D64",
+    "D65",
+    "D66",
+    "D68",
+    "D69",
+    "D70",
+    "D71",
+    "D72",
+    "D73",
+    "D74",
+    "D75"
+   ]
+  }
+ ],
+ "conflicts": [],
+ "spec": null,
+ "score": null,
+ "timing": {
+  "total": 59.81,
+  "ocr": 44.76,
+  "detector": 14.15
+ },
+ "reader": "trained",
+ "engine": "rapidocr",
+ "model": {
+  "weights": "weights/rtdetr_r18_full",
+  "threshold": 0.11
+ },
+ "files": {
+  "quotation_md": "quotation.md",
+  "bom_csv": "bom.csv",
+  "review_html": "review.html",
+  "extraction_json": "extraction.json"
+ }
+}

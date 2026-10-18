@@ -1,0 +1,308 @@
+[
+ {
+  "id": "sheet-10833",
+  "title": "Clean drawing, medium board, IEC breakers (sheet 10833)",
+  "kind": "sample",
+  "copy": "clean",
+  "has_answer_key": true,
+  "note": "Synthetic test drawing, never seen in training; scored against its answer key",
+  "thumb": "thumb.jpg"
+ },
+ {
+  "id": "sheet-10834",
+  "title": "Clean drawing, simple board, box-style breakers (sheet 10834)",
+  "kind": "sample",
+  "copy": "clean",
+  "has_answer_key": true,
+  "note": "Synthetic test drawing, never seen in training; scored against its answer key",
+  "thumb": "thumb.jpg"
+ },
+ {
+  "id": "sheet-10839",
+  "title": "Clean drawing, simple board, IEC breakers (sheet 10839)",
+  "kind": "sample",
+  "copy": "clean",
+  "has_answer_key": true,
+  "note": "Synthetic test drawing, never seen in training; scored against its answer key",
+  "thumb": "thumb.jpg"
+ },
+ {
+  "id": "sheet-10841",
+  "title": "Clean drawing, simple board, box-style breakers (sheet 10841)",
+  "kind": "sample",
+  "copy": "clean",
+  "has_answer_key": true,
+  "note": "Synthetic test drawing, never seen in training; scored against its answer key",
+  "thumb": "thumb.jpg"
+ },
+ {
+  "id": "sheet-10843",
+  "title": "Clean drawing, medium board, box-style breakers (sheet 10843)",
+  "kind": "sample",
+  "copy": "clean",
+  "has_answer_key": true,
+  "note": "Synthetic test drawing, never seen in training; scored against its answer key",
+  "thumb": "thumb.jpg"
+ },
+ {
+  "id": "sheet-10845",
+  "title": "Clean drawing, medium board, IEC breakers (sheet 10845)",
+  "kind": "sample",
+  "copy": "clean",
+  "has_answer_key": true,
+  "note": "Synthetic test drawing, never seen in training; scored against its answer key",
+  "thumb": "thumb.jpg"
+ },
+ {
+  "id": "sheet-10833-scan",
+  "title": "Scan-like drawing, medium board, IEC breakers (sheet 10833)",
+  "kind": "sample",
+  "copy": "scan",
+  "has_answer_key": true,
+  "note": "Scan-like copy of a synthetic test drawing (tilt, blur, noise); scored against its answer key",
+  "thumb": "thumb.jpg"
+ },
+ {
+  "id": "sheet-10834-scan",
+  "title": "Scan-like drawing, simple board, box-style breakers (sheet 10834)",
+  "kind": "sample",
+  "copy": "scan",
+  "has_answer_key": true,
+  "note": "Scan-like copy of a synthetic test drawing (tilt, blur, noise); scored against its answer key",
+  "thumb": "thumb.jpg"
+ },
+ {
+  "id": "sheet-10839-scan",
+  "title": "Scan-like drawing, simple board, IEC breakers (sheet 10839)",
+  "kind": "sample",
+  "copy": "scan",
+  "has_answer_key": true,
+  "note": "Scan-like copy of a synthetic test drawing (tilt, blur, noise); scored against its answer key",
+  "thumb": "thumb.jpg"
+ },
+ {
+  "id": "sheet-10000",
+  "title": "Unseen-style drawing (labels below), medium board, IEC breakers (sheet 10000)",
+  "kind": "sample",
+  "copy": "clean",
+  "has_answer_key": true,
+  "note": "Synthetic drawing in a style held out of training (Courier New text or labels below); scored against its answer key",
+  "thumb": "thumb.jpg"
+ },
+ {
+  "id": "sheet-10002",
+  "title": "Unseen-style drawing (Courier New text and labels below), medium board, box-style breakers (sheet 10002)",
+  "kind": "sample",
+  "copy": "clean",
+  "has_answer_key": true,
+  "note": "Synthetic drawing in a style held out of training (Courier New text or labels below); scored against its answer key",
+  "thumb": "thumb.jpg"
+ },
+ {
+  "id": "sheet-10004",
+  "title": "Unseen-style drawing (labels below), medium board, box-style breakers (sheet 10004)",
+  "kind": "sample",
+  "copy": "clean",
+  "has_answer_key": true,
+  "note": "Synthetic drawing in a style held out of training (Courier New text or labels below); scored against its answer key",
+  "thumb": "thumb.jpg"
+ },
+ {
+  "id": "sheet-10006",
+  "title": "Unseen-style drawing (labels below), simple board, IEC breakers (sheet 10006)",
+  "kind": "sample",
+  "copy": "clean",
+  "has_answer_key": true,
+  "note": "Synthetic drawing in a style held out of training (Courier New text or labels below); scored against its answer key",
+  "thumb": "thumb.jpg"
+ },
+ {
+  "id": "sheet-1007",
+  "title": "Preview drawing, medium board, IEC breakers (sheet 1007)",
+  "kind": "sample",
+  "copy": "clean",
+  "has_answer_key": true,
+  "note": "Synthetic drawing from the generator's preview set, not in the training pool; scored against its answer key",
+  "thumb": "thumb.jpg"
+ },
+ {
+  "id": "sheet-1009",
+  "title": "Preview drawing, simple board, box-style breakers (sheet 1009)",
+  "kind": "sample",
+  "copy": "clean",
+  "has_answer_key": true,
+  "note": "Synthetic drawing from the generator's preview set, not in the training pool; scored against its answer key",
+  "thumb": "thumb.jpg"
+ },
+ {
+  "id": "ufc3-540-01-p43",
+  "title": "UFC 3-540-01: Figure B-1 Typical Single Engine Generator Configuration",
+  "kind": "sample",
+  "copy": "clean",
+  "has_answer_key": false,
+  "note": "Real public-domain drawing (US federal document), American symbol style the model never trained on; not scored, because it has no answer key yet",
+  "thumb": "thumb.jpg"
+ },
+ {
+  "id": "ufc3-540-01-p45",
+  "title": "UFC 3-540-01: Figure B-4 Configuration to Supply Multiple ATS",
+  "kind": "sample",
+  "copy": "clean",
+  "has_answer_key": false,
+  "note": "Real public-domain drawing (US federal document), American symbol style the model never trained on; not scored, because it has no answer key yet",
+  "thumb": "thumb.jpg"
+ },
+ {
+  "id": "ufc3-540-01-p47",
+  "title": "UFC 3-540-01: Figure B-6 Selection Between Redundant Utility Supply and Dual Generators",
+  "kind": "sample",
+  "copy": "clean",
+  "has_answer_key": false,
+  "note": "Real public-domain drawing (US federal document), American symbol style the model never trained on; not scored, because it has no answer key yet",
+  "thumb": "thumb.jpg"
+ },
+ {
+  "id": "ufc3-540-01-p48",
+  "title": "UFC 3-540-01: Figure B-9 Parallel Generators with Alternate Utility Supply for UPS Systems",
+  "kind": "sample",
+  "copy": "clean",
+  "has_answer_key": false,
+  "note": "Real public-domain drawing (US federal document), American symbol style the model never trained on; not scored, because it has no answer key yet",
+  "thumb": "thumb.jpg"
+ },
+ {
+  "id": "tm5-693-p74",
+  "title": "TM 5-693: Figure 4-3. Double-ended substation connected in secondary selective configuration",
+  "kind": "sample",
+  "copy": "clean",
+  "has_answer_key": false,
+  "note": "Real public-domain drawing (US federal document), American symbol style the model never trained on; not scored, because it has no answer key yet",
+  "thumb": "thumb.jpg"
+ },
+ {
+  "id": "tm5-693-p87",
+  "title": "TM 5-693: Figure 4-7. UPS distribution panels",
+  "kind": "sample",
+  "copy": "clean",
+  "has_answer_key": false,
+  "note": "Real public-domain drawing (US federal document), American symbol style the model never trained on; not scored, because it has no answer key yet",
+  "thumb": "thumb.jpg"
+ },
+ {
+  "id": "tm5-694-p43",
+  "title": "TM 5-694: Figure 4-1. Main power system single line diagram",
+  "kind": "sample",
+  "copy": "clean",
+  "has_answer_key": false,
+  "note": "Real public-domain drawing (US federal document), American symbol style the model never trained on; not scored, because it has no answer key yet",
+  "thumb": "thumb.jpg"
+ },
+ {
+  "id": "tm5-694-p60",
+  "title": "TM 5-694: Figure 5-1. Standby power system single line diagram",
+  "kind": "sample",
+  "copy": "clean",
+  "has_answer_key": false,
+  "note": "Real public-domain drawing (US federal document), American symbol style the model never trained on; not scored, because it has no answer key yet",
+  "thumb": "thumb.jpg"
+ },
+ {
+  "id": "tm5-694-p76",
+  "title": "TM 5-694: Figure 6-1. Uninterruptible power supply system single line diagram",
+  "kind": "sample",
+  "copy": "clean",
+  "has_answer_key": false,
+  "note": "Real public-domain drawing (US federal document), American symbol style the model never trained on; not scored, because it has no answer key yet",
+  "thumb": "thumb.jpg"
+ },
+ {
+  "id": "va-edm2019-p67",
+  "title": "PG 18-10: Single or multiple mission critical buildings, standby generators in energy center and essential electrical system generators at patient care building",
+  "kind": "sample",
+  "copy": "clean",
+  "has_answer_key": false,
+  "note": "Real public-domain drawing (US federal document), American symbol style the model never trained on; not scored, because it has no answer key yet",
+  "thumb": "thumb.jpg"
+ },
+ {
+  "id": "va-edm2019-p68",
+  "title": "PG 18-10: Single or multiple mission critical buildings, standby and essential electrical system generators at energy center",
+  "kind": "sample",
+  "copy": "clean",
+  "has_answer_key": false,
+  "note": "Real public-domain drawing (US federal document), American symbol style the model never trained on; not scored, because it has no answer key yet",
+  "thumb": "thumb.jpg"
+ },
+ {
+  "id": "navfac-mo201-p12",
+  "title": "NAVFAC MO-201: FIGURE 1-1 Typical Electric Power Generation, Transmission, and Distribution System",
+  "kind": "sample",
+  "copy": "scan",
+  "has_answer_key": false,
+  "note": "Real public-domain drawing (US federal document), American symbol style the model never trained on; not scored, because it has no answer key yet",
+  "thumb": "thumb.jpg"
+ },
+ {
+  "id": "navfac-mo201-p24",
+  "title": "NAVFAC MO-201: FIGURE 1-6 Expanded Radial Distribution System",
+  "kind": "sample",
+  "copy": "scan",
+  "has_answer_key": false,
+  "note": "Real public-domain drawing (US federal document), American symbol style the model never trained on; not scored, because it has no answer key yet",
+  "thumb": "thumb.jpg"
+ },
+ {
+  "id": "navfac-mo201-p25",
+  "title": "NAVFAC MO-201: FIGURE 1-7 Primary Selective Distribution System",
+  "kind": "sample",
+  "copy": "scan",
+  "has_answer_key": false,
+  "note": "Real public-domain drawing (US federal document), American symbol style the model never trained on; not scored, because it has no answer key yet",
+  "thumb": "thumb.jpg"
+ },
+ {
+  "id": "navfac-mo201-p27a",
+  "title": "NAVFAC MO-201: FIGURE 1-9 Secondary Selective-Radial Distribution System",
+  "kind": "sample",
+  "copy": "scan",
+  "has_answer_key": false,
+  "note": "Real public-domain drawing (US federal document), American symbol style the model never trained on; not scored, because it has no answer key yet",
+  "thumb": "thumb.jpg"
+ },
+ {
+  "id": "navfac-mo201-p27b",
+  "title": "NAVFAC MO-201: FIGURE 1-10 Secondary Network Distribution System",
+  "kind": "sample",
+  "copy": "scan",
+  "has_answer_key": false,
+  "note": "Real public-domain drawing (US federal document), American symbol style the model never trained on; not scored, because it has no answer key yet",
+  "thumb": "thumb.jpg"
+ },
+ {
+  "id": "ufc3-520-01-2002-p37",
+  "title": "UFC 3-520-01: Figure 3-2. Redundant Power Feed to Facility",
+  "kind": "sample",
+  "copy": "clean",
+  "has_answer_key": false,
+  "note": "Real public-domain drawing (US federal document), American symbol style the model never trained on; not scored, because it has no answer key yet",
+  "thumb": "thumb.jpg"
+ },
+ {
+  "id": "ufc3-550-03fa-p28",
+  "title": "UFC 3-550-03FA: Figure 4-3. Single-Line of Primary Unit Substation with Two Transformers",
+  "kind": "sample",
+  "copy": "scan",
+  "has_answer_key": false,
+  "note": "Real public-domain drawing (US federal document), American symbol style the model never trained on; not scored, because it has no answer key yet",
+  "thumb": "thumb.jpg"
+ },
+ {
+  "id": "tm5-698-1-p51",
+  "title": "TM 5-698-1: Figure 4-7 Double Ended Bus",
+  "kind": "sample",
+  "copy": "clean",
+  "has_answer_key": false,
+  "note": "Real public-domain drawing (US federal document), American symbol style the model never trained on; not scored, because it has no answer key yet",
+  "thumb": "thumb.jpg"
+ }
+]

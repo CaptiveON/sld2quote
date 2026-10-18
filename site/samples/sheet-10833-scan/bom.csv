@@ -1,0 +1,19 @@
+line,part,description,qty,unit_gbp,total_gbp,conf,rule,evidence
+1,METER-CT 1600/5A | BAR A 1600A Cu 80 kA/1s,Panel meter (CT 1600/5A | BAR A 1600A Cu 80 kA/1s),1,260,260,0.27,R-METERING,S5 S5t1 S5t2
+2,METER-CT1600/5A | 1600 A Cu 80 kA/1s BARB,Panel meter (CT1600/5A | 1600 A Cu 80 kA/1s BARB),1,260,260,0.52,R-METERING,S6 S6t1 S6t2
+3,CT-SET,"Current transformers 1600/5 A, set of three, class 1",1,280,280,0.29,R-METERING,S7 S7t2
+4,CT-SET,"Current transformers 1600/5 A, set of three, class 1",1,280,280,0.41,R-METERING,S8 S8t2
+5,BSS-1600-4P,"Bus-section switch 1600 A 4-pole, 80 kA",1,4340.0,4340.0,0.24,R-BUS-SECTION,S9 S9t2
+6,FU-KIT-BS,Bus-section functional unit and interlocking,1,900,900,0.24,R-FU-KIT,S9 S9t2
+7,FSW-400-3P,Fuse-switch-disconnector 400 A 3-pole; feeds MCC-7chillers,1,780.0,780.0,0.39,R-FSW-SELECT,S19 S19t4 S19t3
+8,FUSE-400,"Fuse links 400 A, one per pole",3,46,138,0.39,R-FUSE-LINKS,S19 S19t4 S19t3
+9,FU-KIT-FUSE_SWITCH,"Outgoing functional unit: compartment door, terminals, labels",1,380,380,0.39,R-FU-KIT,S19 S19t4 S19t3
+10,FSW-800-4P,Fuse-switch-disconnector 800 A 4-pole; feeds kitchen,1,1854.4,1854.4,0.31,R-FSW-SELECT,S21 S21t4 S21t3
+11,FUSE-800,"Fuse links 800 A, one per pole",4,94,376,0.31,R-FUSE-LINKS,S21 S21t4 S21t3
+12,FU-KIT-FUSE_SWITCH,"Outgoing functional unit: compartment door, terminals, labels",1,380,380,0.31,R-FU-KIT,S21 S21t4 S21t3
+13,BUSBAR-CU-1600,"Copper busbar set 1600 A (4-bar), 2 sections, about 58 kg",1,662.4,662.4,0.9,R-BUSBAR-SIZE,T12 T12 T60
+14,ENC-SECTION,"Enclosure section, Form 4 Type 4, IP41, RAL 7035",2,3160.04,6320.08,0.95,R-ENCLOSURE,T54 T54 T56 T58
+15,LAB-ASSY,"Assembly, wiring and routine verification: 168 hours",1,8064,8064,0.9,R-LABOUR,
+16,DOC,"Documentation, as-built drawings, test certificates",1,600,600,1.0,R-DOC,
+17,CERT,Design-verification certificates per specification,1,0.0,0.0,1.0,R-SPEC-CERT,7.7
+18,DEL,"Delivery to site, crane and offload excluded",1,850,850,1.0,R-DELIVERY,

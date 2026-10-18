@@ -1,0 +1,517 @@
+{
+ "image": "tm5-698-1-p51.png",
+ "size": [
+  1360,
+  436
+ ],
+ "deskew_deg": -0.2,
+ "texts": [
+  {
+   "text": "SuppIy A",
+   "conf": 0.9537392780184746,
+   "box": [
+    156.5,
+    8.0,
+    125.0,
+    33.5
+   ],
+   "src": "page",
+   "id": "T1"
+  },
+  {
+   "text": "SuppIy B",
+   "conf": 0.9098132699728012,
+   "box": [
+    1054.0,
+    12.0,
+    126.0,
+    32.5
+   ],
+   "src": "page",
+   "id": "T2"
+  },
+  {
+   "text": "Tie Breaker",
+   "conf": 0.9982000372626565,
+   "box": [
+    597.5,
+    110.0,
+    153.0,
+    27.0
+   ],
+   "src": "page",
+   "id": "T3"
+  },
+  {
+   "text": "Output A",
+   "conf": 0.988203190267086,
+   "box": [
+    309.5,
+    375.0,
+    124.0,
+    32.5
+   ],
+   "src": "page",
+   "id": "T4"
+  },
+  {
+   "text": "Output B",
+   "conf": 0.9984301179647446,
+   "box": [
+    899.5,
+    380.0,
+    123.5,
+    32.0
+   ],
+   "src": "page",
+   "id": "T5"
+  },
+  {
+   "text": "ppIy A",
+   "conf": 0.9622698028882345,
+   "box": [
+    196.0,
+    5.666666666666667,
+    89.0,
+    39.666666666666664
+   ],
+   "src": "crop",
+   "id": "S1t1"
+  },
+  {
+   "text": "ppIy B",
+   "conf": 0.7836038072903951,
+   "box": [
+    1098.0,
+    9.333333333333334,
+    84.33333333333333,
+    38.333333333333336
+   ],
+   "src": "crop",
+   "id": "S2t1"
+  },
+  {
+   "text": "Tie Breaker",
+   "conf": 0.9988772814924066,
+   "box": [
+    596.6666666666666,
+    109.66666666666666,
+    154.66666666666666,
+    28.333333333333332
+   ],
+   "src": "crop",
+   "id": "S4t1"
+  },
+  {
+   "text": "1",
+   "conf": 0.8031538724899292,
+   "box": [
+    1136.3333333333333,
+    139.66666666666666,
+    15.333333333333334,
+    18.0
+   ],
+   "src": "crop",
+   "id": "S5t1"
+  },
+  {
+   "text": "utput A",
+   "conf": 0.9991927828107562,
+   "box": [
+    327.6666666666667,
+    378.33333333333337,
+    104.66666666666667,
+    22.666666666666668
+   ],
+   "src": "crop",
+   "id": "S7t1"
+  },
+  {
+   "text": "Output B",
+   "conf": 0.9736811593174934,
+   "box": [
+    907.0,
+    382.66666666666663,
+    113.0,
+    22.0
+   ],
+   "src": "crop",
+   "id": "S8t1"
+  },
+  {
+   "text": "Output A",
+   "conf": 0.947282001376152,
+   "box": [
+    305.6666666666667,
+    371.6666666666667,
+    131.66666666666666,
+    38.333333333333336
+   ],
+   "src": "crop",
+   "id": "S9t1"
+  },
+  {
+   "text": "Output B",
+   "conf": 0.997816264629364,
+   "box": [
+    895.6666666666666,
+    376.6666666666667,
+    130.33333333333334,
+    38.333333333333336
+   ],
+   "src": "crop",
+   "id": "S10t1"
+  }
+ ],
+ "busbars": [
+  {
+   "x1": 140,
+   "x2": 643,
+   "y1": 201,
+   "y2": 208,
+   "y": 204.5,
+   "id": "BUS-1",
+   "rating": null,
+   "kA": null,
+   "label_text": null
+  },
+  {
+   "x1": 701,
+   "x2": 1207,
+   "y1": 203,
+   "y2": 209,
+   "y": 206.0,
+   "id": "BUS-2",
+   "rating": null,
+   "kA": null,
+   "label_text": null
+  }
+ ],
+ "vlines_count": 22,
+ "symbols": [
+  {
+   "id": "S1",
+   "kind": "breaker",
+   "box": [
+    256,
+    11,
+    23,
+    23
+   ],
+   "shape_score": 0.21
+  },
+  {
+   "id": "S2",
+   "kind": "breaker",
+   "box": [
+    1158,
+    15,
+    19,
+    21
+   ],
+   "shape_score": 0.24
+  },
+  {
+   "id": "S3",
+   "kind": "breaker",
+   "box": [
+    189,
+    81,
+    14,
+    69
+   ],
+   "shape_score": 0.12
+  },
+  {
+   "id": "S4",
+   "kind": "breaker",
+   "box": [
+    598,
+    112,
+    38,
+    22
+   ],
+   "shape_score": 0.12
+  },
+  {
+   "id": "S5",
+   "kind": "breaker",
+   "box": [
+    1162,
+    137,
+    16,
+    19
+   ],
+   "shape_score": 0.11
+  },
+  {
+   "id": "S6",
+   "kind": "breaker",
+   "box": [
+    631,
+    167,
+    81,
+    28
+   ],
+   "shape_score": 0.64
+  },
+  {
+   "id": "S7",
+   "kind": "generator",
+   "box": [
+    386,
+    245,
+    22,
+    68
+   ],
+   "shape_score": 0.16
+  },
+  {
+   "id": "S8",
+   "kind": "contactor",
+   "box": [
+    966,
+    248,
+    22,
+    68
+   ],
+   "shape_score": 0.18
+  },
+  {
+   "id": "S9",
+   "kind": "ct",
+   "box": [
+    311,
+    379,
+    19,
+    20
+   ],
+   "shape_score": 0.15
+  },
+  {
+   "id": "S10",
+   "kind": "ct",
+   "box": [
+    901,
+    384,
+    19,
+    20
+   ],
+   "shape_score": 0.21
+  }
+ ],
+ "devices": [
+  {
+   "symbol": "S1",
+   "box": [
+    256,
+    11,
+    23,
+    23
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.1,
+   "type": "ACB",
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "on_bus": "BUS-1",
+   "connected": false,
+   "id": "D1"
+  },
+  {
+   "symbol": "S2",
+   "box": [
+    1158,
+    15,
+    19,
+    21
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.12,
+   "type": "ACB",
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "on_bus": "BUS-2",
+   "connected": false,
+   "id": "D2"
+  },
+  {
+   "symbol": "S3",
+   "box": [
+    189,
+    81,
+    14,
+    69
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.06,
+   "type": "ACB",
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "on_bus": "BUS-1",
+   "connected": false,
+   "id": "D3"
+  },
+  {
+   "symbol": "S4",
+   "box": [
+    598,
+    112,
+    38,
+    22
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.06,
+   "type": "ACB",
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "on_bus": "BUS-1",
+   "connected": false,
+   "id": "D4"
+  },
+  {
+   "symbol": "S5",
+   "box": [
+    1162,
+    137,
+    16,
+    19
+   ],
+   "label_texts": [
+    "S5t1"
+   ],
+   "label": "1",
+   "conf": 0.11,
+   "type": "ACB",
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "on_bus": "BUS-2",
+   "connected": false,
+   "id": "D5"
+  },
+  {
+   "symbol": "S6",
+   "box": [
+    631,
+    167,
+    81,
+    28
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.32,
+   "type": "ACB",
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "on_bus": null,
+   "connected": false,
+   "id": "D6"
+  },
+  {
+   "symbol": "S7",
+   "box": [
+    386,
+    245,
+    22,
+    68
+   ],
+   "label_texts": [
+    "S7t1"
+   ],
+   "label": "utput A",
+   "conf": 0.16,
+   "type": "GENERATOR",
+   "rating": null,
+   "on_bus": "BUS-1",
+   "connected": false,
+   "id": "D7"
+  },
+  {
+   "symbol": "S8",
+   "box": [
+    966,
+    248,
+    22,
+    68
+   ],
+   "label_texts": [
+    "S8t1"
+   ],
+   "label": "Output B",
+   "conf": 0.18,
+   "type": "CONTACTOR",
+   "rating": null,
+   "on_bus": "BUS-2",
+   "connected": false,
+   "id": "D8"
+  },
+  {
+   "symbol": "S9",
+   "box": [
+    311,
+    379,
+    19,
+    20
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.07,
+   "type": "CT",
+   "rating": null,
+   "on_bus": "BUS-1",
+   "connected": false,
+   "id": "D9"
+  },
+  {
+   "symbol": "S10",
+   "box": [
+    901,
+    384,
+    19,
+    20
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.1,
+   "type": "CT",
+   "rating": null,
+   "on_bus": "BUS-2",
+   "connected": false,
+   "id": "D10"
+  }
+ ],
+ "notes": {
+  "form": null,
+  "ip": null,
+  "fault_kA": null,
+  "poles_default": null,
+  "evidence": []
+ },
+ "reader": "trained",
+ "seconds": {
+  "total": 8.14,
+  "ocr": 5.88,
+  "detector": 2.15
+ },
+ "detector": {
+  "weights": "weights/rtdetr_r18_full",
+  "device": "cpu",
+  "threads": 4,
+  "score_threshold": 0.11,
+  "score_threshold_source": "drawing",
+  "nms_iou": 0.5,
+  "merge_iou": 0.5,
+  "edge_px": 2,
+  "contain": 0.8
+ }
+}

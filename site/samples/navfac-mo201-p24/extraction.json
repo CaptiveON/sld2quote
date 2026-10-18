@@ -1,0 +1,947 @@
+{
+ "image": "navfac-mo201-p24.png",
+ "size": [
+  1088,
+  642
+ ],
+ "deskew_deg": 0.0,
+ "texts": [
+  {
+   "text": "SUPPLY SOURCE",
+   "conf": 0.9633983740439782,
+   "box": [
+    427.0,
+    30.5,
+    173.0,
+    14.0
+   ],
+   "src": "page",
+   "id": "T1"
+  },
+  {
+   "text": "MAIN BREAKER",
+   "conf": 0.9703293293714523,
+   "box": [
+    599.5,
+    72.0,
+    155.0,
+    13.5
+   ],
+   "src": "page",
+   "id": "T2"
+  },
+  {
+   "text": "CIRCUIT BREAKER",
+   "conf": 0.9849736253420512,
+   "box": [
+    775.0,
+    145.5,
+    183.5,
+    15.5
+   ],
+   "src": "page",
+   "id": "T3"
+  },
+  {
+   "text": "-TRANSFORMER",
+   "conf": 0.9708485503991445,
+   "box": [
+    258.0,
+    275.0,
+    163.5,
+    13.0
+   ],
+   "src": "page",
+   "id": "T4"
+  },
+  {
+   "text": "-LOAD",
+   "conf": 0.9631037592887879,
+   "box": [
+    914.0,
+    271.5,
+    69.0,
+    13.5
+   ],
+   "src": "page",
+   "id": "T5"
+  },
+  {
+   "text": "CENTER",
+   "conf": 0.9956828057765961,
+   "box": [
+    912.5,
+    285.5,
+    85.0,
+    13.5
+   ],
+   "src": "page",
+   "id": "T6"
+  },
+  {
+   "text": "TPP?T",
+   "conf": 0.6425905108451844,
+   "box": [
+    98.0,
+    342.0,
+    204.5,
+    92.5
+   ],
+   "src": "page",
+   "id": "T7"
+  },
+  {
+   "text": "PRIMARY",
+   "conf": 0.9960468922342572,
+   "box": [
+    572.0,
+    400.0,
+    97.0,
+    13.5
+   ],
+   "src": "page",
+   "id": "T8"
+  },
+  {
+   "text": "FEEDER",
+   "conf": 0.9946190118789673,
+   "box": [
+    579.5,
+    415.0,
+    84.5,
+    13.5
+   ],
+   "src": "page",
+   "id": "T9"
+  },
+  {
+   "text": "PPLY SOURCE",
+   "conf": 0.9695707180283286,
+   "box": [
+    457.3333333333333,
+    31.333333333333332,
+    141.33333333333334,
+    13.0
+   ],
+   "src": "crop",
+   "id": "S1t1"
+  },
+  {
+   "text": "MAINBREAKER",
+   "conf": 0.9856249527497725,
+   "box": [
+    599.3333333333334,
+    72.66666666666666,
+    153.66666666666666,
+    11.666666666666666
+   ],
+   "src": "crop",
+   "id": "S1t2"
+  },
+  {
+   "text": "CIRCUIT",
+   "conf": 0.9741656950541905,
+   "box": [
+    769.6666666666667,
+    148.33333333333331,
+    85.0,
+    10.666666666666666
+   ],
+   "src": "crop",
+   "id": "S1t3"
+  },
+  {
+   "text": "LYSOURCE",
+   "conf": 0.9651323333382607,
+   "box": [
+    478.3333333333333,
+    33.333333333333336,
+    120.33333333333333,
+    10.333333333333334
+   ],
+   "src": "crop",
+   "id": "S2t1"
+  },
+  {
+   "text": "MAIN BREAKER",
+   "conf": 0.9396267235279083,
+   "box": [
+    600.0,
+    73.0,
+    153.0,
+    11.333333333333334
+   ],
+   "src": "crop",
+   "id": "S2t2"
+  },
+  {
+   "text": "CIRCUIT BF",
+   "conf": 0.9252620577812195,
+   "box": [
+    769.0,
+    147.0,
+    113.66666666666667,
+    12.333333333333334
+   ],
+   "src": "crop",
+   "id": "S2t3"
+  },
+  {
+   "text": "CIRCUIT BREAKE",
+   "conf": 0.9874109072344643,
+   "box": [
+    720.6666666666666,
+    145.0,
+    220.0,
+    17.333333333333332
+   ],
+   "src": "crop",
+   "id": "S3t1"
+  },
+  {
+   "text": "CIRCUITBREAKEF",
+   "conf": 0.9865531240190778,
+   "box": [
+    768.3333333333334,
+    147.33333333333334,
+    185.0,
+    11.666666666666666
+   ],
+   "src": "crop",
+   "id": "S4t1"
+  },
+  {
+   "text": "LOAD",
+   "conf": 0.9771671891212463,
+   "box": [
+    920.3333333333334,
+    272.6666666666667,
+    61.0,
+    11.333333333333334
+   ],
+   "src": "crop",
+   "id": "S5t1"
+  },
+  {
+   "text": "CENTER",
+   "conf": 0.9934657216072083,
+   "box": [
+    913.3333333333334,
+    286.3333333333333,
+    82.0,
+    11.333333333333334
+   ],
+   "src": "crop",
+   "id": "S5t2"
+  },
+  {
+   "text": "TRANSFORMER",
+   "conf": 0.9925230904058977,
+   "box": [
+    240.33333333333334,
+    274.6666666666667,
+    180.33333333333334,
+    13.0
+   ],
+   "src": "crop",
+   "id": "S6t1"
+  },
+  {
+   "text": "LOAD",
+   "conf": 0.9914621412754059,
+   "box": [
+    919.0,
+    273.0,
+    62.333333333333336,
+    11.333333333333334
+   ],
+   "src": "crop",
+   "id": "S7t1"
+  },
+  {
+   "text": "CENTER",
+   "conf": 0.9958904882272085,
+   "box": [
+    913.0,
+    286.6666666666667,
+    82.33333333333333,
+    11.333333333333334
+   ],
+   "src": "crop",
+   "id": "S7t2"
+  },
+  {
+   "text": "')",
+   "conf": 0.5173771604895592,
+   "box": [
+    834.6666666666666,
+    309.0,
+    24.333333333333332,
+    24.333333333333332
+   ],
+   "src": "crop",
+   "id": "S8t1"
+  },
+  {
+   "text": "PT",
+   "conf": 0.7853044867515564,
+   "box": [
+    221.0,
+    338.6666666666667,
+    85.0,
+    88.66666666666667
+   ],
+   "src": "crop",
+   "id": "S9t1"
+  },
+  {
+   "text": "PRIM",
+   "conf": 0.9936831146478653,
+   "box": [
+    573.0,
+    401.3333333333333,
+    49.333333333333336,
+    11.666666666666666
+   ],
+   "src": "crop",
+   "id": "S9t2"
+  },
+  {
+   "text": "FEE",
+   "conf": 0.9783914883931478,
+   "box": [
+    579.3333333333333,
+    414.6666666666667,
+    42.666666666666664,
+    13.0
+   ],
+   "src": "crop",
+   "id": "S9t3"
+  },
+  {
+   "text": "PRIMARY",
+   "conf": 0.9876049671854291,
+   "box": [
+    572.3333333333334,
+    402.0,
+    94.66666666666667,
+    10.333333333333334
+   ],
+   "src": "crop",
+   "id": "S11t1"
+  },
+  {
+   "text": "FEEDER",
+   "conf": 0.9345967769622803,
+   "box": [
+    580.3333333333334,
+    415.6666666666667,
+    82.0,
+    11.333333333333334
+   ],
+   "src": "crop",
+   "id": "S11t2"
+  },
+  {
+   "text": "FEEDER",
+   "conf": 0.9904081424077352,
+   "box": [
+    580.6666666666667,
+    415.3333333333333,
+    81.0,
+    11.666666666666666
+   ],
+   "src": "crop",
+   "id": "S12t1"
+  },
+  {
+   "text": "K",
+   "conf": 0.5204916596412659,
+   "box": [
+    307.6666666666667,
+    444.3333333333333,
+    63.333333333333336,
+    60.666666666666664
+   ],
+   "src": "crop",
+   "id": "S12t2"
+  },
+  {
+   "text": "ER",
+   "conf": 0.7042488604784012,
+   "box": [
+    644.0,
+    412.6666666666667,
+    21.0,
+    18.333333333333332
+   ],
+   "src": "crop",
+   "id": "S13t1"
+  },
+  {
+   "text": "FEEUER",
+   "conf": 0.9197144508361816,
+   "box": [
+    580.0,
+    419.0,
+    82.66666666666667,
+    11.0
+   ],
+   "src": "crop",
+   "id": "S14t1"
+  },
+  {
+   "text": "X",
+   "conf": 0.5183184146881104,
+   "box": [
+    467.6666666666667,
+    472.6666666666667,
+    109.33333333333333,
+    108.0
+   ],
+   "src": "crop",
+   "id": "S14t2"
+  }
+ ],
+ "busbars": [
+  {
+   "x1": 49,
+   "x2": 1051,
+   "y1": 10,
+   "y2": 14,
+   "y": 12.0,
+   "id": "BUS-1",
+   "rating": null,
+   "kA": null,
+   "label_text": null
+  },
+  {
+   "x1": 305,
+   "x2": 1062,
+   "y1": 638,
+   "y2": 641,
+   "y": 639.5,
+   "id": "BUS-2",
+   "rating": null,
+   "kA": null,
+   "label_text": null
+  }
+ ],
+ "vlines_count": 27,
+ "symbols": [
+  {
+   "id": "S1",
+   "kind": "breaker",
+   "box": [
+    516,
+    67,
+    16,
+    21
+   ],
+   "shape_score": 0.24
+  },
+  {
+   "id": "S2",
+   "kind": "breaker",
+   "box": [
+    534,
+    72,
+    19,
+    16
+   ],
+   "shape_score": 0.18
+  },
+  {
+   "id": "S3",
+   "kind": "fuse_switch",
+   "box": [
+    599,
+    123,
+    12,
+    24
+   ],
+   "shape_score": 0.12
+  },
+  {
+   "id": "S4",
+   "kind": "fuse_switch",
+   "box": [
+    610,
+    146,
+    14,
+    22
+   ],
+   "shape_score": 0.13
+  },
+  {
+   "id": "S5",
+   "kind": "fuse_switch",
+   "box": [
+    825,
+    215,
+    31,
+    34
+   ],
+   "shape_score": 0.14
+  },
+  {
+   "id": "S6",
+   "kind": "breaker",
+   "box": [
+    164,
+    274,
+    65,
+    19
+   ],
+   "shape_score": 0.22
+  },
+  {
+   "id": "S7",
+   "kind": "contactor",
+   "box": [
+    844,
+    308,
+    14,
+    22
+   ],
+   "shape_score": 0.12
+  },
+  {
+   "id": "S8",
+   "kind": "capacitor",
+   "box": [
+    834,
+    347,
+    43,
+    7
+   ],
+   "shape_score": 0.11
+  },
+  {
+   "id": "S9",
+   "kind": "fuse_switch",
+   "box": [
+    281,
+    372,
+    12,
+    21
+   ],
+   "shape_score": 0.2
+  },
+  {
+   "id": "S10",
+   "kind": "fuse_switch",
+   "box": [
+    241,
+    373,
+    13,
+    22
+   ],
+   "shape_score": 0.16
+  },
+  {
+   "id": "S11",
+   "kind": "breaker",
+   "box": [
+    518,
+    402,
+    18,
+    27
+   ],
+   "shape_score": 0.2
+  },
+  {
+   "id": "S12",
+   "kind": "breaker",
+   "box": [
+    306,
+    452,
+    65,
+    20
+   ],
+   "shape_score": 0.17
+  },
+  {
+   "id": "S13",
+   "kind": "breaker",
+   "box": [
+    704,
+    452,
+    64,
+    21
+   ],
+   "shape_score": 0.23
+  },
+  {
+   "id": "S14",
+   "kind": "breaker",
+   "box": [
+    512,
+    459,
+    26,
+    32
+   ],
+   "shape_score": 0.32
+  },
+  {
+   "id": "S15",
+   "kind": "fuse_switch",
+   "box": [
+    486,
+    513,
+    68,
+    22
+   ],
+   "shape_score": 0.19
+  },
+  {
+   "id": "S16",
+   "kind": "contactor",
+   "box": [
+    517,
+    549,
+    22,
+    25
+   ],
+   "shape_score": 0.12
+  }
+ ],
+ "devices": [
+  {
+   "symbol": "S1",
+   "box": [
+    516,
+    67,
+    16,
+    21
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.12,
+   "type": "ACB",
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "on_bus": "BUS-1",
+   "connected": false,
+   "id": "D1"
+  },
+  {
+   "symbol": "S2",
+   "box": [
+    534,
+    72,
+    19,
+    16
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.09,
+   "type": "ACB",
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "on_bus": "BUS-1",
+   "connected": false,
+   "id": "D2"
+  },
+  {
+   "symbol": "S3",
+   "box": [
+    599,
+    123,
+    12,
+    24
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.06,
+   "type": "FUSE_SWITCH",
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "on_bus": "BUS-1",
+   "connected": false,
+   "id": "D3"
+  },
+  {
+   "symbol": "S4",
+   "box": [
+    610,
+    146,
+    14,
+    22
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.07,
+   "type": "FUSE_SWITCH",
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "on_bus": "BUS-1",
+   "connected": false,
+   "id": "D4"
+  },
+  {
+   "symbol": "S5",
+   "box": [
+    825,
+    215,
+    31,
+    34
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.07,
+   "type": "FUSE_SWITCH",
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "on_bus": "BUS-1",
+   "connected": true,
+   "id": "D5"
+  },
+  {
+   "symbol": "S6",
+   "box": [
+    164,
+    274,
+    65,
+    19
+   ],
+   "label_texts": [
+    "S6t1"
+   ],
+   "label": "TRANSFORMER",
+   "conf": 0.22,
+   "type": "ACB",
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "on_bus": "BUS-1",
+   "connected": false,
+   "id": "D6"
+  },
+  {
+   "symbol": "S7",
+   "box": [
+    844,
+    308,
+    14,
+    22
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.06,
+   "type": "CONTACTOR",
+   "rating": null,
+   "on_bus": "BUS-1",
+   "connected": false,
+   "id": "D7"
+  },
+  {
+   "symbol": "S8",
+   "box": [
+    834,
+    347,
+    43,
+    7
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.06,
+   "type": "CAPACITOR",
+   "rating": null,
+   "on_bus": "BUS-1",
+   "connected": false,
+   "id": "D8"
+  },
+  {
+   "symbol": "S9",
+   "box": [
+    281,
+    372,
+    12,
+    21
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.1,
+   "type": "FUSE_SWITCH",
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "on_bus": "BUS-1",
+   "connected": false,
+   "id": "D9"
+  },
+  {
+   "symbol": "S10",
+   "box": [
+    241,
+    373,
+    13,
+    22
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.08,
+   "type": "FUSE_SWITCH",
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "on_bus": "BUS-1",
+   "connected": false,
+   "id": "D10"
+  },
+  {
+   "symbol": "S11",
+   "box": [
+    518,
+    402,
+    18,
+    27
+   ],
+   "label_texts": [
+    "S11t1"
+   ],
+   "label": "PRIMARY",
+   "conf": 0.2,
+   "type": "MCCB",
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "dest": "PRIMARY",
+   "on_bus": "BUS-1",
+   "connected": false,
+   "id": "D11"
+  },
+  {
+   "symbol": "S12",
+   "box": [
+    306,
+    452,
+    65,
+    20
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.09,
+   "type": "MCCB",
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "on_bus": "BUS-1",
+   "connected": true,
+   "id": "D12"
+  },
+  {
+   "symbol": "S13",
+   "box": [
+    704,
+    452,
+    64,
+    21
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.12,
+   "type": "MCCB",
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "on_bus": "BUS-1",
+   "connected": true,
+   "id": "D13"
+  },
+  {
+   "symbol": "S14",
+   "box": [
+    512,
+    459,
+    26,
+    32
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.16,
+   "type": "MCCB",
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "on_bus": "BUS-1",
+   "connected": false,
+   "id": "D14"
+  },
+  {
+   "symbol": "S15",
+   "box": [
+    486,
+    513,
+    68,
+    22
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.1,
+   "type": "FUSE_SWITCH",
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "on_bus": "BUS-1",
+   "connected": true,
+   "id": "D15"
+  },
+  {
+   "symbol": "S16",
+   "box": [
+    517,
+    549,
+    22,
+    25
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.06,
+   "type": "CONTACTOR",
+   "rating": null,
+   "on_bus": "BUS-1",
+   "connected": false,
+   "id": "D16"
+  }
+ ],
+ "notes": {
+  "form": null,
+  "ip": null,
+  "fault_kA": null,
+  "poles_default": null,
+  "evidence": []
+ },
+ "reader": "trained",
+ "seconds": {
+  "total": 9.7,
+  "ocr": 8.39,
+  "detector": 1.25
+ },
+ "detector": {
+  "weights": "weights/rtdetr_r18_full",
+  "device": "cpu",
+  "threads": 4,
+  "score_threshold": 0.11,
+  "score_threshold_source": "drawing",
+  "nms_iou": 0.5,
+  "merge_iou": 0.5,
+  "edge_px": 2,
+  "contain": 0.8
+ }
+}

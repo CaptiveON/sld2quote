@@ -1,0 +1,31 @@
+line,part,description,qty,unit_gbp,total_gbp,conf,rule,evidence
+1,METER-MF,Panel meter (multifunction),1,260,260,0.09,R-METERING,S1
+2,SPD-T12,"Surge protective device, Type 1+2, with status indication",1,690,690,0.06,R-SPD,S2
+3,METER-MF,Panel meter (multifunction),1,260,260,0.14,R-METERING,S3
+4,ACB-1600-4P-N,"Air circuit breaker 1600 A 4-pole, None kA band N, withdrawable, electronic trip",1,5124.0,5124.0,0.3,R-ACB-SELECT,S4 T10
+5,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.3,R-FU-KIT,S4 T10
+6,ACB-1600-4P-N,"Air circuit breaker 1600 A 4-pole, None kA band N, withdrawable, electronic trip",1,5124.0,5124.0,0.17,R-ACB-SELECT,S5 S5t1
+7,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.17,R-FU-KIT,S5 S5t1
+8,ACB-1600-4P-N,"Air circuit breaker 1600 A 4-pole, None kA band N, withdrawable, electronic trip",1,5124.0,5124.0,0.12,R-ACB-SELECT,S6 S6t1
+9,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.12,R-FU-KIT,S6 S6t1
+10,METER-Sync,Panel meter (Sync),1,260,260,0.16,R-METERING,S8 S8t3
+11,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.07,R-PROTECTION,S9
+12,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.07,R-PROTECTION,S10
+13,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.07,R-PROTECTION,S12
+14,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.09,R-PROTECTION,S13
+15,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.38,R-PROTECTION,S18 S18t1 S18t4
+16,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.24,R-PROTECTION,S19 S19t1 S19t6
+17,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.2,R-PROTECTION,S20 S20t1 S20t6
+18,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.12,R-PROTECTION,S21 T38 T33
+19,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.11,R-PROTECTION,S22 S22t4
+20,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.14,R-PROTECTION,S24
+21,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.15,R-PROTECTION,S25
+22,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.12,R-PROTECTION,S26
+23,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.1,R-PROTECTION,S27
+24,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.14,R-PROTECTION,S31 S31t2
+25,METER-25,Panel meter (25),1,260,260,0.15,R-METERING,S35 T69
+26,BUSBAR-CU-1600,"Copper busbar set 1600 A (4-bar), 3 sections, about 86 kg",1,993.6,993.6,0.9,R-BUSBAR-SIZE,
+27,ENC-SECTION,"Enclosure section, Form 4 Type 6, IP31, RAL 7035",3,3380.0,10140.0,0.95,R-ENCLOSURE,
+28,LAB-ASSY,"Assembly, wiring and routine verification: 238 hours",1,11424,11424,0.9,R-LABOUR,
+29,DOC,"Documentation, as-built drawings, test certificates",1,600,600,1.0,R-DOC,
+30,DEL,"Delivery to site, crane and offload excluded",1,850,850,1.0,R-DELIVERY,

@@ -1,0 +1,59 @@
+# Quotation (draft for estimator review), sheet sheet-10839.png
+
+Prices are from the prototype's illustrative catalogue, not a supplier price list. Every line names the evidence it rests on: S = symbol box, T = text box, clause numbers from the specification, R = rule.
+
+## Board as read
+- Busbar rating 2500 A; fault level 65 kA; Form 4 Type 6; IP42; default 3-pole; 5 outgoing ways in 4 sections.
+
+## Bill of materials
+
+| # | Part | Description | Qty | Unit £ | Total £ | Conf | Evidence |
+|---|---|---|---|---|---|---|---|
+| 1 | ACB-2500-3P-H | Air circuit breaker 2500 A 3-pole, 65 kA band H, withdrawable, electronic trip | 1 | 6,608.00 | 6,608.00 | 0.3 | S2 S2t1 S2t2 R-ACB-SELECT |
+| 2 | FU-KIT-ACB | Incomer functional unit: compartment, shutters, terminals, controls | 1 | 1,400.00 | 1,400.00 | 0.3 | S2 S2t1 S2t2 R-FU-KIT |
+| 3 | METER-CT2500/5A | 3AR A 2500 A Cu 65 kA/1s | Panel meter (CT2500/5A | 3AR A 2500 A Cu 65 kA/1s) | 1 | 260.00 | 260.00 | 0.49 | S3 S3t1 S3t2 R-METERING |
+| 4 | CT-SET | Current transformers 2500/5 A, set of three, class 1 | 1 | 280.00 | 280.00 | 0.16 | S4 S4t2 R-METERING |
+| 5 | BSS-2500-3P | Bus-section switch 2500 A 3-pole, 65 kA | 1 | 4,838.00 | 4,838.00 | 0.73 | S5 S5t2 R-BUS-SECTION |
+| 6 | FU-KIT-BS | Bus-section functional unit and interlocking | 1 | 900.00 | 900.00 | 0.73 | S5 S5t2 R-FU-KIT |
+| 7 | FSW-250-3P | Fuse-switch-disconnector 250 A 3-pole | 1 | 430.00 | 430.00 | 0.6 | S6 S6t1 R-FSW-SELECT |
+| 8 | FUSE-250 | Fuse links 250 A, one per pole | 3 | 29.00 | 87.00 | 0.6 | S6 S6t1 R-FUSE-LINKS |
+| 9 | FU-KIT-FUSE_SWITCH | Outgoing functional unit: compartment door, terminals, labels | 1 | 380.00 | 380.00 | 0.6 | S6 S6t1 R-FU-KIT |
+| 10 | FSW-250-3P | Fuse-switch-disconnector 250 A 3-pole; feeds data hall | 1 | 430.00 | 430.00 | 0.79 | S8 S8t5 S8t2 R-FSW-SELECT |
+| 11 | FUSE-250 | Fuse links 250 A, one per pole | 3 | 29.00 | 87.00 | 0.79 | S8 S8t5 S8t2 R-FUSE-LINKS |
+| 12 | FU-KIT-FUSE_SWITCH | Outgoing functional unit: compartment door, terminals, labels | 1 | 380.00 | 380.00 | 0.79 | S8 S8t5 S8t2 R-FU-KIT |
+| 13 | FSW-400-3P | Fuse-switch-disconnector 400 A 3-pole; feeds lighting | 1 | 780.00 | 780.00 | 0.47 | S9 S9t2 S9t1 R-FSW-SELECT |
+| 14 | FUSE-400 | Fuse links 400 A, one per pole | 3 | 46.00 | 138.00 | 0.47 | S9 S9t2 S9t1 R-FUSE-LINKS |
+| 15 | FU-KIT-FUSE_SWITCH | Outgoing functional unit: compartment door, terminals, labels | 1 | 380.00 | 380.00 | 0.47 | S9 S9t2 S9t1 R-FU-KIT |
+| 16 | FSW-630-3P | Fuse-switch-disconnector 630 A 3-pole; feeds UPS input | 1 | 1,180.00 | 1,180.00 | 0.54 | S11 S11t4 S11t3 R-FSW-SELECT |
+| 17 | FUSE-630 | Fuse links 630 A, one per pole | 3 | 72.00 | 216.00 | 0.54 | S11 S11t4 S11t3 R-FUSE-LINKS |
+| 18 | FU-KIT-FUSE_SWITCH | Outgoing functional unit: compartment door, terminals, labels | 1 | 380.00 | 380.00 | 0.54 | S11 S11t4 S11t3 R-FU-KIT |
+| 19 | FSW-800-3P | Fuse-switch-disconnector 800 A 3-pole; feeds data hall | 1 | 1,520.00 | 1,520.00 | 0.56 | S12 S12t5 S12t4 R-FSW-SELECT |
+| 20 | FUSE-800 | Fuse links 800 A, one per pole | 3 | 94.00 | 282.00 | 0.56 | S12 S12t5 S12t4 R-FUSE-LINKS |
+| 21 | FU-KIT-FUSE_SWITCH | Outgoing functional unit: compartment door, terminals, labels | 1 | 380.00 | 380.00 | 0.56 | S12 S12t5 S12t4 R-FU-KIT |
+| 22 | BUSBAR-CU-2500 | Copper busbar set 2500 A (4-bar), 4 sections, about 182 kg | 1 | 2,097.60 | 2,097.60 | 0.9 | T7 T7 R-BUSBAR-SIZE |
+| 23 | ENC-SECTION | Enclosure section, Form 4 Type 6, IP42, RAL 7035 | 4 | 3,549.00 | 14,196.00 | 0.95 | T24 T24 T26 T28 R-ENCLOSURE |
+| 24 | LAB-ASSY | Assembly, wiring and routine verification: 146 hours | 1 | 7,008.00 | 7,008.00 | 0.9 |  R-LABOUR |
+| 25 | DOC | Documentation, as-built drawings, test certificates | 1 | 600.00 | 600.00 | 1.0 |  R-DOC |
+| 26 | CERT | Design-verification certificates per specification | 1 | 0.00 | 0.00 | 1.0 | 7.7 R-SPEC-CERT |
+| 27 | DEL | Delivery to site, crane and offload excluded | 1 | 850.00 | 850.00 | 1.0 |  R-DELIVERY |
+
+Subtotal £46,087.60; margin £6,913.14; **total £53,000.74**
+
+## Clarifications and exclusions (from flagged items)
+- [missing] D7 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S7 S7t2 S7t3
+- [missing] D10 (CONTACTOR): kW not read. Action: read from drawing / schedule. Evidence: S10 S10t5 S10t3
+- [missing] D13 (CAPACITOR): kVAr not read. Action: read from drawing / schedule. Evidence: S13
+- [low_confidence] devices read with low confidence: D2, D3, D4, D7, D9, D10, D11, D12, D13, D14, D15. Action: check against the drawing. Evidence: D2 D3 D4 D7 D9 D10 D11 D12 D13 D14 D15
+
+## Specification clauses matched
+
+- standard: clause 7.1 -> BS EN IEC 61439-2:2021
+- form: clause 7.2 -> Form 4 Type 6
+- fault_kA: clause 7.3 -> 65
+- poles: clause 7.4 -> 3
+- ip: clause 7.5 -> IP42
+- busbar_material: clause 7.6 -> copper
+- certificates: clause 7.7 -> True
+- other (not priced automatically): clause 7.8: Two years' spares for all trip units shall be included.
+
+Generated by sld2quote 0.1.0 in 10.1 s; reader deskew -0.1 deg.

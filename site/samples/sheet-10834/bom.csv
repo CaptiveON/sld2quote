@@ -1,0 +1,19 @@
+line,part,description,qty,unit_gbp,total_gbp,conf,rule,evidence
+1,ACB-1600-4P-N,"Air circuit breaker 1600 A 4-pole, 36 kA band N, withdrawable, electronic trip",1,5124.0,5124.0,0.46,R-ACB-SELECT,S2 S2t1 S2t2
+2,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.46,R-FU-KIT,S2 S2t1 S2t2
+3,METER-CT 1600/5A | 3AR A 1600 A Cu 36 kA/1s,Panel meter (CT 1600/5A | 3AR A 1600 A Cu 36 kA/1s),1,260,260,0.56,R-METERING,S3 S3t1 S3t2
+4,CT-SET,"Current transformers 1600/5 A, set of three, class 1",1,280,280,0.38,R-METERING,S4 S4t2
+5,MCCB-250-4P-N,"Moulded-case circuit breaker 250 A 4-pole, 36 kA band N, adjustable trip",1,634.4,634.4,0.38,R-MCCB-SELECT,S6 S6t1
+6,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.38,R-FU-KIT,S6 S6t1
+7,ISOL-400-4P,Switch-disconnector 400 A 4-pole,1,634.4,634.4,0.77,R-ISOL-SELECT,S8 S8t1
+8,FU-KIT-ISOLATOR,"Outgoing functional unit: compartment door, terminals, labels",1,340,340,0.77,R-FU-KIT,S8 S8t1
+9,ISOL-100-4P,Switch-disconnector 100 A 4-pole; feeds pumps,1,207.4,207.4,0.75,R-ISOL-SELECT,S9 S9t2 S9t1
+10,FU-KIT-ISOLATOR,"Outgoing functional unit: compartment door, terminals, labels",1,340,340,0.75,R-FU-KIT,S9 S9t2 S9t1
+11,MCCB-400-4P-N,"Moulded-case circuit breaker 400 A 4-pole, 36 kA band N, adjustable trip",1,1195.6,1195.6,0.27,R-MCCB-SELECT,S10 T13
+12,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.27,R-FU-KIT,S10 T13
+13,BUSBAR-CU-1600,"Copper busbar set 1600 A (4-bar), 2 sections, about 58 kg",1,662.4,662.4,0.9,R-BUSBAR-SIZE,T6
+14,ENC-SECTION,"Enclosure section, Form 4 Type 6, IP42, RAL 7035",2,3549.0,7098.0,0.95,R-ENCLOSURE,T20 T20 T22 T24
+15,LAB-ASSY,"Assembly, wiring and routine verification: 90 hours",1,4320,4320,0.9,R-LABOUR,
+16,DOC,"Documentation, as-built drawings, test certificates",1,600,600,1.0,R-DOC,
+17,CERT,Design-verification certificates per specification,1,0.0,0.0,1.0,R-SPEC-CERT,7.7
+18,DEL,"Delivery to site, crane and offload excluded",1,850,850,1.0,R-DELIVERY,

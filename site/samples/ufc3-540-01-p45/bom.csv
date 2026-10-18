@@ -1,0 +1,6 @@
+line,part,description,qty,unit_gbp,total_gbp,conf,rule,evidence
+1,BUSBAR-CU-1600,"Copper busbar set 1600 A (4-bar), 1 sections, about 29 kg",1,331.2,331.2,0.9,R-BUSBAR-SIZE,
+2,ENC-SECTION,"Enclosure section, Form 4 Type 6, IP31, RAL 7035",1,3380.0,3380.0,0.95,R-ENCLOSURE,
+3,LAB-ASSY,"Assembly, wiring and routine verification: 70 hours",1,3360,3360,0.9,R-LABOUR,
+4,DOC,"Documentation, as-built drawings, test certificates",1,600,600,1.0,R-DOC,
+5,DEL,"Delivery to site, crane and offload excluded",1,850,850,1.0,R-DELIVERY,

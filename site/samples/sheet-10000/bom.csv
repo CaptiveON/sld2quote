@@ -1,0 +1,29 @@
+line,part,description,qty,unit_gbp,total_gbp,conf,rule,evidence
+1,ACB-1600-3P-N,"Air circuit breaker 1600 A 3-pole, 36 kA band N, withdrawable, electronic trip",1,4200.0,4200.0,0.24,R-ACB-SELECT,S4 S4t1 S4t3
+2,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.24,R-FU-KIT,S4 S4t1 S4t3
+3,ACB-1600-3P-N,"Air circuit breaker 1600 A 3-pole, 36 kA band N, withdrawable, electronic trip",1,4200.0,4200.0,0.61,R-ACB-SELECT,S6 S6t1 S6t2
+4,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.61,R-FU-KIT,S6 S6t1 S6t2
+5,METER-CT 1600/5A | 3AR A 1600 A Cu 36 kA/1s,Panel meter (CT 1600/5A | 3AR A 1600 A Cu 36 kA/1s),1,260,260,0.58,R-METERING,S7 S7t2 S7t3
+6,CT-SET,"Current transformers 1600/5 A, set of three, class 1",1,280,280,0.12,R-METERING,S8 S8t1 S8t3
+7,METER-CT 1600/5A | 3AR B 1600 A Cu 36 kA/1s,Panel meter (CT 1600/5A | 3AR B 1600 A Cu 36 kA/1s),1,260,260,0.44,R-METERING,S9 S9t2 S9t3
+8,CT-SET,"Current transformers, set of three, class 1",1,280,280,0.65,R-METERING,S10 S10t1
+9,METER-CT 1600/5A,Panel meter (CT 1600/5A),1,260,260,0.17,R-METERING,S11 S11t2
+10,CT-SET,"Current transformers 1600/5 A, set of three, class 1",1,280,280,0.12,R-METERING,S12 S12t1 S12t3
+11,MCCB-800-3P-N,"Moulded-case circuit breaker 800 A 3-pole, 36 kA band N, adjustable trip",1,1900.0,1900.0,0.65,R-MCCB-SELECT,S14 S14t2
+12,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.65,R-FU-KIT,S14 S14t2
+13,MCCB-250-3P-N,"Moulded-case circuit breaker 250 A 3-pole, 36 kA band N, adjustable trip",1,520.0,520.0,0.51,R-MCCB-SELECT,S15 S15t1
+14,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.51,R-FU-KIT,S15 S15t1
+15,MCCB-400-3P-N,"Moulded-case circuit breaker 400 A 3-pole, 50 kA band N, adjustable trip; feeds 3C 240 mm2 XLPE/SWA",1,980.0,980.0,0.36,R-MCCB-SELECT,S21 S21t1 S21t4
+16,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.36,R-FU-KIT,S21 S21t1 S21t4
+17,MCCB-250-3P-N,"Moulded-case circuit breaker 250 A 3-pole, 36 kA band N, adjustable trip; feeds data'hall",1,520.0,520.0,0.34,R-MCCB-SELECT,S28 S28t1 S28t3
+18,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.34,R-FU-KIT,S28 S28t1 S28t3
+19,MCCB-800-3P-H,"Moulded-case circuit breaker 800 A 3-pole, 65 kA band H, adjustable trip; feeds data'hall",1,2242.0,2242.0,0.27,R-MCCB-SELECT,S29 S29t2 S29t4
+20,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.27,R-FU-KIT,S29 S29t2 S29t4
+21,MCCB-250-3P-N,"Moulded-case circuit breaker 250 A 3-pole, 36 kA band N, adjustable trip; feeds kitchen",1,520.0,520.0,0.37,R-MCCB-SELECT,S30 S30t4 S30t5
+22,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.37,R-FU-KIT,S30 S30t4 S30t5
+23,BUSBAR-CU-1600,"Copper busbar set 1600 A (4-bar), 4 sections, about 115 kg",1,1324.8,1324.8,0.9,R-BUSBAR-SIZE,T19 T19
+24,ENC-SECTION,"Enclosure section, Form 4 Type 4, IP42, RAL 7035",4,3221.4,12885.6,0.95,R-ENCLOSURE,T66 T66 T68 T70
+25,LAB-ASSY,"Assembly, wiring and routine verification: 252 hours",1,12096,12096,0.9,R-LABOUR,
+26,DOC,"Documentation, as-built drawings, test certificates",1,600,600,1.0,R-DOC,
+27,CERT,Design-verification certificates per specification,1,0.0,0.0,1.0,R-SPEC-CERT,7.7
+28,DEL,"Delivery to site, crane and offload excluded",1,850,850,1.0,R-DELIVERY,

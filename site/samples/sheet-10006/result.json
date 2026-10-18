@@ -1,0 +1,768 @@
+{
+ "id": "sheet-10006",
+ "source": {
+  "kind": "sample",
+  "title": "Unseen-style drawing (labels below), simple board, IEC breakers (sheet 10006)",
+  "seed": 10006,
+  "level": "simple",
+  "copy": "clean",
+  "has_answer_key": true,
+  "note": "Synthetic drawing in a style held out of training (Courier New text or labels below); scored against its answer key"
+ },
+ "images": {
+  "sheet": "sheet.png",
+  "overlay": "overlay.png"
+ },
+ "size": [
+  1600,
+  1000
+ ],
+ "steps": [
+  {
+   "key": "text",
+   "title": "Read the words",
+   "count": 35,
+   "seconds": 10.11,
+   "plain": "Read 35 pieces of text in 10.11 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+  },
+  {
+   "key": "symbols",
+   "title": "Find the symbols",
+   "count": 16,
+   "seconds": 3.61,
+   "plain": "Found 16 symbols in 3.61 s: 5 outgoing moulded-case breakers, 2 incoming air circuit breakers, 1 generator, 1 transformer, 1 panel meter, 1 current transformer, 1 bus-section switch, 1 power-factor correction bank, 1 motor starter, 1 isolator, 1 motor. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+  },
+  {
+   "key": "labels",
+   "title": "Pair labels with symbols",
+   "count": 14,
+   "seconds": 0.13,
+   "plain": "Paired 14 of 16 symbols with the label text beside them; 3 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
+  },
+  {
+   "key": "spec",
+   "title": "Read the specification and compare",
+   "count": 8,
+   "seconds": 0.0,
+   "plain": "Read 8 clauses of the specification and compared them with the drawing notes (Form 3b, IP42, 50 kA): 0 conflicts. An estimator checks the drawing against the specification before pricing, because a conflict is a question for the consultant, not a guess."
+  },
+  {
+   "key": "price",
+   "title": "Pick parts and price",
+   "count": 12,
+   "seconds": 0.0,
+   "plain": "Chose 12 catalogue lines and priced the board at \u00a330,750 (illustrative prices, 15% margin included); 10 items flagged for the estimator. Every line names the symbol, text or clause it rests on, so a reviewer can check it on the drawing."
+  }
+ ],
+ "devices": [
+  {
+   "id": "D1",
+   "type": "GENERATOR",
+   "type_plain": "generator",
+   "rating": null,
+   "unit": "kVA",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.52,
+   "box": [
+    1356,
+    67,
+    49,
+    47
+   ],
+   "label": "i30 kVA"
+  },
+  {
+   "id": "D2",
+   "type": "TRANSFORMER",
+   "type_plain": "transformer",
+   "rating": 1250,
+   "unit": "kVA",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.98,
+   "box": [
+    198,
+    69,
+    45,
+    73
+   ],
+   "label": "11kV/415V | TX-1 1250 kVA"
+  },
+  {
+   "id": "D3",
+   "type": "ACB",
+   "type_plain": "incoming air circuit breaker",
+   "rating": 2500,
+   "unit": "A",
+   "poles": 3,
+   "kA": 50,
+   "dest": "",
+   "conf": 0.63,
+   "box": [
+    203,
+    199,
+    22,
+    46
+   ],
+   "label": "ACB-1 2500 A 3P | Icu 50 kA, withdrawable"
+  },
+  {
+   "id": "D4",
+   "type": "ACB",
+   "type_plain": "incoming air circuit breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": 3,
+   "kA": null,
+   "dest": "",
+   "conf": 0.2,
+   "box": [
+    1363,
+    199,
+    22,
+    46
+   ],
+   "label": "3P ATS"
+  },
+  {
+   "id": "D5",
+   "type": "METER",
+   "type_plain": "panel meter",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.64,
+   "box": [
+    1418,
+    287,
+    29,
+    30
+   ],
+   "label": "CT 1600/5A"
+  },
+  {
+   "id": "D6",
+   "type": "CT",
+   "type_plain": "current transformer",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.11,
+   "box": [
+    1368,
+    290,
+    24,
+    24
+   ],
+   "label": ""
+  },
+  {
+   "id": "D7",
+   "type": "BUS_SECTION",
+   "type_plain": "bus-section switch",
+   "rating": 2500,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.56,
+   "box": [
+    778,
+    395,
+    45,
+    22
+   ],
+   "label": "BS-1 2500 A"
+  },
+  {
+   "id": "D8",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.18,
+   "box": [
+    585,
+    499,
+    21,
+    39
+   ],
+   "label": ""
+  },
+  {
+   "id": "D9",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "1",
+   "conf": 0.34,
+   "box": [
+    1186,
+    499,
+    20,
+    38
+   ],
+   "label": "1 | MCCB400A3P"
+  },
+  {
+   "id": "D10",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "MCCB 630A3P",
+   "conf": 0.2,
+   "box": [
+    185,
+    519,
+    21,
+    39
+   ],
+   "label": "MCCB 630A3P | MCC-1/chillers"
+  },
+  {
+   "id": "D11",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "MCCB 800A3P",
+   "conf": 0.47,
+   "box": [
+    386,
+    549,
+    19,
+    38
+   ],
+   "label": "MCCB 800A3P"
+  },
+  {
+   "id": "D12",
+   "type": "CAPACITOR",
+   "type_plain": "power-factor correction bank",
+   "rating": null,
+   "unit": "kVAr",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.57,
+   "box": [
+    1185,
+    550,
+    30,
+    12
+   ],
+   "label": "MCCB400A3P | PFC 150 kVAr"
+  },
+  {
+   "id": "D13",
+   "type": "CONTACTOR",
+   "type_plain": "motor starter",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.68,
+   "box": [
+    586,
+    551,
+    20,
+    38
+   ],
+   "label": "M | MCCB 100 A3P"
+  },
+  {
+   "id": "D14",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "MCC-4lchillers",
+   "conf": 0.4,
+   "box": [
+    985,
+    579,
+    21,
+    38
+   ],
+   "label": "MCC-4lchillers"
+  },
+  {
+   "id": "D15",
+   "type": "ISOLATOR",
+   "type_plain": "isolator",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "ISOL630 A3P",
+   "conf": 0.13,
+   "box": [
+    1385,
+    580,
+    22,
+    38
+   ],
+   "label": "ISOL630 A3P | lighting"
+  },
+  {
+   "id": "D16",
+   "type": "MOTOR",
+   "type_plain": "motor",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.62,
+   "box": [
+    581,
+    600,
+    38,
+    37
+   ],
+   "label": "MCCB 100 A3P | DOL 22 kW"
+  }
+ ],
+ "board": {
+  "fault_kA": 50,
+  "form": "Form 3b",
+  "ip": "IP42",
+  "poles_default": 3,
+  "busbar_rating": 2500,
+  "sections": 2,
+  "ways": 0
+ },
+ "bom": {
+  "lines": [
+   {
+    "line": 1,
+    "part": "ACB-2500-3P-N",
+    "description": "Air circuit breaker 2500 A 3-pole, 50 kA band N, withdrawable, electronic trip",
+    "qty": 1,
+    "unit_gbp": 5600.0,
+    "total_gbp": 5600.0,
+    "conf": 0.63,
+    "evidence": [
+     "S3",
+     "S3t1",
+     "S3t2"
+    ],
+    "rule": "R-ACB-SELECT"
+   },
+   {
+    "line": 2,
+    "part": "FU-KIT-ACB",
+    "description": "Incomer functional unit: compartment, shutters, terminals, controls",
+    "qty": 1,
+    "unit_gbp": 1400,
+    "total_gbp": 1400,
+    "conf": 0.63,
+    "evidence": [
+     "S3",
+     "S3t1",
+     "S3t2"
+    ],
+    "rule": "R-FU-KIT"
+   },
+   {
+    "line": 3,
+    "part": "METER-CT 1600/5A",
+    "description": "Panel meter (CT 1600/5A)",
+    "qty": 1,
+    "unit_gbp": 260,
+    "total_gbp": 260,
+    "conf": 0.64,
+    "evidence": [
+     "S5",
+     "S5t1"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 4,
+    "part": "CT-SET",
+    "description": "Current transformers, set of three, class 1",
+    "qty": 1,
+    "unit_gbp": 280,
+    "total_gbp": 280,
+    "conf": 0.11,
+    "evidence": [
+     "S6"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 5,
+    "part": "BSS-2500-3P",
+    "description": "Bus-section switch 2500 A 3-pole, 50 kA",
+    "qty": 1,
+    "unit_gbp": 4100.0,
+    "total_gbp": 4100.0,
+    "conf": 0.56,
+    "evidence": [
+     "S7",
+     "S7t2"
+    ],
+    "rule": "R-BUS-SECTION"
+   },
+   {
+    "line": 6,
+    "part": "FU-KIT-BS",
+    "description": "Bus-section functional unit and interlocking",
+    "qty": 1,
+    "unit_gbp": 900,
+    "total_gbp": 900,
+    "conf": 0.56,
+    "evidence": [
+     "S7",
+     "S7t2"
+    ],
+    "rule": "R-FU-KIT"
+   },
+   {
+    "line": 7,
+    "part": "BUSBAR-CU-2500",
+    "description": "Copper busbar set 2500 A (4-bar), 2 sections, about 91 kg",
+    "qty": 1,
+    "unit_gbp": 1048.8,
+    "total_gbp": 1048.8,
+    "conf": 0.9,
+    "evidence": [
+     "T11",
+     "T11"
+    ],
+    "rule": "R-BUSBAR-SIZE"
+   },
+   {
+    "line": 8,
+    "part": "ENC-SECTION",
+    "description": "Enclosure section, Form 3b, IP42, RAL 7035",
+    "qty": 2,
+    "unit_gbp": 2730.0,
+    "total_gbp": 5460.0,
+    "conf": 0.95,
+    "evidence": [
+     "T28",
+     "T28",
+     "T30",
+     "T32"
+    ],
+    "rule": "R-ENCLOSURE"
+   },
+   {
+    "line": 9,
+    "part": "LAB-ASSY",
+    "description": "Assembly, wiring and routine verification: 130 hours",
+    "qty": 1,
+    "unit_gbp": 6240,
+    "total_gbp": 6240,
+    "conf": 0.9,
+    "evidence": [],
+    "rule": "R-LABOUR"
+   },
+   {
+    "line": 10,
+    "part": "DOC",
+    "description": "Documentation, as-built drawings, test certificates",
+    "qty": 1,
+    "unit_gbp": 600,
+    "total_gbp": 600,
+    "conf": 1.0,
+    "evidence": [],
+    "rule": "R-DOC"
+   },
+   {
+    "line": 11,
+    "part": "CERT",
+    "description": "Design-verification certificates per specification",
+    "qty": 1,
+    "unit_gbp": 0.0,
+    "total_gbp": 0.0,
+    "conf": 1.0,
+    "evidence": [
+     "7.7"
+    ],
+    "rule": "R-SPEC-CERT"
+   },
+   {
+    "line": 12,
+    "part": "DEL",
+    "description": "Delivery to site, crane and offload excluded",
+    "qty": 1,
+    "unit_gbp": 850,
+    "total_gbp": 850,
+    "conf": 1.0,
+    "evidence": [],
+    "rule": "R-DELIVERY"
+   }
+  ],
+  "subtotal_gbp": 26738.8,
+  "margin_gbp": 4010.82,
+  "total_gbp": 30749.62
+ },
+ "issues": [
+  {
+   "kind": "missing",
+   "what": "D4 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S4",
+    "S4t1"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D8 (MCCB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S8"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D9 (MCCB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S9",
+    "S9t1",
+    "S9t2"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D10 (MCCB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S10",
+    "S10t1",
+    "S10t2"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D11 (MCCB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S11",
+    "S11t1"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D12 (CAPACITOR): kVAr not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S12",
+    "S12t1",
+    "S12t2"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D13 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S13",
+    "S13t1",
+    "S13t2"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D14 (MCCB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S14",
+    "S14t3"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D15 (ISOLATOR): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S15",
+    "S15t1",
+    "S15t2"
+   ]
+  },
+  {
+   "kind": "low_confidence",
+   "what": "devices read with low confidence: D1, D4, D6, D7, D8, D9, D10, D11, D12, D14, D15",
+   "action": "check against the drawing",
+   "evidence": [
+    "D1",
+    "D4",
+    "D6",
+    "D7",
+    "D8",
+    "D9",
+    "D10",
+    "D11",
+    "D12",
+    "D14",
+    "D15"
+   ]
+  }
+ ],
+ "conflicts": [],
+ "spec": {
+  "clauses": [
+   {
+    "id": "7.1",
+    "text": "The switchboard shall be designed, manufactured and verified in accordance with BS EN 61439-2."
+   },
+   {
+    "id": "7.2",
+    "text": "Internal separation shall be Form 3b as defined in the UK National Annex."
+   },
+   {
+    "id": "7.3",
+    "text": "The assembly shall withstand a prospective short-circuit current of 50 kA for 1 second at the main busbars."
+   },
+   {
+    "id": "7.4",
+    "text": "Outgoing moulded-case circuit breakers shall be 3-pole with adjustable thermal-magnetic or electronic trip units."
+   },
+   {
+    "id": "7.5",
+    "text": "Degree of protection shall be not less than IP42 with doors closed."
+   },
+   {
+    "id": "7.6",
+    "text": "Main busbars shall be hard-drawn high-conductivity copper, tin-plated at joints."
+   },
+   {
+    "id": "7.7",
+    "text": "The contractor shall provide type-test or design-verification certificates prior to manufacture."
+   },
+   {
+    "id": "7.8",
+    "text": "Enclosure finish RAL 7035, front access only."
+   }
+  ]
+ },
+ "score": {
+  "symbols_total": 17,
+  "symbols_found": 16,
+  "symbols_reported": 16,
+  "precision": 1.0,
+  "recall": 0.941,
+  "per_type": [
+   {
+    "type": "ACB",
+    "total": 2,
+    "found": 2,
+    "reported": 2
+   },
+   {
+    "type": "MCCB",
+    "total": 5,
+    "found": 5,
+    "reported": 5
+   },
+   {
+    "type": "BUS_SECTION",
+    "total": 1,
+    "found": 1,
+    "reported": 1
+   },
+   {
+    "type": "ISOLATOR",
+    "total": 1,
+    "found": 1,
+    "reported": 1
+   },
+   {
+    "type": "CONTACTOR",
+    "total": 1,
+    "found": 1,
+    "reported": 1
+   },
+   {
+    "type": "TRANSFORMER",
+    "total": 1,
+    "found": 1,
+    "reported": 1
+   },
+   {
+    "type": "GENERATOR",
+    "total": 1,
+    "found": 1,
+    "reported": 1
+   },
+   {
+    "type": "MOTOR",
+    "total": 1,
+    "found": 1,
+    "reported": 1
+   },
+   {
+    "type": "CT",
+    "total": 1,
+    "found": 1,
+    "reported": 1
+   },
+   {
+    "type": "METER",
+    "total": 1,
+    "found": 1,
+    "reported": 1
+   },
+   {
+    "type": "CAPACITOR",
+    "total": 1,
+    "found": 1,
+    "reported": 1
+   },
+   {
+    "type": "EARTH",
+    "total": 1,
+    "found": 0,
+    "reported": 0
+   }
+  ],
+  "reference_total_gbp": 74492.4,
+  "price_error": 0.5872,
+  "rating_accuracy": 0.25,
+  "notes_accuracy": 1.0
+ },
+ "timing": {
+  "total": 14.05,
+  "ocr": 10.11,
+  "detector": 3.61
+ },
+ "reader": "trained",
+ "engine": "rapidocr",
+ "model": {
+  "weights": "weights/rtdetr_r18_full",
+  "threshold": 0.11
+ },
+ "files": {
+  "quotation_md": "quotation.md",
+  "bom_csv": "bom.csv",
+  "review_html": "review.html",
+  "extraction_json": "extraction.json"
+ }
+}
