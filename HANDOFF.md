@@ -341,6 +341,13 @@ shorter), val 40, test 30 + 30, test_unseen 60 (Courier New 25, Tahoma 19, Times
 training (Tahoma and Verdana, Times New Roman and Georgia, Courier New and Menlo or Monaco), so the unseen score is kinder than a truly
 new font would be; rare classes are thin in the unseen splits (24 relay boxes in test_unseen, 6 in val_unseen).
 
+**Run 1 result, 18 Oct 15:23 (`weights/rtdetr_r18_plain`, plain control, full 10-pass schedule, best pass 10 by pooled F1 0.888,
+steady 0.876 to 0.888 over passes 6 to 10, threshold 0.06).** Per tile on the 60-sheet test_unseen against r18_full: mAP@0.5 0.913 /
+0.922, mean P 0.931 / 0.932, mean R 0.844 / 0.880, micro recall 0.874 / 0.863; test_scan mAP 0.924 / 0.840; test_clean 0.907 / 0.939.
+Same 3 classes pass the rule. Keeps the bus-section (0.74 / 0.75), better on every breaker type (ACB 0.99 / 0.88, MCCB 0.91 / 0.82) and on
+scans; weaker on isolator (0.67 / 0.85), contactor (0.82 / 0.95), motor (0.78 / 0.86), earth (0.57 / 0.71). So r18_rare's bus-section loss
+belonged to its chosen pass, not to the schedule or the sampling share. Drawing-level check of r18_plain running on cpu (reader engineer).
+
 ## 8. Metrics (as implemented in `evaluate.py`; keep the names)
 
 symbol precision and recall (IoU >= 0.3, same type); rating accuracy, poles accuracy, kA accuracy over matched devices; notes accuracy over
