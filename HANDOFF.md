@@ -347,6 +347,16 @@ steady 0.876 to 0.888 over passes 6 to 10, threshold 0.06).** Per tile on the 60
 Same 3 classes pass the rule. Keeps the bus-section (0.74 / 0.75), better on every breaker type (ACB 0.99 / 0.88, MCCB 0.91 / 0.82) and on
 scans; weaker on isolator (0.67 / 0.85), contactor (0.82 / 0.95), motor (0.78 / 0.86), earth (0.57 / 0.71). So r18_rare's bus-section loss
 belonged to its chosen pass, not to the schedule or the sampling share. Drawing-level check of r18_plain running on cpu (reader engineer).
+Drawing-level verdict on r18_plain (18:40): keep r18_full; r18_plain's per-tile threshold 0.06 lets 35 to 45 ghost capacitors per set
+through on blank paper (scores 0.06 to 0.08), so clean-sheet precision falls to 0.89; it is better on scans (+2 to 3 recall) and ACB typing.
+Method change (PROBLEMS 10b): the operating threshold is chosen at drawing level on val and val_unseen sheets by a detector-plus-merge
+sweep and stored as score_threshold_drawing; being built by the reader engineer for the morning's comparison.
+
+**Night 2 done, 19:01 (`weights/night2_summary.md`).** Per tile on data/coco test_unseen: r18_full 0.922 (3 classes pass), r18_rare pass 4
+0.919 (4, loses bus-sections), r18_plain pass 10 0.913 (3), r18_fonts pass 4 0.865 (2; relay recall 0.24, capacitor 0.56; on its own
+test_unseen 0.863 with relay 0.08 at pass 10; its pooled F1 declines after pass 4), so the wider font set did not improve generalisation
+as measured per tile and the fonts engineer is checking the regenerated data for a fault (relays first). Night2b started 19:02: plain+EMA,
+then fonts+EMA, six-run summary about 03:00.
 
 ## 8. Metrics (as implemented in `evaluate.py`; keep the names)
 
