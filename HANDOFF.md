@@ -295,6 +295,15 @@ class frequency. All ten passes ran (294 min); passes 1 to 7 were slowed by the 
 the generator and a retrain (a dataset change, about 4 h); per-class thresholds chosen on val and val_unseen; the product decision at
 drawing level, which is being measured now by the reader engineer.
 
+**Drawing-level verdict on B, 18 Oct 10:50 (`eval/RESULTS.md`, r18_rare sections):** keep r18_full as the product model. r18_rare is more
+precise (unseen clean 0.964 against 0.942, 10 types passing against 8) but no longer detects the box-style bus-section (BUS_SECTION recall
+0.714 to 0.333 on unseen clean; the IEC style is still found), so quotes lose the bus-section lines: price error is worse on all six columns
+(unseen clean 0.232 to 0.279, baseline clean 0.208 to 0.240) and BoM recall lower on four. Cause: repeat-factor sampling rebalances by
+class, and the in-busbar breaker is a rare appearance of the most common class, so it lost weight; r18_full's higher ACB count was partly
+those mistyped bus-sections. r18_rare's other gains are real (boards no longer misread on Courier New text, relay precision 1.0, CT and
+meter complete). Proposed next runs: sampling with the in-busbar breaker as its own group; and more fonts in the generator (the unseen
+font explains the remaining misses on symbols with a glyph inside), with the drawing-level check as the judge.
+
 ## 8. Metrics (as implemented in `evaluate.py`; keep the names)
 
 symbol precision and recall (IoU >= 0.3, same type); rating accuracy, poles accuracy, kA accuracy over matched devices; notes accuracy over
