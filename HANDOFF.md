@@ -304,6 +304,15 @@ those mistyped bus-sections. r18_rare's other gains are real (boards no longer m
 meter complete). Proposed next runs: sampling with the in-busbar breaker as its own group; and more fonts in the generator (the unseen
 font explains the remaining misses on symbols with a glyph inside), with the drawing-level check as the judge.
 
+**18 Oct 11:30, Adnan:** all commits pushed to GitHub (master, private); weights stay on this Mac until no more training is needed, then the
+final model goes to his Hugging Face account and to a GitHub release. Night 2 queue (`scripts/train_night2.sh`): run 1 `rtdetr_r18_grouped`
+(repeat-factor sampling grouped by device_type, so the in-busbar breaker keeps its weight; data/coco), then run 2 `rtdetr_r18_fonts`
+(generator font set "wide", about 15 fonts, new pool seeds 20000 to 20899 at data/pool_fonts, export data/coco_fonts with Courier New and
+Tahoma plus labels below held out; no rare sampling, so the two effects are measured apart). Existing seeds must reproduce byte-identically
+under the default "classic" font set. Morning: both scored at drawing level against r18_full by the reader engineer; the best becomes the
+product model. Step 6 starts after that, with Adnan's go. Errors in any run are handled by diagnosing the root cause, fixing, testing and
+recording; no run is restarted more than once without a report.
+
 ## 8. Metrics (as implemented in `evaluate.py`; keep the names)
 
 symbol precision and recall (IoU >= 0.3, same type); rating accuracy, poles accuracy, kA accuracy over matched devices; notes accuracy over
