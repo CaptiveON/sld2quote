@@ -19,7 +19,7 @@ const KIND = {missing: 'not read', conflict: 'disagreement', low_confidence: 'lo
 const STAGES = [['text', 'Reading the words on the page', 'Every label, rating and note becomes text with a box.'], ['symbols', 'Finding the symbols', 'The detector reads the page in tiles and keeps one box per device.'],
   ['labels', 'Pairing labels with symbols', 'Each symbol takes the nearest label: type, rating, poles, fault rating.'], ['spec', 'Checking the specification', 'Each clause is compared with the drawing; a disagreement becomes a question.'],
   ['price', 'Choosing parts and pricing', 'Fixed rules pick a part for every device and add busbars, enclosure and labour.']];
-const S = {mode: 'live', health: 'asleep', step: 'choose', samples: [], filter: 'all', result: null, key: null, running: null, retry: null, model: '', engine: ''};
+const S = {mode: 'live', health: 'asleep', step: 'choose', samples: [], filter: 'all', result: null, key: null, running: null, retry: null, pending: null, model: '', engine: ''};
 
 // ---------------------------------------------------------------- data access
 function loadMock() { return new Promise((ok, no) => { const s = document.createElement('script'); s.src = 'mock.js'; s.onload = ok; s.onerror = no; document.head.appendChild(s); }); }
@@ -36,7 +36,7 @@ async function fetchRetry(url, init, onBusy, delays) {  // the Response; a busy 
 }
 function busyPill(secs) {  // the pill while a data request waits for the busy instance; secs 0 restores the pill's own state
   if (!secs) { if (S.busy) { S.busy = false; setPill(S.health); } return; }
-  const p = $('#pill'); S.busy = true; clearInterval(countdown); p.className = 'pill warn'; p.textContent = `Server busy with another visitor's run; retrying in ${secs} s`; p.title = 'The server refused the request while its only instance was reading another drawing';
+  const p = $('#pill'); S.busy = true; clearInterval(countdown); p.className = 'pill warn'; say(`Server busy with another visitor's run; retrying in ${secs} s`); p.title = 'The server refused the request while its only instance was reading another drawing';
 }
 async function getJson(url) { const r = await fetchRetry(url, undefined, busyPill); busyPill(0); if (!r.ok) { const e = new Error('HTTP ' + r.status); e.status = r.status; throw e; } return r.json(); }
 function fileUrl(dir, u) { return !u ? u : dir ? dir + String(u).split('/').pop() : String(u).startsWith('/') ? API + u : u; }
@@ -90,14 +90,15 @@ function runError(status, detail) {
 
 // ---------------------------------------------------------------- header pill and waking
 let countdown = null;
+function say(t) { $('#pill').textContent = t; if (S.pending) S.pending.note.textContent = t; }  // the pill's words, mirrored beside a button whose click is waiting on the server
 function setPill(state, extra) {
   const p = $('#pill'); clearInterval(countdown); S.health = state;
   const text = {loading: ['Loading', ''], asleep: ['Server asleep', 'wakes in about 20 seconds when you try a drawing'], waking: ['Waking the server, about 20 s', ''],
     ready: ['Ready', 'model ' + S.model + ', text engine ' + S.engine], static: ['Samples only', 'no server here: the precomputed samples and scorecards'], fault: ['Live runs unavailable', 'the server could not load its models; the samples still work']}[state];
-  S.busy = false; p.className = 'pill ' + ({ready: 'ok', waking: 'warn', fault: 'bad'}[state] || ''); p.textContent = text[0]; p.title = extra || text[1];
-  if (state === 'waking') { let n = 20; countdown = setInterval(() => { n -= 1; p.textContent = n > 0 ? `Waking the server, about ${n} s` : 'Still waking the server'; }, 1000); }
+  S.busy = false; p.className = 'pill ' + ({ready: 'ok', waking: 'warn', fault: 'bad'}[state] || ''); say(text[0]); p.title = extra || text[1];
+  if (state === 'waking') { let n = 20; countdown = setInterval(() => { n -= 1; say(n > 0 ? `Waking the server, about ${n} s` : 'Still waking the server'); }, 1000); }
   const nolive = S.mode !== 'live' || state === 'fault';
-  $('#nolive').hidden = !nolive; $$('#tab-generate, #tab-upload').forEach(t => { t.hidden = nolive; });
+  $('#nolive').hidden = !nolive; $('#try').classList.toggle('nolive', nolive); $$('#tab-generate, #tab-upload').forEach(t => { t.hidden = nolive; });
   if (state === 'fault') $('#nolive span').textContent = 'The server could not load its models, so live runs are unavailable for now; the samples and scorecards still work.';
 }
 let waking = null;
@@ -108,13 +109,28 @@ function warm() {  // one health call wakes the server; callers never wait for i
     if (r.ok && h.warm) setPill('ready'); else if (r.status === 429) { setPill('asleep'); waking = null; } else setPill('fault'); }).catch(() => { setPill('asleep'); waking = null; });
   return waking;
 }
+function whenReady(btn, start) {  // a live action: at once on a ready server, else after the one health call, with the pill's countdown mirrored beside the button meanwhile; the latest click wins
+  if (S.health === 'ready') return start();
+  if (S.pending) S.pending.off();
+  const note = document.createElement('span'); note.className = 'wake small'; note.setAttribute('aria-hidden', 'true');  // the pill is the live region; this is its visual echo
+  const me = S.pending = {note, off() { note.remove(); btn.disabled = false; if (S.pending === me) S.pending = null; }};
+  btn.disabled = true; btn.after(note); warm(); note.textContent = $('#pill').textContent;
+  (waking || Promise.resolve()).then(() => { if (S.pending !== me) return; me.off(); if (S.health !== 'fault') start(); });
+}
 
 // ---------------------------------------------------------------- steps, tabs, history
+const FLOW = [['choose', 'Choose', 'a sample, a new drawing or your own'], ['run', 'Run', 'the five stages, live'], ['results', 'Results', 'the drawing, the parts, the questions']];
+function stepperHtml(step) {  // a progress indicator, not a toolbar: a button only for a step there is something to go back to; the rest are plain
+  const st = {choose: step === 'choose' ? 'current' : 'done', run: step === 'run' ? 'current' : S.running ? 'live' : step === 'results' ? (S.key && S.key.sample ? 'skipped' : 'done') : 'todo', results: step === 'results' ? 'current' : S.result ? 'done' : 'todo'};
+  const back = {choose: step !== 'choose', run: st.run === 'live', results: st.results === 'done'};
+  const words = {run: {todo: 'starts when you run a drawing below', live: 'running now; open it to watch', skipped: 'skipped: this result was precomputed'}};
+  return FLOW.map(([k, name, what], i) => { const s = st[k], inner = `<span class="num">${s === 'done' ? icon('check') : i + 1}</span><span><b>${name}</b><small>${(words[k] || {})[s] || what}</small></span>`;
+    return `<li class="${s}"${s === 'current' ? ' aria-current="step"' : ''}>${back[k] ? `<button type="button" class="step" data-step="${k}">${inner}</button>` : `<span class="step">${inner}</span>`}</li>`; }).join('');
+}
 function showStep(step, push) {
   S.step = step;
   ['choose', 'run', 'results'].forEach(s => { $('#step-' + s).hidden = s !== step; });
-  $$('.stepper button').forEach(b => { const s = b.dataset.step; b.setAttribute('aria-current', s === step ? 'step' : 'false');
-    b.disabled = s === 'run' ? !S.running && step !== 'run' : s === 'results' ? !S.result : false; b.classList.toggle('done', (s === 'choose' && step !== 'choose') || (s === 'run' && step === 'results' && !!S.result)); });
+  $('.stepper').innerHTML = stepperHtml(step);
   if (push) syncUrl(true);
   if (step === 'results') $('#rtitle').focus({preventScroll: true});
   if (step !== 'choose') $('.stepper').scrollIntoView({block: 'start'});  // the stepper, so the highlighted step and the title sit under the header, never beneath it
@@ -129,8 +145,7 @@ async function applyUrl() {  // deep links: ?sample=id, ?run=id, &step=choose|re
   if (sample || (run && S.mode === 'live')) {
     try { if (!S.key || (sample ? S.key.sample !== sample : S.key.run !== run)) { S.result = await (sample ? loadSample(sample) : loadRun(run)); S.key = sample ? {sample} : {run}; render(S.result); } }
     catch (e) { S.result = null; S.key = null; showStep('choose'); showNotice('That drawing could not be loaded; pick one from the gallery.'); return; }
-    $$('#gallery .sample').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.id === sample)));
-    showStep(step === 'choose' ? 'choose' : 'results'); return;
+    markCard(sample); showStep(step === 'choose' ? 'choose' : 'results'); return;
   }
   showStep('choose');
 }
@@ -152,15 +167,24 @@ function gallery() {
   const counts = {all: S.samples.length}; S.samples.forEach(s => { const k = kindOf(s); counts[k] = (counts[k] || 0) + 1; });
   $('#chips').innerHTML = Object.keys(KINDS).filter(k => counts[k]).map(k => `<button type="button" class="chip" data-k="${k}" aria-pressed="${String(k === S.filter)}">${KINDS[k]} <span class="mono">${counts[k]}</span></button>`).join('');
   const list = S.samples.filter(s => S.filter === 'all' || kindOf(s) === S.filter), dir = S.mode === 'static' ? id => 'samples/' + id + '/' : () => '';
-  const label = {clean: 'clean copy', scan: 'scan-like copy', unseen: 'unseen style', real: 'real drawing'};
-  $('#gallery').innerHTML = list.map(s => { const k = kindOf(s), sc = s.score, meta = [s.devices != null && s.devices + ' devices', s.total_gbp != null && gbp(s.total_gbp)].filter(Boolean).join(' · ');
-    const line = sc ? `found ${pct(sc.recall)} of symbols, price within ${pct(sc.price_error)}` : s.has_answer_key ? '' : 'not scored: no answer key';
-    return `<button type="button" class="sample" data-id="${esc(s.id)}" aria-pressed="${String(!!(S.key && S.key.sample === s.id))}"><img class="thumb" src="${esc(fileUrl(dir(s.id), s.thumb))}" width="320" height="200" loading="lazy" alt="">
-      <span class="body"><span class="t">${esc(s.title)}</span><span class="row"><span class="tag ${k === 'real' ? 'warn' : ''}">${label[k]}</span>${s.has_answer_key ? '<span class="tag ok">answer key</span>' : ''}</span>${meta ? `<span class="m">${esc(meta)}</span>` : ''}${line ? `<span class="m">${esc(line)}</span>` : ''}</span></button>`; }).join('') || `<p class="empty">${S.busyStart ? 'The server is busy with another visitor\'s run; reload the page in a minute to see the samples.' : 'No samples of that kind.'}</p>`;
+  $('#gallery').innerHTML = list.map(s => cardHtml(s, dir(s.id))).join('') || `<p class="empty">${S.busyStart ? 'The server is busy with another visitor\'s run; reload the page in a minute to see the samples.' : 'No samples of that kind.'}</p>`;
   $('#gallery').setAttribute('aria-busy', 'false');
 }
+const LABEL = {clean: 'clean copy', scan: 'scan-like copy', unseen: 'unseen style', real: 'real drawing'};
+function cardHtml(s, dir) {  // one gallery card: the thumbnail and the facts, then the two actions, a live run of the drawing (primary) and the saved result
+  const k = kindOf(s), sc = s.score, id = esc(s.id), meta = [s.devices != null && s.devices + ' devices', s.total_gbp != null && gbp(s.total_gbp)].filter(Boolean).join(' · ');
+  const line = sc ? `found ${pct(sc.recall)} of symbols, price within ${pct(sc.price_error)}` : s.has_answer_key ? '' : 'not scored: no answer key';
+  return `<div class="sample" data-id="${id}" aria-current="${String(!!(S.key && S.key.sample === s.id))}"><img class="thumb" src="${esc(fileUrl(dir, s.thumb))}" width="320" height="200" loading="lazy" alt="">
+    <div class="body"><span class="t" id="t-${id}">${esc(s.title)}</span><span class="row"><span class="tag ${k === 'real' ? 'warn' : ''}">${LABEL[k]}</span>${s.has_answer_key ? '<span class="tag ok">answer key</span>' : ''}</span>${meta ? `<span class="m">${esc(meta)}</span>` : ''}${line ? `<span class="m">${esc(line)}</span>` : ''}
+    <div class="acts"><button type="button" class="btn primary live" data-run="${id}" aria-describedby="t-${id}">${icon('play')} Run it live</button><button type="button" class="btn" data-open="${id}" aria-describedby="t-${id}">Result, precomputed</button></div></div></div>`;
+}
+function markCard(id) { $$('#gallery .sample').forEach(c => c.setAttribute('aria-current', String(c.dataset.id === id))); }
+function runSample(id, btn) {  // the sample's stored drawing through the live pipeline: the same stream as generate and upload, scored when the sample carries an answer key
+  const s = S.samples.find(x => x.id === id) || {}; markCard(id);
+  whenReady(btn, () => startRun('/api/samples/' + encodeURIComponent(id) + '/run', {method: 'POST'}, s.title || id));
+}
 async function openSample(id, push) {
-  $$('#gallery .sample').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.id === id)));
+  markCard(id);
   try { S.result = await loadSample(id); S.key = {sample: id}; render(S.result); showStep('results', push); }
   catch (e) { showNotice('That sample could not be loaded. Try another one.', 'bad'); }
 }
@@ -196,7 +220,7 @@ function generateSubmit(e) {
   e.preventDefault(); const seed = $('#seed').value.trim(), err = $('#seed-err');
   if (!/^\d{1,6}$/.test(seed)) { err.textContent = 'Enter a whole number from 0 to 999999.'; $('#seed').focus(); return; } err.textContent = '';
   const level = $('#gen [name=level]:checked').value, scan = $('#gen [name=scan]:checked').value === '1';
-  warm(); startRun('/api/generate', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({seed: Number(seed), level, scan: scan})}, `Generated drawing, seed ${seed} (${level}, ${scan ? 'scan-like' : 'clean'})`);
+  whenReady($('#gen [type=submit]'), () => startRun('/api/generate', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({seed: Number(seed), level, scan: scan})}, `Generated drawing, seed ${seed} (${level}, ${scan ? 'scan-like' : 'clean'})`));
 }
 let upload = {file: null, ok: false};
 async function checkFile(file) {
@@ -214,7 +238,7 @@ function uploadSubmit(e) {
   if (!upload.file || !upload.ok) { $('#file-err').textContent = $('#file-err').textContent || 'Choose a PNG or JPEG drawing first.'; return; }
   if (new TextEncoder().encode(spec).length > 100 * 1024) { serr.textContent = 'The specification is over 100 kB.'; return; } serr.textContent = '';
   const fd = new FormData(); fd.append('file', upload.file, upload.file.name); if (spec.trim()) fd.append('spec', spec);
-  warm(); startRun('/api/upload', {method: 'POST', body: fd}, upload.file.name);
+  whenReady($('#up [type=submit]'), () => startRun('/api/upload', {method: 'POST', body: fd}, upload.file.name));
 }
 
 // ---------------------------------------------------------------- the results workspace
@@ -231,6 +255,9 @@ function render(r) {
   const f = u => fileUrl(r.dir, u), src = r.source || {}, bom = r.bom || {lines: []}, devices = r.devices || [], issues = r.issues || [], [W, H] = r.size || [1600, 1000], t = r.timing || {}, m = r.model || {};
   const aw = ($('#try > .wrap') || document.body).clientWidth || 600;  // a visible width: the result panels are still hidden while they are built
   $('#rtitle').textContent = src.title || r.id;
+  const live = !!(S.key && S.key.run), kind = $('#rkind');  // which reading this is: the live run just made (or reopened by its link), or the sample's stored one
+  kind.textContent = (live ? 'Live run' : 'Precomputed result') + (t.total != null ? `, ${Number(t.total).toFixed(1)} s` : ''); kind.className = 'tag ' + (live ? 'ok' : '');
+  $('#rerun').hidden = !(S.key && S.key.sample); $('#stored').hidden = !(live && src.kind === 'sample' && src.sample);
   const who = [m.weights && `model ${String(m.weights).split('/').pop()}`, r.engine && `text engine ${ENGINES[r.engine] || r.engine}`].filter(Boolean).join(', ');
   $('#rmeta').textContent = [src.note, t.total != null ? `Read in ${t.total} s (text ${t.ocr} s, symbols ${t.detector} s)` : '', who,
     S.key && S.key.run ? 'This result stays while the server keeps the last 50 runs; copy the link to come back to it' : ''].filter(Boolean).map(x => x.replace(/\.\s*$/, '').replace(/^./, c => c.toUpperCase())).join('. ') + '.';
@@ -383,11 +410,13 @@ async function boot() {
   $('.hero .btn.primary').addEventListener('click', warm);
   tabs($('#step-choose [role=tablist]'));
   showTab = tabs($('#rtabs'));
-  $$('.stepper button').forEach(b => b.addEventListener('click', () => { const s = b.dataset.step; if (s === 'results' && !S.result) return; if (s === 'run' && !S.running) return; showStep(s, true); }));
+  $('.stepper').addEventListener('click', e => { const b = e.target.closest('button[data-step]'); if (b) showStep(b.dataset.step, true); });
+  $('#rerun').addEventListener('click', () => runSample(S.key.sample, $('#rerun')));
+  $('#stored').addEventListener('click', () => openSample(S.result.source.sample, true));
   $('#another').addEventListener('click', () => showStep('choose', true));
   $('#pick').addEventListener('click', () => showStep('choose', true));
   $('#retry').addEventListener('click', () => S.retry && S.retry());
-  $('#gallery').addEventListener('click', e => { const b = e.target.closest('.sample[data-id]'); if (b) openSample(b.dataset.id, true); });
+  $('#gallery').addEventListener('click', e => { const r = e.target.closest('[data-run]'), o = e.target.closest('[data-open]'); if (r) runSample(r.dataset.run, r); else if (o) openSample(o.dataset.open, true); });
   $('#chips').addEventListener('click', e => { const c = e.target.closest('.chip'); if (c) { S.filter = c.dataset.k; gallery(); } });
   $('#seed').value = Math.floor(Math.random() * 10000); $('#random').addEventListener('click', () => { $('#seed').value = Math.floor(Math.random() * 1000000); $('#seed-err').textContent = ''; });
   $('#gen').addEventListener('submit', generateSubmit); $('#up').addEventListener('submit', uploadSubmit);

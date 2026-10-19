@@ -51,7 +51,7 @@ section.block { padding: var(--s6) 0; border-top: 1px solid var(--line-2) }
 .lede { font-size: var(--fs-l); color: var(--ink-2); max-width: 70ch }
 
 /* buttons, inputs, pills */
-.btn { display: inline-flex; align-items: center; gap: var(--s2); padding: 10px var(--s3); font: 600 var(--fs-m)/1.2 var(--sans); color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); cursor: pointer; text-decoration: none; transition: background var(--fast), border-color var(--fast) }
+.btn { display: inline-flex; align-items: center; gap: var(--s2); min-height: 44px; padding: 10px var(--s3); font: 600 var(--fs-m)/1.2 var(--sans); color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); cursor: pointer; text-decoration: none; transition: background var(--fast), border-color var(--fast) }
 .btn:hover { border-color: var(--ink-3) }
 .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent) }
 .btn.primary:hover { filter: brightness(1.08) }
@@ -101,15 +101,21 @@ textarea { min-height: 7em; font-family: var(--mono); font-size: var(--fs-s) }
 .stat .w { display: block; color: var(--ink-3); font-size: var(--fs-s) }
 .honest { display: flex; gap: var(--s2); align-items: flex-start; margin: var(--s4) 0 0; padding: var(--s2) var(--s3); background: var(--surface-2); border-radius: var(--r2); font-size: var(--fs-s); color: var(--ink-2) }
 
-/* stepper and tabs */
+/* stepper and tabs; the stepper is a progress indicator: the current step boxed in the accent, a tick behind it, plain muted text ahead, and a button (box, pointer) only where there is something to go back to */
 .stepper { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s2); list-style: none; padding: 0; margin: var(--s4) 0 }
-.stepper button { width: 100%; display: flex; align-items: center; gap: var(--s2); padding: var(--s2) var(--s3); background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); font: inherit; color: var(--ink-2); cursor: pointer; text-align: left }
-.stepper button .num { width: 26px; height: 26px; border-radius: 50%; display: inline-grid; place-items: center; font: 600 var(--fs-s)/1 var(--mono); background: var(--surface-2); flex: none }
-.stepper button[aria-current=step] { border-color: var(--accent); color: var(--ink); box-shadow: inset 0 0 0 1px var(--accent) }
-.stepper button[aria-current=step] .num { background: var(--accent); color: var(--accent-ink) }
-.stepper button.done .num { background: var(--ok-soft); color: var(--ok) }
-.stepper button:disabled { opacity: .55; cursor: not-allowed }
+.stepper .step { width: 100%; min-height: 44px; display: flex; align-items: center; gap: var(--s2); padding: var(--s2) var(--s3); background: none; border: 1px solid transparent; border-radius: var(--r2); font: inherit; color: var(--ink-2); text-align: left }
+.stepper button.step { background: var(--surface); border-color: var(--line); cursor: pointer; transition: border-color var(--fast) }
+.stepper button.step:hover { border-color: var(--ink-3) }
+.stepper .num { width: 26px; height: 26px; border-radius: 50%; display: inline-grid; place-items: center; font: 600 var(--fs-s)/1 var(--mono); background: var(--surface-2); flex: none }
+.stepper .current .step { background: var(--surface); border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); color: var(--ink) }
+.stepper .current .num { background: var(--accent); color: var(--accent-ink) }
+.stepper .done .num { background: var(--ok-soft); color: var(--ok) }
+.stepper .live .num { background: var(--accent-soft); color: var(--accent) }
+.stepper .todo .step, .stepper .skipped .step { color: var(--ink-3) }
+.stepper .todo .num, .stepper .skipped .num { background: none; border: 1px dashed var(--ink-3) }
 .stepper small { display: block; color: var(--ink-3); font-size: var(--fs-xs) }
+.wake { display: inline-block; margin-left: var(--s2); font-weight: 600; color: var(--warn) }
+#try.nolive .live { display: none }
 [role=tablist] { display: flex; gap: var(--s1); border-bottom: 1px solid var(--line); margin-bottom: var(--s3); overflow-x: auto; scrollbar-width: none }
 [role=tab] { padding: 10px var(--s3); border: 0; border-bottom: 2px solid transparent; margin-bottom: -1px; background: none; font: 600 var(--fs-s)/1.2 var(--sans); color: var(--ink-2); cursor: pointer; white-space: nowrap }
 [role=tab][aria-selected=true] { color: var(--ink); border-color: var(--accent) }
@@ -121,11 +127,11 @@ textarea { min-height: 7em; font-family: var(--mono); font-size: var(--fs-s) }
 .chip { padding: 4px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); font: 600 var(--fs-s)/1.4 var(--sans); color: var(--ink-2); cursor: pointer }
 .chip[aria-pressed=true] { background: var(--ink); color: var(--bg); border-color: var(--ink) }
 .gallery { display: grid; gap: var(--s3); grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)) }
-.sample { display: block; width: 100%; text-align: left; padding: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r3); overflow: hidden; cursor: pointer; font: inherit; color: inherit; transition: border-color var(--fast), box-shadow var(--fast) }
-.sample:hover { border-color: var(--ink-3); box-shadow: var(--shadow) }
-.sample[aria-pressed=true] { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent) }
+.sample { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r3); overflow: hidden }
+.sample[aria-current=true] { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent) }
 .sample .thumb { display: block; width: 100%; aspect-ratio: 8 / 5; object-fit: contain; background: #fff; border-bottom: 1px solid var(--line-2) }
-.sample .body { padding: var(--s2) var(--s3) var(--s3) }
+.sample .body { display: flex; flex-direction: column; flex: 1; padding: var(--s2) var(--s3) var(--s3) }
+.sample .acts { display: grid; gap: var(--s2); margin-top: auto; padding-top: var(--s3) } .sample .acts .btn { justify-content: center } .sample .acts .wake { margin: 0; text-align: center }
 .sample .t { display: block; font-weight: 600; font-size: var(--fs-s); margin-bottom: var(--s1) }
 .sample .m { display: block; color: var(--ink-3); font-size: var(--fs-xs); font-family: var(--mono); margin-top: var(--s1) }
 .drop { border: 2px dashed var(--line); border-radius: var(--r3); padding: var(--s4); text-align: center; color: var(--ink-2); transition: border-color var(--fast), background var(--fast) }
@@ -226,7 +232,7 @@ footer { padding: var(--s5) 0 var(--s6); color: var(--ink-3); font-size: var(--f
   .hero { padding: var(--s5) 0 var(--s4) } h1 { font-size: var(--fs-2xl) } h2 { font-size: var(--fs-xl) }
   .bar { height: auto; flex-wrap: wrap; padding: var(--s2) 0 }
   .nav { order: 3; width: 100%; margin-left: 0; flex-wrap: wrap; overflow: visible } #pill { margin-left: auto }
-  .stepper { grid-template-columns: 1fr } .stepper small { display: none }
+  .stepper { grid-template-columns: 1fr }
   .stage { grid-template-columns: 28px 1fr } .stage .secs { grid-column: 2 }
   .stagearea { height: 60vh }
   .meter { width: 72px }

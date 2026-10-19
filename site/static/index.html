@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="icon" href="data:,">
 <link rel="stylesheet" href="style.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/15.0.12/marked.min.js" defer></script>
 <script src="app.js" defer></script>
@@ -60,9 +61,9 @@
     <h2 id="h-try">One drawing, three steps</h2>
     <p class="lede">Choose a drawing, watch the server read it stage by stage, then check every number against the sheet.</p>
     <ol class="stepper" aria-label="Progress through the demo">
-      <li><button type="button" data-step="choose"><span class="num">1</span><span><b>Choose</b><small>a sample, a new drawing or your own</small></span></button></li>
-      <li><button type="button" data-step="run" disabled><span class="num">2</span><span><b>Run</b><small>the five stages, live</small></span></button></li>
-      <li><button type="button" data-step="results" disabled><span class="num">3</span><span><b>Results</b><small>the drawing, the parts, the questions</small></span></button></li>
+      <li class="current" aria-current="step"><span class="step"><span class="num">1</span><span><b>Choose</b><small>a sample, a new drawing or your own</small></span></span></li>
+      <li class="todo"><span class="step"><span class="num">2</span><span><b>Run</b><small>starts when you run a drawing below</small></span></span></li>
+      <li class="todo"><span class="step"><span class="num">3</span><span><b>Results</b><small>the drawing, the parts, the questions</small></span></span></li>
     </ol>
 
     <div id="step-choose">
@@ -74,7 +75,7 @@
       <p id="nolive" class="notice" hidden><svg class="icon"><use href="#i-info"/></svg><span>Live runs need the server, so this copy shows the precomputed samples only; the repository runs the server in one command.</span></p>
 
       <div id="panel-samples" role="tabpanel" aria-labelledby="tab-samples">
-        <p class="muted small">Every sample was read by the same pipeline and saved with its files. Synthetic drawings carry an answer key and are scored; the real public-domain drawings have none, so they show what the reader does on a style it never saw.</p>
+        <p class="muted small">Every sample was read by the same pipeline and saved with its files: Run it live sends the drawing through the server again, stage by stage; Result, precomputed opens the saved reading at once. Synthetic drawings carry an answer key and are scored; the real public-domain drawings have none, so they show what the reader does on a style it never saw.</p>
         <div class="chips" id="chips" role="group" aria-label="Filter the samples"></div>
         <div class="gallery" id="gallery" aria-busy="true">
           <div class="sample"><div class="thumb skeleton"></div><div class="body"><span class="t skeleton">&nbsp;</span><span class="m skeleton">&nbsp;</span></div></div>
@@ -110,7 +111,7 @@
               </div>
             </div>
             <p class="muted small">The generator draws a new switchboard from the seed and writes its answer key, so the run is scored. Runs on the free server, about 20 to 50 seconds.</p>
-            <button type="submit" class="btn primary"><svg class="icon"><use href="#i-play"/></svg> Generate and read</button>
+            <button type="submit" class="btn primary"><svg class="icon"><use href="#i-play"/></svg> Generate and run</button>
           </div>
         </form>
       </div>
@@ -137,7 +138,7 @@
               <button type="button" class="btn small" id="use-example">Use the example</button>
             </div>
             <p class="muted small">An uploaded drawing has no answer key, so there is no score: check the boxes on the sheet instead. Nothing is kept beyond the last 50 runs. Runs on the free server, about 20 to 50 seconds.</p>
-            <button type="submit" class="btn primary"><svg class="icon"><use href="#i-upload"/></svg> Upload and read</button>
+            <button type="submit" class="btn primary"><svg class="icon"><use href="#i-upload"/></svg> Upload and run</button>
           </div>
         </form>
       </div>
@@ -152,7 +153,7 @@
     </div>
 
     <div id="step-results" hidden>
-      <div class="rhead"><h3 id="rtitle" tabindex="-1"></h3><div class="row"><button type="button" class="btn small" id="copy-link"><svg class="icon"><use href="#i-copy"/></svg> Copy link</button><button type="button" class="btn small" id="another"><svg class="icon"><use href="#i-back"/></svg> Another drawing</button></div></div>
+      <div class="rhead"><div class="row"><h3 id="rtitle" tabindex="-1"></h3><span id="rkind" class="tag"></span></div><div class="row"><button type="button" class="btn live" id="rerun" hidden><svg class="icon"><use href="#i-play"/></svg> Run it live</button><button type="button" class="btn" id="stored" hidden><svg class="icon"><use href="#i-file"/></svg> Result, precomputed</button><button type="button" class="btn" id="copy-link"><svg class="icon"><use href="#i-copy"/></svg> Copy link</button><button type="button" class="btn" id="another"><svg class="icon"><use href="#i-back"/></svg> Another drawing</button></div></div>
       <p class="muted small" id="rmeta"></p>
       <div class="strip" id="strip"></div>
       <div class="viewer">
