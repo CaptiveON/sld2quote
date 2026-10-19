@@ -96,26 +96,23 @@ def build_result(image_path: str, spec_path: str | None = None, out_dir: str | N
     """run the pipeline as cli.run does, write its files plus sheet.png, overlay.png and result.json into out_dir, return the Result;
     crops (the OCR pass around every symbol) None follows the OCR engine (reader.read_sheet); progress(step, seconds, stats), when
     given, is called for each of the five steps with its seconds and what it produced (text: texts; symbols: symbols; labels:
-    linked, devices; spec: clauses, conflicts; price: lines, total_gbp). The reader's own callback only names the step, so its
-    three are timed as they finish and reported together once the extraction is back; spec and price are reported as they finish"""
-    t0 = time.perf_counter(); last, times = [t0], {}
+    linked, devices; spec: clauses, conflicts; price: lines, total_gbp), each as it finishes: the reader's three through its own
+    callback, spec and price here"""
+    t0 = time.perf_counter(); last = [t0]
 
-    def mark(step):
-        now = time.perf_counter(); times[step], last[0] = round(now - last[0], 2), now
-
-    def done(step, **stats):
+    def done(step, stats):
+        now = time.perf_counter(); secs, last[0] = round(now - last[0], 2), now
         if progress:
-            progress(step, times.get(step, 0.0), stats)
+            progress(step, secs, stats)
     out_dir = out_dir or os.path.join("out", os.path.splitext(os.path.basename(image_path))[0])
     os.makedirs(out_dir, exist_ok=True)
-    ex = choose(reader, weights, device, crops)(image_path, progress=mark)
-    done("text", texts=page_texts(ex)); done("symbols", symbols=len(ex["symbols"])); done("labels", linked=linked(ex), devices=len(ex["devices"]))
+    ex = choose(reader, weights, device, crops)(image_path, progress=done)
     t1 = time.perf_counter()
     sp = read_spec(spec_path) if spec_path and os.path.exists(spec_path) else None
     conflicts = cross_check(ex["notes"], sp) if sp else []
-    t2 = time.perf_counter(); mark("spec"); done("spec", clauses=len(sp["clauses"]) if sp else 0, conflicts=len(conflicts))
+    t2 = time.perf_counter(); done("spec", {"clauses": len(sp["clauses"]) if sp else 0, "conflicts": len(conflicts)})
     bom = build_bom(ex, sp, conflicts)
-    t3 = time.perf_counter(); mark("price"); done("price", lines=len(bom["lines"]), total_gbp=bom["total_gbp"])
+    t3 = time.perf_counter(); done("price", {"lines": len(bom["lines"]), "total_gbp": bom["total_gbp"]})
     write_outputs(out_dir, image_path, ex, sp, conflicts, bom, {"version": __version__, "seconds": round(t3 - t0, 1), "reader": ex["reader"]})
     if image_path.lower().endswith(".png"):
         shutil.copyfile(image_path, os.path.join(out_dir, "sheet.png"))

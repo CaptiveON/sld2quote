@@ -4,8 +4,8 @@ live generated sheet scored against its answer key (as JSON and as an NDJSON str
 the first health call and 503 after a load error, the daily cap on live runs (429; samples and scorecards never capped), and the OCR crop pass following the
 engine (on for vision, off for rapidocr) unless overridden, in the reader and through the server's SLD2QUOTE_CROPS, and the chart data
 (eval/charts.json validated by scripts/build_charts.py's own check, served by /api/charts), and a sample rerun live with its stored
-answer key and specification. About 12 s."""
-import importlib.util, json, os, sys, tempfile
+answer key and specification, and the five progress events produced live, each as its stage ends, with its counts. About 12 s."""
+import importlib.util, json, os, sys, tempfile, time
 import pytest
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
@@ -187,3 +187,20 @@ def test_every_static_page_is_served_at_its_directory(client):
         if url != "/":
             r = client.get(url.rstrip("/"), follow_redirects=False)
             assert r.status_code in (301, 307, 308) and r.headers["location"].endswith(url), url
+
+
+def test_the_steps_report_live_as_each_stage_ends(tmp_path, monkeypatch):
+    """the text event is produced before the symbol finder runs, each event with its stage's counts"""
+    from sld2quote.generate import write_sheet
+    from sld2quote.result import build_result
+    stem = write_sheet(str(tmp_path), 4, level="simple"); seen = []; real = reader.find_symbols
+
+    def slow_finder(ink, texts):
+        seen.append(("finder", time.perf_counter(), None)); time.sleep(0.2); return real(ink, texts)
+    monkeypatch.setattr(reader, "find_symbols", slow_finder)
+    res = build_result(stem + ".png", stem + "-spec.txt", str(tmp_path / "out"), stem + ".json", reader="classical",
+                       progress=lambda step, secs, stats: seen.append((step, time.perf_counter(), {"seconds": secs, **stats})))
+    assert [e[0] for e in seen] == ["text", "finder", "symbols", "labels", "spec", "price"]
+    assert seen[2][1] - seen[1][1] >= 0.2 and seen[2][2]["seconds"] >= 0.2
+    assert seen[0][2] == {"seconds": seen[0][2]["seconds"], "texts": res["steps"][0]["count"]} and seen[2][2]["symbols"] == len(res["devices"])
+    assert set(seen[3][2]) == {"seconds", "linked", "devices"} and seen[4][2]["clauses"] == len(res["spec"]["clauses"]) and seen[5][2]["total_gbp"] == res["bom"]["total_gbp"]

@@ -88,8 +88,9 @@ def test_detector_classes_become_device_types_and_a_breaker_takes_its_role(tmp_p
     texts = [text("MCCB 250 A 3P", 340, 525), text("ACB-2 1600 A 4P", 640, 525),  # right of the two breakers below the busbar
              text("FSW 400 A 4P", 80, 765, 70), text("PFC 200 kVAr", 40 + 120 * others.index("capacitor") + 40, 765, 70)]
     steps = []
-    ex = reader.read_sheet(str(page), texts, finder=lambda page_img, ink, t: syms, progress=steps.append)
-    assert steps == ["text", "symbols", "labels"]
+    ex = reader.read_sheet(str(page), texts, finder=lambda page_img, ink, t: syms, progress=lambda step, stats: steps.append((step, stats)))
+    assert [s for s, _ in steps] == ["text", "symbols", "labels"] and steps[0][1] == {"texts": len(texts)} and steps[1][1] == {"symbols": len(syms)}
+    assert steps[2][1]["devices"] == len(syms) and 0 < steps[2][1]["linked"] <= len(syms)
     dev = [(d["type"], d.get("rating"), d.get("poles")) for d in ex["devices"]]
     assert dev[:4] == [("ACB", None, None),          # above the busbar: an incomer
                        ("BUS_SECTION", None, None),  # in the busbar

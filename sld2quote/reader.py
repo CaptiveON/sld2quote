@@ -553,10 +553,11 @@ def read_sheet(image_path: str, texts: list[dict] | None = None, finder=classica
     crops: the second OCR pass around every symbol (None: on for vision, which reads small text better enlarged, off for
     the other engines, which read the page pass better and pay about 0.3 s per symbol for the crops; see eval/OCR.md);
     without it the labels come from the page texts. "seconds" splits the time into OCR and the symbol finder ("detector").
-    progress, if given, is called with "text", "symbols" and "labels" as each of those steps finishes."""
+    progress, if given, is called as each of those steps finishes with the step name and what it produced: ("text", {"texts": n}),
+    ("symbols", {"symbols": n}), ("labels", {"linked": n, "devices": n}), linked being the devices paired with a label text."""
     from .ocr import default_engine
     t0, clock, engine = time.perf_counter(), {"ocr": 0.0, "detector": 0.0}, os.environ.get("SLD2QUOTE_OCR") or default_engine()
-    done = progress or (lambda step: None)
+    done = progress or (lambda step, stats: None)
     if crops is None:
         crops = engine == "vision"
     g, b, ang = prepare(image_path)
@@ -565,17 +566,17 @@ def read_sheet(image_path: str, texts: list[dict] | None = None, finder=classica
     texts = texts if texts is not None else _timed(clock, "ocr", _ocr_image, page_img, 2.0, "page")
     for i, tb in enumerate(texts):
         tb["id"] = f"T{i + 1}"
-    done("text")
+    done("text", {"texts": len(texts)})
     busbars = find_busbars(b)
     vlines = find_vertical_lines(b)
     ink = remove_lines(b, busbars, vlines)
     symbols = _timed(clock, "detector", finder, page_img, ink, texts)
-    done("symbols")
+    done("symbols", {"symbols": len(symbols)})
     local = _timed(clock, "ocr", symbol_texts, page_img, symbols) if crops else {}
     tags = _timed(clock, "ocr", meter_tags, page_img, symbols, texts + [tb for reg in local.values() for tb in reg])
     label_busbars(busbars, texts)
     devices = make_devices(symbols, local, texts + tags, busbars, vlines, H)
-    done("labels")
+    done("labels", {"linked": sum(bool(d.get("label_texts")) for d in devices), "devices": len(devices)})
     notes = read_notes(texts)
     all_texts = texts + [tb for reg in local.values() for tb in reg] + tags
     return {"image": os.path.basename(image_path), "size": [int(W), int(H)], "deskew_deg": round(float(ang), 2),
