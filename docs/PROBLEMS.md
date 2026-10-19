@@ -92,6 +92,14 @@ weights are kept so another selection rule can be applied without retraining.
 **For the real project.** Early stopping belongs with schedules that react to plateaus, not with a schedule that decays on a fixed clock.
 This was the orchestrator's own protocol error, caught by the measurements.
 
+**What the repeat runs showed (19 Oct, morning).** With the gradient fault fixed and the weights averaged, two runs on different data
+both dipped at passes four to six while the learning rate was still high, then climbed: the wide-font run to its best score at pass ten,
+and the plain run, stopped by the "three passes without gain" rule after pass seven, kept pass four although pass seven had already
+rebounded and three passes of annealing were left. So a fixed patience can end a run inside a dip it would have recovered from. The
+rule that fits this detector counts patience only once the learning rate has fallen (the second half of the schedule), or uses a longer
+patience; the honest alternative is to run the schedule to its end and keep the best pass, which costs an hour and never cuts a
+recovery short. Until the rule changes, a run stopped early can be resumed on the same curve, which is what the trainer offers.
+
 ## 8. Finishing the schedule helped the seen styles and hurt the unseen one
 
 **What happened (18 Oct).** Three gentle passes from the best weights lifted the validation score (0.929 to 0.936) and tightened the
