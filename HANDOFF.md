@@ -458,6 +458,27 @@ the run for passes 8 to 10 first (about 1.5 h; the trainer's resume command) and
 site-engine scorecard sections (RapidOCR, crops off) for the new model; `scripts/build_charts.py --model`; README numbers; the model
 repo upload; one redeploy and the Space refresh. Live: revision 00010 (image c3b2897) with the seven-run summary and nine-run charts.
 
+**State at 15:10, 19 Oct: step 6 done and reviewed; the site model is pass 4 of the plain EMA repeat.** Adnan (09:20): "Run it and
+then switch it and go for step 6." The repeat ran its last three passes (final pass 10, pooled F1 0.917, still edging up at a
+learning rate of zero); on whole drawings pass 4 stayed clearly ahead (mean class F1 0.963 and 3 blank-paper boxes against 0.950 and
+33 for pass 10), so pass 4 is the site model, copied to `weights/rtdetr_r18_plain_ema_fix_pass4` with its own config (drawing
+threshold 0.11, calibration) and an ORIGIN.md; the deployment, chart script and server default point at it (fac0b1a). Lesson kept:
+the per-tile score and the drawing-level score can disagree, and the product is judged on drawings. Step 6 (73f51fc): the way-based
+symbol-to-label link and the role rules, built by a fresh agent, reviewed independently (no leakage, 240 refreshed answer keys verified
+byte for byte, one real neighbour-way bug found and fixed, the search window widened for labels-below layouts, the in-sample tuning
+said plainly in the RESULTS header and PROBLEMS 24, the link score defined where it is read), rerun officially on the pass-4 weights
+with RapidOCR crops off: test clean ratings read right 0.753 to 1.000, price error 0.125 to 0.014, link 1.000; test scan ratings 0.608
+to 0.995, price error 0.333 to 0.014; unseen clean ratings 0.556 to 0.813, price error 0.249 to 0.125; unseen scan 0.531 to 0.840,
+0.316 to 0.098; baseline clean 0.672 to 0.897, 0.189 to 0.054; baseline scan 0.640 to 0.911, 0.368 to 0.051; symbol precision and
+recall up on all six columns (the role rules stop scans typing MCCBs as ACBs). What remains is the cable drawn through its own label on
+labels-below drawings (PROBLEMS 27). Out of sample: the answer-key oracle makes no link or rating error on 1,000 fresh drawings of both
+font sets (fresh seeds used for no choice); the rules remain this generator's conventions and the real project's learned link stays in
+the road map. PROBLEMS 23 to 27 added; 96 tests, 3 skipped. Samples rebuilt (0b5b479: over the 15 scored samples symbols 99.3% right
+and 97.6% found, ratings 93%, price error 0.07; sheet 10833 31 of 31, price exact); chart data rebuilt (live model pass 4, the link
+metric); the page shows "labels linked right" and describes the way-based rule with its caveats. In flight: the final deployment from
+0b5b479 with the model published to the private model repo, the Space refresh, and the README at 0.3.0 (packaging agent). Pending from
+Adnan: the AI-assistance sentence (keep or his wording), the citation name split, the token revocation, his review notes, going public.
+
 ## 8. Metrics (as implemented in `evaluate.py`; keep the names)
 
 symbol precision and recall (IoU >= 0.3, same type); rating accuracy, poles accuracy, kA accuracy over matched devices; notes accuracy over
