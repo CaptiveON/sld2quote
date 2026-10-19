@@ -445,6 +445,19 @@ generated drawing (text reading 19 to 33 s, detector 14 to 20 s), upload 12 to 1
 (`rtdetr_r18_plain_ema_fix` certainly ended about 08:20), then Adnan's model selection and, if he switches, the two-edit model switch,
 the samples rebuild, the eval sections, README numbers and one redeploy.
 
+**State at 08:40, 19 Oct: the training has certainly ended; the verdict for Adnan.** `rtdetr_r18_plain_ema_fix` (plain recipe,
+averaged weights, gradient fix; patience 3 stopped it after pass 7 in a dip, keeping pass 4, pooled F1 0.914) is the same as
+`rtdetr_r18_plain_ema` within noise per tile but better at drawing level, where the product is judged: at its drawing threshold 0.11
+its precision is above plain_ema on all six columns (1.1 to 4.1 points) at the same recall, its recall is above r18_full on all six
+(1.1 to 5.3 points) with more types passing on all six, 3 boxes on blank paper on validation (plain_ema 13 at 0.07) and the best mean
+class F1 of the three (0.963); weak types on unseen clean are mild (bus-section recall 0.79, relay 0.94/0.88, earth recall 0.89); its
+one weak spot is baseline scans (price error 0.426 against 0.388), the step 6 role fault on scans. Recommendation: switch the site to
+plain_ema_fix at 0.11 (RESULTS.md has its sections; its config.json carries the threshold and the calibration table). Option: resume
+the run for passes 8 to 10 first (about 1.5 h; the trainer's resume command) and compare again. The switch, when he says: MODEL in
+`scripts/deploy_cloudrun.sh` and the weights line in `.gcloudignore`; `scripts/build_samples.py --force` with the new weights; the
+site-engine scorecard sections (RapidOCR, crops off) for the new model; `scripts/build_charts.py --model`; README numbers; the model
+repo upload; one redeploy and the Space refresh. Live: revision 00010 (image c3b2897) with the seven-run summary and nine-run charts.
+
 ## 8. Metrics (as implemented in `evaluate.py`; keep the names)
 
 symbol precision and recall (IoU >= 0.3, same type); rating accuracy, poles accuracy, kA accuracy over matched devices; notes accuracy over
