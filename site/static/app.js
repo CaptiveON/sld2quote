@@ -310,12 +310,12 @@ function mdTable(text, afterRe) {  // the rows of the first table after a match,
 const ENGINES = {rapidocr: 'RapidOCR', vision: 'Apple Vision', tesseract: 'Tesseract', easyocr: 'EasyOCR', doctr: 'docTR', 'rapidocr-ch': 'RapidOCR (Chinese model)'};
 const SETS = [['data/eval/test', 'Test set', 'drawings in the styles the detector trained on, never seen in training'], ['data/eval/unseen', 'Unseen style', 'drawings in styles held out of training'], ['data/baseline', 'Baseline set', 'the drawings of the first measurements']];
 function setSections(md, set) {
-  const re = p => new RegExp('^## ' + p.replace(/[/.]/g, '\\$&'), 'm');
-  const trained = section(md, re(set + ', trained reader \\(`weights/[^`]+`\\), rapidocr OCR')) || section(md, re(set + ', trained reader'));
-  const classical = section(md, re(set + ', classical reader\\n'));
-  return {trained, classical};
+  const all = md.split(/\n(?=## )/).filter(t => t.startsWith('## ' + set + ', ')), trained = all.filter(t => /^## [^\n]*trained reader/.test(t));
+  const rapid = trained.filter(t => /^## [^\n]*rapidocr OCR/i.test(t)), run = liveModel().run, mine = run ? rapid.filter(t => t.split('\n')[0].includes('`weights/' + run + '`')) : [];
+  const pick = mine.length ? mine : rapid.length ? rapid : trained;  // a rerun replaces its own section in place, so the last one is the current state
+  return {trained: pick[pick.length - 1] || '', classical: all.find(t => /^## [^\n]*classical reader\n/.test(t)) || ''};
 }
-const MEASURES = [['sym_recall', 'Symbols found'], ['sym_precision', 'Boxes that were right'], ['rating_acc', 'Ratings read right'], ['bom_recall', 'Bill-of-materials lines found'], ['price_error_mean', 'Price within']];
+const MEASURES = [['sym_recall', 'Symbols found'], ['sym_precision', 'Boxes that were right'], ['link_recall', 'Labels linked right'], ['rating_acc', 'Ratings read right'], ['bom_recall', 'Bill-of-materials lines found'], ['price_error_mean', 'Price within']];
 function readSets(md) {
   return SETS.map(([set, name, what]) => { const {trained, classical} = setSections(md, set); if (!trained) return null;
     const n = trained.match(/Run on (\d+) synthetic sheets \((\d+) clean, (\d+) scan-like\)/), engine = /rapidocr/i.test(trained.slice(0, 200)) ? 'RapidOCR, the live site\'s text engine' : 'Apple Vision text engine';
@@ -336,11 +336,11 @@ function enginesHtml(md) {
   return `<table class="kv"><thead><tr><th>Engine</th><th>Labels and notes</th><th class="n">s per sheet</th></tr></thead><tbody>${rows.map(r => `<tr><th scope="row">${esc(r[0])}${r[0] === chosen ? ' <span class="tag ok">chosen</span>' : ''}</th><td>${bar(r[4])}<span class="mono small">${pct(r[4])}</span></td><td class="n mono small">${esc(r[6])}</td></tr>`).join('')}</tbody></table><p class="foot">Vision is the Mac's built-in reader and the reference; it does not run on Linux, where the server lives.</p>`;
 }
 function runsHtml(md) {
-  const live = S.model || 'rtdetr_r18_full', out = []; let wrong = '';
+  const live = liveModel().run, tag = liveTag(), out = []; let wrong = '';
   for (const sec of md.split(/\n(?=## )/)) { const h = sec.match(/^## (.+?) \(`weights\/(\w+)`\)/); if (!h) continue;
     const row = sec.match(/\| test_unseen \| (\d+) \| with NMS \| ([\d.]+) \| ([\d.]+) \| [^|]+\| ([\d.]+) \|/), rule = sec.match(/Size rule: (\d+) of (\d+) classes pass/), pass = sec.match(/best pass's weights, epoch (\d+)/);
     if (!row) continue; const isLive = h[2] === live; if (isLive) wrong = (sec.match(/What it still gets wrong: ([^\n]+)/) || [])[1] || '';
-    out.push(`<tr><th scope="row">${esc(h[2])}${isLive ? ' <span class="tag ok">live model</span>' : ''}<br><small class="muted">${esc(h[1])}</small></th><td class="n mono small">${esc(pass ? pass[1] : '')}</td><td>${bar(row[2])}<span class="mono small">${esc(row[2])}</span></td><td class="n mono small">${pct(row[3])}</td><td class="n mono small">${pct(row[4])}</td><td class="n mono small">${rule ? `${rule[1]} of ${rule[2]}` : ''}</td></tr>`); }
+    out.push(`<tr><th scope="row">${esc(h[2])}${isLive ? ` <span class="tag ok">${esc(tag)}</span>` : ''}<br><small class="muted">${esc(h[1])}</small></th><td class="n mono small">${esc(pass ? pass[1] : '')}</td><td>${bar(row[2])}<span class="mono small">${esc(row[2])}</span></td><td class="n mono small">${pct(row[3])}</td><td class="n mono small">${pct(row[4])}</td><td class="n mono small">${rule ? `${rule[1]} of ${rule[2]}` : ''}</td></tr>`); }
   $('#wrong').textContent = wrong || 'See the full record below.';
   return out.length ? `<table class="kv"><thead><tr><th>Run</th><th class="n">Best pass</th><th>mAP@0.5</th><th class="n">Precision</th><th class="n">Recall</th><th class="n">Classes passing</th></tr></thead><tbody>${out.join('')}</tbody></table>` : '';
 }
@@ -352,7 +352,10 @@ function keyNumbers(sc) {
     ocr && stat(pct(ocr[2]), 'of characters read right', `labels and notes, ${ENGINES[ocr[1]] || ocr[1]}, clean and scan copies`)].filter(Boolean).join('') || '<p class="muted">The scorecards could not be loaded.</p>';
   const num = (k, v, w) => { const el = $(`.stagecard .num[data-k="${k}"]`); if (el) el.innerHTML = v ? `${esc(v)}<small>${esc(w)}</small>` : '<small>not measured yet</small>'; };
   num('text', ocr && pct(ocr[2]) + ' of characters read right', ocr ? `${ENGINES[ocr[1]] || ocr[1]}, labels and notes` : ''); num('symbols', rec && pct(rec[0]) + ' of symbols found', 'test set, clean copies');
-  num('labels', rating && pct(rating[0]) + ' of ratings read right', 'on the matched devices, test set, clean'); const cm = conf && conf[0].match(/(\d+) found of (\d+), (\d+) false/); num('spec', cm && `${cm[1]} of ${cm[2]} planted disagreements found, ${cm[3]} false alarm${cm[3] === '1' ? '' : 's'}`, 'test set, clean copies');
+  const link = cells(test, 'link_recall');
+  num('labels', link ? pct(link[0]) + ' of labels linked right' : rating && pct(rating[0]) + ' of ratings read right', (link && rating ? pct(rating[0]) + ' of ratings read right on the matched devices; ' : 'on the matched devices, ') + 'test set, clean copies');
+  const fonts = (sc.results_md || '').split(/\n(?=## )/).filter(t => /^## [^\n]*fonts[^\n]*trained reader/i.test(t)), fl = fonts.length ? cells(fonts[fonts.length - 1], 'link_recall') : null;
+  $$('[data-fonts-link]').forEach(el => { el.textContent = fl ? ` On a layout the rules were not tuned on (the wide-font set) the link reaches ${pct(fl[0])} of labels.` : ''; }); const cm = conf && conf[0].match(/(\d+) found of (\d+), (\d+) false/); num('spec', cm && `${cm[1]} of ${cm[2]} planted disagreements found, ${cm[3]} false alarm${cm[3] === '1' ? '' : 's'}`, 'test set, clean copies');
   num('price', price && 'price within ' + pct(price[0]) + ' of the answer key', 'test set, clean copies, mean');
 }
 function problemsHtml(md) {
@@ -361,7 +364,7 @@ function problemsHtml(md) {
   return `<div class="md">${html(intro)}</div>` + parts.map(p => { const [title, ...body] = p.split('\n'); return `<details><summary>${esc(title.replace(/^## /, ''))}${icon('chevron')}</summary><div class="md">${html(body.join('\n'))}</div></details>`; }).join('');
 }
 async function scorecards() {
-  const sc = await loadScorecards(); keyNumbers(sc);
+  const sc = await loadScorecards(); S.cards = sc; keyNumbers(sc);
   $('#panels').innerHTML = panelsHtml(readSets(sc.results_md || '')) || '<p class="empty">The scorecard could not be read.</p>';
   $('#runs').innerHTML = runsHtml(sc.detector_md || '') || '<p class="empty">Not available.</p>';
   $('#problems').innerHTML = sc.problems_md ? problemsHtml(sc.problems_md) : '<p class="empty">Not available.</p>';
@@ -412,10 +415,10 @@ async function boot() {
   setPill(S.mode === 'live' ? 'asleep' : 'static');
   if (S.mode === 'live' && 'IntersectionObserver' in window) { const io = new IntersectionObserver(es => { if (es.some(x => x.isIntersecting)) { warm(); io.disconnect(); } }, {rootMargin: '200px'}); io.observe($('#try')); }
   gallery(); await applyUrl();
-  scorecards().catch(() => { $('#stats').innerHTML = '<p class="muted">The scorecards could not be loaded.</p>'; $$('.stagecard .num').forEach(n => { n.innerHTML = '<small>not loaded</small>'; }); });
+  const failed = () => { $('#stats').innerHTML = '<p class="muted">The scorecards could not be loaded.</p>'; $$('.stagecard .num').forEach(n => { n.innerHTML = '<small>not loaded</small>'; }); };
   $('#charts').addEventListener('click', e => { const b = e.target.closest('button[data-c]'); if (!b) return; CS[b.dataset.k] = isNaN(b.dataset.v) ? b.dataset.v : +b.dataset.v; renderCharts(b.dataset.c); });
   let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => renderCharts(), 200); });
-  loadCharts().then(ch => { S.charts = normCharts(ch); renderCharts(); });
+  loadCharts().then(ch => { S.charts = normCharts(ch); renderCharts(); }).catch(() => {}).then(scorecards).catch(failed);  // the chart data names the live model, which decides whose scorecard sections are read
 }
 document.addEventListener('DOMContentLoaded', boot);
 
@@ -442,7 +445,8 @@ const C = {
   rw: labels => Math.max(44, Math.ceil(Math.max(...labels.map(s => String(s).length * 6.6 + 12)))),  // room for the longest value label at 11 px mono, so none is cut at the right edge
 };
 const CS = {scoresSet: 0, typesCopy: 'clean', priceSet: 0, trainingAll: 0};  // the chart controls' state
-const MEAS = [['symbol_recall', 'Symbols found'], ['symbol_precision', 'Boxes that were right'], ['rating_accuracy', 'Ratings read right'], ['bom_recall', 'Bill-of-materials lines found'], ['price_error', 'Price error (lower is better)']];
+const MEAS = [['symbol_recall', 'Symbols found'], ['symbol_precision', 'Boxes that were right'], ['link_recall', 'Labels linked right'], ['rating_accuracy', 'Ratings read right'], ['bom_recall', 'Bill-of-materials lines found'], ['price_error', 'Price error (lower is better)']];
+const LINK_NOTE = 'Labels linked right is counted between devices that were found and texts that were read, so it measures the pairing alone; a correct pairing can still hold a misread rating. The link rules were written against this generator\'s conventions and tuned on the sets they are scored on, so it is an upper bound.';
 const SERIES = [['trained', 'clean', 'f-trained', 'Trained, clean'], ['trained', 'scan', 'f-trained f-scan', 'Trained, scan-like'], ['classical', 'clean', 'f-classical', 'Classical, clean'], ['classical', 'scan', 'f-classical f-scan', 'Classical, scan-like']];
 function setButtons(chart, key, items, current) {
   return `<p class="row small" role="group" aria-label="Choose what the chart shows">${items.map(([v, label]) => `<button type="button" class="chip" data-c="${chart}" data-k="${key}" data-v="${esc(v)}" aria-pressed="${String(String(v) === String(current))}">${esc(label)}</button>`).join('')}</p>`;
@@ -450,10 +454,11 @@ function setButtons(chart, key, items, current) {
 function chartScores(ch, w) {
   const set = (ch.sets || [])[CS.scoresSet]; if (!set || !set.copies) return null;
   const by = {}; set.copies.forEach(c => { by[c.copy] = c; });
-  const narrow = w < 420, L = narrow ? 8 : C.lw(MEAS.map(m => m[1]), w), R = 44, rowH = narrow ? 78 : 62, h = 24 + MEAS.length * rowH + 28, x = C.lin(0, 1, L, w - R), xs = C.ticks(0, 1, 5);
+  const meas = MEAS.filter(([k]) => SERIES.some(([reader, copy]) => ((by[copy] || {})[reader] || {})[k] != null));  // a measure the data lacks (link, before it was measured) draws no row
+  const narrow = w < 420, L = narrow ? 8 : C.lw(meas.map(m => m[1]), w), R = 44, rowH = narrow ? 78 : 62, h = 24 + meas.length * rowH + 28, x = C.lin(0, 1, L, w - R), xs = C.ticks(0, 1, 5);
   let g = C.vgrid(x, xs, 20, h - 28) + C.xaxis(x, xs, h - 28, v => pct(v));
   const rows = [];
-  MEAS.forEach(([k, label], i) => {
+  meas.forEach(([k, label], i) => {
     const y0 = 24 + i * rowH + (narrow ? 16 : 0); g += narrow ? C.t(L, y0 - 5, label, 'lbl') : C.t(L - 8, y0 + 28, label, 'lbl', 'end');  // on a phone the label sits above its bars, so it is never cut
     const vals = SERIES.map(([reader, copy, cls]) => { const v = ((by[copy] || {})[reader] || {})[k]; return v == null ? null : +v; });
     vals.forEach((v, j) => { if (v == null) return; g += C.r(L, y0 + j * 13, x(v) - L, 11, SERIES[j][2], `${SERIES[j][3]}: ${pct(v)}`) + C.t(x(v) + 4, y0 + j * 13 + 9, pct(v), 'val'); });
@@ -462,7 +467,7 @@ function chartScores(ch, w) {
   const tc = ((by.clean || {}).trained || {}), cc = ((by.clean || {}).classical || {}), eng = e => ENGINES[e] || e;
   return {title: 'Scorecards: trained reader against the classical one', caption: `${set.label}: the five measures on whole drawings, clean and scan-like copies${tc.engine ? `; the trained reader read text with ${eng(tc.engine)}${cc.engine && cc.engine !== tc.engine ? `, the classical one with ${eng(cc.engine)}` : ''}` : ''}. Price error is the gap to the answer key's total, so shorter is better there.`,
     svg: C.svg(w, h, g, `${set.label}: the trained reader finds ${pct(tc.symbol_recall)} of symbols on clean copies against ${pct(cc.symbol_recall)} for the classical reader; price error ${pct(tc.price_error)} against ${pct(cc.price_error)}`),
-    legend: C.legend(SERIES.map(s => [s[2], s[3]])), table: C.table(['Measure', ...SERIES.map(s => s[3])], rows),
+    legend: C.legend(SERIES.map(s => [s[2], s[3]])), table: C.table(['Measure', ...SERIES.map(s => s[3])], rows), note: meas.some(m => m[0] === 'link_recall') ? LINK_NOTE : '',
     controls: setButtons('scores', 'scoresSet', ch.sets.map((s, i) => [i, s.label]), CS.scoresSet)};
 }
 function stackedTypes(types, w, title) {  // found, missed and extra boxes per device type, sorted by total; shared by the How it works chart and the Score tab
@@ -485,20 +490,21 @@ function chartTypes(ch, w) {
 }
 function chartTraining(ch, w) {
   const all = (ch.training || []).filter(r => (r.passes || []).length && (r.score || []).length); if (!all.length) return null;
-  const few = all.filter(r => r.live || r.ema), runs = CS.trainingAll || few.length < 2 ? all : few;  // by default the live model and the averaged-weight runs; the rest behind a toggle
+  const lm = liveModel(), byName = all.some(r => r.run === lm.run), isLive = r => byName ? r.run === lm.run : !!r.live, tag = liveTag();
+  const few = all.filter(r => isLive(r) || r.ema), runs = CS.trainingAll || few.length < 2 ? all : few;  // by default the live model and the averaged-weight runs; the rest behind a toggle
   const L = 46, R = 110, T = 12, B = 34, h = 240, maxP = Math.max(...runs.map(r => Math.max(...r.passes))), ys = runs.flatMap(r => r.score), lo = Math.floor(Math.min(...ys) * 20) / 20, hi = Math.ceil(Math.max(...ys) * 20) / 20;
   const x = C.lin(1, maxP, L, w - R), y = C.lin(lo, hi, h - B, T), yt = C.ticks(lo, hi, 4), xt = C.ticks(1, maxP, Math.min(maxP, 10)).filter(Number.isInteger);
   let g = C.hgrid(y, yt, L, w - R) + C.yaxis(y, yt, L, v => v.toFixed(2)) + C.xaxis(x, xt, h - B, v => String(v)) + C.t((L + w - R) / 2, h - 4, 'pass', 'tick', 'middle');
   const legend = [];
   const nameOf = r => (r.label || r.run).replace(/\s*\((site|live) model\)\s*$/i, '');  // the data may already say (site model); the legend says it once
-  runs.forEach((r, i) => { const k4 = i % 4, cls = r.live ? 'ln-live' : 'ln-run' + k4 + (i >= 4 ? ' ln-alt' : ''), pts = r.passes.map((p, k) => [x(p), y(r.score[k])]);
-    g += C.pl(pts, cls + (r.ema ? ' ln-ema' : '')); const bi = r.passes.indexOf(r.best_pass); if (bi >= 0) g += C.dot(x(r.passes[bi]), y(r.score[bi]), 4, 'dot-' + (r.live ? 'live' : 'run' + k4), `${nameOf(r)}: best pass ${r.best_pass}, ${r.score[bi]}`);
-    if (r.live) { const last = pts[pts.length - 1]; g += C.t(last[0] + 6, last[1] + 4, 'live model', 'val'); } legend.push([r.live ? 'sw-live' : 'sw-run' + k4, nameOf(r) + (r.live ? ' (live model)' : '') + (r.ema ? (/EMA|averaged/i.test(nameOf(r)) ? ' (dashed)' : ', averaged weights (dashed)') : '') + (i >= 4 && !r.ema ? ' (dotted)' : '')]); });
-  const live = runs.find(r => r.live) || runs[0], metrics = [...new Set(runs.map(r => r.metric).filter(Boolean))];
+  runs.forEach((r, i) => { const k4 = i % 4, live = isLive(r), cls = live ? 'ln-live' : 'ln-run' + k4 + (i >= 4 ? ' ln-alt' : ''), pts = r.passes.map((p, k) => [x(p), y(r.score[k])]);
+    g += C.pl(pts, cls + (r.ema ? ' ln-ema' : '')); const mark = live && lm.pass ? lm.pass : r.best_pass, bi = r.passes.indexOf(mark); if (bi >= 0) g += C.dot(x(r.passes[bi]), y(r.score[bi]), 4, 'dot-' + (live ? 'live' : 'run' + k4), `${nameOf(r)}: ${live ? tag : 'best pass ' + r.best_pass}, ${r.score[bi]}`);
+    if (live) { const last = pts[pts.length - 1]; g += C.t(last[0] + 6, last[1] + 4, tag, 'val'); } legend.push([live ? 'sw-live' : 'sw-run' + k4, nameOf(r) + (live ? ` (${tag})` : '') + (r.ema ? (/EMA|averaged/i.test(nameOf(r)) ? ' (dashed)' : ', averaged weights (dashed)') : '') + (i >= 4 && !r.ema ? ' (dotted)' : '')]); });
+  const live = runs.find(isLive) || runs[0], metrics = [...new Set(runs.map(r => r.metric).filter(Boolean))];
   return {title: 'Training runs: the selection score pass by pass', caption: `The score each run was judged by after every pass${metrics.length > 1 ? ` (${metrics.map(m => `${m} for ${all.filter(r => r.metric === m).length} runs`).join('; ')}; the table under Show the numbers names each run's metric)` : live.metric ? ` (${live.metric})` : ''}; the live model's line is emphasised, averaged-weight runs are dashed, the chosen pass is dotted. The swings between adjacent passes are why averaged weights are preferred.`,
     controls: all.length > few.length && few.length >= 2 ? setButtons('training', 'trainingAll', [[0, 'Live model and averaged-weight runs'], [1, `All ${all.length} runs`]], CS.trainingAll) : '',
     svg: C.svg(w, h, g, `${runs.length} training runs; the live model ${nameOf(live)} peaks at pass ${live.best_pass} with ${Math.max(...live.score)}`), legend: C.legend(legend),
-    table: C.table(['Run', 'Metric', 'Best pass', ...Array.from({length: maxP}, (_, i) => 'pass ' + (i + 1))], all.map(r => [nameOf(r) + (r.live ? ' (live model)' : ''), r.metric || '', r.best_pass, ...Array.from({length: maxP}, (_, i) => { const k = r.passes.indexOf(i + 1); return k < 0 ? '' : r.score[k]; })]))};
+    table: C.table(['Run', 'Metric', 'Best pass', ...Array.from({length: maxP}, (_, i) => 'pass ' + (i + 1))], all.map(r => [nameOf(r) + (isLive(r) ? ` (${tag})` : ''), r.metric || '', r.best_pass, ...Array.from({length: maxP}, (_, i) => { const k = r.passes.indexOf(i + 1); return k < 0 ? '' : r.score[k]; })]))};
 }
 function chartThreshold(ch, w) {
   const th = ch.threshold; if (!th || !(th.thresholds || []).length) return null;
@@ -585,7 +591,7 @@ function chartPrice(ch, w) {
 const CHARTS = [['scores', chartScores], ['types', chartTypes], ['training', chartTraining], ['threshold', chartThreshold], ['calibration', chartCalibration], ['ocr', chartOcr], ['timing', chartTiming], ['data', chartData], ['price', chartPrice]];
 function figureHtml(id, out) {
   if (!out) return '';
-  return `<figure class="chart" id="c-${id}"><figcaption><h4>${esc(out.title)}</h4><p class="small muted">${esc(out.caption)}</p></figcaption>${out.controls || ''}<div class="plotwrap">${out.svg}</div>${out.legend ? `<p class="legend small">${out.legend}</p>` : ''}<details class="numbers"><summary>Show the numbers</summary><div class="frame">${out.table}</div></details></figure>`;
+  return `<figure class="chart" id="c-${id}"><figcaption><h4>${esc(out.title)}</h4><p class="small muted">${esc(out.caption)}</p></figcaption>${out.controls || ''}<div class="plotwrap">${out.svg}</div>${out.legend ? `<p class="legend small">${out.legend}</p>` : ''}${out.note ? `<p class="foot">${esc(out.note)}</p>` : ''}<details class="numbers"><summary>Show the numbers</summary><div class="frame">${out.table}</div></details></figure>`;
 }
 function chartWidth(el) { const box = el.closest('.chart'); return Math.max(280, Math.floor((box ? box.clientWidth : el.clientWidth) - 2) || 520); }
 function renderCharts(only) {
@@ -597,6 +603,12 @@ function renderCharts(only) {
   host.innerHTML = CHARTS.map(([id, fn]) => one(id, fn)).join('');
   block.hidden = !host.innerHTML;
 }
+function liveModel() {  // the live model's run name (any _passN suffix stripped) and the pass it uses: the health call first, else the chart data
+  const name = S.model || (S.charts && S.charts.model) || '', m = name.match(/^(.*?)(?:_pass(\d+))?$/), flagged = (S.charts && (S.charts.training || []).find(r => r.live)) || null;
+  const run = (m && m[1]) || (flagged && flagged.run) || '', hit = S.charts && (S.charts.training || []).find(r => r.run === run);
+  return {run, pass: m && m[2] ? +m[2] : (hit && hit.live_pass) || (flagged && flagged.run === run && flagged.live_pass) || null};
+}
+const liveTag = () => { const lm = liveModel(); return 'live model' + (lm.pass ? ', pass ' + lm.pass : ''); };
 const SET_LABEL = {test: 'Test set', unseen: 'Unseen style', baseline: 'Baseline set'};
 function normCharts(ch) {  // eval/charts.json keeps one record per set, copy and reader; the charts read them grouped by set
   if (!ch) return null;
