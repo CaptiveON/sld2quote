@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decisions, sld2quote</title>
+<meta name="description" content="Fifteen decisions that made the numbers honest, each as the problem, the options considered, the decision and what the measurements showed: synthetic data with answer keys, the IEC 60617 symbols, RT-DETR over YOLO, tiles and duplicate suppression, the threshold and the pass chosen on whole drawings, calibrated confidence, the text reader chosen by measurement, the label link scored on its own and reviewed independently, the free-tier deployment with no secret, one link for everything.">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../style.css">
+<script src="../app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="../">sld2quote</a>
+    <span id="pill" class="pill" role="status" aria-live="polite">Loading</span>
+    <nav class="nav" aria-label="Pages"></nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="block" aria-labelledby="h-page" style="border-top:0">
+  <div class="wrap prose">
+    <p class="kicker">Decisions</p>
+    <h1 id="h-page" style="font-size:var(--fs-2xl)">Fifteen decisions, and what each one bought</h1>
+    <p class="lede">The choices that decided whether the figures on this site can be trusted, in the order I took them: the problem, the options I weighed, what I chose, and what the measurements showed afterwards. Every figure is read from the evaluation files when the page loads.</p>
+    <p>I am Muhammad Adnan, an applied AI engineer. This page is the reasoning behind sld2quote, the miniature single-line-diagram-to-quotation system on this site. It lists the fifteen decisions that mattered most, in the order I took them. Each one names the problem, the options I weighed, what I chose and what the measurements showed afterwards. Where a decision went wrong first, the page says so.</p>
+<p>Three things hold for every number on this page:</p>
+<ul><li><b>The drawings are synthetic.</b> They were drawn by the project's own generator, with invented prices. Nothing comes from R&amp;B. Scores on synthetic drawings should be read as an upper bound for real ones.</li><li><b>The label and role rules were tuned on the sets they are scored on.</b> The check on fresh drawings is described under decision 13.</li><li><b>Real drawings are not scored yet.</b> Nineteen public-domain one-line diagrams are collected with their provenance; they are not labelled.</li></ul>
+<p>Unless a sentence says otherwise, a number is for the site's reader: the RT-DETR detector (pass 4 of the training run <span class="mono">rtdetr_r18_plain_ema_fix</span>), RapidOCR reading the text, and the step 6 link rules, run on 4 processor threads with no graphics card. The sets are <em>test</em> (30 drawings in the styles the detector trained on, none of which it saw in training), <em>unseen style</em> (60 drawings in a font or label layout held out of training) and <em>baseline</em> (the 30 drawings of the first measurement), each as a clean copy and a scan-like copy.</p>
+
+  </div>
+</section><section class="block" aria-label="The decisions"><div class="wrap"><p class="row" style="margin-bottom:var(--s3)"><button type="button" class="btn" id="open-all">Open every decision</button><button type="button" class="btn" id="close-all">Close them</button><span class="muted small">Each decision opens on its title; the one-line summary is always visible.</span></p><details class="decision card" id="d1"><summary><h3>1. Train and test on synthetic drawings that carry their own answer keys</h3><p class="lead">No labelled set of switchboard drawings is public, so I built a generator that draws them and writes down the right answer for each one; every stage of the pipeline is scored against it.</p><svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary><div class="more"><dl>
+<dt>The problem</dt><dd>A detector learns from drawings in which every symbol has been marked, and every score needs a correct answer to compare with. No public labelled set of single-line diagrams exists. A 2024 review of the field names the lack of datasets as a key challenge <a class="cite" href="../references/#r15" aria-label="reference 15">[15]</a>, and a recent published set of 17,085 labelled symbols on single-line diagrams is confidential to the company that owns the drawings <a class="cite" href="../references/#r16" aria-label="reference 16">[16]</a>. R&amp;B's drawings could not be used before the project, and should not be.
+</dd>
+<dt>Options considered</dt><dd>
+<ul><li>Hand-label a few public drawings: slow, few in number, in the American symbol style, and most carry no ratings.</li><li>Ask a large vision-language model to read the drawings with no training: there is nothing to measure it against, and published work on engineering drawings reports an 11.5% hallucination rate even for a fine-tuned model <a class="cite" href="../references/#r19" aria-label="reference 19">[19]</a>.</li><li>Write a generator that draws each sheet and its answer key together.</li></ul>
+</dd>
+<dt>Decision</dt><dd>A generator (<span class="mono">generate.py</span>) draws low-voltage switchboard diagrams in varied fonts, sizes, line widths and label layouts, at two board sizes, each with a scan-like copy and a short specification that sometimes contradicts the drawing on purpose. Its answer key lists every device with its type, box and ratings, and every piece of text with its box and the device it was drawn for. Real drawings are kept for testing only, never for training.
+</dd>
+<dt>Result</dt><dd>A pool of 900 drawings, split by whole drawing so that no drawing feeds both training and testing: 400 for training (9,176 tiles holding 38,332 symbol boxes), 40 for validation, 30 for the test set, 60 for the unseen-style test, and 20 more unseen-style drawings used only to choose between models. Because each drawing carries its answer key, symbols, label links, ratings, notes, conflicts, bill-of-materials lines and price are each scored on their own, not only the final total.
+</dd>
+<dt>The technical layer</dt><dd>The generator is treated as a product with its own tests. An audit of early output found a label printed across a symbol on 16% of sheets, and scan-like copies whose answer-key boxes sat up to 35 pixels away from the rotated ink; both are fixed and now checked by tests (problems 3 and 4 in the log). Work on P&amp;ID digitisation shows that synthetic sheets which keep real topology can train a model to within 8 points of one trained on real drawings <a class="cite" href="../references/#r18" aria-label="reference 18">[18]</a>. That is the role synthetic data plays here: a way to start, not a substitute for the company's drawings. The 19 real drawings come from US federal documents, which are public domain <a class="cite" href="../references/#r14" aria-label="reference 14">[14]</a>.
+</dd>
+<dt>Evidence</dt><dd><span class="mono">HANDOFF.md</span> section 7, step 2; <span class="mono">docs/PROBLEMS.md</span> entries 2 to 4; <span class="mono">data/real/SOURCES.md</span>.
+</dd>
+</dl>
+</div></details>
+<details class="decision card" id="d2"><summary><h3>2. Draw the international symbols, for every device an estimator prices</h3><p class="lead">The drawings use IEC 60617 symbols for sixteen device types, so the detector is tested on the parts that change a price, not only on breakers.</p><svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary><div class="more"><dl>
+<dt>The problem</dt><dd>The first generator drew three shapes: breakers, transformers and generators. An estimator's take-off also counts fuse switches, isolators, motor starters, power-factor correction, surge protection, current transformers, meters and protection relays. A detector trained on three shapes would prove nothing about the rest.
+</dd>
+<dt>Options considered</dt><dd>
+<ul><li>Invent simple shapes: easy, but no consultant draws them.</li><li>Copy symbols from manufacturers' or consultants' drawings: the licence is unclear, and the work would be tied to one firm's style.</li><li>Use the international standard symbols from an openly licensed library, with attribution.</li></ul>
+</dd>
+<dt>Decision</dt><dd>IEC 60617, the IEC's database of graphical symbols for electrotechnical diagrams <a class="cite" href="../references/#r9" aria-label="reference 9">[9]</a>. Seven symbol bodies are taken unchanged from the QElectroTech elements collection through the synergycodes single-line-diagram editor, under CC BY 3.0 and credited <a class="cite" href="../references/#r11" aria-label="reference 11">[11]</a>, <a class="cite" href="../references/#r12" aria-label="reference 12">[12]</a>, <a class="cite" href="../references/#r13" aria-label="reference 13">[13]</a>; the other shapes are drawn to the same conventions. Breakers appear in both the IEC style (a switch with a cross) and the box-with-a-diagonal style common on UK drawings. The detector learns 14 classes, one per symbol meaning (one breaker class covers incomers, outgoing breakers and bus-sections, which the role rules tell apart), and each of the 16 device types has a pricing rule.
+</dd>
+<dt>Result</dt><dd>The wider set exposed the hand-written shape tests at once. On the test set (clean copies) the classical reader finds <span data-n="set.test.clean.classical.symbol_recall" data-v="0.059" class="skeleton"></span> of the symbols, because it knows only box-style breakers and circles; the trained reader finds <span data-n="set.test.clean.trained.symbol_recall" data-v="0.981" class="skeleton"></span>.
+</dd>
+<dt>The technical layer</dt><dd>The answer key does not depend on how a symbol looks: a device's type comes from the generator, so the same key scores both breaker styles and either reader. Still missing: a changeover-switch symbol, withdrawable brackets, double-line busbars, and the American ANSI/IEEE 315 style that the real public-domain drawings use.
+</dd>
+<dt>Evidence</dt><dd><span class="mono">assets/symbols/ATTRIBUTION.md</span>; <span class="mono">docs/PROBLEMS.md</span> entries 1 and 5; <span class="mono">eval/RESULTS.md</span>, classical and trained sections.
+</dd>
+</dl>
+</div></details>
+<details class="decision card" id="d3"><summary><h3>3. RT-DETR rather than YOLO, and the smaller model by measurement</h3><p class="lead">I chose a detector whose licence lets a company build it into its own software without publishing that software, then picked its size by timing and scoring both options.</p><svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary><div class="more"><dl>
+<dt>The problem</dt><dd>The reader needs a modern object detector that can be fine-tuned on drawings and that a manufacturer could later ship inside its own estimating tools.
+</dd>
+<dt>Options considered</dt><dd>
+<ul><li>Ultralytics YOLO, the most popular family. It is offered under AGPL-3.0, which the vendor explains as publicly releasing the complete source of the whole derived work, or under a paid Enterprise licence for closed use <a class="cite" href="../references/#r25" aria-label="reference 25">[25]</a>.</li><li>RT-DETR, a real-time detection transformer whose code and pretrained weights are Apache-2.0, available through the Hugging Face transformers library <a class="cite" href="../references/#r20" aria-label="reference 20">[20]</a>, <a class="cite" href="../references/#r21" aria-label="reference 21">[21]</a>, <a class="cite" href="../references/#r22" aria-label="reference 22">[22]</a>, <a class="cite" href="../references/#r23" aria-label="reference 23">[23]</a>.</li><li>torchvision's Faster R-CNN (BSD licence), kept as the fallback.</li></ul>
+</dd>
+<dt>Decision</dt><dd>RT-DETR, fine-tuned from the COCO-trained <span class="mono">PekingU/rtdetr_r18vd</span> checkpoint (about 20 million parameters) through <span class="mono">RTDetrForObjectDetection</span> <a class="cite" href="../references/#r22" aria-label="reference 22">[22]</a>, <a class="cite" href="../references/#r23" aria-label="reference 23">[23]</a>. Its authors report that it beats comparable YOLO models on both speed and accuracy on the COCO benchmark <a class="cite" href="../references/#r20" aria-label="reference 20">[20]</a>; I did not train YOLO, so that comparison is theirs, not mine. Between the two backbone sizes, I measured rather than assumed. The smaller r18vd read a standard sheet in about half the time of r50vd on every device tried (0.82 s against 1.65 s on 8 processor threads, 1.31 s against 2.45 s on 2). Scored per tile on the 60-drawing unseen-style test after the first overnight runs, it was also the more accurate (mAP@0.5 0.922 against 0.887), while r50vd found about one relay in seven.
+</dd>
+<dt>Result</dt><dd>The site's model scores mAP@0.5 <span data-n="tile.map" data-v="0.9389" class="skeleton"></span> per tile on the unseen-style test. On whole drawings of the test set (clean copies), the share of symbols found rises from <span data-n="set.test.clean.classical.symbol_recall" data-v="0.059" class="skeleton"></span> with the classical reader to <span data-n="set.test.clean.trained.symbol_recall" data-v="0.981" class="skeleton"></span>, and the share of reported boxes that are right from <span data-n="set.test.clean.classical.symbol_precision" data-v="0.238" class="skeleton"></span> to <span data-n="set.test.clean.trained.symbol_precision" data-v="0.990" class="skeleton"></span>.
+</dd>
+<dt>The technical layer</dt><dd>RT-DETR is end to end. Like DETR, it is trained with one-to-one matching between its predictions and the true objects, which teaches it to avoid duplicate boxes without a hand-written suppression step <a class="cite" href="../references/#r24" aria-label="reference 24">[24]</a>, <a class="cite" href="../references/#r20" aria-label="reference 20">[20]</a>. That behaviour takes a long training schedule to learn, which shaped decision 4. Licence review is part of model selection from the first day: the symbol artwork is CC BY 3.0 and credited, and the text reader's OpenCV wheel bundles LGPL components (problem 18 in the log).
+</dd>
+<dt>Evidence</dt><dd><span class="mono">HANDOFF.md</span> section 7, step 3 (the speed bench and the overnight result); <span class="mono">eval/DETECTOR.md</span>; <span class="mono">docs/PROBLEMS.md</span> entry 18.
+</dd>
+</dl>
+</div></details>
+<details class="decision card" id="d4"><summary><h3>4. Overlapping tiles, and one rule against counting a part twice</h3><p class="lead">A drawing is read in overlapping squares, and a filter makes sure that no symbol becomes two lines on the quote.</p><svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary><div class="more"><dl>
+<dt>The problem</dt><dd>Sheets are 1,600 to about 4,300 pixels wide and the detector reads 640-pixel squares; shrinking a page to fit would make small symbols vanish. Cutting the page creates a new problem: symbols cut in half at a tile edge. And the first trained model drew two boxes on one symbol: 92% of its false alarms were duplicates of a symbol it had already found. On a quotation, a duplicate is a part priced twice.
+</dd>
+<dt>Options considered</dt><dd>
+<ul><li>Shrink the whole page to one image: small symbols are lost.</li><li>Tiles with no overlap: every symbol on a seam is cut.</li><li>Overlapping tiles, merged afterwards, with duplicates removed.</li><li>Wait for the detector to learn to suppress its own duplicates, which DETR-style models do over a long schedule: the authors' recipe runs 72 passes over the data <a class="cite" href="../references/#r21" aria-label="reference 21">[21]</a>, and the first run had 2.</li></ul>
+</dd>
+<dt>Decision</dt><dd>640-pixel tiles with a 160-pixel overlap (a stride of 480), the last tile flush with the page edge, so that every symbol is whole in at least one tile. Inside each tile, duplicate suppression across classes (non-maximum suppression at IoU 0.5) is part of the detector's single inference path. Across tiles, two merge filters: a box cut by an inner tile edge is dropped, and a box that mostly contains a better-scoring one is dropped. Reading large images in slices is established practice for small objects <a class="cite" href="../references/#r26" aria-label="reference 26">[26]</a>.
+</dd>
+<dt>Result</dt><dd>On the first run, duplicate suppression alone lifted the validation mAP@0.5 from 0.854 to 0.933. For the current run, on the unseen-style test tiles, the detector reports <span data-n="detector.rtdetr_r18_plain_ema_fix.false_alarms" data-v="126" class="skeleton"></span> false alarms with suppression and <span data-n="detector.rtdetr_r18_plain_ema_fix.false_alarms_raw" data-v="983" class="skeleton"></span> without. The two merge filters added 2 to 6 points of precision on whole drawings for at most half a point of recall. A plausible refinement, keeping a cut box when no whole one exists elsewhere, was measured and rejected: it added 6 to 15 false boxes per set to regain about 3 true ones.
+</dd>
+<dt>The technical layer</dt><dd>Suppression across classes matters: if one symbol is seen as two different classes, suppression within each class would keep both and the quote would carry two different parts. Per-tile scores are a floor. In its own tile, a symbol cut by the edge is found <span data-n="detector.rtdetr_r18_plain_ema_fix.edge_found" data-v="0.56" class="skeleton"></span> of the time, yet on whole unseen-style drawings (clean copies) <span data-n="set.unseen.clean.trained.symbol_recall" data-v="0.985" class="skeleton"></span> of symbols are found, because each one is whole in a neighbouring tile.
+</dd>
+<dt>Evidence</dt><dd><span class="mono">sld2quote/tiles.py</span>; <span class="mono">eval/DETECTOR.md</span>; <span class="mono">docs/PROBLEMS.md</span> entries 6 and 11; <span class="mono">HANDOFF.md</span> section 7, steps 3 and 4.
+</dd>
+</dl>
+</div></details>
+<details class="decision card" id="d5"><summary><h3>5. Set the detector's cut-off on whole drawings, not on tiles</h3><p class="lead">The score above which a box counts as a symbol is chosen on whole validation drawings, because that is the unit an estimator sees, and blank paper is where invented parts appear.</p><svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary><div class="more"><dl>
+<dt>The problem</dt><dd>A control model's cut-off, chosen to maximise accuracy on validation tiles, came out at 0.06. On whole drawings it let through 35 to 45 "capacitors" per test set, scoring 0.06 to 0.08 and sitting on blank paper with nothing under them, some over 100 pixels wide. The price barely moved only because capacitor ratings were not read yet; once they were, every ghost would have become a priced power-factor-correction line.
+</dd>
+<dt>Options considered</dt><dd>
+<ul><li>The per-tile cut-off that maximises tile accuracy.</li><li>A separate cut-off for each class.</li><li>One cut-off chosen by sweeping whole validation drawings through the detector and the tile merge, and counting the boxes that land on blank paper.</li></ul>
+</dd>
+<dt>Decision</dt><dd>The third. The sweep runs over <span data-n="threshold.sheets" data-v="120" class="skeleton"></span> whole validation sheets (the clean and scan-like copies of the seen-style and unseen-style validation drawings), and the chosen value is stored with the weights, apart from the per-tile one. Test drawings are never used for choosing. Boxes on blank paper (a false box with almost no ink inside it) are reported as their own number, because each one is a line on a quote.
+</dd>
+<dt>Result</dt><dd>For the site's model the sweep chose <span data-n="threshold.chosen" data-v="0.11" class="skeleton"></span>. At that value the validation drawings carry <span data-n="threshold.at.0.11.blank_paper_boxes" data-v="3" class="skeleton"></span> boxes on blank paper, the share of reported boxes that are right is <span data-n="threshold.at.0.11.precision" data-v="0.992" class="skeleton"></span> and the share of symbols found is <span data-n="threshold.at.0.11.recall" data-v="0.980" class="skeleton"></span>. At 0.06 the same drawings would carry <span data-n="threshold.at.0.06.blank_paper_boxes" data-v="248" class="skeleton"></span> boxes on blank paper.
+</dd>
+<dt>The technical layer</dt><dd>Tiles that hold symbols dominate a tile score, so a low cut-off costs little there. A whole drawing is mostly blank paper, where a low cut-off has far more room to invent things. The two measurements disagree, and the product lives at the drawing level.
+</dd>
+<dt>Evidence</dt><dd><span class="mono">sld2quote/select_threshold.py</span>; <span class="mono">eval/charts.json</span> (threshold); <span class="mono">docs/PROBLEMS.md</span> entry 10b.
+</dd>
+</dl>
+</div></details>
+<details class="decision card" id="d6"><summary><h3>6. Choose the best training pass by per-class F1 at the working cut-off, not by mAP</h3><p class="lead">When choosing which saved pass of a model to keep, I score it the way it will be used, class by class at its working cut-off, so that one class failing cannot hide inside an average.</p><svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary><div class="more"><dl>
+<dt>The problem</dt><dd>The usual detection score, mAP, averages over classes and over every possible cut-off, so one class failing at the cut-off actually used barely moves it. Three gentle extra passes on the first full model lifted the validation mAP@0.5 from 0.929 to 0.936, while on the unseen style the share of generators found fell from 0.98 to 0.50 per tile.
+</dd>
+<dt>Options considered</dt><dd>
+<ul><li>Validation mAP@0.5.</li><li>mAP averaged over the seen-style and unseen-style validation sets.</li><li>The worst class's lower value of precision and recall.</li><li>Mean per-class F1 at the working cut-off, pooled over both validation sets.</li></ul>
+</dd>
+<dt>Decision</dt><dd>Pooled mean per-class F1 at the working cut-off, over the seen-style and unseen-style validation drawings. Every pass's weights are kept with all the candidate scores recorded, so any other rule can be applied later without retraining.
+</dd>
+<dt>Result</dt><dd>In the comparisons of 18 October, F1 picked the model that the untouched test set then confirmed. mAP would have picked the continuation run, which generalised worse (per tile on the 60-drawing unseen-style test, 0.918 against 0.922 for the model it continued). For the current run, the rule picked pass 10, with pooled F1 <span data-n="training.rtdetr_r18_plain_ema_fix.pass10" data-v="0.9169" class="skeleton"></span>; decision 9 explains why the site still uses pass 4.
+</dd>
+<dt>The technical layer</dt><dd>F1 at the working cut-off is closer to the bar the project set itself, 95% precision and 95% recall for every class, than an average over cut-offs that are never used. mAP@0.5 is still reported, computed with pycocotools <a class="cite" href="../references/#r28" aria-label="reference 28">[28]</a>, so the numbers can be compared with published work.
+</dd>
+<dt>Evidence</dt><dd><span class="mono">eval/DETECTOR.md</span> (training curves); <span class="mono">docs/PROBLEMS.md</span> entries 8 and 9.
+</dd>
+</dl>
+</div></details>
+<details class="decision card" id="d7"><summary><h3>7. Hold some drawing styles out of training altogether</h3><p class="lead">Drawings in a font and a label layout that the model never trained on are kept apart, so the scores show how it copes with a consultant whose drawings it has never seen.</p><svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary><div class="more"><dl>
+<dt>The problem</dt><dd>Drafting style varies from consultant to consultant. A model can score well on the styles it trained on and fail on the next firm's drawings, and a selection step that only sees trained styles will quietly prefer the model that generalises worst.
+</dd>
+<dt>Options considered</dt><dd>
+<ul><li>A random split of drawings: every style appears in training, so nothing measures generalisation.</li><li>Hold out a font, a label layout, or both.</li><li>Use the held-out drawings for choosing as well as for testing: then the test is no longer independent.</li></ul>
+</dd>
+<dt>Decision</dt><dd>The unseen style holds out the Courier New font and the labels-below layout. There are two separate held-out sets: 20 drawings for choosing between models and 60 for the final numbers only. The final set was widened from 20 to 60 drawings, because with 24 relay boxes a 95% recall bar allowed a single miss.
+</dd>
+<dt>Result</dt><dd>The held-out style is where most of the remaining error lives: ratings are read right <span data-n="set.unseen.clean.trained.rating_accuracy" data-v="0.813" class="skeleton"></span> of the time on unseen-style clean copies against <span data-n="set.test.clean.trained.rating_accuracy" data-v="1.000" class="skeleton"></span> on the test set, most of the gap from one cause (a cable drawn through its own label, problem 27 in the log). The held-out set also corrected an explanation. The first one blamed the held-out font for the loss of symbols with a letter inside, such as the G of a generator. Checking the generator showed that those letters were drawn in Arial Bold on every sheet, so the font could not change them; the labels-below layout, used on most unseen-style drawings, was the likelier cause.
+</dd>
+<dt>The technical layer</dt><dd>The unseen style is still this generator's style: the same symbols and the same drafting conventions. A new consultant's drawings will differ in more ways than a font and a layout, so in the real project the held-out unit should be whole consultants.
+</dd>
+<dt>Evidence</dt><dd><span class="mono">sld2quote/export_coco.py</span>; <span class="mono">eval/RESULTS.md</span>, unseen sections; <span class="mono">docs/PROBLEMS.md</span> entries 8 and 15.
+</dd>
+</dl>
+</div></details>
+<details class="decision card" id="d8"><summary><h3>8. Average the weights, as the detector's authors do</h3><p class="lead">Instead of keeping the model exactly as it stands at the end of a pass, I keep a running average of its weights, which smooths out lucky and unlucky moments in training.</p><svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary><div class="more"><dl>
+<dt>The problem</dt><dd>Across the ten saved passes of one run, the share of a device type found swung by up to 0.3 between neighbouring passes, even late in training (motors 0.84, then 0.60). So "which pass" was deciding the per-type results, and comparisons between runs were partly comparisons between lucky and unlucky passes.
+</dd>
+<dt>Options considered</dt><dd>
+<ul><li>More passes, or a lower learning rate.</li><li>Choose passes by a smoother score.</li><li>Follow the authors' own recipe. RT-DETR's official configuration keeps an exponential moving average (EMA) of the weights, with decay 0.9999 and a 2,000-update warm-up, and evaluates the average rather than the live weights <a class="cite" href="../references/#r21" aria-label="reference 21">[21]</a>. The Hugging Face port provides the model but not that part of the recipe.</li></ul>
+</dd>
+<dt>Decision</dt><dd>EMA added to the trainer as one separately measured change, with a control run on the same data without it. The decay is scaled to this run's length: 0.999 with 200 warm-up updates averages over about 1,000 steps. The authors' setting, tuned to 72 passes, would still be warming up at the end of these runs and would average over only about 18 steps.
+</dd>
+<dt>Result</dt><dd>Per tile on the unseen-style test, the control run scores mAP@0.5 <span data-n="detector.rtdetr_r18_plain.final.map" data-v="0.913" class="skeleton"></span> and the same recipe with EMA <span data-n="detector.rtdetr_r18_plain_ema.final.map" data-v="0.9495" class="skeleton"></span>, the first model to beat the earlier product model (<span data-n="detector.rtdetr_r18_full.final.map" data-v="0.9219" class="skeleton"></span>). Its validation curve rose steadily instead of see-sawing. The lesson: read the authors' configuration files, not only the paper; a port of a model is not a port of its training.
+</dd>
+<dt>Evidence</dt><dd><span class="mono">eval/DETECTOR.md</span>, sections <span class="mono">rtdetr_r18_plain</span>, <span class="mono">rtdetr_r18_plain_ema</span> and <span class="mono">rtdetr_r18_full</span>; <span class="mono">docs/PROBLEMS.md</span> entry 10a.
+</dd>
+</dl>
+</div></details>
+<details class="decision card" id="d9"><summary><h3>9. Pass 4, not pass 10: judged on whole drawings</h3><p class="lead">The last training run's final pass scored slightly higher on tiles, but an earlier pass made fewer mistakes on whole drawings, so the site uses the earlier one.</p><svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary><div class="more"><dl>
+<dt>The problem</dt><dd>After a fault in the Mac's graphics chip was found and worked around (problem 17a in the log), the best recipe was run again. Scored per tile, the selection rule of decision 6 preferred the final pass, pass 10 (pooled F1 <span data-n="training.rtdetr_r18_plain_ema_fix.pass10" data-v="0.9169" class="skeleton"></span> against <span data-n="training.rtdetr_r18_plain_ema_fix.pass4" data-v="0.9142" class="skeleton"></span> for pass 4). But the product is judged on drawings, and decisions 4 and 5 had already shown that tile scores and drawing scores can disagree.
+</dd>
+<dt>Options considered</dt><dd>
+<ul><li>Ship the pass that the tile rule chose.</li><li>Put the leading candidates through the whole-drawing sweep of decision 5, each with its own cut-off, and compare them on the validation drawings.</li></ul>
+</dd>
+<dt>Decision</dt><dd>The second. Pass 4 became the site's model, stored with its own cut-off, its confidence calibration and a note of where it came from.
+</dd>
+<dt>Result</dt><dd>On whole validation drawings, pass 4 reached a mean class F1 of <span data-n="threshold.at.0.11.f1" data-v="0.963" class="skeleton"></span> with <span data-n="threshold.at.0.11.blank_paper_boxes" data-v="3" class="skeleton"></span> boxes on blank paper, against 0.950 and 33 for pass 10. Per tile the two are close: mAP@0.5 <span data-n="tile.map" data-v="0.9389" class="skeleton"></span> against <span data-n="detector.rtdetr_r18_plain_ema_fix.final.map" data-v="0.9368" class="skeleton"></span> on the unseen-style test.
+</dd>
+<dt>The technical layer</dt><dd>Every pass's weights had been kept (decision 6), so this check cost an hour of evaluation, not a new training run.
+</dd>
+<dt>Evidence</dt><dd><span class="mono">HANDOFF.md</span> section 7, 19 October 15:10; <span class="mono">eval/DETECTOR.md</span>, the rows "pass 4, the site model"; <span class="mono">eval/charts.json</span> (threshold).
+</dd>
+</dl>
+</div></details>
+<details class="decision card" id="d10"><summary><h3>10. Show a calibrated confidence, not the detector's raw score</h3><p class="lead">The confidence on each box now means "how often a box like this was right on the validation drawings", which an estimator can act on.</p><svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary><div class="more"><dl>
+<dt>The problem</dt><dd>The results page painted almost every device red, "low confidence", on drawings where every symbol had been found. The number shown was the detector's raw score, and the colour bands had been set for the old shape-matching reader, whose scores behaved like percentages. A DETR's scores rank boxes; they are not probabilities, and modern neural networks are known to be poorly calibrated <a class="cite" href="../references/#r29" aria-label="reference 29">[29]</a>.
+</dd>
+<dt>Options considered</dt><dd>
+<ul><li>Keep the raw score and move the colour bands by hand.</li><li>Rescale the scores with one fitted curve, such as the single temperature that Guo and colleagues found effective <a class="cite" href="../references/#r29" aria-label="reference 29">[29]</a>; this assumes one smooth curve can correct every band of score.</li><li>A table from bands of score to measured precision, built on validation drawings with the same sweep that sets the cut-off.</li></ul>
+</dd>
+<dt>Decision</dt><dd>The table. Each model's weights carry it: for each band of score, how often such a box was right on the validation drawings. The raw score is kept in the result for the record; the page says what the number means and that it was calibrated on synthetic drawings. A device's colour is now decided mostly by whether its rating label was read, which is what an estimator needs to know.
+</dd>
+<dt>Result</dt><dd>For the site's model, a box with a raw score from 0.11 to 0.16 is shown with a confidence of <span data-n="calibration.0.11-0.16" data-v="0.867" class="skeleton"></span>, because boxes in that band were right that often on the validation drawings; a box scoring from 0.24 to 0.36 is shown with <span data-n="calibration.0.24-0.36" data-v="0.999" class="skeleton"></span>.
+</dd>
+<dt>The technical layer</dt><dd>A table measured on whole drawings needs no assumption about the shape of the score distribution, and it is rebuilt by the same command whenever the model changes. Its limit is stated on the page: on real drawings it overstates, because they are not the drawings it was measured on.
+</dd>
+<dt>Evidence</dt><dd><span class="mono">eval/charts.json</span> (calibration); <span class="mono">docs/PROBLEMS.md</span> entry 22.
+</dd>
+</dl>
+</div></details>
+<details class="decision card" id="d11"><summary><h3>11. Choose the Linux text reader by measuring it on our own drawings</h3><p class="lead">The site runs on Linux, where Apple's text reader does not exist, so I measured four open engines (one of them with two recognisers) on the project's drawings and took the most accurate one that is fast enough.</p><svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary><div class="more"><dl>
+<dt>The problem</dt><dd>The first text reader was Apple Vision, which runs only on a Mac. A public site runs on Linux.
+</dd>
+<dt>Options considered</dt><dd>Tesseract, EasyOCR, docTR, and RapidOCR, which runs PaddleOCR's PP-OCR models on ONNX Runtime <a class="cite" href="../references/#r33" aria-label="reference 33">[33]</a>, <a class="cite" href="../references/#r34" aria-label="reference 34">[34]</a>, <a class="cite" href="../references/#r35" aria-label="reference 35">[35]</a>, <a class="cite" href="../references/#r36" aria-label="reference 36">[36]</a>, <a class="cite" href="../references/#r37" aria-label="reference 37">[37]</a>, with its bundled Chinese recogniser or the English one; Apple Vision as the reference.
+</dd>
+<dt>Decision</dt><dd>A rule written before the measurement: the best character accuracy on the rating labels and the notes lines (a string the engine misses scores 0), among engines that read a standard sheet in under about 5 seconds on 2 processor threads; if two are within 0.01, the lighter install wins.
+</dd>
+<dt>Result</dt><dd>RapidOCR with the English recogniser: <span data-n="ocr.rapidocr.label_and_notes" data-v="0.960" class="skeleton"></span> in <span data-n="ocr.rapidocr.seconds_page" data-v="2.51" class="skeleton"></span> seconds per standard sheet, against <span data-n="ocr.vision.label_and_notes" data-v="0.868" class="skeleton"></span> for Apple Vision, <span data-n="ocr.tesseract.label_and_notes" data-v="0.868" class="skeleton"></span> for Tesseract, <span data-n="ocr.doctr.label_and_notes" data-v="0.727" class="skeleton"></span> for docTR, and <span data-n="ocr.easyocr.label_and_notes" data-v="0.732" class="skeleton"></span> for EasyOCR, which took <span data-n="ocr.easyocr.seconds_page" data-v="32.03" class="skeleton"></span> seconds and broke the time rule. On the held-out font, Courier New, RapidOCR reads labels at <span data-n="ocr.rapidocr.courier_new" data-v="0.98" class="skeleton"></span> against Vision's <span data-n="ocr.vision.courier_new" data-v="0.72" class="skeleton"></span>.
+</dd>
+<dt>The technical layer</dt><dd>The bundled Chinese recogniser drops the spaces in English labels ("ACB-13200A4P"), hence the English one. With RapidOCR, the close-up second pass around each symbol reads labels worse than its own page pass (<span data-n="ocr.rapidocr.label_char_crops" data-v="0.914" class="skeleton"></span> against <span data-n="ocr.rapidocr.label_char" data-v="0.964" class="skeleton"></span>), because strokes inside the window are read as text, and it costs seconds per sheet, so the site turns it off. The engine sits behind one function, so another can be swapped in and scored the same way.
+</dd>
+<dt>Evidence</dt><dd><span class="mono">eval/OCR.md</span>; <span class="mono">docs/PROBLEMS.md</span> entry 13.
+</dd>
+</dl>
+</div></details>
+<details class="decision card" id="d12"><summary><h3>12. Measure the link between a symbol and its label on its own</h3><p class="lead">Reading a label correctly is no use if it is attached to the wrong device, so the link got its own score, and then a new rule.</p><svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary><div class="more"><dl>
+<dt>The problem</dt><dd>On a 10-drawing probe, 26 of 42 wrong ratings had the label read exactly but attached to the wrong device. The scorecard could not tell a wrong link from a missed symbol or a misread label, because the answer key did not record which device each text was drawn for.
+</dd>
+<dt>Options considered</dt><dd>
+<ul><li>Keep the rule "nearest text to the right or below".</li><li>Train a second model to make the link: there were no labelled links to train it on.</li><li>Rules from the drawing's own structure, scored on their own.</li></ul>
+</dd>
+<dt>Decision</dt><dd>The generator now records which device each text belongs to; the 240 answer keys of the three evaluation sets were refreshed without changing a pixel of any drawing, which was checked. The scorecard gains link precision and link recall. The rule, agreed on 17 October: symbols on one vertical line form a way; text lines stacked at regular spacing form the way's label block; the block goes to the way with the shortest edge-to-edge gap; each line goes to the device it names (a current rating to the breaker, kW to the motor starter, kVAr to the capacitor, kVA and kV to the source, a CT ratio to the current transformer, a cable size to the way; text inside a symbol is its tag; the rest is the destination).
+</dd>
+<dt>Result</dt><dd>On the test set (clean copies), link precision rose from <span data-n="results.test.before.link_precision.clean" data-v="0.738" class="skeleton"></span> to <span data-n="set.test.clean.trained.link_precision" data-v="1.000" class="skeleton"></span> and link recall from <span data-n="results.test.before.link_recall.clean" data-v="0.612" class="skeleton"></span> to <span data-n="set.test.clean.trained.link_recall" data-v="1.000" class="skeleton"></span>; ratings read right from <span data-n="results.test.before.rating_acc.clean" data-v="0.753" class="skeleton"></span> to <span data-n="set.test.clean.trained.rating_accuracy" data-v="1.000" class="skeleton"></span>; mean price error from <span data-n="results.test.before.price_error_mean.clean" data-v="0.125" class="skeleton"></span> to <span data-n="set.test.clean.trained.price_error" data-v="0.014" class="skeleton"></span>. On unseen-style clean copies, ratings read right rose from <span data-n="results.unseen.before.rating_acc.clean" data-v="0.556" class="skeleton"></span> to <span data-n="set.unseen.clean.trained.rating_accuracy" data-v="0.813" class="skeleton"></span> and mean price error fell from <span data-n="results.unseen.before.price_error_mean.clean" data-v="0.249" class="skeleton"></span> to <span data-n="set.unseen.clean.trained.price_error" data-v="0.125" class="skeleton"></span>.
+</dd>
+<dt>The technical layer</dt><dd>These rules were designed by reading the per-link error lists of the same sets they are scored on, so those numbers are in sample, and the results file says so in its header. The check on drawings no rule was read from is decision 13.
+</dd>
+<dt>Evidence</dt><dd><span class="mono">eval/RESULTS.md</span>, sections "reader before the step 6 link" and "step 6 way-based link and role rules, reviewed"; <span class="mono">docs/PROBLEMS.md</span> entries 13, 20, 23 and 24.
+</dd>
+</dl>
+</div></details>
+<details class="decision card" id="d13"><summary><h3>13. Have the riskiest logic reviewed independently, on fresh drawings</h3><p class="lead">The link and role rules were the riskiest hand-written logic in the project, so they were reviewed by a reviewer that had not written them, and tested on fresh drawings nobody had looked at.</p><svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary><div class="more"><dl>
+<dt>The problem</dt><dd>Rules designed by reading error lists on the scored sets can fit those sets and fail elsewhere, and whoever builds a rule is the person least likely to see its blind spots.
+</dd>
+<dt>Options considered</dt><dd>
+<ul><li>Trust the scores.</li><li>Generate more scored sets and keep tuning.</li><li>An independent review, with checks on drawings that no rule was read from.</li></ul>
+</dd>
+<dt>Decision</dt><dd>A separate review agent, which had not built step 6, checked that no answer-key information leaked into the reader, verified the 240 refreshed answer keys byte for byte, and ran answer-key oracles: the generator's own symbols, texts and busbars fed to the rules on fresh drawings, scored by the same link score and rating checks.
+</dd>
+<dt>Result</dt><dd>The review found one real bug. On 10 of 1,530 classic drawings, a long first label line ended 19 to 27 pixels from the next way's symbol at the same height, the block went to the neighbour, and 22 ratings were wrong; the side preference is now a ranking, not a small penalty. The window below a symbol was also widened for layouts whose labels start under the cable. On 500 fresh drawings of each font set, used for no choice, the reviewed rules make no link or rating error, where the first version misrated 12 devices (classic fonts) and 233 (wide fonts). The in-sample tuning is stated plainly in the results header and in the problem log.
+</dd>
+<dt>Evidence</dt><dd><span class="mono">HANDOFF.md</span> section 7, 19 October 15:10; <span class="mono">eval/RESULTS.md</span> header; <span class="mono">docs/PROBLEMS.md</span> entry 24.
+</dd>
+</dl>
+</div></details>
+<details class="decision card" id="d14"><summary><h3>14. Deploy inside the free tier, with no secret on the server</h3><p class="lead">The live site costs nothing while nobody visits, and the server holds no password or token that could leak.</p><svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary><div class="more"><dl>
+<dt>The problem</dt><dd>The first deployment fetched the model from a private repository using the owner's write token, far more power than a server that reads one file should hold. It also kept the processor on so that the models could load in a background thread, which would have cost about $110 a month if anything kept the service awake around the clock.
+</dd>
+<dt>Options considered</dt><dd>
+<ul><li>Keep the processor allocated all the time (instance-based billing) <a class="cite" href="../references/#r38" aria-label="reference 38">[38]</a>.</li><li>Replace the write token with a read-only token for the one model.</li><li>Copy the model into the container image and need no token at all.</li><li>Load the models inside the first request that needs them, so request-based billing works.</li></ul>
+</dd>
+<dt>Decision</dt><dd>Request-based billing, under which an instance is charged only while it starts, serves requests and shuts down, and has processor time only while it serves <a class="cite" href="../references/#r38" aria-label="reference 38">[38]</a>. The models load inside the first request instead of a background thread, and a TCP startup probe lets the page answer quickly after a cold start <a class="cite" href="../references/#r39" aria-label="reference 39">[39]</a>. The model is copied into the image and the token was destroyed; the service runs under its own account. A daily cap on live runs keeps the worst case inside the free allowance, which for request-based billing is 180,000 vCPU-seconds, 360,000 GB-seconds and 2 million requests a month <a class="cite" href="../references/#r42" aria-label="reference 42">[42]</a>. The second-generation execution environment is used, which Google documents as having faster CPU performance <a class="cite" href="../references/#r41" aria-label="reference 41">[41]</a>; on the first deployment it halved a run that took 95 seconds in the default sandbox.
+</dd>
+<dt>Result</dt><dd>Measured on the live service on 19 October: the page answers in about 3 seconds from cold; the models load within the first run (13 to 22 seconds); a streamed live run of a medium generated drawing took 34 to 54 seconds (60 seconds on one slow host), and an upload 12 to 19 seconds. The service has no secret to steal.
+</dd>
+<dt>Evidence</dt><dd><span class="mono">scripts/deploy_cloudrun.sh</span>; <span class="mono">docs/PROBLEMS.md</span> entry 21; <span class="mono">HANDOFF.md</span> section 7, 19 October 01:15 to 03:15.
+</dd>
+</dl>
+</div></details>
+<details class="decision card" id="d15"><summary><h3>15. One link for everything</h3><p class="lead">Everything you need is behind one link: try the system live, see how it works, and read the evidence, the decisions, the problems and the plan.</p><svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary><div class="more"><dl>
+<dt>The problem</dt><dd>An assessor or a company director will click one link and give it a few minutes. A video or a static page proves nothing about whether the system runs, and a code repository asks too much of a reader who is not a developer.
+</dd>
+<dt>Options considered</dt><dd>A replayed static site; GitHub Pages; a shared document page; a Hugging Face Space, where the free plan refused a Docker Space (payment required, HTTP 402); Google Cloud Run.
+</dd>
+<dt>Decision</dt><dd>A live site on Cloud Run. It runs the real pipeline on a stored sample, a freshly generated drawing or an upload, streams each stage as it happens with what that stage produced, scores generated drawings against their answer keys while you watch, and serves its scorecards from the same evaluation files as these pages. Every sample also has a precomputed result, so nothing depends on the server waking up.
+</dd>
+<dt>Result</dt><dd>Live runs on demand; a second visitor is served while a run is in progress (problem 21 in the log); and the numbers on these pages are read from the evaluation files, so they cannot drift from the record.
+</dd>
+<dt>Evidence</dt><dd><span class="mono">site/app.py</span>; <span class="mono">HANDOFF.md</span> section 2 ("One-link site") and section 7.
+</dd>
+</dl>
+</div></details>
+<div class="card prose" style="max-width:none"><h3>What the fifteen have in common</h3><ul><li><b>Measure on the unit the product is judged by.</b> Whole drawings, not tiles; price and bill-of-materials lines, not only boxes.</li><li><b>Never let a model be the authority on a price.</b> Rules price; doubtful items are raised for the estimator, never silently fixed; every line names its evidence.</li><li><b>Write the problem down when it happens.</b> Every decision above came from a measurement, and several from a mistake I recorded first (<a href="../problems/">the problem log</a>).</li></ul></div></div></section>
+</main>
+<footer><div class="wrap"></div></footer>
+</body>
+</html>

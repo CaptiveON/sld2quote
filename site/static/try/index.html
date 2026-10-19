@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Try it, sld2quote</title>
+<meta name="description" content="Run a switchboard drawing through the pipeline live: a stored sample, a freshly generated drawing or your own upload; watch the five stages report what they found, then check every number against the sheet.">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../style.css">
+<script src="../app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="../">sld2quote</a>
+    <span id="pill" class="pill" role="status" aria-live="polite">Loading</span>
+    <nav class="nav" aria-label="Pages"></nav>
+  </div>
+</header>
+
+<main id="main">
+<section id="try" class="block" aria-labelledby="h-try" style="border-top:0">
+  <div class="wrap">
+    <p class="kicker">Try it</p>
+    <h1 id="h-try" style="font-size:var(--fs-2xl)">One drawing, three steps</h1>
+    <p class="lede">Choose a drawing and run it live: the server reads it stage by stage, each stage says what it is doing, which technology does it and what it found, and the results open with the drawing, the parts and the questions. The server sleeps between visits, so the first run waits about 20 seconds while it wakes.</p>
+    <ol class="stepper" aria-label="Progress through the demo">
+      <li class="current" aria-current="step"><span class="step"><span class="num">1</span><span><b>Choose</b><small>a sample, a new drawing or your own</small></span></span></li>
+      <li class="todo"><span class="step"><span class="num">2</span><span><b>Run</b><small>starts when you run a drawing below</small></span></span></li>
+      <li class="todo"><span class="step"><span class="num">3</span><span><b>Results</b><small>the drawing, the parts, the questions</small></span></span></li>
+    </ol>
+
+    <div id="step-choose">
+      <div role="tablist" aria-label="Where the drawing comes from">
+        <button role="tab" id="tab-samples" aria-controls="panel-samples" aria-selected="true">Sample gallery</button>
+        <button role="tab" id="tab-generate" aria-controls="panel-generate" aria-selected="false" tabindex="-1">Generate a drawing</button>
+        <button role="tab" id="tab-upload" aria-controls="panel-upload" aria-selected="false" tabindex="-1">Upload your own</button>
+      </div>
+      <p id="nolive" class="notice" hidden><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg><span>Live runs need the server, so this copy shows the precomputed samples only; the repository runs the server in one command.</span></p>
+
+      <div id="panel-samples" role="tabpanel" aria-labelledby="tab-samples">
+        <p class="muted small">Every sample was read by the same pipeline and saved with its files: Run it live sends the drawing through the server again, stage by stage; Result, precomputed opens the saved reading at once. Synthetic drawings carry an answer key and are scored; the real public-domain drawings have none, so they show what the reader does on a style it never saw.</p>
+        <div class="chips" id="chips" role="group" aria-label="Filter the samples"></div>
+        <div class="gallery" id="gallery" aria-busy="true">
+          <div class="sample"><div class="thumb skeleton"></div><div class="body"><span class="t skeleton">&nbsp;</span><span class="m skeleton">&nbsp;</span></div></div>
+          <div class="sample"><div class="thumb skeleton"></div><div class="body"><span class="t skeleton">&nbsp;</span><span class="m skeleton">&nbsp;</span></div></div>
+          <div class="sample"><div class="thumb skeleton"></div><div class="body"><span class="t skeleton">&nbsp;</span><span class="m skeleton">&nbsp;</span></div></div>
+          <div class="sample"><div class="thumb skeleton"></div><div class="body"><span class="t skeleton">&nbsp;</span><span class="m skeleton">&nbsp;</span></div></div>
+        </div>
+      </div>
+
+      <div id="panel-generate" role="tabpanel" aria-labelledby="tab-generate" hidden>
+        <form id="gen" class="card two" novalidate>
+          <div>
+            <div class="field">
+              <label for="seed">Seed <span class="hint">(0 to 999999; the same seed always draws the same board)</span></label>
+              <div class="row"><input type="number" id="seed" name="seed" min="0" max="999999" step="1" required style="width: 10em"><button type="button" class="btn small" id="random"><svg class="icon" aria-hidden="true"><use href="#i-random"/></svg> Random</button></div>
+              <p class="err" id="seed-err"></p>
+            </div>
+            <div class="field">
+              <span class="label-text" id="level-label" style="font-weight:600;font-size:var(--fs-s)">Complexity</span>
+              <div class="radios" role="radiogroup" aria-labelledby="level-label">
+                <label class="radio"><input type="radio" name="level" value="simple" checked><span><b>Simple</b>One incomer and a few outgoing ways; about 10 to 20 devices.</span></label>
+                <label class="radio"><input type="radio" name="level" value="medium"><span><b>Medium</b>Two incomers with a bus-section, more device types; about 20 to 35 devices.</span></label>
+                <label class="radio"><input type="radio" name="level" value="mix"><span><b>Mix</b>The generator picks simple or medium.</span></label>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="field">
+              <span style="font-weight:600;font-size:var(--fs-s)" id="copy-label">Copy</span>
+              <div class="radios" role="radiogroup" aria-labelledby="copy-label">
+                <label class="radio"><input type="radio" name="scan" value="0" checked><span><b>Clean</b>Crisp lines and text, as a CAD export.</span></label>
+                <label class="radio"><input type="radio" name="scan" value="1"><span><b>Scan-like</b>Blur, noise and a slight tilt, as a scanned print.</span></label>
+              </div>
+            </div>
+            <p class="muted small">The generator draws a new switchboard from the seed and writes its answer key, so the run is scored. Runs on the free server, about 20 to 50 seconds.</p>
+            <button type="submit" class="btn primary"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg> Generate and run</button>
+          </div>
+        </form>
+      </div>
+
+      <div id="panel-upload" role="tabpanel" aria-labelledby="tab-upload" hidden>
+        <form id="up" class="card two" novalidate>
+          <div>
+            <div class="field">
+              <label for="file">Drawing <span class="hint">(PNG or JPEG, up to 12 MB and 12 megapixels)</span></label>
+              <div class="drop" id="drop">
+                <svg class="icon" style="width:28px;height:28px" aria-hidden="true"><use href="#i-upload"/></svg>
+                <p>Drop a drawing here, or <label for="file" style="display:inline;color:var(--link);cursor:pointer;text-decoration:underline">choose a file</label>.</p>
+                <input type="file" id="file" name="file" accept="image/png,image/jpeg" hidden>
+                <p class="file" id="file-name">No file chosen</p>
+              </div>
+              <p class="err" id="file-err"></p>
+            </div>
+          </div>
+          <div>
+            <div class="field">
+              <label for="spec">Specification <span class="hint">(optional; one clause per line)</span></label>
+              <textarea id="spec" name="spec" placeholder="7.2 Internal separation shall be Form 4 Type 6.&#10;7.3 The assembly shall withstand a prospective short-circuit current of 50 kA for 1 second at the main busbars.&#10;7.5 Degree of protection shall be not less than IP31 with doors closed."></textarea>
+              <p class="err" id="spec-err"></p>
+              <button type="button" class="btn small" id="use-example">Use the example</button>
+            </div>
+            <p class="muted small">An uploaded drawing has no answer key, so there is no score: check the boxes on the sheet instead. The detector knows the synthetic IEC style only, so a real drawing is a stretch test. Nothing is kept beyond the last 50 runs. Runs on the free server, about 20 to 50 seconds.</p>
+            <button type="submit" class="btn primary"><svg class="icon" aria-hidden="true"><use href="#i-upload"/></svg> Upload and run</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="step-run" class="card" hidden>
+      <div class="rhead"><h2 id="run-title" style="font-size:var(--fs-xl)">Reading the drawing</h2><span class="mono muted" id="elapsed" aria-live="off">0 s</span></div>
+      <p class="muted small" id="run-sub"></p>
+      <ol class="stages" id="stages" aria-live="polite"></ol>
+      <p class="muted small" id="run-next"></p>
+      <div id="run-error" class="notice bad" hidden><svg class="icon" aria-hidden="true"><use href="#i-warn"/></svg><div><p id="run-error-text" style="margin:0 0 8px"></p><div class="row"><button type="button" class="btn" id="retry"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg> Try again</button><button type="button" class="btn" id="pick"><svg class="icon" aria-hidden="true"><use href="#i-back"/></svg> Pick another drawing</button></div></div></div>
+    </div>
+
+    <div id="step-results" hidden>
+      <div class="rhead"><div class="row"><h2 id="rtitle" tabindex="-1" style="font-size:var(--fs-xl);margin:0"></h2><span id="rkind" class="tag"></span></div><div class="row"><button type="button" class="btn live" id="rerun" hidden><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg> Run it live</button><button type="button" class="btn" id="stored" hidden><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg> Result, precomputed</button><button type="button" class="btn" id="copy-link"><svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg> Copy link</button><button type="button" class="btn" id="another"><svg class="icon" aria-hidden="true"><use href="#i-back"/></svg> Another drawing</button></div></div>
+      <p class="muted small" id="rmeta"></p>
+      <div class="strip" id="strip"></div>
+      <details class="rsteps" open><summary>How this drawing was read: the five stages, what each found and how long it took <svg class="icon" aria-hidden="true"><use href="#i-chevron"/></svg></summary><ol id="rstages"></ol></details>
+      <div class="viewer">
+        <div class="toolbar">
+          <div class="group" role="group" aria-label="Zoom"><button type="button" class="btn small" id="zoom-out" aria-label="Zoom out"><svg class="icon" aria-hidden="true"><use href="#i-zoom-out"/></svg></button><button type="button" class="btn small" id="zoom-in" aria-label="Zoom in"><svg class="icon" aria-hidden="true"><use href="#i-zoom-in"/></svg></button><button type="button" class="btn small" id="zoom-fit"><svg class="icon" aria-hidden="true"><use href="#i-fit"/></svg> Fit</button><span class="mono muted" id="zoom-level">100%</span></div>
+          <div class="group" role="group" aria-label="Layers"><label class="check"><input type="checkbox" id="layer-boxes" checked> Device boxes</label><label class="check"><input type="checkbox" id="layer-texts" checked> Rating text</label><label class="check"><input type="checkbox" id="layer-notes" checked> Notes</label></div>
+          <span class="muted small">Click the drawing, then scroll to zoom (or hold Ctrl); drag to pan; hover a box to find its row.</span>
+        </div>
+        <div class="stagearea" id="stagearea" tabindex="0" aria-label="The drawing with the boxes the reader found"></div>
+        <div class="legend"><span><i style="border-color:var(--box)"></i>device, high confidence</span><span><i style="border-color:var(--warn)"></i>medium</span><span><i style="border-color:var(--bad)"></i>low</span><span><i style="border-color:var(--text-box)"></i>rating text used</span><span><i style="border-color:var(--note-box)"></i>notes used for the board</span></div>
+      </div>
+      <div role="tablist" aria-label="Result sections" id="rtabs">
+        <button role="tab" id="tab-devices" aria-controls="r-devices" aria-selected="true">Devices<span class="count"></span></button>
+        <button role="tab" id="tab-bom" aria-controls="r-bom" aria-selected="false" tabindex="-1">Bill of materials<span class="count"></span></button>
+        <button role="tab" id="tab-issues" aria-controls="r-issues" aria-selected="false" tabindex="-1">Questions<span class="count"></span></button>
+        <button role="tab" id="tab-spec" aria-controls="r-spec" aria-selected="false" tabindex="-1">Specification check<span class="count"></span></button>
+        <button role="tab" id="tab-score" aria-controls="r-score" aria-selected="false" tabindex="-1">Score</button>
+        <button role="tab" id="tab-files" aria-controls="r-files" aria-selected="false" tabindex="-1">Files</button>
+      </div>
+      <div id="r-devices" role="tabpanel" aria-labelledby="tab-devices"></div>
+      <div id="r-bom" role="tabpanel" aria-labelledby="tab-bom" hidden></div>
+      <div id="r-issues" role="tabpanel" aria-labelledby="tab-issues" hidden></div>
+      <div id="r-spec" role="tabpanel" aria-labelledby="tab-spec" hidden></div>
+      <div id="r-score" role="tabpanel" aria-labelledby="tab-score" hidden></div>
+      <div id="r-files" role="tabpanel" aria-labelledby="tab-files" hidden></div>
+      <p class="foot" style="margin-top:var(--s4)">Where these numbers come from and what they mean: <a href="../how/">How it works</a> explains each stage; <a href="../evidence/">Evidence</a> holds the scorecards this reader was measured on.</p>
+    </div>
+  </div>
+</section>
+</main>
+<footer><div class="wrap"></div></footer>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Evidence, sld2quote</title>
+<meta name="description" content="The scorecards and charts the pipeline was measured on: whole drawings against their answer keys, the device types, the training runs, the operating threshold, the calibration, the text readers and where the time goes, each with its plain reading.">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/15.0.12/marked.min.js" defer></script>
+<script src="../app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="../">sld2quote</a>
+    <span id="pill" class="pill" role="status" aria-live="polite">Loading</span>
+    <nav class="nav" aria-label="Pages"></nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="block" aria-labelledby="h-evidence" style="border-top:0">
+  <div class="wrap">
+    <p class="kicker">The evidence</p>
+    <h1 id="h-evidence" style="font-size:var(--fs-2xl)">Every number, with its plain reading</h1>
+    <p class="lede">This page is the measurement record. Each chart and table is drawn from the evaluation files the code wrote (the scorecards, the detector summary, the text-reader comparison and the chart data), never typed in, and each comes with a sentence saying what it means. Synthetic drawings only; the real public-domain drawings in the gallery are not scored, because they have no answer key yet.</p>
+    <p class="reading"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg><span>How to read it: the test set is drawings in the styles the detector trained on, never seen in training; the unseen-style set holds whole drawing styles out of training; the baseline set is the drawings of the first measurement. Each comes as a clean copy and a scan-like copy. "Trained" is the site's reader; "classical" is the hand-written shape-test reader it replaced, kept as the before.</span></p>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-charts">
+  <div class="wrap">
+    <div id="charts-block" hidden>
+      <p class="kicker">In charts</p>
+      <h2 id="h-charts">The evidence, drawn</h2>
+      <p class="muted">Nine charts from the evaluation files; "Show the numbers" under each gives the same data as a table. The plain reading, chart by chart: the trained reader finds nearly every symbol where the classical one found few; the rare device types are the hard ones; weight averaging made the training curves steady; the threshold was chosen where boxes on blank paper stop; the confidence shown is how often a box with that score was right; the chosen text reader is both accurate and runs on Linux; the time goes to reading, not to rules; the training data is long-tailed; the price error is small on most drawings with a short tail.</p>
+      <div class="charts" id="charts"></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-cards">
+  <div class="wrap">
+    <p class="kicker">Whole drawings</p>
+    <h2 id="h-cards">The scorecards</h2>
+    <p class="muted">Whole drawings, scored against their answer keys: the trained reader against the hand-written one it replaced, on each evaluation set. <em>Symbols found</em> is the share of the answer key's symbols the reader found with the right type; <em>price within</em> is the gap between the quoted total and the total the same rules give on the answer key, so it measures reading, not pricing.</p>
+    <p class="foot" style="margin:0 0 var(--s2)">Labels linked right is counted between devices that were found and texts that were read, so it measures the pairing alone; a correct pairing can still hold a misread rating. The link rules were written against this generator's conventions and tuned on the sets they are scored on, so it is an upper bound.</p>
+    <div class="panels" id="panels"><div class="card"><span class="skeleton" style="display:block;height:8em"></span></div><div class="card"><span class="skeleton" style="display:block;height:8em"></span></div><div class="card"><span class="skeleton" style="display:block;height:8em"></span></div></div>
+    <p class="reading"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg><span>Plain reading: on the test set the trained reader finds <span data-n="set.test.clean.trained.symbol_recall" class="skeleton"></span> of the symbols on clean copies where the classical reader found <span data-n="set.test.clean.classical.symbol_recall" class="skeleton"></span>, and its quoted total lands within <span data-n="set.test.clean.trained.price_error" class="skeleton"></span> of the answer key's. On the unseen styles the symbols hold up (<span data-n="set.unseen.clean.trained.symbol_recall" class="skeleton"></span>) but the ratings read right drop to <span data-n="set.unseen.clean.trained.rating_accuracy" class="skeleton"></span>, because most of those drawings have a cable drawn through the label, which is the largest error left.</span></p>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-types">
+  <div class="wrap">
+    <p class="kicker">By device type</p>
+    <h2 id="h-types">Which symbols are found, and which are not</h2>
+    <p class="muted" id="types-sub">Test set, trained reader; the share of each type's symbols found on clean copies, with the scan-like share beside it.</p>
+    <div class="card"><div id="types"><span class="skeleton" style="display:block;height:6em"></span></div></div>
+    <p class="reading"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg><span>Plain reading: the common devices (breakers, fuse switches, transformers) are found almost every time; the rare and small ones (relays, earths, surge arresters) are where the misses are, and the training data shows why: the rarest class, <span data-n="data.rarest.name" class="skeleton"></span>, has <span data-n="data.rarest.train" class="skeleton"></span> training boxes against <span data-n="data.commonest.train" class="skeleton"></span> for the commonest.</span></p>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-runs">
+  <div class="wrap">
+    <p class="kicker">The detector on its own</p>
+    <h2 id="h-runs">Training runs, per tile</h2>
+    <div class="card"><p class="sub muted small">Per 640 px tile on the unseen-style test tiles, with duplicate suppression; the size rule asks for precision and recall of at least 0.95 for every class on validation and unseen-style tiles. The live model's row is its deployed pass, chosen on whole drawings.</p><div id="runs"><span class="skeleton" style="display:block;height:6em"></span></div><h4 style="margin-top:var(--s3)">What it still gets wrong</h4><p id="wrong" class="small"></p></div>
+    <p class="reading"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg><span>Plain reading: every run is recorded, including the ones that lost. Per-tile scores are a floor for the product, because a symbol cut by a tile edge is whole in the next tile, and they can disagree with the drawing-level score, which is why the live pass was chosen on whole drawings: <span data-n="training.live.run" class="skeleton"></span>, pass <span data-n="training.live.pass" class="skeleton"></span>, mAP@0.5 <span data-n="tile.map" class="skeleton"></span> on <span data-n="tile.tiles" class="skeleton"></span> unseen-style tiles; <span data-n="tile.rule" class="skeleton"></span> classes meet the 0.95 bar, which the full system does not yet, and says so.</span></p>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-engines">
+  <div class="wrap">
+    <p class="kicker">The text readers</p>
+    <h2 id="h-engines">Six engines on the same sheets</h2>
+    <div class="card"><p class="sub muted small">Character accuracy on the rating labels and the notes lines against the generator's own text, clean and scan-like copies pooled, and the seconds per standard sheet on two CPU threads. A string the engine misses scores zero, so the columns combine finding and reading.</p><div id="engines"><span class="skeleton" style="display:block;height:6em"></span></div></div>
+    <p class="reading"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg><span>Plain reading: <span data-n="ocr.choice.engine" class="skeleton"></span> was chosen by this measurement, <span data-n="ocr.choice.accuracy" class="skeleton"></span> of the characters right in <span data-n="ocr.choice.seconds" class="skeleton"></span> per sheet, and it runs on Linux where the server lives; Apple Vision, the Mac's own reader, is faster but reads these sheets at <span data-n="ocr.vision.choice.accuracy" class="skeleton"></span>.</span></p>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-full">
+  <div class="wrap">
+    <p class="kicker">The record</p>
+    <h2 id="h-full">The full scorecards</h2>
+    <p class="muted">The markdown files exactly as the evaluation code wrote them, every set, reader, device type and sheet, so any figure above can be traced to its row.</p>
+    <div id="fullcards"></div>
+    <p class="foot">The problems met while producing these numbers, and what each means for the real project, are on the <a href="../problems/">Problems</a> page; the decisions they led to are on the <a href="../decisions/">Decisions</a> page.</p>
+  </div>
+</section>
+</main>
+<footer><div class="wrap"></div></footer>
+</body>
+</html>

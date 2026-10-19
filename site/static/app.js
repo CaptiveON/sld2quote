@@ -1,9 +1,10 @@
 'use strict';
-// sld2quote front end: plain JavaScript, no build step. Modes decided at load: live (the FastAPI server on this origin, or
+// sld2quote front end, one script for every page (each page wires only the parts it has): plain JavaScript, no build step. Modes decided at load: live (the FastAPI server on this origin, or
 // http://127.0.0.1:7860 when the page is opened from file://), static (samples/index.json beside the page, no server) and
 // mock (window.MOCK from mock.js when nothing answers: the test double). The server sleeps between visits, so it is woken
 // (one /api/health call, about 20 s) only when the visitor reaches Try it or starts a run.
 const API = location.protocol.startsWith('http') ? '' : 'http://127.0.0.1:7860';
+const ROOT = document.currentScript && document.currentScript.src ? new URL('.', document.currentScript.src).href : './';  // the site root (this script's folder), so a page under it finds mock.js, mock/ and samples/ over http, file and the static Space alike
 const $ = (s, el) => (el || document).querySelector(s), $$ = (s, el) => [...(el || document).querySelectorAll(s)];
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'})[c]);
 const gbp = (n, d) => n == null ? '' : '£' + Number(n).toLocaleString('en-GB', {minimumFractionDigits: d || 0, maximumFractionDigits: d || 0});
@@ -16,13 +17,17 @@ const bar = (v, cls) => `<svg class="meter ${cls || ''}" viewBox="0 0 100 8" pre
 const PLAIN = {ACB: 'incoming air circuit breaker', MCCB: 'outgoing moulded-case breaker', BUS_SECTION: 'bus-section switch', FUSE_SWITCH: 'fuse switch', ISOLATOR: 'isolator', CONTACTOR: 'motor starter', TRANSFORMER: 'transformer', GENERATOR: 'generator', MOTOR: 'motor', BOARD: 'downstream board', CT: 'current transformer', METER: 'panel meter', RELAY: 'protection relay', SPD: 'surge protector', CAPACITOR: 'power-factor correction bank', EARTH: 'earth'};
 const FIELD = {fault_kA: 'Fault level (kA)', form: 'Form of separation', ip: 'Ingress protection', poles: 'Poles', standard: 'Standard', busbar_material: 'Busbar material'};
 const KIND = {missing: 'not read', conflict: 'disagreement', low_confidence: 'low confidence', assumed: 'assumed', below_fault: 'below the fault level'};
-const STAGES = [['text', 'Reading the words on the page', 'Every label, rating and note becomes text with a box.'], ['symbols', 'Finding the symbols', 'The detector reads the page in tiles and keeps one box per device.'],
-  ['labels', 'Pairing labels with symbols', 'Each symbol takes the nearest label: type, rating, poles, fault rating.'], ['spec', 'Checking the specification', 'Each clause is compared with the drawing; a disagreement becomes a question.'],
-  ['price', 'Choosing parts and pricing', 'Fixed rules pick a part for every device and add busbars, enclosure and labour.']];
-const S = {mode: 'live', health: 'asleep', step: 'choose', samples: [], filter: 'all', result: null, key: null, running: null, retry: null, pending: null, model: '', engine: ''};
+const STAGES = [['text', 'Reading the words on the page', 'Every label, rating and note becomes text with a box.', 'RapidOCR, the PP-OCR text models, on the CPU'],
+  ['symbols', 'Finding the symbols', 'The detector reads the page in tiles and keeps one box per device.', 'RT-DETR r18 trained on synthetic tiles: 640 px tiles with 25% overlap, duplicates removed within and across tiles, confidence calibrated on validation drawings'],
+  ['labels', 'Pairing labels with symbols', 'Each symbol takes the lines of its own way: type, rating, poles, fault rating.', 'the way-based link rules and the role rules; no second model'],
+  ['spec', 'Checking the specification', 'Each clause is compared with the drawing; a disagreement becomes a question.', 'clause splitting and rule-based reading of form, fault level, IP and poles'],
+  ['price', 'Choosing parts and pricing', 'Fixed rules pick a part for every device and add busbars, enclosure and labour.', 'deterministic rules over an invented catalogue, the evidence named on every line']];
+const STAT = {text: e => e.texts != null && `${e.texts} pieces of text read`, symbols: e => e.symbols != null && `${e.symbols} symbols found`, labels: e => e.linked != null && `${e.linked} of ${e.devices} devices given their labels`,
+  spec: e => e.clauses != null && (e.clauses ? `${e.clauses} clause${e.clauses === 1 ? '' : 's'} checked, ${e.conflicts} disagreement${e.conflicts === 1 ? '' : 's'}` : 'no specification came with this drawing'), price: e => e.lines != null && `${e.lines} lines priced, ${gbp(e.total_gbp)}`};  // what a step event says it produced
+const S = {mode: 'live', health: 'asleep', step: 'choose', samples: [], filter: 'all', result: null, key: null, running: null, retry: null, pending: null, model: '', engine: '', numbers: null};
 
 // ---------------------------------------------------------------- data access
-function loadMock() { return new Promise((ok, no) => { const s = document.createElement('script'); s.src = 'mock.js'; s.onload = ok; s.onerror = no; document.head.appendChild(s); }); }
+function loadMock() { return new Promise((ok, no) => { const s = document.createElement('script'); s.src = ROOT + 'mock.js'; s.onload = ok; s.onerror = no; document.head.appendChild(s); }); }
 const BUSY = [5000, 10000, 20000, 30000, 30000], RUN_BUSY = [20000, 20000, 20000];  // backoff when the platform refuses with a plain-text 429 while another visitor's run holds the only instance: data requests, then runs
 const sleep = ms => new Promise(res => setTimeout(res, ms));
 const isCap = text => /allowance/i.test(text || '');  // the daily cap's own 429 carries this word; the platform's refusal does not
@@ -39,22 +44,22 @@ function busyPill(secs) {  // the pill while a data request waits for the busy i
   const p = $('#pill'); S.busy = true; clearInterval(countdown); p.className = 'pill warn'; say(`Server busy with another visitor's run; retrying in ${secs} s`); p.title = 'The server refused the request while its only instance was reading another drawing';
 }
 async function getJson(url) { const r = await fetchRetry(url, undefined, busyPill); busyPill(0); if (!r.ok) { const e = new Error('HTTP ' + r.status); e.status = r.status; throw e; } return r.json(); }
-function fileUrl(dir, u) { return !u ? u : dir ? dir + String(u).split('/').pop() : String(u).startsWith('/') ? API + u : u; }
+function fileUrl(dir, u) { u = u == null ? u : String(u); return !u ? u : dir ? dir + u.split('/').pop() : u.startsWith('/') ? API + u : /^[a-z]+:/.test(u) ? u : ROOT + u; }  // a run or sample file on the API, a static copy's file beside the page, a mock fixture under the site root
 async function detectMode() {
   try { const j = await getJson(API + '/api/samples'); S.samples = j.samples || j; S.mode = 'live'; return; } catch (e) { if (e.status === 429) { S.mode = 'live'; S.samples = []; S.busyStart = true; return; } /* no server here */ }
-  if (location.protocol !== 'file:') { try { const j = await getJson('samples/index.json'); S.samples = j.samples || j; S.mode = 'static'; return; } catch (e) { /* not a static copy */ } }
+  if (location.protocol !== 'file:') { try { const j = await getJson(ROOT + 'samples/index.json'); S.samples = j.samples || j; S.mode = 'static'; return; } catch (e) { /* not a static copy */ } }
   await loadMock(); S.mode = 'mock'; S.samples = window.MOCK.samples;
 }
 async function loadSample(id) {
   if (S.mode === 'mock') { const r = window.MOCK.results[id]; if (!r) throw new Error('no such sample'); return r; }
-  if (S.mode === 'static') { const r = await getJson('samples/' + encodeURIComponent(id) + '/result.json'); r.dir = 'samples/' + id + '/'; return r; }
+  if (S.mode === 'static') { const r = await getJson(ROOT + 'samples/' + encodeURIComponent(id) + '/result.json'); r.dir = ROOT + 'samples/' + id + '/'; return r; }
   return getJson(API + '/api/samples/' + encodeURIComponent(id));
 }
 async function loadRun(rid) { const r = await getJson(API + '/api/runs/' + encodeURIComponent(rid) + '/result.json'); r.dir = API + '/api/runs/' + rid + '/'; return r; }
 async function loadScorecards() {
   if (S.mode === 'mock') return window.MOCK.scorecards;
   if (S.mode === 'static') { const get = async p => { try { const r = await fetch(p); return r.ok ? await r.text() : ''; } catch (e) { return ''; } };
-    const [results_md, ocr_md, detector_md, problems_md] = await Promise.all(['eval/RESULTS.md', 'eval/OCR.md', 'eval/DETECTOR.md', 'docs/PROBLEMS.md'].map(get)); return {results_md, ocr_md, detector_md, problems_md}; }
+    const [results_md, ocr_md, detector_md, problems_md] = await Promise.all(['eval/RESULTS.md', 'eval/OCR.md', 'eval/DETECTOR.md', 'docs/PROBLEMS.md'].map(x => get(ROOT + x))); return {results_md, ocr_md, detector_md, problems_md}; }
   return getJson(API + '/api/scorecards');
 }
 // A live run as a stream of events (start, step, result, error); a plain JSON answer (an older server) is accepted too.
@@ -97,9 +102,9 @@ function setPill(state, extra) {
     ready: ['Ready', 'model ' + S.model + ', text engine ' + S.engine], static: ['Samples only', 'no server here: the precomputed samples and scorecards'], fault: ['Live runs unavailable', 'the server could not load its models; the samples still work']}[state];
   S.busy = false; p.className = 'pill ' + ({ready: 'ok', waking: 'warn', fault: 'bad'}[state] || ''); say(text[0]); p.title = extra || text[1];
   if (state === 'waking') { let n = 20; countdown = setInterval(() => { n -= 1; say(n > 0 ? `Waking the server, about ${n} s` : 'Still waking the server'); }, 1000); }
-  const nolive = S.mode !== 'live' || state === 'fault';
-  $('#nolive').hidden = !nolive; $('#try').classList.toggle('nolive', nolive); $$('#tab-generate, #tab-upload').forEach(t => { t.hidden = nolive; });
-  if (state === 'fault') $('#nolive span').textContent = 'The server could not load its models, so live runs are unavailable for now; the samples and scorecards still work.';
+  const nolive = S.mode !== 'live' || state === 'fault', notice = $('#nolive'), tryIt = $('#try');  // the Try page's live controls hide behind its notice; the other pages have none
+  if (notice) notice.hidden = !nolive; if (tryIt) tryIt.classList.toggle('nolive', nolive); $$('#tab-generate, #tab-upload').forEach(t => { t.hidden = nolive; });
+  if (state === 'fault' && notice) $('span', notice).textContent = 'The server could not load its models, so live runs are unavailable for now; the samples and scorecards still work.';
 }
 let waking = null;
 function warm() {  // one health call wakes the server; callers never wait for it
@@ -166,7 +171,7 @@ const KINDS = {all: 'All', clean: 'Clean', scan: 'Scan-like', unseen: 'Unseen st
 function gallery() {
   const counts = {all: S.samples.length}; S.samples.forEach(s => { const k = kindOf(s); counts[k] = (counts[k] || 0) + 1; });
   $('#chips').innerHTML = Object.keys(KINDS).filter(k => counts[k]).map(k => `<button type="button" class="chip" data-k="${k}" aria-pressed="${String(k === S.filter)}">${KINDS[k]} <span class="mono">${counts[k]}</span></button>`).join('');
-  const list = S.samples.filter(s => S.filter === 'all' || kindOf(s) === S.filter), dir = S.mode === 'static' ? id => 'samples/' + id + '/' : () => '';
+  const list = S.samples.filter(s => S.filter === 'all' || kindOf(s) === S.filter), dir = S.mode === 'static' ? id => ROOT + 'samples/' + id + '/' : () => '';
   $('#gallery').innerHTML = list.map(s => cardHtml(s, dir(s.id))).join('') || `<p class="empty">${S.busyStart ? 'The server is busy with another visitor\'s run; reload the page in a minute to see the samples.' : 'No samples of that kind.'}</p>`;
   $('#gallery').setAttribute('aria-busy', 'false');
 }
@@ -190,25 +195,28 @@ async function openSample(id, push) {
 }
 
 // ---------------------------------------------------------------- live runs
-function stagesHtml(steps, state) {
-  return steps.map(([k, label, plain]) => { const st = state[k] || 'pending';
-    return `<li class="stage ${st}" data-k="${k}"><span class="dot">${st === 'done' ? icon('check') : ''}</span><span><b>${esc(label)}</b><small>${esc(plain)}</small></span><span class="secs">${st === 'done' && state.secs[k] != null ? state.secs[k].toFixed(1) + ' s' : ''}</span></li>`; }).join('');
+function stagesHtml(steps, state) {  // each stage: what happens, which technology does it and, once it has reported, what it produced and its seconds
+  return steps.map(([k, label, plain, tech]) => { const st = state[k] || 'pending', stat = state.stats[k];
+    return `<li class="stage ${st}" data-k="${k}"><span class="dot">${st === 'done' ? icon('check') : ''}</span><span><b>${esc(label)}</b><small>${esc(plain)}</small><small class="tech">${esc(tech || '')}</small>${stat ? `<span class="found">${esc(stat)}</span>` : ''}</span><span class="secs">${st === 'done' && state.secs[k] != null ? state.secs[k].toFixed(1) + ' s' : ''}</span></li>`; }).join('');
 }
 async function startRun(path, init, title) {
-  const state = {secs: {}}, started = Date.now(); let steps = STAGES; S.running = {title}; S.retry = () => startRun(path, init, title);
+  const state = {secs: {}, stats: {}}, started = Date.now(); let steps = STAGES; S.running = {title}; S.retry = () => startRun(path, init, title);
   $('#run-title').textContent = title; $('#run-error').hidden = true; $('#elapsed').textContent = '0 s';
-  $('#run-sub').textContent = S.health === 'ready' ? 'The five stages run one after another; each ticks when done.' : 'The server wakes up first (about 20 seconds), then the five stages run one after another.';
+  const reading = 'The five stages run one after another; each reports what it found as it finishes.';
+  $('#run-sub').textContent = S.health === 'ready' ? reading : 'The server wakes up first (about 20 seconds). ' + reading;
   $('#run-next').textContent = 'The results open on this page as soon as the last stage finishes; nothing to refresh.';
   const paint = () => { $('#stages').innerHTML = stagesHtml(steps, state); };
-  state[steps[0][0]] = S.health === 'ready' ? 'active' : 'pending'; paint(); showStep('run', true);
+  const begin = () => { if (state[steps[0][0]] !== 'done') state[steps[0][0]] = 'active'; };  // the first stage spins until its step line arrives; each line ticks its stage and starts the next
+  if (S.health === 'ready') begin(); paint(); showStep('run', true);
   const tick = setInterval(() => { $('#elapsed').textContent = Math.round((Date.now() - started) / 1000) + ' s'; }, 1000);
   try {
     const r = await runStream(path, init, ev => {
-      if (ev.event === 'start') { steps = ev.steps.map(s => [s.step, s.label, (STAGES.find(x => x[0] === s.step) || [])[2] || '']); state[steps[0][0]] = 'active'; $('#run-sub').textContent = 'The five stages run one after another; each ticks when done.'; if (S.health !== 'ready') setPill('ready'); }
-      if (ev.event === 'step') { state[ev.step] = 'done'; state.secs[ev.step] = ev.seconds; const i = steps.findIndex(s => s[0] === ev.step); if (steps[i + 1]) state[steps[i + 1][0]] = 'active'; }
+      if (ev.event === 'start') { steps = ev.steps.map(st => { const own = STAGES.find(x => x[0] === st.step) || []; return [st.step, st.label, own[2] || '', own[3] || '']; }); begin(); $('#run-sub').textContent = reading; if (S.health !== 'ready') setPill('ready'); }
+      if (ev.event === 'step') { state[ev.step] = 'done'; state.secs[ev.step] = ev.seconds; const said = STAT[ev.step] && STAT[ev.step](ev); if (said) state.stats[ev.step] = said;
+        const i = steps.findIndex(st => st[0] === ev.step); if (steps[i + 1] && state[steps[i + 1][0]] !== 'done') state[steps[i + 1][0]] = 'active'; }
       paint();
     }, (secs, n, total) => { $('#run-sub').textContent = `The server is busy with another visitor's run (up to a minute); it will retry in ${secs} s, attempt ${n} of ${total}.`; });
-    steps.forEach(s => { state[s[0]] = 'done'; }); paint(); S.running = null;
+    steps.forEach(st => { state[st[0]] = 'done'; }); paint(); S.running = null;
     S.result = r; S.key = {run: r.id}; render(r); showStep('results', true);
   } catch (e) {
     S.running = null; $('#run-error-text').textContent = e.message; $('#run-error').hidden = false; $('#run-next').textContent = '';
@@ -261,6 +269,7 @@ function render(r) {
   const who = [m.weights && `model ${String(m.weights).split('/').pop()}`, r.engine && `text engine ${ENGINES[r.engine] || r.engine}`].filter(Boolean).join(', ');
   $('#rmeta').textContent = [src.note, t.total != null ? `Read in ${t.total} s (text ${t.ocr} s, symbols ${t.detector} s)` : '', who,
     S.key && S.key.run ? 'This result stays while the server keeps the last 50 runs; copy the link to come back to it' : ''].filter(Boolean).map(x => x.replace(/\.\s*$/, '').replace(/^./, c => c.toUpperCase())).join('. ') + '.';
+  const rs = $('#rstages'); if (rs) rs.innerHTML = (r.steps || []).map((st, i) => { const own = STAGES[i] || []; return `<li><span class="num">${i + 1}</span><span><b>${esc(st.title || st.key)}</b><small>${esc(st.plain || '')}</small><small class="tech">${esc(own[3] || '')}</small></span><span class="secs">${st.seconds != null ? Number(st.seconds).toFixed(1) + ' s' : ''}</span></li>`; }).join('');
   const margin = bom.subtotal_gbp ? Math.round(bom.margin_gbp / bom.subtotal_gbp * 100) : null;
   const sc = r.score, q = sc ? quality(sc) : null;
   $('#strip').innerHTML = `<div class="tile"><span class="v">${devices.length}</span><span class="c">devices found on the sheet</span></div>
@@ -293,11 +302,18 @@ function render(r) {
     + (() => { const st = stackedTypes((sc.per_type || []).map(p => Object.assign({plain: PLAIN[p.type]}, p)), Math.max(280, Math.min(560, aw / 2 - 40)), 'this drawing'); return `<div class="two"><div class="rchart"><h4>By device type</h4><div class="plotwrap">${st ? st.svg : ''}</div><p class="legend small">${st ? st.legend : ''}</p></div><div>` + table(['Device type', {t: 'In the answer key', n: 1}, 'Found', {t: 'Reported', n: 1}], (sc.per_type || []).map(p => `<tr>${td(PLAIN[p.type] || p.type)}${td(p.total, 'n')}<td>${bar(p.total ? p.found / p.total : 0, p.total && p.found === p.total ? 'ok' : '')}<span class="mono small">${p.found} of ${p.total}</span></td>${td(p.reported, 'n')}</tr>`)) + '</div></div>'; })()
     + `<p class="foot">A symbol counts as found when its type is right and its box overlaps the answer key's. The reference total (${gbp(sc.reference_total_gbp)}) is what the same rules give on the answer key, so the price error measures reading, not pricing.</p>` : '<p class="empty">No answer key exists for this drawing, so there is no score. The gallery\'s synthetic samples and generated drawings are scored.</p>';
   const files = r.files || {}, names = [['quotation_md', 'quotation.md', 'the draft quotation'], ['bom_csv', 'bom.csv', 'the bill of materials for a spreadsheet'], ['review_html', 'review.html', 'the review page, self-contained'], ['extraction_json', 'extraction.json', 'everything the reader found']];
-  const sheet = f((r.images || {}).sheet), resultJson = sheet && sheet.includes('/') && S.mode !== 'mock' ? sheet.slice(0, sheet.lastIndexOf('/') + 1) + 'result.json' : (S.mode === 'mock' ? 'mock/result.json' : null);
+  const sheet = f((r.images || {}).sheet), resultJson = sheet && sheet.includes('/') && S.mode !== 'mock' ? sheet.slice(0, sheet.lastIndexOf('/') + 1) + 'result.json' : (S.mode === 'mock' ? ROOT + 'mock/result.json' : null);
   const rw = Math.max(280, Math.min(640, aw - 48)), tm = stackedTiming((r.steps || []).map(s => ({label: s.title || s.key, seconds: s.seconds})), rw, 'seconds per stage for this run');
   $('#r-files').innerHTML = (tm ? `<div class="rchart"><h4>Where the time went for this run</h4><div class="plotwrap">${tm.svg}</div><p class="legend small">${tm.legend}</p><details class="numbers"><summary>Show the numbers</summary><div class="frame">${tm.table}</div></details></div>` : '') + `<div class="files">${names.filter(([k]) => files[k]).map(([k, n, d]) => `<a href="${esc(f(files[k]))}" download>${icon('file')}<span>${n}<br><small>${d}</small></span></a>`).join('')}${resultJson ? `<a href="${esc(resultJson)}" download>${icon('file')}<span>result.json<br><small>this result as the server returned it</small></span></a>` : ''}</div>`;
+  Object.keys(MEANS).forEach(k => { const el = $('#r-' + k); if (el) el.insertAdjacentHTML('afterbegin', `<p class="means">${MEANS[k]}</p>`); });
   showTab($('#tab-devices'));
 }
+const MEANS = {devices: 'Every device the detector found, with the rating the reader paired to it. Confidence is how often a box with that score was right on the validation drawings; a rating marked not read is a question for the estimator, never a guess.',
+  bom: 'The parts the rules chose for those devices, with busbars, enclosure, labour and documents added. Every line names its evidence (the symbol box, the text box or the clause it rests on) and the rule that chose it.',
+  issues: 'What an estimator must still decide: a rating that could not be read, a disagreement with the specification, a symbol found with low confidence. Nothing here was settled silently.',
+  spec: 'The clauses the specification reader found, and where they disagree with the drawing. Each disagreement is priced to the drawing and listed under Questions.',
+  score: 'How this reading compares with the answer key the generator wrote: symbols found, price within, ratings read. Only synthetic drawings have an answer key.',
+  files: 'The files the pipeline wrote for this drawing, as an estimator would receive them, and where the seconds went.'};
 async function textLayers(r, f) {
   const off = why => ['texts', 'notes'].forEach(l => { const cb = $('#layer-' + l); cb.checked = false; cb.disabled = true; cb.title = why; layers(); });
   if (!(r.files || {}).extraction_json || location.protocol === 'file:') return off('Not available for this result');
@@ -355,30 +371,35 @@ function panelsHtml(sets) {
 }
 function typesHtml(md) {
   const {trained} = setSections(md, 'data/eval/test'); const rows = mdTable(trained, /### Symbols per device type/).slice(1); if (!rows.length) return '';
-  $('#types-sub').textContent = 'Test set, trained reader; the share of each type\'s symbols found on clean copies, with the scan-like share beside it.';
+  const sub = $('#types-sub'); if (sub) sub.textContent = 'Test set, trained reader; the share of each type\'s symbols found on clean copies, with the scan-like share beside it.';
   return `<table class="kv"><thead><tr><th>Device type</th><th>Clean</th><th>Scan</th><th class="n">In the set</th></tr></thead><tbody>${rows.map(r => `<tr><th scope="row">${esc(PLAIN[r[0]] || r[0])}</th><td>${bar(r[2])}<span class="mono small">${pct(r[2])}</span></td><td class="mono small">${pct(r[6])}</td><td class="n mono small">${esc(r[3])}</td></tr>`).join('')}</tbody></table>`;
 }
 function enginesHtml(md) {
   const rows = mdTable(section(md, /^## The rule/m), /\| engine \|/).slice(1), chosen = (md.match(/## The choice\s+\*\*([\w-]+)\*\*/) || [])[1]; if (!rows.length) return '';
   return `<table class="kv"><thead><tr><th>Engine</th><th>Labels and notes</th><th class="n">s per sheet</th></tr></thead><tbody>${rows.map(r => `<tr><th scope="row">${esc(r[0])}${r[0] === chosen ? ' <span class="tag ok">chosen</span>' : ''}</th><td>${bar(r[4])}<span class="mono small">${pct(r[4])}</span></td><td class="n mono small">${esc(r[6])}</td></tr>`).join('')}</tbody></table><p class="foot">Vision is the Mac's built-in reader and the reference; it does not run on Linux, where the server lives.</p>`;
 }
-function runsHtml(md) {
-  const lm = liveModel(), live = lm.run, tag = liveTag(), out = []; let wrong = '';
+function tileRows(md) {  // one row per training run in DETECTOR.md: whether it is the live model, its pass, mAP@0.5, precision, recall, the size rule and what it still gets wrong
+  const lm = liveModel(), out = [];
   for (const sec of md.split(/\n(?=## )/)) { const h = sec.match(/^## (.+?) \(`weights\/(\w+)`\)/); if (!h) continue;
-    const isLive = h[2] === live, dp = isLive && lm.pass, cell = '\\| (\\d+) \\| with NMS \\| ([\\d.]+) \\| ([\\d.]+) \\| [^|]+\\| ([\\d.]+) \\|';
+    const isLive = h[2] === lm.run, dp = isLive && lm.pass, cell = '\\| (\\d+) \\| with NMS \\| ([\\d.]+) \\| ([\\d.]+) \\| [^|]+\\| ([\\d.]+) \\|';
     const liveRow = dp && sec.match(new RegExp('\\| test_unseen, pass ' + dp + ', the site model[^|]*' + cell));  // the deployed pass's own per-tile row, when the summary carries it
     const row = liveRow || sec.match(new RegExp('\\| test_unseen ' + cell)), rule = (dp && sec.match(new RegExp('Size rule for pass ' + dp + '[^:]*: (\\d+) of (\\d+) classes pass'))) || sec.match(/Size rule: (\d+) of (\d+) classes pass/);
-    const best = sec.match(/best pass's weights, epoch (\d+)/), pass = liveRow ? [null, dp + ', the deployed pass'] : best;
-    if (!row) continue; if (isLive) wrong = (sec.match(/What it still gets wrong: ([^\n]+)/) || [])[1] || '';
-    out.push(`<tr><th scope="row">${esc(h[2])}${isLive ? ` <span class="tag ok">${esc(tag)}</span>` : ''}<br><small class="muted">${esc(h[1])}</small></th><td class="n mono small">${esc(pass ? pass[1] : '')}</td><td>${bar(row[2])}<span class="mono small">${esc(row[2])}</span></td><td class="n mono small">${pct(row[3])}</td><td class="n mono small">${pct(row[4])}</td><td class="n mono small">${rule ? `${rule[1]} of ${rule[2]}` : ''}</td></tr>`); }
-  $('#wrong').textContent = wrong || 'See the full record below.';
-  return out.length ? `<table class="kv"><thead><tr><th>Run</th><th class="n">Best pass</th><th>mAP@0.5</th><th class="n">Precision</th><th class="n">Recall</th><th class="n">Classes passing</th></tr></thead><tbody>${out.join('')}</tbody></table>` : '';
+    const best = sec.match(/best pass's weights, epoch (\d+)/), final = sec.match(new RegExp('\\| test_unseen ' + cell)); if (!row) continue;
+    const wrong = (sec.match(/What it still gets wrong: ([^\n]+)/) || [])[1] || '', fa = wrong.match(/false alarm \((\d+) on (\d+) tiles/), raw = wrong.match(/report (\d+) false alarms on the same tiles instead of (\d+)/), edge = wrong.match(/finds (\d+)% of the symbols cut by a tile edge/);
+    out.push({run: h[2], title: h[1], isLive, pass: liveRow ? dp + ', the deployed pass' : best ? best[1] : '', map: row[2], p: row[3], r: row[4], rule: rule ? `${rule[1]} of ${rule[2]}` : '', tiles: row[1], wrong,
+      final: final ? {map: final[2], p: final[3], r: final[4]} : null, falseAlarms: fa ? fa[1] : null, falseAlarmsRaw: raw ? raw[1] : null, edgeFound: edge ? edge[1] + '%' : null}); }
+  return out;
+}
+const liveTile = md => tileRows(md).find(r => r.isLive) || null;
+function runsHtml(md) {
+  const rows = tileRows(md), tag = liveTag(), live = rows.find(r => r.isLive), wrong = $('#wrong'); if (wrong) wrong.textContent = (live && live.wrong) || 'See the full record below.';
+  return rows.length ? `<table class="kv"><thead><tr><th>Run</th><th class="n">Best pass</th><th>mAP@0.5</th><th class="n">Precision</th><th class="n">Recall</th><th class="n">Classes passing</th></tr></thead><tbody>${rows.map(r => `<tr><th scope="row">${esc(r.run)}${r.isLive ? ` <span class="tag ok">${esc(tag)}</span>` : ''}<br><small class="muted">${esc(r.title)}</small></th><td class="n mono small">${esc(r.pass)}</td><td>${bar(r.map)}<span class="mono small">${esc(r.map)}</span></td><td class="n mono small">${pct(r.p)}</td><td class="n mono small">${pct(r.r)}</td><td class="n mono small">${esc(r.rule)}</td></tr>`).join('')}</tbody></table>` : '';
 }
 function keyNumbers(sc) {
   const test = setSections(sc.results_md || '', 'data/eval/test').trained, rec = cells(test, 'sym_recall'), price = cells(test, 'price_error_mean'), rating = cells(test, 'rating_acc'), conf = cells(test, 'conflicts');
   const ocr = (sc.ocr_md || '').match(/\*\*([\w-]+)\*\*: label and notes accuracy ([\d.]+)/), engine = /rapidocr/i.test(test.slice(0, 200)) ? 'RapidOCR' : 'Apple Vision';
   const stat = (v, c, w) => `<div class="stat"><span class="v">${v}</span><span class="c">${c}</span><span class="w">${w}</span></div>`;
-  $('#stats').innerHTML = [rec && stat(pct(rec[0]), 'of symbols found', `test set, clean copies, trained reader with ${engine}`), price && stat(pct(price[0]), 'price within the answer key', 'test set, clean copies, mean over the drawings'),
+  const stats = $('#stats'); if (stats) stats.innerHTML = [rec && stat(pct(rec[0]), 'of symbols found', `test set, clean copies, trained reader with ${engine}`), price && stat(pct(price[0]), 'price within the answer key', 'test set, clean copies, mean over the drawings'),
     ocr && stat(pct(ocr[2]), 'of characters read right', `labels and notes, ${ENGINES[ocr[1]] || ocr[1]}, clean and scan copies`)].filter(Boolean).join('') || '<p class="muted">The scorecards could not be loaded.</p>';
   const num = (k, v, w) => { const el = $(`.stagecard .num[data-k="${k}"]`); if (el) el.innerHTML = v ? `${esc(v)}<small>${esc(w)}</small>` : '<small>not measured yet</small>'; };
   num('text', ocr && pct(ocr[2]) + ' of characters read right', ocr ? `${ENGINES[ocr[1]] || ocr[1]}, labels and notes` : ''); num('symbols', rec && pct(rec[0]) + ' of symbols found', 'test set, clean copies');
@@ -393,23 +414,109 @@ function problemsHtml(md) {
   const intro = parts.shift().replace(/^# [^\n]+\n/, '');
   return `<div class="md">${html(intro)}</div>` + parts.map(p => { const [title, ...body] = p.split('\n'); return `<details><summary>${esc(title.replace(/^## /, ''))}${icon('chevron')}</summary><div class="md">${html(body.join('\n'))}</div></details>`; }).join('');
 }
-async function scorecards() {
+async function scorecards() {  // every page fills what it has: the key numbers, the panels, the runs table, the engines, the device types, the problems log, the full files, and the figures its prose quotes
   const sc = await loadScorecards(); S.cards = sc; keyNumbers(sc);
-  $('#panels').innerHTML = panelsHtml(readSets(sc.results_md || '')) || '<p class="empty">The scorecard could not be read.</p>';
-  $('#runs').innerHTML = runsHtml(sc.detector_md || '') || '<p class="empty">Not available.</p>';
-  $('#problems').innerHTML = sc.problems_md ? problemsHtml(sc.problems_md) : '<p class="empty">Not available.</p>';
-  const html = s => window.marked ? marked.parse(s) : '<pre>' + esc(s) + '</pre>';
-  $('#fullcards').innerHTML = [['results_md', 'eval/RESULTS.md'], ['ocr_md', 'eval/OCR.md'], ['detector_md', 'eval/DETECTOR.md']].map(([k, n]) => `<details class="more"><summary>${n}</summary><div class="md">${sc[k] ? html(sc[k]) : 'Not available.'}</div></details>`).join('');
+  const put = (sel, html) => { const el = $(sel); if (el) el.innerHTML = html; };
+  put('#panels', panelsHtml(readSets(sc.results_md || '')) || '<p class="empty">The scorecard could not be read.</p>');
+  put('#runs', runsHtml(sc.detector_md || '') || '<p class="empty">Not available.</p>');
+  put('#engines', enginesHtml(sc.ocr_md || '') || '<p class="empty">Not available.</p>');
+  put('#types', typesHtml(sc.results_md || '') || '<p class="empty">Not available.</p>');
+  put('#problems', sc.problems_md ? problemsHtml(sc.problems_md) : '<p class="empty">Not available.</p>');
+  const html = x => window.marked ? marked.parse(x) : '<pre>' + esc(x) + '</pre>';
+  put('#fullcards', [['results_md', 'eval/RESULTS.md'], ['ocr_md', 'eval/OCR.md'], ['detector_md', 'eval/DETECTOR.md']].map(([k, n]) => `<details class="more"><summary>${n}</summary><div class="md">${sc[k] ? html(sc[k]) : 'Not available.'}</div></details>`).join(''));
+  fillNumbers();
+}
+function numbers() {  // every figure the prose quotes, read from the chart data and the scorecards at load time; a page marks a span with data-n="key" and the value lands in it
+  const N = {}, ch = S.charts || {}, sc = S.cards || {}, count = v => Number(v).toLocaleString('en-GB'), secs = v => Number(v).toFixed(1) + ' s';
+  (ch.sets || []).forEach(st => (st.copies || []).forEach(c => ['trained', 'classical'].forEach(r => { const m = c[r]; if (!m) return; Object.keys(m).forEach(k => { if (typeof m[k] === 'number') N[`set.${st.id}.${c.copy}.${r}.${k}`] = k === 'n_sheets' ? count(m[k]) : pct(m[k]); }); })));
+  const th = ch.threshold; if (th && th.thresholds) { const i = th.thresholds.indexOf(th.chosen); N['threshold.chosen'] = String(th.chosen); N['threshold.sheets'] = count(th.sheets); if (i >= 0) { N['threshold.blank'] = count(th.blank_paper_boxes[i]); N['threshold.precision'] = pct(th.precision[i]); N['threshold.recall'] = pct(th.recall[i]); } N['threshold.blank_low'] = count(th.blank_paper_boxes[0]); N['threshold.low'] = String(th.thresholds[0]); }
+  const cal = (ch.calibration || {}).bins || []; if (cal.length) { const lo = cal[0], hi = cal[cal.length - 1]; Object.assign(N, {'calibration.low': pct(lo.precision), 'calibration.low_from': String(lo.from), 'calibration.low_to': String(lo.to), 'calibration.high': pct(hi.precision), 'calibration.high_from': String(hi.from), 'calibration.bins': String(cal.length), 'calibration.boxes': count(cal.reduce((a, b) => a + b.boxes, 0))}); }
+  (ch.ocr || []).forEach(e => { N[`ocr.${e.engine}.clean`] = pct(e.clean_char); N[`ocr.${e.engine}.scan`] = pct(e.scan_char); N[`ocr.${e.engine}.seconds`] = secs(e.seconds_per_sheet); if (e.chosen) N['ocr.chosen'] = e.label; });
+  const tm = ch.timing; if (tm) { N['timing.n'] = count(tm.n); (tm.stages || []).forEach(st => { N[`timing.${st.step}`] = secs(st.mean_seconds); }); N['timing.total'] = secs((tm.stages || []).reduce((a, st) => a + st.mean_seconds, 0)); (tm.by_kind || []).forEach(k => { N[`timing.kind.${k.kind.replace(/\W+/g, '_')}`] = secs(k.mean_total_seconds); }); }
+  const d = ch.data; if (d) { (d.splits || []).forEach(sp => { N[`data.${sp.split}.tiles`] = count(sp.tiles); N[`data.${sp.split}.boxes`] = count(sp.boxes); }); const cl = (d.classes || []).filter(c => c.train > 0).sort((a, b) => a.train - b.train);
+    if (cl.length) Object.assign(N, {'data.classes': String(cl.length), 'data.rarest.name': cl[0].plain || cl[0].type, 'data.rarest.train': count(cl[0].train), 'data.commonest.name': cl[cl.length - 1].plain || cl[cl.length - 1].type, 'data.commonest.train': count(cl[cl.length - 1].train)}); }
+  const tr = ch.training || [], lm = liveModel(), live = tr.find(r => r.run === lm.run) || tr.find(r => r.live); N['training.runs'] = String(tr.length);
+  if (live) { const pass = lm.pass || live.live_pass || live.best_pass, k = live.passes.indexOf(pass); Object.assign(N, {'training.live.run': live.run, 'training.live.pass': String(pass), 'training.live.passes': String(live.passes.length), 'training.live.best': String(live.best_pass)}); if (k >= 0) N['training.live.score'] = String(live.score[k]); }
+  N.model = ch.model || S.model || ''; N.engine = ENGINES[ch.engine || S.engine] || ch.engine || S.engine || '';
+  SETS.forEach(([set]) => { const key = set.split('/').pop(), {trained, classical} = setSections(sc.results_md || '', set);
+    [['', trained], ['classical.', classical]].forEach(([pre, text]) => { if (!text) return;
+      ['sym_precision', 'sym_recall', 'link_precision', 'link_recall', 'rating_acc', 'poles_acc', 'ka_acc', 'notes_acc', 'bom_precision', 'bom_recall', 'price_error_mean', 'price_error_max', 'seconds_mean', 'seconds_ocr_mean', 'seconds_detector_mean', 'sheets', 'conflicts'].forEach(m => {
+        const v = cells(text, m); if (!v) return; ['clean', 'scan'].forEach((copy, i) => { N[`results.${key}.${pre}${m}.${copy}`] = /^(sheets|conflicts)$/.test(m) ? v[i] : /seconds/.test(m) ? secs(v[i]) : pct(v[i]); }); }); }); });
+  SETS.forEach(([set]) => { const key = set.split('/').pop(), before = (sc.results_md || '').split(/\n(?=## )/).filter(t => t.startsWith('## ' + set + ', ') && /before the step 6 link/.test(t.split('\n')[0])).pop(); if (!before) return;
+    ['link_precision', 'link_recall', 'rating_acc', 'price_error_mean', 'sym_recall', 'sym_precision', 'bom_recall'].forEach(m => { const v = cells(before, m); if (v) ['clean', 'scan'].forEach((copy, i) => { N[`results.${key}.before.${m}.${copy}`] = pct(v[i]); }); }); });
+  const tile = liveTile(sc.detector_md || ''); if (tile) Object.assign(N, {'tile.map': tile.map, 'tile.precision': pct(tile.p), 'tile.recall': pct(tile.r), 'tile.rule': tile.rule, 'tile.tiles': count(tile.tiles)});
+  tileRows(sc.detector_md || '').forEach(r => { const k = 'detector.' + r.run; N[k + '.map'] = r.map; N[k + '.precision'] = pct(r.p); N[k + '.recall'] = pct(r.r); N[k + '.rule'] = r.rule; if (r.final) { N[k + '.final.map'] = r.final.map; N[k + '.final.precision'] = pct(r.final.p); N[k + '.final.recall'] = pct(r.final.r); }
+    if (r.falseAlarms) N[k + '.false_alarms'] = r.falseAlarms; if (r.falseAlarmsRaw) N[k + '.false_alarms_raw'] = r.falseAlarmsRaw; if (r.edgeFound) N[k + '.edge_found'] = r.edgeFound; });
+  tr.forEach(r => r.passes.forEach((p, k) => { N[`training.${r.run}.pass${p}`] = String(r.score[k]); }));
+  if (th && th.thresholds) th.thresholds.forEach((t, i) => { const k = 'threshold.at.' + t; N[k + '.precision'] = pct(th.precision[i]); N[k + '.recall'] = pct(th.recall[i]); if (th.f1) N[k + '.f1'] = pct(th.f1[i]); if (th.blank_paper_boxes) N[k + '.blank_paper_boxes'] = count(th.blank_paper_boxes[i]); });
+  cal.forEach(b => { N[`calibration.${b.from}-${b.to}`] = pct(b.precision); });
+  SETS.forEach(([set]) => { const key = set.split('/').pop(), {trained} = setSections(sc.results_md || '', set); mdTable(trained, /### Symbols per device type/).slice(1).forEach(r => { const k = `type.${key}.${r[0]}`; N[k + '.clean.precision'] = pct(r[1]); N[k + '.clean.recall'] = pct(r[2]); N[k + '.clean.n'] = r[3]; N[k + '.clean.rating'] = pct(r[4]); N[k + '.scan.precision'] = pct(r[5]); N[k + '.scan.recall'] = pct(r[6]); N[k + '.scan.n'] = r[7]; N[k + '.scan.rating'] = pct(r[8]); }); });
+  mdTable(section(sc.ocr_md || '', /^## The rule/m), /\| engine \|/).slice(1).forEach(r => { const k = 'ocr.' + r[0]; Object.assign(N, {[k + '.label_char']: pct(r[2]), [k + '.notes_char']: pct(r[3]), [k + '.label_and_notes']: pct(r[4]), [k + '.label_char_crops']: pct(r[5]), [k + '.seconds_page']: r[6] + ' s', [k + '.seconds_crops']: r[7] + ' s'}); });
+  mdTable(section(sc.ocr_md || '', /^## By font/m), /\| engine \|/).slice(1).forEach(r => { const m = (r[3] || '').match(/^([\d.]+)/); if (m) N['ocr.' + r[0] + '.courier_new'] = pct(m[1]); });
+  const oc = (sc.ocr_md || '').match(/\*\*([\w-]+)\*\*: label and notes accuracy ([\d.]+) \(labels ([\d.]+), notes ([\d.]+)\) in ([\d.]+) s/); if (oc) Object.assign(N, {'ocr.choice.engine': ENGINES[oc[1]] || oc[1], 'ocr.choice.accuracy': pct(oc[2]), 'ocr.choice.labels': pct(oc[3]), 'ocr.choice.notes': pct(oc[4]), 'ocr.choice.seconds': oc[5] + ' s'});
+  const vi = (sc.ocr_md || '').match(/Apple Vision on the same pages: ([\d.]+) \(labels ([\d.]+), notes ([\d.]+)\) in ([\d.]+) s/); if (vi) Object.assign(N, {'ocr.vision.choice.accuracy': pct(vi[1]), 'ocr.vision.choice.seconds': vi[4] + ' s'});
+  return N;
+}
+function fillNumbers() { const N = S.numbers = numbers(); $$('[data-n]').forEach(el => { const v = N[el.dataset.n]; el.textContent = v == null ? (el.dataset.v || 'n/a') : v; el.classList.remove('skeleton'); el.title = v == null ? 'the value when this page was written; not found in the evaluation files' : 'read from the evaluation files when the page loaded'; }); }
+
+// ---------------------------------------------------------------- diagrams: boxes on a grid and arrows between them, from a node list in the page; the text alternative comes from the same list
+function renderDiagram(fig) {
+  const spec = JSON.parse($('script[type="application/json"]', fig).textContent), W = 236, H = 76, GX = 44, GY = 26, nodes = spec.nodes || [], byId = {}; nodes.forEach(n => { byId[n.id] = n; });
+  const edges = (spec.edges || []).filter(e => byId[e[0]] && byId[e[1]]), tops = edges.filter(([a, b]) => byId[b].col - byId[a].col >= 2), backs = edges.filter(([a, b]) => byId[b].col < byId[a].col);
+  const PT = 8 + tops.length * 8, PB = 8 + backs.length * 8, PL = backs.some(([, b]) => byId[b].col === 0) ? GX / 2 + 14 : 6, PR = GX / 2 + 6, cols = Math.max(...nodes.map(n => n.col)) + 1, rows = Math.max(...nodes.map(n => n.row)) + 1;
+  const w = PL + PR + cols * W + (cols - 1) * GX, h = PT + PB + rows * H + (rows - 1) * GY, x = n => PL + n.col * (W + GX), y = n => PT + n.row * (H + GY), mk = 'dg-arrow-' + (fig.id || 'x');
+  const wrap = (t, max) => { const out = []; let line = ''; String(t).split(' ').forEach(wd => { if ((line + ' ' + wd).trim().length > max) { out.push(line.trim()); line = wd; } else line += ' ' + wd; }); if (line.trim()) out.push(line.trim()); return out.slice(0, 3); };
+  const box = n => `<g class="node ${n.kind || ''}"><title>${esc(n.what || n.sub || n.title)}</title><rect x="${x(n)}" y="${y(n)}" width="${W}" height="${H}" rx="8"/><text x="${x(n) + 12}" y="${y(n) + 22}" class="t">${esc(n.title)}</text>${wrap(n.sub || '', 38).map((l, i) => `<text x="${x(n) + 12}" y="${y(n) + 39 + i * 13}" class="s">${esc(l)}</text>`).join('')}</g>`;
+  const edge = e => { const [a, b] = e, A = byId[a], B = byId[b], dc = B.col - A.col; let d, cls = 'edge';
+    if (dc >= 2) { const k = tops.findIndex(q => q[0] === a && q[1] === b), lane = 4 + k * 8; d = `M${x(A) + W / 2},${y(A)} V${lane} H${x(B) + W / 2} V${y(B)}`; cls += ' over'; }
+    else if (dc === 1) { const x1 = x(A) + W, y1 = y(A) + H / 2, x2 = x(B), y2 = y(B) + H / 2, xm = x2 - GX / 2 + 7; d = y1 === y2 ? `M${x1},${y1} H${x2}` : `M${x1},${y1} H${xm} V${y2} H${x2}`; }
+    else if (dc < 0) { const k = backs.findIndex(q => q[0] === a && q[1] === b), lane = h - 4 - k * 8, xg = x(B) - GX / 2 - 7 + (k % 3) * 5; d = `M${x(A) + W / 2 + k * 6},${y(A) + H} V${lane} H${xg} V${y(B) + H / 2} H${x(B)}`; cls += ' back'; }
+    else if (Math.abs(B.row - A.row) === 1) { const x1 = x(A) + W / 2, down = B.row > A.row; d = `M${x1},${down ? y(A) + H : y(A)} V${down ? y(B) : y(B) + H}`; }
+    else { const xg = x(A) + W + GX / 2 - 7; d = `M${x(A) + W},${y(A) + H / 2} H${xg} V${y(B) + H / 2} H${x(B) + W}`; }
+    if (e[3]) cls += ' ' + e[3];
+    return `<path class="${cls}" d="${d}" marker-end="url(#${mk})"/>`; };
+  $('.plotwrap', fig).innerHTML = `<svg class="dgsvg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" role="img" aria-label="${esc(spec.title || '')}"><defs><marker id="${mk}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="head"/></marker></defs>${edges.map(edge).join('')}${nodes.map(box).join('')}</svg>`;
+  const alt = $('.alt', fig); if (alt) alt.innerHTML = nodes.map(n => { const to = edges.filter(e => e[0] === n.id).map(e => byId[e[1]].title + (e[2] ? ` (${e[2]})` : '')); return `<li><b>${esc(n.title)}</b>${n.what ? ': ' + esc(n.what) : n.sub ? ': ' + esc(n.sub) : ''}${n.built ? ` <span class="muted">Built with: ${esc(n.built)}.</span>` : ''}${n.step ? ` <span class="muted">The estimator's step: ${esc(n.step)}.</span>` : ''}${to.length ? ` <span class="muted">Feeds: ${esc(to.join('; '))}.</span>` : ''}</li>`; }).join('');
 }
 
-// ---------------------------------------------------------------- boot
+// ---------------------------------------------------------------- the shared chrome: navigation, sprite, footer
+const NAV = [['', 'Home', 'the claim, three measured numbers, the map of the site'], ['try/', 'Try it', 'run a drawing live and check every number against the sheet'], ['how/', 'How it works', 'the five stages, plain first, then the technical layer and why each technology was used'],
+  ['evidence/', 'Evidence', 'the scorecards and charts, each with its plain reading'], ['decisions/', 'Decisions', 'the choices that made the numbers honest: problem, options, decision, result'], ['problems/', 'Problems', 'what went wrong, how it was fixed here, how the KTP would fix it'],
+  ['architecture/', 'Architecture', 'what is built now, and the system after the KTP, side by side'], ['ktp/', 'The KTP', 'the requirements, the 36-month plan, the road map'], ['why-me/', 'Why me', 'the person specification answered with evidence'],
+  ['references/', 'References', 'the sources behind every research-backed claim'], ['about/', 'About', 'author, licence, synthetic data, AI assistance']];
+const SPRITE = '<svg hidden aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M7 5v14l12-7z"/></symbol><symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4m-6 6l6-6 6 6M4 20h16"/></symbol>'
+  + '<symbol id="i-zoom-in" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></symbol><symbol id="i-zoom-out" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M8 11h6"/></symbol><symbol id="i-fit" viewBox="0 0 24 24"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></symbol>'
+  + '<symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5h10"/></symbol><symbol id="i-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></symbol>'
+  + '<symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3l10 18H2zM12 10v4M12 17h.01"/></symbol><symbol id="i-random" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h.01M15 15h.01M12 12h.01"/></symbol><symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8zM14 3v5h5"/></symbol>'
+  + '<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol><symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></symbol></svg>';
+function chrome() {  // the navigation from one list on every page, the current page marked; the home page's map of the site; the footer
+  const here = location.pathname.replace(/index\.html$/, ''), brand = $('.brand'); if (brand) brand.href = ROOT;
+  const nav = $('.nav'); if (nav) nav.innerHTML = NAV.map(([p, label]) => { const url = ROOT + p, cur = new URL(url, location.href).pathname.replace(/index\.html$/, '') === here; return `<a href="${url}"${cur ? ' aria-current="page"' : ''}>${label}</a>`; }).join('');
+  const map = $('#sitemap'); if (map) map.innerHTML = NAV.filter(([p]) => p).map(([p, label, what]) => `<a class="mapcard" href="${ROOT + p}"><b>${label}</b><span>${esc(what)}</span>${icon('arrow')}</a>`).join('');
+  const foot = $('footer .wrap'); if (foot && !foot.innerHTML.trim()) foot.innerHTML = `sld2quote 0.3.0, October 2026. Plain HTML, CSS and JavaScript; every figure on these pages is read from the evaluation files when the page loads. Synthetic drawings only, nothing from R&amp;B Switchgear. <a href="${ROOT}about/">About, licence and AI assistance</a>.`;
+}
 function padTop() { document.documentElement.style.scrollPaddingTop = ($('.top').offsetHeight + 8) + 'px'; }  // anchors and scrolls clear the sticky header at any width
 async function boot() {
-  setPill('loading'); padTop(); window.addEventListener('resize', padTop);
-  $$('.nav a').forEach(a => a.addEventListener('click', () => { if (a.getAttribute('href') === '#try') warm(); }));
-  $('.hero .btn.primary').addEventListener('click', warm);
-  tabs($('#step-choose [role=tablist]'));
-  showTab = tabs($('#rtabs'));
+  if ($('#sitemap') && /[?&](sample|run)=/.test(location.search)) { location.replace(ROOT + 'try/' + location.search); return; }  // the one-page site's deep links still open their drawing
+  if (document.body) document.body.insertAdjacentHTML('afterbegin', SPRITE);
+  chrome(); setPill('loading'); padTop(); window.addEventListener('resize', padTop); $$('.dg').forEach(renderDiagram);
+  if ($('#step-choose')) tryPage();
+  document.addEventListener('error', e => { const el = e.target; if (!(el instanceof HTMLImageElement || el instanceof SVGImageElement)) return; const n = +(el.dataset.retry || 0); if (n >= BUSY.length) return; el.dataset.retry = n + 1;
+    setTimeout(() => { const a = el instanceof SVGImageElement ? 'href' : 'src', u = (el.getAttribute(a) || '').replace(/[?&]r=\d+$/, ''); el.setAttribute(a, u + (u.includes('?') ? '&' : '?') + 'r=' + (n + 1)); }, BUSY[n]); }, true);  // an image refused while the instance is busy is fetched again on the same backoff
+  await detectMode();
+  setPill(S.mode === 'live' ? 'asleep' : 'static');
+  const tryIt = $('#try');
+  if (S.mode === 'live' && tryIt && 'IntersectionObserver' in window) { const io = new IntersectionObserver(es => { if (es.some(x => x.isIntersecting)) { warm(); io.disconnect(); } }, {rootMargin: '200px'}); io.observe(tryIt); }
+  if ($('#gallery')) { gallery(); await applyUrl(); }
+  const openAll = $('#open-all'); if (openAll) { openAll.addEventListener('click', () => $$('.decision').forEach(d => { d.open = true; })); $('#close-all').addEventListener('click', () => $$('.decision').forEach(d => { d.open = false; })); }  // the decisions page: every collapsible at once
+  if (location.hash && $(location.hash) && $(location.hash).closest('details')) $(location.hash).closest('details').open = true;  // a link into a collapsed decision opens it
+  const failed = () => { const st = $('#stats'); if (st) st.innerHTML = '<p class="muted">The scorecards could not be loaded.</p>'; $$('.stagecard .num').forEach(n => { n.innerHTML = '<small>not loaded</small>'; }); $$('[data-n]').forEach(n => { n.textContent = 'n/a'; n.classList.remove('skeleton'); }); };
+  const charts = $('#charts'); if (charts) { charts.addEventListener('click', e => { const b = e.target.closest('button[data-c]'); if (!b) return; CS[b.dataset.k] = isNaN(b.dataset.v) ? b.dataset.v : +b.dataset.v; renderCharts(b.dataset.c); });
+    let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => renderCharts(), 200); }); }
+  if ($('#charts, #stats, #panels, #runs, #engines, #types, #problems, #fullcards, [data-n], .stagecard .num')) loadCharts().then(ch => { S.charts = normCharts(ch); renderCharts(); }).catch(() => {}).then(scorecards).catch(failed);  // the chart data names the live model, which decides whose scorecard sections are read
+}
+function tryPage() {  // the Try page: the stepper, the gallery, the forms, the viewer and the result tabs
+  tabs($('#step-choose [role=tablist]')); showTab = tabs($('#rtabs'));
   $('.stepper').addEventListener('click', e => { const b = e.target.closest('button[data-step]'); if (b) showStep(b.dataset.step, true); });
   $('#rerun').addEventListener('click', () => runSample(S.key.sample, $('#rerun')));
   $('#stored').addEventListener('click', () => openSample(S.result.source.sample, true));
@@ -441,16 +548,6 @@ async function boot() {
   $('#copy-link').addEventListener('click', async () => { const b = $('#copy-link'), url = location.href; try { await navigator.clipboard.writeText(url); } catch (e) { window.prompt('Copy this link', url); }
     b.innerHTML = icon('check') + ' Copied'; setTimeout(() => { b.innerHTML = icon('copy') + ' Copy link'; }, 2500); });
   window.addEventListener('popstate', applyUrl);
-  document.addEventListener('error', e => { const el = e.target; if (!(el instanceof HTMLImageElement || el instanceof SVGImageElement)) return; const n = +(el.dataset.retry || 0); if (n >= BUSY.length) return; el.dataset.retry = n + 1;
-    setTimeout(() => { const a = el instanceof SVGImageElement ? 'href' : 'src', u = (el.getAttribute(a) || '').replace(/[?&]r=\d+$/, ''); el.setAttribute(a, u + (u.includes('?') ? '&' : '?') + 'r=' + (n + 1)); }, BUSY[n]); }, true);  // an image refused while the instance is busy is fetched again on the same backoff
-  await detectMode();
-  setPill(S.mode === 'live' ? 'asleep' : 'static');
-  if (S.mode === 'live' && 'IntersectionObserver' in window) { const io = new IntersectionObserver(es => { if (es.some(x => x.isIntersecting)) { warm(); io.disconnect(); } }, {rootMargin: '200px'}); io.observe($('#try')); }
-  gallery(); await applyUrl();
-  const failed = () => { $('#stats').innerHTML = '<p class="muted">The scorecards could not be loaded.</p>'; $$('.stagecard .num').forEach(n => { n.innerHTML = '<small>not loaded</small>'; }); };
-  $('#charts').addEventListener('click', e => { const b = e.target.closest('button[data-c]'); if (!b) return; CS[b.dataset.k] = isNaN(b.dataset.v) ? b.dataset.v : +b.dataset.v; renderCharts(b.dataset.c); });
-  let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => renderCharts(), 200); });
-  loadCharts().then(ch => { S.charts = normCharts(ch); renderCharts(); }).catch(() => {}).then(scorecards).catch(failed);  // the chart data names the live model, which decides whose scorecard sections are read
 }
 document.addEventListener('DOMContentLoaded', boot);
 
@@ -627,7 +724,7 @@ function figureHtml(id, out) {
 }
 function chartWidth(el) { const box = el.closest('.chart'); return Math.max(280, Math.floor((box ? box.clientWidth : el.clientWidth) - 2) || 520); }
 function renderCharts(only) {
-  const ch = S.charts, host = $('#charts'), block = $('#charts-block'); if (!ch) return;
+  const ch = S.charts, host = $('#charts'), block = $('#charts-block'); if (!ch || !host || !block) return;
   block.hidden = false;  // measured while visible, so the drawn width matches the displayed one and the text keeps its size
   const hw = host.clientWidth || 600, cols = hw >= 700 ? 2 : 1, w = Math.max(260, Math.floor((hw - (cols - 1) * 24) / cols) - 50);
   const one = (id, fn) => { let out = null; try { out = fn(ch, w); } catch (e) { out = null; } return figureHtml(id, out); };  // a chart whose data is missing or odd renders nothing
@@ -655,6 +752,6 @@ function normCharts(ch) {  // eval/charts.json keeps one record per set, copy an
 }
 async function loadCharts() {
   if (S.mode === 'mock') return window.MOCK.charts || null;
-  if (S.mode === 'static') { for (const p of ['eval/charts.json', 'charts.json']) { try { return await getJson(p); } catch (e) { /* next */ } } return null; }
+  if (S.mode === 'static') { for (const p of ['eval/charts.json', 'charts.json']) { try { return await getJson(ROOT + p); } catch (e) { /* next */ } } return null; }
   try { return await getJson(API + '/api/charts'); } catch (e) { return null; }
 }

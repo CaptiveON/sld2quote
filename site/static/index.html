@@ -4,285 +4,77 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>sld2quote</title>
-<meta name="description" content="Reads a switchboard single-line diagram and its specification, prices the bill of materials with the evidence for every line, and flags what an estimator must decide. Synthetic drawings only.">
+<meta name="description" content="A small, measured version of the single-line-diagram-to-quotation system the University of Salford and R&B Switchgear KTP sets out to build: a switchboard drawing and its specification in, a priced bill of materials with the evidence for every line out. Synthetic drawings only.">
+<link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="icon" href="data:,">
 <link rel="stylesheet" href="style.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/15.0.12/marked.min.js" defer></script>
 <script src="app.js" defer></script>
 </head>
 <body>
-<svg hidden aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></symbol>
-  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 5v14l12-7z"/></symbol>
-  <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4m-6 6l6-6 6 6M4 20h16"/></symbol>
-  <symbol id="i-zoom-in" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></symbol>
-  <symbol id="i-zoom-out" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M8 11h6"/></symbol>
-  <symbol id="i-fit" viewBox="0 0 24 24"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></symbol>
-  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5h10"/></symbol>
-  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
-  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></symbol>
-  <symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3l10 18H2zM12 10v4M12 17h.01"/></symbol>
-  <symbol id="i-random" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h.01M15 15h.01M12 12h.01"/></symbol>
-  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8zM14 3v5h5"/></symbol>
-  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
-  <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></symbol>
-</svg>
-<a class="skip" href="#try">Skip to the demo</a>
+<a class="skip" href="#main">Skip to the content</a>
 <header class="top">
   <div class="wrap bar">
-    <a class="brand" href="#overview">sld2quote</a>
-    <nav class="nav" aria-label="Sections"><a href="#overview">Overview</a><a href="#try">Try it</a><a href="#how">How it works</a><a href="#real">The real project</a><a href="#about">About</a></nav>
+    <a class="brand" href="./">sld2quote</a>
     <span id="pill" class="pill" role="status" aria-live="polite">Loading</span>
+    <nav class="nav" aria-label="Pages"></nav>
   </div>
 </header>
 
-<main>
+<main id="main">
 <section id="overview" class="hero" aria-labelledby="h-overview">
   <div class="wrap">
-    <p class="kicker">A miniature of the KTP system, measured</p>
-    <h1 id="h-overview">From a switchboard drawing to a priced bill of materials, with the evidence for every line.</h1>
-    <p class="lede">The computer reads the single-line diagram and the specification, finds every device, pairs it with its rating, picks the parts and prices them, then lists what an estimator must still decide. Every number below was measured against an answer key.</p>
-    <div class="actions"><a class="btn primary" href="#try">Try it on a drawing <svg class="icon"><use href="#i-arrow"/></svg></a><a class="btn" href="#how">How it works</a></div>
+    <p class="kicker">sld2quote: a miniature of the KTP system, measured</p>
+    <h1 id="h-overview">I built a small, measured version of the system this KTP sets out to build: a switchboard drawing and its specification in, a priced bill of materials with the evidence for every line out.</h1>
+    <p class="lede">This site is written for the assessor at the University of Salford and for R&amp;B Switchgear. It shows the pipeline reading a drawing you choose, the numbers it was scored on, the decisions behind those numbers, the problems met on the way, and how each part would be rebuilt at full scale inside the partnership.</p>
+    <div class="actions"><a class="btn primary" href="try/">Try it live <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a><a class="btn" href="how/">How it works</a><a class="btn" href="why-me/">Why me</a></div>
     <div class="stats" id="stats" aria-live="polite">
       <div class="stat"><span class="v skeleton"></span><span class="c skeleton"></span><span class="w skeleton"></span></div>
       <div class="stat"><span class="v skeleton"></span><span class="c skeleton"></span><span class="w skeleton"></span></div>
       <div class="stat"><span class="v skeleton"></span><span class="c skeleton"></span><span class="w skeleton"></span></div>
     </div>
-    <p class="honest"><svg class="icon"><use href="#i-info"/></svg><span>Synthetic drawings only, an invented catalogue with invented prices, nothing from R&amp;B Switchgear. Built by Muhammad Adnan as evidence for the University of Salford and R&amp;B Switchgear KTP application.</span></p>
+    <p class="honest"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg><span>Every number on this site was measured against an answer key on synthetic drawings and is read from the evaluation files when the page loads; none is typed in. The catalogue and the prices are invented. Nothing here comes from R&amp;B Switchgear. Built by Muhammad Adnan as evidence for the University of Salford and R&amp;B Switchgear KTP application.</span></p>
   </div>
 </section>
 
-<section id="try" class="block" aria-labelledby="h-try">
+<section class="block" aria-labelledby="h-plain">
   <div class="wrap">
-    <p class="kicker">Try it</p>
-    <h2 id="h-try">One drawing, three steps</h2>
-    <p class="lede">Choose a drawing, watch the server read it stage by stage, then check every number against the sheet.</p>
-    <ol class="stepper" aria-label="Progress through the demo">
-      <li class="current" aria-current="step"><span class="step"><span class="num">1</span><span><b>Choose</b><small>a sample, a new drawing or your own</small></span></span></li>
-      <li class="todo"><span class="step"><span class="num">2</span><span><b>Run</b><small>starts when you run a drawing below</small></span></span></li>
-      <li class="todo"><span class="step"><span class="num">3</span><span><b>Results</b><small>the drawing, the parts, the questions</small></span></span></li>
-    </ol>
-
-    <div id="step-choose">
-      <div role="tablist" aria-label="Where the drawing comes from">
-        <button role="tab" id="tab-samples" aria-controls="panel-samples" aria-selected="true">Sample gallery</button>
-        <button role="tab" id="tab-generate" aria-controls="panel-generate" aria-selected="false" tabindex="-1">Generate a drawing</button>
-        <button role="tab" id="tab-upload" aria-controls="panel-upload" aria-selected="false" tabindex="-1">Upload your own</button>
-      </div>
-      <p id="nolive" class="notice" hidden><svg class="icon"><use href="#i-info"/></svg><span>Live runs need the server, so this copy shows the precomputed samples only; the repository runs the server in one command.</span></p>
-
-      <div id="panel-samples" role="tabpanel" aria-labelledby="tab-samples">
-        <p class="muted small">Every sample was read by the same pipeline and saved with its files: Run it live sends the drawing through the server again, stage by stage; Result, precomputed opens the saved reading at once. Synthetic drawings carry an answer key and are scored; the real public-domain drawings have none, so they show what the reader does on a style it never saw.</p>
-        <div class="chips" id="chips" role="group" aria-label="Filter the samples"></div>
-        <div class="gallery" id="gallery" aria-busy="true">
-          <div class="sample"><div class="thumb skeleton"></div><div class="body"><span class="t skeleton">&nbsp;</span><span class="m skeleton">&nbsp;</span></div></div>
-          <div class="sample"><div class="thumb skeleton"></div><div class="body"><span class="t skeleton">&nbsp;</span><span class="m skeleton">&nbsp;</span></div></div>
-          <div class="sample"><div class="thumb skeleton"></div><div class="body"><span class="t skeleton">&nbsp;</span><span class="m skeleton">&nbsp;</span></div></div>
-          <div class="sample"><div class="thumb skeleton"></div><div class="body"><span class="t skeleton">&nbsp;</span><span class="m skeleton">&nbsp;</span></div></div>
-        </div>
-      </div>
-
-      <div id="panel-generate" role="tabpanel" aria-labelledby="tab-generate" hidden>
-        <form id="gen" class="card two" novalidate>
-          <div>
-            <div class="field">
-              <label for="seed">Seed <span class="hint">(0 to 999999; the same seed always draws the same board)</span></label>
-              <div class="row"><input type="number" id="seed" name="seed" min="0" max="999999" step="1" required style="width: 10em"><button type="button" class="btn small" id="random"><svg class="icon"><use href="#i-random"/></svg> Random</button></div>
-              <p class="err" id="seed-err"></p>
-            </div>
-            <div class="field">
-              <span class="label-text" id="level-label" style="font-weight:600;font-size:var(--fs-s)">Complexity</span>
-              <div class="radios" role="radiogroup" aria-labelledby="level-label">
-                <label class="radio"><input type="radio" name="level" value="simple" checked><span><b>Simple</b>One incomer and a few outgoing ways; about 10 to 20 devices.</span></label>
-                <label class="radio"><input type="radio" name="level" value="medium"><span><b>Medium</b>Two incomers with a bus-section, more device types; about 20 to 35 devices.</span></label>
-                <label class="radio"><input type="radio" name="level" value="mix"><span><b>Mix</b>The generator picks simple or medium.</span></label>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="field">
-              <span style="font-weight:600;font-size:var(--fs-s)" id="copy-label">Copy</span>
-              <div class="radios" role="radiogroup" aria-labelledby="copy-label">
-                <label class="radio"><input type="radio" name="scan" value="0" checked><span><b>Clean</b>Crisp lines and text, as a CAD export.</span></label>
-                <label class="radio"><input type="radio" name="scan" value="1"><span><b>Scan-like</b>Blur, noise and a slight tilt, as a scanned print.</span></label>
-              </div>
-            </div>
-            <p class="muted small">The generator draws a new switchboard from the seed and writes its answer key, so the run is scored. Runs on the free server, about 20 to 50 seconds.</p>
-            <button type="submit" class="btn primary"><svg class="icon"><use href="#i-play"/></svg> Generate and run</button>
-          </div>
-        </form>
-      </div>
-
-      <div id="panel-upload" role="tabpanel" aria-labelledby="tab-upload" hidden>
-        <form id="up" class="card two" novalidate>
-          <div>
-            <div class="field">
-              <label for="file">Drawing <span class="hint">(PNG or JPEG, up to 12 MB and 12 megapixels)</span></label>
-              <div class="drop" id="drop">
-                <svg class="icon" style="width:28px;height:28px"><use href="#i-upload"/></svg>
-                <p>Drop a drawing here, or <label for="file" style="display:inline;color:var(--link);cursor:pointer;text-decoration:underline">choose a file</label>.</p>
-                <input type="file" id="file" name="file" accept="image/png,image/jpeg" hidden>
-                <p class="file" id="file-name">No file chosen</p>
-              </div>
-              <p class="err" id="file-err"></p>
-            </div>
-          </div>
-          <div>
-            <div class="field">
-              <label for="spec">Specification <span class="hint">(optional; one clause per line)</span></label>
-              <textarea id="spec" name="spec" placeholder="7.2 Internal separation shall be Form 4 Type 6.&#10;7.3 The assembly shall withstand a prospective short-circuit current of 50 kA for 1 second at the main busbars.&#10;7.5 Degree of protection shall be not less than IP31 with doors closed."></textarea>
-              <p class="err" id="spec-err"></p>
-              <button type="button" class="btn small" id="use-example">Use the example</button>
-            </div>
-            <p class="muted small">An uploaded drawing has no answer key, so there is no score: check the boxes on the sheet instead. Nothing is kept beyond the last 50 runs. Runs on the free server, about 20 to 50 seconds.</p>
-            <button type="submit" class="btn primary"><svg class="icon"><use href="#i-upload"/></svg> Upload and run</button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <div id="step-run" class="card" hidden>
-      <div class="rhead"><h3 id="run-title">Reading the drawing</h3><span class="mono muted" id="elapsed" aria-live="off">0 s</span></div>
-      <p class="muted small" id="run-sub"></p>
-      <ol class="stages" id="stages" aria-live="polite"></ol>
-      <p class="muted small" id="run-next"></p>
-      <div id="run-error" class="notice bad" hidden><svg class="icon"><use href="#i-warn"/></svg><div><p id="run-error-text" style="margin:0 0 8px"></p><div class="row"><button type="button" class="btn small" id="retry"><svg class="icon"><use href="#i-play"/></svg> Try again</button><button type="button" class="btn small" id="pick"><svg class="icon"><use href="#i-back"/></svg> Pick another drawing</button></div></div></div>
-    </div>
-
-    <div id="step-results" hidden>
-      <div class="rhead"><div class="row"><h3 id="rtitle" tabindex="-1"></h3><span id="rkind" class="tag"></span></div><div class="row"><button type="button" class="btn live" id="rerun" hidden><svg class="icon"><use href="#i-play"/></svg> Run it live</button><button type="button" class="btn" id="stored" hidden><svg class="icon"><use href="#i-file"/></svg> Result, precomputed</button><button type="button" class="btn" id="copy-link"><svg class="icon"><use href="#i-copy"/></svg> Copy link</button><button type="button" class="btn" id="another"><svg class="icon"><use href="#i-back"/></svg> Another drawing</button></div></div>
-      <p class="muted small" id="rmeta"></p>
-      <div class="strip" id="strip"></div>
-      <div class="viewer">
-        <div class="toolbar">
-          <div class="group" role="group" aria-label="Zoom"><button type="button" class="btn small" id="zoom-out" aria-label="Zoom out"><svg class="icon"><use href="#i-zoom-out"/></svg></button><button type="button" class="btn small" id="zoom-in" aria-label="Zoom in"><svg class="icon"><use href="#i-zoom-in"/></svg></button><button type="button" class="btn small" id="zoom-fit"><svg class="icon"><use href="#i-fit"/></svg> Fit</button><span class="mono muted" id="zoom-level">100%</span></div>
-          <div class="group" role="group" aria-label="Layers"><label class="check"><input type="checkbox" id="layer-boxes" checked> Device boxes</label><label class="check"><input type="checkbox" id="layer-texts" checked> Rating text</label><label class="check"><input type="checkbox" id="layer-notes" checked> Notes</label></div>
-          <span class="muted small">Click the drawing, then scroll to zoom (or hold Ctrl); drag to pan; hover a box to find its row.</span>
-        </div>
-        <div class="stagearea" id="stagearea" tabindex="0" aria-label="The drawing with the boxes the reader found"></div>
-        <div class="legend"><span><i style="border-color:var(--box)"></i>device, high confidence</span><span><i style="border-color:var(--warn)"></i>medium</span><span><i style="border-color:var(--bad)"></i>low</span><span><i style="border-color:var(--text-box)"></i>rating text used</span><span><i style="border-color:var(--note-box)"></i>notes used for the board</span></div>
-      </div>
-      <div role="tablist" aria-label="Result sections" id="rtabs">
-        <button role="tab" id="tab-devices" aria-controls="r-devices" aria-selected="true">Devices<span class="count"></span></button>
-        <button role="tab" id="tab-bom" aria-controls="r-bom" aria-selected="false" tabindex="-1">Bill of materials<span class="count"></span></button>
-        <button role="tab" id="tab-issues" aria-controls="r-issues" aria-selected="false" tabindex="-1">Questions<span class="count"></span></button>
-        <button role="tab" id="tab-spec" aria-controls="r-spec" aria-selected="false" tabindex="-1">Specification check<span class="count"></span></button>
-        <button role="tab" id="tab-score" aria-controls="r-score" aria-selected="false" tabindex="-1">Score</button>
-        <button role="tab" id="tab-files" aria-controls="r-files" aria-selected="false" tabindex="-1">Files</button>
-      </div>
-      <div id="r-devices" role="tabpanel" aria-labelledby="tab-devices"></div>
-      <div id="r-bom" role="tabpanel" aria-labelledby="tab-bom" hidden></div>
-      <div id="r-issues" role="tabpanel" aria-labelledby="tab-issues" hidden></div>
-      <div id="r-spec" role="tabpanel" aria-labelledby="tab-spec" hidden></div>
-      <div id="r-score" role="tabpanel" aria-labelledby="tab-score" hidden></div>
-      <div id="r-files" role="tabpanel" aria-labelledby="tab-files" hidden></div>
-    </div>
-  </div>
-</section>
-
-<section id="how" class="block" aria-labelledby="h-how">
-  <div class="wrap">
-    <p class="kicker">How it works</p>
-    <h2 id="h-how">Five stages, each one measured</h2>
-    <p class="lede">The pipeline follows the estimator's own take-off. Every figure in this section is read from the evaluation files the code wrote; none is typed into the page.</p>
-    <div class="stagecards" id="stagecards">
-      <article class="stagecard"><h4>Read the words</h4><p class="small">A text reader turns every label, rating and note on the sheet into text with a box.</p><p class="small muted">An estimator's first pass is reading every rating; a misread "1600 A" becomes the wrong breaker.</p><span class="num" data-k="text"><span class="skeleton">&nbsp;</span></span></article>
-      <article class="stagecard"><h4>Find the symbols</h4><p class="small">A detector trained on synthetic drawings finds each device symbol, reading the page in overlapping tiles and removing duplicates.</p><p class="small muted">Every symbol is a line on the quotation; a missed symbol is a missing part.</p><span class="num" data-k="symbols"><span class="skeleton">&nbsp;</span></span></article>
-      <article class="stagecard"><h4>Pair labels with symbols</h4><p class="small">Symbols on one vertical line form a way; the text lines stacked beside or below it form the way's label block; each block goes to the nearest way, preferring its own side, and each line is routed to a device by what it says.</p><p class="small muted">A right label on the wrong symbol prices the wrong breaker. These rules were written against this generator's drawing conventions and tuned on the sets they are scored on; the held-out layouts hold styles out from the detector, not from the rule's author, so the link numbers are an upper bound.<span data-fonts-link></span> The real project replaces the rules with a learned link trained on estimators' corrections.</p><span class="num" data-k="labels"><span class="skeleton">&nbsp;</span></span></article>
-      <article class="stagecard"><h4>Check the specification</h4><p class="small">The clauses are split and each requirement (form, fault level, IP, poles) is compared with the drawing; a disagreement becomes a question, never a silent fix.</p><p class="small muted">A quotation that misses a clause is under-priced or non-compliant.</p><span class="num" data-k="spec"><span class="skeleton">&nbsp;</span></span></article>
-      <article class="stagecard"><h4>Choose parts and price</h4><p class="small">Fixed rules pick a catalogue part within the fault level, add busbars, enclosure, labour and documents, and name the evidence for every line.</p><p class="small muted">The estimator checks each line against the drawing instead of trusting a total.</p><span class="num" data-k="price"><span class="skeleton">&nbsp;</span></span></article>
-    </div>
-
-    <div id="charts-block" hidden>
-      <h3 style="margin-top:var(--s6)">The evidence, in charts</h3>
-      <p class="muted">Each chart is drawn from the evaluation files; "Show the numbers" under it gives the same data as a table.</p>
-      <div class="charts" id="charts"></div>
-    </div>
-
-    <h3 style="margin-top:var(--s6)">The scorecards</h3>
-    <p class="muted">Whole drawings, scored against their answer keys: the trained reader against the hand-written one it replaced, on each evaluation set. <em>Symbols found</em> is the share of the answer key's symbols the reader found with the right type; <em>price within</em> is the gap between the quoted total and the total the same rules give on the answer key.</p>
-    <p class="foot" style="margin:0 0 var(--s2)">Labels linked right is counted between devices that were found and texts that were read, so it measures the pairing alone; a correct pairing can still hold a misread rating. The link rules were written against this generator's conventions and tuned on the sets they are scored on, so it is an upper bound.</p>
-    <div class="panels" id="panels"><div class="card"><span class="skeleton" style="display:block;height:8em"></span></div><div class="card"><span class="skeleton" style="display:block;height:8em"></span></div><div class="card"><span class="skeleton" style="display:block;height:8em"></span></div></div>
-
-    <div class="card" style="margin-top:var(--s4)"><h4>Detector training runs</h4><p class="sub muted small">Per 640 px tile on the unseen-style test tiles, with duplicate suppression; the size rule asks for precision and recall of at least 0.95 for every class on validation and unseen-style tiles.</p><div id="runs"></div><h4 style="margin-top:var(--s3)">What it still gets wrong</h4><p id="wrong" class="small"></p></div>
-
-    <h3 style="margin-top:var(--s6)">The problems met</h3>
-    <p class="muted">A running record kept as the work went: what happened, why, what was done, and what it means for the real project. These are the lessons the road map below is built on.</p>
-    <div class="acc" id="problems"></div>
-
-    <details class="more"><summary>View the full scorecards (the markdown files as written by the evaluation code)</summary><div id="fullcards"></div></details>
-  </div>
-</section>
-
-<section id="real" class="block" aria-labelledby="h-real">
-  <div class="wrap">
-    <p class="kicker">The real project</p>
-    <h2 id="h-real">The road map, as the author would follow it in the KTP</h2>
-    <p class="lede">Each part of this miniature replaced by its real version, in the order the evidence suggests. It is presented as a road map, not a finished solution: no phase promises a number, each says what would be measured.</p>
-    <ol class="timeline">
-      <li class="phase" data-n="1"><div class="card"><h4>Data and labelling with the estimators</h4><dl>
-        <dt>Goal</dt><dd>A labelled set of the company's own past enquiries: a box and a type on every symbol, each rating linked to its device, the clauses, and the estimator's final bill of materials as the answer key; a symbol vocabulary agreed with the estimators first.</dd>
-        <dt>What the demo does</dt><dd>Draws its own synthetic drawings with answer keys, audits them like code, and keeps a small public-domain set of real drawings for an honest, separate score.</dd>
-        <dt>What the KTP does differently</dt><dd>Real drawings from real consultants, labelled by the people who will use the tool, with every label checked against the pixels it describes and the input class (native CAD, vector PDF, scan) recorded.</dd>
-        <dt>Risk</dt><dd>Too few or too uniform drawings; synthetic drawings seeded from real topologies fill the gap, and test-set sizes are set from the rarest symbol, not from convenience.</dd></dl></div></li>
-      <li class="phase" data-n="2"><div class="card"><h4>The detector trained on real drawings</h4><dl>
-        <dt>Goal</dt><dd>A symbol detector that spans every consultant's style, with its threshold chosen on whole drawings and a per-type scorecard at drawing level.</dd>
-        <dt>What the demo does</dt><dd>An RT-DETR detector trained on synthetic tiles, merged across tiles with duplicates made impossible, scored per type on clean, scan-like and unseen-style drawings.</dd>
-        <dt>What the KTP does differently</dt><dd>Trains on the labelled real sheets, adds a connectivity trace so the output is a circuit rather than a list of boxes, and counts false boxes on blank paper as their own number.</dd>
-        <dt>Risk</dt><dd>A new consultant's style arriving unseen, and rare symbols staying weak as styles widen; met by a validation set of unseen styles and a per-type recall curve as the early warning.</dd></dl></div></li>
-      <li class="phase" data-n="3"><div class="card"><h4>The learned symbol-to-label link</h4><dl>
-        <dt>Goal</dt><dd>A model that assigns each piece of text to the device it belongs to and joins device schedules by tag, trained on the estimators' corrections.</dd>
-        <dt>What the demo does</dt><dd>Rules: symbols on one vertical line form a way, the text lines stacked beside or below it form its label block, the block goes to the nearest way (preferring its own side) and each line is routed to a device by what it says. They were written against this generator's drawing conventions and tuned on the sets they are scored on, so their link numbers in the scorecards are an upper bound; the held-out layouts hold styles out from the detector, not from the rule's author.<span data-fonts-link></span></dd>
-        <dt>What the KTP does differently</dt><dd>Replaces the rules with a learned link trained on the estimators' corrections and measured with its own precision and recall apart from symbol finding and text reading, on drawings from consultants the rule's author never saw.</dd>
-        <dt>Risk</dt><dd>Without corrections flowing from the workbench there is nothing to train on, which is why the workbench comes early.</dd></dl></div></li>
-      <li class="phase" data-n="4"><div class="card"><h4>The specification reader with clause citations</h4><dl>
-        <dt>Goal</dt><dd>Every requirement extracted into a fixed schema with its clause as evidence, unusual clauses flagged by retrieval from past tenders, and a draft compliance statement.</dd>
-        <dt>What the demo does</dt><dd>Splits the clauses and reads form, fault level, IP, poles and busbar material by rules, then raises every disagreement with the drawing as a question.</dd>
-        <dt>What the KTP does differently</dt><dd>A language model inside the company's boundary that must cite the clause or abstain, with the sector overlays the company meets and a measured hallucination rate.</dd>
-        <dt>Risk</dt><dd>A confident answer without evidence, and prompt injection through document text; clauses are treated as data, never as instructions.</dd></dl></div></li>
-      <li class="phase" data-n="5"><div class="card"><h4>The rules and the catalogue, owned by the estimators</h4><dl>
-        <dt>Goal</dt><dd>The company's design rules written down as rules the estimators can read, test and change, with supplier price lists dated and versioned; the model drafts, it never chooses a fault rating.</dd>
-        <dt>What the demo does</dt><dd>Deterministic rules over an invented catalogue, every line carrying its rule and evidence, nothing outside the fault level ever selected silently.</dd>
-        <dt>What the KTP does differently</dt><dd>The licensed system's verified limits, the company's labour norms per functional unit, and a test for every rule that reproduces past quotations within an agreed band.</dd>
-        <dt>Risk</dt><dd>Rules that live in people's heads and differ between estimators; written down, they become the company's property and survive the project.</dd></dl></div></li>
-      <li class="phase" data-n="6"><div class="card"><h4>The review workbench and the human in the loop</h4><dl>
-        <dt>Goal</dt><dd>The estimator's screen: drawing and schedule side by side, doubtful lines first, correction in place, nothing sent to a customer without acceptance; every correction logged as audit trail and training data.</dd>
-        <dt>What the demo does</dt><dd>This page: the boxes on the sheet, the tables beside them, the questions listed, the files to download.</dd>
-        <dt>What the KTP does differently</dt><dd>Integration with the estimating sheets and the tools already in use, automatic acceptance only after thresholds are calibrated per field on real enquiries.</dd>
-        <dt>Risk</dt><dd>A tool slower than the sheet it replaces, or a draft treated as the answer; confidence and evidence stay on every line.</dd></dl></div></li>
-      <li class="phase" data-n="7"><div class="card"><h4>Evaluation gates and the regression set</h4><dl>
-        <dt>Goal</dt><dd>A golden set of real enquiries with estimator-verified bills of materials; symbols, lines and price measured per input class and sector; no change ships that lowers a gated number.</dd>
-        <dt>What the demo does</dt><dd>Scores every drawing against its answer key at three levels and keeps every run's numbers in the evaluation files this page reads.</dd>
-        <dt>What the KTP does differently</dt><dd>Real answer keys, acceptance bands agreed per field, a regression run on every model, prompt or rule change, and a quarterly report to the project's management committee.</dd>
-        <dt>Risk</dt><dd>Small test sets making pass or fail a coin toss, and thresholds chosen on the wrong unit; every threshold is chosen on whole enquiries, on validation data that is never the test data.</dd></dl></div></li>
-      <li class="phase" data-n="8"><div class="card"><h4>Secure on-premise deployment and explainability</h4><dl>
-        <dt>Goal</dt><dd>A service inside the company's existing security boundary, open-weight models for anything that sees customer drawings, versioned models and prompts, logging and drift monitoring, a threat model following the UK code of practice for the cyber security of AI and the NCSC guidelines.</dd>
-        <dt>What the demo does</dt><dd>Runs on a small cloud instance with an invented catalogue; every value on this page points to its box, clause, rule or price row.</dd>
-        <dt>What the KTP does differently</dt><dd>Customer drawings never leave the building unless a contract and a data-protection assessment allow it; a security review before go-live and after each model change; an explanation test with the estimators.</dd>
-        <dt>Risk</dt><dd>Data residency with API models, and a model change that silently shifts behaviour; re-tested after every change.</dd></dl></div></li>
-      <li class="phase" data-n="9"><div class="card"><h4>Roll-out, and measuring hours saved and tender win rate</h4><dl>
-        <dt>Goal</dt><dd>Shadow mode first, then assisted mode one sector at a time; estimators trained as reviewers and labellers; the capability written into the quality procedures so it outlives the project.</dd>
-        <dt>What the demo does</dt><dd>Shows the shape of the gain on synthetic drawings and records every problem met in plain language.</dd>
-        <dt>What the KTP does differently</dt><dd>A baseline measured before anything changes (time per enquiry, errors found later, tenders won), then hours per quotation, re-work on revisions and win rate tracked over time with their caveats.</dd>
-        <dt>Risk</dt><dd>Measuring after without a before, and attributing a change in win rate to the tool alone.</dd></dl></div></li>
-    </ol>
-  </div>
-</section>
-
-<section id="about" class="block" aria-labelledby="h-about">
-  <div class="wrap">
-    <p class="kicker">About</p>
-    <h2 id="h-about">Who, what and under which terms</h2>
+    <p class="kicker">In plain language</p>
+    <h2 id="h-plain">What this is, and what it is not</h2>
+    <p class="lede">An estimator at a switchgear maker receives a single-line diagram and a specification and turns them into a priced bill of materials. That takes hours of reading, counting and checking, and a missed clause or a misread rating costs money. This miniature does that reading on synthetic drawings and shows its evidence, so the gain and the gaps can be measured before any real drawing is involved.</p>
     <div class="two">
-      <div class="card"><h4>Author</h4><p>Muhammad Adnan, built in October 2026 as evidence for the University of Salford and R&amp;B Switchgear KTP application. Code: <a href="https://github.com/CaptiveON/sld2quote">github.com/CaptiveON/sld2quote</a> <span class="tag">private for now</span>.</p><p class="small muted" style="margin:0">Licence: MIT, copyright 2026 Muhammad Adnan. The IEC 60617 symbol artwork is from the QElectroTech elements library (CC BY 3.0); the detector is RT-DETR through Hugging Face transformers (Apache-2.0); the text reader is RapidOCR (Apache-2.0).</p></div>
-      <div class="card"><h4>Synthetic data, invented prices</h4><p>Every drawing the system was trained and scored on is synthetic, drawn by its own generator; the catalogue, part numbers and prices are invented and labelled as such; the real drawings in the gallery are public-domain figures from United States federal manuals; nothing comes from R&amp;B Switchgear.</p><p class="small muted" style="margin:0">Written with AI coding agents (Claude, by Anthropic) as implementation tools: they wrote the code, tests and documents under the author's direction and review, and every number here was produced by the evaluation code, never typed by hand.</p></div>
+      <div class="card prose">
+        <h4>What it is</h4>
+        <ul>
+          <li>A working pipeline: text reading, symbol detection, label linking, a specification check, rule-based pricing, and a quotation with the evidence for every line.</li>
+          <li>Measured end to end: a generator draws the drawings and writes their answer keys, so every stage has a score, and every score on this site is read from the evaluation files at load time.</li>
+          <li>Live: the server reads the drawing you choose while you watch, stage by stage, and the result opens with the drawing, the parts and the questions an estimator must still decide.</li>
+          <li>Honest about its limits: the symbol detector was trained on synthetic drawings; the link rules were tuned on the sets they are scored on; the real public-domain drawings are shown unscored.</li>
+        </ul>
+      </div>
+      <div class="card prose">
+        <h4>What it is not</h4>
+        <ul>
+          <li>Not R&amp;B's system, and not built on any R&amp;B drawing, part or price. The catalogue is invented and labelled as such.</li>
+          <li>Not a claim that real consultants' drawings would score like these. They would score lower, and the first weeks of the KTP are labelling real drawings to measure that gap and close it.</li>
+          <li>Not a language model guessing a quotation. A rules layer owns the ratings, the forms and the parts; nothing doubtful is settled silently.</li>
+          <li>Not finished. It is a partial solution built in a week to show the shape of the full one, with the road map for the rest.</li>
+        </ul>
+      </div>
     </div>
+  </div>
+</section>
+
+<section class="block" aria-labelledby="h-map">
+  <div class="wrap">
+    <p class="kicker">The site</p>
+    <h2 id="h-map">Where to find what</h2>
+    <p class="lede">Each page starts in plain language and then gives the technical layer. The order below is the order I would read them in; Try it is the one to open first if you have five minutes.</p>
+    <div class="map" id="sitemap"></div>
   </div>
 </section>
 </main>
-<footer><div class="wrap">sld2quote 0.2.0, October 2026. Plain HTML, CSS and JavaScript; the scorecards are read from the evaluation files at load time.</div></footer>
+<footer><div class="wrap"></div></footer>
 </body>
 </html>

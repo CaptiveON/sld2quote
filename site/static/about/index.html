@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About, sld2quote</title>
+<meta name="description" content="Who built sld2quote and under which terms: the author, the MIT licence, the synthetic-data statement, the AI-assistance statement, the repository and the model repository.">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../style.css">
+<script src="../app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="../">sld2quote</a>
+    <span id="pill" class="pill" role="status" aria-live="polite">Loading</span>
+    <nav class="nav" aria-label="Pages"></nav>
+  </div>
+</header>
+
+<main id="main">
+<section id="about" class="block" aria-labelledby="h-about" style="border-top:0">
+  <div class="wrap">
+    <p class="kicker">About</p>
+    <h1 id="h-about" style="font-size:var(--fs-2xl)">Who, what and under which terms</h1>
+    <p class="lede">I am Muhammad Adnan, an applied AI engineer. I built sld2quote in October 2026 as evidence for my application to the University of Salford and R&amp;B Switchgear Knowledge Transfer Partnership, Artificial Intelligence and Machine Learning Engineer (KTP Associate), and this site is the link I share with the assessor, in my application and with the company.</p>
+    <div class="two">
+      <div class="card prose">
+        <h4>Author and licence</h4>
+        <p>Code and text: Muhammad Adnan. Licence: MIT, copyright 2026 Muhammad Adnan, so a company or a university can use any part of it without obligation. The repository is private at the time of writing and opens on request; the trained detector is in a private model repository on the Hugging Face Hub, published to the site at deployment time.</p>
+        <p class="small muted" style="margin:0">Third-party parts keep their own licences: the IEC 60617 symbol artwork in <span class="mono">assets/symbols/</span> is from the QElectroTech elements library (CC BY 3.0), taken unchanged through the synergycodes single-line-diagram set; the detector is RT-DETR through the Hugging Face transformers library (Apache-2.0), fine-tuned from the published r18vd weights; the text reader is RapidOCR running the PP-OCR models (Apache-2.0). The 19 real drawings in the gallery are figures from United States federal manuals, public domain as works of the US government (17 U.S.C. 105), with each sheet's source recorded in the repository. Every source is listed on the <a href="../references/">References</a> page.</p>
+      </div>
+      <div class="card prose">
+        <h4>Synthetic data, invented prices</h4>
+        <p>Every drawing the system was trained and scored on is synthetic, drawn by its own generator, which also writes the answer key. The catalogue, the part numbers and the prices are invented and labelled as such on every quotation. The real drawings in the gallery are public-domain figures, shown unscored because they have no answer key yet. Nothing in this project comes from R&amp;B Switchgear: no drawing, no part, no price. The company's problem is described only as its public job description states it.</p>
+        <p class="small muted" style="margin:0">Every number on this site is read from the evaluation files the code wrote, when the page loads; none is typed into a page. The full files are on the <a href="../evidence/">Evidence</a> page.</p>
+      </div>
+    </div>
+    <div class="card prose" style="margin-top:var(--s3)">
+      <h4>AI assistance</h4>
+      <p>I designed, researched and planned this project and its architecture, took every decision in it and reviewed every result. AI coding tools (Claude, by Anthropic) wrote code, tests and documents to my direction, which is what let one person build and measure it in days.</p>
+      <p class="small muted" style="margin:0">What that means in practice is on the <a href="../why-me/">Why me</a> page: the decisions, the reviews and the acceptance tests were mine; the typing was not. I consider directing, reviewing and measuring AI-written code a core skill of the role this site is evidence for, and I say so rather than hide it.</p>
+    </div>
+    <div class="card prose" style="margin-top:var(--s3)">
+      <h4>This site</h4>
+      <p>Plain HTML, CSS and JavaScript with no framework and no build step; one script serves every page. The pages were checked in headless Chrome at phone and laptop widths, in light and dark mode, with the keyboard alone, against the WCAG 2.2 targets for contrast, focus and target size. The server is a small FastAPI application on Google Cloud Run inside the free tier; it sleeps between visits, which is why the first run of a session waits about 20 seconds. A static copy of the samples and scorecards lives on a Hugging Face Space as the fallback.</p>
+      <p class="small muted" style="margin:0">Version 0.3.0, 19 October 2026. Problems met on the way are recorded in plain language on the <a href="../problems/">Problems</a> page.</p>
+    </div>
+  </div>
+</section>
+</main>
+<footer><div class="wrap"></div></footer>
+</body>
+</html>

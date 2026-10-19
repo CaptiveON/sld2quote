@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why me, sld2quote</title>
+<meta name="description" content="The person specification for the post answered criterion by criterion with evidence from this project and from the professional record, why the project was built, the first ninety days, the questions for the company in week one, and how the project was built.">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../style.css">
+<script src="../app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="../">sld2quote</a>
+    <span id="pill" class="pill" role="status" aria-live="polite">Loading</span>
+    <nav class="nav" aria-label="Pages"></nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="block" aria-labelledby="h-page" style="border-top:0">
+  <div class="wrap prose">
+    <p class="kicker">Why me</p>
+    <h1 id="h-page" style="font-size:var(--fs-2xl)">The person specification, answered with evidence</h1>
+    <p class="lede">I am an applied AI engineer. The first question I ever asked a computer was "what happens in between, and can you show me?", and it is still the question behind everything I build; your project asks it of an estimator holding a single-line diagram.</p>
+    <p>The person specification for this post lists 17 criteria: 12 essential and 5 desirable <a class="cite" href="../references/#r1" aria-label="reference 1">[1]</a>. Below, each one is answered twice: with evidence from this project, which you can try on this site, and with evidence from my professional record. Where I have a gap, I say so, and say how I would close it. Figures from my earlier roles are my own measurements from the time; where I recorded how a figure was measured, the method is given.</p>
+<p>My record in brief: an MSc in Advanced Computer Science with Research from the University of Hertfordshire; two years (August 2024 to August 2026, part-time alongside the MSc until September 2025) as a Full-Stack AI Engineer at Pro Construction Bidders, a pre-construction services firm (estimating, quantity take-offs, tender analysis and bid preparation), building the document-extraction, retrieval, agent and evaluation systems its estimators used daily; and several systems I built on my own, of which three matter here: TenderFrame (an auditable assistant that must cite its sources), GenFeedback (a fine-tuned extraction model behind a human review step) and AugmentMeReality (vision models deployed and fused on an iPhone).</p>
+
+  </div>
+</section><section class="block" aria-labelledby="h-w0"><div class="wrap prose qa"><h2 id="h-w0">Qualifications</h2><h3 id="c1">1. A first degree (minimum 2.1) in computer science or a closely related discipline (essential)</h3>
+<dl>
+<dt>From my record</dt><dd>BS (Hons) in Computer Science, National University of Computer and Emerging Sciences (FAST-NUCES), Lahore, 2017 to 2023, followed by the postgraduate qualification below.
+</dd>
+</dl>
+<h3 id="c2">2. A relevant postgraduate qualification (desirable)</h3>
+<dl>
+<dt>From my record</dt><dd>MSc Advanced Computer Science with Research, University of Hertfordshire, September 2023 to December 2025, with a research year in place of a placement. My dissertation, GenFeedback, fine-tuned a BERT model with LoRA to extract entities from documents, behind a human review step; I rebuilt and retrained it in 2026.
+</dd>
+</dl>
+</div></section>
+<section class="block" aria-labelledby="h-w1"><div class="wrap prose qa"><h2 id="h-w1">Background, experience and knowledge</h2><h3 id="c3">3. Machine learning applied to real technical or business problems (essential)</h3>
+<dl>
+<dt>From this project</dt><dd>A detector fine-tuned for one business task and judged by business measures, not only by detection scores: bill-of-materials lines found and the error in the quoted total. On the 30 test drawings (clean copies) the mean price error is <span data-n="set.test.clean.trained.price_error" data-v="0.014" class="skeleton"></span>; on 60 drawings in a style held out of training it is <span data-n="set.unseen.clean.trained.price_error" data-v="0.125" class="skeleton"></span>. Synthetic drawings, invented prices.
+</dd>
+<dt>From my record</dt><dd>At Pro Construction Bidders I developed and deployed multimodal document-extraction pipelines on AWS for the estimators: manual review effort fell 58% (timed before and after rollout) and estimator corrections fell 27%.
+</dd>
+</dl>
+<h3 id="c4">4. Computer vision for diagrams, drawings and image-based documents (essential)</h3>
+<dl>
+<dt>From this project</dt><dd>RT-DETR fine-tuned on single-line diagrams read in overlapping tiles, 14 symbol classes, with duplicate suppression, tile merging and a cut-off chosen on whole drawings. It finds <span data-n="set.test.clean.trained.symbol_recall" data-v="0.981" class="skeleton"></span> of the symbols on the test set and <span data-n="set.unseen.clean.trained.symbol_recall" data-v="0.985" class="skeleton"></span> on the held-out style (clean copies), where hand-written shape tests found <span data-n="set.test.clean.classical.symbol_recall" data-v="0.059" class="skeleton"></span>.
+</dd>
+<dt>From my record</dt><dd>At Pro Construction Bidders I applied vision-language models to architectural drawings, specifications and tender packs. In AugmentMeReality I deployed Depth Anything V2 on the iPhone's Neural Engine, fused its depth with LiDAR through a gated fit that, when unsure, assumes nothing is in the way rather than inventing an obstacle, and wrote the Metal kernel that refines person segmentation.
+</dd>
+<dt>The gap, closed here</dt><dd>Before this project I had deployed and fused vision models but never trained a detector. This is the first, and <a href="../problems/">the problem log</a> shows the mistakes made on the way and how each was found.
+</dd>
+</dl>
+<h3 id="c5">5. NLP, information extraction or LLMs for technical text (essential)</h3>
+<dl>
+<dt>From this project</dt><dd>A specification reader that turns clauses into requirements with their clause numbers and lists conflicts with the drawing: <span data-n="results.test.conflicts.clean" data-v="17 found of 17, 0 false" class="skeleton"></span> on the test set (clean copies). It is a rules-based reader over the generator's clauses; the KTP version would be a language model with a fixed schema that must cite its clause (<a href="../architecture/">architecture</a>).
+</dd>
+<dt>From my record</dt><dd>TenderFrame, my open-source assistant over official guidance, enforces citations, has a second model verify each claim, abstains when evidence is missing and writes every answer to an append-only log; on its committed 30-question test set it retrieves the right source for 24 of 25 answerable questions, all 135 verified claims cite valid sources, and it refuses 5 of 5 out-of-scope questions. At Pro Construction Bidders I built retrieval pipelines over specifications, past estimates and pricing data, and estimator corrections to retrieved answers fell 24%. GenFeedback (criterion 2) is a fine-tuned entity extractor.
+</dd>
+</dl>
+<h3 id="c6">6. Multimodal AI combining visual and textual information (essential)</h3>
+<dl>
+<dt>From this project</dt><dd>The pipeline joins what the detector sees (symbols), what the text reader reads (ratings and notes) and what the specification says (clauses) into one bill of materials, with the evidence for every line, and raises the places where drawing and text disagree.
+</dd>
+<dt>From my record</dt><dd>At Pro Construction Bidders the same pattern at production scale: drawings and specifications turned into quantities, scope and requirements for 10 to 30 estimators and bid managers, 100 to 1,000 documents a month.
+</dd>
+</dl>
+<h3 id="c7">7. Python and common AI/ML frameworks (essential)</h3>
+<dl>
+<dt>From this project</dt><dd>Python throughout: PyTorch and Hugging Face transformers for the detector, pycocotools for detection scores, RapidOCR on ONNX Runtime for text, FastAPI for the site, and pytest tests for the generator, export, trainer, text readers, readers and site.
+</dd>
+<dt>From my record</dt><dd>GenFeedback: PyTorch, Hugging Face Transformers, PEFT (LoRA), scikit-learn class weights and seqeval. TenderFrame: FastAPI and PostgreSQL with pgvector. Pro Construction Bidders: LlamaIndex, LangChain, LangGraph and LangSmith, and contributions to fine-tuning Llama models with LoRA, SFT and DPO on Amazon SageMaker.
+</dd>
+</dl>
+<h3 id="c8">8. Data engineering for complex or variable datasets (essential)</h3>
+<dl>
+<dt>From this project</dt><dd>The training data was built, not downloaded: a generator with answer keys, an export of 9,176 training tiles holding 38,332 boxes split by whole drawing with styles held out, audits that caught labels printed over symbols and scan boxes in the wrong frame, and 19 real public-domain drawings collected with the source and rights statement of each.
+</dd>
+<dt>From my record</dt><dd>RailRun, my UK rail companion, processes the 677 MB national timetable every day through a 2 GiB container and maintains a 26,000-entry train-identity map; TenderFrame re-ingests its documents idempotently into typed clause chunks.
+</dd>
+</dl>
+<h3 id="c9">9. Safe AI, interpretability, confidence scoring, human-in-the-loop validation (desirable)</h3>
+<dl>
+<dt>From this project</dt><dd>Calibrated confidence (a box scoring 0.11 to 0.16 was right <span data-n="calibration.0.11-0.16" data-v="0.867" class="skeleton"></span> of the time on validation drawings); the evidence and the rule behind every bill-of-materials line; doubtful items raised for the estimator, never silently fixed; conflicts between drawing and specification listed, never resolved by the system.
+</dd>
+<dt>From my record</dt><dd>TenderFrame's citation rule, claim verifier, abstention and append-only audit log; GenFeedback's confidence gates before anything reaches its review step; AugmentMeReality's fit, which falls back to "no obstacle" whenever it cannot trust the measurement.
+</dd>
+</dl>
+<h3 id="c10">10. Cybersecurity, secure AI deployment, data protection, responsible AI (desirable)</h3>
+<dl>
+<dt>From this project</dt><dd>A live service that holds no secret (the model is inside the image and the access token was destroyed), runs under its own least-privilege account and caps its use; a licence review of every component and every real drawing.
+</dd>
+<dt>From my record</dt><dd>TenderFrame's authenticated API and an audit log that the database itself keeps append-only; AugmentMeReality's Firestore security rules with 74 emulator tests. The security work in my plan follows the UK code of practice for AI security <a class="cite" href="../references/#r43" aria-label="reference 43">[43]</a>, the NCSC guidelines <a class="cite" href="../references/#r44" aria-label="reference 44">[44]</a> and the OWASP list of LLM risks <a class="cite" href="../references/#r45" aria-label="reference 45">[45]</a>. I hold no security qualification, and I would not claim one.
+</dd>
+</dl>
+<h3 id="c11">11. APIs, integration, cloud or on-premise deployment, monitoring, MLOps (desirable)</h3>
+<dl>
+<dt>From this project</dt><dd>A FastAPI service that streams each stage of a run; a Docker image on Google Cloud Run with a startup probe and request-based billing; a model versioned together with its cut-off and calibration; resumable training runs that keep every pass; evaluation files that the site reads live.
+</dd>
+<dt>From my record</dt><dd>RailRun's Cloud Run services, Python Kafka consumer and continuous integration on GitHub Actions; at Pro Construction Bidders, AWS (S3, EC2, Lambda, RDS, Bedrock), Docker, CI/CD with automated testing and monitoring, and evaluation pipelines in LangSmith.
+</dd>
+</dl>
+<h3 id="c12">12. Regulated, safety-sensitive, engineering, manufacturing or infrastructure environments (desirable)</h3>
+<dl>
+<dt>The honest answer</dt><dd>Not as an employee. The nearest is construction tendering at Pro Construction Bidders, where every output fed a bid, and domains with rules I had to learn, such as rail accessibility data in RailRun. In this project the symbols follow IEC 60617 <a class="cite" href="../references/#r9" aria-label="reference 9">[9]</a>, the pricing rules treat the form of separation and the IP rating as cost drivers, as the BEAMA guide to BS EN 61439-2 explains <a class="cite" href="../references/#r8" aria-label="reference 8">[8]</a>, and provenance and licences were treated as requirements. My plan starts at the estimators' desks and on the factory floor before I write anything that prices.
+</dd>
+</dl>
+</div></section>
+<section class="block" aria-labelledby="h-w2"><div class="wrap prose qa"><h2 id="h-w2">Skills and competencies</h2><h3 id="c13">13. Analytical problem-solving under technical uncertainty (essential)</h3>
+<dl>
+<dt>From this project</dt><dd>A training run crashed with invalid numbers. I had every gradient computed on the Mac's graphics chip compared with a float64 recomputation on the processor, found the one kind that was wrong (large weight gradients, past 65,536 rows), worked around it at under 1% cost, and reran the best recipe (log entry 17a). Several hypotheses in <a href="../problems/">the problem log</a> were tested and withdrawn before anything was built on them.
+</dd>
+<dt>From my record</dt><dd>In RailRun I cut push-notification latency from a mean of 12.3 s to 0.92 s on a live ride (14 and 8 measurements).
+</dd>
+</dl>
+<h3 id="c14">14. Working relationships across estimating, engineering, IT, finance and leadership (essential)</h3>
+<dl>
+<dt>From my record</dt><dd>At Pro Construction Bidders I worked in a team of 4 to 6 engineers with 10 to 30 estimators and bid managers, and presented results to management for adoption and road-map decisions. Adoption followed the review screens: estimators trusted what they could check and correct.
+</dd>
+<dt>For R&B</dt><dd>These are relationships to build, not ones I have. The plan puts me with the estimators first, makes one of them co-owner of the symbol set, and reports to the company in its own units: minutes per quote, lines corrected, price error.
+</dd>
+</dl>
+<h3 id="c15">15. Organisation and project management: milestones, risks, testing, expectations (essential)</h3>
+<dl>
+<dt>From this project</dt><dd>Eleven planned steps, each with acceptance criteria, and the dates, risks and every result recorded in the build record; tests for every module; what is not done stated on the page, not hidden.
+</dd>
+<dt>From my record</dt><dd>AugmentMeReality has 60 architecture decision records and a 41-item field-test protocol; RailRun has 13 decision records and more than 12,000 automated tests across six packages; ShipTrial, my open-source harness in which AI reviewer agents try to break a build before it ships, was refined over more than 170 review runs.
+</dd>
+</dl>
+<h3 id="c16">16. Attention to detail where AI feeds engineering, pricing or commercial decisions (essential)</h3>
+<dl>
+<dt>From this project</dt><dd>Price error is a headline number; double counting is made impossible by design; boxes on blank paper are counted because each would be a priced line; refreshed answer keys were checked byte for byte; and the caveat that the label rules were tuned on the sets they are scored on sits next to the numbers.
+</dd>
+<dt>From my record</dt><dd>TenderFrame's mechanical citation check (135 of 135 verified claims valid); schema validation and estimator corrections at Pro Construction Bidders.
+</dd>
+</dl>
+<h3 id="c17">17. Supporting organisational change: engagement, training, documentation, adoption (essential)</h3>
+<dl>
+<dt>From this project</dt><dd>A site that a reader who is not technical can try step by step, with a plain explanation of how each step relates to the estimator's work, and a problem log written in plain language as the work went.
+</dd>
+<dt>From my record</dt><dd>At Pro Construction Bidders, demonstrations on the estimators' own documents and their corrections turned into features. At R&amp;B: estimators trained as reviewers and labellers, an internal AI champion, runbooks, and the capability written into the company's own procedures (<a href="../ktp/">the plan</a>).
+</dd>
+</dl>
+</div></section>
+<section class="block" aria-labelledby="h-w3"><div class="wrap prose qa"><h2 id="h-w3">Why I built this project</h2><ul><li><b>To show a partial solution, not a promise.</b> The job description asks for drawings and specifications turned into accurate bills of materials and costed quotations, with explainability. This miniature does that end to end on synthetic drawings, with every step measured.</li><li><b>To show I can run the whole project.</b> Data, model, rules, evaluation, deployment and documentation, planned in steps, decided on evidence and shipped to a fixed date, with the unfinished parts stated.</li><li><b>To close my largest gap before you found it.</b> I had never trained a detector. Now I have, and the record shows how.</li><li><b>To find the hard problems early.</b> Every problem in the log is one the KTP will meet on real drawings; each now has a work package.</li></ul>
+</div></section>
+<section class="block" aria-labelledby="h-w4"><div class="wrap prose qa"><h2 id="h-w4">My first 90 days</h2><ol><li><b>Weeks 1 and 2: learn the work.</b> At the estimators' desks and on the factory floor: the products, the enquiries, each step from enquiry to quotation, and where the time goes (objective 1). Agree the IT and security boundary.</li><li><b>Weeks 2 and 3: the mini-project.</b> Time ten recent enquiries step by step (minutes per step, rework, error types), then build a throwaway tool for the costliest step to show the size of the gain before the workplan is fixed.</li><li><b>Weeks 3 to 6: the data.</b> An inventory of past enquiries (drawings, specifications, bills of materials, the quotes sent), their formats and confidentiality terms; a labelling tool set up with an estimator as co-owner of the symbol set; the first sheets labelled, links included.</li><li><b>Weeks 6 to 10: first models.</b> The detector from this miniature retrained on company drawings behind the same interface; a first clause extractor on real specification sections; scorecards per consultant and input type.</li><li><b>Weeks 10 to 12: the baseline.</b> A report in the company's units: what the drawings look like by input type, the measured time per step, first model numbers on a golden set agreed with the company supervisor, and the plan for months 4 to 12, ready for the first Local Management Committee.</li></ol>
+</div></section>
+<section class="block" aria-labelledby="h-w5"><div class="wrap prose qa"><h2 id="h-w5">What I would ask the company in week one</h2><ol><li>What arrives with an enquiry, in which formats (vector PDF, scan, CAD file), and how many arrive a month?</li><li>Which step costs the estimators the most time today, and where do errors and rework come from?</li><li>Are past enquiries kept together with the drawing, the specification, the bill of materials and the quote that was sent, and may the project use them for training and evaluation?</li><li>Which estimating tools, price lists and templates are in use, who owns them, and how are price changes handled?</li><li>Who owns the design rules, and are they written down?</li><li>Where may models run: on the company's own servers, in a UK cloud region, or through outside services, given its security accreditation and customers' confidentiality terms?</li><li>How will the company judge success: hours per quote, errors caught, win rate?</li><li>Which sectors' quotations are hardest, and which estimator would co-own the symbol set?</li><li>For the academic team: the supervision rhythm, access to compute, the publication plan, and whether anonymised drawings could ever be released.</li></ol>
+</div></section>
+<section class="block" aria-labelledby="h-w6"><div class="wrap prose qa"><h2 id="h-w6">How this project was built</h2><p>I designed, researched and planned this project and its architecture, took every decision in it and reviewed every result. AI coding tools (Claude, by Anthropic) wrote code, tests and documents to my direction, which is what let one person build and measure it in days.</p></div></section>
+</main>
+<footer><div class="wrap"></div></footer>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Problems, sld2quote</title>
+<meta name="description" content="Fourteen problems met while building sld2quote that will come back at full scale, each in three parts: what happened, how it was solved here, and how the KTP would solve it properly; with the full log of all 27 entries rendered from the record.">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/15.0.12/marked.min.js" defer></script>
+<script src="../app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="../">sld2quote</a>
+    <span id="pill" class="pill" role="status" aria-live="polite">Loading</span>
+    <nav class="nav" aria-label="Pages"></nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="block" aria-labelledby="h-page" style="border-top:0">
+  <div class="wrap prose">
+    <p class="kicker">Problems</p>
+    <h1 id="h-page" style="font-size:var(--fs-2xl)">Fourteen problems that will come back at full scale</h1>
+    <p class="lede">Every real problem the build met was written down on the day it happened, in plain language, with its cause, what was done and what it means for the full system. The fourteen below matter most for the real project, each in three parts; the complete log is at the end of the page, rendered from the record itself.</p>
+    <p>I kept a log of every real problem this project met, written in plain language on the day it happened: 27 numbered entries. The fourteen below matter most for the real project, because each one will come back on real drawings, at a larger scale and with money attached. For each one: what happened, how we solved it here, and how the KTP would solve it properly, with the company's own drawings, its estimators and three years.</p>
+<p>Everything below was measured on synthetic drawings drawn by the project's generator; nothing is an R&amp;B drawing, part or price. Numbers are for the site's reader (RT-DETR pass 4, RapidOCR, the step 6 link rules) unless a sentence says otherwise. The label rules were tuned on the sets they are scored on, and the real public-domain drawings are not scored yet.</p>
+
+  </div>
+</section><section class="block" aria-label="The critical problems"><div class="wrap"><article class="problem card" id="p1"><h3>1. There was no labelled data to learn from</h3><p class="sub">Log entry 2</p>
+<dl>
+<dt>What happened</dt><dd>A detector needs drawings in which every symbol has been marked. No public labelled set of single-line diagrams exists <a class="cite" href="../references/#r15" aria-label="reference 15">[15]</a>, a recent published set is confidential to the company that owns the drawings <a class="cite" href="../references/#r16" aria-label="reference 16">[16]</a>, and R&amp;B's drawings are off limits before the project starts.
+</dd>
+<dt>How we solved it here</dt><dd>A generator draws each sheet and writes its answer key: every device with its box and ratings, every text with its box and its device. Every sheet also has a scan-like copy. For a reality check there are 19 genuine one-line diagrams from 8 US federal documents, public domain as works of the US government <a class="cite" href="../references/#r14" aria-label="reference 14">[14]</a>, kept for scoring only, each with its source and rights statement recorded. They use the American symbol style and only six carry ampere ratings, so they will score far lower than the synthetic sets; they are not labelled yet.
+</dd>
+<dt>How the KTP would solve it properly</dt><dd>Label the company's own past enquiries with the estimators from the first months: symbol boxes and types, the link from each label to its device, and the checked bill of materials. Keep a golden set, by consultant and by sector, that is never trained on. Keep the generator for rare symbols, seeded with real board topologies, which published work on P&amp;IDs shows narrows the gap to real data <a class="cite" href="../references/#r18" aria-label="reference 18">[18]</a>.
+</dd>
+</dl>
+</article>
+<article class="problem card" id="p2"><h3>2. The answer key for scanned copies was in the wrong place</h3><p class="sub">Log entry 4</p>
+<dl>
+<dt>What happened</dt><dd>Scan-like copies are rotated by up to 1.2 degrees after drawing, but their answer-key boxes stayed in the unrotated frame, up to 35 pixels off on wide pages. Every scan copy would have taught the model wrong positions, and every scan score would have been wrong, with nothing looking broken.
+</dd>
+<dt>How we solved it here</dt><dd>Each box goes through the same rotation as the image. One test rotates an image and checks the mapped box against the ink; another checks that every answer-key box hugs its drawn symbol within 3 pixels.
+</dd>
+<dt>How the KTP would solve it properly</dt><dd>Check every label against the pixels it describes: the labelling tool shows the boxes on the image exactly as the model will see it, a second person audits a sample, and an automatic check flags boxes with no ink inside. A label file can be internally consistent and still wrong.
+</dd>
+</dl>
+</article>
+<article class="problem card" id="p3"><h3>3. The detector drew two boxes on one symbol</h3><p class="sub">Log entry 6</p>
+<dl>
+<dt>What happened</dt><dd>92% of the first model's false alarms were a second box on a symbol it had already found. On a quotation, that is a part priced twice.
+</dd>
+<dt>How we solved it here</dt><dd>Duplicate suppression across classes inside each tile, then a merge across the overlapping tiles with two filters; scores are reported with and without them (<a href="../decisions/">decision 4</a>).
+</dd>
+<dt>How the KTP would solve it properly</dt><dd>Defence in depth, because no model is perfect: suppression and merging as here, one device per box, a rule that flags near-identical devices, part counts reconciled against any schedule table on the drawing, and a review screen that shows every box to the estimator.
+</dd>
+</dl>
+</article>
+<article class="problem card" id="p4"><h3>4. Early stopping cut training short</h3><p class="sub">Log entry 7</p>
+<dl>
+<dt>What happened</dt><dd>The rule "stop when the validation score has not improved for three passes" was combined with a learning-rate schedule that decays on a fixed clock. Both overnight runs stopped at pass 6 with the learning rate still high, so the gentle finishing phase never ran. Later, the same rule stopped a run inside a temporary dip that it would have recovered from.
+</dd>
+<dt>How we solved it here</dt><dd>Runs complete their schedule and keep their best pass; every pass's weights are saved; a stopped run can be resumed on the same curve.
+</dd>
+<dt>How the KTP would solve it properly</dt><dd>Write the training protocol down and review it before any long run: count patience only once the learning rate has fallen, or use a schedule that reacts to plateaus. On shared university compute, a run that stops early wastes a booking, not just a night.
+</dd>
+</dl>
+</article>
+<article class="problem card" id="p5"><h3>5. The unseen style, and an explanation that was wrong</h3><p class="sub">Log entry 8</p>
+<dl>
+<dt>What happened</dt><dd>Three extra gentle passes lifted the scores on the trained styles, but on the unseen style the share of generators found fell from 0.98 to 0.50 per tile. The first explanation was that the held-out font changed the letters drawn inside symbols. The generator's code said otherwise: those letters were drawn in Arial Bold on every sheet. The likelier cause was the labels-below layout, which most unseen-style drawings use and the model had never trained on.
+</dd>
+<dt>How we solved it here</dt><dd>A second held-out validation set, so that models are chosen on unseen styles too while the test set stays untouched. In the wider font set, the letters inside symbols follow the sheet's font, and its hold-out is fonts only, so that "unseen" measures one thing at a time.
+</dd>
+<dt>How the KTP would solve it properly</dt><dd>Hold out whole consultants, not just fonts; report every score per consultant and per input type; and check each explanation against the code and the data before acting on it.
+</dd>
+</dl>
+</article>
+<article class="problem card" id="p6"><h3>6. Rare symbols</h3><p class="sub">Log entries 10 and 10c</p>
+<dl>
+<dt>What happened</dt><dd>Protection relays are 0.7% of the training boxes, capacitors 1.8% and surge arresters 3.2%. Showing tiles with rare classes more often (repeat-factor sampling, introduced with the LVIS dataset <a class="cite" href="../references/#r27" aria-label="reference 27">[27]</a>) raised precision across classes but, on whole drawings, lost the box-style bus-section, so every quote with one got worse; the first explanation for that was tested and found wrong. Widening the fonts spread the 270 training relays over 13 typefaces, about 21 each, and that run never learnt relays at all.
+</dd>
+<dt>How we solved it here</dt><dd>Control runs, so that one effect is measured apart from another; the product model is one that keeps the bus-sections. Relays remain the weakest class on whole drawings: found <span data-n="type.test.RELAY.clean.recall" data-v="0.545" class="skeleton"></span> of the time on the test set (clean copies, 11 relays) and <span data-n="type.unseen.RELAY.clean.recall" data-v="0.882" class="skeleton"></span> on the unseen style (clean copies, 17 relays).
+</dd>
+<dt>How the KTP would solve it properly</dt><dd>Give each class examples in proportion to its variety, not a fixed share; send rare-class candidates to the estimators for labelling first (active learning); watch per-class recall across passes as the early warning; and size each test set from its rarest class (log entry 15).
+</dd>
+</dl>
+</article>
+<article class="problem card" id="p7"><h3>7. Results swung from pass to pass</h3><p class="sub">Log entry 10a</p>
+<dl>
+<dt>What happened</dt><dd>Within one run, the share of a device type found moved by up to 0.3 between neighbouring passes, even late in training. The pass chosen happened to be the worst one for bus-sections, so comparisons between runs were partly comparisons of luck.
+</dd>
+<dt>How we solved it here</dt><dd>A running average of the weights, as in the detector authors' recipe <a class="cite" href="../references/#r21" aria-label="reference 21">[21]</a>, added as one separately measured change with a control run (<a href="../decisions/">decision 8</a>); every pass kept.
+</dd>
+<dt>How the KTP would solve it properly</dt><dd>Measure run-to-run variance with several seeds before claiming that one change beat another, and keep every model in a registry with its data version, settings and scores.
+</dd>
+</dl>
+</article>
+<article class="problem card" id="p8"><h3>8. Ghost parts on blank paper</h3><p class="sub">Log entry 10b</p>
+<dl>
+<dt>What happened</dt><dd>A cut-off chosen on tiles, 0.06, let through 35 to 45 "capacitors" per test set, sitting on blank paper. Once capacitor ratings are read, each one would be a priced line.
+</dd>
+<dt>How we solved it here</dt><dd>The cut-off is chosen on whole validation drawings, and "boxes on blank paper" is reported as its own number (<a href="../decisions/">decision 5</a>). The site's model leaves <span data-n="threshold.at.0.11.blank_paper_boxes" data-v="3" class="skeleton"></span> such boxes on <span data-n="threshold.sheets" data-v="120" class="skeleton"></span> validation sheets.
+</dd>
+<dt>How the KTP would solve it properly</dt><dd>Choose cut-offs per class and per input type on real validation enquiries, and switch on automatic acceptance for a field only after it has been measured in shadow mode on live enquiries.
+</dd>
+</dl>
+</article>
+<article class="problem card" id="p9"><h3>9. The Mac's graphics chip computed some gradients wrongly</h3><p class="sub">Log entry 17a</p>
+<dl>
+<dt>What happened</dt><dd>A training run crashed within a minute with invalid numbers. Comparing every gradient computed on the Mac's graphics chip (MPS) with a float64 recomputation on the processor found one kind wrong: the weight gradient of three large linear layers in the decoder (256 by 256, computed over 134,400 rows), off by anywhere from 0.08 to 10^36 (a one followed by 36 zeros) in six of six repeats. A plain matrix product was wrong above 65,536 rows. Every earlier run on the chip had trained through it. PyTorch's issue tracker holds related silent-correctness reports for matrix products on MPS <a class="cite" href="../references/#r30" aria-label="reference 30">[30]</a>, <a class="cite" href="../references/#r31" aria-label="reference 31">[31]</a>, <a class="cite" href="../references/#r32" aria-label="reference 32">[32]</a>; none names this exact case.
+</dd>
+<dt>How we solved it here</dt><dd>During training on the chip, every linear layer runs in pieces of at most 65,536 rows, which brings the error down to about one part in ten million (10^-7) at under 1% extra cost; an update with a finite loss but a non-finite gradient is skipped and its tiles named; and the best recipe was rerun with correct gradients. The site's model comes from that rerun.
+</dd>
+<dt>How the KTP would solve it properly</dt><dd>Train on hardware whose numerics are verified, such as a university GPU cluster, and verify anyway: a one-batch gradient check against the processor before every long run is cheap. Here it was found only because a crash forced the look.
+</dd>
+</dl>
+</article>
+<article class="problem card" id="p10"><h3>10. Choosing the text reader</h3><p class="sub">Log entry 13</p>
+<dl>
+<dt>What happened</dt><dd>Apple Vision, the first engine, runs only on a Mac and read labels and notes at <span data-n="ocr.vision.label_and_notes" data-v="0.868" class="skeleton"></span> character accuracy. The open engine that did best, RapidOCR, had its own faults: its bundled Chinese recogniser dropped the spaces in English labels, its close-up second pass read strokes inside the window as text, and "mm²" came out as "mm2". A probe showed the larger problem was elsewhere: 26 of 42 wrong ratings had the label read exactly and attached to the wrong device.
+</dd>
+<dt>How we solved it here</dt><dd>Four open engines (one with two recognisers) measured on our own drawings alongside Apple Vision, against a rule set in advance; RapidOCR with its English recogniser chosen at <span data-n="ocr.rapidocr.label_and_notes" data-v="0.960" class="skeleton"></span> (<a href="../decisions/">decision 11</a>); the close-up pass made engine-dependent; the label patterns made tolerant of the engine's known slips (log entry 26); and the link given its own score (problem 12 below).
+</dd>
+<dt>How the KTP would solve it properly</dt><dd>Read the text straight from the file wherever it exists, since vector PDFs and CAD files carry it; measure engines on the company's own scans; fine-tune a recogniser on labelled crops if scans dominate; and keep the engine behind one function so that it can be replaced and scored the same way.
+</dd>
+</dl>
+</article>
+<article class="problem card" id="p11"><h3>11. The confidence shown was on the wrong scale</h3><p class="sub">Log entry 22</p>
+<dl>
+<dt>What happened</dt><dd>The results page painted almost every device red, "low confidence", on drawings where every symbol had been found. It showed the detector's raw score, with colour bands set for the old shape reader, whose scores behaved like percentages.
+</dd>
+<dt>How we solved it here</dt><dd>Each model now carries a calibration table from its whole-drawing sweep: for each band of score, how often such a box was right on the validation drawings (<a href="../decisions/">decision 10</a>). A device's colour is decided mostly by whether its rating label was read.
+</dd>
+<dt>How the KTP would solve it properly</dt><dd>Calibrate per field and per input type on real validation enquiries <a class="cite" href="../references/#r29" aria-label="reference 29">[29]</a>, re-calibrate after every model change, tell the estimators in one sentence what the number means, and measure whether they act on it.
+</dd>
+</dl>
+</article>
+<article class="problem card" id="p12"><h3>12. The link between a symbol and its label</h3><p class="sub">Log entries 23 and 24</p>
+<dl>
+<dt>What happened</dt><dd>The scorecard counted a rating as wrong in the same way whether the symbol was missed, the label misread, or the right label attached to another device. The old rule, nearest text to the right or below, made a correct link only 72 to 75% of the time, and made only 61 to 66% of the links it should have.
+</dd>
+<dt>How we solved it here</dt><dd>The answer key records which device each text belongs to (240 answer keys refreshed without changing a pixel, which was checked); link precision and recall are scored; and a way-based rule replaced the old one. On the test set (clean copies) link precision is now <span data-n="set.test.clean.trained.link_precision" data-v="1.000" class="skeleton"></span> and link recall <span data-n="set.test.clean.trained.link_recall" data-v="1.000" class="skeleton"></span>, and the rules passed a check on fresh drawings (<a href="../decisions/">decision 13</a>). They were tuned on the sets they are scored on, which the results file says plainly.
+</dd>
+<dt>How the KTP would solve it properly</dt><dd>A link model learnt from the estimators' corrections, plus joins to schedule tables where drawings carry them; published work already extracts symbols and their connections together as a graph <a class="cite" href="../references/#r17" aria-label="reference 17">[17]</a>. Record the link at labelling time: it costs seconds per drawing and cannot be recovered afterwards.
+</dd>
+</dl>
+</article>
+<article class="problem card" id="p13"><h3>13. The platform refused a second visitor</h3><p class="sub">Log entry 21</p>
+<dl>
+<dt>What happened</dt><dd>While a live run kept both processors busy, the platform judged the only instance overloaded, could not start another because the service was capped at one, and after 14 seconds refused a second visitor's page with "no available instance" (HTTP 429) <a class="cite" href="../references/#r40" aria-label="reference 40">[40]</a>. The demo's own daily allowance of live runs also answers with 429.
+</dd>
+<dt>How we solved it here</dt><dd>A second instance is allowed, billed only for its start-up and the requests it serves; the daily cap on live runs is counted per instance, so the worst case stays inside the free allowance; the page recognises the platform's refusal, retries after a short wait and says why; and the two kinds of 429 are told apart by their message.
+</dd>
+<dt>How the KTP would solve it properly</dt><dd>Inside the company, long runs go to a job queue (submit, then be notified), separate from the pages people browse; capacity is planned from measured enquiry volumes; and monitoring watches queue times and failures.
+</dd>
+</dl>
+</article>
+<article class="problem card" id="p14"><h3>14. A cable drawn through its own label</h3><p class="sub">Log entry 27</p>
+<dl>
+<dt>What happened</dt><dd>On the classic drawings with labels below, a feeder's cable is drawn straight through the rating line, and the text reader returns readings such as "8b0 A". The link is right; the reading is wrong. On unseen-style clean copies, MCCB ratings are read right <span data-n="type.unseen.MCCB.clean.rating" data-v="0.568" class="skeleton"></span> of the time and fuse-switch ratings <span data-n="type.unseen.FUSE_SWITCH.clean.rating" data-v="0.610" class="skeleton"></span>, against <span data-n="set.test.clean.trained.rating_accuracy" data-v="1.000" class="skeleton"></span> for all ratings on the test set, whose labels sit to the right. This is most of the price error left.
+</dd>
+<dt>How we solved it here</dt><dd>Not yet solved. Whitening the cable before reading was tried and not kept: on six such drawings, 29 to 31 of 72 rating lines read exactly whether or not the cable was whitened. The classic drawings keep the crossing so that the committed numbers reproduce; the generator's wider layout starts such labels below the cable, but that has not been measured end to end.
+</dd>
+<dt>How the KTP would solve it properly</dt><dd>Leader lines and cables through text are common on real drawings, and the fixes that work are upstream: read the text from vector or CAD files, or train a recogniser on crossed text. Snapping a broken number to the nearest standard rating is a guess, so it could only ever be a flagged suggestion for the estimator.
+</dd>
+</dl>
+</article></div></section>
+<section class="block" aria-labelledby="h-log">
+  <div class="wrap">
+    <p class="kicker">The record</p>
+    <h2 id="h-log">The full log, as kept during the build</h2>
+    <p class="muted">Every entry of <span class="mono">docs/PROBLEMS.md</span>, rendered from the file itself: what happened, why, what was done, and what it means for the real project. The numbers inside are the ones recorded at the time.</p>
+    <div class="acc" id="problems"><div class="card"><span class="skeleton" style="display:block;height:6em"></span></div></div>
+  </div>
+</section>
+</main>
+<footer><div class="wrap"></div></footer>
+</body>
+</html>
