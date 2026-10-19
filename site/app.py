@@ -1,5 +1,6 @@
 """The site's back end: precomputed samples, live runs (a sheet generated from a seed, or an uploaded drawing), their
-files, the scorecards and the static front end. POST /api/generate and /api/upload with ?stream=1 answer NDJSON: a start
+files, the scorecards and the chart data (eval/charts.json from scripts/build_charts.py), and the static front end. POST
+/api/generate and /api/upload with ?stream=1 answer NDJSON: a start
 line, one line as each of the five steps finishes, then the Result (or one error line).
 
   uvicorn app:app --app-dir site --host 0.0.0.0 --port 7860
@@ -37,6 +38,7 @@ CROPS = {"0": False, "1": True}.get(os.environ.get("SLD2QUOTE_CROPS", ""))  # No
 KEEP = 50                                                     # run directories kept
 MAX_UPLOAD, MAX_SPEC, MAX_PIXELS = 12 << 20, 100 << 10, 12_000_000  # bytes, bytes, pixels (a 4000 x 3000 drawing)
 SCORECARDS = {"results_md": "eval/RESULTS.md", "ocr_md": "eval/OCR.md", "detector_md": "eval/DETECTOR.md", "problems_md": "docs/PROBLEMS.md"}
+CHARTS = os.path.join(ROOT, "eval", "charts.json")
 ID, NAME = re.compile(r"^[A-Za-z0-9_-]{1,64}$"), re.compile(r"^[A-Za-z0-9_.-]{1,96}$")
 STATE = {"warm": False, "error": None}
 LOCK = threading.Lock()  # ponytail: live runs are serial on the 2-core Space; a queue with positions if the demo gets busy
@@ -177,6 +179,14 @@ def run_file(rid: str, name: str):
 @app.get("/api/scorecards")
 def scorecards():
     return {k: open(os.path.join(ROOT, p), encoding="utf-8").read() if os.path.isfile(os.path.join(ROOT, p)) else "" for k, p in SCORECARDS.items()}
+
+
+@app.get("/api/charts")
+def charts():
+    """the chart data, eval/charts.json as scripts/build_charts.py wrote it"""
+    if not os.path.isfile(CHARTS):
+        raise HTTPException(404, "no chart data: run python3 scripts/build_charts.py")
+    return FileResponse(CHARTS, media_type="application/json")
 
 
 # ---------------------------------------------------------------- live runs

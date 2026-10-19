@@ -9,6 +9,7 @@
 !/eval/
 /eval/*
 !/eval/*.md
+!/eval/charts.json
 !/docs/
 /docs/*
 !/docs/PROBLEMS.md

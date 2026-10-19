@@ -2,8 +2,9 @@
 so no weights are needed) and the runs in a temporary directory: health, the samples list without and with an index, a
 live generated sheet scored against its answer key (as JSON and as an NDJSON stream of step events), the upload checks, a run file served, the models warmed by
 the first health call and 503 after a load error, the daily cap on live runs (429; samples and scorecards never capped), and the OCR crop pass following the
-engine (on for vision, off for rapidocr) unless overridden, in the reader and through the server's SLD2QUOTE_CROPS. About 10 s."""
-import json, os, sys, tempfile
+engine (on for vision, off for rapidocr) unless overridden, in the reader and through the server's SLD2QUOTE_CROPS, and the chart data
+(eval/charts.json validated by scripts/build_charts.py's own check, served by /api/charts). About 10 s."""
+import importlib.util, json, os, sys, tempfile
 import pytest
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
@@ -142,3 +143,14 @@ def test_a_refused_streamed_run_is_one_error_line(client, monkeypatch):
     monkeypatch.setitem(site.STATE, "warm", False); monkeypatch.setitem(site.STATE, "error", "boom")
     ev = [json.loads(l) for l in client.post("/api/upload?stream=1", files={"file": ("x.png", b"\x89PNG", "image/png")}).text.splitlines()]
     assert ev == [{"event": "error", "status": 503, "message": "the server could not load its models: boom"}]
+
+
+def test_the_chart_data_validates_and_is_served(client, monkeypatch):
+    spec = importlib.util.spec_from_file_location("build_charts", os.path.join(ROOT, "scripts", "build_charts.py"))
+    bc = importlib.util.module_from_spec(spec); spec.loader.exec_module(bc)
+    doc = json.load(open(os.path.join(ROOT, "eval", "charts.json")))
+    bc.validate(doc)
+    r = client.get("/api/charts")
+    assert r.status_code == 200 and r.json() == doc
+    monkeypatch.setattr(site, "CHARTS", "/nowhere/charts.json")
+    assert client.get("/api/charts").status_code == 404
