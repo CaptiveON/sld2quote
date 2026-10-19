@@ -429,6 +429,22 @@ Space refresh; a phone fix (results title under the sticky header at 390 px); th
 the new page at the live link; the model selection after the training report; the README AI sentence, CITATION name split and the
 go-public checklist, all when he says.
 
+**State at 03:15, 19 Oct.** Adnan at 05:35 (his clock; 01:35 here): "Use informational graphs as well. Next just build it, I will
+review in the morning before finalising." Done and committed since: nine charts in How it works drawn from `eval/charts.json`
+(`scripts/build_charts.py`, served at `/api/charts`: scorecards trained against classical, device types found, missed and extra, the
+training runs' selection score pass by pass, the operating threshold chosen on whole drawings with the boxes on blank paper, the
+calibration of the confidence number, text readers' accuracy against speed, where the time goes, boxes per device type in training
+against the unseen test, price error drawing by drawing), each a plain SVG with a caption and a numbers table, plus a stage-timing bar
+and a per-type chart in the results workspace; the phone scroll fix; the final deployment (revision 00009, image site:31f1de9): TCP
+startup probe so the page answers in about 3 s from cold, the models loaded inside the first request that needs them (13 to 22 s),
+concurrency 8, a second instance allowed because the platform refused a second visitor's page requests while a run saturated the
+first (measured: 429 after 14 s; now every request 200 during a run, the first one 6 s while the instance starts), the daily cap 16
+per instance, and a page that retries the platform's busy refusal with its state shown (PROBLEMS 21); the static Space refreshed
+(private) with the sample cards as its index and the chart data. Measured on the final revision: streamed run 34 to 54 s for a medium
+generated drawing (text reading 19 to 33 s, detector 14 to 20 s), upload 12 to 19 s, charts 0.09 s. Waiting: the training chain
+(`rtdetr_r18_plain_ema_fix` certainly ended about 08:20), then Adnan's model selection and, if he switches, the two-edit model switch,
+the samples rebuild, the eval sections, README numbers and one redeploy.
+
 ## 8. Metrics (as implemented in `evaluate.py`; keep the names)
 
 symbol precision and recall (IoU >= 0.3, same type); rating accuracy, poles accuracy, kA accuracy over matched devices; notes accuracy over
