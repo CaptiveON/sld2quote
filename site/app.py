@@ -10,7 +10,7 @@ Environment: SLD2QUOTE_RUNS (run directories, default /tmp/sld2quote-runs, prune
 (default weights/rtdetr_r18_full; when missing, downloaded once at start-up from the model repo SLD2QUOTE_MODEL_REPO
 with HF_TOKEN); SLD2QUOTE_OCR (the OCR engine: vision on a Mac with the tool, else rapidocr); SLD2QUOTE_READER=classical
 (tests only: the shape-test reader, no weights); SLD2QUOTE_CROPS=0 or 1 (the OCR pass around every symbol; default: the
-engine's own, on for vision, off for rapidocr); SLD2QUOTE_DAILY_RUNS (live runs allowed per UTC day, default 24, the strict free-tier worst case; over it
+engine's own, on for vision, off for rapidocr); SLD2QUOTE_DAILY_RUNS (live runs allowed per UTC day per instance, default 16, so two instances stay inside the free tier in the strict worst case; over it
 live runs answer 429, samples and scorecards never). The detector and the OCR engine load in the first request that needs
 them (/api/health or a live run; the caller waits about 20 s, other callers wait for its lock), since a background thread
 gets no CPU under per-request billing; after a load error /api/health and live runs answer 503 for good. Live runs go one
@@ -43,7 +43,7 @@ ID, NAME = re.compile(r"^[A-Za-z0-9_-]{1,64}$"), re.compile(r"^[A-Za-z0-9_.-]{1,
 STATE = {"warm": False, "error": None}
 LOCK = threading.Lock()  # ponytail: live runs are serial on the 2-core Space; a queue with positions if the demo gets busy
 WARMING = threading.Lock()  # the one warm-up; concurrent requests wait for it
-DAILY_RUNS = int(os.environ.get("SLD2QUOTE_DAILY_RUNS", "24"))
+DAILY_RUNS = int(os.environ.get("SLD2QUOTE_DAILY_RUNS", "16"))
 TODAY = {"date": "", "runs": 0}  # ponytail: in memory, so the count resets when the instance restarts; a bucket or Firestore counter if it ever matters
 OVER = "today's free allowance of live runs is used up; the samples still work; try again tomorrow"
 STEPS = [{"step": "text", "label": "Reading the words on the page"}, {"step": "symbols", "label": "Finding the symbols"},
