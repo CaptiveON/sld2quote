@@ -479,6 +479,15 @@ metric); the page shows "labels linked right" and describes the way-based rule w
 0b5b479 with the model published to the private model repo, the Space refresh, and the README at 0.3.0 (packaging agent). Pending from
 Adnan: the AI-assistance sentence (keep or his wording), the citation name split, the token revocation, his review notes, going public.
 
+**State at 16:50, 19 Oct: final.** Live: revision 00014 (image site:3146d61), the pass-4 model, step 6, the 0.3.0 samples, the
+pass-4 rows in the detector scorecard, the runs table showing the deployed pass; the private static Space mirrors it; the private
+model repo itsmoadnan/sld2quote-detector holds pass 4 at its root (config with threshold 0.11 and the calibration, ORIGIN.md, a card)
+and rtdetr_r18_full under its folder (`python3 scripts/deploy_space.py --model` reproduces it). Measured on the final revision: health
+0.11 s warm; a medium generated drawing 60 s on a slow host sample (text reading 31.5 s, detector 27.2 s; 34 to 54 s earlier in the
+day), upload 16 s; during a run the second instance serves the page (first request 6 s while it starts, then 0.1 s). README,
+CHANGELOG and CITATION at 0.3.0; 97 tests, 3 skipped; everything committed through 3146d61. Pending from Adnan only: the
+AI-assistance sentence, the citation name split, the token revocation, his review notes, going public.
+
 ## 8. Metrics (as implemented in `evaluate.py`; keep the names)
 
 symbol precision and recall (IoU >= 0.3, same type); rating accuracy, poles accuracy, kA accuracy over matched devices; notes accuracy over
