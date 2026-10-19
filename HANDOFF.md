@@ -488,6 +488,17 @@ day), upload 16 s; during a run the second instance serves the page (first reque
 CHANGELOG and CITATION at 0.3.0; 97 tests, 3 skipped; everything committed through 3146d61. Pending from Adnan only: the
 AI-assistance sentence, the citation name split, the token revocation, his review notes, going public.
 
+**Adnan, 19 Oct 17:40 to 18:10: the site becomes a multi-page assessor site.** His review found the stepper's greyed "Run" step read
+as a button (fixed: a plain indicator, "Run it live" on every sample card through `POST /api/samples/{id}/run`, buttons enabled while
+the server wakes). Then the full brief: live runs as the default, each stage saying what happens, which technology does it and its
+stats before moving on; a multi-page site (home, try it, how it works, the evidence, decisions, problems, architecture now and after
+the KTP side by side, the KTP requirements and 36-month timeline, why me, references, about), plain language first and the technical
+layer after, in the first person as an Applied AI engineer addressing the assessor, citations for every research-backed claim, why
+each technology was used, the critical problems with how they were solved here and how the KTP would solve them; the end goal is the
+link in his résumé, cover letter and a message to the company's director. Sources: the application folder (read-only; professional
+facts only) and the project record. The /ui-ux-pro-max skill (installed at ~/.claude/skills) governs the design. The front-end agent
+has the brief as milestone 2 after the flow fix; the back end adds counts to the stream's step events and multi-page serving.
+
 ## 8. Metrics (as implemented in `evaluate.py`; keep the names)
 
 symbol precision and recall (IoU >= 0.3, same type); rating accuracy, poles accuracy, kA accuracy over matched devices; notes accuracy over
