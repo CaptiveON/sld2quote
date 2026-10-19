@@ -539,11 +539,15 @@ def base_of(model: str) -> str:
 
 def more_command(weights: str, g: dict) -> str:
     """the one line that gives a trained model N more passes: a new run from its weights with its own fresh, shorter and gentler
-    schedule (half the learning rates, a 100-step warm-up, the same early stopping), into a new directory"""
+    schedule (half the learning rates, a 100-step warm-up, the same early stopping), into a new directory, keeping the run's own
+    pass selection, kept passes, weight average and repeat-factor sampling, so only the schedule differs"""
     weights = weights.rstrip("/"); out = (weights[:-5] if weights.endswith("_full") else weights) + "_more"
     return (f"PYTORCH_ENABLE_MPS_FALLBACK=1 caffeinate -is python3 -m sld2quote.train_detector train --data {g['data']} --model {weights} --out {out} "
             f"--epochs N --batch {g['batch']} --lr {g['lr'] / 2:.0e} --backbone-lr {g['backbone_lr'] / 2:.0e} --warmup-steps 100 --patience {g.get('patience') or 3} "
-            f"--min-delta {g.get('min_delta', 0.002):g} --nms-iou {g.get('nms_iou', 0.5):g} --device {g['device']} --seed {g['seed']}")
+            f"--min-delta {g.get('min_delta', 0.002):g} --nms-iou {g.get('nms_iou', 0.5):g} --device {g['device']} --seed {g['seed']}" +
+            (f" --select {g['select']}" if g.get("select", "map50") != "map50" else "") + (" --keep-passes" if g.get("keep_passes") else "") +
+            (f" --ema {g['ema']:g} --ema-warmup {g['ema_warmup']}" if g.get("ema") else "") +
+            (f" --rare-repeat {g['rare_repeat']:g} --rare-group {g.get('rare_group') or 'class'}" if g.get("rare_repeat") else ""))
 
 
 def cmd_train(a, argv: list):
@@ -859,7 +863,8 @@ def more_passes(runs: list) -> list:
     """the summary's last section: per model, the time per pass measured in its run and the one line that orders more passes"""
     L = ["## More passes", "",
          "To give a model more passes than its cap, start a new run from its trained weights with its own fresh, shorter and gentler schedule "
-         "(half the learning rates, a 100-step warm-up, the same early stopping). It writes a new directory with its own card and metrics, scored "
+         "(half the learning rates, a 100-step warm-up, the same early stopping; the run's own pass selection, kept passes, weight average and "
+         "sampling stay as they were). It writes a new directory with its own card and metrics, scored "
          "with its best pass, and leaves the overnight run as it is. Replace N with the number of passes:", ""]
     for d in runs:
         if os.path.isfile(os.path.join(d, "metrics.json")):

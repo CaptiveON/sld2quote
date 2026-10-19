@@ -1,7 +1,7 @@
 """Trainer checks: the precision and recall matcher, the threshold chooser, selection on val and val_unseen, the split report, NMS, the size rule, early stopping, repeat-factor sampling, the dataset,
 collate and augmentation on a two-tile COCO fixture, and one optimisation step plus the shared inference path of rtdetr_r18vd on
 cpu, and reloading trained weights for more passes (skipped unless the weights are already in the Hugging Face cache)."""
-import json, math, os, shutil, statistics, sys, time
+import json, math, os, shlex, shutil, statistics, sys, time
 from types import SimpleNamespace
 import numpy as np
 import pytest
@@ -301,3 +301,14 @@ def test_a_finite_loss_with_a_gradient_that_is_not_finite_skips_the_update(caplo
     assert "update skipped; tiles [7]" in caplog.text
     hook.remove(); td.step(model, opt, sched, b, "cpu", 0.1)
     assert model.w.item() < 1.0  # a sound gradient updates as before
+
+
+def test_more_command_keeps_the_runs_selection_kept_passes_average_and_sampling():
+    g = {"data": "data/coco", "batch": 16, "lr": 1e-4, "backbone_lr": 1e-5, "patience": 0, "min_delta": 0.002, "nms_iou": 0.5, "device": "mps", "seed": 0}
+    old = td.more_command("weights/rtdetr_r18_full", g)  # a run from before these flags: the command stays as it was
+    assert " --out weights/rtdetr_r18_more " in old and not any(f in old for f in ("--select", "--keep-passes", "--ema", "--rare-repeat"))
+    ema = shlex.split(td.more_command("weights/rtdetr_r18_plain_ema_fix", g | {"select": "f1", "keep_passes": True, "ema": 0.999, "ema_warmup": 200,
+                                                                             "rare_repeat": 0, "rare_group": "class"}))
+    assert ema[ema.index("--select") + 1] == "f1" and "--keep-passes" in ema and "--rare-repeat" not in ema
+    assert (ema[ema.index("--ema") + 1], ema[ema.index("--ema-warmup") + 1], ema[ema.index("--lr") + 1]) == ("0.999", "200", "5e-05")  # only the schedule changes
+    assert td.more_command("weights/rtdetr_r18_rare", g | {"select": "f1", "rare_repeat": 0.15}).endswith(" --select f1 --rare-repeat 0.15 --rare-group class")
