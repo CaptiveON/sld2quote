@@ -1,0 +1,1460 @@
+{
+ "id": "sheet-10845",
+ "style": {
+  "font": "Trebuchet MS.ttf",
+  "size": 18,
+  "lw": 2,
+  "sym": 34,
+  "bus_lw": 8,
+  "label_pos": "right",
+  "scan": false,
+  "level": "medium",
+  "breaker": "iec",
+  "boards": false
+ },
+ "devices": [
+  {
+   "id": "TX-1",
+   "type": "TRANSFORMER",
+   "box": [
+    198,
+    68,
+    44,
+    74
+   ],
+   "rating": 1000,
+   "poles": null,
+   "kA": null,
+   "label": "TX-1 1000 kVA",
+   "dest": "",
+   "on_bus": "BUS-A"
+  },
+  {
+   "id": "ACB-1",
+   "type": "ACB",
+   "box": [
+    203,
+    199,
+    22,
+    46
+   ],
+   "rating": 3200,
+   "poles": 4,
+   "kA": 65,
+   "label": "ACB-1 3200 A 4P",
+   "dest": "",
+   "on_bus": "BUS-A"
+  },
+  {
+   "id": "TX-2",
+   "type": "TRANSFORMER",
+   "box": [
+    1767,
+    68,
+    44,
+    74
+   ],
+   "rating": 1250,
+   "poles": null,
+   "kA": null,
+   "label": "TX-2 1250 kVA",
+   "dest": "",
+   "on_bus": "BUS-B"
+  },
+  {
+   "id": "ACB-2",
+   "type": "ACB",
+   "box": [
+    1772,
+    199,
+    22,
+    46
+   ],
+   "rating": 3200,
+   "poles": 4,
+   "kA": 65,
+   "label": "ACB-2 3200 A 4P",
+   "dest": "",
+   "on_bus": "BUS-B"
+  },
+  {
+   "id": "ACB-2-CT",
+   "type": "CT",
+   "box": [
+    1777,
+    290,
+    24,
+    24
+   ],
+   "rating": 3200,
+   "poles": null,
+   "kA": null,
+   "label": "CT 3200/5A",
+   "dest": "",
+   "on_bus": null
+  },
+  {
+   "id": "ACB-2-PM",
+   "type": "METER",
+   "box": [
+    1827,
+    287,
+    29,
+    30
+   ],
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "label": "kW",
+   "dest": "",
+   "on_bus": null
+  },
+  {
+   "id": "ACB-2-R",
+   "type": "RELAY",
+   "box": [
+    1878,
+    289,
+    26,
+    26
+   ],
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "label": "I>",
+   "dest": "",
+   "on_bus": null
+  },
+  {
+   "id": "BS-1",
+   "type": "BUS_SECTION",
+   "box": [
+    1666,
+    395,
+    46,
+    22
+   ],
+   "rating": 3200,
+   "poles": 4,
+   "kA": 65,
+   "label": "BS-1 3200 A",
+   "dest": "",
+   "on_bus": null
+  },
+  {
+   "id": "GEN-1",
+   "type": "GENERATOR",
+   "box": [
+    3132,
+    66,
+    48,
+    48
+   ],
+   "rating": 800,
+   "poles": null,
+   "kA": null,
+   "label": "GEN-1 800 kVA",
+   "dest": "",
+   "on_bus": "BUS-B"
+  },
+  {
+   "id": "ACB-3",
+   "type": "ACB",
+   "box": [
+    3139,
+    199,
+    22,
+    46
+   ],
+   "rating": 1600,
+   "poles": 4,
+   "kA": 65,
+   "label": "ACB-3 1600 A 4P ATS",
+   "dest": "",
+   "on_bus": "BUS-B"
+  },
+  {
+   "id": "ACB-3-CT",
+   "type": "CT",
+   "box": [
+    3144,
+    290,
+    24,
+    24
+   ],
+   "rating": 1600,
+   "poles": null,
+   "kA": null,
+   "label": "CT 1600/5A",
+   "dest": "",
+   "on_bus": null
+  },
+  {
+   "id": "ACB-3-PM",
+   "type": "METER",
+   "box": [
+    3193,
+    289,
+    35,
+    26
+   ],
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "label": "kWh",
+   "dest": "",
+   "on_bus": null
+  },
+  {
+   "id": "OG-1",
+   "type": "MCCB",
+   "box": [
+    186,
+    519,
+    19,
+    38
+   ],
+   "rating": 800,
+   "poles": 4,
+   "kA": 65,
+   "label": "MCCB 800 A 4P",
+   "dest": "spare",
+   "on_bus": "BUS-A"
+  },
+  {
+   "id": "OG-2",
+   "type": "MCCB",
+   "box": [
+    412,
+    579,
+    19,
+    38
+   ],
+   "rating": 100,
+   "poles": 4,
+   "kA": 65,
+   "label": "MCCB 100 A 4P",
+   "dest": "sub-board 2",
+   "on_bus": "BUS-A"
+  },
+  {
+   "id": "OG-3",
+   "type": "MCCB",
+   "box": [
+    639,
+    519,
+    19,
+    38
+   ],
+   "rating": 800,
+   "poles": 4,
+   "kA": 65,
+   "label": "MCCB 800 A 4P",
+   "dest": "UPS input",
+   "on_bus": "BUS-A"
+  },
+  {
+   "id": "OG-4",
+   "type": "MCCB",
+   "box": [
+    866,
+    579,
+    19,
+    38
+   ],
+   "rating": 250,
+   "poles": 3,
+   "kA": 65,
+   "label": "MCCB 250 A 3P",
+   "dest": "DB-4 theatres",
+   "on_bus": "BUS-A"
+  },
+  {
+   "id": "OG-5",
+   "type": "MCCB",
+   "box": [
+    1093,
+    549,
+    19,
+    38
+   ],
+   "rating": 100,
+   "poles": 3,
+   "kA": 65,
+   "label": "MCCB 100 A 3P",
+   "dest": "MCC-5 AHU",
+   "on_bus": "BUS-A"
+  },
+  {
+   "id": "OG-6",
+   "type": "MCCB",
+   "box": [
+    1320,
+    519,
+    19,
+    38
+   ],
+   "rating": 630,
+   "poles": 3,
+   "kA": 65,
+   "label": "MCCB 630 A 3P",
+   "dest": "DB-6 theatres",
+   "on_bus": "BUS-A"
+  },
+  {
+   "id": "OG-7",
+   "type": "ISOLATOR",
+   "box": [
+    1547,
+    549,
+    20,
+    38
+   ],
+   "rating": 630,
+   "poles": 3,
+   "kA": null,
+   "label": "ISOL 630 A 3P",
+   "dest": "lighting",
+   "on_bus": "BUS-A"
+  },
+  {
+   "id": "OG-8",
+   "type": "ISOLATOR",
+   "box": [
+    1774,
+    519,
+    20,
+    38
+   ],
+   "rating": 160,
+   "poles": 4,
+   "kA": null,
+   "label": "ISOL 160 A 4P",
+   "dest": "MCC-8 AHU",
+   "on_bus": "BUS-B"
+  },
+  {
+   "id": "OG-9",
+   "type": "MCCB",
+   "box": [
+    2001,
+    499,
+    19,
+    38
+   ],
+   "rating": 630,
+   "poles": 3,
+   "kA": 65,
+   "label": "MCCB 630 A 3P",
+   "dest": "",
+   "on_bus": "BUS-B"
+  },
+  {
+   "id": "OG-9-C",
+   "type": "CAPACITOR",
+   "box": [
+    2001,
+    550,
+    28,
+    12
+   ],
+   "rating": 300,
+   "poles": null,
+   "kA": null,
+   "label": "PFC 300 kVAr",
+   "dest": "",
+   "on_bus": null
+  },
+  {
+   "id": "OG-9-E",
+   "type": "EARTH",
+   "box": [
+    2001,
+    571,
+    28,
+    21
+   ],
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "label": "",
+   "dest": "",
+   "on_bus": null
+  },
+  {
+   "id": "OG-10",
+   "type": "MCCB",
+   "box": [
+    2228,
+    519,
+    19,
+    38
+   ],
+   "rating": 630,
+   "poles": 3,
+   "kA": 65,
+   "label": "MCCB 630 A 3P",
+   "dest": "data hall",
+   "on_bus": "BUS-B"
+  },
+  {
+   "id": "OG-11",
+   "type": "MCCB",
+   "box": [
+    2455,
+    499,
+    19,
+    38
+   ],
+   "rating": 100,
+   "poles": 4,
+   "kA": 65,
+   "label": "MCCB 100 A 4P",
+   "dest": "",
+   "on_bus": "BUS-B"
+  },
+  {
+   "id": "OG-11-F",
+   "type": "SPD",
+   "box": [
+    2457,
+    551,
+    24,
+    39
+   ],
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "label": "SPD Type 1+2",
+   "dest": "",
+   "on_bus": null
+  },
+  {
+   "id": "OG-11-E",
+   "type": "EARTH",
+   "box": [
+    2455,
+    600,
+    28,
+    21
+   ],
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "label": "",
+   "dest": "",
+   "on_bus": null
+  },
+  {
+   "id": "OG-12",
+   "type": "MCCB",
+   "box": [
+    2682,
+    579,
+    19,
+    38
+   ],
+   "rating": 250,
+   "poles": 3,
+   "kA": 65,
+   "label": "MCCB 250 A 3P",
+   "dest": "data hall",
+   "on_bus": "BUS-B"
+  },
+  {
+   "id": "OG-13",
+   "type": "MCCB",
+   "box": [
+    2909,
+    499,
+    19,
+    38
+   ],
+   "rating": 250,
+   "poles": 3,
+   "kA": 65,
+   "label": "MCCB 250 A 3P",
+   "dest": "fan F-13",
+   "on_bus": "BUS-B"
+  },
+  {
+   "id": "OG-13-K",
+   "type": "CONTACTOR",
+   "box": [
+    2909,
+    550,
+    20,
+    39
+   ],
+   "rating": 45,
+   "poles": null,
+   "kA": null,
+   "label": "S/D 45 kW",
+   "dest": "",
+   "on_bus": null
+  },
+  {
+   "id": "OG-13-M",
+   "type": "MOTOR",
+   "box": [
+    2904,
+    599,
+    38,
+    38
+   ],
+   "rating": 45,
+   "poles": null,
+   "kA": null,
+   "label": "M",
+   "dest": "",
+   "on_bus": null
+  },
+  {
+   "id": "OG-14",
+   "type": "MCCB",
+   "box": [
+    3136,
+    519,
+    19,
+    38
+   ],
+   "rating": 250,
+   "poles": 4,
+   "kA": 65,
+   "label": "MCCB 250 A 4P",
+   "dest": "UPS input",
+   "on_bus": "BUS-B"
+  }
+ ],
+ "busbars": [
+  {
+   "id": "BUS-A",
+   "rating": 3200,
+   "x1": 140,
+   "x2": 1667,
+   "y": 400,
+   "thickness": 8
+  },
+  {
+   "id": "BUS-B",
+   "rating": 3200,
+   "x1": 1710,
+   "x2": 3236,
+   "y": 400,
+   "thickness": 8
+  }
+ ],
+ "connections": [
+  [
+   "TX-1",
+   "ACB-1"
+  ],
+  [
+   "ACB-1",
+   "BUS-A"
+  ],
+  [
+   "TX-2",
+   "ACB-2"
+  ],
+  [
+   "ACB-2",
+   "BUS-B"
+  ],
+  [
+   "ACB-2-CT",
+   "ACB-2-PM"
+  ],
+  [
+   "ACB-2-CT",
+   "ACB-2-R"
+  ],
+  [
+   "BUS-A",
+   "BS-1"
+  ],
+  [
+   "BS-1",
+   "BUS-B"
+  ],
+  [
+   "GEN-1",
+   "ACB-3"
+  ],
+  [
+   "ACB-3",
+   "BUS-B"
+  ],
+  [
+   "ACB-3-CT",
+   "ACB-3-PM"
+  ],
+  [
+   "BUS-A",
+   "OG-1"
+  ],
+  [
+   "BUS-A",
+   "OG-2"
+  ],
+  [
+   "BUS-A",
+   "OG-3"
+  ],
+  [
+   "BUS-A",
+   "OG-4"
+  ],
+  [
+   "BUS-A",
+   "OG-5"
+  ],
+  [
+   "BUS-A",
+   "OG-6"
+  ],
+  [
+   "BUS-A",
+   "OG-7"
+  ],
+  [
+   "BUS-B",
+   "OG-8"
+  ],
+  [
+   "BUS-B",
+   "OG-9"
+  ],
+  [
+   "OG-9",
+   "OG-9-C"
+  ],
+  [
+   "OG-9-C",
+   "OG-9-E"
+  ],
+  [
+   "BUS-B",
+   "OG-10"
+  ],
+  [
+   "BUS-B",
+   "OG-11"
+  ],
+  [
+   "OG-11",
+   "OG-11-F"
+  ],
+  [
+   "OG-11-F",
+   "OG-11-E"
+  ],
+  [
+   "BUS-B",
+   "OG-12"
+  ],
+  [
+   "BUS-B",
+   "OG-13"
+  ],
+  [
+   "OG-13",
+   "OG-13-K"
+  ],
+  [
+   "OG-13-K",
+   "OG-13-M"
+  ],
+  [
+   "BUS-B",
+   "OG-14"
+  ]
+ ],
+ "notes": {
+  "form": "Form 3b",
+  "ip": "IP31",
+  "fault_kA": 65,
+  "poles_default": 4,
+  "standard": "BS EN IEC 61439-2:2021"
+ },
+ "texts": [
+  {
+   "text": "TX-1 1000 kVA",
+   "box": [
+    256,
+    86,
+    113,
+    13
+   ],
+   "device": "TX-1"
+  },
+  {
+   "text": "11 kV / 415 V",
+   "box": [
+    256,
+    109,
+    81,
+    10
+   ],
+   "device": "TX-1"
+  },
+  {
+   "text": "ACB-1 3200 A 4P",
+   "box": [
+    237,
+    216,
+    129,
+    13
+   ],
+   "device": "ACB-1"
+  },
+  {
+   "text": "Icu 65 kA, withdrawable",
+   "box": [
+    237,
+    237,
+    143,
+    12
+   ],
+   "device": "ACB-1"
+  },
+  {
+   "text": "TX-2 1250 kVA",
+   "box": [
+    1825,
+    86,
+    113,
+    13
+   ],
+   "device": "TX-2"
+  },
+  {
+   "text": "11 kV / 415 V",
+   "box": [
+    1825,
+    109,
+    81,
+    10
+   ],
+   "device": "TX-2"
+  },
+  {
+   "text": "ACB-2 3200 A 4P",
+   "box": [
+    1806,
+    216,
+    129,
+    13
+   ],
+   "device": "ACB-2"
+  },
+  {
+   "text": "Icu 65 kA, withdrawable",
+   "box": [
+    1806,
+    237,
+    143,
+    12
+   ],
+   "device": "ACB-2"
+  },
+  {
+   "text": "kW",
+   "box": [
+    1832.5,
+    297.0,
+    19.0,
+    9.0
+   ],
+   "device": "ACB-2-PM"
+  },
+  {
+   "text": "I>",
+   "box": [
+    1886.0,
+    297.0,
+    10.0,
+    9.0
+   ],
+   "device": "ACB-2-R"
+  },
+  {
+   "text": "CT 3200/5A",
+   "box": [
+    1827,
+    327,
+    70,
+    9
+   ],
+   "device": "ACB-2-CT"
+  },
+  {
+   "text": "BS-1 3200 A",
+   "box": [
+    1653,
+    429,
+    69,
+    9
+   ],
+   "device": "BS-1"
+  },
+  {
+   "text": "BUSBAR B  3200 A Cu  65 kA/1s",
+   "box": [
+    1720,
+    372,
+    304,
+    15
+   ],
+   "device": "BUS-B"
+  },
+  {
+   "text": "BUSBAR A  3200 A Cu  65 kA/1s",
+   "box": [
+    150,
+    372,
+    304,
+    15
+   ],
+   "device": "BUS-A"
+  },
+  {
+   "text": "G",
+   "box": [
+    3148,
+    82,
+    16,
+    15
+   ],
+   "device": "GEN-1"
+  },
+  {
+   "text": "GEN-1 800 kVA",
+   "box": [
+    3003,
+    64,
+    117,
+    13
+   ],
+   "device": "GEN-1"
+  },
+  {
+   "text": "standby",
+   "box": [
+    3076,
+    89,
+    45,
+    13
+   ],
+   "device": "GEN-1"
+  },
+  {
+   "text": "ACB-3 1600 A 4P ATS",
+   "box": [
+    2963,
+    216,
+    164,
+    13
+   ],
+   "device": "ACB-3"
+  },
+  {
+   "text": "kWh",
+   "box": [
+    3199.5,
+    303.16,
+    21.0,
+    7.0
+   ],
+   "device": "ACB-3-PM"
+  },
+  {
+   "text": "CT 1600/5A",
+   "box": [
+    3193,
+    325,
+    70,
+    9
+   ],
+   "device": "ACB-3-CT"
+  },
+  {
+   "text": "MCCB 800 A 4P",
+   "box": [
+    231,
+    532,
+    117,
+    13
+   ],
+   "device": "OG-1"
+  },
+  {
+   "text": "spare",
+   "box": [
+    231,
+    555,
+    31,
+    11
+   ],
+   "device": "OG-1"
+  },
+  {
+   "text": "4C 2x240 mm\u00b2 XLPE/SWA",
+   "box": [
+    231,
+    576,
+    150,
+    9
+   ],
+   "device": "OG-1"
+  },
+  {
+   "text": "MCCB 100 A 4P",
+   "box": [
+    457,
+    592,
+    117,
+    13
+   ],
+   "device": "OG-2"
+  },
+  {
+   "text": "sub-board 2",
+   "box": [
+    457,
+    613,
+    68,
+    10
+   ],
+   "device": "OG-2"
+  },
+  {
+   "text": "4C 35 mm\u00b2 XLPE/SWA",
+   "box": [
+    457,
+    636,
+    129,
+    9
+   ],
+   "device": "OG-2"
+  },
+  {
+   "text": "MCCB 800 A 4P",
+   "box": [
+    684,
+    532,
+    117,
+    13
+   ],
+   "device": "OG-3"
+  },
+  {
+   "text": "UPS input",
+   "box": [
+    684,
+    553,
+    55,
+    13
+   ],
+   "device": "OG-3"
+  },
+  {
+   "text": "4C 2x240 mm\u00b2 XLPE/SWA",
+   "box": [
+    684,
+    576,
+    150,
+    9
+   ],
+   "device": "OG-3"
+  },
+  {
+   "text": "MCCB 250 A 3P",
+   "box": [
+    911,
+    592,
+    117,
+    13
+   ],
+   "device": "OG-4"
+  },
+  {
+   "text": "DB-4 theatres",
+   "box": [
+    911,
+    613,
+    79,
+    10
+   ],
+   "device": "OG-4"
+  },
+  {
+   "text": "3C 120 mm\u00b2 XLPE/SWA",
+   "box": [
+    911,
+    636,
+    136,
+    9
+   ],
+   "device": "OG-4"
+  },
+  {
+   "text": "MCCB 100 A 3P",
+   "box": [
+    1138,
+    562,
+    117,
+    13
+   ],
+   "device": "OG-5"
+  },
+  {
+   "text": "MCC-5 AHU",
+   "box": [
+    1138,
+    584,
+    66,
+    9
+   ],
+   "device": "OG-5"
+  },
+  {
+   "text": "3C 35 mm\u00b2 XLPE/SWA",
+   "box": [
+    1138,
+    606,
+    129,
+    9
+   ],
+   "device": "OG-5"
+  },
+  {
+   "text": "MCCB 630 A 3P",
+   "box": [
+    1365,
+    532,
+    117,
+    13
+   ],
+   "device": "OG-6"
+  },
+  {
+   "text": "DB-6 theatres",
+   "box": [
+    1365,
+    553,
+    79,
+    10
+   ],
+   "device": "OG-6"
+  },
+  {
+   "text": "3C 2x185 mm\u00b2 XLPE/SWA",
+   "box": [
+    1365,
+    576,
+    150,
+    9
+   ],
+   "device": "OG-6"
+  },
+  {
+   "text": "ISOL 630 A 3P",
+   "box": [
+    1592,
+    562,
+    107,
+    13
+   ],
+   "device": "OG-7"
+  },
+  {
+   "text": "lighting",
+   "box": [
+    1592,
+    583,
+    45,
+    13
+   ],
+   "device": "OG-7"
+  },
+  {
+   "text": "3C 2x185 mm\u00b2 XLPE/SWA",
+   "box": [
+    1592,
+    606,
+    150,
+    9
+   ],
+   "device": "OG-7"
+  },
+  {
+   "text": "ISOL 160 A 4P",
+   "box": [
+    1819,
+    532,
+    107,
+    13
+   ],
+   "device": "OG-8"
+  },
+  {
+   "text": "MCC-8 AHU",
+   "box": [
+    1819,
+    554,
+    66,
+    9
+   ],
+   "device": "OG-8"
+  },
+  {
+   "text": "4C 70 mm\u00b2 XLPE/SWA",
+   "box": [
+    1819,
+    576,
+    129,
+    9
+   ],
+   "device": "OG-8"
+  },
+  {
+   "text": "MCCB 630 A 3P",
+   "box": [
+    2046,
+    512,
+    117,
+    13
+   ],
+   "device": "OG-9"
+  },
+  {
+   "text": "PFC 300 kVAr",
+   "box": [
+    2046,
+    533,
+    80,
+    10
+   ],
+   "device": "OG-9-C"
+  },
+  {
+   "text": "3C 2x185 mm\u00b2 XLPE/SWA",
+   "box": [
+    2046,
+    556,
+    150,
+    9
+   ],
+   "device": "OG-9"
+  },
+  {
+   "text": "MCCB 630 A 3P",
+   "box": [
+    2273,
+    532,
+    117,
+    13
+   ],
+   "device": "OG-10"
+  },
+  {
+   "text": "data hall",
+   "box": [
+    2273,
+    553,
+    52,
+    10
+   ],
+   "device": "OG-10"
+  },
+  {
+   "text": "3C 2x185 mm\u00b2 XLPE/SWA",
+   "box": [
+    2273,
+    576,
+    150,
+    9
+   ],
+   "device": "OG-10"
+  },
+  {
+   "text": "MCCB 100 A 4P",
+   "box": [
+    2500,
+    512,
+    117,
+    13
+   ],
+   "device": "OG-11"
+  },
+  {
+   "text": "SPD Type 1+2",
+   "box": [
+    2500,
+    534,
+    78,
+    12
+   ],
+   "device": "OG-11-F"
+  },
+  {
+   "text": "MCCB 250 A 3P",
+   "box": [
+    2727,
+    592,
+    117,
+    13
+   ],
+   "device": "OG-12"
+  },
+  {
+   "text": "data hall",
+   "box": [
+    2727,
+    613,
+    52,
+    10
+   ],
+   "device": "OG-12"
+  },
+  {
+   "text": "3C 120 mm\u00b2 XLPE/SWA",
+   "box": [
+    2727,
+    636,
+    136,
+    9
+   ],
+   "device": "OG-12"
+  },
+  {
+   "text": "M",
+   "box": [
+    2916.0,
+    612.0,
+    13.0,
+    12.0
+   ],
+   "device": "OG-13-M"
+  },
+  {
+   "text": "MCCB 250 A 3P",
+   "box": [
+    2954,
+    512,
+    117,
+    13
+   ],
+   "device": "OG-13"
+  },
+  {
+   "text": "S/D 45 kW",
+   "box": [
+    2954,
+    533,
+    61,
+    10
+   ],
+   "device": "OG-13-K"
+  },
+  {
+   "text": "fan F-13",
+   "box": [
+    2954,
+    555,
+    49,
+    10
+   ],
+   "device": "OG-13"
+  },
+  {
+   "text": "3C 120 mm\u00b2 XLPE/SWA",
+   "box": [
+    2954,
+    578,
+    136,
+    9
+   ],
+   "device": "OG-13"
+  },
+  {
+   "text": "MCCB 250 A 4P",
+   "box": [
+    3181,
+    532,
+    117,
+    13
+   ],
+   "device": "OG-14"
+  },
+  {
+   "text": "UPS input",
+   "box": [
+    3181,
+    553,
+    55,
+    13
+   ],
+   "device": "OG-14"
+  },
+  {
+   "text": "4C 120 mm\u00b2 XLPE/SWA",
+   "box": [
+    3181,
+    576,
+    136,
+    9
+   ],
+   "device": "OG-14"
+  },
+  {
+   "text": "NOTES",
+   "box": [
+    72,
+    774,
+    68,
+    15
+   ],
+   "device": null
+  },
+  {
+   "text": "1. Switchboard to BS EN IEC 61439-2:2021, Form 3b, IP31.",
+   "box": [
+    72,
+    803,
+    342,
+    12
+   ],
+   "device": null
+  },
+  {
+   "text": "2. Prospective fault level 65 kA for 1 s at the busbars.",
+   "box": [
+    72,
+    829,
+    315,
+    13
+   ],
+   "device": null
+  },
+  {
+   "text": "3. All MCCBs 4-pole unless stated.",
+   "box": [
+    72,
+    855,
+    198,
+    13
+   ],
+   "device": null
+  },
+  {
+   "text": "4. Busbars hard-drawn copper, ratings as shown.",
+   "box": [
+    72,
+    881,
+    283,
+    13
+   ],
+   "device": null
+  },
+  {
+   "text": "PROJECT: St Mary\u2019s Hospital",
+   "box": [
+    2828,
+    813,
+    166,
+    13
+   ],
+   "device": null
+  },
+  {
+   "text": "DRAWING: E-318-SLD  REV B",
+   "box": [
+    2828,
+    844,
+    166,
+    9
+   ],
+   "device": null
+  },
+  {
+   "text": "MAIN LV SWITCHBOARD, SINGLE LINE DIAGRAM",
+   "box": [
+    2828,
+    874,
+    277,
+    11
+   ],
+   "device": null
+  },
+  {
+   "text": "SHEET sheet-10845  (synthetic, for sld2quote)",
+   "box": [
+    2828,
+    902,
+    268,
+    15
+   ],
+   "device": null
+  }
+ ],
+ "spec": {
+  "clauses": [
+   {
+    "id": "7.1",
+    "text": "The switchboard shall be designed, manufactured and verified in accordance with BS EN IEC 61439-2:2021."
+   },
+   {
+    "id": "7.2",
+    "text": "Internal separation shall be Form 3b as defined in the UK National Annex."
+   },
+   {
+    "id": "7.3",
+    "text": "The assembly shall withstand a prospective short-circuit current of 50 kA for 1 second at the main busbars."
+   },
+   {
+    "id": "7.4",
+    "text": "Outgoing moulded-case circuit breakers shall be 4-pole with adjustable thermal-magnetic or electronic trip units."
+   },
+   {
+    "id": "7.5",
+    "text": "Degree of protection shall be not less than IP31 with doors closed."
+   },
+   {
+    "id": "7.6",
+    "text": "Main busbars shall be hard-drawn high-conductivity copper, tin-plated at joints."
+   },
+   {
+    "id": "7.7",
+    "text": "The contractor shall provide type-test or design-verification certificates prior to manufacture."
+   },
+   {
+    "id": "7.8",
+    "text": "Two years' spares for all trip units shall be included."
+   }
+  ],
+  "requirements": {
+   "standard": "BS EN IEC 61439-2:2021",
+   "form": "Form 3b",
+   "fault_kA": 50,
+   "poles": 4,
+   "ip": "IP31",
+   "busbar_material": "copper",
+   "certificates": true,
+   "extra": "Two years' spares for all trip units shall be included."
+  }
+ },
+ "conflicts": [
+  {
+   "field": "fault_kA",
+   "drawing": 65,
+   "spec": 50
+  }
+ ],
+ "image": "sheet-10845.png",
+ "size": [
+  3376,
+  1000
+ ]
+}

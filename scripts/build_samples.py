@@ -1,5 +1,6 @@
 """The site's precomputed samples: site/samples/<id>/ holds result.json and the files it references, written by
-sld2quote.result.build_result exactly as a live run writes them, plus thumb.jpg (320 px wide JPEG of the drawing);
+sld2quote.result.build_result exactly as a live run writes them, plus thumb.jpg (320 px wide JPEG of the drawing) and, for a
+synthetic sheet, its answer key as answer.json and specification as spec.txt (POST /api/samples/<id>/run scores a live rerun with them);
 site/samples/index.json lists the samples in display order. One command rebuilds the set from the data directories:
 
   python3 scripts/build_samples.py --weights weights/rtdetr_r18_full --device cpu
@@ -15,7 +16,7 @@ The set, by rule, so a rebuild picks the same sheets:
 - real: the 19 drawings of data/real/sheets, in manifest order, unscored (no answer key yet), titled by their document and
   figure caption from data/real/manifest.json (written with SOURCES.md's tables by scripts/real_sheets/build.py).
 """
-import argparse, json, os, re, sys
+import argparse, json, os, re, shutil, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT); sys.path.insert(0, ROOT)
@@ -92,6 +93,9 @@ def main(argv=None):
     S = samples()
     for s in S:  # cheap, so always rewritten; the index goes first so the site can be built against it
         os.makedirs(f"{OUT}/{s['id']}", exist_ok=True); thumb(s["image"], f"{OUT}/{s['id']}/thumb.jpg")
+        for src, name in ((s["spec"], "spec.txt"), (s["gt"], "answer.json")):
+            if src:
+                shutil.copyfile(src, f"{OUT}/{s['id']}/{name}")
     json.dump([{"id": s["id"], **s["source"], "thumb": "thumb.jpg"} for s in S], open(f"{OUT}/index.json", "w"), indent=1)  # bare names, as in result.json
     from sld2quote.result import build_result
     for s in S:

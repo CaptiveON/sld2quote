@@ -1,0 +1,10 @@
+SPECIFICATION EXTRACT, SECTION 7: LV SWITCHBOARD (sheet-10006)
+
+7.1 The switchboard shall be designed, manufactured and verified in accordance with BS EN 61439-2.
+7.2 Internal separation shall be Form 3b as defined in the UK National Annex.
+7.3 The assembly shall withstand a prospective short-circuit current of 50 kA for 1 second at the main busbars.
+7.4 Outgoing moulded-case circuit breakers shall be 3-pole with adjustable thermal-magnetic or electronic trip units.
+7.5 Degree of protection shall be not less than IP42 with doors closed.
+7.6 Main busbars shall be hard-drawn high-conductivity copper, tin-plated at joints.
+7.7 The contractor shall provide type-test or design-verification certificates prior to manufacture.
+7.8 Enclosure finish RAL 7035, front access only.

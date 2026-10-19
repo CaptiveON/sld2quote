@@ -1,0 +1,587 @@
+{
+ "id": "sheet-10834",
+ "style": {
+  "font": "Verdana.ttf",
+  "size": 17,
+  "lw": 3,
+  "sym": 30,
+  "bus_lw": 8,
+  "label_pos": "right",
+  "scan": true,
+  "level": "simple",
+  "breaker": "box",
+  "boards": true,
+  "rotate_deg": -0.225
+ },
+ "devices": [
+  {
+   "id": "TX-1",
+   "type": "TRANSFORMER",
+   "box": [
+    198,
+    68,
+    44,
+    74
+   ],
+   "rating": 1250,
+   "poles": null,
+   "kA": null,
+   "label": "TX-1 1250 kVA",
+   "dest": "",
+   "on_bus": "BUS-A"
+  },
+  {
+   "id": "ACB-1",
+   "type": "ACB",
+   "box": [
+    205,
+    200,
+    30,
+    30
+   ],
+   "rating": 1600,
+   "poles": 4,
+   "kA": 36,
+   "label": "ACB-1 1600 A 4P",
+   "dest": "",
+   "on_bus": "BUS-A"
+  },
+  {
+   "id": "ACB-1-CT",
+   "type": "CT",
+   "box": [
+    209,
+    284,
+    22,
+    22
+   ],
+   "rating": 1600,
+   "poles": null,
+   "kA": null,
+   "label": "CT 1600/5A",
+   "dest": "",
+   "on_bus": null
+  },
+  {
+   "id": "ACB-1-PM",
+   "type": "METER",
+   "box": [
+    257,
+    282,
+    26,
+    26
+   ],
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "label": "A",
+   "dest": "",
+   "on_bus": null
+  },
+  {
+   "id": "OG-1",
+   "type": "MCCB",
+   "box": [
+    188,
+    520,
+    24,
+    24
+   ],
+   "rating": 250,
+   "poles": 4,
+   "kA": 36,
+   "label": "MCCB 250 A 4P",
+   "dest": "UPS input",
+   "on_bus": "BUS-A"
+  },
+  {
+   "id": "OG-2",
+   "type": "ISOLATOR",
+   "box": [
+    467,
+    548,
+    19,
+    35
+   ],
+   "rating": 400,
+   "poles": 4,
+   "kA": null,
+   "label": "ISOL 400 A 4P",
+   "dest": "pumps",
+   "on_bus": "BUS-A"
+  },
+  {
+   "id": "OG-3",
+   "type": "MCCB",
+   "box": [
+    749,
+    550,
+    24,
+    24
+   ],
+   "rating": 400,
+   "poles": 4,
+   "kA": 36,
+   "label": "MCCB 400 A 4P",
+   "dest": "spare",
+   "on_bus": "BUS-A"
+  },
+  {
+   "id": "OG-4",
+   "type": "MCCB",
+   "box": [
+    1029,
+    500,
+    24,
+    24
+   ],
+   "rating": 250,
+   "poles": 3,
+   "kA": 36,
+   "label": "MCCB 250 A 3P",
+   "dest": "pump P-4",
+   "on_bus": "BUS-A"
+  },
+  {
+   "id": "OG-4-K",
+   "type": "CONTACTOR",
+   "box": [
+    1028,
+    538,
+    19,
+    35
+   ],
+   "rating": 45,
+   "poles": null,
+   "kA": null,
+   "label": "S/D 45 kW",
+   "dest": "",
+   "on_bus": null
+  },
+  {
+   "id": "OG-4-M",
+   "type": "MOTOR",
+   "box": [
+    1025,
+    582,
+    32,
+    33
+   ],
+   "rating": 45,
+   "poles": null,
+   "kA": null,
+   "label": "M",
+   "dest": "",
+   "on_bus": null
+  },
+  {
+   "id": "OG-5",
+   "type": "ISOLATOR",
+   "box": [
+    1309,
+    548,
+    19,
+    35
+   ],
+   "rating": 100,
+   "poles": 4,
+   "kA": null,
+   "label": "ISOL 100 A 4P",
+   "dest": "pumps",
+   "on_bus": "BUS-A"
+  }
+ ],
+ "busbars": [
+  {
+   "id": "BUS-A",
+   "rating": 1600,
+   "x1": 140,
+   "x2": 1460,
+   "y": 400,
+   "thickness": 8
+  }
+ ],
+ "connections": [
+  [
+   "TX-1",
+   "ACB-1"
+  ],
+  [
+   "ACB-1",
+   "BUS-A"
+  ],
+  [
+   "ACB-1-CT",
+   "ACB-1-PM"
+  ],
+  [
+   "BUS-A",
+   "OG-1"
+  ],
+  [
+   "BUS-A",
+   "OG-2"
+  ],
+  [
+   "BUS-A",
+   "OG-3"
+  ],
+  [
+   "BUS-A",
+   "OG-4"
+  ],
+  [
+   "OG-4",
+   "OG-4-K"
+  ],
+  [
+   "OG-4-K",
+   "OG-4-M"
+  ],
+  [
+   "BUS-A",
+   "OG-5"
+  ]
+ ],
+ "notes": {
+  "form": "Form 4 Type 6",
+  "ip": "IP42",
+  "fault_kA": 36,
+  "poles_default": 4,
+  "standard": "BS EN 61439-2"
+ },
+ "texts": [
+  {
+   "text": "TX-1 1250 kVA",
+   "box": [
+    256,
+    87,
+    131,
+    13
+   ],
+   "device": "TX-1"
+  },
+  {
+   "text": "11 kV / 415 V",
+   "box": [
+    256,
+    110,
+    92,
+    12
+   ],
+   "device": "TX-1"
+  },
+  {
+   "text": "ACB-1 1600 A 4P",
+   "box": [
+    247,
+    211,
+    150,
+    12
+   ],
+   "device": "ACB-1"
+  },
+  {
+   "text": "Icu 36 kA, withdrawable",
+   "box": [
+    247,
+    231,
+    162,
+    12
+   ],
+   "device": "ACB-1"
+  },
+  {
+   "text": "A",
+   "box": [
+    266.0,
+    291.0,
+    8.0,
+    8.0
+   ],
+   "device": "ACB-1-PM"
+  },
+  {
+   "text": "CT 1600/5A",
+   "box": [
+    257,
+    318,
+    77,
+    12
+   ],
+   "device": "ACB-1-CT"
+  },
+  {
+   "text": "BUSBAR A  1600 A Cu  36 kA/1s",
+   "box": [
+    150,
+    372,
+    304,
+    15
+   ],
+   "device": "BUS-A"
+  },
+  {
+   "text": "MCCB 250 A 4P",
+   "box": [
+    244,
+    528,
+    134,
+    12
+   ],
+   "device": "OG-1"
+  },
+  {
+   "text": "UPS input",
+   "box": [
+    244,
+    548,
+    65,
+    13
+   ],
+   "device": "OG-1"
+  },
+  {
+   "text": "ISOL 400 A 4P",
+   "box": [
+    524,
+    561,
+    125,
+    12
+   ],
+   "device": "OG-2"
+  },
+  {
+   "text": "pumps",
+   "box": [
+    524,
+    584,
+    44,
+    10
+   ],
+   "device": "OG-2"
+  },
+  {
+   "text": "MCCB 400 A 4P",
+   "box": [
+    805,
+    558,
+    134,
+    12
+   ],
+   "device": "OG-3"
+  },
+  {
+   "text": "spare",
+   "box": [
+    805,
+    581,
+    37,
+    10
+   ],
+   "device": "OG-3"
+  },
+  {
+   "text": "M",
+   "box": [
+    1035.0,
+    593.5,
+    12.0,
+    10.0
+   ],
+   "device": "OG-4-M"
+  },
+  {
+   "text": "MCCB 250 A 3P",
+   "box": [
+    1085,
+    508,
+    134,
+    12
+   ],
+   "device": "OG-4"
+  },
+  {
+   "text": "S/D 45 kW",
+   "box": [
+    1085,
+    528,
+    72,
+    12
+   ],
+   "device": "OG-4-K"
+  },
+  {
+   "text": "pump P-4",
+   "box": [
+    1085,
+    551,
+    64,
+    12
+   ],
+   "device": "OG-4"
+  },
+  {
+   "text": "ISOL 100 A 4P",
+   "box": [
+    1366,
+    561,
+    125,
+    12
+   ],
+   "device": "OG-5"
+  },
+  {
+   "text": "pumps",
+   "box": [
+    1366,
+    584,
+    44,
+    10
+   ],
+   "device": "OG-5"
+  },
+  {
+   "text": "NOTES",
+   "box": [
+    72,
+    774,
+    68,
+    15
+   ],
+   "device": null
+  },
+  {
+   "text": "1. Switchboard to BS EN 61439-2, Form 4 Type 6, IP42.",
+   "box": [
+    72,
+    804,
+    374,
+    13
+   ],
+   "device": null
+  },
+  {
+   "text": "2. Prospective fault level 36 kA for 1 s at the busbars.",
+   "box": [
+    72,
+    830,
+    365,
+    13
+   ],
+   "device": null
+  },
+  {
+   "text": "3. All MCCBs 4-pole unless stated.",
+   "box": [
+    72,
+    856,
+    230,
+    13
+   ],
+   "device": null
+  },
+  {
+   "text": "4. Busbars hard-drawn copper, ratings as shown.",
+   "box": [
+    72,
+    882,
+    331,
+    13
+   ],
+   "device": null
+  },
+  {
+   "text": "PROJECT: St Mary\u2019s Hospital",
+   "box": [
+    1052,
+    814,
+    190,
+    13
+   ],
+   "device": null
+  },
+  {
+   "text": "DRAWING: E-365-SLD  REV A",
+   "box": [
+    1052,
+    845,
+    197,
+    9
+   ],
+   "device": null
+  },
+  {
+   "text": "MAIN LV SWITCHBOARD, SINGLE LINE DIAGRAM",
+   "box": [
+    1052,
+    875,
+    324,
+    11
+   ],
+   "device": null
+  },
+  {
+   "text": "SHEET sheet-10834  (synthetic, for sld2quote)",
+   "box": [
+    1052,
+    904,
+    310,
+    13
+   ],
+   "device": null
+  }
+ ],
+ "spec": {
+  "clauses": [
+   {
+    "id": "7.1",
+    "text": "The switchboard shall be designed, manufactured and verified in accordance with BS EN 61439-2."
+   },
+   {
+    "id": "7.2",
+    "text": "Internal separation shall be Form 4 Type 6 as defined in the UK National Annex."
+   },
+   {
+    "id": "7.3",
+    "text": "The assembly shall withstand a prospective short-circuit current of 36 kA for 1 second at the main busbars."
+   },
+   {
+    "id": "7.4",
+    "text": "Outgoing moulded-case circuit breakers shall be 4-pole with adjustable thermal-magnetic or electronic trip units."
+   },
+   {
+    "id": "7.5",
+    "text": "Degree of protection shall be not less than IP42 with doors closed."
+   },
+   {
+    "id": "7.6",
+    "text": "Main busbars shall be hard-drawn high-conductivity copper, tin-plated at joints."
+   },
+   {
+    "id": "7.7",
+    "text": "The contractor shall provide type-test or design-verification certificates prior to manufacture."
+   },
+   {
+    "id": "7.8",
+    "text": "Two years' spares for all trip units shall be included."
+   }
+  ],
+  "requirements": {
+   "standard": "BS EN 61439-2",
+   "form": "Form 4 Type 6",
+   "fault_kA": 36,
+   "poles": 4,
+   "ip": "IP42",
+   "busbar_material": "copper",
+   "certificates": true,
+   "extra": "Two years' spares for all trip units shall be included."
+  }
+ },
+ "conflicts": [],
+ "image": "sheet-10834-scan.png",
+ "size": [
+  1600,
+  1000
+ ]
+}

@@ -1,6 +1,7 @@
 """The site's back end: precomputed samples, live runs (a sheet generated from a seed, or an uploaded drawing), their
 files, the scorecards and the chart data (eval/charts.json from scripts/build_charts.py), and the static front end. POST
-/api/generate and /api/upload with ?stream=1 answer NDJSON: a start
+/api/samples/<id>/run reruns a sample's drawing live, with its spec.txt and answer.json when the sample directory holds them.
+POST /api/generate, /api/upload and /api/samples/<id>/run with ?stream=1 answer NDJSON: a start
 line, one line as each of the five steps finishes, then the Result (or one error line).
 
   uvicorn app:app --app-dir site --host 0.0.0.0 --port 7860
@@ -305,6 +306,21 @@ def api_upload(file: UploadFile = File(...), spec: str | None = Form(None), stre
         if spec and spec.strip():
             sp = os.path.join(d, "spec.txt"); open(sp, "w", encoding="utf-8").write(spec)
         return rid, lambda progress=None: live(rid, d, img, sp, None, {"kind": "upload", "title": (file.filename or "uploaded drawing")[:80]}, progress)
+    return stream_run(prepare) if stream else prepare()[1]()
+
+
+@app.post("/api/samples/{sid}/run")
+def api_sample_run(sid: str, stream: bool = False):
+    """the sample's stored drawing through the live pipeline, as an upload with the sample's spec and answer key when stored"""
+    def prepare():
+        d0 = os.path.join(SAMPLES, check(sid, ID, "sample id")); image = os.path.join(d0, "sheet.png")
+        if not os.path.isfile(image):
+            raise HTTPException(404, f"no sample {sid!r}")
+        ready()
+        card = next((c for c in cards() if c["id"] == sid), {})
+        spec, gt = (p if os.path.isfile(p) else None for p in (os.path.join(d0, "spec.txt"), os.path.join(d0, "answer.json")))
+        rid, d = new_run()
+        return rid, lambda progress=None: live(rid, d, image, spec, gt, {"kind": "sample", "sample": sid, "title": card.get("title", sid), "copy": card.get("copy"), "note": card.get("note", "")}, progress)
     return stream_run(prepare) if stream else prepare()[1]()
 
 

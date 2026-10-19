@@ -3,7 +3,8 @@ so no weights are needed) and the runs in a temporary directory: health, the sam
 live generated sheet scored against its answer key (as JSON and as an NDJSON stream of step events), the upload checks, a run file served, the models warmed by
 the first health call and 503 after a load error, the daily cap on live runs (429; samples and scorecards never capped), and the OCR crop pass following the
 engine (on for vision, off for rapidocr) unless overridden, in the reader and through the server's SLD2QUOTE_CROPS, and the chart data
-(eval/charts.json validated by scripts/build_charts.py's own check, served by /api/charts). About 10 s."""
+(eval/charts.json validated by scripts/build_charts.py's own check, served by /api/charts), and a sample rerun live with its stored
+answer key and specification. About 12 s."""
 import importlib.util, json, os, sys, tempfile
 import pytest
 
@@ -154,3 +155,21 @@ def test_the_chart_data_validates_and_is_served(client, monkeypatch):
     assert r.status_code == 200 and r.json() == doc
     monkeypatch.setattr(site, "CHARTS", "/nowhere/charts.json")
     assert client.get("/api/charts").status_code == 404
+
+
+def test_a_sample_reruns_live_with_its_stored_answer_key(client, tmp_path, monkeypatch, request):
+    from sld2quote.generate import write_sheet
+    monkeypatch.setattr(site, "SAMPLES", str(tmp_path)); site.cards.cache_clear(); request.addfinalizer(site.cards.cache_clear)
+    d = tmp_path / "s9"; d.mkdir(); stem = write_sheet(str(d), 9, level="simple")
+    for src, name in ((stem + ".png", "sheet.png"), (stem + ".json", "answer.json"), (stem + "-spec.txt", "spec.txt")):
+        os.rename(src, d / name)
+    (tmp_path / "index.json").write_text(json.dumps([{"id": "s9", "title": "Sample nine", "kind": "sample", "copy": "clean", "has_answer_key": True, "note": "n", "thumb": "thumb.jpg"}]))
+    r = client.post("/api/samples/s9/run")
+    assert r.status_code == 200, r.text
+    res = r.json()
+    assert set(res) == RESULT_KEYS and res["source"] == dict(res["source"], kind="sample", sample="s9", title="Sample nine", seed=9, copy="clean", has_answer_key=True, note="n")
+    assert res["score"]["symbols_total"] > 0 and res["spec"]["clauses"] and res["images"]["sheet"] == f"/api/runs/{res['id']}/sheet.png"
+    assert os.path.isdir(os.path.join(site.RUNS, res["id"]))
+    ev = [json.loads(l) for l in client.post("/api/samples/s9/run?stream=1").text.splitlines()]
+    assert [e["event"] for e in ev] == ["start"] + ["step"] * 5 + ["result"] and ev[-1]["result"]["source"]["sample"] == "s9"
+    assert client.post("/api/samples/nope/run").status_code == 404 and client.post("/api/samples/nope/run?stream=1").json()["status"] == 404

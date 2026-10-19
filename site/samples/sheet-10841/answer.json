@@ -1,0 +1,678 @@
+{
+ "id": "sheet-10841",
+ "style": {
+  "font": "Verdana.ttf",
+  "size": 22,
+  "lw": 2,
+  "sym": 30,
+  "bus_lw": 5,
+  "label_pos": "right",
+  "scan": false,
+  "level": "simple",
+  "breaker": "box",
+  "boards": false
+ },
+ "devices": [
+  {
+   "id": "TX-1",
+   "type": "TRANSFORMER",
+   "box": [
+    198,
+    68,
+    44,
+    74
+   ],
+   "rating": 2500,
+   "poles": null,
+   "kA": null,
+   "label": "TX-1 2500 kVA",
+   "dest": "",
+   "on_bus": "BUS-A"
+  },
+  {
+   "id": "ACB-1",
+   "type": "ACB",
+   "box": [
+    205,
+    200,
+    30,
+    30
+   ],
+   "rating": 3200,
+   "poles": 3,
+   "kA": 65,
+   "label": "ACB-1 3200 A 3P",
+   "dest": "",
+   "on_bus": "BUS-A"
+  },
+  {
+   "id": "ACB-1-CT",
+   "type": "CT",
+   "box": [
+    209,
+    284,
+    22,
+    22
+   ],
+   "rating": 3200,
+   "poles": null,
+   "kA": null,
+   "label": "CT 3200/5A",
+   "dest": "",
+   "on_bus": null
+  },
+  {
+   "id": "ACB-1-PM",
+   "type": "METER",
+   "box": [
+    257,
+    282,
+    26,
+    26
+   ],
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "label": "A",
+   "dest": "",
+   "on_bus": null
+  },
+  {
+   "id": "BS-1",
+   "type": "BUS_SECTION",
+   "box": [
+    1135,
+    385,
+    30,
+    30
+   ],
+   "rating": 3200,
+   "poles": 3,
+   "kA": 65,
+   "label": "BS-1 3200 A",
+   "dest": "",
+   "on_bus": null
+  },
+  {
+   "id": "OG-1",
+   "type": "FUSE_SWITCH",
+   "box": [
+    187,
+    519,
+    18,
+    33
+   ],
+   "rating": 400,
+   "poles": 3,
+   "kA": null,
+   "label": "FSW 400 A 3P",
+   "dest": "data hall",
+   "on_bus": "BUS-A"
+  },
+  {
+   "id": "OG-2",
+   "type": "FUSE_SWITCH",
+   "box": [
+    487,
+    579,
+    18,
+    33
+   ],
+   "rating": 630,
+   "poles": 4,
+   "kA": null,
+   "label": "FSW 630 A 4P",
+   "dest": "data hall",
+   "on_bus": "BUS-A"
+  },
+  {
+   "id": "OG-3",
+   "type": "FUSE_SWITCH",
+   "box": [
+    787,
+    549,
+    18,
+    33
+   ],
+   "rating": 160,
+   "poles": 3,
+   "kA": null,
+   "label": "FSW 160 A 3P",
+   "dest": "spare",
+   "on_bus": "BUS-A"
+  },
+  {
+   "id": "OG-4",
+   "type": "FUSE_SWITCH",
+   "box": [
+    1387,
+    519,
+    18,
+    33
+   ],
+   "rating": 800,
+   "poles": 4,
+   "kA": null,
+   "label": "FSW 800 A 4P",
+   "dest": "data hall",
+   "on_bus": "BUS-B"
+  },
+  {
+   "id": "OG-5",
+   "type": "FUSE_SWITCH",
+   "box": [
+    1687,
+    499,
+    18,
+    33
+   ],
+   "rating": 100,
+   "poles": 3,
+   "kA": null,
+   "label": "FSW 100 A 3P",
+   "dest": "fan F-5",
+   "on_bus": "BUS-B"
+  },
+  {
+   "id": "OG-5-K",
+   "type": "CONTACTOR",
+   "box": [
+    1688,
+    545,
+    17,
+    34
+   ],
+   "rating": 11,
+   "poles": null,
+   "kA": null,
+   "label": "DOL 11 kW",
+   "dest": "",
+   "on_bus": null
+  },
+  {
+   "id": "OG-5-M",
+   "type": "MOTOR",
+   "box": [
+    1684,
+    589,
+    32,
+    33
+   ],
+   "rating": 11,
+   "poles": null,
+   "kA": null,
+   "label": "M",
+   "dest": "",
+   "on_bus": null
+  },
+  {
+   "id": "OG-6",
+   "type": "FUSE_SWITCH",
+   "box": [
+    1987,
+    579,
+    18,
+    33
+   ],
+   "rating": 630,
+   "poles": 3,
+   "kA": null,
+   "label": "FSW 630 A 3P",
+   "dest": "DB-6 wards",
+   "on_bus": "BUS-B"
+  }
+ ],
+ "busbars": [
+  {
+   "id": "BUS-A",
+   "rating": 3200,
+   "x1": 140,
+   "x2": 1135,
+   "y": 400,
+   "thickness": 5
+  },
+  {
+   "id": "BUS-B",
+   "rating": 3200,
+   "x1": 1165,
+   "x2": 2160,
+   "y": 400,
+   "thickness": 5
+  }
+ ],
+ "connections": [
+  [
+   "TX-1",
+   "ACB-1"
+  ],
+  [
+   "ACB-1",
+   "BUS-A"
+  ],
+  [
+   "ACB-1-CT",
+   "ACB-1-PM"
+  ],
+  [
+   "BUS-A",
+   "BS-1"
+  ],
+  [
+   "BS-1",
+   "BUS-B"
+  ],
+  [
+   "BUS-A",
+   "OG-1"
+  ],
+  [
+   "BUS-A",
+   "OG-2"
+  ],
+  [
+   "BUS-A",
+   "OG-3"
+  ],
+  [
+   "BUS-B",
+   "OG-4"
+  ],
+  [
+   "BUS-B",
+   "OG-5"
+  ],
+  [
+   "OG-5",
+   "OG-5-K"
+  ],
+  [
+   "OG-5-K",
+   "OG-5-M"
+  ],
+  [
+   "BUS-B",
+   "OG-6"
+  ]
+ ],
+ "notes": {
+  "form": "Form 3b",
+  "ip": "IP41",
+  "fault_kA": 65,
+  "poles_default": 3,
+  "standard": "BS EN 61439-2"
+ },
+ "texts": [
+  {
+   "text": "TX-1 2500 kVA",
+   "box": [
+    256,
+    88,
+    168,
+    17
+   ],
+   "device": "TX-1"
+  },
+  {
+   "text": "11 kV / 415 V",
+   "box": [
+    256,
+    111,
+    121,
+    16
+   ],
+   "device": "TX-1"
+  },
+  {
+   "text": "ACB-1 3200 A 3P",
+   "box": [
+    247,
+    212,
+    191,
+    16
+   ],
+   "device": "ACB-1"
+  },
+  {
+   "text": "Icu 65 kA, withdrawable",
+   "box": [
+    247,
+    232,
+    210,
+    16
+   ],
+   "device": "ACB-1"
+  },
+  {
+   "text": "A",
+   "box": [
+    266.0,
+    291.0,
+    8.0,
+    8.0
+   ],
+   "device": "ACB-1-PM"
+  },
+  {
+   "text": "CT 3200/5A",
+   "box": [
+    257,
+    319,
+    103,
+    16
+   ],
+   "device": "ACB-1-CT"
+  },
+  {
+   "text": "BS-1 3200 A",
+   "box": [
+    1094,
+    429,
+    111,
+    12
+   ],
+   "device": "BS-1"
+  },
+  {
+   "text": "BUSBAR B  3200 A Cu  65 kA/1s",
+   "box": [
+    1175,
+    375,
+    304,
+    15
+   ],
+   "device": "BUS-B"
+  },
+  {
+   "text": "BUSBAR A  3200 A Cu  65 kA/1s",
+   "box": [
+    150,
+    375,
+    304,
+    15
+   ],
+   "device": "BUS-A"
+  },
+  {
+   "text": "FSW 400 A 3P",
+   "box": [
+    228,
+    532,
+    158,
+    16
+   ],
+   "device": "OG-1"
+  },
+  {
+   "text": "data hall",
+   "box": [
+    228,
+    552,
+    75,
+    13
+   ],
+   "device": "OG-1"
+  },
+  {
+   "text": "FSW 630 A 4P",
+   "box": [
+    528,
+    592,
+    158,
+    16
+   ],
+   "device": "OG-2"
+  },
+  {
+   "text": "data hall",
+   "box": [
+    528,
+    612,
+    75,
+    13
+   ],
+   "device": "OG-2"
+  },
+  {
+   "text": "FSW 160 A 3P",
+   "box": [
+    828,
+    562,
+    158,
+    16
+   ],
+   "device": "OG-3"
+  },
+  {
+   "text": "spare",
+   "box": [
+    828,
+    586,
+    47,
+    12
+   ],
+   "device": "OG-3"
+  },
+  {
+   "text": "FSW 800 A 4P",
+   "box": [
+    1428,
+    532,
+    158,
+    16
+   ],
+   "device": "OG-4"
+  },
+  {
+   "text": "data hall",
+   "box": [
+    1428,
+    552,
+    75,
+    13
+   ],
+   "device": "OG-4"
+  },
+  {
+   "text": "M",
+   "box": [
+    1694.0,
+    600.5,
+    12.0,
+    10.0
+   ],
+   "device": "OG-5-M"
+  },
+  {
+   "text": "FSW 100 A 3P",
+   "box": [
+    1728,
+    512,
+    158,
+    16
+   ],
+   "device": "OG-5"
+  },
+  {
+   "text": "DOL 11 kW",
+   "box": [
+    1728,
+    532,
+    96,
+    13
+   ],
+   "device": "OG-5-K"
+  },
+  {
+   "text": "fan F-5",
+   "box": [
+    1728,
+    554,
+    62,
+    13
+   ],
+   "device": "OG-5"
+  },
+  {
+   "text": "FSW 630 A 3P",
+   "box": [
+    2028,
+    592,
+    158,
+    16
+   ],
+   "device": "OG-6"
+  },
+  {
+   "text": "DB-6 wards",
+   "box": [
+    2028,
+    612,
+    101,
+    13
+   ],
+   "device": "OG-6"
+  },
+  {
+   "text": "NOTES",
+   "box": [
+    72,
+    774,
+    68,
+    15
+   ],
+   "device": null
+  },
+  {
+   "text": "1. Switchboard to BS EN 61439-2, Form 3b, IP41.",
+   "box": [
+    72,
+    805,
+    434,
+    16
+   ],
+   "device": null
+  },
+  {
+   "text": "2. Prospective fault level 65 kA for 1 s at the busbars.",
+   "box": [
+    72,
+    831,
+    466,
+    16
+   ],
+   "device": null
+  },
+  {
+   "text": "3. All MCCBs 3-pole unless stated.",
+   "box": [
+    72,
+    857,
+    298,
+    16
+   ],
+   "device": null
+  },
+  {
+   "text": "4. Busbars hard-drawn copper, ratings as shown.",
+   "box": [
+    72,
+    883,
+    426,
+    16
+   ],
+   "device": null
+  },
+  {
+   "text": "PROJECT: Westside Retail Park",
+   "box": [
+    1752,
+    815,
+    266,
+    13
+   ],
+   "device": null
+  },
+  {
+   "text": "DRAWING: E-875-SLD  REV B",
+   "box": [
+    1752,
+    846,
+    260,
+    12
+   ],
+   "device": null
+  },
+  {
+   "text": "MAIN LV SWITCHBOARD, SINGLE LINE DIAGRAM",
+   "box": [
+    1752,
+    876,
+    424,
+    15
+   ],
+   "device": null
+  },
+  {
+   "text": "SHEET sheet-10841  (synthetic, for sld2quote)",
+   "box": [
+    1752,
+    905,
+    406,
+    16
+   ],
+   "device": null
+  }
+ ],
+ "spec": {
+  "clauses": [
+   {
+    "id": "7.1",
+    "text": "The switchboard shall be designed, manufactured and verified in accordance with BS EN 61439-2."
+   },
+   {
+    "id": "7.2",
+    "text": "Internal separation shall be Form 3b as defined in the UK National Annex."
+   },
+   {
+    "id": "7.3",
+    "text": "The assembly shall withstand a prospective short-circuit current of 65 kA for 1 second at the main busbars."
+   },
+   {
+    "id": "7.4",
+    "text": "Outgoing moulded-case circuit breakers shall be 3-pole with adjustable thermal-magnetic or electronic trip units."
+   },
+   {
+    "id": "7.5",
+    "text": "Degree of protection shall be not less than IP41 with doors closed."
+   },
+   {
+    "id": "7.6",
+    "text": "Main busbars shall be hard-drawn high-conductivity copper, tin-plated at joints."
+   },
+   {
+    "id": "7.7",
+    "text": "The contractor shall provide type-test or design-verification certificates prior to manufacture."
+   },
+   {
+    "id": "7.8",
+    "text": "Two years' spares for all trip units shall be included."
+   }
+  ],
+  "requirements": {
+   "standard": "BS EN 61439-2",
+   "form": "Form 3b",
+   "fault_kA": 65,
+   "poles": 3,
+   "ip": "IP41",
+   "busbar_material": "copper",
+   "certificates": true,
+   "extra": "Two years' spares for all trip units shall be included."
+  }
+ },
+ "conflicts": [],
+ "image": "sheet-10841.png",
+ "size": [
+  2300,
+  1000
+ ]
+}
