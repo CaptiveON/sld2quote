@@ -198,6 +198,16 @@ resort draw more relays in the generator.
 need more examples in proportion, and a per-class recall curve across passes is the early warning. One run per condition is not enough
 to be sure of a cause; the mechanism here is inferred from the outputs and will be confirmed only by the next runs.
 
+**The next run answered (19 Oct, 04:20).** The same wide-font set trained again with averaged weights and the gradient fault fixed
+reached a better score than any earlier run on that set and was still rising at its cap of ten passes, but relays stayed unlearned: on
+the standard unseen test it finds 15 of 42, and on the other 27 it reports nothing at all, not a wrong class, simply no box. A second
+fault appeared with it: about 100 contactor boxes on no symbol, 45 of them on the notes box or the title block, 40 on blank paper just
+above a long horizontal line, all scoring between 0.07 and 0.23. The live model shows neither fault. The dip in its curve at passes
+four to six happened with correct gradients and the average on, so it is real training behaviour on this data, and the "stop after
+three passes without gain" rule would have ended the run there, before it recovered to its best score at pass ten. So the inference
+stands: with the same 270 relay examples spread over 13 typefaces the class never gets a foothold, and the fix is more examples of the
+rare class in proportion to the variety, not a different recipe. The wide-font model is not used on the site.
+
 ## 11. Tile edges: the per-tile score is a floor, and a tempting fix was wrong
 
 **What happened (18 Oct).** Pages are cut into 640-pixel tiles with a quarter overlap. A symbol cut by a tile edge is found only 40 to 50
