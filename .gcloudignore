@@ -1,5 +1,7 @@
 # What gcloud builds submit uploads (scripts/deploy_cloudrun.sh): only what site/Dockerfile copies into the image, since
-# this upload is the build context. Everything is out unless named below.
+# this upload is the build context. Everything is out unless named below. The model baked into the image is the one
+# directory under weights/ named on its own line below, of which only the three serving files go up; a model switch
+# edits that line and MODEL in scripts/deploy_cloudrun.sh, nothing else.
 /*
 !/site/
 !/sld2quote/
@@ -13,5 +15,12 @@
 !/data/
 /data/*
 !/data/preview/
+!/weights/
+/weights/*
+!/weights/rtdetr_r18_full/
+/weights/*/*
+!/weights/*/config.json
+!/weights/*/preprocessor_config.json
+!/weights/*/model.safetensors
 __pycache__/
 .DS_Store

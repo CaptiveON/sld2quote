@@ -1,5 +1,6 @@
-# The live site's image. The Space builds it from the repo scripts/deploy_space.py assembles (this file at its root, the
-# package, the site and its samples). CPU only; the detector weights download at start-up (site/app.py), never baked in.
+# The live site's image, built by Cloud Build from the repo root (scripts/deploy_cloudrun.sh; the build context is what
+# .gcloudignore lets through). CPU only. The detector's weights come in with that upload (weights/<model>: config.json,
+# preprocessor_config.json, model.safetensors) and are baked in by the COPY below, so the running service needs no token.
 FROM python:3.12.15-slim-trixie
 
 # libgl1 and libglib2.0-0t64 (libglib2.0-0 before trixie): opencv-python, pulled in by rapidocr-onnxruntime, loads them.
@@ -16,14 +17,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends libgl1 libglib2
 COPY site/requirements.txt /tmp/requirements.txt
 RUN pip install --no-cache-dir --root-user-action=ignore --extra-index-url https://download.pytorch.org/whl/cpu -r /tmp/requirements.txt
 
-# Spaces run the container as uid 1000; /data holds the downloaded weights (SLD2QUOTE_WEIGHTS), a persistent volume if one is added
-RUN useradd -m -u 1000 user && mkdir /data && chown user /data
+# an unprivileged user, uid 1000 (Hugging Face Spaces require that uid; Cloud Run runs the image's user)
+RUN useradd -m -u 1000 user
 USER user
 WORKDIR /home/user/app
 COPY --chown=user . .
 # the English text recogniser (9 MB, public) into the image's hub cache so a cold start does not fetch it; this also
 # proves the OCR stack loads on this image
 RUN python -c "from sld2quote.ocr import _rapid; _rapid(True)"
-# torch would otherwise size its thread pool from the host's cores, not the Space's 2 vCPUs
+# torch would otherwise size its thread pool from the host's cores, not the instance's 2 vCPUs
 ENV OMP_NUM_THREADS=2 PYTHONUNBUFFERED=1
 CMD ["uvicorn", "app:app", "--app-dir", "site", "--host", "0.0.0.0", "--port", "7860"]
