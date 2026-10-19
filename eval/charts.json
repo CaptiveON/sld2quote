@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-19T04:23:01",
+ "generated": "2026-10-19T07:45:24",
  "model": "rtdetr_r18_full",
  "engine": "rapidocr",
  "sets": [
@@ -1535,6 +1535,41 @@
     1.787
    ],
    "best_pass": 8
+  },
+  {
+   "run": "rtdetr_r18_plain_ema_fix",
+   "label": "rtdetr_r18_plain_ema_fix",
+   "live": false,
+   "ema": true,
+   "passes": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+   ],
+   "score": [
+    0.822,
+    0.872,
+    0.9,
+    0.914,
+    0.903,
+    0.9,
+    0.911
+   ],
+   "metric": "pooled per-class F1 at the operating threshold on val and val_unseen",
+   "train_loss": [
+    5.075,
+    2.214,
+    1.925,
+    1.826,
+    1.673,
+    1.621,
+    1.524
+   ],
+   "best_pass": 4
   },
   {
    "run": "rtdetr_r18_rare",
