@@ -3414,9 +3414,9 @@
  "ocr_engine": "rapidocr",
  "reader": "trained",
  "seconds": {
-  "total": 16.24,
-  "ocr": 8.27,
-  "detector": 7.69
+  "total": 17.29,
+  "ocr": 9.16,
+  "detector": 7.83
  },
  "detector": {
   "weights": "weights/rtdetr_r18_plain_ema_fix_pass4",

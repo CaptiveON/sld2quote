@@ -22,8 +22,8 @@
    "key": "text",
    "title": "Read the words",
    "count": 40,
-   "seconds": 3.67,
-   "plain": "Read 40 pieces of text in 3.67 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 3.69,
+   "plain": "Read 40 pieces of text in 3.69 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
@@ -880,8 +880,8 @@
  "spec": null,
  "score": null,
  "timing": {
-  "total": 6.41,
-  "ocr": 3.67,
+  "total": 6.42,
+  "ocr": 3.69,
   "detector": 2.35
  },
  "reader": "trained",

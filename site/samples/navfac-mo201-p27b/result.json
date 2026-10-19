@@ -22,15 +22,15 @@
    "key": "text",
    "title": "Read the words",
    "count": 10,
-   "seconds": 1.4,
-   "plain": "Read 10 pieces of text in 1.4 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 1.39,
+   "plain": "Read 10 pieces of text in 1.39 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
    "count": 28,
-   "seconds": 1.28,
-   "plain": "Found 28 symbols in 1.28 s: 11 outgoing moulded-case breakers, 7 current transformers, 7 motor starters, 1 motor, 1 power-factor correction bank, 1 fuse switch. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "seconds": 1.36,
+   "plain": "Found 28 symbols in 1.36 s: 11 outgoing moulded-case breakers, 7 current transformers, 7 motor starters, 1 motor, 1 power-factor correction bank, 1 fuse switch. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
@@ -964,9 +964,9 @@
  "spec": null,
  "score": null,
  "timing": {
-  "total": 2.92,
-  "ocr": 1.4,
-  "detector": 1.28
+  "total": 2.98,
+  "ocr": 1.39,
+  "detector": 1.36
  },
  "reader": "trained",
  "engine": "rapidocr",

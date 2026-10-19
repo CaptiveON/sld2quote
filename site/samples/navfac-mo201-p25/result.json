@@ -29,8 +29,8 @@
    "key": "symbols",
    "title": "Find the symbols",
    "count": 27,
-   "seconds": 1.31,
-   "plain": "Found 27 symbols in 1.31 s: 8 fuse switches, 7 outgoing moulded-case breakers, 4 current transformers, 3 motor starters, 3 power-factor correction banks, 1 bus-section switch, 1 motor. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "seconds": 1.29,
+   "plain": "Found 27 symbols in 1.29 s: 8 fuse switches, 7 outgoing moulded-case breakers, 4 current transformers, 3 motor starters, 3 power-factor correction banks, 1 bus-section switch, 1 motor. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
@@ -921,9 +921,9 @@
  "spec": null,
  "score": null,
  "timing": {
-  "total": 2.79,
+  "total": 2.77,
   "ocr": 1.27,
-  "detector": 1.31
+  "detector": 1.29
  },
  "reader": "trained",
  "engine": "rapidocr",

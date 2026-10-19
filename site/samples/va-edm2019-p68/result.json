@@ -22,21 +22,21 @@
    "key": "text",
    "title": "Read the words",
    "count": 87,
-   "seconds": 8.27,
-   "plain": "Read 87 pieces of text in 8.27 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 9.16,
+   "plain": "Read 87 pieces of text in 9.16 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
    "count": 73,
-   "seconds": 7.69,
-   "plain": "Found 73 symbols in 7.69 s: 22 outgoing moulded-case breakers, 16 power-factor correction banks, 7 protection relays, 7 earths, 6 current transformers, 4 panel meters, 3 motor starters, 2 fuse switches, 2 transformers, 2 motors, 1 incoming air circuit breaker, 1 downstream board. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "seconds": 7.83,
+   "plain": "Found 73 symbols in 7.83 s: 22 outgoing moulded-case breakers, 16 power-factor correction banks, 7 protection relays, 7 earths, 6 current transformers, 4 panel meters, 3 motor starters, 2 fuse switches, 2 transformers, 2 motors, 1 incoming air circuit breaker, 1 downstream board. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
    "count": 15,
-   "seconds": 0.28,
+   "seconds": 0.3,
    "plain": "Paired 15 of 73 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
@@ -2205,9 +2205,9 @@
  "spec": null,
  "score": null,
  "timing": {
-  "total": 16.81,
-  "ocr": 8.27,
-  "detector": 7.69
+  "total": 17.87,
+  "ocr": 9.16,
+  "detector": 7.83
  },
  "reader": "trained",
  "engine": "rapidocr",

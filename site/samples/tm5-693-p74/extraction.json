@@ -1363,8 +1363,8 @@
  "ocr_engine": "rapidocr",
  "reader": "trained",
  "seconds": {
-  "total": 6.16,
-  "ocr": 3.67,
+  "total": 6.18,
+  "ocr": 3.69,
   "detector": 2.35
  },
  "detector": {

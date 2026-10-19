@@ -22,15 +22,15 @@
    "key": "text",
    "title": "Read the words",
    "count": 61,
-   "seconds": 5.5,
-   "plain": "Read 61 pieces of text in 5.5 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 5.75,
+   "plain": "Read 61 pieces of text in 5.75 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
    "count": 31,
-   "seconds": 6.34,
-   "plain": "Found 31 symbols in 6.34 s: 10 fuse switches, 2 transformers, 2 incoming air circuit breakers, 2 panel meters, 2 current transformers, 2 outgoing moulded-case breakers, 2 motor starters, 2 earths, 2 motors, 2 downstream boards, 1 bus-section switch, 1 power-factor correction bank, 1 surge protector. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "seconds": 6.39,
+   "plain": "Found 31 symbols in 6.39 s: 10 fuse switches, 2 transformers, 2 incoming air circuit breakers, 2 panel meters, 2 current transformers, 2 outgoing moulded-case breakers, 2 motor starters, 2 earths, 2 motors, 2 downstream boards, 1 bus-section switch, 1 power-factor correction bank, 1 surge protector. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
@@ -1633,9 +1633,9 @@
   "notes_accuracy": 1.0
  },
  "timing": {
-  "total": 14.33,
-  "ocr": 5.5,
-  "detector": 6.34
+  "total": 14.62,
+  "ocr": 5.75,
+  "detector": 6.39
  },
  "reader": "trained",
  "engine": "rapidocr",

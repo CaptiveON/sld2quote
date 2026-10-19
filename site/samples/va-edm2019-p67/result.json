@@ -22,21 +22,21 @@
    "key": "text",
    "title": "Read the words",
    "count": 55,
-   "seconds": 7.16,
-   "plain": "Read 55 pieces of text in 7.16 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 7.27,
+   "plain": "Read 55 pieces of text in 7.27 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
    "count": 70,
-   "seconds": 7.67,
-   "plain": "Found 70 symbols in 7.67 s: 12 protection relays, 11 power-factor correction banks, 8 earths, 8 outgoing moulded-case breakers, 7 current transformers, 6 incoming air circuit breakers, 6 motor starters, 4 fuse switches, 3 motors, 3 downstream boards, 2 panel meters. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "seconds": 7.62,
+   "plain": "Found 70 symbols in 7.62 s: 12 protection relays, 11 power-factor correction banks, 8 earths, 8 outgoing moulded-case breakers, 7 current transformers, 6 incoming air circuit breakers, 6 motor starters, 4 fuse switches, 3 motors, 3 downstream boards, 2 panel meters. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
    "count": 17,
-   "seconds": 0.27,
+   "seconds": 0.28,
    "plain": "Paired 17 of 70 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
@@ -2119,9 +2119,9 @@
  "spec": null,
  "score": null,
  "timing": {
-  "total": 15.65,
-  "ocr": 7.16,
-  "detector": 7.67
+  "total": 15.73,
+  "ocr": 7.27,
+  "detector": 7.62
  },
  "reader": "trained",
  "engine": "rapidocr",

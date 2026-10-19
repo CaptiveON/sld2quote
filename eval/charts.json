@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-19T13:56:16",
+ "generated": "2026-10-19T14:07:47",
  "model": "rtdetr_r18_plain_ema_fix_pass4",
  "engine": "rapidocr",
  "sets": [
@@ -2144,17 +2144,17 @@
    {
     "step": "text",
     "label": "Read the words",
-    "mean_seconds": 3.324
+    "mean_seconds": 3.387
    },
    {
     "step": "symbols",
     "label": "Find the symbols",
-    "mean_seconds": 2.712
+    "mean_seconds": 2.746
    },
    {
     "step": "labels",
     "label": "Pair labels with symbols",
-    "mean_seconds": 0.146
+    "mean_seconds": 0.145
    },
    {
     "step": "spec",
@@ -2171,17 +2171,17 @@
    {
     "kind": "real drawing",
     "n": 19,
-    "mean_total_seconds": 5.947
+    "mean_total_seconds": 6.076
    },
    {
     "kind": "synthetic clean",
     "n": 12,
-    "mean_total_seconds": 7.445
+    "mean_total_seconds": 7.528
    },
    {
     "kind": "synthetic scan",
     "n": 3,
-    "mean_total_seconds": 6.227
+    "mean_total_seconds": 6.16
    }
   ]
  },

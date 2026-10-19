@@ -22,21 +22,21 @@
    "key": "text",
    "title": "Read the words",
    "count": 27,
-   "seconds": 2.45,
-   "plain": "Read 27 pieces of text in 2.45 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 2.41,
+   "plain": "Read 27 pieces of text in 2.41 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
    "count": 13,
-   "seconds": 1.43,
-   "plain": "Found 13 symbols in 1.43 s: 5 motor starters, 2 panel meters, 2 generators, 1 transformer, 1 protection relay, 1 incoming air circuit breaker, 1 power-factor correction bank. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "seconds": 1.23,
+   "plain": "Found 13 symbols in 1.23 s: 5 motor starters, 2 panel meters, 2 generators, 1 transformer, 1 protection relay, 1 incoming air circuit breaker, 1 power-factor correction bank. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
    "count": 6,
-   "seconds": 0.11,
+   "seconds": 0.1,
    "plain": "Paired 6 of 13 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
@@ -511,9 +511,9 @@
  "spec": null,
  "score": null,
  "timing": {
-  "total": 4.22,
-  "ocr": 2.45,
-  "detector": 1.43
+  "total": 3.98,
+  "ocr": 2.41,
+  "detector": 1.23
  },
  "reader": "trained",
  "engine": "rapidocr",
