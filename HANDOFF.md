@@ -412,7 +412,7 @@ stays free, with the drawing-level comparison about an hour after. Open for Adna
 seconds" wording (measured 16 to 18 s for an upload, 48 to 51 s for a medium generated sheet), a read-only HF token in the secret, a
 budget alert on the billing account, the go-public checklist.
 
-**State at 05:10, 19 Oct.** Adnan's decisions tonight: the site stays on `rtdetr_r18_full` until the plain EMA repeat
+**State at 02:05, 19 Oct.** Adnan's decisions tonight: the site stays on `rtdetr_r18_full` until the plain EMA repeat
 (`rtdetr_r18_plain_ema_fix`, due about 08:20) has certainly ended, then he selects; the service stays inside the free tier (no CPU kept
 on, no bill at all); the GitHub repo, the model repo and the static Space stay private until he says. Done and committed since 01:15:
 per-request billing with the models warmed inside the first request (no start-up thread), a daily cap of 24 live runs (HTTP 429 over
