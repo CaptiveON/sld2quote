@@ -426,23 +426,25 @@ What it still gets wrong: On the unseen-style sheets rtdetr_r18vd finds 96% of t
 
 ## rtdetr_r18vd (`weights/rtdetr_r18_plain_ema_fix`)
 
-- 7 passes of a cap of 10 at batch 16, lr 1e-04 (backbone 1e-05), warm-up 300 steps, seed 0, early stopping patience 3, EMA decay 0.999 with 200 warm-up updates (d 0.9990 after 4011 updates, an average over about 1000 steps, 1.7 passes of 573 steps; the authors' 0.9999 with 2000 warm-up updates, tuned to 72 epochs of hundreds of thousands of steps, would average about 7 steps on this run, so the decay is set for its length; the evaluated weights are the average): early stop after epoch 7 of 10: 3 val passes in a row without an improvement of 0.002 in val and val_unseen pooled: mean per-class F1 at the operating threshold with NMS; the best pass was epoch 4 at 0.9142
-- Scored with the best pass's weights, epoch 4 (val and val_unseen pooled: mean per-class F1 at the operating threshold with NMS 0.9142); 192 min of training and 3.1 min of final evaluation, 5.8648 training images/s
-- Thresholds chosen on val and val_unseen pooled at training time: with NMS 0.09, raw 0.10; NMS is class-agnostic at IoU 0.5
+- 10 passes of a cap of 10 at batch 16, lr 1e-04 (backbone 1e-05), warm-up 300 steps, seed 0, early stopping patience 3, EMA decay 0.999 with 200 warm-up updates (d 0.9990 after 5730 updates, an average over about 1000 steps, 1.7 passes of 573 steps; the authors' 0.9999 with 2000 warm-up updates, tuned to 72 epochs of hundreds of thousands of steps, would average about 18 steps on this run, so the decay is set for its length; the evaluated weights are the average): ended by the cap
+- Scored with the best pass's weights, epoch 10 (val and val_unseen pooled: mean per-class F1 at the operating threshold with NMS 0.9169); 274 min of training and 3.1 min of final evaluation, 5.8765 training images/s
+- Thresholds chosen on val and val_unseen pooled at training time: with NMS 0.06, raw 0.08; NMS is class-agnostic at IoU 0.5
 - eval of val, val_unseen, test_clean, test_scan, test_unseen after training reproduces the training-time metrics exactly
 
 | split | tiles | post-processing | mAP@0.5 | mean P | worst P | mean R | worst R |
 |---|---|---|---|---|---|---|---|
-| val | 936 | with NMS | 0.9327 | 0.9471 | 0.7273 (relay) | 0.8932 | 0.5333 (relay) |
-| val | 936 | raw | 0.911 | 0.8852 | 0.7416 (earth) | 0.8791 | 0.5333 (relay) |
-| val_unseen | 396 | with NMS | 0.9328 | 0.8689 | 0.0 (board) | 0.8919 | 0.6 (relay) |
-| val_unseen | 396 | raw | 0.9057 | 0.805 | 0.0 (board) | 0.8607 | 0.4 (relay) |
-| test_clean | 348 | with NMS | 0.9195 | 0.971 | 0.907 (board) | 0.8776 | 0.5385 (relay) |
-| test_clean | 348 | raw | 0.904 | 0.8922 | 0.6724 (earth) | 0.8713 | 0.5385 (relay) |
-| test_scan | 348 | with NMS | 0.9013 | 0.9464 | 0.4286 (relay) | 0.8508 | 0.2308 (relay) |
-| test_scan | 348 | raw | 0.8707 | 0.8617 | 0.4286 (relay) | 0.8353 | 0.2308 (relay) |
-| test_unseen | 1140 | with NMS | 0.9389 | 0.9517 | 0.75 (relay) | 0.9004 | 0.6062 (earth) |
-| test_unseen | 1140 | raw | 0.9149 | 0.8765 | 0.6744 (relay) | 0.8867 | 0.5719 (earth) |
+| val | 936 | with NMS | 0.9246 | 0.958 | 0.8571 (relay) | 0.8955 | 0.4 (relay) |
+| val | 936 | raw | 0.872 | 0.8281 | 0.6488 (ct) | 0.8545 | 0.3667 (relay) |
+| val_unseen | 396 | with NMS | 0.9299 | 0.9551 | 0.8571 (contactor) | 0.8926 | 0.5 (relay) |
+| val_unseen | 396 | raw | 0.8908 | 0.8404 | 0.6412 (ct) | 0.8653 | 0.5 (relay) |
+| test_clean | 348 | with NMS | 0.9121 | 0.9615 | 0.8636 (contactor) | 0.8878 | 0.5385 (relay) |
+| test_clean | 348 | raw | 0.8616 | 0.7901 | 0.52 (board) | 0.8668 | 0.4615 (relay) |
+| test_scan | 348 | with NMS | 0.9074 | 0.9616 | 0.75 (relay) | 0.843 | 0.2308 (relay) |
+| test_scan | 348 | raw | 0.8677 | 0.8971 | 0.7183 (ct) | 0.7903 | 0.1538 (relay) |
+| test_unseen | 1140 | with NMS | 0.9368 | 0.9547 | 0.8 (relay) | 0.9043 | 0.6667 (relay) |
+| test_unseen | 1140 | raw | 0.8896 | 0.8341 | 0.6626 (ct) | 0.874 | 0.6164 (earth) |
+| test_unseen, `pass-10`, threshold 0.06 | 1140 | with NMS | 0.9368 | 0.9547 | 0.8 (relay) | 0.9043 | 0.6667 (relay) |
+| test_unseen, `pass-10`, threshold 0.08 | 1140 | raw | 0.8896 | 0.8341 | 0.6626 (ct) | 0.874 | 0.6164 (earth) |
 | test_unseen, `pass-7`, threshold 0.07 | 1140 | with NMS | 0.923 | 0.952 | 0.8 (relay) | 0.8922 | 0.6267 (earth) |
 | test_unseen, `pass-7`, threshold 0.10 | 1140 | raw | 0.8878 | 0.8754 | 0.7391 (capacitor) | 0.8387 | 0.5034 (earth) |
 
@@ -450,20 +452,20 @@ Per class with NMS, and the size rule (precision and recall at least 0.95 on val
 
 | class | val P | val R | test_unseen P | test_unseen R | rule |
 |---|---|---|---|---|---|
-| breaker | 0.9855 | 0.9589 | 0.9868 | 0.9444 | fail |
-| fuse_switch | 0.9982 | 0.9823 | 0.99 | 0.9766 | pass |
-| isolator | 0.9725 | 0.9464 | 0.9933 | 0.9024 | fail |
-| contactor | 0.8842 | 0.9871 | 0.8932 | 0.9819 | fail |
-| transformer | 0.9799 | 1.0 | 0.9949 | 1.0 | pass |
-| generator | 1.0 | 0.9153 | 1.0 | 0.9881 | fail |
-| motor | 0.9596 | 0.8297 | 0.9858 | 0.8373 | fail |
-| board | 0.9653 | 0.9145 | 0.8644 | 0.9808 | fail |
-| ct | 0.9571 | 0.9873 | 0.9954 | 0.9909 | pass |
-| meter | 0.9202 | 0.9804 | 0.9383 | 0.9953 | fail |
-| relay | 0.7273 | 0.5333 | 0.75 | 0.7143 | fail |
-| spd | 0.9885 | 0.7818 | 1.0 | 0.7609 | fail |
-| capacitor | 0.9355 | 0.9886 | 0.9434 | 0.9259 | fail |
-| earth | 0.9856 | 0.699 | 0.9888 | 0.6062 | fail |
+| breaker | 0.9848 | 0.9484 | 0.9889 | 0.9419 | fail |
+| fuse_switch | 1.0 | 0.9805 | 0.9937 | 0.9692 | pass |
+| isolator | 0.973 | 0.9643 | 0.9686 | 0.939 | fail |
+| contactor | 0.8949 | 0.9914 | 0.897 | 0.997 | fail |
+| transformer | 0.9799 | 1.0 | 0.9948 | 0.9847 | pass |
+| generator | 0.98 | 0.8305 | 1.0 | 0.8214 | fail |
+| motor | 0.972 | 0.9083 | 0.9966 | 0.8735 | fail |
+| board | 0.9333 | 0.9211 | 0.9259 | 0.9615 | fail |
+| ct | 0.9693 | 1.0 | 0.9604 | 0.9909 | pass |
+| meter | 0.9554 | 0.9804 | 0.9181 | 0.9953 | fail |
+| relay | 0.8571 | 0.4 | 0.8 | 0.6667 | fail |
+| spd | 0.9787 | 0.8364 | 0.9645 | 0.8859 | fail |
+| capacitor | 0.9462 | 1.0 | 0.9623 | 0.9444 | fail |
+| earth | 0.987 | 0.7755 | 0.995 | 0.6884 | fail |
 
 Size rule: 3 of 14 classes pass; fails on breaker, isolator, contactor, generator, motor, board, meter, relay, spd, capacitor, earth.
 
@@ -474,14 +476,17 @@ Training curve, val after each epoch:
 | 1 | 5.0747 | 0.8337 | 0.8134 | 0.8218 | 0.8236 | 0.4667 | 0.8075 | 5.7581 | 28.3 |
 | 2 | 2.214 | 0.9075 | 0.9043 | 0.8718 | 0.9059 | 0.3478 | 0.8807 | 5.6165 | 28.6 |
 | 3 | 1.9249 | 0.9218 | 0.9209 | 0.9002 | 0.9214 | 0.6 | 0.8991 | 5.7958 | 27.7 |
-| 4 (best) | 1.8261 | 0.9327 | 0.9328 | 0.9142 | 0.9327 | 0.6 | 0.911 | 5.7834 | 27.8 |
+| 4 | 1.8261 | 0.9327 | 0.9328 | 0.9142 | 0.9327 | 0.6 | 0.911 | 5.7834 | 27.8 |
 | 5 | 1.6732 | 0.9236 | 0.9288 | 0.9035 | 0.9262 | 0.5536 | 0.8952 | 5.9252 | 27.1 |
 | 6 | 1.621 | 0.9174 | 0.9084 | 0.9 | 0.9129 | 0.4706 | 0.8864 | 5.9799 | 26.9 |
 | 7 | 1.5238 | 0.9306 | 0.8999 | 0.9107 | 0.9153 | 0.4 | 0.8961 | 6.1944 | 25.9 |
+| 8 | 1.4824 | 0.9196 | 0.915 | 0.9088 | 0.9173 | 0.5882 | 0.8745 | 6.2638 | 25.8 |
+| 9 | 1.4219 | 0.9207 | 0.9239 | 0.9146 | 0.9223 | 0.5 | 0.8718 | 5.7564 | 28.0 |
+| 10 (best) | 1.4131 | 0.9246 | 0.9299 | 0.9169 | 0.9272 | 0.5 | 0.872 | 5.6915 | 28.2 |
 
-Candidates for the drawing-level check: the pass chosen by val and val_unseen pooled: mean per-class F1 at the operating threshold with NMS, pass 4 (`weights/rtdetr_r18_plain_ema_fix`, the final weights), and the last pass, pass 7 (`weights/rtdetr_r18_plain_ema_fix/pass-7`), before the schedule's end; every pass's weights are kept.
+Candidates for the drawing-level check: the pass chosen by val and val_unseen pooled: mean per-class F1 at the operating threshold with NMS, pass 10 (`weights/rtdetr_r18_plain_ema_fix`, the final weights), and the last pass, pass 10 (`weights/rtdetr_r18_plain_ema_fix/pass-10`), fully annealed; every pass's weights are kept.
 
-What it still gets wrong: On the unseen-style sheets rtdetr_r18vd finds 92% of the symbols, and 2% of what it reports is a false alarm (125 on 1140 tiles, 59 of them at a tile edge). It misses too many earth symbols (finds 61%), protection relays (finds 71%), surge arresters (finds 76%), motors (finds 84%). It reports some symbols that are not there, mostly protection relays (25% of those reported are wrong), downstream boards (14% of those reported are wrong), contactors (11% of those reported are wrong). It finds 93% of the breakers drawn as a box with a diagonal and 95% of the IEC breakers. It finds 52% of the symbols cut by a tile edge; each of these is whole in a neighbouring tile, where the reader can find it. Without duplicate suppression, at its own best threshold, it would report 446 false alarms on the same tiles instead of 125.
+What it still gets wrong: On the unseen-style sheets rtdetr_r18vd finds 93% of the symbols, and 2% of what it reports is a false alarm (126 on 1140 tiles, 49 of them at a tile edge). It misses too many protection relays (finds 67%), earth symbols (finds 69%), generators (finds 82%), motors (finds 87%). It reports some symbols that are not there, mostly protection relays (20% of those reported are wrong), contactors (10% of those reported are wrong), meters (8% of those reported are wrong). Scan-like copies are harder: it finds 92% of their symbols against 94% on clean copies. It finds 96% of the breakers drawn as a box with a diagonal and 93% of the IEC breakers. It finds 56% of the symbols cut by a tile edge; each of these is whole in a neighbouring tile, where the reader can find it. Without duplicate suppression, at its own best threshold, it would report 983 false alarms on the same tiles instead of 126.
 
 ## More passes
 
