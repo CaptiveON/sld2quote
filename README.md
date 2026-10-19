@@ -158,7 +158,7 @@ can be read, but the detector knows only the synthetic IEC style.
 `SLD2QUOTE_OCR=rapidocr` picks it on a Mac too, `SLD2QUOTE_OCR=vision` the Mac engine.
 
 **The site.** `uvicorn app:app --app-dir site --port 7860` serves it at http://localhost:7860, live runs included
-(`site/app.py`); `site/Dockerfile` builds the Space's image.
+(`site/app.py`); `site/Dockerfile` builds the server's image for Cloud Run (or a Docker Space).
 
 **Evaluation.** Each run rewrites only its own section of `eval/RESULTS.md`; `OMP_NUM_THREADS=4` gives the thread count
 used above.
