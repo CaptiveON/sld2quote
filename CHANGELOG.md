@@ -2,6 +2,28 @@
 
 Synthetic data only; nothing here comes from R&B. Steps are those of the plan in `HANDOFF.md` section 7.
 
+## 0.3.0, 19 October 2026
+
+- **Model switch.** The site's detector is now pass 4 of `rtdetr_r18_plain_ema_fix` (the plain recipe with averaged
+  weights and the gradient fix), chosen on whole validation drawings at threshold 0.11, in
+  `weights/rtdetr_r18_plain_ema_fix_pass4`; it replaces `rtdetr_r18_full`.
+- **Step 6, the label link and the role rules.** Symbols on one vertical line form a way, the lines stacked beside or
+  below it form its label block, and each line goes to the device it names; the main bus is the level with the most
+  busbar length, a bus-section is a breaker the bus passes through, meters are read again, kW, kVAr and CT ratios are
+  parsed, and the text reader's slips inside numbers are repaired. The generator records which device each text was
+  drawn for, and `evaluate.py` scores link precision and recall (PROBLEMS 23 to 27).
+- **Calibrated confidence.** The trained reader reports how often a box with its score was right on the validation
+  drawings (`score_calibration` in the weights' `config.json`), not the raw score (PROBLEMS 22). The close-up text pass
+  depends on the engine (`--crops`: on for Vision, off for RapidOCR).
+- **The site, rebuilt.** One page: an overview with key numbers read from the scorecards, a three-step run (sample,
+  generated drawing or upload) with the stages streamed live, results on a zoomable drawing linked to the device table,
+  and charts in "How it works" built from the evaluation files (`scripts/build_charts.py`, `eval/charts.json`); the
+  samples rebuilt with the site's reader.
+- **Deployment.** Google Cloud Run inside the free tier: billed only during start-up and requests, a daily cap on live
+  runs, the model copied into the image so the service holds no secret, and a second instance so the page answers while
+  a run is in progress (`scripts/deploy_cloudrun.sh`, PROBLEMS 21).
+- **Packaging.** README figures from the step 6 sections of `eval/RESULTS.md` (RapidOCR), version 0.3.0.
+
 ## 0.2.0, 19 October 2026
 
 - **Symbols (Phase 2).** IEC 60617 symbols for the devices an estimator prices, breakers in two drawn styles, simple and

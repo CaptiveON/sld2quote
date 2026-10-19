@@ -584,7 +584,7 @@ def read_sheet(image_path: str, texts: list[dict] | None = None, finder=classica
 
 
 READERS = ("classical", "trained")
-WEIGHTS = "weights/rtdetr_r18_full"  # the trained reader's detector unless --weights says otherwise
+WEIGHTS = "weights/rtdetr_r18_plain_ema_fix_pass4"  # the trained reader's detector unless --weights says otherwise
 
 
 def add_reader_args(ap):

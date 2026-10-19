@@ -6,7 +6,7 @@ abstract: "A miniature single-line-diagram-to-quotation pipeline, measured end t
 authors:
   - given-names: Muhammad
     family-names: Adnan
-version: 0.2.0
+version: 0.3.0
 date-released: 2026-10-19
 license: MIT
 repository-code: "https://github.com/CaptiveON/sld2quote"
