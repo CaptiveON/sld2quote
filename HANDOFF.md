@@ -509,6 +509,12 @@ application folder (professional facts only) and the project record; the AI-assi
 the site, third person in the README); no degree grades. Still private everywhere until Adnan says. The stream's step events were
 briefly batched (6ebeef4) and fixed at the source (1af874a).
 
+**State at 21:30, 19 Oct: everything live and mirrored.** Revision 00018 (image site:ea46e4a) serves the eleven-page site with the
+pass-4 model and step 6; slash-less page addresses redirect on https; the private Space mirror carries the same pages with file links
+(Hugging Face static hosting has no folder index) and makes no API requests; the private model repo holds pass 4. All agents idle;
+everything committed and pushed. Pending from Adnan only: his review notes, the citation name split, the token revocation, going public,
+and the two optional items (answer keys for the 19 real drawings; the per-error cause column).
+
 ## 8. Metrics (as implemented in `evaluate.py`; keep the names)
 
 symbol precision and recall (IoU >= 0.3, same type); rating accuracy, poles accuracy, kA accuracy over matched devices; notes accuracy over
