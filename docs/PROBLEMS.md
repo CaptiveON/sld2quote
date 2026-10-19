@@ -341,6 +341,14 @@ the platform keep the processor on only during start-up and go back to per-reque
 removes the token altogether; a few requests at a time keep the page responsive while a run is in progress; and a budget alert on the
 billing account catches a demo that something keeps awake around the clock.
 
+**And one more (19 Oct, 03:00).** With the server allowed several requests at once, a second visitor's page requests were still refused
+while a run was in flight: the run keeps both processors busy, the platform decides the single instance is overloaded, cannot start
+another because the service is capped at one, and after 14 seconds answers "no available instance" instead of queueing. The fix is a
+second instance allowed for the page's requests (billed only for its few seconds of start-up and the requests it serves, with the
+daily cap of live runs counted per instance and set so the worst case stays inside the free allowance) and a page that recognises the
+platform's refusal, retries with a short wait and says why. The platform's "busy" and the demo's own "today's allowance is used" are
+both HTTP 429 and had to be told apart by their message.
+
 **What happened next (19 Oct, 01:00 to 03:00).** The processor was first kept on so the models could load in a background thread,
 which would have cost about $110 a month if something kept the service awake around the clock; that was reversed the same night: the
 processor runs only during start-up and requests, the models load inside the first request instead of a thread, and live runs are
