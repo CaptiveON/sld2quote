@@ -499,6 +499,16 @@ link in his résumé, cover letter and a message to the company's director. Sour
 facts only) and the project record. The /ui-ux-pro-max skill (installed at ~/.claude/skills) governs the design. The front-end agent
 has the brief as milestone 2 after the flow fix; the back end adds counts to the stream's step events and multi-page serving.
 
+**State at 20:40, 19 Oct: the eleven-page site is built (1daaccc) and deploying.** Pages: Home, Try it (live runs the default
+through `POST /api/samples/{id}/run?stream=1`, each stage with what it found, its technology and its seconds as the step line
+arrives), How it works, Evidence, Decisions (fifteen), Problems (fourteen in three parts plus the full log), Architecture (now and
+after the KTP, text alternatives, a 17-row comparison), The KTP (objectives and 17 criteria quoted, a 36-month plan with what the
+miniature shows, risks), Why me, References (49, each fetched), About. One shared script; 91 figures bound to the evaluation files at
+load time; keyboard walks, dark mode and phone width checked on every page; 15 site tests. Content drafted by a second agent from the
+application folder (professional facts only) and the project record; the AI-assistance sentence settled by Adnan (first person on
+the site, third person in the README); no degree grades. Still private everywhere until Adnan says. The stream's step events were
+briefly batched (6ebeef4) and fixed at the source (1af874a).
+
 ## 8. Metrics (as implemented in `evaluate.py`; keep the names)
 
 symbol precision and recall (IoU >= 0.3, same type); rating accuracy, poles accuracy, kA accuracy over matched devices; notes accuracy over
