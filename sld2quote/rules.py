@@ -2,7 +2,7 @@
 specification; the catalogue maps them to parts; nothing is guessed. Anything below the fault level or missing is
 raised as an issue for the estimator, not silently fixed. Every line records its evidence."""
 from __future__ import annotations
-import json, math, os
+import json, math, os, re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 CAT = json.load(open(os.path.join(HERE, "catalogue.json")))
@@ -102,8 +102,9 @@ def build_bom(extraction: dict, spec: dict | None, conflicts: list[dict]) -> dic
             add("SPD-T12", "Surge protective device, Type 1+2, with status indication", 1, CAT["spd_gbp"], ev, "R-SPD", d["conf"])
         elif d["type"] == "CT":
             add("CT-SET", "Current transformers" + (f" {d['rating']}/5 A" if d.get("rating") else "") + ", set of three, class 1", 1, CAT["ct_set_gbp"], ev, "R-METERING", d["conf"])
-        elif d["type"] == "METER":
-            unit = (d.get("label") or "").strip()
+        elif d["type"] == "METER":  # the unit is the meter's tag; a stray mark the text reader adds ("kWh]", "V.") is dropped
+            m = re.search(r"kwh|kw|\b[av]\b", d.get("label") or "", re.I)
+            unit = {"kwh": "kWh", "kw": "kW", "a": "A", "v": "V"}[m.group(0).lower()] if m else ""
             add(f"METER-{unit or 'MF'}", f"Panel meter ({unit or 'multifunction'})", 1, CAT["meter_gbp"].get(unit, CAT["meter_gbp"]["kW"]), ev, "R-METERING", d["conf"])
         elif d["type"] == "RELAY":
             add("RELAY-OC", "Overcurrent and earth-fault protection relay", 1, CAT["relay_gbp"], ev, "R-PROTECTION", d["conf"])

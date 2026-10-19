@@ -108,7 +108,8 @@ class Sheet:
     busbars: list = field(default_factory=list)   # {id, rating, x1, x2, y, thickness}
     connections: list = field(default_factory=list)
     notes: dict = field(default_factory=dict)      # form, ip, fault_kA, poles_default, standard
-    texts: list = field(default_factory=list)      # every drawn string with its box (for OCR evaluation)
+    texts: list = field(default_factory=list)      # every drawn string with its box and the device (or busbar) it was drawn
+                                                   # for, None for the notes and title block (OCR and label-link evaluation)
     spec: dict = field(default_factory=dict)       # clauses and the requirements they encode
     conflicts: list = field(default_factory=list)  # deliberate drawing-vs-spec disagreements
 
@@ -209,10 +210,10 @@ def draw_symbol(d, name: str, x: float, y: float, u: float, lw: int, rot: bool =
     return [x0, y0, x1 - x0, y1 - y0], P(tx, vy + vh)
 
 
-def text(d, sh: Sheet, xy, s, f, anchor="la"):
+def text(d, sh: Sheet, xy, s, f, anchor="la", dev: str | None = None):
     d.text(xy, s, fill="black", font=f, anchor=anchor)
     bb = d.textbbox(xy, s, font=f, anchor=anchor)
-    sh.texts.append({"text": s, "box": [bb[0], bb[1], bb[2] - bb[0], bb[3] - bb[1]]})
+    sh.texts.append({"text": s, "box": [bb[0], bb[1], bb[2] - bb[0], bb[3] - bb[1]], "device": dev})
 
 
 def image_box(box: list, size: list, rotate_deg: float = 0.0) -> list:
@@ -283,29 +284,29 @@ def make_sheet(seed: int, scan: bool = False, level: str | None = None, fonts: s
         mb, _ = draw_symbol(d, kind, ctb[0] + ctb[2] + 26 + mw * um / 2, yc - mh * um / 2, um, lw)
         dashed(d, (ctb[0] + ctb[2] + 2, yc), (mb[0] - 2, yc))
         fm = gf(max(10, round(mh * um * (0.34 if kind == "energy-meter" else 0.42))))
-        text(d, sh, (mb[0] + mb[2] / 2, mb[1] + mb[3] * (0.66 if kind == "energy-meter" else 0.5)), unit, fm, anchor="mm")
+        text(d, sh, (mb[0] + mb[2] / 2, mb[1] + mb[3] * (0.66 if kind == "energy-meter" else 0.5)), unit, fm, anchor="mm", dev=f"{acb_id}-PM")
         sh.devices.append(Device(f"{acb_id}-PM", "METER", mb, label=unit))
         sh.connections.append([f"{acb_id}-CT", f"{acb_id}-PM"])
         if relay:
             rb, _ = draw_symbol(d, "protection-relay", mb[0] + mb[2] + 22 + 16 * um, yc - 16 * um, um, lw)
             dashed(d, (mb[0] + mb[2] + 2, yc), (rb[0] - 2, yc))
-            text(d, sh, (rb[0] + rb[2] / 2, rb[1] + rb[3] / 2), "I>", fm, anchor="mm")
+            text(d, sh, (rb[0] + rb[2] / 2, rb[1] + rb[3] / 2), "I>", fm, anchor="mm", dev=f"{acb_id}-R")
             sh.devices.append(Device(f"{acb_id}-R", "RELAY", rb, label="I>"))
             sh.connections.append([f"{acb_id}-CT", f"{acb_id}-R"])
-        text(d, sh, (mb[0], mb[1] + mb[3] + 6), f"CT {rating}/5A", fs)
+        text(d, sh, (mb[0], mb[1] + mb[3] + 6), f"CT {rating}/5A", fs, dev=f"{acb_id}-CT")  # drawn under the meter, read for the CT
 
     def tx_incomer(n: int, x: int, acb_id: str, bus_id: str):
         """transformer -> ACB (with metering) -> busbar"""
         circle(d, x, tx_y, 22, lw); circle(d, x, tx_y + 30, 22, lw)
         kva = rnd.choice([1000, 1250, 1600, 2000, 2500])
-        text(d, sh, (x + 36, tx_y - 8), f"TX-{n} {kva} kVA", f); text(d, sh, (x + 36, tx_y + 16), "11 kV / 415 V", fs)
+        text(d, sh, (x + 36, tx_y - 8), f"TX-{n} {kva} kVA", f, dev=f"TX-{n}"); text(d, sh, (x + 36, tx_y + 16), "11 kV / 415 V", fs, dev=f"TX-{n}")
         sh.devices.append(Device(f"TX-{n}", "TRANSFORMER", [x - 22, tx_y - 22, 44, 74], rating=kva, label=f"TX-{n} {kva} kVA", on_bus=bus_id))
         d.line([x, tx_y + 52, x, 200], fill="black", width=lw)
         box, (_, yb) = breaker(x, 200, s, u_in)
         acb_label = f"{acb_id} {acb} A {poles_default}P"
         lx, ly = box[0] + box[2] + 12, box[1] + box[3] // 2
-        text(d, sh, (lx, ly - 10), acb_label, f)
-        text(d, sh, (lx, ly + 12), f"Icu {fault} kA, withdrawable", fs)
+        text(d, sh, (lx, ly - 10), acb_label, f, dev=acb_id)
+        text(d, sh, (lx, ly + 12), f"Icu {fault} kA, withdrawable", fs, dev=acb_id)
         sh.devices.append(Device(acb_id, "ACB", box, rating=acb, poles=poles_default, kA=fault, label=acb_label, on_bus=bus_id))
         d.line([x, yb, x, bus_y], fill="black", width=lw)
         sh.connections += [[f"TX-{n}", acb_id], [acb_id, bus_id]]
@@ -326,30 +327,30 @@ def make_sheet(seed: int, scan: bool = False, level: str | None = None, fonts: s
         bx1 = round(bx1)
         d.line([bx1, bus_y, bus_x2, bus_y], fill="black", width=style["bus_lw"])
         bs_label = f"BS-1 {acb} A"
-        text(d, sh, (mid, bbox[1] + bbox[3] + 8), bs_label, fs, anchor="ma")
+        text(d, sh, (mid, bbox[1] + bbox[3] + 8), bs_label, fs, anchor="ma", dev="BS-1")
         sh.devices.append(Device("BS-1", "BUS_SECTION", bbox, rating=acb, poles=poles_default, kA=fault, label=bs_label))
         sh.busbars.append({"id": "BUS-A", "rating": acb, "x1": bus_x1, "x2": bx0, "y": bus_y, "thickness": style["bus_lw"]})
         sh.busbars.append({"id": "BUS-B", "rating": acb, "x1": bx1, "x2": bus_x2, "y": bus_y, "thickness": style["bus_lw"]})
         sh.connections += [["BUS-A", "BS-1"], ["BS-1", "BUS-B"]]
-        text(d, sh, (bx1 + 10, bus_y - style["bus_lw"] - 24), f"BUSBAR B  {acb} A Cu  {fault} kA/1s", fb)
+        text(d, sh, (bx1 + 10, bus_y - style["bus_lw"] - 24), f"BUSBAR B  {acb} A Cu  {fault} kA/1s", fb, dev="BUS-B")
     else:
         d.line([bus_x1, bus_y, bus_x2, bus_y], fill="black", width=style["bus_lw"])
         sh.busbars.append({"id": "BUS-A", "rating": acb, "x1": bus_x1, "x2": bus_x2, "y": bus_y, "thickness": style["bus_lw"]})
-    text(d, sh, (bus_x1 + 10, bus_y - style["bus_lw"] - 24), f"BUSBAR A  {acb} A Cu  {fault} kA/1s", fb)
+    text(d, sh, (bus_x1 + 10, bus_y - style["bus_lw"] - 24), f"BUSBAR A  {acb} A Cu  {fault} kA/1s", fb, dev="BUS-A")
 
     # --- generator incomer on busbar B
     if has_gen:
         g_cx = bus_x2 - 80; circle(d, g_cx, 90, 24, lw)
-        text(d, sh, (g_cx, 90), "G", gf(20), anchor="mm")
+        text(d, sh, (g_cx, 90), "G", gf(20), anchor="mm", dev="GEN-1")
         gk = rnd.choice([500, 630, 800, 1000])
-        text(d, sh, (g_cx - 36, 60), f"GEN-1 {gk} kVA", f, anchor="ra"); text(d, sh, (g_cx - 36, 86), "standby", fs, anchor="ra")
+        text(d, sh, (g_cx - 36, 60), f"GEN-1 {gk} kVA", f, anchor="ra", dev="GEN-1"); text(d, sh, (g_cx - 36, 86), "standby", fs, anchor="ra", dev="GEN-1")
         sh.devices.append(Device("GEN-1", "GENERATOR", [g_cx - 24, 66, 48, 48], rating=gk, label=f"GEN-1 {gk} kVA", on_bus="BUS-B"))
         d.line([g_cx, 114, g_cx, 200], fill="black", width=lw)
         box, (_, yb) = breaker(g_cx, 200, s, u_in)
         acb2 = rnd.choice([r for r in ACB_RATINGS if r <= acb])
         gid = "ACB-3" if medium else "ACB-2"
         l2 = f"{gid} {acb2} A {poles_default}P ATS"
-        text(d, sh, (box[0] - 12, box[1] + box[3] // 2 - 10), l2, f, anchor="ra")
+        text(d, sh, (box[0] - 12, box[1] + box[3] // 2 - 10), l2, f, anchor="ra", dev=gid)
         sh.devices.append(Device(gid, "ACB", box, rating=acb2, poles=poles_default, kA=fault, label=l2, on_bus="BUS-B"))
         d.line([g_cx, yb, g_cx, bus_y], fill="black", width=lw)
         sh.connections += [["GEN-1", gid], [gid, "BUS-B"]]
@@ -399,7 +400,7 @@ def make_sheet(seed: int, scan: bool = False, level: str | None = None, fonts: s
             d.line([x, bottom, x, bottom + gap], fill="black", width=lw)
             pb, (_, bottom) = draw_symbol(d, name, x, bottom + gap, u_out, lw)
             if typ == "MOTOR":
-                text(d, sh, (pb[0] + pb[2] / 2, pb[1] + pb[3] / 2), "M", gf(max(10, round(pb[3] * 0.42))), anchor="mm")
+                text(d, sh, (pb[0] + pb[2] / 2, pb[1] + pb[3] / 2), "M", gf(max(10, round(pb[3] * 0.42))), anchor="mm", dev=f"{did}-{suffix}")
             sh.devices.append(Device(f"{did}-{suffix}", typ, pb, rating=rating, label=lbl))
             sh.connections.append([prev, f"{did}-{suffix}"]); prev = f"{did}-{suffix}"
         if not parts:  # a plain feeder: the outgoing cable, sometimes ending at a drawn downstream board
@@ -412,17 +413,19 @@ def make_sheet(seed: int, scan: bool = False, level: str | None = None, fonts: s
                 name = f"SB-{i + 1}" if dest.startswith("sub") else dest.split(" ")[0]
                 bw, bh = max(round(76 * u_out), round(fs.getlength(name)) + 14), max(round(34 * u_out), fs.size + 10)
                 d.rectangle([x - bw // 2, yb + stub, x - bw // 2 + bw, yb + stub + bh], outline="black", width=lw)
-                text(d, sh, (x, yb + stub + bh / 2), name, fs, anchor="mm")
+                text(d, sh, (x, yb + stub + bh / 2), name, fs, anchor="mm", dev=f"{did}-DB")
                 sh.devices.append(Device(f"{did}-DB", "BOARD", [x - bw // 2, round(yb + stub), bw, bh], label=name))
                 sh.connections.append([did, f"{did}-DB"])
-        lines = [lab] + [t for t in (extra, dest) if t]
+        # the way's label block, each line with the device it was drawn for: the rating line, destination and cable are the
+        # way's own; the starter's kW, the PFC's kVAr and the SPD line belong to the first device hanging below it
+        lines = [(lab, did)] + [(t, o) for t, o in ((extra, f"{did}-{parts[0][2]}" if parts else did), (dest, did)) if t]
         if medium and chain != "spd":
-            lines.append(f"{'4C' if poles == 4 else '3C'} {CABLES[r]} mm² XLPE/SWA")
-        for k, t in enumerate(lines):
+            lines.append((f"{'4C' if poles == 4 else '3C'} {CABLES[r]} mm² XLPE/SWA", did))
+        for k, (t, o) in enumerate(lines):
             if right:
-                text(d, sh, (x + half + 10, box[1] + box[3] // 2 - 10 + 22 * k), t, f if k == 0 else fs)
+                text(d, sh, (x + half + 10, box[1] + box[3] // 2 - 10 + 22 * k), t, f if k == 0 else fs, dev=o)
             else:
-                text(d, sh, (x, bottom + 10 + 20 * k), t, fs, anchor="ma")
+                text(d, sh, (x, bottom + 10 + 20 * k), t, fs, anchor="ma", dev=o)
 
     # --- notes block (the rules), title block
     nx, ny = 60, 760

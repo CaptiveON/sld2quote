@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-19T13:15:19",
+ "generated": "2026-10-19T13:33:06",
  "model": "rtdetr_r18_full",
  "engine": "rapidocr",
  "sets": [
@@ -14,7 +14,9 @@
    "rating_accuracy": 0.759,
    "bom_recall": 0.79,
    "price_error": 0.179,
-   "n_sheets": 30
+   "n_sheets": 30,
+   "link_precision": null,
+   "link_recall": null
   },
   {
    "set": "test",
@@ -27,59 +29,9 @@
    "rating_accuracy": 0.615,
    "bom_recall": 0.607,
    "price_error": 0.381,
-   "n_sheets": 30
-  },
-  {
-   "set": "unseen",
-   "copy": "clean",
-   "reader": "trained",
-   "engine": "rapidocr",
-   "crops": false,
-   "symbol_recall": 0.963,
-   "symbol_precision": 0.956,
-   "rating_accuracy": 0.56,
-   "bom_recall": 0.589,
-   "price_error": 0.27,
-   "n_sheets": 60
-  },
-  {
-   "set": "unseen",
-   "copy": "scan",
-   "reader": "trained",
-   "engine": "rapidocr",
-   "crops": false,
-   "symbol_recall": 0.801,
-   "symbol_precision": 0.85,
-   "rating_accuracy": 0.546,
-   "bom_recall": 0.482,
-   "price_error": 0.365,
-   "n_sheets": 60
-  },
-  {
-   "set": "baseline",
-   "copy": "clean",
-   "reader": "trained",
-   "engine": "rapidocr",
-   "crops": false,
-   "symbol_recall": 0.961,
-   "symbol_precision": 0.965,
-   "rating_accuracy": 0.685,
-   "bom_recall": 0.708,
-   "price_error": 0.209,
-   "n_sheets": 30
-  },
-  {
-   "set": "baseline",
-   "copy": "scan",
-   "reader": "trained",
-   "engine": "rapidocr",
-   "crops": false,
-   "symbol_recall": 0.798,
-   "symbol_precision": 0.853,
-   "rating_accuracy": 0.65,
-   "bom_recall": 0.545,
-   "price_error": 0.4,
-   "n_sheets": 30
+   "n_sheets": 30,
+   "link_precision": null,
+   "link_recall": null
   },
   {
    "set": "test",
@@ -92,7 +44,9 @@
    "rating_accuracy": 0.55,
    "bom_recall": 0.191,
    "price_error": 0.833,
-   "n_sheets": 30
+   "n_sheets": 30,
+   "link_precision": null,
+   "link_recall": null
   },
   {
    "set": "test",
@@ -105,7 +59,39 @@
    "rating_accuracy": 0.585,
    "bom_recall": 0.214,
    "price_error": 0.751,
-   "n_sheets": 30
+   "n_sheets": 30,
+   "link_precision": null,
+   "link_recall": null
+  },
+  {
+   "set": "unseen",
+   "copy": "clean",
+   "reader": "trained",
+   "engine": "rapidocr",
+   "crops": false,
+   "symbol_recall": 0.963,
+   "symbol_precision": 0.956,
+   "rating_accuracy": 0.56,
+   "bom_recall": 0.589,
+   "price_error": 0.27,
+   "n_sheets": 60,
+   "link_precision": null,
+   "link_recall": null
+  },
+  {
+   "set": "unseen",
+   "copy": "scan",
+   "reader": "trained",
+   "engine": "rapidocr",
+   "crops": false,
+   "symbol_recall": 0.801,
+   "symbol_precision": 0.85,
+   "rating_accuracy": 0.546,
+   "bom_recall": 0.482,
+   "price_error": 0.365,
+   "n_sheets": 60,
+   "link_precision": null,
+   "link_recall": null
   },
   {
    "set": "unseen",
@@ -118,7 +104,9 @@
    "rating_accuracy": 0.693,
    "bom_recall": 0.276,
    "price_error": 0.727,
-   "n_sheets": 60
+   "n_sheets": 60,
+   "link_precision": null,
+   "link_recall": null
   },
   {
    "set": "unseen",
@@ -131,7 +119,39 @@
    "rating_accuracy": 0.568,
    "bom_recall": 0.255,
    "price_error": 0.624,
-   "n_sheets": 60
+   "n_sheets": 60,
+   "link_precision": null,
+   "link_recall": null
+  },
+  {
+   "set": "baseline",
+   "copy": "clean",
+   "reader": "trained",
+   "engine": "rapidocr",
+   "crops": false,
+   "symbol_recall": 0.961,
+   "symbol_precision": 0.965,
+   "rating_accuracy": 0.685,
+   "bom_recall": 0.708,
+   "price_error": 0.209,
+   "n_sheets": 30,
+   "link_precision": null,
+   "link_recall": null
+  },
+  {
+   "set": "baseline",
+   "copy": "scan",
+   "reader": "trained",
+   "engine": "rapidocr",
+   "crops": false,
+   "symbol_recall": 0.798,
+   "symbol_precision": 0.853,
+   "rating_accuracy": 0.65,
+   "bom_recall": 0.545,
+   "price_error": 0.4,
+   "n_sheets": 30,
+   "link_precision": null,
+   "link_recall": null
   },
   {
    "set": "baseline",
@@ -144,7 +164,9 @@
    "rating_accuracy": 0.719,
    "bom_recall": 0.234,
    "price_error": 0.772,
-   "n_sheets": 30
+   "n_sheets": 30,
+   "link_precision": null,
+   "link_recall": null
   },
   {
    "set": "baseline",
@@ -157,7 +179,9 @@
    "rating_accuracy": 0.587,
    "bom_recall": 0.218,
    "price_error": 0.746,
-   "n_sheets": 30
+   "n_sheets": 30,
+   "link_precision": null,
+   "link_recall": null
   }
  ],
  "per_type": [
@@ -1309,6 +1333,7 @@
    "run": "rtdetr_r18_fonts",
    "label": "r18, wide font set",
    "live": false,
+   "live_pass": null,
    "ema": false,
    "passes": [
     1,
@@ -1353,6 +1378,7 @@
    "run": "rtdetr_r18_fonts_ema",
    "label": "r18, wide font set with EMA",
    "live": false,
+   "live_pass": null,
    "ema": true,
    "passes": [
     1,
@@ -1397,6 +1423,7 @@
    "run": "rtdetr_r18_full",
    "label": "r18, full set (site model)",
    "live": true,
+   "live_pass": null,
    "ema": false,
    "passes": [
     1,
@@ -1429,6 +1456,7 @@
    "run": "rtdetr_r18_more",
    "label": "r18, continued from r18 full",
    "live": false,
+   "live_pass": null,
    "ema": false,
    "passes": [
     1,
@@ -1452,6 +1480,7 @@
    "run": "rtdetr_r18_plain",
    "label": "r18, plain control",
    "live": false,
+   "live_pass": null,
    "ema": false,
    "passes": [
     1,
@@ -1496,6 +1525,7 @@
    "run": "rtdetr_r18_plain_ema",
    "label": "r18, plain control with EMA",
    "live": false,
+   "live_pass": null,
    "ema": true,
    "passes": [
     1,
@@ -1540,6 +1570,7 @@
    "run": "rtdetr_r18_plain_ema_fix",
    "label": "rtdetr_r18_plain_ema_fix",
    "live": false,
+   "live_pass": null,
    "ema": true,
    "passes": [
     1,
@@ -1584,6 +1615,7 @@
    "run": "rtdetr_r18_rare",
    "label": "r18, rare classes repeated",
    "live": false,
+   "live_pass": null,
    "ema": false,
    "passes": [
     1,
@@ -1628,6 +1660,7 @@
    "run": "rtdetr_r50_full",
    "label": "r50, full set",
    "live": false,
+   "live_pass": null,
    "ema": false,
    "passes": [
     1,

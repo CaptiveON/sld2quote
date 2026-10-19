@@ -1,10 +1,11 @@
 """Reader: turns a sheet image plus OCR text boxes into devices, busbars, connections and notes, each with evidence.
 
 Classical computer vision on purpose: busbars and connection lines by run-length analysis, symbols by connected
-components after the lines are removed, classification by simple shape tests, labels by proximity to the symbol.
-read_sheet is the one pipeline of both readers (prepare, page OCR, busbars and lines, symbols, OCR around each symbol,
-label association, roles, notes); only the symbol finder is swapped: find_symbols here, the trained detector in
-reader_v2.py. So the two readers are compared like for like, and everything downstream keeps the same interface.
+components after the lines are removed, classification by simple shape tests, labels by ways (link: the label block beside
+or below a vertical chain of symbols, each line routed to the device it names). read_sheet is the one pipeline of both
+readers (prepare, page OCR, busbars and lines, symbols, OCR around each symbol, the unit inside each meter, label link,
+roles, notes); only the symbol finder is swapped: find_symbols here, the trained detector in reader_v2.py. So the two
+readers are compared like for like, and everything downstream keeps the same interface.
 """
 from __future__ import annotations
 import json, math, re, os, time
@@ -14,8 +15,8 @@ from PIL import Image
 from scipy import ndimage
 from .classes import DEVICE_TO_CLASS
 
-# OCR sometimes returns Cyrillic look-alikes for Latin capitals on isolated words; map them back.
-LOOKALIKE = str.maketrans({"А": "A", "В": "B", "С": "C", "Е": "E", "Н": "H", "К": "K", "М": "M", "О": "O", "Р": "P", "Т": "T", "Х": "X", "а": "a", "е": "e", "о": "o", "р": "p", "с": "c", "х": "x", "у": "y"})
+# OCR sometimes returns Cyrillic look-alikes for Latin capitals on isolated words, and "$" for S on scans; map them back.
+LOOKALIKE = str.maketrans({"А": "A", "В": "B", "С": "C", "Е": "E", "Н": "H", "К": "K", "М": "M", "О": "O", "Р": "P", "Т": "T", "Х": "X", "а": "a", "е": "e", "о": "o", "р": "p", "с": "c", "х": "x", "у": "y", "$": "S"})
 
 
 def _ocr_image(img: Image.Image, scale: float, tag: str) -> list[dict]:
@@ -208,57 +209,82 @@ def find_symbols(b_nolines: np.ndarray, texts: list[dict]):
 
 
 # ---------------------------------------------------------------- labels and parsing
+# tolerant of the text reader's quirks: a dropped space ("A4P", "400A"), scan specks between a number and its unit
+# ("1600-A", "45.kW", "15'kW"), "mm²" read as "mm2" or "mm"
+SEP = r"[\s.,:;'`’-]*"
 RX_TYPE = re.compile(r"\b(ACB|MCCB|MCB|BS)[-\s]?(\d+)?", re.I)
-RX_AMPS = re.compile(r"(\d{2,4})\s*A\b")
-RX_POLES = re.compile(r"\b(\d)\s*P\b", re.I)
-RX_KA = re.compile(r"(\d{2,3})\s*kA", re.I)
-RX_KVA = re.compile(r"(\d{3,4})\s*kVA", re.I)
+RX_AMPS = re.compile(rf"(\d{{2,4}}){SEP}A(?![A-Za-z])")
+RX_POLES = re.compile(r"(?<!\d)(\d)\s*P\b", re.I)
+RX_KA = re.compile(rf"(\d{{2,3}}){SEP}kA", re.I)
+RX_KVA = re.compile(rf"(\d{{3,4}}){SEP}kVA(?!r)", re.I)
+RX_KVAR = re.compile(rf"(\d{{2,4}}){SEP}kVAr", re.I)
+RX_KW = re.compile(rf"(\d{{1,3}}){SEP}kW(?!h)", re.I)
+RX_KV = re.compile(r"\d\s*kV(?!a)", re.I)
+RX_CT = re.compile(r"(\d{2,5})\s*/\s*\d\s*A", re.I)  # a CT ratio, primary over secondary
+RX_CABLE = re.compile(r"\d\s*mm", re.I)
 RX_FORM = re.compile(r"Form\s*(\d)\s*(?:Type\s*(\d)|([ab]))?", re.I)
 RX_IP = re.compile(r"\bIP\s*(\d{2})\b", re.I)
 RX_POLE_DEFAULT = re.compile(r"(\d)\s*-\s*pole", re.I)
 
 
 def parse_label(s: str) -> dict:
-    s = s.translate(LOOKALIKE)
-    out = {}
-    m = RX_TYPE.search(s)
-    if m:
+    """what a label line states: the type word, amps, poles, kA, a source's kVA, a starter's kW, a PFC bank's kVAr, a CT's
+    primary amps (amps only when the line is neither a kVA nor a CT ratio). In a number, O and Q are read as 0, and l, I or
+    | as 1, the text reader's usual confusions ("4O0 A", "8Q0 A", "DOL l5 kW"), but not a letter ending a word ("DOI15")"""
+    s = re.sub(r"(?<=\d)[OQ]+|[OQ]+(?=\d)", lambda m: "0" * len(m.group()), s.translate(LOOKALIKE))
+    s = re.sub(r"(?<![A-Za-z])[lI|](?=\d)|(?<=\d)[lI|](?![A-Za-z])", "1", s)
+    out = {k: int(m.group(1)) for k, rx in (("kva", RX_KVA), ("kvar", RX_KVAR), ("kw", RX_KW), ("ct", RX_CT), ("poles", RX_POLES), ("kA", RX_KA))
+           if (m := rx.search(s))}
+    if m := RX_TYPE.search(s):
         out["type_word"] = m.group(1).upper()
-    m = RX_KVA.search(s)
-    if m:
-        out["kva"] = int(m.group(1))
-    else:
-        m = RX_AMPS.search(s)
-        if m:
-            out["rating"] = int(m.group(1))
-    m = RX_POLES.search(s)
-    if m:
-        out["poles"] = int(m.group(1))
-    m = RX_KA.search(s)
-    if m:
-        out["kA"] = int(m.group(1))
+    if not out.keys() & {"kva", "ct"} and (m := RX_AMPS.search(s)):
+        out["rating"] = int(m.group(1))
     return out
+
+
+def route(s: str) -> str:
+    """the device a label line is for, by what it says: a CT ratio, kVAr, kVA or kV, kW, an SPD; a rating, poles, kA, a type
+    word or a cable size belong to the way's switching device; anything else names the destination"""
+    p = parse_label(s)
+    if "ct" in p:
+        return "CT"
+    if "kvar" in p:
+        return "CAPACITOR"
+    if "kva" in p or RX_KV.search(s):
+        return "SOURCE"
+    if "kw" in p:
+        return "CONTACTOR"
+    if re.search(r"\bSPD\b", s, re.I):
+        return "SPD"
+    return "SWITCH" if p or RX_CABLE.search(s) else "DEST"
 
 
 def _center(box):
     return box[0] + box[2] / 2, box[1] + box[3] / 2
 
 
-def nearest_texts(sym, texts, used):
-    """texts to the right of the symbol (same row) or directly below it, nearest first"""
-    sx, sy, sw, sh = sym["box"]; scx, scy = _center(sym["box"])
-    cands = []
-    for t in texts:
-        if t["id"] in used:
-            continue
-        tx, ty, tw, th = t["box"]; tcx, tcy = _center(t["box"])
-        right = tx >= sx + sw - 6 and tx - (sx + sw) <= 40 and abs(tcy - scy) <= sh * 0.9
-        left = tx + tw <= sx + 6 and sx - (tx + tw) <= 40 and abs(tcy - scy) <= sh * 0.9
-        below = abs(tcx - scx) <= max(60, tw / 2) and 0 <= ty - (sy + sh) <= 70
-        if right or left or below:
-            dist = math.hypot(tcx - scx, tcy - scy)
-            cands.append((dist, t))
-    return [t for _, t in sorted(cands, key=lambda c: c[0])]
+def gap(a, b) -> float:
+    """edge-to-edge distance between two boxes, 0 when they touch or overlap"""
+    dx = max(0, b[0] - a[0] - a[2], a[0] - b[0] - b[2]); dy = max(0, b[1] - a[1] - a[3], a[1] - b[1] - b[3])
+    return math.hypot(dx, dy)
+
+
+def blocks(texts, u: float) -> list[list[dict]]:
+    """label blocks, top to bottom: a line joins the block whose last line starts 0.5 to 3 text heights u above it and
+    shares its left edge, centre or right edge (within half of u)"""
+    out = []
+    for t in sorted(texts, key=lambda t: (t["box"][1], t["box"][0])):
+        x, y, w, h = t["box"]; fits = []
+        for b in out:
+            lx, ly, lw, lh = b[-1]["box"]
+            off = min(abs(x - lx), abs(x + w / 2 - lx - lw / 2), abs(x + w - lx - lw))
+            if 0.5 * u <= y - ly <= 3 * u and off <= 0.5 * u:
+                fits.append((off, b))
+        if fits:
+            min(fits, key=lambda f: f[0])[1].append(t)
+        else:
+            out.append([t])
+    return out
 
 
 def bus_for_x(x, busbars):
@@ -268,9 +294,22 @@ def bus_for_x(x, busbars):
     return None
 
 
+def main_bus(busbars, H) -> float:
+    """the main busbar's level: the most busbar length on one level, the thicker band on a tie. A scan thickens the
+    borders of the notes and title boxes until they pass the busbar finder; they are far shorter than the main bus, so they
+    no longer pull its level down the page (the median of every band did, and feeders were typed as incomers)"""
+    if not busbars:
+        return H / 2
+    level = lambda b: sum(o["x2"] - o["x1"] for o in busbars if abs(o["y"] - b["y"]) <= 4)
+    return max(busbars, key=lambda b: (level(b), b["y2"] - b["y1"]))["y"]
+
+
 def touches_bus(sym, busbars):
+    """the busbar runs through the symbol: a band crosses its box at least 2 px inside its top and bottom edges, and the box
+    lies on the band or in the break between two bands (an IEC bus-section's box sits a quarter of its height off the line,
+    which a 2 px window around the line missed)"""
     sx, sy, sw, sh = sym["box"]
-    return any(not (sx + sw < bb["x1"] or sx > bb["x2"]) and bb["y1"] - 2 <= sy + sh / 2 <= bb["y2"] + 2 for bb in busbars)
+    return any(sx - 6 <= bb["x2"] and sx + sw + 6 >= bb["x1"] and sy + 2 <= bb["y"] <= sy + sh - 2 for bb in busbars)
 
 
 def line_from_symbol(sym, direction, vlines):
@@ -291,7 +330,89 @@ SOURCES = {"TRANSFORMER", "GENERATOR"}                              # rated in k
 AMPS = {"ACB", "MCCB", "BUS_SECTION", "FUSE_SWITCH", "ISOLATOR", "CT"}  # rated in amps, as the ground truth rates them
 SWITCHES = {"ACB", "MCCB", "BUS_SECTION", "FUSE_SWITCH", "ISOLATOR"}   # poles and kA from the label
 WAYS = {"MCCB", "FUSE_SWITCH", "ISOLATOR"}                           # an outgoing way names what it feeds
-# kW (contactor, motor) and kVAr (capacitor) are not parsed by parse_label yet, so those ratings stay None
+RATED = {**{t: "kva" for t in SOURCES}, **{t: "rating" for t in AMPS}, "CT": "ct", "CONTACTOR": "kw", "MOTOR": "kw", "CAPACITOR": "kvar"}
+SWITCHING = {"BREAKER", "FUSE_SWITCH", "ISOLATOR"}                   # a way's ratings, kA and cable size are its switching device's
+RATINGS = {"rating", "kva", "kw", "kvar", "ct"}                       # what parse_label reads as a device's rating
+
+
+def base(sym) -> str:
+    """a symbol's device type before roles: a breaker is BREAKER until role() places it"""
+    return "BREAKER" if sym["kind"].lower() == "breaker" else KIND_TYPE[sym["kind"]]
+
+
+def near(hb, symbols, reach: float, below: bool = False) -> list[tuple]:
+    """the symbols a label block whose first line is the box hb may belong to, as (lies left of or above it, gap, symbol): within
+    reach edge to edge (only those it lies below, if below), and not lying on the text (a box on a label is not beside it)"""
+    out = []
+    for s in symbols:
+        sx, sy, sw, sh = s["box"]; g = gap(hb, s["box"])
+        if g <= reach and _overlap_frac(s["box"], hb) <= 0.5 and (not below or hb[1] >= sy + sh - 2):
+            out.append((hb[0] + hb[2] <= sx + 2 or hb[1] + hb[3] <= sy + 2, g, s))
+    return out
+
+
+def link(symbols, texts, busbars, main_bus_y) -> tuple[dict, dict]:
+    """the symbol-to-label link, by ways (decided 17 Oct). A text inside a symbol is its tag. Symbols on one vertical line on
+    one side of the main bus form a way; a meter or relay joins the way of its CT. Text lines stacked beside or below form a
+    block (blocks), and a block goes to the way of a symbol near its first line (near): within five text heights, or, when
+    nothing is, up to eight below a symbol if its first line names a device (labels that start under a feeder's cable). The
+    side ranks first, since labels sit to the right or below: a symbol the block lies right of or below beats one it lies
+    left of or above, and the shortest edge-to-edge gap decides within each. Each line then goes to the device of that way
+    it names (route), the nearest if there are two; a line whose device is not in the way stays unlinked; a destination goes
+    to the way's outgoing switching device, else (incomers and sources) to the symbol the block sits by. Blocks are placed
+    in that order, and a block that would give a device a second rating is contested: its own symbol was missed, so it
+    stays unlinked rather than misrate a neighbour. Busbar labels and the notes are label_busbars' and read_notes' own.
+    Returns each symbol's texts in reading order and each motor's kW, which its starter's line states."""
+    labels = {s["id"]: [] for s in symbols}
+    u = float(np.median([t["box"][3] for t in texts])) if texts else 16.0
+    head, under = notes_area(texts); notes = {t["id"] for t in under + ([head] if head else [])}  # read_notes' own
+    side = {s["id"]: 0 if touches_bus(s, busbars) else -1 if _center(s["box"])[1] < main_bus_y else 1 for s in symbols}
+    kind = {s["id"]: base(s) for s in symbols}
+    free = []
+    for t in texts:
+        cx, cy = _center(t["box"])
+        host = next((s for s in symbols if s["box"][0] - 2 <= cx <= s["box"][0] + s["box"][2] + 2 and s["box"][1] - 2 <= cy <= s["box"][1] + s["box"][3] + 2), None)
+        if host:
+            labels[host["id"]].append(t)
+        elif "BUSBAR" not in t["text"].translate(LOOKALIKE).upper() and t["id"] not in notes:
+            free.append(t)
+    way = {s["id"]: [o for o in symbols if side[o["id"]] == side[s["id"]] and
+                     abs(_center(o["box"])[0] - _center(s["box"])[0]) <= max(8, 0.4 * min(s["box"][2], o["box"][2]))] for s in symbols}
+    cts = [s for s in symbols if kind[s["id"]] == "CT"]
+    for s in symbols:
+        if kind[s["id"]] in ("METER", "RELAY") and cts:
+            way[s["id"]] = way[min(cts, key=lambda c: math.dist(_center(c["box"]), _center(s["box"])))["id"]] + [s]
+    placed = []
+    for blk in blocks(free, u):
+        hb = blk[0]["box"]  # within five text heights; failing that, a block that names a device may start up to eight below a symbol (under its cable)
+        cand = near(hb, symbols, 5 * u) or (near(hb, symbols, 8 * u, below=True) if route(blk[0]["text"]) != "DEST" else [])
+        if cand:
+            placed.append(min(cand, key=lambda n: n[:2]) + (blk,))
+    rated = set()
+    for _, _, anchor, blk in sorted(placed, key=lambda p: p[:2]):  # right of or below first, then nearest first
+        routed = []
+        for t in blk:
+            r = route(t["text"])
+            if r == "DEST":  # an outgoing way's, else (incomers and sources) the symbol's the block sits by
+                cand = [s for s in way[anchor["id"]] if kind[s["id"]] in SWITCHING and side[s["id"]] > 0] or ([anchor] if side[anchor["id"]] <= 0 else [])
+            else:
+                want = SWITCHING if r == "SWITCH" else SOURCES if r == "SOURCE" else {r}
+                cand = [s for s in way[anchor["id"]] if kind[s["id"]] in want]
+            if cand:
+                routed.append((t, min(cand, key=lambda s: gap(t["box"], s["box"]))["id"]))
+        gets = {sid for t, sid in routed if RATINGS & parse_label(t["text"]).keys()}
+        if gets & rated:  # contested: a block placed before it rated that device, so this one is a missed symbol's and stays unlinked
+            continue
+        rated |= gets
+        for t, sid in routed:
+            labels[sid].append(t)
+    kw = {}
+    for s in symbols:
+        if kind[s["id"]] == "MOTOR":
+            k = [p["kw"] for o in way[s["id"]] if kind[o["id"]] == "CONTACTOR" for p in (parse_label(t["text"]) for t in labels[o["id"]]) if "kw" in p]
+            if k:
+                kw[s["id"]] = k[0]
+    return {k: sorted(v, key=lambda t: (t["box"][1], t["box"][0])) for k, v in labels.items()}, kw
 
 
 def role(sym, parsed, busbars, main_bus_y) -> str:
@@ -304,9 +425,10 @@ def role(sym, parsed, busbars, main_bus_y) -> str:
     return "MCCB" if parsed.get("type_word") != "ACB" else "ACB"
 
 
-def make_device(sym, labels, busbars, vlines, main_bus_y) -> dict:
-    """one symbol with its label texts as a device: type, ratings parsed from the labels, busbar and connection"""
-    parsed = {}
+def make_device(sym, labels, busbars, vlines, main_bus_y, parsed: dict | None = None) -> dict:
+    """one symbol with its label texts as a device: type, ratings parsed from the labels (parsed: a rating stated on
+    another device's line, such as a motor's kW on its starter's), busbar and connection"""
+    parsed = dict(parsed or {})
     for t in labels:
         parsed.update({k: v for k, v in parse_label(t["text"]).items() if k not in parsed})
     dev = {"symbol": sym["id"], "box": sym["box"], "label_texts": [t["id"] for t in labels], "label": " | ".join(t["text"] for t in labels),
@@ -314,12 +436,11 @@ def make_device(sym, labels, busbars, vlines, main_bus_y) -> dict:
     if "score" in sym:  # the detector's raw score, beside the calibrated shape_score that conf is made from
         dev["score"] = sym["score"]
     typ = role(sym, parsed, busbars, main_bus_y) if sym["kind"].lower() == "breaker" else KIND_TYPE[sym["kind"]]
-    dev.update(type=typ, rating=parsed.get("kva") if typ in SOURCES else parsed.get("rating") if typ in AMPS else None)
+    dev.update(type=typ, rating=parsed.get(RATED.get(typ)))
     if typ in SWITCHES:
         dev.update(poles=parsed.get("poles"), kA=parsed.get("kA"))
     if typ in WAYS:
-        # destination: the lower of the two labels when both are "below", else the second label
-        dests = [t["text"] for t in labels if not RX_AMPS.search(t["text"]) and not RX_KVA.search(t["text"])]
+        dests = [t["text"] for t in labels if route(t["text"]) == "DEST"]
         dev["dest"] = dests[0] if dests else ""
     cx, cy = _center(sym["box"]); bb = bus_for_x(cx, busbars)
     dev["on_bus"] = bb["id"] if bb else None
@@ -327,15 +448,26 @@ def make_device(sym, labels, busbars, vlines, main_bus_y) -> dict:
     return dev
 
 
+def with_crops(texts, local) -> list[dict]:
+    """the texts the link reads, one read per place: each page read, or the widest crop-pass read that covers most of it
+    (read closer and larger, so better), then the crop reads of places the page pass missed, widest first (a window that
+    cuts a label reads part of it; another window reads it whole)"""
+    crops, out = [t for reg in local.values() for t in reg], {}
+    for t in texts:
+        better = [c for c in crops if _overlap_frac(t["box"], c["box"]) >= 0.8]
+        c = max(better, key=lambda c: c["box"][2]) if better else t
+        out[c["id"]] = c
+    for c in sorted(crops, key=lambda c: -c["box"][2]):
+        if not any(_overlap_frac(c["box"], o["box"]) > 0.5 or _overlap_frac(o["box"], c["box"]) > 0.5 for o in out.values()):
+            out[c["id"]] = c
+    return list(out.values())
+
+
 def make_devices(symbols, local, texts, busbars, vlines, H) -> list[dict]:
-    """label association, in the finder's order: each symbol's own OCR window first, else the nearest unused page texts"""
-    devices, used = [], set()
-    main_bus_y = np.median([bb["y"] for bb in busbars]) if busbars else H / 2
-    for sym in symbols:
-        labels = nearest_texts(sym, local.get(sym["id"], []), set())[:2] or nearest_texts(sym, texts, used)[:2]
-        devices.append(make_device(sym, labels, busbars, vlines, main_bus_y))
-        for t in labels:
-            used.add(t["id"])
+    """the devices, in the finder's order, with their labels by the way-based link"""
+    main_bus_y = main_bus(busbars, H)
+    labels, kw = link(symbols, with_crops(texts, local), busbars, main_bus_y)
+    devices = [make_device(s, labels[s["id"]], busbars, vlines, main_bus_y, {"kw": kw[s["id"]]} if s["id"] in kw else None) for s in symbols]
     for i, dv in enumerate(devices):
         dv["id"] = f"D{i + 1}"
     return devices
@@ -352,37 +484,55 @@ def symbol_texts(page_img, symbols) -> dict:
     return local
 
 
+def meter_tags(page_img, symbols, texts) -> list[dict]:
+    """the unit inside a meter (A, V, kW, kWh), read again from the symbol alone at 3x when the page pass left it unread: its
+    letters are about 7 px tall, too small for the page pass, and a meter is priced by its unit"""
+    out = []
+    for s in symbols:
+        x, y, w, h = s["box"]
+        if s["kind"].lower() != "meter" or min(w, h) < 8 or any(x <= _center(t["box"])[0] <= x + w and y <= _center(t["box"])[1] <= y + h for t in texts):
+            continue
+        for k, t in enumerate(_ocr_image(page_img.crop((x + 2, y + 2, x + w - 2, y + h - 2)), 3.0, "tag")):
+            t["box"][0] += x + 2; t["box"][1] += y + 2; t["id"] = f"{s['id']}g{k + 1}"
+            out.append(t)
+    return out
+
+
 def label_busbars(busbars, texts):
     """busbar label (rating, kA) from the text that says BUSBAR"""
     for bb in busbars:
         bb["rating"] = None; bb["kA"] = None; bb["label_text"] = None
         for t in texts:
-            if "BUSBAR" in t["text"].upper() and bb["y1"] - 60 <= t["box"][1] + t["box"][3] <= bb["y1"] + 5:
+            if "BUSBAR" in t["text"].translate(LOOKALIKE).upper() and bb["y1"] - 60 <= t["box"][1] + t["box"][3] <= bb["y1"] + 5:
                 p = parse_label(t["text"]); bb["rating"] = p.get("rating"); bb["kA"] = p.get("kA"); bb["label_text"] = t["id"]
+
+
+def notes_area(texts) -> tuple:
+    """the text that says NOTES and the texts under it that read_notes reads (up to 600 px right and 170 px down)"""
+    anchor = next((t for t in texts if t["text"].strip().upper() == "NOTES"), None)
+    if not anchor:
+        return None, []
+    ax, ay = anchor["box"][0], anchor["box"][1]
+    return anchor, [t for t in texts if ax - 10 <= t["box"][0] <= ax + 600 and ay < t["box"][1] <= ay + 170]
 
 
 def read_notes(texts) -> dict:
     """notes block, anchored on the word NOTES"""
     notes = {"form": None, "ip": None, "fault_kA": None, "poles_default": None, "evidence": []}
-    anchor = next((t for t in texts if t["text"].strip().upper() == "NOTES"), None)
-    if anchor:
-        ax, ay = anchor["box"][0], anchor["box"][1]
-        for t in texts:
-            tx, ty = t["box"][0], t["box"][1]
-            if ax - 10 <= tx <= ax + 600 and ay < ty <= ay + 170:
-                s = t["text"].translate(LOOKALIKE)
-                m = RX_FORM.search(s)
-                if m and notes["form"] is None:
-                    notes["form"] = f"Form {m.group(1)}" + (f" Type {m.group(2)}" if m.group(2) else (m.group(3) if m.group(3) else "")); notes["evidence"].append(t["id"])
-                m = RX_IP.search(s)
-                if m and notes["ip"] is None:
-                    notes["ip"] = f"IP{m.group(1)}"; notes["evidence"].append(t["id"])
-                m = RX_KA.search(s)
-                if m and notes["fault_kA"] is None:
-                    notes["fault_kA"] = int(m.group(1)); notes["evidence"].append(t["id"])
-                m = RX_POLE_DEFAULT.search(s)
-                if m and notes["poles_default"] is None:
-                    notes["poles_default"] = int(m.group(1)); notes["evidence"].append(t["id"])
+    for t in notes_area(texts)[1]:
+        s = t["text"].translate(LOOKALIKE)
+        m = RX_FORM.search(s)
+        if m and notes["form"] is None:
+            notes["form"] = f"Form {m.group(1)}" + (f" Type {m.group(2)}" if m.group(2) else (m.group(3) if m.group(3) else "")); notes["evidence"].append(t["id"])
+        m = RX_IP.search(s)
+        if m and notes["ip"] is None:
+            notes["ip"] = f"IP{m.group(1)}"; notes["evidence"].append(t["id"])
+        m = RX_KA.search(s)
+        if m and notes["fault_kA"] is None:
+            notes["fault_kA"] = int(m.group(1)); notes["evidence"].append(t["id"])
+        m = RX_POLE_DEFAULT.search(s)
+        if m and notes["poles_default"] is None:
+            notes["poles_default"] = int(m.group(1)); notes["evidence"].append(t["id"])
     return notes
 
 
@@ -422,11 +572,12 @@ def read_sheet(image_path: str, texts: list[dict] | None = None, finder=classica
     symbols = _timed(clock, "detector", finder, page_img, ink, texts)
     done("symbols")
     local = _timed(clock, "ocr", symbol_texts, page_img, symbols) if crops else {}
+    tags = _timed(clock, "ocr", meter_tags, page_img, symbols, texts + [tb for reg in local.values() for tb in reg])
     label_busbars(busbars, texts)
-    devices = make_devices(symbols, local, texts, busbars, vlines, H)
+    devices = make_devices(symbols, local, texts + tags, busbars, vlines, H)
     done("labels")
     notes = read_notes(texts)
-    all_texts = texts + [tb for reg in local.values() for tb in reg]
+    all_texts = texts + [tb for reg in local.values() for tb in reg] + tags
     return {"image": os.path.basename(image_path), "size": [int(W), int(H)], "deskew_deg": round(float(ang), 2),
             "texts": all_texts, "busbars": busbars, "vlines_count": len(vlines), "symbols": symbols, "devices": devices, "notes": notes, "crops": bool(crops),
             "ocr_engine": engine, "reader": reader, "seconds": {"total": round(time.perf_counter() - t0, 2), **{k: round(v, 2) for k, v in clock.items()}}}

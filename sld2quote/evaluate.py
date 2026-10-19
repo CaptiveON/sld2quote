@@ -21,7 +21,11 @@ TARGET = 0.95                  # the symbol rule: precision and recall per type
 HEAD = ["# sld2quote evaluation", "",
         "Synthetic sheets only. One section per evaluation set and reader, each written by `python3 -m sld2quote.evaluate` (a rerun replaces "
         "its own section and keeps the others). The reference bill of materials is built by the same rules from ground truth, so the numbers "
-        "measure reading, not pricing. A predicted device matches a ground-truth device of the same type at IoU >= 0.3."]
+        "measure reading, not pricing. A predicted device matches a ground-truth device of the same type at IoU >= 0.3. Link precision and "
+        "recall score the symbol-to-label link alone: only links between a device matched to the answer key and a text the reader located "
+        "(an OCR box lying over a text the generator drew, whether or not its characters were read right) count, so a device the answer key "
+        "does not match drops out of both, and a note or title line linked to a device counts as a wrong link; a link near 1.0 beside a "
+        "misrated device means the right text was attached but read or parsed wrong."]
 
 
 def iou(a, b):
@@ -41,6 +45,32 @@ def gt_extraction(gt: dict) -> dict:
             "notes": {"form": gt["notes"]["form"], "ip": gt["notes"]["ip"], "fault_kA": gt["notes"]["fault_kA"], "poles_default": gt["notes"]["poles_default"], "evidence": ["gt"]}}
 
 
+def drawn(box, gtx) -> int | None:
+    """the answer-key text an OCR box reads: the one it overlaps most, if by half the smaller box or more"""
+    best, bi = 0.0, None
+    for j, t in enumerate(gtx):
+        ix = max(0, min(box[0] + box[2], t["box"][0] + t["box"][2]) - max(box[0], t["box"][0]))
+        iy = max(0, min(box[1] + box[3], t["box"][1] + t["box"][3]) - max(box[1], t["box"][1]))
+        if ix * iy > best:
+            best, bi = ix * iy, j
+    return bi if bi is not None and best >= 0.5 * min(box[2] * box[3], gtx[bi]["box"][2] * gtx[bi]["box"][3]) else None
+
+
+def link(ex: dict, gt: dict, pairs: dict) -> dict:
+    """the symbol-to-label link apart from symbol finding and text reading. Made: the reader's text-to-device assignments
+    between a device matched to the answer key and a text read where the key drew one; right when the key drew that text
+    for that device. Due: the key's assignments whose device was found and whose text was read; found when the reader
+    made it. Empty for answer keys written before texts recorded their device."""
+    gtx, ids = gt["texts"], [d["id"] for d in gt["devices"]]
+    if not gtx or any("device" not in t for t in gtx):
+        return {}
+    read = {t["id"]: drawn(t["box"], gtx) for t in ex["texts"]}
+    made = [(read[tid], pairs[d["id"]]) for d in ex["devices"] if d["id"] in pairs for tid in d["label_texts"] if read.get(tid) is not None]
+    found = set(pairs.values()); seen = {g for g in read.values() if g is not None}
+    due = {(g, ids.index(t["device"])) for g, t in enumerate(gtx) if g in seen and t["device"] in ids and ids.index(t["device"]) in found}
+    return {"link_made": len(made), "link_right": sum(gtx[g]["device"] == ids[j] for g, j in made), "link_due": len(due), "link_found": len(due & set(made))}
+
+
 def eval_sheet(png: str, gt_path: str, spec_path: str, read=read_sheet) -> dict:
     gt = json.load(open(gt_path))
     ex = read(png)
@@ -52,7 +82,7 @@ def eval_sheet(png: str, gt_path: str, spec_path: str, read=read_sheet) -> dict:
     gconf = cross_check(gex["notes"], sp)
     gbom = build_bom(gex, sp, gconf)
     # symbols: match predicted devices to GT by IoU >= 0.3 and same type
-    gt_devs = gt["devices"]; matched = set(); tp = 0; rating_ok = poles_ok = ka_ok = 0; hit, hit_rating = Counter(), Counter()
+    gt_devs = gt["devices"]; matched = set(); pairs = {}; tp = 0; rating_ok = poles_ok = ka_ok = 0; hit, hit_rating = Counter(), Counter()
     for pd in ex["devices"]:
         best, bi = 0, None
         for j, gd in enumerate(gt_devs):
@@ -62,11 +92,11 @@ def eval_sheet(png: str, gt_path: str, spec_path: str, read=read_sheet) -> dict:
             if v > best:
                 best, bi = v, j
         if bi is not None and best >= 0.3:
-            matched.add(bi); tp += 1; gd = gt_devs[bi]; ok = int(pd.get("rating") == gd.get("rating"))
+            matched.add(bi); pairs[pd["id"]] = bi; tp += 1; gd = gt_devs[bi]; ok = int(pd.get("rating") == gd.get("rating"))
             rating_ok += ok; hit[gd["type"]] += 1; hit_rating[gd["type"]] += ok
             poles_ok += int((pd.get("poles") or ex["notes"].get("poles_default")) == (gd.get("poles") or gt["notes"]["poles_default"]))
             ka_ok += int((pd.get("kA") or ex["notes"].get("fault_kA")) == (gd.get("kA") or gt["notes"]["fault_kA"]))
-    prec = tp / max(1, len(ex["devices"])); rec = tp / max(1, len(gt_devs))
+    prec = tp / max(1, len(ex["devices"])); rec = tp / max(1, len(gt_devs)); lk = link(ex, gt, pairs)
     npred, ngt = Counter(d["type"] for d in ex["devices"]), Counter(d["type"] for d in gt_devs)
     notes_fields = ["form", "ip", "fault_kA", "poles_default"]
     notes_ok = sum(int(str(ex["notes"].get(k)).lower() == str(gt["notes"].get(k)).lower()) for k in notes_fields)
@@ -77,7 +107,9 @@ def eval_sheet(png: str, gt_path: str, spec_path: str, read=read_sheet) -> dict:
     inter = sum((pm & gm).values()); bprec = inter / max(1, sum(pm.values())); brec = inter / max(1, sum(gm.values()))
     price_err = abs(bom["total_gbp"] - gbom["total_gbp"]) / max(1.0, gbom["total_gbp"])
     return {"sheet": os.path.basename(png), "scan": "-scan" in os.path.basename(png), "gt_devices": len(gt_devs), "pred_devices": len(ex["devices"]), "tp": tp,
-            "sym_precision": round(prec, 3), "sym_recall": round(rec, 3), "rating_acc": round(rating_ok / max(1, tp), 3), "poles_acc": round(poles_ok / max(1, tp), 3), "ka_acc": round(ka_ok / max(1, tp), 3),
+            "sym_precision": round(prec, 3), "sym_recall": round(rec, 3), **lk, "link_precision": round(lk["link_right"] / lk["link_made"], 3) if lk.get("link_made") else None,
+            "link_recall": round(lk["link_found"] / lk["link_due"], 3) if lk.get("link_due") else None,
+            "rating_acc": round(rating_ok / max(1, tp), 3), "poles_acc": round(poles_ok / max(1, tp), 3), "ka_acc": round(ka_ok / max(1, tp), 3),
             "notes_acc": round(notes_ok / len(notes_fields), 3), "conflict_tp": len(pc & gc), "conflict_fp": len(pc - gc), "conflict_fn": len(gc - pc),
             "bom_precision": round(bprec, 3), "bom_recall": round(brec, 3), "price_error": round(price_err, 4), "pred_total": bom["total_gbp"], "gt_total": gbom["total_gbp"], "seconds": round(secs["total"], 1),
             "seconds_ocr": secs["ocr"], "seconds_detector": secs["detector"], "reader": ex["reader"], "detector": ex.get("detector"), "crops": ex.get("crops"), "engine": engine(),
@@ -91,7 +123,10 @@ def engine() -> str:
 
 def agg(sub):
     n = max(1, len(sub)); tp = sum(r["tp"] for r in sub); gtn = sum(r["gt_devices"] for r in sub); pdn = sum(r["pred_devices"] for r in sub)
-    return {"sheets": len(sub), "sym_precision": tp / max(1, pdn), "sym_recall": tp / max(1, gtn), "rating_acc": sum(r["rating_acc"] * r["tp"] for r in sub) / max(1, tp),
+    lk = [r for r in sub if "link_made" in r]; tot = lambda k: sum(r[k] for r in lk)
+    return {"sheets": len(sub), "sym_precision": tp / max(1, pdn), "sym_recall": tp / max(1, gtn),
+            "link_precision": tot("link_right") / max(1, tot("link_made")) if lk else None, "link_recall": tot("link_found") / max(1, tot("link_due")) if lk else None,
+            "rating_acc": sum(r["rating_acc"] * r["tp"] for r in sub) / max(1, tp),
             "poles_acc": sum(r["poles_acc"] * r["tp"] for r in sub) / max(1, tp), "ka_acc": sum(r["ka_acc"] * r["tp"] for r in sub) / max(1, tp),
             "notes_acc": sum(r["notes_acc"] for r in sub) / n, "conflicts": f"{sum(r['conflict_tp'] for r in sub)} found of {sum(r['conflict_tp'] + r['conflict_fn'] for r in sub)}, {sum(r['conflict_fp'] for r in sub)} false",
             "bom_precision": sum(r["bom_precision"] for r in sub) / n, "bom_recall": sum(r["bom_recall"] for r in sub) / n,
@@ -156,10 +191,10 @@ def section(rows: list) -> list[str]:
     L += ["", f"Symbol rule at drawing level (precision and recall >= {TARGET} for each type, over all sheets of the split; type precision / recall):"]
     L += [rule_line(s, len(sub), pt) for (s, sub), pt in zip(splits, pts)]
     L += ["", f"<details><summary>Per sheet ({len(rows)})</summary>", "",
-          "| sheet | gt | pred | tp | sym P | sym R | rating | notes | BoM P | BoM R | price err | s | OCR s | detector s |", "|" + "---|" * 14]
+          "| sheet | gt | pred | tp | sym P | sym R | rating | notes | BoM P | BoM R | price err | s | OCR s | detector s | link P | link R |", "|" + "---|" * 16]
     for r in rows:
         L.append(f"| {r['sheet']} | {r['gt_devices']} | {r['pred_devices']} | {r['tp']} | {r['sym_precision']} | {r['sym_recall']} | {r['rating_acc']} | {r['notes_acc']} | {r['bom_precision']} | "
-                 f"{r['bom_recall']} | {r['price_error']:.3f} | {r['seconds']} | {r['seconds_ocr']} | {r['seconds_detector']} |")
+                 f"{r['bom_recall']} | {r['price_error']:.3f} | {r['seconds']} | {r['seconds_ocr']} | {r['seconds_detector']} | {f3(r.get('link_precision'))} | {f3(r.get('link_recall'))} |")
     return L + ["", "</details>"]
 
 
@@ -207,6 +242,7 @@ def main(argv=None):
     ap.add_argument("--make-sets", action="store_true", help="build the test, unseen, val and val_unseen sets from the manifest in --coco, then stop")
     ap.add_argument("--coco", default="data/coco", help="the COCO export whose manifest names the sheets of each split")
     ap.add_argument("--sets", help="where --make-sets puts the sets (default data/eval for data/coco, data/eval_fonts for data/coco_fonts)")
+    ap.add_argument("--tag", help="added to the section title, so runs of different code or weights copies on the same settings sit side by side")
     a = ap.parse_args(argv)
     if a.make_sets:
         for d, n in make_sets(a.coco, a.sets).items():
@@ -223,7 +259,7 @@ def main(argv=None):
     os.makedirs(a.out, exist_ok=True)
     json.dump(rows, open(os.path.join(a.out, "results.json"), "w"), indent=1)
     # the engine and crop setting are in the title, so a run with another setting sits beside the earlier sections instead of replacing them
-    title = f"## {os.path.normpath(a.data)}, {a.reader} reader" + (f" (`{a.weights}`)" if a.reader == "trained" else "") + f", {rows[0]['engine']} OCR, crops {'on' if rows[0]['crops'] else 'off'}"
+    title = f"## {os.path.normpath(a.data)}, {a.reader} reader" + (f" (`{a.weights}`)" if a.reader == "trained" else "") + f", {rows[0]['engine']} OCR, crops {'on' if rows[0]['crops'] else 'off'}" + (f", {a.tag}" if a.tag else "")
     L = section(rows)
     write_section(os.path.join(a.out, "RESULTS.md"), title, L)
     print("\n".join([title, ""] + L[:next(i for i, l in enumerate(L) if l.startswith("<details>"))]))

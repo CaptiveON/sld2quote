@@ -98,7 +98,7 @@ def test_detector_classes_become_device_types_and_a_breaker_takes_its_role(tmp_p
     assert {c: t for c, (t, _, _) in zip(others, dev[4:])} == {
         "fuse_switch": "FUSE_SWITCH", "isolator": "ISOLATOR", "contactor": "CONTACTOR", "transformer": "TRANSFORMER", "generator": "GENERATOR",
         "motor": "MOTOR", "board": "BOARD", "ct": "CT", "meter": "METER", "relay": "RELAY", "spd": "SPD", "capacitor": "CAPACITOR", "earth": "EARTH"}
-    assert dev[4] == ("FUSE_SWITCH", 400, 4) and dev[4 + others.index("capacitor")] == ("CAPACITOR", None, None)  # amps are read, kVAr not yet
+    assert dev[4] == ("FUSE_SWITCH", 400, 4) and dev[4 + others.index("capacitor")] == ("CAPACITOR", 200, None)  # amps and kVAr are read
 
 
 def bus_tilt(ink, x0: int, x1: int, y: int = 400, half: int = 80, win: int = 40) -> float:
@@ -118,16 +118,18 @@ def test_deskew_levels_a_scan_instead_of_doubling_its_tilt(tmp_path):
 
 
 # the classical reader on make_sheet(1, level="medium") (box breakers, every breaker role), saved before the refactor:
-# its devices, and the sha256 of the whole extraction as compact JSON in key order, without the keys added since
+# its devices, and the sha256 of the whole extraction as compact JSON in key order, without the keys added since. Label
+# texts updated on 19 Oct for the way-based link (intended): each way takes its whole label block and each circle the
+# letter inside it, every one the text the answer key drew for that device; types, boxes and ratings are as before
 BEFORE_DEVICES = [
     ("ACB", [207, 200, 28, 28], 3200, ["T3", "T4"]), ("ACB", [1437, 200, 28, 28], 3200, ["T10", "T11"]),
-    ("GENERATOR", [255, 281, 23, 24], None, ["T7", "T6"]), ("GENERATOR", [300, 283, 20, 20], None, ["T5"]),
-    ("BUS_SECTION", [1344, 387, 28, 28], 3200, ["T12", "T13"]), ("MCCB", [768, 520, 22, 22], 630, ["T27", "T26"]),
-    ("MCCB", [1154, 550, 22, 22], 800, ["T33", "T32"]), ("MCCB", [1733, 550, 22, 22], 800, ["T39", "T38"]),
-    ("MCCB", [2119, 550, 22, 22], 630, ["T45", "T44"]), ("MCCB", [382, 580, 22, 22], 100, ["T21", "T20"]),
-    ("MCCB", [575, 580, 22, 22], 250, ["T24", "T23"]), ("MCCB", [961, 580, 22, 22], 630, ["T30", "T29"]),
-    ("MCCB", [1540, 580, 22, 22], 400, ["T36", "T35"]), ("MCCB", [2312, 580, 22, 22], 250, ["T48", "T47"])]
-BEFORE_SHA256 = "943997a5aa67856b66a364dc8c99505a420e6c6a7aeb0886721f7ae94963ad71"
+    ("GENERATOR", [255, 281, 23, 24], None, ["T5"]), ("GENERATOR", [300, 283, 20, 20], None, ["T6"]),
+    ("BUS_SECTION", [1344, 387, 28, 28], 3200, ["T12"]), ("MCCB", [768, 520, 22, 22], 630, ["T26", "T27", "T28"]),
+    ("MCCB", [1154, 550, 22, 22], 800, ["T32", "T33", "T34"]), ("MCCB", [1733, 550, 22, 22], 800, ["T38", "T39", "T40"]),
+    ("MCCB", [2119, 550, 22, 22], 630, ["T44", "T45", "T46"]), ("MCCB", [382, 580, 22, 22], 100, ["T20", "T21", "T22"]),
+    ("MCCB", [575, 580, 22, 22], 250, ["T23", "T24", "T25"]), ("MCCB", [961, 580, 22, 22], 630, ["T29", "T30", "T31"]),
+    ("MCCB", [1540, 580, 22, 22], 400, ["T35", "T36", "T37"]), ("MCCB", [2312, 580, 22, 22], 250, ["T47", "T48", "T49"])]
+BEFORE_SHA256 = "1358f4f0699d19b5be9a5cc8c9aa91b01a8de73dd438b7652464ee610db98809"
 
 
 def test_the_classical_reader_reads_a_generated_sheet_exactly_as_before_the_refactor(tmp_path, monkeypatch):

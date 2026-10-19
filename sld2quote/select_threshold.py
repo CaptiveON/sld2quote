@@ -130,6 +130,8 @@ def main(argv=None):
     sets = [s for s in a.sets.split(",") if s]
     if not sets or any(not os.path.basename(os.path.normpath(s)).startswith("val") for s in sets):
         raise SystemExit(f"--sets {a.sets}: a threshold is chosen on validation sets only (folders named val...), never on a test set")
+    if json.load(open(os.path.join(a.weights, "config.json"))).get("nms_iou") is None:  # a bare checkpoint: the sweep would skip the run's per-tile NMS
+        raise SystemExit(f"{a.weights}/config.json has no nms_iou; copy the training run's (and its score_threshold) into it first")
     device = a.device or rv2.default_device(); model, proc = rv2.load(a.weights, device); t0 = time.time()
     pngs = [p for s in sets for p in sorted(glob.glob(os.path.join(s, "sheet-*.png")))]
     if not pngs:

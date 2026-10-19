@@ -387,3 +387,110 @@ from 0.11 to 0.15 reads 0.75, from 0.26 upward 0.996). The raw score is kept in 
 means and that it was calibrated on synthetic drawings, and a device's colour is now mostly decided by whether its rating label was
 read, which is the reading an estimator needs. On real drawings the calibration overstates, because they are not the drawings it was
 measured on; those are the stretch test and say so.
+
+## 23. The answer key could not tell a wrong link from a missed symbol
+
+**What happened (19 Oct).** The scorecard counted a rating as wrong in the same way whether the symbol was missed, its label was
+misread, or the right label was read and attached to another device. So the largest error source, the link between a symbol and its
+label, had no number of its own. The generator recorded every text it drew, but not which device it drew it for.
+
+**What was done.** Every drawn text now names the device (or busbar) it was drawn for; the notes and title block name none. No pixel
+of any drawing changed: before the 240 answer keys of the three evaluation sets were rewritten, each drawing was redrawn from its seed
+and compared with the saved image pixel for pixel, and each key was checked to differ from the old one only by the new record. The
+generator test still holds the old answer key byte for byte, with the new record set aside. The scorecard gains link precision (of the
+links the reader made between a device it found and a text it read, the share the answer key agrees with) and link recall (of the
+answer key's links whose device was found and whose text was read, the share the reader made), so the link is scored apart from symbol
+finding and text reading.
+
+**For the real project.** When real drawings are labelled, label the link too (which text belongs to which device). It costs seconds
+per drawing at labelling time and cannot be recovered afterwards.
+
+## 24. "Nearest text to the right or below" was the wrong rule
+
+**What happened.** Measured with the new score on a frozen copy of the next site model: the old rule's links were right 72 to 75
+percent of the time and it made 61 to 66 percent of the links it should, on every set. The per-link list showed why: a way's label block has
+up to four lines and the rule kept two; the starter's kW, the PFC bank's kVAr and the motor's "M" went to the breaker above them; the
+meter took the CT ratio drawn under it and the CT took the busbar label; the generator's label sits on its left. Ratings stated in
+kW, kVAr or as a CT ratio were not parsed at all, so contactors, motors and capacitors were never rated right and CTs only by luck.
+
+**What was done.** The rule agreed on 17 Oct: symbols on one vertical line form a way, lines stacked at line spacing form a block, the
+block goes to the way nearest its first line (edge to edge), and each line goes to the device it names (a rating to the breaker, kW to
+the starter, kVAr to the capacitor, kVA and kV to the source, a CT ratio to the CT, a cable size to the way; text inside a symbol is
+its tag; the rest is the destination). Four problems came up on the way. First, ties by construction: the generator leaves the
+same 10 pixels between a label and its own symbol as between the label's end and the next way's symbol, so distance alone cannot
+decide. The first version made a block that lies left of or above a symbol pay one text height; the review's answer-key check on
+1,530 classic drawings showed that too small: on 10 of them a long first line ("MCCB 100 A 3P 50 kA") ends 19 to 27 pixels from the
+next way's board or motor at the same height, the block went to the neighbour, the neighbour's own block was then dropped, and 22
+ratings were wrong. The side is now a ranking: a symbol the block lies right of or below always beats one it lies left of or above,
+and distance decides within each. Second, when the detector misses a way's breaker, its label block went to the next way and gave
+that breaker a second rating line, so one missed symbol mispriced two ways; a block that would give a device a second rating is now
+left unlinked. Third, on the generator's wide layout a plain feeder's labels start under its cable, up to six text heights below the
+breaker, outside the five-height window; when nothing lies within five, a block that names a device may now start up to eight text
+heights below a symbol. Fourth, on one drawing NOTES and note 1 had become a way's labels; the notes block is read_notes' own and no
+longer joins a way.
+
+**How far to trust it.** The rules were designed by reading the per-link error lists of the same test, unseen and baseline sets they
+are scored on, and "unseen" holds layouts out from the detector, not from the rule author, so those sections are in sample for the
+rules. The real out-of-sample checks are answer-key oracles (the generator's own symbols and texts fed to the rules) on drawings no
+rule was read from: on 500 drawings of the wide font set the first version reached 0.968 of the links and misrated 211 of 10,335
+devices (that set then set the new window, so it is in sample now); on 500 fresh seeds of each font set, used for no choice, the
+reviewed rules make no link or rating error, where the first version misrated 12 devices (classic) and 233 (wide).
+
+**What is left.** A motor's kW is read from its starter's line, so a contactor the detector misses leaves its motor unrated too; and
+problem 27.
+
+**Result (19 Oct, eval/RESULTS.md, the sections ending "step 6 way-based link and role rules, reviewed", official runs).**
+Link precision and recall rose from 0.72 to 0.75 and 0.61 to 0.66 before to 0.997 to 1.000 and 0.999 to 1.000 on all six
+columns. Ratings read right: test 0.753 to 1.000 (clean) and 0.608 to 0.995 (scan), unseen 0.556 to 0.813 and 0.531 to 0.840,
+baseline 0.672 to 0.897 and 0.640 to 0.911. Mean price error: test 0.125 to 0.014 and 0.333 to 0.014, unseen 0.249 to 0.125 and
+0.316 to 0.098, baseline 0.189 to 0.054 and 0.368 to 0.051. Symbol precision and recall rose on all six columns (the role rules).
+The reviewed rules give the same 240 per-drawing rows as the first version on these sets: the cases the review found do not occur
+in them.
+
+**For the real project.** Even on drawings from one generator, geometry needs a convention to break ties; consultants vary the
+convention, which is why the agreed upgrade is a link model learned from estimators' corrections.
+
+## 25. The role rules: a scan's box borders and the IEC bus-section (problem 14, fixed)
+
+**What happened.** The main bus was taken as the median height of every horizontal band the busbar finder returned. On scans the
+borders of the notes and title boxes blur to 4 pixels and pass the finder, the median fell to about y = 780, and outgoing breakers
+above that line were typed as incomers: on the unseen and baseline scans only 39 to 42 percent of the breakers typed ACB were ACBs.
+The bus-section rule allowed 2 pixels around the bus line, but the IEC bus-section's box sits a quarter of its height below the line,
+so bus-section recall on clean drawings was only 0.64 to 0.79.
+
+**What was done.** The main bus is the level carrying the most busbar length (the thicker band on a tie); a breaker is a bus-section
+when the bus passes through its box, at least 2 pixels inside its top and bottom edges.
+
+## 26. The text reader's slips inside numbers, and a meter's unit too small to read
+
+**What happened.** On scans the text reader drops spaces ("ACB-1 1600 A4P"), puts specks between a number and its unit
+("S/D 45.kW.", "DOL15'kW"), reads 0 as Q or O ("8Q0 A", "16OO kVA"), 1 as l in Courier New ("DOL l5 kW"), "mm²" as "mm" and BUSBAR as
+BU$BAR. The label patterns needed a word break after the unit, so "A4P" lost both the rating and the poles. A meter's unit (A, V, kW,
+kWh) is drawn about 7 pixels tall inside the symbol and the page pass does not read it: once the CT ratio no longer passed for the
+meter's label, 33 of the 44 meters on the clean test drawings had no unit and were priced as multifunction meters.
+
+**What was done.** Tolerant patterns, a run of O or Q inside a number read as zeros, and l or I as 1 in a number but never as the last
+letter of a word: turning every I next to a digit into 1 would make "DOI15 kW" (a misread DOL with its space dropped) a 115 kW starter.
+Each meter whose inside the page pass left empty is read again on its own at three times the size (about 0.2 seconds a meter), and the
+rules take the unit from the meter's tag and ignore stray marks ("kWh]").
+
+## 27. A cable drawn through its own label
+
+**What happened.** On the classic drawings with labels below, a plain feeder's cable is drawn 40 pixels down from its breaker, through
+the first line of the label, which is the rating line. The line crosses the middle digit, and the text reader returns "8b0 A",
+"1p0 A" or "6B0 A". The link is right on these drawings (precision and recall 0.998 and 0.999 on the clean unseen copies), but on
+the unseen set, where 47 of 60 drawings have labels below, only 57 percent of the MCCB ratings and 61 percent of the fuse-switch
+ratings on the clean copies are read right after the change (100 percent on the labels-right test set), and that is most of the
+price error left on the unseen and baseline sets. The generator's wide layout starts such labels under the cable instead, which
+avoids the crossing but first put the labels out of the link's reach: on 500 wide drawings the answer-key check found 0.968 of the
+links and 211 misrated devices until the window below a symbol was widened (problem 24). No wide drawing has been run through the
+text reader and the detector here, so whether uncrossed labels read better end to end is not measured. The classic set keeps the
+crossing so that the committed numbers reproduce.
+
+**What was tried.** Whitening the detected vertical lines before the text reader, with and without keeping the pixels where a
+character's stroke crosses the line, on six such drawings: 29, 30 and 31 of 72 rating lines read exactly, and 0.718, 0.715 and 0.718
+of all lines; the crossed digit loses its middle either way ("8 )0", "2:0"). Not kept.
+
+**For the real project.** Leader lines and cables through text are common on real drawings. The fixes that work are upstream: vector
+drawings (the text is in the file), or a text reader trained on crossed text; snapping a broken number to the standard rating series
+recovers some cases but is a guess the estimator would have to check.

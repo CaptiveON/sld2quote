@@ -3,6 +3,8 @@ training histories and the threshold sweep under weights/, eval/OCR.md, the prec
 
   python3 scripts/build_charts.py [--model rtdetr_r18_full] [--out eval/charts.json]
 
+--model is the deployed directory under weights/: a run, or a pass of one copied as <run>_passN with its own config.json and
+threshold_drawing.json (the training record stays with the run, which is then the live one, with live_pass N).
 Keys stay stable; a section is left out when its source is missing. Finished training runs only (metrics.json exists).
 validate(doc) checks the shape and is what tests/test_site.py runs on the written file."""
 import argparse, glob, json, os, re, sys, time
@@ -16,7 +18,8 @@ from sld2quote.result import TYPE_PLAIN  # noqa: E402
 SETS = {"test": "data/eval/test", "unseen": "data/eval/unseen", "baseline": "data/baseline"}
 COPIES = ("clean", "scan")
 METRICS = {"sym_recall": "symbol_recall", "sym_precision": "symbol_precision", "rating_acc": "rating_accuracy", "bom_recall": "bom_recall",
-           "price_error_mean": "price_error", "sheets": "n_sheets"}
+           "price_error_mean": "price_error", "sheets": "n_sheets", "link_precision": "link_precision", "link_recall": "link_recall"}
+TITLE = re.compile(r"^(data/\S+), (trained|classical) reader(?: \(`weights/([^`]+)`\))?(?:, (\S+) OCR, crops (on|off))?")
 CLASS_PLAIN = {"breaker": "circuit breaker", "fuse_switch": "fuse switch", "isolator": "isolator", "contactor": "contactor (motor starter)",
                "transformer": "transformer", "generator": "generator", "motor": "motor", "board": "downstream board", "ct": "current transformer",
                "meter": "panel meter", "relay": "protection relay", "spd": "surge protector", "capacitor": "capacitor bank", "earth": "earth"}
@@ -64,26 +67,39 @@ def scorecard(text: str) -> tuple:
                 metrics[cells[0]] = (float(cells[1]), float(cells[2]))
             elif cells[0] in TYPES and len(cells) == 9:
                 per_type.append(cells)
-            elif cells[0].startswith("sheet-") and len(cells) == 14:
+            elif cells[0].startswith("sheet-") and len(cells) >= 14:  # 16 since the link columns (19 Oct), added at the end
                 sheets.append(cells)
     return metrics, per_type, sheets
 
 
+def run_of(model: str) -> tuple:
+    """the training run a deployed directory comes from and the pass copied, if any: rtdetr_r18_plain_ema_fix_pass4 -> (run, 4)"""
+    m = re.fullmatch(r"(.+)_pass(\d+)", model)
+    return (m.group(1), int(m.group(2))) if m else (model, None)
+
+
 def sets_section(model: str) -> tuple:
-    """sets, per_type and price_error from the scorecards: the site engine's trained sections and the classical ones"""
-    secs = sections("eval/RESULTS.md")
-    titles = {"trained": {s: f"{d}, trained reader (`weights/{model}`), rapidocr OCR, crops off" for s, d in SETS.items()},
-              "classical": {s: f"{d}, classical reader" for s, d in SETS.items()}}
-    engine = {"trained": ("rapidocr", False), "classical": ("vision", True)}  # the classical sections predate the engine naming: Vision, crops on
+    """sets, per_type and price_error from the scorecards: per set and reader the latest section in file order, the trained
+    reader's among the site engine's (rapidocr) sections of the deployed run, so a rerun of a set replaces the earlier one"""
+    run = run_of(model)[0]; dirs = {d: s for s, d in SETS.items()}; latest = {}
+    for title, text in sections("eval/RESULTS.md").items():
+        m = TITLE.match(title)
+        if not m or m.group(1) not in dirs:
+            continue
+        reader, weights, engine, crops = m.group(2), m.group(3), m.group(4) or "vision", (m.group(5) or "on") == "on"  # sections before the engine naming ran with Vision, crops on
+        if reader == "trained" and (weights != run or engine != "rapidocr"):
+            continue
+        latest[(dirs[m.group(1)], reader)] = (text, engine, crops)
     sets, per_type, price = [], [], []
-    for reader, by_set in titles.items():
-        for name, title in by_set.items():
-            if title not in secs:
+    for name in SETS:
+        for reader in ("trained", "classical"):
+            if (name, reader) not in latest:
                 continue
-            metrics, types, sheets = scorecard(secs[title])
+            text, engine, crops = latest[(name, reader)]
+            metrics, types, sheets = scorecard(text)
             for i, copy in enumerate(COPIES):
-                sets.append({"set": name, "copy": copy, "reader": reader, "engine": engine[reader][0], "crops": engine[reader][1],
-                             **{out: (int(metrics[k][i]) if k == "sheets" else r3(metrics[k][i])) for k, out in METRICS.items()}})
+                sets.append({"set": name, "copy": copy, "reader": reader, "engine": engine, "crops": crops,
+                             **{out: (None if k not in metrics else int(metrics[k][i]) if k == "sheets" else r3(metrics[k][i])) for k, out in METRICS.items()}})
                 if reader == "trained":
                     for c in types:  # P, R, n, rating per copy; found and reported recovered from the rounded ratios (exact at these counts)
                         p, rc, n = c[1 + 4 * i], c[2 + 4 * i], int(c[3 + 4 * i])
@@ -95,8 +111,8 @@ def sets_section(model: str) -> tuple:
 
 
 def training(model: str) -> list:
-    """one entry per finished run (metrics.json and a best pass), from its history.json"""
-    out = []
+    """one entry per finished run (metrics.json and a best pass), from its history.json; live is the deployed run"""
+    live, live_pass = run_of(model); out = []
     for d in sorted(glob.glob("weights/*/")):
         run = os.path.basename(d.rstrip("/"))
         if run.startswith(("smoke", "aborted", "bench")) or not os.path.isfile(d + "metrics.json") or not os.path.isfile(d + "history.json"):
@@ -105,7 +121,7 @@ def training(model: str) -> list:
         if not ep or not h.get("best_epoch"):
             continue
         pooled = all(e.get("selection") for e in ep)
-        out.append({"run": run, "label": RUN_LABELS.get(run, run), "live": run == model, "ema": bool(h.get("args", {}).get("ema")),
+        out.append({"run": run, "label": RUN_LABELS.get(run, run), "live": run == live, "live_pass": live_pass if run == live else None, "ema": bool(h.get("args", {}).get("ema")),
                     "passes": [e["epoch"] for e in ep],
                     "score": [r3(e["selection"]["nms"]["pooled_mean_f1"] if pooled else e["val"]["nms"]["map50"]) for e in ep],
                     "metric": "pooled per-class F1 at the operating threshold on val and val_unseen" if pooled else "val mAP@0.5",
@@ -119,9 +135,11 @@ def threshold(model: str) -> tuple:
     if not os.path.isfile(p):
         return None, None
     t = json.load(open(p)); sw = {float(k): v for k, v in t["sweep"].items()}; ts = sorted(sw)
-    tot = lambda th, k: sum(c[k] for c in sw[th]["classes"].values())
+    cfg = f"weights/{model}/config.json"  # the deployed threshold, when the directory carries one
+    chosen = json.load(open(cfg)).get("score_threshold_drawing", t["chosen"]) if os.path.isfile(cfg) else t["chosen"]
+    tot = lambda th, k: sum(c.get(k, 0) for c in sw[th]["classes"].values())  # a count the sweep left out is zero
     sweep = {"thresholds": ts, "precision": [r3(tot(th, "tp") / max(1, tot(th, "pred"))) for th in ts], "recall": [r3(tot(th, "tp") / max(1, tot(th, "gt"))) for th in ts],
-             "f1": [r3(sw[th]["mean_f1"]) for th in ts], "blank_paper_boxes": [sw[th]["blank_fp"] for th in ts], "chosen": t["chosen"], "sheets": t["sheets"]}
+             "f1": [r3(sw[th]["mean_f1"]) for th in ts], "blank_paper_boxes": [sw[th]["blank_fp"] for th in ts], "chosen": chosen, "sheets": t["sheets"]}
     bins = t["calibration"]
     cal = [{"from": e, "to": bins[i + 1][0] if i + 1 < len(bins) else 1, "boxes": n, "precision": r3(right / n)} for i, (e, n, right) in enumerate(bins)]
     return sweep, cal
@@ -186,12 +204,13 @@ def validate(doc: dict):
     keys = {(s["set"], s["copy"], s["reader"]) for s in doc["sets"]}
     assert keys == {(n, c, r) for n in SETS for c in COPIES for r in ("trained", "classical")}, f"sets incomplete: {sorted(keys)}"
     assert all(s["n_sheets"] > 0 and 0 <= s["symbol_recall"] <= 1 and s["price_error"] >= 0 for s in doc["sets"])
+    assert all(s[k] is None or 0 <= s[k] <= 1 for s in doc["sets"] for k in ("link_precision", "link_recall"))
     assert all(0 <= t["found"] <= min(t["total"], t["reported"]) for t in doc["per_type"]) and doc["per_type"]
     assert all(len(p["values"]) > 0 for p in doc["price_error"])
     for run in doc["training"]:
         assert run["passes"] == list(range(1, len(run["passes"]) + 1)) and len(run["score"]) == len(run["train_loss"]) == len(run["passes"]), run["run"]
         assert run["best_pass"] in run["passes"] and run["metric"]
-    assert sum(r["live"] for r in doc["training"]) == 1
+    assert sum(r["live"] for r in doc["training"]) == 1 and all(r["live_pass"] is None or (r["live"] and r["live_pass"] in r["passes"]) for r in doc["training"])
     t = doc["threshold"]
     assert t["thresholds"] == sorted(t["thresholds"]) and t["chosen"] in t["thresholds"]
     assert all(len(t[k]) == len(t["thresholds"]) for k in ("precision", "recall", "f1", "blank_paper_boxes"))

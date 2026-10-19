@@ -1,6 +1,6 @@
 """Generator checks that protect the training labels: drawings stay legible in every font set, boxes match the drawn symbols,
 and the default font set still draws the sheets the committed numbers rest on, byte for byte."""
-import hashlib, os, sys
+import hashlib, json, os, sys
 import numpy as np
 import pytest
 from PIL import Image, ImageDraw
@@ -26,7 +26,13 @@ def _inside(t, b):
 
 def test_the_classic_font_set_reproduces_a_known_sheet_byte_for_byte(tmp_path):
     write_sheet(str(tmp_path), 1); write_sheet(str(tmp_path), 1, scan=True)
-    assert {n: hashlib.sha256((tmp_path / n).read_bytes()).hexdigest() for n in SEED_1} == SEED_1
+    got = {}
+    for n in SEED_1:
+        b = (tmp_path / n).read_bytes()
+        if n.endswith(".json"):  # the answer key as written then, once each text's "device" (added 19 Oct) is set aside
+            gt = json.loads(b); [t.pop("device") for t in gt["texts"]]; b = json.dumps(gt, indent=1).encode()
+        got[n] = hashlib.sha256(b).hexdigest()
+    assert got == SEED_1
 
 
 @pytest.mark.parametrize("fonts", list(FONT_SETS))
