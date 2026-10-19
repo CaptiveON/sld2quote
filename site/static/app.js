@@ -5,6 +5,15 @@
 // (one /api/health call, about 20 s) only when the visitor reaches Try it or starts a run.
 const API = location.protocol.startsWith('http') ? '' : 'http://127.0.0.1:7860';
 const ROOT = document.currentScript && document.currentScript.src ? new URL('.', document.currentScript.src).href : './';  // the site root (this script's folder), so a page under it finds mock.js, mock/ and samples/ over http, file and the static Space alike
+const STATIC_HINT = location.protocol.startsWith('http') && (/\.hf\.space$|(^|\.)huggingface\.co$/.test(location.hostname) || /\/index\.html$/.test(location.pathname));  // a static host, or a page reached by its file name: probe the static copy first and link to index.html files
+function pageHref(h, explicit) {  // an internal link in the form the host serves: a folder (the live server) or its index.html (a static host with no folder index)
+  if (!h || (/^[a-z]+:/.test(h) && !h.startsWith(ROOT))) return h;
+  const m = h.match(/^([^?#]*)(.*)$/), base = m[1], rest = m[2];
+  if (explicit) return base.endsWith('/') ? base + 'index.html' + rest : h;
+  return base.endsWith('/index.html') ? base.slice(0, -10) + rest : h;
+}
+const explicitLinks = () => S.detected ? S.mode === 'static' : STATIC_HINT;
+function relink() { const ex = explicitLinks(); $$('a[href]').forEach(a => { const h = a.getAttribute('href'), v = pageHref(h, ex); if (v !== h) a.setAttribute('href', v); }); }  // every internal link on the page, in the host's form
 const $ = (s, el) => (el || document).querySelector(s), $$ = (s, el) => [...(el || document).querySelectorAll(s)];
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'})[c]);
 const gbp = (n, d) => n == null ? '' : '£' + Number(n).toLocaleString('en-GB', {minimumFractionDigits: d || 0, maximumFractionDigits: d || 0});
@@ -24,7 +33,7 @@ const STAGES = [['text', 'Reading the words on the page', 'Every label, rating a
   ['price', 'Choosing parts and pricing', 'Fixed rules pick a part for every device and add busbars, enclosure and labour.', 'deterministic rules over an invented catalogue, the evidence named on every line']];
 const STAT = {text: e => e.texts != null && `${e.texts} pieces of text read`, symbols: e => e.symbols != null && `${e.symbols} symbols found`, labels: e => e.linked != null && `${e.linked} of ${e.devices} devices given their labels`,
   spec: e => e.clauses != null && (e.clauses ? `${e.clauses} clause${e.clauses === 1 ? '' : 's'} checked, ${e.conflicts} disagreement${e.conflicts === 1 ? '' : 's'}` : 'no specification came with this drawing'), price: e => e.lines != null && `${e.lines} lines priced, ${gbp(e.total_gbp)}`};  // what a step event says it produced
-const S = {mode: 'live', health: 'asleep', step: 'choose', samples: [], filter: 'all', result: null, key: null, running: null, retry: null, pending: null, model: '', engine: '', numbers: null};
+const S = {mode: 'live', health: 'asleep', step: 'choose', samples: [], filter: 'all', result: null, key: null, running: null, retry: null, pending: null, model: '', engine: '', numbers: null, detected: false};
 
 // ---------------------------------------------------------------- data access
 function loadMock() { return new Promise((ok, no) => { const s = document.createElement('script'); s.src = ROOT + 'mock.js'; s.onload = ok; s.onerror = no; document.head.appendChild(s); }); }
@@ -45,9 +54,11 @@ function busyPill(secs) {  // the pill while a data request waits for the busy i
 }
 async function getJson(url) { const r = await fetchRetry(url, undefined, busyPill); busyPill(0); if (!r.ok) { const e = new Error('HTTP ' + r.status); e.status = r.status; throw e; } return r.json(); }
 function fileUrl(dir, u) { u = u == null ? u : String(u); return !u ? u : dir ? dir + u.split('/').pop() : u.startsWith('/') ? API + u : /^[a-z]+:/.test(u) ? u : ROOT + u; }  // a run or sample file on the API, a static copy's file beside the page, a mock fixture under the site root
-async function detectMode() {
+async function detectMode() {  // live (the server answers), static (samples/index.json beside the page) or mock; a static host is probed first so its console stays clean
+  const asStatic = async () => { const j = await getJson(ROOT + 'samples/index.json'); S.samples = j.samples || j; S.mode = 'static'; };
+  if (STATIC_HINT) { try { await asStatic(); return; } catch (e) { /* not a static copy after all */ } }
   try { const j = await getJson(API + '/api/samples'); S.samples = j.samples || j; S.mode = 'live'; return; } catch (e) { if (e.status === 429) { S.mode = 'live'; S.samples = []; S.busyStart = true; return; } /* no server here */ }
-  if (location.protocol !== 'file:') { try { const j = await getJson(ROOT + 'samples/index.json'); S.samples = j.samples || j; S.mode = 'static'; return; } catch (e) { /* not a static copy */ } }
+  if (location.protocol !== 'file:' && !STATIC_HINT) { try { await asStatic(); return; } catch (e) { /* not a static copy */ } }
   await loadMock(); S.mode = 'mock'; S.samples = window.MOCK.samples;
 }
 async function loadSample(id) {
@@ -489,21 +500,22 @@ const SPRITE = '<svg hidden aria-hidden="true" xmlns="http://www.w3.org/2000/svg
   + '<symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5h10"/></symbol><symbol id="i-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></symbol>'
   + '<symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3l10 18H2zM12 10v4M12 17h.01"/></symbol><symbol id="i-random" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h.01M15 15h.01M12 12h.01"/></symbol><symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8zM14 3v5h5"/></symbol>'
   + '<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol><symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></symbol></svg>';
-function chrome() {  // the navigation from one list on every page, the current page marked; the home page's map of the site; the footer
-  const here = location.pathname.replace(/index\.html$/, ''), brand = $('.brand'); if (brand) brand.href = ROOT;
-  const nav = $('.nav'); if (nav) nav.innerHTML = NAV.map(([p, label]) => { const url = ROOT + p, cur = new URL(url, location.href).pathname.replace(/index\.html$/, '') === here; return `<a href="${url}"${cur ? ' aria-current="page"' : ''}>${label}</a>`; }).join('');
-  const map = $('#sitemap'); if (map) map.innerHTML = NAV.filter(([p]) => p).map(([p, label, what]) => `<a class="mapcard" href="${ROOT + p}"><b>${label}</b><span>${esc(what)}</span>${icon('arrow')}</a>`).join('');
-  const foot = $('footer .wrap'); if (foot && !foot.innerHTML.trim()) foot.innerHTML = `sld2quote 0.3.0, October 2026. Plain HTML, CSS and JavaScript; every figure on these pages is read from the evaluation files when the page loads. Synthetic drawings only, nothing from R&amp;B Switchgear. <a href="${ROOT}about/">About, licence and AI assistance</a>.`;
+function chrome() {  // the navigation from one list on every page, the current page marked; the home page's map of the site; the footer; every link in the host's form (run again once the mode is known)
+  const here = location.pathname.replace(/index\.html$/, ''), ex = explicitLinks(), link = p => pageHref(ROOT + p, ex), brand = $('.brand'); if (brand) brand.href = link('');
+  const nav = $('.nav'); if (nav) nav.innerHTML = NAV.map(([p, label]) => { const cur = new URL(ROOT + p, location.href).pathname.replace(/index\.html$/, '') === here; return `<a href="${link(p)}"${cur ? ' aria-current="page"' : ''}>${label}</a>`; }).join('');
+  const map = $('#sitemap'); if (map) map.innerHTML = NAV.filter(([p]) => p).map(([p, label, what]) => `<a class="mapcard" href="${link(p)}"><b>${label}</b><span>${esc(what)}</span>${icon('arrow')}</a>`).join('');
+  const foot = $('footer .wrap'); if (foot && !foot.innerHTML.trim()) foot.innerHTML = `sld2quote 0.3.0, October 2026. Plain HTML, CSS and JavaScript; every figure on these pages is read from the evaluation files when the page loads. Synthetic drawings only, nothing from R&amp;B Switchgear. <a href="${link('about/')}">About, licence and AI assistance</a>.`;
+  relink();
 }
 function padTop() { document.documentElement.style.scrollPaddingTop = ($('.top').offsetHeight + 8) + 'px'; }  // anchors and scrolls clear the sticky header at any width
 async function boot() {
-  if ($('#sitemap') && /[?&](sample|run)=/.test(location.search)) { location.replace(ROOT + 'try/' + location.search); return; }  // the one-page site's deep links still open their drawing
+  if ($('#sitemap') && /[?&](sample|run)=/.test(location.search)) { location.replace(pageHref(ROOT + 'try/', STATIC_HINT) + location.search); return; }  // the one-page site's deep links still open their drawing, in either link form
   if (document.body) document.body.insertAdjacentHTML('afterbegin', SPRITE);
   chrome(); setPill('loading'); padTop(); window.addEventListener('resize', padTop); $$('.dg').forEach(renderDiagram);
   if ($('#step-choose')) tryPage();
   document.addEventListener('error', e => { const el = e.target; if (!(el instanceof HTMLImageElement || el instanceof SVGImageElement)) return; const n = +(el.dataset.retry || 0); if (n >= BUSY.length) return; el.dataset.retry = n + 1;
     setTimeout(() => { const a = el instanceof SVGImageElement ? 'href' : 'src', u = (el.getAttribute(a) || '').replace(/[?&]r=\d+$/, ''); el.setAttribute(a, u + (u.includes('?') ? '&' : '?') + 'r=' + (n + 1)); }, BUSY[n]); }, true);  // an image refused while the instance is busy is fetched again on the same backoff
-  await detectMode();
+  await detectMode(); S.detected = true; chrome();  // the links take the host's form once the mode is known
   setPill(S.mode === 'live' ? 'asleep' : 'static');
   const tryIt = $('#try');
   if (S.mode === 'live' && tryIt && 'IntersectionObserver' in window) { const io = new IntersectionObserver(es => { if (es.some(x => x.isIntersecting)) { warm(); io.disconnect(); } }, {rootMargin: '200px'}); io.observe(tryIt); }
