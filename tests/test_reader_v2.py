@@ -44,8 +44,8 @@ def test_a_box_at_a_tile_edge_maps_back_to_page_pixels_in_reading_order():
     assert (x0, y0) == (3138 - 640, 1000 - 640)
     # the earth touches that tile's right and bottom borders, which are the page edge, so it is not a cut symbol
     r = rv2.merge([(0, 0), (x0, y0)], [tile((0.7, "meter", 300.2, 50.1, 330.0, 80.4)), tile((0.8, "earth", 610.2, 600.3, 638.1, 639.2))], (3138, 1000))
-    assert rv2.to_symbols(r) == [{"id": "S1", "kind": "meter", "box": [300, 50, 30, 30], "shape_score": 0.7},
-                                 {"id": "S2", "kind": "earth", "box": [x0 + 610, y0 + 600, 28, 39], "shape_score": 0.8}]
+    assert rv2.to_symbols(r) == [{"id": "S1", "kind": "meter", "box": [300, 50, 30, 30], "score": 0.7, "shape_score": 0.7},
+                                 {"id": "S2", "kind": "earth", "box": [x0 + 610, y0 + 600, 28, 39], "score": 0.8, "shape_score": 0.8}]
 
 
 def test_a_box_cut_by_an_inner_tile_edge_is_dropped_and_one_at_the_page_edge_is_kept():
@@ -87,7 +87,9 @@ def test_detector_classes_become_device_types_and_a_breaker_takes_its_role(tmp_p
         s["id"] = f"S{i + 1}"
     texts = [text("MCCB 250 A 3P", 340, 525), text("ACB-2 1600 A 4P", 640, 525),  # right of the two breakers below the busbar
              text("FSW 400 A 4P", 80, 765, 70), text("PFC 200 kVAr", 40 + 120 * others.index("capacitor") + 40, 765, 70)]
-    ex = reader.read_sheet(str(page), texts, finder=lambda page_img, ink, t: syms)
+    steps = []
+    ex = reader.read_sheet(str(page), texts, finder=lambda page_img, ink, t: syms, progress=steps.append)
+    assert steps == ["text", "symbols", "labels"]
     dev = [(d["type"], d.get("rating"), d.get("poles")) for d in ex["devices"]]
     assert dev[:4] == [("ACB", None, None),          # above the busbar: an incomer
                        ("BUS_SECTION", None, None),  # in the busbar
@@ -134,7 +136,7 @@ def test_the_classical_reader_reads_a_generated_sheet_exactly_as_before_the_refa
     im, sh = make_sheet(1, level="medium"); im.save(tmp_path / "sheet-medium-1.png")
     ex = reader.read_sheet(str(tmp_path / "sheet-medium-1.png"), [{"text": t["text"], "conf": 1.0, "box": list(t["box"]), "src": "page"} for t in sh.texts])
     assert [(d["type"], d["box"], d.get("rating"), d["label_texts"]) for d in ex["devices"]] == BEFORE_DEVICES
-    old = {k: v for k, v in ex.items() if k not in ("reader", "seconds", "crops")}  # crops: added 19 Oct, a setting not a reading
+    old = {k: v for k, v in ex.items() if k not in ("reader", "seconds", "crops", "ocr_engine")}  # crops, ocr_engine: added 19 Oct, settings not readings
     assert hashlib.sha256(json.dumps(old, separators=(",", ":")).encode()).hexdigest() == BEFORE_SHA256
     assert ex["reader"] == "classical" and set(ex["seconds"]) == {"total", "ocr", "detector"}
 
@@ -174,6 +176,25 @@ def test_the_drawing_threshold_goes_beside_the_per_tile_one_and_the_reader_prefe
     assert rv2.threshold(SimpleNamespace(score_threshold=0.1)) == (0.1, "tile")
     with pytest.raises(SystemExit):  # never on a test set
         sel.main(["--weights", str(tmp_path), "--sets", "data/eval/test"])
+
+
+def test_the_score_calibration_rises_with_the_score_and_every_bin_holds_enough_boxes():
+    # pooled boxes and right boxes at each sweep threshold: the bins [0.10, 0.11) and [0.11, 0.12) hold 50 and 100 boxes, so
+    # they merge; [0.13, 0.14) is right 100 times in 100 but the top bin, from 0.14 up, only 190 in 200, so the two pool
+    sweep = {t: {"classes": {"breaker": {"pred": n, "tp": r}}} for t, n, r in ((0.10, 600, 500), (0.11, 550, 480), (0.12, 450, 400), (0.13, 300, 290), (0.14, 200, 190))}
+    bins = sel.calibration(sweep, 0.10)
+    assert bins == [[0.10, 150, 100], [0.12, 150, 110], [0.13, 300, 290]]
+    assert all(n >= sel.MIN_BOXES for _, n, _ in bins) and all(a[2] / a[1] <= b[2] / b[1] for a, b in zip(bins, bins[1:]))
+    assert sel.calibration(sweep, 0.12)[0][0] == 0.12  # bins start at the operating threshold
+    table = [[e, round(r / n, 4)] for e, n, r in bins]
+    assert [rv2.calibrated(x, table) for x in (0.05, 0.10, 0.1199, 0.12, 0.13, 0.95)] == [0.6667, 0.6667, 0.6667, 0.7333, 0.9667, 0.9667]
+    r = rv2.merge([(0, 0)], [tile((0.125, "motor", 100, 100, 140, 140))], (1600, 1000))
+    assert [(y["score"], y["shape_score"]) for y in rv2.to_symbols(r, table)] == [(0.12, 0.73)] and rv2.to_symbols(r)[0]["shape_score"] == 0.12
+    # the device keeps the raw score and makes its conf from the calibrated one as before: the label's lower conf, else half
+    sym = {"id": "S1", "kind": "motor", "box": [100, 100, 40, 40], "score": 0.12, "shape_score": 0.98}
+    assert (lambda d: (d["score"], d["conf"]))(reader.make_device(sym, [], [], [], 400)) == (0.12, 0.49)
+    assert reader.make_device(sym, [text("M", 150, 110, 20) | {"id": "T1", "conf": 0.9}], [], [], 400)["conf"] == 0.9
+    assert "score" not in reader.make_device({k: v for k, v in sym.items() if k != "score"}, [], [], [], 400)  # the classical reader's symbols
 
 
 def test_make_sets_takes_each_split_from_the_export_s_own_pool_into_its_own_folder(tmp_path):

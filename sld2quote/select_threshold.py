@@ -4,8 +4,11 @@ class-level precision and recall at IoU >= 0.3 (evaluate's rule) for every thres
 and the threshold with the best mean per-class F1 pooled over the sets (the trainer's rule per tile, applied to drawings).
 It goes into the weights' config.json as score_threshold_drawing, beside the per-tile score_threshold, with the sweep in
 threshold_drawing.json; reader_v2 prefers it. A false positive whose box holds almost no ink is counted as on blank paper.
+The same sweep gives score_calibration: for score bins from the threshold up, how often a box was right on those drawings,
+which reader_v2 shows as a box's confidence; --calibrate-only rebuilds it from a stored threshold_drawing.json.
 
   python3 -m sld2quote.select_threshold --weights weights/rtdetr_r18_full --sets data/eval/val,data/eval/val_unseen --device cpu
+  python3 -m sld2quote.select_threshold --weights weights/rtdetr_r18_full --calibrate-only
 """
 from __future__ import annotations
 import argparse, glob, json, os, time
@@ -19,6 +22,7 @@ from .evaluate import iou
 THRESHOLDS = [round(float(t), 2) for t in np.arange(0.05, 0.6001, 0.01)]
 MATCH_IOU = 0.3   # a detection finds an answer of its class at this overlap, as evaluate.py matches devices
 BLANK_INK = 0.01  # a false positive whose box is less than this share ink sits on blank paper
+MIN_BOXES = 100   # a calibration bin holds at least this many boxes
 
 
 def sheet(png: str, model, proc, device: str, nms_iou: float) -> tuple:
@@ -73,15 +77,42 @@ def choose(table: dict) -> float:
     return best[len(best) // 2]
 
 
-def write(weights: str, chosen: float, table: dict, record: dict):
-    """the sweep into threshold_drawing.json, then score_threshold_drawing into config.json; each is written aside and
-    swapped in, so the weights never hold a half-written file nor a threshold without the sweep behind it"""
-    path = os.path.join(weights, "config.json"); cfg = json.load(open(path)); cfg["score_threshold_drawing"] = chosen
-    for dst, text in ((os.path.join(weights, "threshold_drawing.json"), json.dumps({**record, "chosen": chosen, "sweep": {str(t): v for t, v in table.items()}}, indent=1)),
+def calibration(table: dict, start: float) -> list:
+    """[[lower_edge, boxes, right], ...]: score bins from start upward, one between each pair of sweep thresholds and the last
+    holding every box above the top one; a bin's boxes and right boxes are the differences of the pooled counts (a box is
+    only ever removed by a better-scoring one, so the sets nest); bins merged upward to hold MIN_BOXES or more, then pooled
+    where precision would fall (pool-adjacent-violators), so a higher score never means a lower confidence"""
+    ts = [t for t in sorted(table) if t >= start - 1e-9]
+    tot = [(sum(c.get("pred", 0) for c in table[t]["classes"].values()), sum(c.get("tp", 0) for c in table[t]["classes"].values())) for t in ts] + [(0, 0)]
+    bins = []
+    for t, (n, r), (n2, r2) in zip(ts, tot, tot[1:]):
+        if bins and bins[-1][1] < MIN_BOXES:
+            bins[-1][1] += n - n2; bins[-1][2] += r - r2
+        else:
+            bins.append([t, n - n2, r - r2])
+    if len(bins) > 1 and bins[-1][1] < MIN_BOXES:  # a short top bin joins the one below
+        e, n, r = bins.pop(); bins[-1][1] += n; bins[-1][2] += r
+    pooled = []
+    for b in bins:
+        pooled.append(b)
+        while len(pooled) > 1 and pooled[-2][2] * pooled[-1][1] > pooled[-1][2] * pooled[-2][1]:  # precision falls: pool
+            e, n, r = pooled.pop(); pooled[-1][1] += n; pooled[-1][2] += r
+    return [b for b in pooled if b[1]]
+
+
+def write(weights: str, chosen: float, table: dict, record: dict) -> list:
+    """the sweep and its calibration bins into threshold_drawing.json, then score_threshold_drawing and score_calibration
+    ([[lower_edge, precision], ...]) into config.json; each is written aside and swapped in, so the weights never hold a
+    half-written file nor a threshold without the sweep behind it"""
+    bins = calibration(table, chosen)
+    path = os.path.join(weights, "config.json"); cfg = json.load(open(path))
+    cfg.update(score_threshold_drawing=chosen, score_calibration=[[e, round(r / n, 4)] for e, n, r in bins])
+    for dst, text in ((os.path.join(weights, "threshold_drawing.json"), json.dumps({**record, "chosen": chosen, "calibration": bins, "sweep": {str(t): v for t, v in table.items()}}, indent=1)),
                       (path, json.dumps(cfg, indent=2, sort_keys=True) + "\n")):
         with open(dst + ".tmp", "w") as fh:
             fh.write(text)
         os.replace(dst + ".tmp", dst)
+    return bins
 
 
 def main(argv=None):
@@ -89,7 +120,13 @@ def main(argv=None):
     ap.add_argument("--weights", required=True)
     ap.add_argument("--sets", default="data/eval/val,data/eval/val_unseen", help="comma-separated validation sets; each folder name must start with val")
     ap.add_argument("--device", help="cpu or mps (default mps when available, else cpu)")
+    ap.add_argument("--calibrate-only", action="store_true", help="rebuild score_calibration from the stored threshold_drawing.json, no new sweep")
     a = ap.parse_args(argv)
+    if a.calibrate_only:
+        d = json.load(open(os.path.join(a.weights, "threshold_drawing.json"))); d.pop("calibration", None)
+        bins = write(a.weights, d.pop("chosen"), {float(t): v for t, v in d.pop("sweep").items()}, d)
+        print(f"score_calibration for {a.weights} (lower edge, boxes, right, precision):", [[e, n, r, round(r / n, 4)] for e, n, r in bins])
+        return
     sets = [s for s in a.sets.split(",") if s]
     if not sets or any(not os.path.basename(os.path.normpath(s)).startswith("val") for s in sets):
         raise SystemExit(f"--sets {a.sets}: a threshold is chosen on validation sets only (folders named val...), never on a test set")
@@ -102,11 +139,12 @@ def main(argv=None):
     near = min(table, key=lambda t: abs(t - tile)) if tile is not None else None
     record = {"weights": a.weights, "sets": sets, "sheets": len(pngs), "device": device, "match_iou": MATCH_IOU, "blank_ink": BLANK_INK,
               "per_tile_threshold": tile, "created": time.strftime("%Y-%m-%dT%H:%M:%S"), "seconds": round(time.time() - t0, 1)}
-    write(a.weights, chosen, table, record)
+    bins = write(a.weights, chosen, table, record)
     for label, t in (("chosen on drawings", chosen), ("per tile", near)):
         if t is not None:
             print(f"{label}: threshold {t}, mean class F1 {table[t]['mean_f1']}, false positives on blank paper {table[t]['blank_fp']}")
-    print(f"wrote score_threshold_drawing {chosen} into {a.weights}/config.json and the sweep into {a.weights}/threshold_drawing.json ({len(pngs)} sheets, {record['seconds']} s)")
+    print(f"wrote score_threshold_drawing {chosen} and score_calibration {[[e, round(r / n, 4)] for e, n, r in bins]} into {a.weights}/config.json "
+          f"and the sweep into {a.weights}/threshold_drawing.json ({len(pngs)} sheets, {record['seconds']} s)")
 
 
 if __name__ == "__main__":

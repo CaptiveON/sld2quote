@@ -311,6 +311,8 @@ def make_device(sym, labels, busbars, vlines, main_bus_y) -> dict:
         parsed.update({k: v for k, v in parse_label(t["text"]).items() if k not in parsed})
     dev = {"symbol": sym["id"], "box": sym["box"], "label_texts": [t["id"] for t in labels], "label": " | ".join(t["text"] for t in labels),
            "conf": round(float(min([sym["shape_score"]] + [t["conf"] for t in labels])), 2) if labels else round(sym["shape_score"] * 0.5, 2)}
+    if "score" in sym:  # the detector's raw score, beside the calibrated shape_score that conf is made from
+        dev["score"] = sym["score"]
     typ = role(sym, parsed, busbars, main_bus_y) if sym["kind"].lower() == "breaker" else KIND_TYPE[sym["kind"]]
     dev.update(type=typ, rating=parsed.get("kva") if typ in SOURCES else parsed.get("rating") if typ in AMPS else None)
     if typ in SWITCHES:
@@ -394,34 +396,40 @@ def _timed(clock: dict, key: str, fn, *args):
     return out
 
 
-def read_sheet(image_path: str, texts: list[dict] | None = None, finder=classical, reader: str = "classical", crops: bool | None = None) -> dict:
+def read_sheet(image_path: str, texts: list[dict] | None = None, finder=classical, reader: str = "classical", crops: bool | None = None,
+               progress=None) -> dict:
     """the reading pipeline of both readers. finder(page_img, ink_without_lines, texts) returns the symbols in the pixels
     of the prepared (deskewed) page, the frame of the OCR and the line finders; every OCR call goes through _ocr_image.
     crops: the second OCR pass around every symbol (None: on for vision, which reads small text better enlarged, off for
     the other engines, which read the page pass better and pay about 0.3 s per symbol for the crops; see eval/OCR.md);
-    without it the labels come from the page texts. "seconds" splits the time into OCR and the symbol finder ("detector")."""
-    t0, clock = time.perf_counter(), {"ocr": 0.0, "detector": 0.0}
+    without it the labels come from the page texts. "seconds" splits the time into OCR and the symbol finder ("detector").
+    progress, if given, is called with "text", "symbols" and "labels" as each of those steps finishes."""
+    from .ocr import default_engine
+    t0, clock, engine = time.perf_counter(), {"ocr": 0.0, "detector": 0.0}, os.environ.get("SLD2QUOTE_OCR") or default_engine()
+    done = progress or (lambda step: None)
     if crops is None:
-        from .ocr import default_engine
-        crops = (os.environ.get("SLD2QUOTE_OCR") or default_engine()) == "vision"
+        crops = engine == "vision"
     g, b, ang = prepare(image_path)
     H, W = b.shape
     page_img = Image.fromarray(g.astype(np.uint8))
     texts = texts if texts is not None else _timed(clock, "ocr", _ocr_image, page_img, 2.0, "page")
     for i, tb in enumerate(texts):
         tb["id"] = f"T{i + 1}"
+    done("text")
     busbars = find_busbars(b)
     vlines = find_vertical_lines(b)
     ink = remove_lines(b, busbars, vlines)
     symbols = _timed(clock, "detector", finder, page_img, ink, texts)
+    done("symbols")
     local = _timed(clock, "ocr", symbol_texts, page_img, symbols) if crops else {}
     label_busbars(busbars, texts)
     devices = make_devices(symbols, local, texts, busbars, vlines, H)
+    done("labels")
     notes = read_notes(texts)
     all_texts = texts + [tb for reg in local.values() for tb in reg]
     return {"image": os.path.basename(image_path), "size": [int(W), int(H)], "deskew_deg": round(float(ang), 2),
             "texts": all_texts, "busbars": busbars, "vlines_count": len(vlines), "symbols": symbols, "devices": devices, "notes": notes, "crops": bool(crops),
-            "reader": reader, "seconds": {"total": round(time.perf_counter() - t0, 2), **{k: round(v, 2) for k, v in clock.items()}}}
+            "ocr_engine": engine, "reader": reader, "seconds": {"total": round(time.perf_counter() - t0, 2), **{k: round(v, 2) for k, v in clock.items()}}}
 
 
 READERS = ("classical", "trained")

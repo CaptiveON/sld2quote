@@ -13,7 +13,7 @@ then a box holding CONTAIN or more of a better-scoring box's area is dropped, su
 symbols. The detector was trained on synthetic sheets drawn by generate.py.
 """
 from __future__ import annotations
-import functools, os
+import bisect, functools, os
 import torch
 from PIL import Image
 from . import reader
@@ -102,12 +102,19 @@ def detect_page(page: Image.Image, model, proc, device: str, score_threshold: fl
     return merge(*tile_detections(page, model, proc, device, score_threshold, nms_iou))
 
 
-def to_symbols(r: dict) -> list[dict]:
+def calibrated(score: float, table: list) -> float:
+    """how often a box with this score was right on the validation drawings: the precision of its bin in the weights'
+    score_calibration [[lower_edge, precision], ...] (select_threshold.py), the lowest bin below its edge, the top one above"""
+    return table[max(0, bisect.bisect_right([e for e, _ in table], score) - 1)][1]
+
+
+def to_symbols(r: dict, table: list | None = None) -> list[dict]:
     """merged detections as the extraction's symbols, in reading order (top to bottom, then left to right) as the classical
-    finder gives them: the class name as kind, the box [x, y, w, h] in page pixels, the confidence as shape_score"""
+    finder gives them: the class name as kind, the box [x, y, w, h] in page pixels, the detector's raw score as score, and
+    as shape_score the calibrated score when the weights carry a table, else the raw one"""
     dets = sorted(zip(r["boxes"].tolist(), r["scores"].tolist(), r["labels"].tolist()), key=lambda d: (round(d[0][1]), round(d[0][0])))
-    return [{"id": f"S{i + 1}", "kind": CLASSES[c], "box": [round(x0), round(y0), round(x1) - round(x0), round(y1) - round(y0)], "shape_score": round(s, 2)}
-            for i, ((x0, y0, x1, y1), s, c) in enumerate(dets)]
+    return [{"id": f"S{i + 1}", "kind": CLASSES[c], "box": [round(x0), round(y0), round(x1) - round(x0), round(y1) - round(y0)], "score": round(s, 2),
+             "shape_score": round(calibrated(s, table) if table else s, 2)} for i, ((x0, y0, x1, y1), s, c) in enumerate(dets)]
 
 
 def threshold(config, given: float | None = None) -> tuple:
@@ -120,7 +127,7 @@ def threshold(config, given: float | None = None) -> tuple:
 
 
 def read_sheet(image_path: str, texts: list[dict] | None = None, weights: str = WEIGHTS, device: str | None = None,
-               score_threshold: float | None = None, nms_iou: float | None = None, crops: bool | None = None) -> dict:
+               score_threshold: float | None = None, nms_iou: float | None = None, crops: bool | None = None, progress=None) -> dict:
     """the section 5 extraction with the detector's symbols; score_threshold defaults to threshold()'s choice, nms_iou to
     the model's config.json and crops (the OCR pass around every symbol) to the OCR engine's default (reader.read_sheet)"""
     device = device or default_device()
@@ -129,7 +136,9 @@ def read_sheet(image_path: str, texts: list[dict] | None = None, weights: str = 
     ni = getattr(model.config, "nms_iou", None) if nms_iou is None else nms_iou
     if st is None or ni is None:
         raise ValueError(f"{weights}: config.json has no score_threshold or nms_iou (trained before they were saved); pass both")
-    ex = reader.read_sheet(image_path, texts, finder=lambda page, ink, texts: to_symbols(detect_page(page, model, proc, device, st, ni)), reader="trained", crops=crops)
+    table = getattr(model.config, "score_calibration", None)
+    ex = reader.read_sheet(image_path, texts, finder=lambda page, ink, texts: to_symbols(detect_page(page, model, proc, device, st, ni), table),
+                           reader="trained", crops=crops, progress=progress)
     ex["detector"] = {"weights": weights, "device": device, "threads": torch.get_num_threads(), "score_threshold": st, "score_threshold_source": source, "nms_iou": ni, "merge_iou": MERGE_IOU,
-                     "edge_px": EDGE_PX, "contain": CONTAIN}
+                     "edge_px": EDGE_PX, "contain": CONTAIN, "calibrated": bool(table)}
     return ex

@@ -82,19 +82,26 @@ def source_of(image_path: str, gt: dict | None, given: dict | None) -> dict:
 
 
 def build_result(image_path: str, spec_path: str | None = None, out_dir: str | None = None, gt_path: str | None = None,
-                 reader: str = "trained", weights: str = WEIGHTS, device: str = "cpu", source: dict | None = None, crops: bool | None = None) -> dict:
+                 reader: str = "trained", weights: str = WEIGHTS, device: str = "cpu", source: dict | None = None, crops: bool | None = None,
+                 progress=None) -> dict:
     """run the pipeline as cli.run does, write its files plus sheet.png, overlay.png and result.json into out_dir, return the Result;
-    crops (the OCR pass around every symbol) None follows the OCR engine (reader.read_sheet)"""
-    t0 = time.perf_counter()
+    crops (the OCR pass around every symbol) None follows the OCR engine (reader.read_sheet); progress(step, seconds), when given,
+    is called as each of the five steps finishes (text, symbols and labels from the reader's own callback, spec and price here)"""
+    t0 = time.perf_counter(); last = [t0]
+
+    def tick(step):
+        now = time.perf_counter(); secs, last[0] = round(now - last[0], 2), now
+        if progress:
+            progress(step, secs)
     out_dir = out_dir or os.path.join("out", os.path.splitext(os.path.basename(image_path))[0])
     os.makedirs(out_dir, exist_ok=True)
-    ex = choose(reader, weights, device, crops)(image_path)
+    ex = choose(reader, weights, device, crops)(image_path, progress=tick)
     t1 = time.perf_counter()
     sp = read_spec(spec_path) if spec_path and os.path.exists(spec_path) else None
     conflicts = cross_check(ex["notes"], sp) if sp else []
-    t2 = time.perf_counter()
+    t2 = time.perf_counter(); tick("spec")
     bom = build_bom(ex, sp, conflicts)
-    t3 = time.perf_counter()
+    t3 = time.perf_counter(); tick("price")
     write_outputs(out_dir, image_path, ex, sp, conflicts, bom, {"version": __version__, "seconds": round(t3 - t0, 1), "reader": ex["reader"]})
     if image_path.lower().endswith(".png"):
         shutil.copyfile(image_path, os.path.join(out_dir, "sheet.png"))
@@ -110,7 +117,7 @@ def build_result(image_path: str, spec_path: str | None = None, out_dir: str | N
            "images": {"sheet": "sheet.png", "overlay": "overlay.png"}, "size": ex["size"],
            "steps": steps(ex, sp, conflicts, bom, t2 - t1, t3 - t2),
            "devices": [{"id": d["id"], "type": d["type"], "type_plain": TYPE_PLAIN.get(d["type"], d["type"]), "rating": d.get("rating"), "unit": UNIT.get(d["type"]),
-                        "poles": d.get("poles"), "kA": d.get("kA"), "dest": d.get("dest", ""), "conf": d["conf"], "box": d["box"], "label": d.get("label", "")} for d in ex["devices"]],
+                        "poles": d.get("poles"), "kA": d.get("kA"), "dest": d.get("dest", ""), "conf": d["conf"], "score": d.get("score"), "box": d["box"], "label": d.get("label", "")} for d in ex["devices"]],
            "board": bom["board"],
            "bom": {"lines": [{k: l[k] for k in ("line", "part", "description", "qty", "unit_gbp", "total_gbp", "conf", "evidence", "rule")} for l in bom["lines"]],
                    "subtotal_gbp": bom["subtotal_gbp"], "margin_gbp": bom["margin_gbp"], "total_gbp": bom["total_gbp"]},

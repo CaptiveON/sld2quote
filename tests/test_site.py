@@ -1,9 +1,9 @@
 """The site's back end (site/app.py) through FastAPI's test client, with the classical reader (SLD2QUOTE_READER=classical,
 so no weights are needed) and the runs in a temporary directory: health, the samples list without and with an index, a
-live generated sheet scored against its answer key, the upload checks, a run file served, health and live runs at 503
-while warming, the daily cap on live runs (429; samples and scorecards never capped), and the OCR crop pass following the
+live generated sheet scored against its answer key (as JSON and as an NDJSON stream of step events), the upload checks, a run file served, the models warmed by
+the first health call and 503 after a load error, the daily cap on live runs (429; samples and scorecards never capped), and the OCR crop pass following the
 engine (on for vision, off for rapidocr) unless overridden, in the reader and through the server's SLD2QUOTE_CROPS. About 10 s."""
-import json, os, sys, tempfile, time
+import json, os, sys, tempfile
 import pytest
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
@@ -20,26 +20,29 @@ RESULT_KEYS = {"id", "source", "images", "size", "steps", "devices", "board", "b
 @pytest.fixture(scope="module")
 def client():
     with TestClient(site.app) as c:
-        for _ in range(600):  # the warm-up thread
-            if c.get("/api/health").json()["warm"]:
-                break
-            time.sleep(0.1)
         yield c
 
 
-def test_health(client):
-    h = client.get("/api/health").json()
-    assert h["ok"] and h["warm"] and h["model"] == "classical" and h["engine"] in ("vision", "rapidocr")
+def test_the_first_health_call_warms_the_models(client):
+    assert not site.STATE["warm"]
+    r = client.get("/api/health"); h = r.json()
+    assert r.status_code == 200 and h["ok"] and h["warm"] and h["model"] == "classical" and h["engine"] in ("vision", "rapidocr")
+    assert site.STATE["warm"] and client.get("/api/health").status_code == 200
 
 
-def test_samples_empty_then_with_an_index(client, tmp_path, monkeypatch):
-    monkeypatch.setattr(site, "SAMPLES", str(tmp_path))
+def test_samples_empty_then_with_an_index(client, tmp_path, monkeypatch, request):
+    monkeypatch.setattr(site, "SAMPLES", str(tmp_path)); site.cards.cache_clear(); request.addfinalizer(site.cards.cache_clear)
     assert client.get("/api/samples").json() == {"samples": []}
     (tmp_path / "s1").mkdir()
     (tmp_path / "index.json").write_text(json.dumps([{"id": "s1", "title": "Sheet 1", "kind": "sample", "copy": "clean", "has_answer_key": True, "thumb": "s1/thumb.png"}]))
-    (tmp_path / "s1" / "result.json").write_text(json.dumps({"id": "s1", "images": {"sheet": "sheet.png", "overlay": "overlay.png"}, "files": {"quotation_md": "quotation.md"}}))
+    (tmp_path / "s1" / "result.json").write_text(json.dumps({"id": "s1", "source": {"kind": "sample", "title": "x", "copy": "scan", "has_answer_key": True, "note": "n"}, "images": {"sheet": "sheet.png", "overlay": "overlay.png"},
+        "files": {"quotation_md": "quotation.md"}, "devices": [1, 2, 3], "bom": {"total_gbp": 1234.5}, "issues": [1], "timing": {"total": 9.5},
+        "score": {"precision": 0.9, "recall": 0.8, "price_error": 0.1, "rating_accuracy": 0.7, "symbols_total": 3}}))
     (tmp_path / "s1" / "thumb.png").write_bytes(b"\x89PNG")
-    assert client.get("/api/samples").json()["samples"][0]["thumb"] == "/api/samples/s1/files/thumb.png"
+    site.cards.cache_clear()
+    card = client.get("/api/samples").json()["samples"][0]
+    assert card == {"id": "s1", "title": "Sheet 1", "kind": "sample", "copy": "scan", "has_answer_key": True, "note": "n", "devices": 3, "total_gbp": 1234.5, "issues": 1,
+                    "score": {"precision": 0.9, "recall": 0.8, "price_error": 0.1, "rating_accuracy": 0.7}, "seconds": 9.5, "thumb": "/api/samples/s1/files/thumb.png"}
     r = client.get("/api/samples/s1").json()
     assert r["images"]["overlay"] == "/api/samples/s1/files/overlay.png" and r["files"]["quotation_md"] == "/api/samples/s1/files/quotation.md"
     assert client.get("/api/samples/s1/files/thumb.png").content == b"\x89PNG"
@@ -52,6 +55,7 @@ def test_generate_scores_the_sheet_and_serves_its_files(client):
     assert r.status_code == 200, r.text
     res = r.json()
     assert set(res) == RESULT_KEYS and res["reader"] == "classical" and res["source"]["kind"] == "generated" and res["source"]["seed"] == 7
+    assert all({"conf", "score", "box"} <= set(d) for d in res["devices"])  # score: the detector's raw score once the reader records it
     assert [s["key"] for s in res["steps"]] == ["text", "symbols", "labels", "spec", "price"] and all(s["count"] >= 0 and "plain" in s for s in res["steps"])
     sc = res["score"]
     assert sc and sc["symbols_total"] > 0 and 0 <= sc["recall"] <= 1 and sc["reference_total_gbp"] > 0 and sc["per_type"]
@@ -76,16 +80,13 @@ def test_upload_rejects_a_non_image_and_accepts_a_png(client):
     assert client.get(res["images"]["sheet"]).status_code == 200
 
 
-def test_live_runs_answer_503_while_warming(client, monkeypatch):
-    monkeypatch.setitem(site.STATE, "warm", False)
-    assert client.post("/api/generate", json={"seed": 1}).status_code == 503
-
-
-def test_health_answers_503_while_warming(client, monkeypatch):
-    monkeypatch.setitem(site.STATE, "warm", False)
+def test_a_load_error_gives_503_with_the_error_for_good(client, monkeypatch):
+    monkeypatch.setitem(site.STATE, "warm", False); monkeypatch.setitem(site.STATE, "error", "RuntimeError: no weights")
     r = client.get("/api/health")
-    assert r.status_code == 503 and r.json()["warm"] is False and r.json()["ok"]
-    assert client.get("/api/samples").status_code == 200
+    assert r.status_code == 503 and r.json() == dict(r.json(), ok=False, warm=False, error="RuntimeError: no weights")
+    r = client.post("/api/generate", json={"seed": 1})
+    assert r.status_code == 503 and "no weights" in r.json()["detail"]
+    assert client.get("/api/samples").status_code == 200 and client.get("/api/scorecards").status_code == 200
 
 
 def test_the_daily_cap_on_live_runs(client, monkeypatch):
@@ -120,3 +121,24 @@ def test_the_server_passes_crops_through(client, monkeypatch):
     monkeypatch.setattr(site, "CROPS", False)
     res = client.post("/api/generate", json={"seed": 3, "level": "simple"}).json()
     assert client.get(res["files"]["extraction_json"]).json()["crops"] is False
+
+
+def test_a_streamed_run_yields_start_the_five_steps_then_the_result(client):
+    r = client.post("/api/generate?stream=1", json={"seed": 5, "level": "simple"})
+    assert r.status_code == 200 and r.headers["content-type"].startswith("application/x-ndjson"), r.text
+    ev = [json.loads(l) for l in r.text.splitlines()]
+    assert ev[0]["event"] == "start" and ev[0]["run"] and [s["step"] for s in ev[0]["steps"]] == ["text", "symbols", "labels", "spec", "price"] and all(s["label"] for s in ev[0]["steps"])
+    assert [(e["event"], e["step"]) for e in ev[1:6]] == [("step", s) for s in ("text", "symbols", "labels", "spec", "price")] and all(e["seconds"] >= 0 for e in ev[1:6])
+    res = ev[6]["result"]
+    assert ev[6]["event"] == "result" and len(ev) == 7 and set(res) == RESULT_KEYS and res["id"] == ev[0]["run"] and res["images"]["overlay"] == f"/api/runs/{res['id']}/overlay.png"
+
+
+def test_a_refused_streamed_run_is_one_error_line(client, monkeypatch):
+    ev = [json.loads(l) for l in client.post("/api/upload?stream=1", files={"file": ("x.txt", b"no", "text/plain")}).text.splitlines()]
+    assert ev == [{"event": "error", "status": 400, "message": "not a readable image: send a PNG or JPEG"}]
+    monkeypatch.setattr(site, "DAILY_RUNS", 0)
+    r = client.post("/api/generate?stream=1", json={"seed": 5})
+    assert r.status_code == 200 and json.loads(r.text) == {"event": "error", "status": 429, "message": site.OVER}
+    monkeypatch.setitem(site.STATE, "warm", False); monkeypatch.setitem(site.STATE, "error", "boom")
+    ev = [json.loads(l) for l in client.post("/api/upload?stream=1", files={"file": ("x.png", b"\x89PNG", "image/png")}).text.splitlines()]
+    assert ev == [{"event": "error", "status": 503, "message": "the server could not load its models: boom"}]
