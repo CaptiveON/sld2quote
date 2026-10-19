@@ -27,4 +27,6 @@ COPY --chown=user . .
 RUN python -c "from sld2quote.ocr import _rapid; _rapid(True)"
 # torch would otherwise size its thread pool from the host's cores, not the instance's 2 vCPUs
 ENV OMP_NUM_THREADS=2 PYTHONUNBUFFERED=1
-CMD ["uvicorn", "app:app", "--app-dir", "site", "--host", "0.0.0.0", "--port", "7860"]
+# Cloud Run's front end ends TLS and says so in X-Forwarded-Proto; trusting it keeps redirects (a page folder asked for
+# without its slash) on https
+CMD ["uvicorn", "app:app", "--app-dir", "site", "--host", "0.0.0.0", "--port", "7860", "--forwarded-allow-ips", "*"]
