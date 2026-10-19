@@ -17,7 +17,7 @@
 # Needs gcloud logged in as the owner. Every gcloud call names the project (gc below); nothing here changes gcloud's
 # configuration. After a successful deploy the registry keeps only the deployed image (the free tier stores 0.5 GB).
 set -euo pipefail
-P=sld2quote-demo R=europe-west1 MODEL=rtdetr_r18_full
+P=sld2quote-demo R=europe-west1 MODEL=rtdetr_r18_plain_ema_fix_pass4
 PROBE=tcpSocket.port=7860,periodSeconds=2,timeoutSeconds=1,failureThreshold=120 CONC=8
 SA=sld2quote-run@$P.iam.gserviceaccount.com  # runtime identity: no project role and no secret, it only runs the container
 cd "$(dirname "$0")/.."

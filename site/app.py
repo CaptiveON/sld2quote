@@ -7,7 +7,7 @@ line, one line as each of the five steps finishes, then the Result (or one error
   (not "site.app:app": the standard library's own `site` module shadows this directory as a package)
 
 Environment: SLD2QUOTE_RUNS (run directories, default /tmp/sld2quote-runs, pruned to the last 50); SLD2QUOTE_WEIGHTS
-(default weights/rtdetr_r18_full; when missing, downloaded once at start-up from the model repo SLD2QUOTE_MODEL_REPO
+(default weights/rtdetr_r18_plain_ema_fix_pass4; when missing, downloaded once at start-up from the model repo SLD2QUOTE_MODEL_REPO
 with HF_TOKEN); SLD2QUOTE_OCR (the OCR engine: vision on a Mac with the tool, else rapidocr); SLD2QUOTE_READER=classical
 (tests only: the shape-test reader, no weights); SLD2QUOTE_CROPS=0 or 1 (the OCR pass around every symbol; default: the
 engine's own, on for vision, off for rapidocr); SLD2QUOTE_DAILY_RUNS (live runs allowed per UTC day per instance, default 16, so two instances stay inside the free tier in the strict worst case; over it
@@ -31,7 +31,7 @@ from sld2quote import generate, ocr, result  # noqa: E402
 
 SAMPLES, STATIC = os.path.join(HERE, "samples"), os.path.join(HERE, "static")
 RUNS = os.environ.get("SLD2QUOTE_RUNS", "/tmp/sld2quote-runs")
-WEIGHTS = os.environ.get("SLD2QUOTE_WEIGHTS", os.path.join(ROOT, "weights", "rtdetr_r18_full"))
+WEIGHTS = os.environ.get("SLD2QUOTE_WEIGHTS", os.path.join(ROOT, "weights", "rtdetr_r18_plain_ema_fix_pass4"))
 READER = os.environ.get("SLD2QUOTE_READER", "trained")
 ENGINE = os.environ.get("SLD2QUOTE_OCR") or ocr.default_engine()
 CROPS = {"0": False, "1": True}.get(os.environ.get("SLD2QUOTE_CROPS", ""))  # None: the engine's default

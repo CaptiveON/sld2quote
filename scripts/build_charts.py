@@ -1,7 +1,7 @@
 """The site's chart data: eval/charts.json, built from what exists on this Mac (the scorecards in eval/RESULTS.md, the
 training histories and the threshold sweep under weights/, eval/OCR.md, the precomputed samples, the COCO export).
 
-  python3 scripts/build_charts.py [--model rtdetr_r18_full] [--out eval/charts.json]
+  python3 scripts/build_charts.py [--model rtdetr_r18_plain_ema_fix_pass4] [--out eval/charts.json]
 
 --model is the deployed directory under weights/: a run, or a pass of one copied as <run>_passN with its own config.json and
 threshold_drawing.json (the training record stays with the run, which is then the live one, with live_pass N).
@@ -23,9 +23,9 @@ TITLE = re.compile(r"^(data/\S+), (trained|classical) reader(?: \(`weights/([^`]
 CLASS_PLAIN = {"breaker": "circuit breaker", "fuse_switch": "fuse switch", "isolator": "isolator", "contactor": "contactor (motor starter)",
                "transformer": "transformer", "generator": "generator", "motor": "motor", "board": "downstream board", "ct": "current transformer",
                "meter": "panel meter", "relay": "protection relay", "spd": "surge protector", "capacitor": "capacitor bank", "earth": "earth"}
-RUN_LABELS = {"rtdetr_r18_full": "r18, full set (site model)", "rtdetr_r50_full": "r50, full set", "rtdetr_r18_more": "r18, continued from r18 full",
+RUN_LABELS = {"rtdetr_r18_full": "r18, full set", "rtdetr_r50_full": "r50, full set", "rtdetr_r18_more": "r18, continued from r18 full",
               "rtdetr_r18_rare": "r18, rare classes repeated", "rtdetr_r18_plain": "r18, plain control", "rtdetr_r18_plain_ema": "r18, plain control with EMA",
-              "rtdetr_r18_fonts": "r18, wide font set", "rtdetr_r18_fonts_ema": "r18, wide font set with EMA"}
+              "rtdetr_r18_fonts": "r18, wide font set", "rtdetr_r18_fonts_ema": "r18, wide font set with EMA", "rtdetr_r18_plain_ema_fix": "r18, plain control with EMA and the gradient fix"}
 OCR_LABELS = {"vision": "Apple Vision", "rapidocr": "RapidOCR (PP-OCRv4, English recogniser)", "rapidocr-ch": "RapidOCR (bundled Chinese recogniser)",
               "tesseract": "Tesseract", "easyocr": "EasyOCR", "doctr": "docTR"}
 KINDS = {(True, "clean"): "synthetic clean", (True, "scan"): "synthetic scan", (False, "clean"): "real drawing", (False, "scan"): "real drawing"}
@@ -224,7 +224,7 @@ def validate(doc: dict):
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("--model", default="rtdetr_r18_full", help="the site's detector: weights/<model>")
+    ap.add_argument("--model", default="rtdetr_r18_plain_ema_fix_pass4", help="the site's detector: weights/<model>")
     ap.add_argument("--out", default="eval/charts.json")
     a = ap.parse_args(argv)
     doc = build(a.model)

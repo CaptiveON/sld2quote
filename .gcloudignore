@@ -18,7 +18,7 @@
 !/data/preview/
 !/weights/
 /weights/*
-!/weights/rtdetr_r18_full/
+!/weights/rtdetr_r18_plain_ema_fix_pass4/
 /weights/*/*
 !/weights/*/config.json
 !/weights/*/preprocessor_config.json
