@@ -420,6 +420,7 @@ const C = {
   legend: items => items.map(([cls, label]) => `<span class="lg"><i class="sw ${cls}"></i>${esc(label)}</span>`).join(''),
   lw: (labels, w) => Math.min(Math.round(w * 0.42), Math.max(90, Math.ceil(Math.max(...labels.map(s => String(s).length * 6.3 + 12))))),  // room for the longest row label at 12 px, capped so the bars keep most of the width
   fit(s, L) { s = String(s); const n = Math.floor((L - 12) / 6.3); return s.length <= n ? s : s.slice(0, Math.max(3, n - 1)) + '\u2026'; },
+  rw: labels => Math.max(44, Math.ceil(Math.max(...labels.map(s => String(s).length * 6.6 + 12)))),  // room for the longest value label at 11 px mono, so none is cut at the right edge
 };
 const CS = {scoresSet: 0, typesCopy: 'clean', priceSet: 0};  // the chart controls' state
 const MEAS = [['symbol_recall', 'Symbols found'], ['symbol_precision', 'Boxes that were right'], ['rating_accuracy', 'Ratings read right'], ['bom_recall', 'Bill-of-materials lines found'], ['price_error', 'Price error (lower is better)']];
@@ -448,9 +449,10 @@ function chartScores(ch, w) {
 function stackedTypes(types, w, title) {  // found, missed and extra boxes per device type, sorted by total; shared by the How it works chart and the Score tab
   const rows = types.map(t => ({plain: t.plain || PLAIN[t.type] || t.type, total: t.total || 0, found: t.found || 0, missed: Math.max(0, (t.total || 0) - (t.found || 0)), extra: Math.max(0, (t.reported || 0) - (t.found || 0))})).sort((a, b) => b.total - a.total);
   if (!rows.length) return null;
-  const L = C.lw(rows.map(r => r.plain), w), R = 60, rowH = 20, h = 12 + rows.length * rowH + 28, max = Math.max(1, ...rows.map(r => r.total + r.extra)), x = C.lin(0, max, L, w - R), xs = C.ticks(0, max, 5);
+  const vals = rows.map(r => `${r.found}/${r.total}${r.extra ? ' +' + r.extra : ''}`);
+  const L = C.lw(rows.map(r => r.plain), w), R = C.rw(vals), rowH = 20, h = 12 + rows.length * rowH + 28, max = Math.max(1, ...rows.map(r => r.total + r.extra)), x = C.lin(0, max, L, w - R), xs = C.ticks(0, max, 5);
   let g = C.vgrid(x, xs, 8, h - 28) + C.xaxis(x, xs, h - 28, v => String(v));
-  rows.forEach((r, i) => { const y = 12 + i * rowH; g += C.t(L - 8, y + 12, C.fit(r.plain, L), 'lbl', 'end') + C.r(L, y + 2, x(r.found) - L, 13, 'f-found', `${r.plain}: ${r.found} found`) + C.r(x(r.found), y + 2, x(r.found + r.missed) - x(r.found), 13, 'f-missed', `${r.missed} missed`) + C.r(x(r.total), y + 2, x(r.total + r.extra) - x(r.total), 13, 'f-extra', `${r.extra} extra boxes`) + C.t(x(r.total + r.extra) + 4, y + 13, `${r.found}/${r.total}${r.extra ? ' +' + r.extra : ''}`, 'val'); });
+  rows.forEach((r, i) => { const y = 12 + i * rowH; g += C.t(L - 8, y + 12, C.fit(r.plain, L), 'lbl', 'end') + C.r(L, y + 2, x(r.found) - L, 13, 'f-found', `${r.plain}: ${r.found} found`) + C.r(x(r.found), y + 2, x(r.found + r.missed) - x(r.found), 13, 'f-missed', `${r.missed} missed`) + C.r(x(r.total), y + 2, x(r.total + r.extra) - x(r.total), 13, 'f-extra', `${r.extra} extra boxes`) + C.t(x(r.total + r.extra) + 4, y + 13, vals[i], 'val'); });
   const found = rows.reduce((a, r) => a + r.found, 0), total = rows.reduce((a, r) => a + r.total, 0), extra = rows.reduce((a, r) => a + r.extra, 0);
   return {svg: C.svg(w, h, g, `${title}: ${found} of ${total} symbols found, ${extra} extra boxes; ${rows.filter(r => r.missed).map(r => r.plain + ' ' + r.found + ' of ' + r.total).join(', ') || 'every type complete'}`),
     legend: C.legend([['f-found', 'found'], ['f-missed', 'missed'], ['f-extra', 'extra boxes']]), table: C.table(['Device type', 'In the answer key', 'Found', 'Missed', 'Extra'], rows.map(r => [r.plain, r.total, r.found, r.missed, r.extra]))};
@@ -468,13 +470,14 @@ function chartTraining(ch, w) {
   const x = C.lin(1, maxP, L, w - R), y = C.lin(lo, hi, h - B, T), yt = C.ticks(lo, hi, 4), xt = C.ticks(1, maxP, Math.min(maxP, 10)).filter(Number.isInteger);
   let g = C.hgrid(y, yt, L, w - R) + C.yaxis(y, yt, L, v => v.toFixed(2)) + C.xaxis(x, xt, h - B, v => String(v)) + C.t((L + w - R) / 2, h - 4, 'pass', 'tick', 'middle');
   const legend = [];
+  const nameOf = r => (r.label || r.run).replace(/\s*\((site|live) model\)\s*$/i, '');  // the data may already say (site model); the legend says it once
   runs.forEach((r, i) => { const k4 = i % 4, cls = r.live ? 'ln-live' : 'ln-run' + k4 + (i >= 4 ? ' ln-alt' : ''), pts = r.passes.map((p, k) => [x(p), y(r.score[k])]);
-    g += C.pl(pts, cls + (r.ema ? ' ln-ema' : '')); const bi = r.passes.indexOf(r.best_pass); if (bi >= 0) g += C.dot(x(r.passes[bi]), y(r.score[bi]), 4, 'dot-' + (r.live ? 'live' : 'run' + k4), `${r.label || r.run}: best pass ${r.best_pass}, ${r.score[bi]}`);
-    if (r.live) { const last = pts[pts.length - 1]; g += C.t(last[0] + 6, last[1] + 4, 'live model', 'val'); } legend.push([r.live ? 'sw-live' : 'sw-run' + k4, (r.label || r.run) + (r.live ? ' (live model)' : '') + (r.ema ? ', averaged weights (dashed)' : '') + (i >= 4 && !r.ema ? ' (dotted)' : '')]); });
+    g += C.pl(pts, cls + (r.ema ? ' ln-ema' : '')); const bi = r.passes.indexOf(r.best_pass); if (bi >= 0) g += C.dot(x(r.passes[bi]), y(r.score[bi]), 4, 'dot-' + (r.live ? 'live' : 'run' + k4), `${nameOf(r)}: best pass ${r.best_pass}, ${r.score[bi]}`);
+    if (r.live) { const last = pts[pts.length - 1]; g += C.t(last[0] + 6, last[1] + 4, 'live model', 'val'); } legend.push([r.live ? 'sw-live' : 'sw-run' + k4, nameOf(r) + (r.live ? ' (live model)' : '') + (r.ema ? ', averaged weights (dashed)' : '') + (i >= 4 && !r.ema ? ' (dotted)' : '')]); });
   const live = runs.find(r => r.live) || runs[0], metrics = [...new Set(runs.map(r => r.metric).filter(Boolean))];
-  return {title: 'Training runs: the selection score pass by pass', caption: `The score each run was judged by after every pass${metrics.length > 1 ? ` (${metrics.map(m => `${m} for ${runs.filter(r => r.metric === m).map(r => r.label || r.run).join(', ')}`).join('; ')})` : live.metric ? ` (${live.metric})` : ''}; the live model's line is emphasised, averaged-weight runs are dashed, the chosen pass is dotted. The swings between adjacent passes are why averaged weights are preferred.`,
-    svg: C.svg(w, h, g, `${runs.length} training runs; the live model ${live.label || live.run} peaks at pass ${live.best_pass} with ${Math.max(...live.score)}`), legend: C.legend(legend),
-    table: C.table(['Run', 'Best pass', ...Array.from({length: maxP}, (_, i) => 'pass ' + (i + 1))], runs.map(r => [r.label || r.run, r.best_pass, ...Array.from({length: maxP}, (_, i) => { const k = r.passes.indexOf(i + 1); return k < 0 ? '' : r.score[k]; })]))};
+  return {title: 'Training runs: the selection score pass by pass', caption: `The score each run was judged by after every pass${metrics.length > 1 ? ` (${metrics.map(m => `${m} for ${runs.filter(r => r.metric === m).map(nameOf).join(', ')}`).join('; ')})` : live.metric ? ` (${live.metric})` : ''}; the live model's line is emphasised, averaged-weight runs are dashed, the chosen pass is dotted. The swings between adjacent passes are why averaged weights are preferred.`,
+    svg: C.svg(w, h, g, `${runs.length} training runs; the live model ${nameOf(live)} peaks at pass ${live.best_pass} with ${Math.max(...live.score)}`), legend: C.legend(legend),
+    table: C.table(['Run', 'Best pass', ...Array.from({length: maxP}, (_, i) => 'pass ' + (i + 1))], runs.map(r => [nameOf(r) + (r.live ? ' (live model)' : ''), r.best_pass, ...Array.from({length: maxP}, (_, i) => { const k = r.passes.indexOf(i + 1); return k < 0 ? '' : r.score[k]; })]))};
 }
 function chartThreshold(ch, w) {
   const th = ch.threshold; if (!th || !(th.thresholds || []).length) return null;
@@ -529,14 +532,14 @@ function stackedTiming(stages, w, aria) {  // one bar of seconds per stage; shar
 function chartTiming(ch, w) {
   const tm = ch.timing; if (!tm || !(tm.stages || []).length) return null;
   const stages = tm.stages.map(s => ({label: s.label || s.step, seconds: s.mean_seconds})), out = stackedTiming(stages, w, `mean seconds per stage over ${tm.n} drawings: ${stages.map(s => `${s.label} ${s.seconds.toFixed(1)}`).join(', ')}`); if (!out) return null;
-  const kinds = tm.by_kind || []; if (kinds.length) { const L = C.lw(kinds.map(k => `${k.kind} (${k.n})`), w), R = 50, rowH = 22, h = 8 + kinds.length * rowH, max = Math.max(...kinds.map(k => k.mean_total_seconds)), x = C.lin(0, max, L, w - R); let g = '';
+  const kinds = tm.by_kind || []; if (kinds.length) { const L = C.lw(kinds.map(k => `${k.kind} (${k.n})`), w), R = C.rw(kinds.map(k => k.mean_total_seconds.toFixed(1) + ' s')), rowH = 22, h = 8 + kinds.length * rowH, max = Math.max(...kinds.map(k => k.mean_total_seconds)), x = C.lin(0, max, L, w - R); let g = '';
     kinds.forEach((k, i) => { const y = 8 + i * rowH; g += C.t(L - 8, y + 12, `${k.kind} (${k.n})`, 'lbl', 'end') + C.r(L, y + 2, x(k.mean_total_seconds) - L, 14, 'f-trained', `${k.kind}: ${k.mean_total_seconds.toFixed(1)} s`) + C.t(x(k.mean_total_seconds) + 4, y + 13, k.mean_total_seconds.toFixed(1) + ' s', 'val'); });
     out.svg += C.svg(w, h, g, `mean seconds by kind: ${kinds.map(k => `${k.kind} ${k.mean_total_seconds.toFixed(1)}`).join(', ')}`); out.table += C.table(['Kind of drawing', 'Drawings', 'Mean seconds'], kinds.map(k => [k.kind, k.n, k.mean_total_seconds.toFixed(1)])); }
   return Object.assign(out, {title: 'Where the time goes', caption: `Mean seconds per stage over the ${tm.n} precomputed samples${tm.engine ? ` with ${ENGINES[tm.engine] || tm.engine}` : ''}, then the mean per kind of drawing. The text reader and the detector take nearly all of it; the rules and the specification check are instant.`});
 }
 function chartData(ch, w) {
   const classes = ((ch.data || {}).classes || []).filter(c => c.train > 0).sort((a, b) => b.train - a.train); if (!classes.length) return null;
-  const names = classes.map(c => c.plain || PLAIN[c.type] || c.type), L = C.lw(names, w), R = 56, rowH = 24, h = 12 + classes.length * rowH + 28, hi = C.nice(Math.max(...classes.map(c => Math.max(c.train, c.test_unseen || 0))) * 1.2), x = C.log(1, hi, L, w - R), xt = [1, 10, 100, 1000, 10000, 100000].filter(v => v <= hi);
+  const names = classes.map(c => c.plain || PLAIN[c.type] || c.type), L = C.lw(names, w), R = C.rw(classes.map(c => String(c.train))), rowH = 24, h = 12 + classes.length * rowH + 28, hi = C.nice(Math.max(...classes.map(c => Math.max(c.train, c.test_unseen || 0))) * 1.2), x = C.log(1, hi, L, w - R), xt = [1, 10, 100, 1000, 10000, 100000].filter(v => v <= hi);
   let g = C.vgrid(x, xt, 8, h - 28) + C.xaxis(x, xt, h - 28, v => String(v)) + C.t((L + w - R) / 2, h - 2, 'boxes (log scale)', 'tick', 'middle');
   classes.forEach((c, i) => { const y = 12 + i * rowH; g += C.t(L - 8, y + 13, C.fit(names[i], L), 'lbl', 'end') + C.r(L, y + 2, x(c.train) - L, 8, 'f-trained', `${c.plain || c.type}: ${c.train} training boxes`) + C.r(L, y + 11, x(c.test_unseen || 1) - L, 8, 'f-classical', `${c.plain || c.type}: ${c.test_unseen || 0} unseen-style test boxes`) + C.t(x(c.train) + 4, y + 10, String(c.train), 'val'); });
   const rare = classes.slice(-3).map(c => `${c.plain || c.type} ${c.train}`).join(', ');
