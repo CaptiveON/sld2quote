@@ -201,10 +201,10 @@ What it still gets wrong: On the unseen-style sheets rtdetr_r18vd finds 87% of t
 | test_scan | 312 | raw | 0.7473 | 0.7264 | 0.5208 (board) | 0.6901 | 0.125 (relay) |
 | test_unseen | 1236 | with NMS | 0.8625 | 0.9245 | 0.5556 (relay) | 0.8169 | 0.4167 (relay) |
 | test_unseen | 1236 | raw | 0.7266 | 0.7044 | 0.4593 (contactor) | 0.7083 | 0.2917 (relay) |
-| test_unseen on `data/coco`, threshold 0.12 | 1140 | with NMS | 0.8652 | 0.9253 | 0.625 (relay) | 0.8116 | 0.2381 (relay) |
-| test_unseen on `data/coco`, threshold 0.20 | 1140 | raw | 0.7331 | 0.697 | 0.4375 (board) | 0.6999 | 0.1429 (relay) |
 | val on `data/coco`, threshold 0.12 | 936 | with NMS | 0.869 | 0.9522 | 0.7849 (board) | 0.8201 | 0.1333 (relay) |
 | val on `data/coco`, threshold 0.20 | 936 | raw | 0.7301 | 0.7 | 0.5092 (board) | 0.7027 | 0.0667 (relay) |
+| test_unseen on `data/coco`, threshold 0.12 | 1140 | with NMS | 0.8652 | 0.9253 | 0.625 (relay) | 0.8116 | 0.2381 (relay) |
+| test_unseen on `data/coco`, threshold 0.20 | 1140 | raw | 0.7331 | 0.697 | 0.4375 (board) | 0.6999 | 0.1429 (relay) |
 | test_unseen, `pass-10`, threshold 0.09 | 1236 | with NMS | 0.7976 | 0.87 | 0.1818 (relay) | 0.7368 | 0.0833 (relay) |
 | test_unseen, `pass-10`, threshold 0.15 | 1236 | raw | 0.6269 | 0.5875 | 0.1 (relay) | 0.6249 | 0.0417 (relay) |
 
@@ -354,10 +354,10 @@ What it still gets wrong: On the unseen-style sheets rtdetr_r18vd finds 93% of t
 | test_scan | 312 | raw | 0.8934 | 0.8246 | 0.2222 (relay) | 0.8553 | 0.125 (relay) |
 | test_unseen | 1236 | with NMS | 0.9205 | 0.9081 | 0.3333 (relay) | 0.8915 | 0.2083 (relay) |
 | test_unseen | 1236 | raw | 0.8811 | 0.8141 | 0.2 (relay) | 0.866 | 0.1667 (relay) |
-| test_unseen on `data/coco`, threshold 0.07 | 1140 | with NMS | 0.9397 | 0.9248 | 0.5172 (relay) | 0.9082 | 0.3571 (relay) |
-| test_unseen on `data/coco`, threshold 0.09 | 1140 | raw | 0.9036 | 0.8382 | 0.4138 (relay) | 0.8789 | 0.2857 (relay) |
 | val on `data/coco`, threshold 0.07 | 936 | with NMS | 0.95 | 0.9506 | 0.7533 (contactor) | 0.9115 | 0.4 (relay) |
 | val on `data/coco`, threshold 0.09 | 936 | raw | 0.9105 | 0.8522 | 0.5882 (relay) | 0.8836 | 0.3333 (relay) |
+| test_unseen on `data/coco`, threshold 0.07 | 1140 | with NMS | 0.9397 | 0.9248 | 0.5172 (relay) | 0.9082 | 0.3571 (relay) |
+| test_unseen on `data/coco`, threshold 0.09 | 1140 | raw | 0.9036 | 0.8382 | 0.4138 (relay) | 0.8789 | 0.2857 (relay) |
 | test_unseen, `pass-10`, threshold 0.07 | 1236 | with NMS | 0.9205 | 0.9081 | 0.3333 (relay) | 0.8915 | 0.2083 (relay) |
 | test_unseen, `pass-10`, threshold 0.09 | 1236 | raw | 0.8811 | 0.8141 | 0.2 (relay) | 0.866 | 0.1667 (relay) |
 
@@ -445,6 +445,16 @@ What it still gets wrong: On the unseen-style sheets rtdetr_r18vd finds 96% of t
 | test_unseen | 1140 | raw | 0.8896 | 0.8341 | 0.6626 (ct) | 0.874 | 0.6164 (earth) |
 | test_unseen, `pass-10`, threshold 0.06 | 1140 | with NMS | 0.9368 | 0.9547 | 0.8 (relay) | 0.9043 | 0.6667 (relay) |
 | test_unseen, `pass-10`, threshold 0.08 | 1140 | raw | 0.8896 | 0.8341 | 0.6626 (ct) | 0.874 | 0.6164 (earth) |
+| val, pass 4, the site model, threshold 0.09 | 936 | with NMS | 0.9327 | 0.9471 | 0.7273 (relay) | 0.8932 | 0.5333 (relay) |
+| val, pass 4, the site model, threshold 0.10 | 936 | raw | 0.911 | 0.8852 | 0.7416 (earth) | 0.8791 | 0.5333 (relay) |
+| val_unseen, pass 4, the site model, threshold 0.09 | 396 | with NMS | 0.9328 | 0.8689 | 0.0 (board) | 0.8919 | 0.6 (relay) |
+| val_unseen, pass 4, the site model, threshold 0.10 | 396 | raw | 0.9057 | 0.805 | 0.0 (board) | 0.8607 | 0.4 (relay) |
+| test_clean, pass 4, the site model, threshold 0.09 | 348 | with NMS | 0.9195 | 0.971 | 0.907 (board) | 0.8776 | 0.5385 (relay) |
+| test_clean, pass 4, the site model, threshold 0.10 | 348 | raw | 0.904 | 0.8922 | 0.6724 (earth) | 0.8713 | 0.5385 (relay) |
+| test_scan, pass 4, the site model, threshold 0.09 | 348 | with NMS | 0.9013 | 0.9464 | 0.4286 (relay) | 0.8508 | 0.2308 (relay) |
+| test_scan, pass 4, the site model, threshold 0.10 | 348 | raw | 0.8707 | 0.8617 | 0.4286 (relay) | 0.8353 | 0.2308 (relay) |
+| test_unseen, pass 4, the site model, threshold 0.09 | 1140 | with NMS | 0.9389 | 0.9517 | 0.75 (relay) | 0.9004 | 0.6062 (earth) |
+| test_unseen, pass 4, the site model, threshold 0.10 | 1140 | raw | 0.9149 | 0.8765 | 0.6744 (relay) | 0.8867 | 0.5719 (earth) |
 | test_unseen, `pass-7`, threshold 0.07 | 1140 | with NMS | 0.923 | 0.952 | 0.8 (relay) | 0.8922 | 0.6267 (earth) |
 | test_unseen, `pass-7`, threshold 0.10 | 1140 | raw | 0.8878 | 0.8754 | 0.7391 (capacitor) | 0.8387 | 0.5034 (earth) |
 
@@ -468,6 +478,27 @@ Per class with NMS, and the size rule (precision and recall at least 0.95 on val
 | earth | 0.987 | 0.7755 | 0.995 | 0.6884 | fail |
 
 Size rule: 3 of 14 classes pass; fails on breaker, isolator, contactor, generator, motor, board, meter, relay, spd, capacitor, earth.
+
+Per class with NMS for pass 4, the site model, and the size rule on its val and test_unseen:
+
+| class | val P | val R | test_unseen P | test_unseen R | rule |
+|---|---|---|---|---|---|
+| breaker | 0.9855 | 0.9589 | 0.9868 | 0.9444 | fail |
+| fuse_switch | 0.9982 | 0.9823 | 0.99 | 0.9766 | pass |
+| isolator | 0.9725 | 0.9464 | 0.9933 | 0.9024 | fail |
+| contactor | 0.8842 | 0.9871 | 0.8932 | 0.9819 | fail |
+| transformer | 0.9799 | 1.0 | 0.9949 | 1.0 | pass |
+| generator | 1.0 | 0.9153 | 1.0 | 0.9881 | fail |
+| motor | 0.9596 | 0.8297 | 0.9858 | 0.8373 | fail |
+| board | 0.9653 | 0.9145 | 0.8644 | 0.9808 | fail |
+| ct | 0.9571 | 0.9873 | 0.9954 | 0.9909 | pass |
+| meter | 0.9202 | 0.9804 | 0.9383 | 0.9953 | fail |
+| relay | 0.7273 | 0.5333 | 0.75 | 0.7143 | fail |
+| spd | 0.9885 | 0.7818 | 1.0 | 0.7609 | fail |
+| capacitor | 0.9355 | 0.9886 | 0.9434 | 0.9259 | fail |
+| earth | 0.9856 | 0.699 | 0.9888 | 0.6062 | fail |
+
+Size rule for pass 4, the site model: 3 of 14 classes pass.
 
 Training curve, val after each epoch:
 

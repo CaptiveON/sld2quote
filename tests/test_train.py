@@ -312,3 +312,22 @@ def test_more_command_keeps_the_runs_selection_kept_passes_average_and_sampling(
     assert ema[ema.index("--select") + 1] == "f1" and "--keep-passes" in ema and "--rare-repeat" not in ema
     assert (ema[ema.index("--ema") + 1], ema[ema.index("--ema-warmup") + 1], ema[ema.index("--lr") + 1]) == ("0.999", "200", "5e-05")  # only the schedule changes
     assert td.more_command("weights/rtdetr_r18_rare", g | {"select": "f1", "rare_repeat": 0.15}).endswith(" --select f1 --rare-repeat 0.15 --rare-group class")
+
+
+def test_summary_shows_labelled_weights_beside_their_run_with_their_own_rule_table(tmp_path):
+    ds = td.Tiles(coco_fixture(tmp_path / "data"), "train", RTDetrImageProcessor(do_resize=False))
+    dets = [det(i, c, b, 0.9) for i in (1, 2) for c, b in ((B, [100, 200, 40, 20]), (T, [400, 300, 60, 80]))]
+    s, data, run = td.split_metrics(ds, dets, 1.0, td.scored(ds.annotations(), dets), 0.5), str(tmp_path / "data"), tmp_path / "run"
+    (run / "pass-4").mkdir(parents=True)
+    json.dump({"data": data, "model": "PekingU/rtdetr_r18vd", "epochs_run": 4, "stopped": None, "train_minutes": 1, "final_eval_minutes": 1, "train_images_per_s": 1,
+               "nms_iou": 0.5, "variants": {v: {"threshold": 0.5, "splits": {"val": s, "test_unseen": s}} for v in ("nms", "raw")}}, open(run / "metrics.json", "w"))
+    json.dump({"args": {"epochs": 4, "batch": 2, "lr": 1e-4, "backbone_lr": 1e-5, "warmup_steps": 0, "seed": 0},
+               "epochs": [{"epoch": 4, "train_loss": 1.0, "images_per_s": 1.0, "seconds": 60}]}, open(run / "history.json", "w"))
+    for sp in ("val", "test_unseen"):  # a kept pass evaluated with eval --label, beside the run
+        json.dump({"weights": str(run / "pass-4"), "data": data, "label": "pass 4, the site model", "variants": {"nms": {"threshold": 0.09, "splits": {sp: s}}}},
+                  open(run / f"eval-pass-4-{sp}.json", "w"))
+    L = td.summarise(str(run), 0.95)
+    assert [l.split(" |")[0] for l in L if ", pass 4, the site model, threshold 0.09" in l] == ["| val, pass 4, the site model, threshold 0.09",
+                                                                                              "| test_unseen, pass 4, the site model, threshold 0.09"]
+    assert "Per class with NMS for pass 4, the site model, and the size rule on its val and test_unseen:" in L
+    assert "Size rule for pass 4, the site model: 2 of 14 classes pass." in L  # breaker and transformer, found on both splits

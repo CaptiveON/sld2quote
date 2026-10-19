@@ -700,7 +700,8 @@ def cmd_eval(a, argv: list):
     sel = [s for s in SELECT if os.path.isdir(os.path.join(a.data, s))]
     ts, out, _ = evaluate(model, proc, a, [a.split] if ts else list(dict.fromkeys(sel + [a.split])), ts)
     res = {"weights": a.weights, "data": a.data, "manifest_sha256": sha256(os.path.join(a.data, "manifest.json")), "device": a.device,
-           "nms_iou": a.nms_iou, "match_iou": MATCH_IOU, "variants": {v: {"threshold": ts[v], "splits": {a.split: out[v][a.split]}} for v in vs}}
+           "nms_iou": a.nms_iou, "match_iou": MATCH_IOU, "variants": {v: {"threshold": ts[v], "splits": {a.split: out[v][a.split]}} for v in vs}} | \
+          ({"label": a.label} if a.label else {})
     path = a.out or os.path.join(a.weights, f"eval-{a.split}.json"); json.dump(res, open(path, "w"), indent=1); log.info(f"wrote {path}")
 
 
@@ -748,17 +749,22 @@ def latest(d: str, m: dict) -> tuple[dict, str]:
 
 def extra_evals(d: str, m: dict) -> list:
     """the run's evaluations beyond its final weights on its own export: eval files naming other weights (a kept pass) or another
-    export, as (label, data, split, metrics per variant, threshold per variant, own weights)"""
+    export, as (label, data, split, metrics per variant, threshold per variant, whose): whose is None for the run's final weights,
+    else the eval's --label or the weights' name"""
     own_w, own_d, out = os.path.normpath(d), os.path.normpath(m["data"]), []
     for p in sorted(glob.glob(os.path.join(d, "eval-*.json"))):
         e = json.load(open(p)); w, data = os.path.normpath(e.get("weights", d)), os.path.normpath(e.get("data", m["data"]))
         if (w, data) == (own_w, own_d):
             continue
+        who = e.get("label") or (f"`{os.path.basename(w)}`" if w != own_w else None)
         for s in next(iter(e["variants"].values()))["splits"]:
-            label = s + (f" on `{e['data']}`" if data != own_d else "") + (f", `{os.path.basename(w)}`" if w != own_w else "")
+            label = s + (f" on `{e['data']}`" if data != own_d else "") + (f", {who}" if who else "")
             out.append((label, data, s, {v: r["splits"][s] for v, r in e["variants"].items() if s in r["splits"]},
-                        {v: r["threshold"] for v, r in e["variants"].items()}, w == own_w))
-    return out
+                        {v: r["threshold"] for v, r in e["variants"].items()}, who))
+    group = {}  # rows stay together by export and weights, in file order, each group's splits in the order the run's table uses
+    for x in out:
+        group.setdefault((x[1], x[5]), len(group))
+    return sorted(out, key=lambda x: (group[x[1], x[5]], EVAL_SPLITS.index(x[2]) if x[2] in EVAL_SPLITS else len(EVAL_SPLITS)))
 
 
 def plain_words(name: str, V: dict) -> str:
@@ -828,14 +834,16 @@ def summarise(d: str, target: float) -> list:
               (f", {na} cannot be judged (no boxes in val or test_unseen)" if na else "") + "; " + (f"fails on {', '.join(fails)}." if fails else "no class fails.")]
     vu, sc = any("val_unseen" in e for e in h["epochs"]), any("selection" in e for e in h["epochs"])
     at = lambda e, s, v: fmt(e.get(s, {}).get(v, {}).get("map50")); pick = lambda e, k: fmt(e.get("selection", {}).get(op, {}).get(k))
-    for data in dict.fromkeys(x[1] for x in X if x[5] and x[1] != os.path.normpath(m["data"])):
-        o = {x[2]: x[3][op] for x in X if x[1] == data and x[5] and op in x[3]}
+    for data, who in dict.fromkeys((x[1], x[5]) for x in X):  # another export, or other weights (a kept pass, a labelled copy)
+        o = {x[2]: x[3][op] for x in X if (x[1], x[5]) == (data, who) and op in x[3]}
         if "val" in o and "test_unseen" in o:
+            other = data != os.path.normpath(m["data"]); where, whose = (f" on `{data}`" if other else ""), (f" for {who}" if who else "")
             rule = size_rule(o["val"], o["test_unseen"], target)
-            L += ["", f"Per class on `{data}` {LABEL[op]}, comparable with the runs trained there, and the size rule on its val and test_unseen:", "",
+            L += ["", f"Per class{where} {LABEL[op]}{whose}, " + ("comparable with the runs trained there, " if other else "") +
+                  "and the size rule on its val and test_unseen:", "",
                   "| class | val P | val R | test_unseen P | test_unseen R | rule |", "|---|---|---|---|---|---|"]
             L += [f"| {c} | " + " | ".join(fmt(o[s]["per_class"][c][k]) for s in ("val", "test_unseen") for k in ("precision", "recall")) + f" | {rule[c]} |" for c in CLASSES]
-            L += ["", f"Size rule on `{data}`: {sum(x == 'pass' for x in rule.values())} of {len(CLASSES)} classes pass."]
+            L += ["", f"Size rule{where}{whose}: {sum(x == 'pass' for x in rule.values())} of {len(CLASSES)} classes pass."]
     L += ["", "Training curve, val after each epoch:", "", "| epoch | train loss | val mAP@0.5 with NMS |" + (" val_unseen mAP@0.5 with NMS |" if vu else "") +
           (" pooled mean F1 | mean mAP@0.5 | val_unseen worst min(P, R) |" if sc else "") + " val mAP@0.5 raw | images/s | minutes |",
           "|---|---|---|" + ("---|" if vu else "") + ("---|---|---|" if sc else "") + "---|---|---|"]
@@ -975,6 +983,7 @@ def main(argv=None):
     e.add_argument("--weights", required=True); e.add_argument("--split", required=True)
     e.add_argument("--threshold", type=float, help="one threshold for every variant; default: those chosen on val at training time")
     e.add_argument("--out", help="default: <weights>/eval-<split>.json")
+    e.add_argument("--label", help="how the summary names these weights in their run's section, e.g. 'pass 4, the site model'; default: the folder name")
     s = sub.add_parser("summary", help="per model: every split with NMS and raw, per-class size rule, training curve, plain words")
     s.add_argument("--runs", required=True, help="comma-separated weights directories"); s.add_argument("--out", required=True)
     s.add_argument("--target", type=float, default=0.95, help="precision and recall every class must reach on val and test_unseen")
