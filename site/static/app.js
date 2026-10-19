@@ -23,10 +23,25 @@ const S = {mode: 'live', health: 'asleep', step: 'choose', samples: [], filter: 
 
 // ---------------------------------------------------------------- data access
 function loadMock() { return new Promise((ok, no) => { const s = document.createElement('script'); s.src = 'mock.js'; s.onload = ok; s.onerror = no; document.head.appendChild(s); }); }
-async function getJson(url) { const r = await fetch(url); if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }
+const BUSY = [5000, 10000, 20000, 30000, 30000], RUN_BUSY = [20000, 20000, 20000];  // backoff when the platform refuses with a plain-text 429 while another visitor's run holds the only instance: data requests, then runs
+const sleep = ms => new Promise(res => setTimeout(res, ms));
+const isCap = text => /allowance/i.test(text || '');  // the daily cap's own 429 carries this word; the platform's refusal does not
+async function fetchRetry(url, init, onBusy, delays) {  // the Response; a busy 429 is retried on the schedule, the cap's 429 is returned at once
+  delays = delays || BUSY;
+  for (let i = 0; ; i++) {
+    const r = await fetch(url, init);
+    if (r.status !== 429 || i >= delays.length || isCap(await r.clone().text())) return r;
+    if (onBusy) onBusy(delays[i] / 1000, i + 1, delays.length); await sleep(delays[i]);
+  }
+}
+function busyPill(secs) {  // the pill while a data request waits for the busy instance; secs 0 restores the pill's own state
+  if (!secs) { if (S.busy) { S.busy = false; setPill(S.health); } return; }
+  const p = $('#pill'); S.busy = true; clearInterval(countdown); p.className = 'pill warn'; p.textContent = `Server busy with another visitor's run; retrying in ${secs} s`; p.title = 'The server refused the request while its only instance was reading another drawing';
+}
+async function getJson(url) { const r = await fetchRetry(url, undefined, busyPill); busyPill(0); if (!r.ok) { const e = new Error('HTTP ' + r.status); e.status = r.status; throw e; } return r.json(); }
 function fileUrl(dir, u) { return !u ? u : dir ? dir + String(u).split('/').pop() : String(u).startsWith('/') ? API + u : u; }
 async function detectMode() {
-  try { const j = await getJson(API + '/api/samples'); S.samples = j.samples || j; S.mode = 'live'; return; } catch (e) { /* no server here */ }
+  try { const j = await getJson(API + '/api/samples'); S.samples = j.samples || j; S.mode = 'live'; return; } catch (e) { if (e.status === 429) { S.mode = 'live'; S.samples = []; S.busyStart = true; return; } /* no server here */ }
   if (location.protocol !== 'file:') { try { const j = await getJson('samples/index.json'); S.samples = j.samples || j; S.mode = 'static'; return; } catch (e) { /* not a static copy */ } }
   await loadMock(); S.mode = 'mock'; S.samples = window.MOCK.samples;
 }
@@ -43,10 +58,11 @@ async function loadScorecards() {
   return getJson(API + '/api/scorecards');
 }
 // A live run as a stream of events (start, step, result, error); a plain JSON answer (an older server) is accepted too.
-async function runStream(path, init, onEvent) {
-  let r; try { r = await fetch(API + path + '?stream=1', init); } catch (e) { throw runError(0); }
+async function runStream(path, init, onEvent, onBusy) {
+  let r; try { r = await fetchRetry(API + path + '?stream=1', init, onBusy, RUN_BUSY); } catch (e) { throw runError(0); }
   if (!(r.headers.get('content-type') || '').includes('ndjson')) {
-    const j = await r.json().catch(() => null); if (!r.ok) throw runError(r.status, j && j.detail); return j;
+    const text = await r.text(); let j = null; try { j = JSON.parse(text); } catch (e) { /* a plain-text refusal */ }
+    if (!r.ok) throw runError(r.status, j && j.detail != null ? j.detail : text); return j;
   }
   const reader = r.body.getReader(), dec = new TextDecoder(); let buf = '', result = null;
   for (;;) {
@@ -62,13 +78,14 @@ async function runStream(path, init, onEvent) {
   if (!result) throw runError(0); return result;
 }
 function runError(status, detail) {
-  const msg = typeof detail === 'string' ? detail.replace(/^./, c => c.toUpperCase()).replace(/\.?$/, '.') : '';
-  const e = new Error(status === 429 ? 'Today\'s free allowance of live runs is used up. The samples still work, and the allowance resets tomorrow.'
+  const text = typeof detail === 'string' ? detail : '', msg = text.replace(/^./, c => c.toUpperCase()).replace(/\.?$/, '.'), cap = status === 429 && isCap(text);
+  const e = new Error(cap ? 'Today\'s free allowance of live runs is used up. The samples still work, and the allowance resets tomorrow.'
+    : status === 429 ? 'The server is still busy with another visitor\'s run. Try again in a minute, or open a sample; the samples always work.'
     : status === 503 ? 'The server could not load its models, so live runs are unavailable for now. The samples still work.'
     : status === 400 ? (msg || 'The server did not accept the input.') + ' Choose another file or seed.'
     : status === 0 ? 'The connection dropped before the result arrived. Try again.'
     : 'The run failed on the server. Try again, or pick another drawing.');
-  e.status = status; return e;
+  e.status = status; e.cap = cap; return e;
 }
 
 // ---------------------------------------------------------------- header pill and waking
@@ -77,7 +94,7 @@ function setPill(state, extra) {
   const p = $('#pill'); clearInterval(countdown); S.health = state;
   const text = {loading: ['Loading', ''], asleep: ['Server asleep', 'wakes in about 20 seconds when you try a drawing'], waking: ['Waking the server, about 20 s', ''],
     ready: ['Ready', 'model ' + S.model + ', text engine ' + S.engine], static: ['Samples only', 'no server here: the precomputed samples and scorecards'], fault: ['Live runs unavailable', 'the server could not load its models; the samples still work']}[state];
-  p.className = 'pill ' + ({ready: 'ok', waking: 'warn', fault: 'bad'}[state] || ''); p.textContent = text[0]; p.title = extra || text[1];
+  S.busy = false; p.className = 'pill ' + ({ready: 'ok', waking: 'warn', fault: 'bad'}[state] || ''); p.textContent = text[0]; p.title = extra || text[1];
   if (state === 'waking') { let n = 20; countdown = setInterval(() => { n -= 1; p.textContent = n > 0 ? `Waking the server, about ${n} s` : 'Still waking the server'; }, 1000); }
   const nolive = S.mode !== 'live' || state === 'fault';
   $('#nolive').hidden = !nolive; $$('#tab-generate, #tab-upload').forEach(t => { t.hidden = nolive; });
@@ -87,8 +104,8 @@ let waking = null;
 function warm() {  // one health call wakes the server; callers never wait for it
   if (S.mode !== 'live' || waking || S.health === 'ready' || S.health === 'fault') return waking;
   setPill('waking');
-  waking = fetch(API + '/api/health').then(async r => { const h = await r.json().catch(() => ({})); S.model = h.model || ''; S.engine = h.engine || '';
-    if (r.ok && h.warm) setPill('ready'); else setPill('fault'); }).catch(() => { setPill('asleep'); waking = null; });
+  waking = fetchRetry(API + '/api/health', undefined, busyPill).then(async r => { const h = await r.json().catch(() => ({})); S.model = h.model || ''; S.engine = h.engine || '';
+    if (r.ok && h.warm) setPill('ready'); else if (r.status === 429) { setPill('asleep'); waking = null; } else setPill('fault'); }).catch(() => { setPill('asleep'); waking = null; });
   return waking;
 }
 
@@ -139,7 +156,7 @@ function gallery() {
   $('#gallery').innerHTML = list.map(s => { const k = kindOf(s), sc = s.score, meta = [s.devices != null && s.devices + ' devices', s.total_gbp != null && gbp(s.total_gbp)].filter(Boolean).join(' · ');
     const line = sc ? `found ${pct(sc.recall)} of symbols, price within ${pct(sc.price_error)}` : s.has_answer_key ? '' : 'not scored: no answer key';
     return `<button type="button" class="sample" data-id="${esc(s.id)}" aria-pressed="${String(!!(S.key && S.key.sample === s.id))}"><img class="thumb" src="${esc(fileUrl(dir(s.id), s.thumb))}" width="320" height="200" loading="lazy" alt="">
-      <span class="body"><span class="t">${esc(s.title)}</span><span class="row"><span class="tag ${k === 'real' ? 'warn' : ''}">${label[k]}</span>${s.has_answer_key ? '<span class="tag ok">answer key</span>' : ''}</span>${meta ? `<span class="m">${esc(meta)}</span>` : ''}${line ? `<span class="m">${esc(line)}</span>` : ''}</span></button>`; }).join('') || '<p class="empty">No samples of that kind.</p>';
+      <span class="body"><span class="t">${esc(s.title)}</span><span class="row"><span class="tag ${k === 'real' ? 'warn' : ''}">${label[k]}</span>${s.has_answer_key ? '<span class="tag ok">answer key</span>' : ''}</span>${meta ? `<span class="m">${esc(meta)}</span>` : ''}${line ? `<span class="m">${esc(line)}</span>` : ''}</span></button>`; }).join('') || `<p class="empty">${S.busyStart ? 'The server is busy with another visitor\'s run; reload the page in a minute to see the samples.' : 'No samples of that kind.'}</p>`;
   $('#gallery').setAttribute('aria-busy', 'false');
 }
 async function openSample(id, push) {
@@ -166,13 +183,13 @@ async function startRun(path, init, title) {
       if (ev.event === 'start') { steps = ev.steps.map(s => [s.step, s.label, (STAGES.find(x => x[0] === s.step) || [])[2] || '']); state[steps[0][0]] = 'active'; $('#run-sub').textContent = 'The five stages run one after another; each ticks when done.'; if (S.health !== 'ready') setPill('ready'); }
       if (ev.event === 'step') { state[ev.step] = 'done'; state.secs[ev.step] = ev.seconds; const i = steps.findIndex(s => s[0] === ev.step); if (steps[i + 1]) state[steps[i + 1][0]] = 'active'; }
       paint();
-    });
+    }, (secs, n, total) => { $('#run-sub').textContent = `The server is busy with another visitor's run (up to a minute); it will retry in ${secs} s, attempt ${n} of ${total}.`; });
     steps.forEach(s => { state[s[0]] = 'done'; }); paint(); S.running = null;
     S.result = r; S.key = {run: r.id}; render(r); showStep('results', true);
   } catch (e) {
     S.running = null; $('#run-error-text').textContent = e.message; $('#run-error').hidden = false; $('#run-next').textContent = '';
     $$('#stages .stage.active').forEach(li => { li.classList.remove('active'); });
-    if (e.status === 429 || e.status === 503) { $('#retry').hidden = true; } else $('#retry').hidden = false;
+    $('#retry').hidden = !!(e.cap || e.status === 503);
   } finally { clearInterval(tick); }
 }
 function generateSubmit(e) {
@@ -389,6 +406,8 @@ async function boot() {
   $('#copy-link').addEventListener('click', async () => { const b = $('#copy-link'), url = location.href; try { await navigator.clipboard.writeText(url); } catch (e) { window.prompt('Copy this link', url); }
     b.innerHTML = icon('check') + ' Copied'; setTimeout(() => { b.innerHTML = icon('copy') + ' Copy link'; }, 2500); });
   window.addEventListener('popstate', applyUrl);
+  document.addEventListener('error', e => { const el = e.target; if (!(el instanceof HTMLImageElement || el instanceof SVGImageElement)) return; const n = +(el.dataset.retry || 0); if (n >= BUSY.length) return; el.dataset.retry = n + 1;
+    setTimeout(() => { const a = el instanceof SVGImageElement ? 'href' : 'src', u = (el.getAttribute(a) || '').replace(/[?&]r=\d+$/, ''); el.setAttribute(a, u + (u.includes('?') ? '&' : '?') + 'r=' + (n + 1)); }, BUSY[n]); }, true);  // an image refused while the instance is busy is fetched again on the same backoff
   await detectMode();
   setPill(S.mode === 'live' ? 'asleep' : 'static');
   if (S.mode === 'live' && 'IntersectionObserver' in window) { const io = new IntersectionObserver(es => { if (es.some(x => x.isIntersecting)) { warm(); io.disconnect(); } }, {rootMargin: '200px'}); io.observe($('#try')); }
