@@ -195,14 +195,15 @@
       <article class="stagecard"><h4>Choose parts and price</h4><p class="small">Fixed rules pick a catalogue part within the fault level, add busbars, enclosure, labour and documents, and name the evidence for every line.</p><p class="small muted">The estimator checks each line against the drawing instead of trusting a total.</p><span class="num" data-k="price"><span class="skeleton">&nbsp;</span></span></article>
     </div>
 
+    <div id="charts-block" hidden>
+      <h3 style="margin-top:var(--s6)">The evidence, in charts</h3>
+      <p class="muted">Each chart is drawn from the evaluation files; "Show the numbers" under it gives the same data as a table.</p>
+      <div class="charts" id="charts"></div>
+    </div>
+
     <h3 style="margin-top:var(--s6)">The scorecards</h3>
     <p class="muted">Whole drawings, scored against their answer keys: the trained reader against the hand-written one it replaced, on each evaluation set. <em>Symbols found</em> is the share of the answer key's symbols the reader found with the right type; <em>price within</em> is the gap between the quoted total and the total the same rules give on the answer key.</p>
     <div class="panels" id="panels"><div class="card"><span class="skeleton" style="display:block;height:8em"></span></div><div class="card"><span class="skeleton" style="display:block;height:8em"></span></div><div class="card"><span class="skeleton" style="display:block;height:8em"></span></div></div>
-
-    <div class="two" style="margin-top:var(--s4)">
-      <div class="card"><h4>Symbols found, by device type</h4><p class="sub muted small" id="types-sub"></p><div id="types"></div></div>
-      <div class="card"><h4>Text readers measured on the same drawings</h4><p class="sub muted small">Character accuracy on the labels and notes, clean and scan copies pooled; the chosen engine is the one the live site uses.</p><div id="engines"></div></div>
-    </div>
 
     <div class="card" style="margin-top:var(--s4)"><h4>Detector training runs</h4><p class="sub muted small">Per 640 px tile on the unseen-style test tiles, with duplicate suppression; the size rule asks for precision and recall of at least 0.95 for every class on validation and unseen-style tiles.</p><div id="runs"></div><h4 style="margin-top:var(--s3)">What it still gets wrong</h4><p id="wrong" class="small"></p></div>
 

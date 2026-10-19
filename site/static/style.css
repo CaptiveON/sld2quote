@@ -231,3 +231,25 @@ footer { padding: var(--s5) 0 var(--s6); color: var(--ink-3); font-size: var(--f
   .stagearea { height: 60vh }
   .meter { width: 72px }
 }
+
+/* charts: plain SVG, every colour a token; series colours double as swatches in the legends */
+:root { --s-trained: var(--accent); --s-classical: var(--ink-3); --s-found: var(--ok); --s-missed: var(--bad); --s-extra: var(--warn); --s-p: var(--accent); --s-r: var(--link); --s-run0: var(--link); --s-run1: var(--ink-3); --s-run2: var(--ok); --s-run3: var(--warn); --s-blank: var(--bad) }
+.charts { display: grid; gap: var(--s4); grid-template-columns: 1fr 1fr; margin-top: var(--s3) }
+@media (max-width: 760px) { .charts { grid-template-columns: 1fr } }
+.chart { margin: 0; padding: var(--s3) var(--s4); background: var(--surface); border: 1px solid var(--line); border-radius: var(--r3); min-width: 0 }
+.chart figcaption h4 { margin-bottom: 2px } .chart figcaption p { margin-bottom: var(--s2) }
+.chart .chip { padding: 2px 10px; font-size: var(--fs-xs) }
+.plotwrap { overflow-x: auto } .plot { display: block; width: 100%; height: auto; max-width: 100% }
+.plot text { font-family: var(--sans); font-size: 12px; fill: var(--ink) } .plot .tick { font-size: 11px; fill: var(--ink-3) } .plot .val { font-family: var(--mono); font-size: 11px; fill: var(--ink-2) } .plot .inbar { font-family: var(--mono); font-size: 11px; fill: var(--accent-ink) }
+.plot .axis { stroke: var(--ink-3) } .plot .grid { stroke: var(--line-2) } .plot .mark { stroke: var(--ink-2); stroke-dasharray: 3 3 } .plot .connector { stroke: var(--line) }
+.plot .f-trained { fill: var(--s-trained) } .plot .f-classical { fill: var(--s-classical) } .plot .f-scan { opacity: .55 } .plot .f-found { fill: var(--s-found) } .plot .f-missed { fill: var(--s-missed); opacity: .7 } .plot .f-extra { fill: var(--s-extra) } .plot .f-blank { fill: var(--s-blank); opacity: .8 }
+.plot .f-st0 { fill: var(--s-run0) } .plot .f-st1 { fill: var(--s-trained) } .plot .f-st2 { fill: var(--s-run2) } .plot .f-st3 { fill: var(--s-run3) } .plot .f-st4 { fill: var(--s-run1) }
+.plot polyline { fill: none; stroke-width: 1.8; stroke-linejoin: round } .plot .ln-live { stroke: var(--accent); stroke-width: 3 } .plot .ln-run0 { stroke: var(--s-run0) } .plot .ln-run1 { stroke: var(--s-run1) } .plot .ln-run2 { stroke: var(--s-run2) } .plot .ln-run3 { stroke: var(--s-run3) } .plot .ln-ema { stroke-dasharray: 6 4 } .plot .ln-p { stroke: var(--s-p); stroke-width: 2.5 } .plot .ln-r { stroke: var(--s-r); stroke-width: 2.5 }
+.plot circle { stroke-width: 2 } .plot .dot-live { fill: var(--accent); stroke: var(--surface) } .plot .dot-run0 { fill: var(--s-run0); stroke: var(--surface) } .plot .dot-run1 { fill: var(--s-run1); stroke: var(--surface) } .plot .dot-run2 { fill: var(--s-run2); stroke: var(--surface) } .plot .dot-run3 { fill: var(--s-run3); stroke: var(--surface) }
+.plot .hollow { fill: var(--surface) } .plot .dot-live.hollow { stroke: var(--accent) } .plot .dot-run1.hollow { stroke: var(--s-run1) }
+.legend { display: flex; flex-wrap: wrap; gap: var(--s1) var(--s3); margin: var(--s2) 0 0; color: var(--ink-2); border: 0; padding: 0 }
+.lg { display: inline-flex; align-items: center; gap: 6px } .sw { display: inline-block; width: 12px; height: 12px; border-radius: 2px; background: var(--ink-3) }
+.sw.f-trained, .sw.sw-live, .sw.sw-p { background: var(--s-trained) } .sw.f-classical, .sw.sw-run1 { background: var(--s-classical) } .sw.f-scan { opacity: .55 } .sw.f-found { background: var(--s-found) } .sw.f-missed { background: var(--s-missed); opacity: .7 } .sw.f-extra { background: var(--s-extra) } .sw.f-blank { background: var(--s-blank) }
+.sw.sw-r, .sw.sw-run0, .sw.f-st0 { background: var(--s-run0) } .sw.sw-run2, .sw.f-st2 { background: var(--s-run2) } .sw.sw-run3, .sw.f-st3 { background: var(--s-run3) } .sw.f-st1 { background: var(--s-trained) } .sw.f-st4 { background: var(--s-run1) }
+.numbers { margin-top: var(--s2) } .numbers summary { cursor: pointer; font-weight: 600; font-size: var(--fs-s); color: var(--link) } .numbers .frame { max-height: 40vh; margin-top: var(--s2) }
+.rchart { margin: var(--s3) 0 } .rchart h4 { margin-bottom: var(--s1) }

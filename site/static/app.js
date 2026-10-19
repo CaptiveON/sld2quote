@@ -212,6 +212,7 @@ function scoreWords(s) {
 function quality(s) { const r = s.recall != null ? s.recall : s.symbols_found / (s.symbols_total || 1), p = s.price_error == null ? 1 : s.price_error; return r >= 0.9 && p <= 0.2 ? ['high', 'ok'] : r >= 0.75 && p <= 0.4 ? ['medium', 'warn'] : ['low', 'bad']; }
 function render(r) {
   const f = u => fileUrl(r.dir, u), src = r.source || {}, bom = r.bom || {lines: []}, devices = r.devices || [], issues = r.issues || [], [W, H] = r.size || [1600, 1000], t = r.timing || {}, m = r.model || {};
+  const aw = ($('#try > .wrap') || document.body).clientWidth || 600;  // a visible width: the result panels are still hidden while they are built
   $('#rtitle').textContent = src.title || r.id;
   const who = [m.weights && `model ${String(m.weights).split('/').pop()}`, r.engine && `text engine ${ENGINES[r.engine] || r.engine}`].filter(Boolean).join(', ');
   $('#rmeta').textContent = [src.note, t.total != null ? `Read in ${t.total} s (text ${t.ocr} s, symbols ${t.detector} s)` : '', who,
@@ -245,11 +246,12 @@ function render(r) {
     + ((r.conflicts || []).length ? '<h4 style="margin-top:var(--s3)">Where the drawing and the specification disagree</h4>' + table(['Field', 'The drawing says', 'The specification says', 'Clause'], r.conflicts.map(c => `<tr>${td(FIELD[c.field] || c.field)}${td(c.drawing)}${td(c.spec)}${td(c.spec_clause, 'mono')}</tr>`)) + '<p class="foot">Each disagreement is priced to the drawing and listed under Questions; nothing is resolved silently.</p>'
     : '<p class="foot">No disagreement between the drawing and the specification.</p>') : '<p class="empty">No specification came with this drawing, so there was nothing to compare it with.</p>';
   $('#r-score').innerHTML = sc ? `<p class="quality ${q[1]}">${q[0]} agreement with the answer key</p><p>${esc(scoreWords(sc))}.${sc.notes_accuracy != null ? ` The board notes (form, protection, fault level, poles) were read right on ${pct(sc.notes_accuracy)}.` : ''}</p>`
-    + table(['Device type', {t: 'In the answer key', n: 1}, 'Found', {t: 'Reported', n: 1}], (sc.per_type || []).map(p => `<tr>${td(PLAIN[p.type] || p.type)}${td(p.total, 'n')}<td>${bar(p.total ? p.found / p.total : 0, p.total && p.found === p.total ? 'ok' : '')}<span class="mono small">${p.found} of ${p.total}</span></td>${td(p.reported, 'n')}</tr>`))
+    + (() => { const st = stackedTypes((sc.per_type || []).map(p => Object.assign({plain: PLAIN[p.type]}, p)), Math.max(280, Math.min(560, aw / 2 - 40)), 'this drawing'); return `<div class="two"><div class="rchart"><h4>By device type</h4><div class="plotwrap">${st ? st.svg : ''}</div><p class="legend small">${st ? st.legend : ''}</p></div><div>` + table(['Device type', {t: 'In the answer key', n: 1}, 'Found', {t: 'Reported', n: 1}], (sc.per_type || []).map(p => `<tr>${td(PLAIN[p.type] || p.type)}${td(p.total, 'n')}<td>${bar(p.total ? p.found / p.total : 0, p.total && p.found === p.total ? 'ok' : '')}<span class="mono small">${p.found} of ${p.total}</span></td>${td(p.reported, 'n')}</tr>`)) + '</div></div>'; })()
     + `<p class="foot">A symbol counts as found when its type is right and its box overlaps the answer key's. The reference total (${gbp(sc.reference_total_gbp)}) is what the same rules give on the answer key, so the price error measures reading, not pricing.</p>` : '<p class="empty">No answer key exists for this drawing, so there is no score. The gallery\'s synthetic samples and generated drawings are scored.</p>';
   const files = r.files || {}, names = [['quotation_md', 'quotation.md', 'the draft quotation'], ['bom_csv', 'bom.csv', 'the bill of materials for a spreadsheet'], ['review_html', 'review.html', 'the review page, self-contained'], ['extraction_json', 'extraction.json', 'everything the reader found']];
   const sheet = f((r.images || {}).sheet), resultJson = sheet && sheet.includes('/') && S.mode !== 'mock' ? sheet.slice(0, sheet.lastIndexOf('/') + 1) + 'result.json' : (S.mode === 'mock' ? 'mock/result.json' : null);
-  $('#r-files').innerHTML = `<div class="files">${names.filter(([k]) => files[k]).map(([k, n, d]) => `<a href="${esc(f(files[k]))}" download>${icon('file')}<span>${n}<br><small>${d}</small></span></a>`).join('')}${resultJson ? `<a href="${esc(resultJson)}" download>${icon('file')}<span>result.json<br><small>this result as the server returned it</small></span></a>` : ''}</div>`;
+  const rw = Math.max(280, Math.min(640, aw - 48)), tm = stackedTiming((r.steps || []).map(s => ({label: s.title || s.key, seconds: s.seconds})), rw, 'seconds per stage for this run');
+  $('#r-files').innerHTML = (tm ? `<div class="rchart"><h4>Where the time went for this run</h4><div class="plotwrap">${tm.svg}</div><p class="legend small">${tm.legend}</p><details class="numbers"><summary>Show the numbers</summary><div class="frame">${tm.table}</div></details></div>` : '') + `<div class="files">${names.filter(([k]) => files[k]).map(([k, n, d]) => `<a href="${esc(f(files[k]))}" download>${icon('file')}<span>${n}<br><small>${d}</small></span></a>`).join('')}${resultJson ? `<a href="${esc(resultJson)}" download>${icon('file')}<span>result.json<br><small>this result as the server returned it</small></span></a>` : ''}</div>`;
   showTab($('#tab-devices'));
 }
 async function textLayers(r, f) {
@@ -344,8 +346,6 @@ function problemsHtml(md) {
 async function scorecards() {
   const sc = await loadScorecards(); keyNumbers(sc);
   $('#panels').innerHTML = panelsHtml(readSets(sc.results_md || '')) || '<p class="empty">The scorecard could not be read.</p>';
-  $('#types').innerHTML = typesHtml(sc.results_md || '') || '<p class="empty">Not available.</p>';
-  $('#engines').innerHTML = enginesHtml(sc.ocr_md || '') || '<p class="empty">Not available.</p>';
   $('#runs').innerHTML = runsHtml(sc.detector_md || '') || '<p class="empty">Not available.</p>';
   $('#problems').innerHTML = sc.problems_md ? problemsHtml(sc.problems_md) : '<p class="empty">Not available.</p>';
   const html = s => window.marked ? marked.parse(s) : '<pre>' + esc(s) + '</pre>';
@@ -394,5 +394,199 @@ async function boot() {
   if (S.mode === 'live' && 'IntersectionObserver' in window) { const io = new IntersectionObserver(es => { if (es.some(x => x.isIntersecting)) { warm(); io.disconnect(); } }, {rootMargin: '200px'}); io.observe($('#try')); }
   gallery(); await applyUrl();
   scorecards().catch(() => { $('#stats').innerHTML = '<p class="muted">The scorecards could not be loaded.</p>'; $$('.stagecard .num').forEach(n => { n.innerHTML = '<small>not loaded</small>'; }); });
+  $('#charts').addEventListener('click', e => { const b = e.target.closest('button[data-c]'); if (!b) return; CS[b.dataset.k] = isNaN(b.dataset.v) ? b.dataset.v : +b.dataset.v; renderCharts(b.dataset.c); });
+  let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => renderCharts(), 200); });
+  loadCharts().then(ch => { S.charts = normCharts(ch); renderCharts(); });
 }
 document.addEventListener('DOMContentLoaded', boot);
+
+// ---------------------------------------------------------------- charts: one small SVG helper; every colour and font comes from the tokens through CSS classes
+const C = {
+  nice(x) { const p = Math.pow(10, Math.floor(Math.log10(x || 1))), f = x / p; return (f <= 1 ? 1 : f <= 2 ? 2 : f <= 5 ? 5 : 10) * p; },
+  ticks(lo, hi, n) { if (!(hi > lo)) return [lo]; const step = C.nice((hi - lo) / (n || 5)), out = []; for (let v = Math.ceil(lo / step - 1e-9) * step; v <= hi + step * 1e-6; v += step) out.push(+v.toFixed(10)); return out; },
+  lin: (d0, d1, r0, r1) => v => r0 + (v - d0) / ((d1 - d0) || 1) * (r1 - r0),
+  log: (d0, d1, r0, r1) => v => r0 + (Math.log(Math.max(v, d0)) - Math.log(d0)) / ((Math.log(d1) - Math.log(d0)) || 1) * (r1 - r0),
+  svg: (w, h, inner, aria) => `<svg class="plot" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" role="img" aria-label="${esc(aria)}">${inner}</svg>`,
+  t: (x, y, s, cls, anchor) => `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" class="${cls || 'lbl'}"${anchor ? ` text-anchor="${anchor}"` : ''}>${esc(s)}</text>`,
+  r: (x, y, w, h, cls, title) => `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${Math.max(0, w).toFixed(1)}" height="${Math.max(0, h).toFixed(1)}" class="${cls}">${title ? `<title>${esc(title)}</title>` : ''}</rect>`,
+  pl: (pts, cls) => `<polyline points="${pts.map(p => p[0].toFixed(1) + ',' + p[1].toFixed(1)).join(' ')}" class="${cls}"/>`,
+  dot: (x, y, r, cls, title) => `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r}" class="${cls}">${title ? `<title>${esc(title)}</title>` : ''}</circle>`,
+  ln: (x1, y1, x2, y2, cls) => `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" class="${cls}"/>`,
+  xaxis: (sc, ticks, y, fmt) => ticks.map(v => C.ln(sc(v), y, sc(v), y + 4, 'axis') + C.t(sc(v), y + 16, fmt(v), 'tick', 'middle')).join(''),
+  yaxis: (sc, ticks, x, fmt) => ticks.map(v => C.ln(x - 4, sc(v), x, sc(v), 'axis') + C.t(x - 7, sc(v) + 4, fmt(v), 'tick', 'end')).join(''),
+  vgrid: (sc, ticks, y0, y1) => ticks.map(v => C.ln(sc(v), y0, sc(v), y1, 'grid')).join(''),
+  hgrid: (sc, ticks, x0, x1) => ticks.map(v => C.ln(x0, sc(v), x1, sc(v), 'grid')).join(''),
+  table: (cols, rows) => `<table class="kv"><thead><tr>${cols.map(c => `<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>${rows.map(r => `<tr>${r.map((v, i) => `<td class="${i ? 'n mono small' : ''}">${esc(v)}</td>`).join('')}</tr>`).join('')}</tbody></table>`,
+  legend: items => items.map(([cls, label]) => `<span class="lg"><i class="sw ${cls}"></i>${esc(label)}</span>`).join(''),
+  lw: (labels, w) => Math.min(Math.round(w * 0.42), Math.max(90, Math.ceil(Math.max(...labels.map(s => String(s).length * 6.3 + 12))))),  // room for the longest row label at 12 px, capped so the bars keep most of the width
+  fit(s, L) { s = String(s); const n = Math.floor((L - 12) / 6.3); return s.length <= n ? s : s.slice(0, Math.max(3, n - 1)) + '\u2026'; },
+};
+const CS = {scoresSet: 0, typesCopy: 'clean', priceSet: 0};  // the chart controls' state
+const MEAS = [['symbol_recall', 'Symbols found'], ['symbol_precision', 'Boxes that were right'], ['rating_accuracy', 'Ratings read right'], ['bom_recall', 'Bill-of-materials lines found'], ['price_error', 'Price error (lower is better)']];
+const SERIES = [['trained', 'clean', 'f-trained', 'Trained, clean'], ['trained', 'scan', 'f-trained f-scan', 'Trained, scan-like'], ['classical', 'clean', 'f-classical', 'Classical, clean'], ['classical', 'scan', 'f-classical f-scan', 'Classical, scan-like']];
+function setButtons(chart, key, items, current) {
+  return `<p class="row small" role="group" aria-label="Choose what the chart shows">${items.map(([v, label]) => `<button type="button" class="chip" data-c="${chart}" data-k="${key}" data-v="${esc(v)}" aria-pressed="${String(String(v) === String(current))}">${esc(label)}</button>`).join('')}</p>`;
+}
+function chartScores(ch, w) {
+  const set = (ch.sets || [])[CS.scoresSet]; if (!set || !set.copies) return null;
+  const by = {}; set.copies.forEach(c => { by[c.copy] = c; });
+  const narrow = w < 420, L = narrow ? 8 : C.lw(MEAS.map(m => m[1]), w), R = 44, rowH = narrow ? 78 : 62, h = 24 + MEAS.length * rowH + 28, x = C.lin(0, 1, L, w - R), xs = C.ticks(0, 1, 5);
+  let g = C.vgrid(x, xs, 20, h - 28) + C.xaxis(x, xs, h - 28, v => pct(v));
+  const rows = [];
+  MEAS.forEach(([k, label], i) => {
+    const y0 = 24 + i * rowH + (narrow ? 16 : 0); g += narrow ? C.t(L, y0 - 5, label, 'lbl') : C.t(L - 8, y0 + 28, label, 'lbl', 'end');  // on a phone the label sits above its bars, so it is never cut
+    const vals = SERIES.map(([reader, copy, cls]) => { const v = ((by[copy] || {})[reader] || {})[k]; return v == null ? null : +v; });
+    vals.forEach((v, j) => { if (v == null) return; g += C.r(L, y0 + j * 13, x(v) - L, 11, SERIES[j][2], `${SERIES[j][3]}: ${pct(v)}`) + C.t(x(v) + 4, y0 + j * 13 + 9, pct(v), 'val'); });
+    rows.push([label, ...vals.map(v => v == null ? 'n/a' : pct(v))]);
+  });
+  const tc = ((by.clean || {}).trained || {}), cc = ((by.clean || {}).classical || {}), eng = e => ENGINES[e] || e;
+  return {title: 'Scorecards: trained reader against the classical one', caption: `${set.label}: the five measures on whole drawings, clean and scan-like copies${tc.engine ? `; the trained reader read text with ${eng(tc.engine)}${cc.engine && cc.engine !== tc.engine ? `, the classical one with ${eng(cc.engine)}` : ''}` : ''}. Price error is the gap to the answer key's total, so shorter is better there.`,
+    svg: C.svg(w, h, g, `${set.label}: the trained reader finds ${pct(tc.symbol_recall)} of symbols on clean copies against ${pct(cc.symbol_recall)} for the classical reader; price error ${pct(tc.price_error)} against ${pct(cc.price_error)}`),
+    legend: C.legend(SERIES.map(s => [s[2], s[3]])), table: C.table(['Measure', ...SERIES.map(s => s[3])], rows),
+    controls: setButtons('scores', 'scoresSet', ch.sets.map((s, i) => [i, s.label]), CS.scoresSet)};
+}
+function stackedTypes(types, w, title) {  // found, missed and extra boxes per device type, sorted by total; shared by the How it works chart and the Score tab
+  const rows = types.map(t => ({plain: t.plain || PLAIN[t.type] || t.type, total: t.total || 0, found: t.found || 0, missed: Math.max(0, (t.total || 0) - (t.found || 0)), extra: Math.max(0, (t.reported || 0) - (t.found || 0))})).sort((a, b) => b.total - a.total);
+  if (!rows.length) return null;
+  const L = C.lw(rows.map(r => r.plain), w), R = 60, rowH = 20, h = 12 + rows.length * rowH + 28, max = Math.max(1, ...rows.map(r => r.total + r.extra)), x = C.lin(0, max, L, w - R), xs = C.ticks(0, max, 5);
+  let g = C.vgrid(x, xs, 8, h - 28) + C.xaxis(x, xs, h - 28, v => String(v));
+  rows.forEach((r, i) => { const y = 12 + i * rowH; g += C.t(L - 8, y + 12, C.fit(r.plain, L), 'lbl', 'end') + C.r(L, y + 2, x(r.found) - L, 13, 'f-found', `${r.plain}: ${r.found} found`) + C.r(x(r.found), y + 2, x(r.found + r.missed) - x(r.found), 13, 'f-missed', `${r.missed} missed`) + C.r(x(r.total), y + 2, x(r.total + r.extra) - x(r.total), 13, 'f-extra', `${r.extra} extra boxes`) + C.t(x(r.total + r.extra) + 4, y + 13, `${r.found}/${r.total}${r.extra ? ' +' + r.extra : ''}`, 'val'); });
+  const found = rows.reduce((a, r) => a + r.found, 0), total = rows.reduce((a, r) => a + r.total, 0), extra = rows.reduce((a, r) => a + r.extra, 0);
+  return {svg: C.svg(w, h, g, `${title}: ${found} of ${total} symbols found, ${extra} extra boxes; ${rows.filter(r => r.missed).map(r => r.plain + ' ' + r.found + ' of ' + r.total).join(', ') || 'every type complete'}`),
+    legend: C.legend([['f-found', 'found'], ['f-missed', 'missed'], ['f-extra', 'extra boxes']]), table: C.table(['Device type', 'In the answer key', 'Found', 'Missed', 'Extra'], rows.map(r => [r.plain, r.total, r.found, r.missed, r.extra]))};
+}
+function chartTypes(ch, w) {
+  const set = (ch.sets || [])[0]; if (!set || !ch.per_type) return null;
+  const entry = ch.per_type.find(p => p.set === set.id && p.copy === CS.typesCopy) || ch.per_type.find(p => p.set === set.id); if (!entry) return null;
+  const out = stackedTypes(entry.types || [], w, set.label + ', ' + entry.copy); if (!out) return null;
+  return Object.assign(out, {title: 'Device types: found, missed and extra', caption: `${set.label}, ${entry.copy === 'scan' ? 'scan-like' : 'clean'} copies: every answer-key symbol of each type, whether the reader found it, and the boxes it drew where nothing was; the rare types are the hard ones.`,
+    controls: setButtons('types', 'typesCopy', [['clean', 'Clean copies'], ['scan', 'Scan-like copies']], CS.typesCopy)});
+}
+function chartTraining(ch, w) {
+  const runs = (ch.training || []).filter(r => (r.passes || []).length && (r.score || []).length); if (!runs.length) return null;
+  const L = 46, R = 110, T = 12, B = 34, h = 240, maxP = Math.max(...runs.map(r => Math.max(...r.passes))), ys = runs.flatMap(r => r.score), lo = Math.floor(Math.min(...ys) * 20) / 20, hi = Math.ceil(Math.max(...ys) * 20) / 20;
+  const x = C.lin(1, maxP, L, w - R), y = C.lin(lo, hi, h - B, T), yt = C.ticks(lo, hi, 4), xt = C.ticks(1, maxP, Math.min(maxP, 10)).filter(Number.isInteger);
+  let g = C.hgrid(y, yt, L, w - R) + C.yaxis(y, yt, L, v => v.toFixed(2)) + C.xaxis(x, xt, h - B, v => String(v)) + C.t((L + w - R) / 2, h - 4, 'pass', 'tick', 'middle');
+  const legend = [];
+  runs.forEach((r, i) => { const k4 = i % 4, cls = r.live ? 'ln-live' : 'ln-run' + k4 + (i >= 4 ? ' ln-alt' : ''), pts = r.passes.map((p, k) => [x(p), y(r.score[k])]);
+    g += C.pl(pts, cls + (r.ema ? ' ln-ema' : '')); const bi = r.passes.indexOf(r.best_pass); if (bi >= 0) g += C.dot(x(r.passes[bi]), y(r.score[bi]), 4, 'dot-' + (r.live ? 'live' : 'run' + k4), `${r.label || r.run}: best pass ${r.best_pass}, ${r.score[bi]}`);
+    if (r.live) { const last = pts[pts.length - 1]; g += C.t(last[0] + 6, last[1] + 4, 'live model', 'val'); } legend.push([r.live ? 'sw-live' : 'sw-run' + k4, (r.label || r.run) + (r.live ? ' (live model)' : '') + (r.ema ? ', averaged weights (dashed)' : '') + (i >= 4 && !r.ema ? ' (dotted)' : '')]); });
+  const live = runs.find(r => r.live) || runs[0], metrics = [...new Set(runs.map(r => r.metric).filter(Boolean))];
+  return {title: 'Training runs: the selection score pass by pass', caption: `The score each run was judged by after every pass${metrics.length > 1 ? ` (${metrics.map(m => `${m} for ${runs.filter(r => r.metric === m).map(r => r.label || r.run).join(', ')}`).join('; ')})` : live.metric ? ` (${live.metric})` : ''}; the live model's line is emphasised, averaged-weight runs are dashed, the chosen pass is dotted. The swings between adjacent passes are why averaged weights are preferred.`,
+    svg: C.svg(w, h, g, `${runs.length} training runs; the live model ${live.label || live.run} peaks at pass ${live.best_pass} with ${Math.max(...live.score)}`), legend: C.legend(legend),
+    table: C.table(['Run', 'Best pass', ...Array.from({length: maxP}, (_, i) => 'pass ' + (i + 1))], runs.map(r => [r.label || r.run, r.best_pass, ...Array.from({length: maxP}, (_, i) => { const k = r.passes.indexOf(i + 1); return k < 0 ? '' : r.score[k]; })]))};
+}
+function chartThreshold(ch, w) {
+  const th = ch.threshold; if (!th || !(th.thresholds || []).length) return null;
+  const L = 46, R = 16, h1 = 190, h2 = 90, h = h1 + h2 + 30, lo = th.thresholds[0], hi = th.thresholds[th.thresholds.length - 1];
+  const x = C.lin(lo, hi, L, w - R), y = C.lin(0, 1, h1 - 30, 12), yt = C.ticks(0, 1, 4), xt = C.ticks(lo, hi, 6);
+  let g = C.hgrid(y, yt, L, w - R) + C.yaxis(y, yt, L, v => pct(v)) + C.xaxis(x, xt, h1 - 30, v => String(v));
+  g += C.pl(th.thresholds.map((t, i) => [x(t), y(th.precision[i])]), 'ln-p') + C.pl(th.thresholds.map((t, i) => [x(t), y(th.recall[i])]), 'ln-r');
+  if (th.chosen != null) g += C.ln(x(th.chosen), 12, x(th.chosen), h - 30, 'mark') + C.t(x(th.chosen) + 5, h1 - 40, 'chosen ' + th.chosen, 'val');
+  const blanks = th.blank_paper_boxes || []; if (blanks.length) { const bmax = Math.max(10, ...blanks), by = C.log(1, bmax, h - 30, h1 + 10), bw = Math.max(2, (x(hi) - x(lo)) / blanks.length - 2);
+    g += C.t(L, h1 + 6, 'boxes on blank paper (log scale)', 'tick') + blanks.map((b, i) => b > 0 ? C.r(x(th.thresholds[i]) - bw / 2, by(b), bw, h - 30 - by(b), 'f-blank', `threshold ${th.thresholds[i]}: ${b} boxes on blank paper`) : '').join('') + C.xaxis(x, xt, h - 30, v => String(v)); }
+  const ci = th.thresholds.indexOf(th.chosen);
+  return {title: 'Choosing the operating threshold on whole drawings', caption: `Precision and recall of ${th.model || 'the detector'} as the score threshold moves, on ${th.sheets || 'the'} validation drawings; the bars count boxes the detector draws on blank paper, which a tile score never sees and a quotation would price.`,
+    svg: C.svg(w, h, g, `threshold sweep: chosen ${th.chosen}${ci >= 0 ? ` with precision ${pct(th.precision[ci])} and recall ${pct(th.recall[ci])}` : ''}`), legend: C.legend([['sw-p', 'precision'], ['sw-r', 'recall'], ['f-blank', 'boxes on blank paper']]),
+    table: C.table(['Threshold', 'Precision', 'Recall', 'F1', 'Blank-paper boxes'], th.thresholds.map((t, i) => [t, pct(th.precision[i]), pct(th.recall[i]), th.f1 ? pct(th.f1[i]) : '', blanks[i] == null ? '' : blanks[i]]))};
+}
+function chartCalibration(ch, w) {
+  const bins = ((ch.calibration || {}).bins || []); if (!bins.length) return null;
+  const L = 46, R = 16, h = 220, x = C.lin(0, bins.length, L, w - R), y = C.lin(0, 1, h - 44, 12), yt = C.ticks(0, 1, 4), bw = (x(1) - x(0)) * 0.7;
+  let g = C.hgrid(y, yt, L, w - R) + C.yaxis(y, yt, L, v => pct(v));
+  const every = Math.max(1, Math.ceil(46 / (x(1) - x(0))));
+  bins.forEach((b, i) => { const cx = x(i + 0.5), show = i % every === 0; g += C.r(cx - bw / 2, y(b.precision), bw, y(0) - y(b.precision), 'f-trained', `${b.from} to ${b.to}: ${pct(b.precision)} right, ${b.boxes} boxes`) + (show ? C.t(cx, y(b.precision) - 4, pct(b.precision), 'val', 'middle') + C.t(cx, h - 28, every > 1 ? String(b.from) : `${b.from} to ${b.to}`, 'tick', 'middle') + C.t(cx, h - 14, `${b.boxes}`, 'tick', 'middle') : ''); });
+  g += C.t(w - R, h - 2, every > 1 ? 'score band from, boxes in the band' : 'score band, boxes in the band', 'tick', 'end');
+  return {title: 'How often a box with a given score was right', caption: `${(ch.calibration || {}).model || 'The detector'} on the validation drawings: the share of boxes in each score band that matched the answer key, with the number of boxes under each. This is the confidence the results show beside every device.`,
+    svg: C.svg(w, h, g, `calibration: ${bins.map(b => `${b.from} to ${b.to} right ${pct(b.precision)} on ${b.boxes} boxes`).join('; ')}`), table: C.table(['Score band', 'Boxes', 'Right'], bins.map(b => [`${b.from} to ${b.to}`, b.boxes, pct(b.precision)]))};
+}
+function chartOcr(ch, w) {
+  const es = (ch.ocr || []).filter(e => e.seconds_per_sheet > 0); if (!es.length) return null;
+  const L = 46, R = 16, h = 250, secs = es.map(e => e.seconds_per_sheet), lo = C.nice(Math.min(...secs) / 2), hi = C.nice(Math.max(...secs) * 1.5);
+  const vals = es.flatMap(e => [e.clean_char, e.scan_char]).filter(v => v != null), ylo = Math.max(0, Math.floor(Math.min(...vals) * 10) / 10 - 0.1);
+  const x = C.log(lo, hi, L, w - R), y = C.lin(ylo, 1, h - 40, 12), yt = C.ticks(ylo, 1, 4), xt = [0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50, 100].filter(v => v >= lo && v <= hi);
+  let g = C.hgrid(y, yt, L, w - R) + C.yaxis(y, yt, L, v => pct(v)) + C.xaxis(x, xt, h - 40, v => String(v)) + C.t((L + w - R) / 2, h - 6, 'seconds per standard sheet (log scale)', 'tick', 'middle');
+  const placed = [];
+  es.forEach((e, i) => { const cx = x(e.seconds_per_sheet), cls = e.chosen ? 'dot-live' : 'dot-run1', name = (ENGINES[e.engine] || e.label || e.engine) + (e.linux === false ? ', not on Linux' : '');
+    if (e.clean_char != null && e.scan_char != null) g += C.ln(cx, y(e.clean_char), cx, y(e.scan_char), 'connector');
+    if (e.clean_char != null) g += C.dot(cx, y(e.clean_char), 5, cls, `${name}: clean copies ${pct(e.clean_char)}`); if (e.scan_char != null) g += C.dot(cx, y(e.scan_char), 5, cls + ' hollow', `${name}: scan-like copies ${pct(e.scan_char)}`);
+    const right = cx > (L + w - R) / 2, lx = cx + (right ? -8 : 8); let ly = y(e.clean_char != null ? e.clean_char : e.scan_char) - 8;
+    while (placed.some(q => Math.abs(q.y - ly) < 13 && Math.abs(q.x - lx) < 160)) ly += 13;  // labels never sit on each other
+    placed.push({x: lx, y: ly}); g += C.t(lx, ly, name, e.chosen ? 'lbl' : 'val', right ? 'end' : 'start'); });
+  const chosen = es.find(e => e.chosen);
+  return {title: 'Text readers: accuracy against speed', caption: 'Character accuracy on the labels and notes, clean copies as filled dots and scan-like copies as hollow ones, against the seconds each engine needs per sheet. The chosen engine serves the site because it is both accurate and runs on Linux.',
+    svg: C.svg(w, h, g, `text readers: ${es.map(e => `${e.label || e.engine} ${pct(e.clean_char)} clean, ${pct(e.scan_char)} scan, ${e.seconds_per_sheet} s`).join('; ')}${chosen ? `; chosen ${chosen.label || chosen.engine}` : ''}`),
+    legend: C.legend([['sw-live', 'chosen engine'], ['sw-run1', 'other engines']]) + '<span class="lg">filled: clean copies, hollow: scan-like</span>',
+    table: C.table(['Engine', 'Clean', 'Scan-like', 'Seconds per sheet', 'Runs on Linux'], es.map(e => [(e.label || e.engine) + (e.chosen ? ' (chosen)' : ''), pct(e.clean_char), pct(e.scan_char), e.seconds_per_sheet, e.linux === false ? 'no' : 'yes']))};
+}
+function stackedTiming(stages, w, aria) {  // one bar of seconds per stage; shared by the How it works chart and the run's Files tab
+  const total = stages.reduce((a, s) => a + (s.seconds || 0), 0); if (!(total > 0)) return null;
+  const L = 8, R = 8, h = 58, x = C.lin(0, total, L, w - R); let at = 0, g = '';
+  stages.forEach((s, i) => { const sec = s.seconds || 0; if (sec <= 0) return; const x0 = x(at), x1 = x(at + sec); g += C.r(x0, 8, x1 - x0, 24, 'f-st' + (i % 5), `${s.label}: ${sec.toFixed(1)} s`); if (x1 - x0 > 56) g += C.t((x0 + x1) / 2, 24, `${sec.toFixed(1)} s`, 'inbar', 'middle'); at += sec; });
+  g += C.t(L, 50, `${total.toFixed(1)} s in all`, 'val');
+  return {svg: C.svg(w, h, g, aria), legend: C.legend(stages.map((s, i) => ['f-st' + (i % 5), `${s.label} ${(s.seconds || 0).toFixed(1)} s`])), table: C.table(['Stage', 'Seconds'], stages.map(s => [s.label, (s.seconds || 0).toFixed(2)]))};
+}
+function chartTiming(ch, w) {
+  const tm = ch.timing; if (!tm || !(tm.stages || []).length) return null;
+  const stages = tm.stages.map(s => ({label: s.label || s.step, seconds: s.mean_seconds})), out = stackedTiming(stages, w, `mean seconds per stage over ${tm.n} drawings: ${stages.map(s => `${s.label} ${s.seconds.toFixed(1)}`).join(', ')}`); if (!out) return null;
+  const kinds = tm.by_kind || []; if (kinds.length) { const L = C.lw(kinds.map(k => `${k.kind} (${k.n})`), w), R = 50, rowH = 22, h = 8 + kinds.length * rowH, max = Math.max(...kinds.map(k => k.mean_total_seconds)), x = C.lin(0, max, L, w - R); let g = '';
+    kinds.forEach((k, i) => { const y = 8 + i * rowH; g += C.t(L - 8, y + 12, `${k.kind} (${k.n})`, 'lbl', 'end') + C.r(L, y + 2, x(k.mean_total_seconds) - L, 14, 'f-trained', `${k.kind}: ${k.mean_total_seconds.toFixed(1)} s`) + C.t(x(k.mean_total_seconds) + 4, y + 13, k.mean_total_seconds.toFixed(1) + ' s', 'val'); });
+    out.svg += C.svg(w, h, g, `mean seconds by kind: ${kinds.map(k => `${k.kind} ${k.mean_total_seconds.toFixed(1)}`).join(', ')}`); out.table += C.table(['Kind of drawing', 'Drawings', 'Mean seconds'], kinds.map(k => [k.kind, k.n, k.mean_total_seconds.toFixed(1)])); }
+  return Object.assign(out, {title: 'Where the time goes', caption: `Mean seconds per stage over the ${tm.n} precomputed samples${tm.engine ? ` with ${ENGINES[tm.engine] || tm.engine}` : ''}, then the mean per kind of drawing. The text reader and the detector take nearly all of it; the rules and the specification check are instant.`});
+}
+function chartData(ch, w) {
+  const classes = ((ch.data || {}).classes || []).filter(c => c.train > 0).sort((a, b) => b.train - a.train); if (!classes.length) return null;
+  const names = classes.map(c => c.plain || PLAIN[c.type] || c.type), L = C.lw(names, w), R = 56, rowH = 24, h = 12 + classes.length * rowH + 28, hi = C.nice(Math.max(...classes.map(c => Math.max(c.train, c.test_unseen || 0))) * 1.2), x = C.log(1, hi, L, w - R), xt = [1, 10, 100, 1000, 10000, 100000].filter(v => v <= hi);
+  let g = C.vgrid(x, xt, 8, h - 28) + C.xaxis(x, xt, h - 28, v => String(v)) + C.t((L + w - R) / 2, h - 2, 'boxes (log scale)', 'tick', 'middle');
+  classes.forEach((c, i) => { const y = 12 + i * rowH; g += C.t(L - 8, y + 13, C.fit(names[i], L), 'lbl', 'end') + C.r(L, y + 2, x(c.train) - L, 8, 'f-trained', `${c.plain || c.type}: ${c.train} training boxes`) + C.r(L, y + 11, x(c.test_unseen || 1) - L, 8, 'f-classical', `${c.plain || c.type}: ${c.test_unseen || 0} unseen-style test boxes`) + C.t(x(c.train) + 4, y + 10, String(c.train), 'val'); });
+  const rare = classes.slice(-3).map(c => `${c.plain || c.type} ${c.train}`).join(', ');
+  return {title: 'The data: boxes per device type', caption: `Training boxes against the unseen-style test boxes for each device type, on a log scale so the rare types stay visible. Small counts make the small classes the hard ones: ${rare}.`,
+    svg: C.svg(w, h, g, `training boxes per type from ${classes[0].train} (${classes[0].plain || classes[0].type}) down to ${classes[classes.length - 1].train} (${classes[classes.length - 1].plain || classes[classes.length - 1].type})`),
+    legend: C.legend([['f-trained', 'training'], ['f-classical', 'unseen-style test']]), table: C.table(['Device type', 'Training', 'Validation', 'Validation, unseen', 'Test, unseen'], classes.map(c => [c.plain || c.type, c.train, c.val, c.val_unseen, c.test_unseen]))};
+}
+function chartPrice(ch, w) {
+  const set = (ch.sets || [])[CS.priceSet]; if (!set || !ch.price_error) return null;
+  const panels = ['clean', 'scan'].map(copy => ch.price_error.find(p => p.set === set.id && p.copy === copy)).filter(p => p && (p.values || []).length); if (!panels.length) return null;
+  const step = 0.1, hi = Math.min(2, Math.ceil(Math.max(...panels.flatMap(p => p.values)) / step) * step), nb = Math.round(hi / step), counts = panels.map(p => { const c = new Array(nb).fill(0); p.values.forEach(v => { c[Math.min(nb - 1, Math.floor(v / step))] += 1; }); return c; });
+  const pw = (w - 12) / panels.length, L = 34, R = 10, h = 200, ymax = Math.max(1, ...counts.flat()), rows = [];
+  const svgs = panels.map((p, k) => { const x = C.lin(0, hi, L, pw - R), y = C.lin(0, ymax, h - 40, 12), yt = C.ticks(0, ymax, 4).filter(Number.isInteger), xt = C.ticks(0, hi, 5), mean = p.values.reduce((a, b) => a + b, 0) / p.values.length;
+    let g = C.hgrid(y, yt, L, pw - R) + C.yaxis(y, yt, L, v => String(v)) + C.xaxis(x, xt, h - 40, v => pct(v)) + C.t((L + pw - R) / 2, h - 6, `${p.copy === 'scan' ? 'scan-like' : 'clean'} copies (${p.values.length} drawings)`, 'tick', 'middle');
+    counts[k].forEach((n, i) => { if (n) g += C.r(x(i * step) + 1, y(n), x(step) - x(0) - 2, y(0) - y(n), 'f-trained', `${pct(i * step)} to ${pct((i + 1) * step)}: ${n} drawings`); });
+    g += C.ln(x(mean), 12, x(mean), h - 40, 'mark') + C.t(x(mean) + 4, 22, `mean ${pct(mean)}`, 'val');
+    rows.push(...counts[k].map((n, i) => [p.copy === 'scan' ? 'scan-like' : 'clean', `${pct(i * step)} to ${pct((i + 1) * step)}`, n]));
+    return C.svg(pw, h, g, `${set.label}, ${p.copy} copies: price error mean ${pct(mean)} over ${p.values.length} drawings`); });
+  return {title: 'Price error, drawing by drawing', caption: `${set.label}: how far each drawing's quoted total lands from the total the same rules give on its answer key, with the mean marked. A long tail means a few drawings where a misread rating or a missed symbol moved the price a lot.`,
+    svg: `<div class="row" style="gap:12px;align-items:flex-start">${svgs.map(s => `<div style="flex:1 1 0;min-width:0">${s}</div>`).join('')}</div>`, table: C.table(['Copy', 'Price error', 'Drawings'], rows), controls: setButtons('price', 'priceSet', ch.sets.map((s, i) => [i, s.label]), CS.priceSet)};
+}
+const CHARTS = [['scores', chartScores], ['types', chartTypes], ['training', chartTraining], ['threshold', chartThreshold], ['calibration', chartCalibration], ['ocr', chartOcr], ['timing', chartTiming], ['data', chartData], ['price', chartPrice]];
+function figureHtml(id, out) {
+  if (!out) return '';
+  return `<figure class="chart" id="c-${id}"><figcaption><h4>${esc(out.title)}</h4><p class="small muted">${esc(out.caption)}</p></figcaption>${out.controls || ''}<div class="plotwrap">${out.svg}</div>${out.legend ? `<p class="legend small">${out.legend}</p>` : ''}<details class="numbers"><summary>Show the numbers</summary><div class="frame">${out.table}</div></details></figure>`;
+}
+function chartWidth(el) { const box = el.closest('.chart'); return Math.max(280, Math.floor((box ? box.clientWidth : el.clientWidth) - 2) || 520); }
+function renderCharts(only) {
+  const ch = S.charts, host = $('#charts'), block = $('#charts-block'); if (!ch) return;
+  block.hidden = false;  // measured while visible, so the drawn width matches the displayed one and the text keeps its size
+  const hw = host.clientWidth || 600, cols = hw >= 700 ? 2 : 1, w = Math.max(260, Math.floor((hw - (cols - 1) * 24) / cols) - 50);
+  const one = (id, fn) => { let out = null; try { out = fn(ch, w); } catch (e) { out = null; } return figureHtml(id, out); };  // a chart whose data is missing or odd renders nothing
+  if (only) { const fn = CHARTS.find(c => c[0] === only)[1], el = $('#c-' + only), open = el && $('details', el).open; if (el) { el.outerHTML = one(only, fn); const d = $('#c-' + only + ' details'); if (d && open) d.open = true; } return; }
+  host.innerHTML = CHARTS.map(([id, fn]) => one(id, fn)).join('');
+  block.hidden = !host.innerHTML;
+}
+const SET_LABEL = {test: 'Test set', unseen: 'Unseen style', baseline: 'Baseline set'};
+function normCharts(ch) {  // eval/charts.json keeps one record per set, copy and reader; the charts read them grouped by set
+  if (!ch) return null;
+  if (Array.isArray(ch.sets) && ch.sets.length && ch.sets[0].reader) {
+    const by = {}; ch.sets.forEach(r => { const s = by[r.set] || (by[r.set] = {id: r.set, label: SET_LABEL[r.set] || r.set, copies: {}}); (s.copies[r.copy] || (s.copies[r.copy] = {copy: r.copy}))[r.reader] = r; });
+    ch.sets = Object.values(by).map(s => Object.assign(s, {copies: Object.values(s.copies)}));
+  } else if (Array.isArray(ch.sets)) ch.sets.forEach(s => { s.label = s.label || SET_LABEL[s.id] || s.id; });
+  if (Array.isArray(ch.per_type) && ch.per_type.length && ch.per_type[0].type) { const by = {}; ch.per_type.forEach(r => { const k = r.set + ':' + r.copy; (by[k] || (by[k] = {set: r.set, copy: r.copy, types: []})).types.push(r); }); ch.per_type = Object.values(by); }
+  if (Array.isArray(ch.calibration)) ch.calibration = {model: ch.model, bins: ch.calibration};
+  if (ch.threshold && !ch.threshold.model) ch.threshold.model = ch.model;
+  return ch;
+}
+async function loadCharts() {
+  if (S.mode === 'mock') return window.MOCK.charts || null;
+  if (S.mode === 'static') { for (const p of ['eval/charts.json', 'charts.json']) { try { return await getJson(p); } catch (e) { /* next */ } } return null; }
+  try { return await getJson(API + '/api/charts'); } catch (e) { return null; }
+}
