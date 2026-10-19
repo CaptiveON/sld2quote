@@ -412,6 +412,23 @@ stays free, with the drawing-level comparison about an hour after. Open for Adna
 seconds" wording (measured 16 to 18 s for an upload, 48 to 51 s for a medium generated sheet), a read-only HF token in the secret, a
 budget alert on the billing account, the go-public checklist.
 
+**State at 05:10, 19 Oct.** Adnan's decisions tonight: the site stays on `rtdetr_r18_full` until the plain EMA repeat
+(`rtdetr_r18_plain_ema_fix`, due about 08:20) has certainly ended, then he selects; the service stays inside the free tier (no CPU kept
+on, no bill at all); the GitHub repo, the model repo and the static Space stay private until he says. Done and committed since 01:15:
+per-request billing with the models warmed inside the first request (no start-up thread), a daily cap of 24 live runs (HTTP 429 over
+it, samples never capped), the model baked into the image and the Hugging Face token destroyed in the cloud (the service holds no
+secret; a model switch is two edits, MODEL in `scripts/deploy_cloudrun.sh` and the one weights line in `.gcloudignore`); calibrated
+confidence (each model's config.json carries `score_calibration` from its drawing-level sweep; the raw score is kept as `score`;
+PROBLEMS 22); streamed live runs (`?stream=1`, NDJSON: start, five step lines with seconds, result or error) and sample cards from
+`/api/samples`; the 34 samples rebuilt with the calibrated numbers; the front end rebuilt from the ground up after Adnan's verdict on
+the first page (one page: overview with three key numbers read from the scorecards; a three-step flow, choose, run with the stages
+streamed, results with a zoomable drawing linked to the device table; how it works with the scorecards as tables and bars; the road map
+as a timeline; about; tokens, dark mode, keyboard and screen-reader support, 360 to 1600 px; the status pill wakes the server only when
+Try it is opened). In flight: the final redeploy (TCP startup probe, concurrency 8, from a clean worktree of HEAD) and the static
+Space refresh; a phone fix (results title under the sticky header at 390 px); the training chain. Pending from Adnan: his review of
+the new page at the live link; the model selection after the training report; the README AI sentence, CITATION name split and the
+go-public checklist, all when he says.
+
 ## 8. Metrics (as implemented in `evaluate.py`; keep the names)
 
 symbol precision and recall (IoU >= 0.3, same type); rating accuracy, poles accuracy, kA accuracy over matched devices; notes accuracy over
