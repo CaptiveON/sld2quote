@@ -2,7 +2,8 @@
 files, the scorecards and the chart data (eval/charts.json from scripts/build_charts.py), and the static front end. POST
 /api/samples/<id>/run reruns a sample's drawing live, with its spec.txt and answer.json when the sample directory holds them.
 POST /api/generate, /api/upload and /api/samples/<id>/run with ?stream=1 answer NDJSON: a start
-line, one line as each of the five steps finishes, then the Result (or one error line).
+line, one line per step with its seconds and counts, then the Result (or one error line). The static front end is served
+from site/static at the root: / is its index.html and every directory with an index.html is a page at /<dir>/.
 
   uvicorn app:app --app-dir site --host 0.0.0.0 --port 7860
   (not "site.app:app": the standard library's own `site` module shadows this directory as a package)
@@ -257,7 +258,7 @@ def stream_run(prepare):
 
     def work():
         try:
-            q.put({"event": "result", "result": run(lambda step, secs: q.put({"event": "step", "step": step, "seconds": secs}))})
+            q.put({"event": "result", "result": run(lambda step, secs, stats: q.put({"event": "step", "step": step, "seconds": secs, **stats}))})
         except Exception as e:
             status, msg = (e.status_code, e.detail) if isinstance(e, HTTPException) else (500, f"the run failed: {type(e).__name__}: {e}")
             q.put({"event": "error", "status": status, "message": msg})

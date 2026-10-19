@@ -131,6 +131,8 @@ def test_a_streamed_run_yields_start_the_five_steps_then_the_result(client):
     ev = [json.loads(l) for l in r.text.splitlines()]
     assert ev[0]["event"] == "start" and ev[0]["run"] and [s["step"] for s in ev[0]["steps"]] == ["text", "symbols", "labels", "spec", "price"] and all(s["label"] for s in ev[0]["steps"])
     assert [(e["event"], e["step"]) for e in ev[1:6]] == [("step", s) for s in ("text", "symbols", "labels", "spec", "price")] and all(e["seconds"] >= 0 for e in ev[1:6])
+    counts = {"text": {"texts"}, "symbols": {"symbols"}, "labels": {"linked", "devices"}, "spec": {"clauses", "conflicts"}, "price": {"lines", "total_gbp"}}
+    assert all(set(e) == {"event", "step", "seconds"} | counts[e["step"]] for e in ev[1:6]) and ev[4]["clauses"] > 0 and ev[5]["lines"] > 0 and ev[5]["total_gbp"] > 0
     res = ev[6]["result"]
     assert ev[6]["event"] == "result" and len(ev) == 7 and set(res) == RESULT_KEYS and res["id"] == ev[0]["run"] and res["images"]["overlay"] == f"/api/runs/{res['id']}/overlay.png"
 
@@ -173,3 +175,15 @@ def test_a_sample_reruns_live_with_its_stored_answer_key(client, tmp_path, monke
     ev = [json.loads(l) for l in client.post("/api/samples/s9/run?stream=1").text.splitlines()]
     assert [e["event"] for e in ev] == ["start"] + ["step"] * 5 + ["result"] and ev[-1]["result"]["source"]["sample"] == "s9"
     assert client.post("/api/samples/nope/run").status_code == 404 and client.post("/api/samples/nope/run?stream=1").json()["status"] == 404
+
+
+def test_every_static_page_is_served_at_its_directory(client):
+    pages = [d for d, _, fs in os.walk(site.STATIC) if "index.html" in fs]
+    assert pages, "site/static has no index.html"
+    for d in pages:
+        rel = os.path.relpath(d, site.STATIC); url = "/" if rel == "." else f"/{rel}/"
+        r = client.get(url + "?sample=sheet-10833")
+        assert r.status_code == 200 and r.text == open(os.path.join(d, "index.html"), encoding="utf-8").read(), url
+        if url != "/":
+            r = client.get(url.rstrip("/"), follow_redirects=False)
+            assert r.status_code in (301, 307, 308) and r.headers["location"].endswith(url), url

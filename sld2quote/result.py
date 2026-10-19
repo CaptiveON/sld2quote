@@ -27,6 +27,15 @@ NOTE = {"generated": "Drawn by the generator from seed {seed} ({level}, {copy} c
         "upload": "Your drawing: no answer key, so there is no score; check the overlay against the drawing."}
 
 
+def page_texts(ex: dict) -> int:
+    return sum(t.get("src") == "page" for t in ex["texts"])
+
+
+def linked(ex: dict) -> int:
+    """devices paired with at least one label text"""
+    return sum(bool(d.get("label_texts")) for d in ex["devices"])
+
+
 def plural(n: int, word: str) -> str:
     return f"{n} {word}" if n == 1 else f"{n} {word}{'es' if word.endswith(('s', 'sh', 'ch', 'x')) else 's'}"
 
@@ -34,10 +43,10 @@ def plural(n: int, word: str) -> str:
 def steps(ex: dict, sp: dict | None, conflicts: list, bom: dict, spec_s: float, price_s: float) -> list[dict]:
     """the five steps in plain language, with the counts a reader can check against the tables"""
     secs, devs = ex["seconds"], ex["devices"]
-    n_text = sum(t.get("src") == "page" for t in ex["texts"])
+    n_text = page_texts(ex)
     kinds = Counter(TYPE_PLAIN.get(d["type"], d["type"].lower()) for d in devs)
     found = ", ".join(plural(n, k) for k, n in kinds.most_common())
-    n_lab, n_rated = sum(bool(d.get("label_texts")) for d in devs), sum(d.get("rating") is not None for d in devs)
+    n_lab, n_rated = linked(ex), sum(d.get("rating") is not None for d in devs)
     b = bom["board"]
     board = f"{b['form']}, {b['ip']}, {b['fault_kA']} kA" if b["fault_kA"] else f"{b['form']}, {b['ip']}, fault level not found"
     rest = max(0.0, secs["total"] - secs["ocr"] - secs["detector"])
@@ -85,23 +94,28 @@ def build_result(image_path: str, spec_path: str | None = None, out_dir: str | N
                  reader: str = "trained", weights: str = WEIGHTS, device: str = "cpu", source: dict | None = None, crops: bool | None = None,
                  progress=None) -> dict:
     """run the pipeline as cli.run does, write its files plus sheet.png, overlay.png and result.json into out_dir, return the Result;
-    crops (the OCR pass around every symbol) None follows the OCR engine (reader.read_sheet); progress(step, seconds), when given,
-    is called as each of the five steps finishes (text, symbols and labels from the reader's own callback, spec and price here)"""
-    t0 = time.perf_counter(); last = [t0]
+    crops (the OCR pass around every symbol) None follows the OCR engine (reader.read_sheet); progress(step, seconds, stats), when
+    given, is called for each of the five steps with its seconds and what it produced (text: texts; symbols: symbols; labels:
+    linked, devices; spec: clauses, conflicts; price: lines, total_gbp). The reader's own callback only names the step, so its
+    three are timed as they finish and reported together once the extraction is back; spec and price are reported as they finish"""
+    t0 = time.perf_counter(); last, times = [t0], {}
 
-    def tick(step):
-        now = time.perf_counter(); secs, last[0] = round(now - last[0], 2), now
+    def mark(step):
+        now = time.perf_counter(); times[step], last[0] = round(now - last[0], 2), now
+
+    def done(step, **stats):
         if progress:
-            progress(step, secs)
+            progress(step, times.get(step, 0.0), stats)
     out_dir = out_dir or os.path.join("out", os.path.splitext(os.path.basename(image_path))[0])
     os.makedirs(out_dir, exist_ok=True)
-    ex = choose(reader, weights, device, crops)(image_path, progress=tick)
+    ex = choose(reader, weights, device, crops)(image_path, progress=mark)
+    done("text", texts=page_texts(ex)); done("symbols", symbols=len(ex["symbols"])); done("labels", linked=linked(ex), devices=len(ex["devices"]))
     t1 = time.perf_counter()
     sp = read_spec(spec_path) if spec_path and os.path.exists(spec_path) else None
     conflicts = cross_check(ex["notes"], sp) if sp else []
-    t2 = time.perf_counter(); tick("spec")
+    t2 = time.perf_counter(); mark("spec"); done("spec", clauses=len(sp["clauses"]) if sp else 0, conflicts=len(conflicts))
     bom = build_bom(ex, sp, conflicts)
-    t3 = time.perf_counter(); tick("price")
+    t3 = time.perf_counter(); mark("price"); done("price", lines=len(bom["lines"]), total_gbp=bom["total_gbp"])
     write_outputs(out_dir, image_path, ex, sp, conflicts, bom, {"version": __version__, "seconds": round(t3 - t0, 1), "reader": ex["reader"]})
     if image_path.lower().endswith(".png"):
         shutil.copyfile(image_path, os.path.join(out_dir, "sheet.png"))
