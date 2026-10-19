@@ -340,3 +340,24 @@ a read-only token for that one model. The service now runs under its own account
 the platform keep the processor on only during start-up and go back to per-request billing; a copy of the model baked into the image
 removes the token altogether; a few requests at a time keep the page responsive while a run is in progress; and a budget alert on the
 billing account catches a demo that something keeps awake around the clock.
+
+**What happened next (19 Oct, 01:00 to 03:00).** The processor was first kept on so the models could load in a background thread,
+which would have cost about $110 a month if something kept the service awake around the clock; that was reversed the same night: the
+processor runs only during start-up and requests, the models load inside the first request instead of a thread, and live runs are
+capped per day so the free allowance holds even in the worst case. The token the server used to fetch the model was the owner's write
+token, kept in the cloud's secret store and reachable only by the service's own account, but far too powerful for a server that only
+needed to read one file; the fix was to need no token at all: the model is copied into the container image and the secret was destroyed.
+
+## 22. The confidence shown was the detector's raw score
+
+**What happened.** The page painted almost every device red, "low confidence", on drawings where the detector had found every symbol.
+The number shown was the detector's raw score, and the colour bands (high from 0.8, medium from 0.6) had been set for the old
+shape-matching reader, whose scores behave like percentages. The trained detector's scores do not: it is trained to rank boxes, its
+working threshold is 0.11, and on the validation drawings a box scoring 0.3 was right 99.9% of the time.
+
+**What we did.** The number is now calibrated. Each model's weights carry a table, built from the same drawing-level sweep that chooses
+its threshold, giving for each band of score how often such a box was right on the validation drawings (for the current model a score
+from 0.11 to 0.15 reads 0.75, from 0.26 upward 0.996). The raw score is kept in the result for the record, the page says what the number
+means and that it was calibrated on synthetic drawings, and a device's colour is now mostly decided by whether its rating label was
+read, which is the reading an estimator needs. On real drawings the calibration overstates, because they are not the drawings it was
+measured on; those are the stretch test and say so.
