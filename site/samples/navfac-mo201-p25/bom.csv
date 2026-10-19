@@ -1,9 +1,10 @@
 line,part,description,qty,unit_gbp,total_gbp,conf,rule,evidence
-1,CT-SET,"Current transformers, set of three, class 1",1,280,280,0.38,R-METERING,S4
-2,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.47,R-PROTECTION,S10
-3,CT-SET,"Current transformers, set of three, class 1",1,280,280,0.38,R-METERING,S12
-4,BUSBAR-CU-2500,"Copper busbar set 2500 A (4-bar), 1 sections, about 46 kg",1,524.4,524.4,0.9,R-BUSBAR-SIZE,
-5,ENC-SECTION,"Enclosure section, Form 4 Type 6, IP31, RAL 7035",1,3380.0,3380.0,0.95,R-ENCLOSURE,
-6,LAB-ASSY,"Assembly, wiring and routine verification: 134 hours",1,6432,6432,0.9,R-LABOUR,
-7,DOC,"Documentation, as-built drawings, test certificates",1,600,600,1.0,R-DOC,
-8,DEL,"Delivery to site, crane and offload excluded",1,850,850,1.0,R-DELIVERY,
+1,CT-SET,"Current transformers, set of three, class 1",1,280,280,0.5,R-METERING,S6
+2,CT-SET,"Current transformers, set of three, class 1",1,280,280,0.43,R-METERING,S7
+3,CT-SET,"Current transformers, set of three, class 1",1,280,280,0.43,R-METERING,S8
+4,CT-SET,"Current transformers, set of three, class 1",1,280,280,0.43,R-METERING,S20
+5,BUSBAR-CU-2500,"Copper busbar set 2500 A (4-bar), 1 sections, about 46 kg",1,524.4,524.4,0.9,R-BUSBAR-SIZE,
+6,ENC-SECTION,"Enclosure section, Form 4 Type 6, IP31, RAL 7035",1,3380.0,3380.0,0.95,R-ENCLOSURE,
+7,LAB-ASSY,"Assembly, wiring and routine verification: 160 hours",1,7680,7680,0.9,R-LABOUR,
+8,DOC,"Documentation, as-built drawings, test certificates",1,600,600,1.0,R-DOC,
+9,DEL,"Delivery to site, crane and offload excluded",1,850,850,1.0,R-DELIVERY,

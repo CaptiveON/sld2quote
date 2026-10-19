@@ -383,15 +383,27 @@
    "kind": "transformer",
    "box": [
     199,
-    67,
-    45,
-    73
+    65,
+    44,
+    75
    ],
-   "score": 0.63,
+   "score": 0.25,
    "shape_score": 1.0
   },
   {
    "id": "S2",
+   "kind": "breaker",
+   "box": [
+    206,
+    197,
+    30,
+    30
+   ],
+   "score": 0.17,
+   "shape_score": 0.97
+  },
+  {
+   "id": "S3",
    "kind": "meter",
    "box": [
     258,
@@ -399,95 +411,95 @@
     26,
     26
    ],
-   "score": 0.33,
-   "shape_score": 1.0
-  },
-  {
-   "id": "S3",
-   "kind": "ct",
-   "box": [
-    210,
-    282,
-    21,
-    22
-   ],
-   "score": 0.4,
+   "score": 0.34,
    "shape_score": 1.0
   },
   {
    "id": "S4",
-   "kind": "breaker",
+   "kind": "ct",
    "box": [
-    1028,
-    501,
-    25,
-    24
+    209,
+    282,
+    23,
+    21
    ],
-   "score": 0.12,
-   "shape_score": 0.75
+   "score": 0.13,
+   "shape_score": 0.87
   },
   {
    "id": "S5",
    "kind": "breaker",
    "box": [
-    187,
-    518,
-    25,
-    24
+    1029,
+    501,
+    24,
+    23
    ],
-   "score": 0.18,
-   "shape_score": 0.93
+   "score": 0.21,
+   "shape_score": 0.99
   },
   {
    "id": "S6",
-   "kind": "contactor",
+   "kind": "breaker",
    "box": [
-    1027,
-    537,
-    21,
-    38
+    187,
+    517,
+    25,
+    25
    ],
-   "score": 0.43,
+   "score": 0.68,
    "shape_score": 1.0
   },
   {
    "id": "S7",
-   "kind": "isolator",
+   "kind": "contactor",
    "box": [
-    464,
-    546,
-    23,
-    37
+    1028,
+    539,
+    18,
+    33
    ],
-   "score": 0.13,
-   "shape_score": 0.75
+   "score": 0.38,
+   "shape_score": 1.0
   },
   {
    "id": "S8",
+   "kind": "isolator",
+   "box": [
+    466,
+    546,
+    20,
+    37
+   ],
+   "score": 0.45,
+   "shape_score": 1.0
+  },
+  {
+   "id": "S9",
    "kind": "breaker",
    "box": [
     748,
     550,
     25,
-    24
+    23
    ],
-   "score": 0.25,
-   "shape_score": 0.98
-  },
-  {
-   "id": "S9",
-   "kind": "isolator",
-   "box": [
-    1308,
-    550,
-    21,
-    35
-   ],
-   "score": 0.48,
+   "score": 0.68,
    "shape_score": 1.0
   },
   {
    "id": "S10",
+   "kind": "isolator",
+   "box": [
+    1309,
+    550,
+    20,
+    34
+   ],
+   "score": 0.47,
+   "shape_score": 1.0
+  },
+  {
+   "id": "S11",
    "kind": "motor",
    "box": [
     1025,
@@ -495,7 +507,7 @@
     32,
     32
    ],
-   "score": 0.5,
+   "score": 0.47,
    "shape_score": 1.0
   }
  ],
@@ -504,17 +516,17 @@
    "symbol": "S1",
    "box": [
     199,
-    67,
-    45,
-    73
+    65,
+    44,
+    75
    ],
    "label_texts": [
-    "T2",
-    "T1"
+    "T1",
+    "T2"
    ],
-   "label": "11 kV/415V | TX-11250 kVA",
+   "label": "TX-11250 kVA | 11 kV/415V",
    "conf": 0.95,
-   "score": 0.63,
+   "score": 0.25,
    "type": "TRANSFORMER",
    "rating": 1250,
    "on_bus": "BUS-1",
@@ -524,37 +536,39 @@
   {
    "symbol": "S2",
    "box": [
-    258,
-    280,
-    26,
-    26
+    206,
+    197,
+    30,
+    30
    ],
    "label_texts": [
-    "T5",
-    "T6"
+    "T3",
+    "T4"
    ],
-   "label": "CT 1600/5A | BUSBAR A 1600 ACu 36 kA/1s",
-   "conf": 0.94,
-   "score": 0.33,
-   "type": "METER",
-   "rating": null,
+   "label": "ACB-11600 A4P | icu 36 kA,withdrawable",
+   "conf": 0.91,
+   "score": 0.17,
+   "type": "ACB",
+   "rating": 1600,
+   "poles": 4,
+   "kA": 36,
    "on_bus": "BUS-1",
-   "connected": false,
+   "connected": true,
    "id": "D2"
   },
   {
    "symbol": "S3",
    "box": [
-    210,
-    282,
-    21,
-    22
+    258,
+    280,
+    26,
+    26
    ],
    "label_texts": [],
    "label": "",
    "conf": 0.5,
-   "score": 0.4,
-   "type": "CT",
+   "score": 0.34,
+   "type": "METER",
    "rating": null,
    "on_bus": "BUS-1",
    "connected": false,
@@ -563,22 +577,19 @@
   {
    "symbol": "S4",
    "box": [
-    1028,
-    501,
-    25,
-    24
+    209,
+    282,
+    23,
+    21
    ],
    "label_texts": [
-    "T9",
-    "T7"
+    "T5"
    ],
-   "label": "S/D'45 kW | MCCB:250 A 3P",
-   "conf": 0.75,
-   "score": 0.12,
-   "type": "ACB",
-   "rating": 250,
-   "poles": 3,
-   "kA": null,
+   "label": "CT 1600/5A",
+   "conf": 0.87,
+   "score": 0.13,
+   "type": "CT",
+   "rating": 1600,
    "on_bus": "BUS-1",
    "connected": false,
    "id": "D4"
@@ -586,21 +597,23 @@
   {
    "symbol": "S5",
    "box": [
-    187,
-    518,
-    25,
-    24
+    1029,
+    501,
+    24,
+    23
    ],
    "label_texts": [
-    "T8"
+    "T7",
+    "T12"
    ],
-   "label": "MCCB 250 A.4P",
-   "conf": 0.89,
-   "score": 0.18,
-   "type": "ACB",
+   "label": "MCCB:250 A 3P | pump p-4",
+   "conf": 0.9,
+   "score": 0.21,
+   "type": "MCCB",
    "rating": 250,
-   "poles": 4,
+   "poles": 3,
    "kA": null,
+   "dest": "pump p-4",
    "on_bus": "BUS-1",
    "connected": true,
    "id": "D5"
@@ -608,43 +621,43 @@
   {
    "symbol": "S6",
    "box": [
-    1027,
-    537,
-    21,
-    38
+    187,
+    517,
+    25,
+    25
    ],
    "label_texts": [
-    "T12"
+    "T8",
+    "T10"
    ],
-   "label": "pump p-4",
-   "conf": 0.92,
-   "score": 0.43,
-   "type": "CONTACTOR",
-   "rating": null,
+   "label": "MCCB 250 A.4P | UPS input ..",
+   "conf": 0.89,
+   "score": 0.68,
+   "type": "MCCB",
+   "rating": 250,
+   "poles": 4,
+   "kA": null,
+   "dest": "UPS input ..",
    "on_bus": "BUS-1",
-   "connected": false,
+   "connected": true,
    "id": "D6"
   },
   {
    "symbol": "S7",
    "box": [
-    464,
-    546,
-    23,
-    37
+    1028,
+    539,
+    18,
+    33
    ],
    "label_texts": [
-    "T15",
-    "T13"
+    "T9"
    ],
-   "label": "sdund | ISOL400 A4P",
-   "conf": 0.75,
-   "score": 0.13,
-   "type": "ISOLATOR",
-   "rating": null,
-   "poles": null,
-   "kA": null,
-   "dest": "sdund",
+   "label": "S/D'45 kW",
+   "conf": 0.9,
+   "score": 0.38,
+   "type": "CONTACTOR",
+   "rating": 45,
    "on_bus": "BUS-1",
    "connected": false,
    "id": "D7"
@@ -652,51 +665,77 @@
   {
    "symbol": "S8",
    "box": [
-    748,
-    550,
-    25,
-    24
+    466,
+    546,
+    20,
+    37
    ],
    "label_texts": [
-    "T11"
+    "T13",
+    "T15"
    ],
-   "label": "MCCB 400 A.4P",
-   "conf": 0.93,
-   "score": 0.25,
-   "type": "ACB",
+   "label": "ISOL400 A4P | sdund",
+   "conf": 0.94,
+   "score": 0.45,
+   "type": "ISOLATOR",
    "rating": 400,
    "poles": 4,
    "kA": null,
+   "dest": "sdund",
    "on_bus": "BUS-1",
-   "connected": true,
+   "connected": false,
    "id": "D8"
   },
   {
    "symbol": "S9",
    "box": [
-    1308,
+    748,
     550,
-    21,
-    35
+    25,
+    23
    ],
    "label_texts": [
-    "T17",
-    "T14"
+    "T11",
+    "T16"
    ],
-   "label": "pumps | ISOL100 A4P",
-   "conf": 0.95,
-   "score": 0.48,
-   "type": "ISOLATOR",
-   "rating": null,
-   "poles": null,
+   "label": "MCCB 400 A.4P | spare",
+   "conf": 0.93,
+   "score": 0.68,
+   "type": "MCCB",
+   "rating": 400,
+   "poles": 4,
    "kA": null,
-   "dest": "pumps",
+   "dest": "spare",
    "on_bus": "BUS-1",
-   "connected": false,
+   "connected": true,
    "id": "D9"
   },
   {
    "symbol": "S10",
+   "box": [
+    1309,
+    550,
+    20,
+    34
+   ],
+   "label_texts": [
+    "T14",
+    "T17"
+   ],
+   "label": "ISOL100 A4P | pumps",
+   "conf": 0.95,
+   "score": 0.47,
+   "type": "ISOLATOR",
+   "rating": 100,
+   "poles": 4,
+   "kA": null,
+   "dest": "pumps",
+   "on_bus": "BUS-1",
+   "connected": false,
+   "id": "D10"
+  },
+  {
+   "symbol": "S11",
    "box": [
     1025,
     583,
@@ -706,12 +745,12 @@
    "label_texts": [],
    "label": "",
    "conf": 0.5,
-   "score": 0.5,
+   "score": 0.47,
    "type": "MOTOR",
-   "rating": null,
+   "rating": 45,
    "on_bus": "BUS-1",
    "connected": false,
-   "id": "D10"
+   "id": "D11"
   }
  ],
  "notes": {
@@ -730,14 +769,14 @@
  "ocr_engine": "rapidocr",
  "reader": "trained",
  "seconds": {
-  "total": 4.46,
-  "ocr": 2.33,
-  "detector": 2.02
+  "total": 3.38,
+  "ocr": 2.05,
+  "detector": 1.24
  },
  "detector": {
-  "weights": "weights/rtdetr_r18_full",
+  "weights": "weights/rtdetr_r18_plain_ema_fix_pass4",
   "device": "cpu",
-  "threads": 2,
+  "threads": 4,
   "score_threshold": 0.11,
   "score_threshold_source": "drawing",
   "nms_iou": 0.5,

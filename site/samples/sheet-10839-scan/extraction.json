@@ -365,6 +365,18 @@
    ],
    "src": "page",
    "id": "T30"
+  },
+  {
+   "text": "V",
+   "conf": 0.6799224615097046,
+   "box": [
+    268.3333333333333,
+    295.0,
+    10.666666666666666,
+    11.333333333333334
+   ],
+   "src": "tag",
+   "id": "S3g1"
   }
  ],
  "busbars": [
@@ -400,9 +412,9 @@
     198,
     67,
     45,
-    74
+    75
    ],
-   "score": 0.87,
+   "score": 0.45,
    "shape_score": 1.0
   },
   {
@@ -411,10 +423,10 @@
    "box": [
     203,
     198,
-    23,
-    47
+    22,
+    46
    ],
-   "score": 0.34,
+   "score": 0.47,
    "shape_score": 1.0
   },
   {
@@ -422,11 +434,11 @@
    "kind": "meter",
    "box": [
     258,
-    288,
+    286,
     29,
-    28
+    30
    ],
-   "score": 0.36,
+   "score": 0.29,
    "shape_score": 1.0
   },
   {
@@ -434,36 +446,36 @@
    "kind": "ct",
    "box": [
     208,
-    290,
+    289,
     24,
-    23
+    24
    ],
-   "score": 0.23,
-   "shape_score": 0.98
+   "score": 0.31,
+   "shape_score": 1.0
   },
   {
    "id": "S5",
    "kind": "breaker",
    "box": [
     890,
-    395,
+    394,
     46,
-    21
+    23
    ],
-   "score": 0.76,
+   "score": 0.59,
    "shape_score": 1.0
   },
   {
    "id": "S6",
    "kind": "fuse_switch",
    "box": [
-    996,
-    498,
-    23,
-    39
+    995,
+    499,
+    22,
+    40
    ],
-   "score": 0.22,
-   "shape_score": 0.98
+   "score": 0.73,
+   "shape_score": 1.0
   },
   {
    "id": "S7",
@@ -472,81 +484,81 @@
     1539,
     500,
     21,
-    38
+    37
    ],
-   "score": 0.19,
-   "shape_score": 0.97
+   "score": 0.87,
+   "shape_score": 1.0
   },
   {
    "id": "S8",
    "kind": "fuse_switch",
    "box": [
-    1267,
-    518,
-    23,
-    40
+    455,
+    519,
+    21,
+    37
    ],
-   "score": 0.44,
+   "score": 0.69,
    "shape_score": 1.0
   },
   {
    "id": "S9",
    "kind": "fuse_switch",
    "box": [
-    456,
-    520,
-    18,
-    37
+    1267,
+    519,
+    22,
+    39
    ],
-   "score": 0.3,
+   "score": 0.73,
    "shape_score": 1.0
   },
   {
    "id": "S10",
    "kind": "fuse_switch",
    "box": [
-    185,
+    184,
     548,
-    20,
+    21,
     37
    ],
-   "score": 0.35,
+   "score": 0.48,
    "shape_score": 1.0
   },
   {
    "id": "S11",
    "kind": "fuse_switch",
    "box": [
-    726,
-    549,
-    21,
+    724,
+    548,
+    23,
     37
    ],
-   "score": 0.35,
+   "score": 0.7,
    "shape_score": 1.0
   },
   {
    "id": "S12",
-   "kind": "capacitor",
+   "kind": "contactor",
    "box": [
-    1538,
+    997,
     550,
-    31,
-    15
+    22,
+    40
    ],
-   "score": 0.29,
+   "score": 0.46,
    "shape_score": 1.0
   },
   {
    "id": "S13",
-   "kind": "contactor",
+   "kind": "capacitor",
    "box": [
-    998,
+    1539,
     551,
-    21,
-    39
+    29,
+    12
    ],
-   "score": 0.5,
+   "score": 0.46,
    "shape_score": 1.0
   },
   {
@@ -555,23 +567,23 @@
    "box": [
     1539,
     571,
-    29,
-    20
+    28,
+    22
    ],
-   "score": 0.44,
-   "shape_score": 1.0
+   "score": 0.14,
+   "shape_score": 0.87
   },
   {
    "id": "S15",
    "kind": "motor",
    "box": [
     992,
-    597,
-    38,
-    43
+    599,
+    39,
+    40
    ],
-   "score": 0.26,
-   "shape_score": 1.0
+   "score": 0.24,
+   "shape_score": 0.99
   }
  ],
  "devices": [
@@ -581,15 +593,15 @@
     198,
     67,
     45,
-    74
+    75
    ],
    "label_texts": [
-    "T2",
-    "T1"
+    "T1",
+    "T2"
    ],
-   "label": "11 kV/415V | TX-1.1600 kVA",
+   "label": "TX-1.1600 kVA | 11 kV/415V",
    "conf": 0.94,
-   "score": 0.87,
+   "score": 0.45,
    "type": "TRANSFORMER",
    "rating": 1600,
    "on_bus": "BUS-1",
@@ -601,8 +613,8 @@
    "box": [
     203,
     198,
-    23,
-    47
+    22,
+    46
    ],
    "label_texts": [
     "T3",
@@ -610,10 +622,10 @@
    ],
    "label": "ACB-1 2500 A3P | lcu 65kA,withdrawable",
    "conf": 0.91,
-   "score": 0.34,
+   "score": 0.47,
    "type": "ACB",
-   "rating": null,
-   "poles": null,
+   "rating": 2500,
+   "poles": 3,
    "kA": 65,
    "on_bus": "BUS-1",
    "connected": false,
@@ -623,17 +635,16 @@
    "symbol": "S3",
    "box": [
     258,
-    288,
+    286,
     29,
-    28
+    30
    ],
    "label_texts": [
-    "T5",
-    "T6"
+    "S3g1"
    ],
-   "label": "CT 2500/5A | BUSBARA 2500 A Cu 65 kA/1s",
-   "conf": 0.96,
-   "score": 0.36,
+   "label": "V",
+   "conf": 0.68,
+   "score": 0.29,
    "type": "METER",
    "rating": null,
    "on_bus": "BUS-1",
@@ -644,16 +655,18 @@
    "symbol": "S4",
    "box": [
     208,
-    290,
+    289,
     24,
-    23
+    24
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.49,
-   "score": 0.23,
+   "label_texts": [
+    "T5"
+   ],
+   "label": "CT 2500/5A",
+   "conf": 0.96,
+   "score": 0.31,
    "type": "CT",
-   "rating": null,
+   "rating": 2500,
    "on_bus": "BUS-1",
    "connected": false,
    "id": "D4"
@@ -662,16 +675,16 @@
    "symbol": "S5",
    "box": [
     890,
-    395,
+    394,
     46,
-    21
+    23
    ],
    "label_texts": [
     "T8"
    ],
    "label": "BS-1.2500 A",
    "conf": 0.91,
-   "score": 0.76,
+   "score": 0.59,
    "type": "BUS_SECTION",
    "rating": 2500,
    "poles": null,
@@ -683,23 +696,23 @@
   {
    "symbol": "S6",
    "box": [
-    996,
-    498,
-    23,
-    39
+    995,
+    499,
+    22,
+    40
    ],
    "label_texts": [
-    "T12",
-    "T9"
+    "T9",
+    "T16"
    ],
-   "label": "S/D 55 kW | FSW'250 A 3P.",
+   "label": "FSW'250 A 3P. | fan F-4",
    "conf": 0.85,
-   "score": 0.22,
+   "score": 0.73,
    "type": "FUSE_SWITCH",
    "rating": 250,
    "poles": 3,
    "kA": null,
-   "dest": "S/D 55 kW",
+   "dest": "fan F-4",
    "on_bus": "BUS-2",
    "connected": true,
    "id": "D6"
@@ -710,20 +723,19 @@
     1539,
     500,
     21,
-    38
+    37
    ],
    "label_texts": [
-    "T14",
     "T10"
    ],
-   "label": "PFC 150.kVAr | FSW 400 A 3P",
-   "conf": 0.96,
-   "score": 0.19,
+   "label": "FSW 400 A 3P",
+   "conf": 1.0,
+   "score": 0.87,
    "type": "FUSE_SWITCH",
    "rating": 400,
    "poles": 3,
    "kA": null,
-   "dest": "PFC 150.kVAr",
+   "dest": "",
    "on_bus": "BUS-2",
    "connected": true,
    "id": "D7"
@@ -731,42 +743,18 @@
   {
    "symbol": "S8",
    "box": [
-    1267,
-    518,
-    23,
-    40
-   ],
-   "label_texts": [
-    "T17",
-    "T13"
-   ],
-   "label": "data hall | FSW 250 A:3P",
-   "conf": 0.94,
-   "score": 0.44,
-   "type": "FUSE_SWITCH",
-   "rating": 250,
-   "poles": 3,
-   "kA": null,
-   "dest": "data hall",
-   "on_bus": "BUS-2",
-   "connected": true,
-   "id": "D8"
-  },
-  {
-   "symbol": "S9",
-   "box": [
-    456,
-    520,
-    18,
+    455,
+    519,
+    21,
     37
    ],
    "label_texts": [
-    "T15",
-    "T11"
+    "T11",
+    "T15"
    ],
-   "label": "lighting | FSW:400 A 3P",
+   "label": "FSW:400 A 3P | lighting",
    "conf": 0.99,
-   "score": 0.3,
+   "score": 0.69,
    "type": "FUSE_SWITCH",
    "rating": 400,
    "poles": 3,
@@ -774,23 +762,47 @@
    "dest": "lighting",
    "on_bus": "BUS-1",
    "connected": true,
+   "id": "D8"
+  },
+  {
+   "symbol": "S9",
+   "box": [
+    1267,
+    519,
+    22,
+    39
+   ],
+   "label_texts": [
+    "T13",
+    "T17"
+   ],
+   "label": "FSW 250 A:3P | data hall",
+   "conf": 0.94,
+   "score": 0.73,
+   "type": "FUSE_SWITCH",
+   "rating": 250,
+   "poles": 3,
+   "kA": null,
+   "dest": "data hall",
+   "on_bus": "BUS-2",
+   "connected": true,
    "id": "D9"
   },
   {
    "symbol": "S10",
    "box": [
-    185,
+    184,
     548,
-    20,
+    21,
     37
    ],
    "label_texts": [
-    "T20",
-    "T18"
+    "T18",
+    "T20"
    ],
-   "label": "UPS input | FSW 630A 3P",
+   "label": "FSW 630A 3P | UPS input",
    "conf": 0.93,
-   "score": 0.35,
+   "score": 0.48,
    "type": "FUSE_SWITCH",
    "rating": 630,
    "poles": 3,
@@ -803,18 +815,18 @@
   {
    "symbol": "S11",
    "box": [
-    726,
-    549,
-    21,
+    724,
+    548,
+    23,
     37
    ],
    "label_texts": [
-    "T21",
-    "T19"
+    "T19",
+    "T21"
    ],
-   "label": "data'hall. : | FSW 800 A 3P",
+   "label": "FSW 800 A 3P | data'hall. :",
    "conf": 0.94,
-   "score": 0.35,
+   "score": 0.7,
    "type": "FUSE_SWITCH",
    "rating": 800,
    "poles": 3,
@@ -827,17 +839,19 @@
   {
    "symbol": "S12",
    "box": [
-    1538,
+    997,
     550,
-    31,
-    15
+    22,
+    40
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.5,
-   "score": 0.29,
-   "type": "CAPACITOR",
-   "rating": null,
+   "label_texts": [
+    "T12"
+   ],
+   "label": "S/D 55 kW",
+   "conf": 0.94,
+   "score": 0.46,
+   "type": "CONTACTOR",
+   "rating": 55,
    "on_bus": "BUS-2",
    "connected": false,
    "id": "D12"
@@ -845,19 +859,19 @@
   {
    "symbol": "S13",
    "box": [
-    998,
+    1539,
     551,
-    21,
-    39
+    29,
+    12
    ],
    "label_texts": [
-    "T16"
+    "T14"
    ],
-   "label": "fan F-4",
+   "label": "PFC 150.kVAr",
    "conf": 0.96,
-   "score": 0.5,
-   "type": "CONTACTOR",
-   "rating": null,
+   "score": 0.46,
+   "type": "CAPACITOR",
+   "rating": 150,
    "on_bus": "BUS-2",
    "connected": false,
    "id": "D13"
@@ -867,13 +881,13 @@
    "box": [
     1539,
     571,
-    29,
-    20
+    28,
+    22
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.5,
-   "score": 0.44,
+   "conf": 0.43,
+   "score": 0.14,
    "type": "EARTH",
    "rating": null,
    "on_bus": "BUS-2",
@@ -884,16 +898,16 @@
    "symbol": "S15",
    "box": [
     992,
-    597,
-    38,
-    43
+    599,
+    39,
+    40
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.5,
-   "score": 0.26,
+   "conf": 0.49,
+   "score": 0.24,
    "type": "MOTOR",
-   "rating": null,
+   "rating": 55,
    "on_bus": "BUS-2",
    "connected": false,
    "id": "D15"
@@ -902,11 +916,12 @@
  "notes": {
   "form": "Form 4 Type 6",
   "ip": "IP42",
-  "fault_kA": null,
+  "fault_kA": 65,
   "poles_default": 3,
   "evidence": [
    "T23",
    "T23",
+   "T25",
    "T27"
   ]
  },
@@ -914,14 +929,14 @@
  "ocr_engine": "rapidocr",
  "reader": "trained",
  "seconds": {
-  "total": 5.32,
-  "ocr": 2.43,
-  "detector": 2.73
+  "total": 3.86,
+  "ocr": 2.18,
+  "detector": 1.53
  },
  "detector": {
-  "weights": "weights/rtdetr_r18_full",
+  "weights": "weights/rtdetr_r18_plain_ema_fix_pass4",
   "device": "cpu",
-  "threads": 2,
+  "threads": 4,
   "score_threshold": 0.11,
   "score_threshold_source": "drawing",
   "nms_iou": 0.5,

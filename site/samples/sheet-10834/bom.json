@@ -5,8 +5,8 @@
   "ip": "IP42",
   "poles_default": 4,
   "busbar_rating": 1600,
-  "sections": 2,
-  "ways": 4
+  "sections": 3,
+  "ways": 5
  },
  "lines": [
   {
@@ -43,15 +43,14 @@
   },
   {
    "line": 3,
-   "part": "METER-CT 1600/5A | BUSBAR A 1600 A Cu 36 kA/1s",
-   "description": "Panel meter (CT 1600/5A | BUSBAR A 1600 A Cu 36 kA/1s)",
+   "part": "METER-A",
+   "description": "Panel meter (A)",
    "qty": 1,
-   "unit_gbp": 260,
-   "total_gbp": 260,
+   "unit_gbp": 120,
+   "total_gbp": 120,
    "evidence": [
     "S3",
-    "T5",
-    "T6"
+    "S3g1"
    ],
    "rule": "R-METERING",
    "conf": 1.0,
@@ -60,31 +59,33 @@
   {
    "line": 4,
    "part": "CT-SET",
-   "description": "Current transformers, set of three, class 1",
+   "description": "Current transformers 1600/5 A, set of three, class 1",
    "qty": 1,
    "unit_gbp": 280,
    "total_gbp": 280,
    "evidence": [
-    "S4"
+    "S4",
+    "T5"
    ],
    "rule": "R-METERING",
-   "conf": 0.5,
+   "conf": 1.0,
    "basis": ""
   },
   {
    "line": 5,
-   "part": "MCCB-250-4P-N",
-   "description": "Moulded-case circuit breaker 250 A 4-pole, 36 kA band N, adjustable trip",
+   "part": "MCCB-250-3P-N",
+   "description": "Moulded-case circuit breaker 250 A 3-pole, 36 kA band N, adjustable trip; feeds pump P-4",
    "qty": 1,
-   "unit_gbp": 634.4,
-   "total_gbp": 634.4,
+   "unit_gbp": 520.0,
+   "total_gbp": 520.0,
    "evidence": [
-    "S6",
-    "T8"
+    "S5",
+    "T7",
+    "T11"
    ],
    "rule": "R-MCCB-SELECT",
-   "conf": 0.99,
-   "basis": "rating 250 A; poles 4; kA 36"
+   "conf": 1.0,
+   "basis": "rating 250 A; poles 3; kA 36"
   },
   {
    "line": 6,
@@ -94,15 +95,63 @@
    "unit_gbp": 420,
    "total_gbp": 420,
    "evidence": [
+    "S5",
+    "T7",
+    "T11"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 1.0,
+   "basis": ""
+  },
+  {
+   "line": 7,
+   "part": "MCCB-250-4P-N",
+   "description": "Moulded-case circuit breaker 250 A 4-pole, 36 kA band N, adjustable trip; feeds UPS input",
+   "qty": 1,
+   "unit_gbp": 634.4,
+   "total_gbp": 634.4,
+   "evidence": [
     "S6",
-    "T8"
+    "T8",
+    "T10"
+   ],
+   "rule": "R-MCCB-SELECT",
+   "conf": 0.99,
+   "basis": "rating 250 A; poles 4; kA 36"
+  },
+  {
+   "line": 8,
+   "part": "FU-KIT-MCCB",
+   "description": "Outgoing functional unit: compartment door, terminals, labels",
+   "qty": 1,
+   "unit_gbp": 420,
+   "total_gbp": 420,
+   "evidence": [
+    "S6",
+    "T8",
+    "T10"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.99,
    "basis": ""
   },
   {
-   "line": 7,
+   "line": 9,
+   "part": "STARTER-45KW",
+   "description": "Motor starter for 45 kW: contactor, overload relay and control circuit",
+   "qty": 1,
+   "unit_gbp": 1850,
+   "total_gbp": 1850,
+   "evidence": [
+    "S7",
+    "T9"
+   ],
+   "rule": "R-STARTER",
+   "conf": 1.0,
+   "basis": "45 kW from the starter label"
+  },
+  {
+   "line": 10,
    "part": "ISOL-400-4P",
    "description": "Switch-disconnector 400 A 4-pole; feeds sdwnd",
    "qty": 1,
@@ -110,15 +159,15 @@
    "total_gbp": 634.4,
    "evidence": [
     "S8",
-    "T15",
-    "T12"
+    "T12",
+    "T15"
    ],
    "rule": "R-ISOL-SELECT",
    "conf": 0.91,
    "basis": "rating 400 A; poles 4"
   },
   {
-   "line": 8,
+   "line": 11,
    "part": "FU-KIT-ISOLATOR",
    "description": "Outgoing functional unit: compartment door, terminals, labels",
    "qty": 1,
@@ -126,15 +175,15 @@
    "total_gbp": 340,
    "evidence": [
     "S8",
-    "T15",
-    "T12"
+    "T12",
+    "T15"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.91,
    "basis": ""
   },
   {
-   "line": 9,
+   "line": 12,
    "part": "ISOL-100-4P",
    "description": "Switch-disconnector 100 A 4-pole; feeds pumps",
    "qty": 1,
@@ -142,15 +191,15 @@
    "total_gbp": 207.4,
    "evidence": [
     "S9",
-    "T17",
-    "T14"
+    "T14",
+    "T17"
    ],
    "rule": "R-ISOL-SELECT",
    "conf": 0.99,
    "basis": "rating 100 A; poles 4"
   },
   {
-   "line": 10,
+   "line": 13,
    "part": "FU-KIT-ISOLATOR",
    "description": "Outgoing functional unit: compartment door, terminals, labels",
    "qty": 1,
@@ -158,30 +207,31 @@
    "total_gbp": 340,
    "evidence": [
     "S9",
-    "T17",
-    "T14"
+    "T14",
+    "T17"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.99,
    "basis": ""
   },
   {
-   "line": 11,
+   "line": 14,
    "part": "MCCB-400-4P-N",
-   "description": "Moulded-case circuit breaker 400 A 4-pole, 36 kA band N, adjustable trip",
+   "description": "Moulded-case circuit breaker 400 A 4-pole, 36 kA band N, adjustable trip; feeds spare",
    "qty": 1,
    "unit_gbp": 1195.6,
    "total_gbp": 1195.6,
    "evidence": [
     "S10",
-    "T13"
+    "T13",
+    "T16"
    ],
    "rule": "R-MCCB-SELECT",
    "conf": 0.99,
    "basis": "rating 400 A; poles 4; kA 36"
   },
   {
-   "line": 12,
+   "line": 15,
    "part": "FU-KIT-MCCB",
    "description": "Outgoing functional unit: compartment door, terminals, labels",
    "qty": 1,
@@ -189,33 +239,34 @@
    "total_gbp": 420,
    "evidence": [
     "S10",
-    "T13"
+    "T13",
+    "T16"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.99,
    "basis": ""
   },
   {
-   "line": 13,
+   "line": 16,
    "part": "BUSBAR-CU-1600",
-   "description": "Copper busbar set 1600 A (4-bar), 2 sections, about 58 kg",
+   "description": "Copper busbar set 1600 A (4-bar), 3 sections, about 86 kg",
    "qty": 1,
-   "unit_gbp": 662.4,
-   "total_gbp": 662.4,
+   "unit_gbp": 993.6,
+   "total_gbp": 993.6,
    "evidence": [
     "T6"
    ],
    "rule": "R-BUSBAR-SIZE",
    "conf": 0.9,
-   "basis": "1600 A busbar label; 2 sections"
+   "basis": "1600 A busbar label; 3 sections"
   },
   {
-   "line": 14,
+   "line": 17,
    "part": "ENC-SECTION",
    "description": "Enclosure section, Form 4 Type 6, IP42, RAL 7035",
-   "qty": 2,
+   "qty": 3,
    "unit_gbp": 3549.0,
-   "total_gbp": 7098.0,
+   "total_gbp": 10647.0,
    "evidence": [
     "T20",
     "T20",
@@ -224,22 +275,22 @@
    ],
    "rule": "R-ENCLOSURE",
    "conf": 0.95,
-   "basis": "4 ways at 4 per section plus incomers"
+   "basis": "5 ways at 4 per section plus incomers"
   },
   {
-   "line": 15,
+   "line": 18,
    "part": "LAB-ASSY",
-   "description": "Assembly, wiring and routine verification: 90 hours",
+   "description": "Assembly, wiring and routine verification: 108 hours",
    "qty": 1,
-   "unit_gbp": 4320,
-   "total_gbp": 4320,
+   "unit_gbp": 5184,
+   "total_gbp": 5184,
    "evidence": [],
    "rule": "R-LABOUR",
    "conf": 0.9,
    "basis": ""
   },
   {
-   "line": 16,
+   "line": 19,
    "part": "DOC",
    "description": "Documentation, as-built drawings, test certificates",
    "qty": 1,
@@ -251,7 +302,7 @@
    "basis": ""
   },
   {
-   "line": 17,
+   "line": 20,
    "part": "CERT",
    "description": "Design-verification certificates per specification",
    "qty": 1,
@@ -265,7 +316,7 @@
    "basis": ""
   },
   {
-   "line": 18,
+   "line": 21,
    "part": "DEL",
    "description": "Delivery to site, crane and offload excluded",
    "qty": 1,
@@ -277,37 +328,8 @@
    "basis": ""
   }
  ],
- "subtotal_gbp": 24786.2,
- "margin_gbp": 3717.93,
- "total_gbp": 28504.13,
- "issues": [
-  {
-   "kind": "missing",
-   "what": "D5 (MCCB): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S5",
-    "T9",
-    "T18"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D7 (CONTACTOR): kW not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S7",
-    "T11"
-   ]
-  },
-  {
-   "kind": "low_confidence",
-   "what": "devices read with low confidence: D4, D11",
-   "action": "check against the drawing",
-   "evidence": [
-    "D4",
-    "D11"
-   ]
-  }
- ]
+ "subtotal_gbp": 32180.4,
+ "margin_gbp": 4827.06,
+ "total_gbp": 37007.46,
+ "issues": []
 }

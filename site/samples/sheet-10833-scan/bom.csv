@@ -1,29 +1,51 @@
 line,part,description,qty,unit_gbp,total_gbp,conf,rule,evidence
-1,METER-CT 1600/5A | BUSBAR A 1600A Cu 80 kA/1s,Panel meter (CT 1600/5A | BUSBAR A 1600A Cu 80 kA/1s),1,260,260,0.92,R-METERING,S5 T9 T11
-2,METER-CT 1600/5A | BUSBAR B 1600 A Cu 80 kA/1s,Panel meter (CT 1600/5A | BUSBAR B 1600 A Cu 80 kA/1s),1,260,260,0.93,R-METERING,S6 T10 T12
-3,CT-SET,"Current transformers, set of three, class 1",1,280,280,0.5,R-METERING,S7
-4,CT-SET,"Current transformers, set of three, class 1",1,280,280,0.5,R-METERING,S8
-5,FSW-100-4P,Fuse-switch-disconnector 100 A 4-pole; feeds SPD Type 1+2,1,317.2,317.2,0.92,R-FSW-SELECT,S10 T18 T14
-6,FUSE-100,"Fuse links 100 A, one per pole",4,16,64,0.92,R-FUSE-LINKS,S10 T18 T14
-7,FU-KIT-FUSE_SWITCH,"Outgoing functional unit: compartment door, terminals, labels",1,380,380,0.92,R-FU-KIT,S10 T18 T14
-8,FSW-400-3P,Fuse-switch-disconnector 400 A 3-pole,1,780.0,780.0,0.95,R-FSW-SELECT,S11 T20 T16
-9,FUSE-400,"Fuse links 400 A, one per pole",3,46,138,0.95,R-FUSE-LINKS,S11 T20 T16
-10,FU-KIT-FUSE_SWITCH,"Outgoing functional unit: compartment door, terminals, labels",1,380,380,0.95,R-FU-KIT,S11 T20 T16
-11,FSW-400-3P,Fuse-switch-disconnector 400 A 3-pole; feeds MCC-7chillers,1,780.0,780.0,0.89,R-FSW-SELECT,S19 T43 T37
-12,FUSE-400,"Fuse links 400 A, one per pole",3,46,138,0.89,R-FUSE-LINKS,S19 T43 T37
-13,FU-KIT-FUSE_SWITCH,"Outgoing functional unit: compartment door, terminals, labels",1,380,380,0.89,R-FU-KIT,S19 T43 T37
-14,FSW-800-4P,Fuse-switch-disconnector 800 A 4-pole; feeds kitchen :,1,1854.4,1854.4,0.88,R-FSW-SELECT,S21 T41 T35
-15,FUSE-800,"Fuse links 800 A, one per pole",4,94,376,0.88,R-FUSE-LINKS,S21 T41 T35
-16,FU-KIT-FUSE_SWITCH,"Outgoing functional unit: compartment door, terminals, labels",1,380,380,0.88,R-FU-KIT,S21 T41 T35
-17,FSW-250-4P,Fuse-switch-disconnector 250 A 4-pole; feeds kitchen,1,524.6,524.6,0.94,R-FSW-SELECT,S24 T47 T39
-18,FUSE-250,"Fuse links 250 A, one per pole",4,29,116,0.94,R-FUSE-LINKS,S24 T47 T39
-19,FU-KIT-FUSE_SWITCH,"Outgoing functional unit: compartment door, terminals, labels",1,380,380,0.94,R-FU-KIT,S24 T47 T39
-20,FSW-250-4P,Fuse-switch-disconnector 250 A 4-pole; feeds DB-9.theatres,1,524.6,524.6,0.98,R-FSW-SELECT,S25 T45 T38
-21,FUSE-250,"Fuse links 250 A, one per pole",4,29,116,0.98,R-FUSE-LINKS,S25 T45 T38
-22,FU-KIT-FUSE_SWITCH,"Outgoing functional unit: compartment door, terminals, labels",1,380,380,0.98,R-FU-KIT,S25 T45 T38
-23,BUSBAR-CU-1600,"Copper busbar set 1600 A (4-bar), 2 sections, about 58 kg",1,662.4,662.4,0.9,R-BUSBAR-SIZE,T12 T12 T60
-24,ENC-SECTION,"Enclosure section, Form 4 Type 4, IP41, RAL 7035",2,3160.04,6320.08,0.95,R-ENCLOSURE,T54 T54 T56 T58
-25,LAB-ASSY,"Assembly, wiring and routine verification: 168 hours",1,8064,8064,0.9,R-LABOUR,
-26,DOC,"Documentation, as-built drawings, test certificates",1,600,600,1.0,R-DOC,
-27,CERT,Design-verification certificates per specification,1,0.0,0.0,1.0,R-SPEC-CERT,7.7
-28,DEL,"Delivery to site, crane and offload excluded",1,850,850,1.0,R-DELIVERY,
+1,ACB-1600-4P-L,"Air circuit breaker 1600 A 4-pole, 80 kA band L, withdrawable, electronic trip",1,7173.6,7173.6,0.9,R-ACB-SELECT,S3 T5 T7
+2,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.9,R-FU-KIT,S3 T5 T7
+3,ACB-1600-4P-L,"Air circuit breaker 1600 A 4-pole, 80 kA band L, withdrawable, electronic trip",1,7173.6,7173.6,0.9,R-ACB-SELECT,S4 T6 T8
+4,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.9,R-FU-KIT,S4 T6 T8
+5,METER-MF,Panel meter (multifunction),1,260,260,0.48,R-METERING,S5
+6,METER-MF,Panel meter (multifunction),1,260,260,0.48,R-METERING,S6
+7,CT-SET,"Current transformers 1600/5 A, set of three, class 1",1,280,280,0.87,R-METERING,S7 T9
+8,CT-SET,"Current transformers 1600/5 A, set of three, class 1",1,280,280,0.97,R-METERING,S8 T10
+9,FSW-400-3P,Fuse-switch-disconnector 400 A 3-pole,1,780.0,780.0,0.94,R-FSW-SELECT,S9 T16 T25
+10,FUSE-400,"Fuse links 400 A, one per pole",3,46,138,0.94,R-FUSE-LINKS,S9 T16 T25
+11,FU-KIT-FUSE_SWITCH,"Outgoing functional unit: compartment door, terminals, labels",1,380,380,0.94,R-FU-KIT,S9 T16 T25
+12,FSW-100-4P,Fuse-switch-disconnector 100 A 4-pole,1,317.2,317.2,0.93,R-FSW-SELECT,S10 T14
+13,FUSE-100,"Fuse links 100 A, one per pole",4,16,64,0.93,R-FUSE-LINKS,S10 T14
+14,FU-KIT-FUSE_SWITCH,"Outgoing functional unit: compartment door, terminals, labels",1,380,380,0.93,R-FU-KIT,S10 T14
+15,FSW-250-3P,Fuse-switch-disconnector 250 A 3-pole; feeds fan F-11,1,430.0,430.0,0.89,R-FSW-SELECT,S11 T17 T28 T33
+16,FUSE-250,"Fuse links 250 A, one per pole",3,29,87,0.89,R-FUSE-LINKS,S11 T17 T28 T33
+17,FU-KIT-FUSE_SWITCH,"Outgoing functional unit: compartment door, terminals, labels",1,380,380,0.89,R-FU-KIT,S11 T17 T28 T33
+18,FSW-400-4P,Fuse-switch-disconnector 400 A 4-pole; feeds DB-8 theatres,1,951.6,951.6,0.94,R-FSW-SELECT,S12 T21 T26 T31
+19,FUSE-400,"Fuse links 400 A, one per pole",4,46,184,0.94,R-FUSE-LINKS,S12 T21 T26 T31
+20,FU-KIT-FUSE_SWITCH,"Outgoing functional unit: compartment door, terminals, labels",1,380,380,0.94,R-FU-KIT,S12 T21 T26 T31
+21,FSW-160-4P,Fuse-switch-disconnector 160 A 4-pole; feeds sub-board 10,1,366.0,366.0,0.93,R-FSW-SELECT,S13 T22 T27 T32
+22,FUSE-160,"Fuse links 160 A, one per pole",4,21,84,0.93,R-FUSE-LINKS,S13 T22 T27 T32
+23,FU-KIT-FUSE_SWITCH,"Outgoing functional unit: compartment door, terminals, labels",1,380,380,0.93,R-FU-KIT,S13 T22 T27 T32
+24,STARTER-37KW,"Motor starter for 37 kW: contactor, overload relay and control circuit",1,1150,1150,0.92,R-STARTER,S14 T19
+25,PFC-200KVAR,"Power-factor correction bank 200 kVAr, detuned, in its own section",1,6800,6800,0.98,R-PFC,S15 T20
+26,STARTER-55KW,"Motor starter for 55 kW: contactor, overload relay and control circuit",1,2150,2150,0.97,R-STARTER,S16 T23
+27,SPD-T12,"Surge protective device, Type 1+2, with status indication",1,690,690,0.92,R-SPD,S17 T18
+28,MCCB-630-4P-L,"Moulded-case circuit breaker 630 A 4-pole, 80 kA band L, adjustable trip; feeds lighting",1,2476.6,2476.6,0.87,R-MCCB-SELECT,S18 T29 T34 T40
+29,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.87,R-FU-KIT,S18 T29 T34 T40
+30,FSW-100-4P,Fuse-switch-disconnector 100 A 4-pole; feeds spare,1,317.2,317.2,0.93,R-FSW-SELECT,S21 T36 T42 T49
+31,FUSE-100,"Fuse links 100 A, one per pole",4,16,64,0.93,R-FUSE-LINKS,S21 T36 T42 T49
+32,FU-KIT-FUSE_SWITCH,"Outgoing functional unit: compartment door, terminals, labels",1,380,380,0.93,R-FU-KIT,S21 T36 T42 T49
+33,FSW-400-3P,Fuse-switch-disconnector 400 A 3-pole; feeds MCC-7chillers,1,780.0,780.0,0.89,R-FSW-SELECT,S22 T37 T43 T50
+34,FUSE-400,"Fuse links 400 A, one per pole",3,46,138,0.89,R-FUSE-LINKS,S22 T37 T43 T50
+35,FU-KIT-FUSE_SWITCH,"Outgoing functional unit: compartment door, terminals, labels",1,380,380,0.89,R-FU-KIT,S22 T37 T43 T50
+36,FSW-250-4P,Fuse-switch-disconnector 250 A 4-pole; feeds kitchen,1,524.6,524.6,0.94,R-FSW-SELECT,S23 T39 T47 T52
+37,FUSE-250,"Fuse links 250 A, one per pole",4,29,116,0.94,R-FUSE-LINKS,S23 T39 T47 T52
+38,FU-KIT-FUSE_SWITCH,"Outgoing functional unit: compartment door, terminals, labels",1,380,380,0.94,R-FU-KIT,S23 T39 T47 T52
+39,FSW-800-4P,Fuse-switch-disconnector 800 A 4-pole; feeds kitchen :,1,1854.4,1854.4,0.88,R-FSW-SELECT,S25 T35 T41 T48
+40,FUSE-800,"Fuse links 800 A, one per pole",4,94,376,0.88,R-FUSE-LINKS,S25 T35 T41 T48
+41,FU-KIT-FUSE_SWITCH,"Outgoing functional unit: compartment door, terminals, labels",1,380,380,0.88,R-FU-KIT,S25 T35 T41 T48
+42,FSW-250-4P,Fuse-switch-disconnector 250 A 4-pole; feeds DB-9.theatres,1,524.6,524.6,0.96,R-FSW-SELECT,S26 T38 T45 T51
+43,FUSE-250,"Fuse links 250 A, one per pole",4,29,116,0.96,R-FUSE-LINKS,S26 T38 T45 T51
+44,FU-KIT-FUSE_SWITCH,"Outgoing functional unit: compartment door, terminals, labels",1,380,380,0.96,R-FU-KIT,S26 T38 T45 T51
+45,BUSBAR-CU-1600,"Copper busbar set 1600 A (4-bar), 6 sections, about 173 kg",1,1987.2,1987.2,0.9,R-BUSBAR-SIZE,T12 T12 T60
+46,ENC-SECTION,"Enclosure section, Form 4 Type 4, IP41, RAL 7035",6,3160.04,18960.24,0.95,R-ENCLOSURE,T54 T54 T56 T58
+47,LAB-ASSY,"Assembly, wiring and routine verification: 229 hours",1,10992,10992,0.9,R-LABOUR,
+48,DOC,"Documentation, as-built drawings, test certificates",1,600,600,1.0,R-DOC,
+49,CERT,Design-verification certificates per specification,1,0.0,0.0,1.0,R-SPEC-CERT,7.7
+50,DEL,"Delivery to site, crane and offload excluded",1,850,850,1.0,R-DELIVERY,

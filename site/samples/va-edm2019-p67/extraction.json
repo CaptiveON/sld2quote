@@ -674,112 +674,100 @@
    "id": "S1",
    "kind": "breaker",
    "box": [
-    915,
+    1397,
     219,
-    20,
+    22,
     19
    ],
-   "score": 0.15,
-   "shape_score": 0.75
+   "score": 0.16,
+   "shape_score": 0.87
   },
   {
    "id": "S2",
    "kind": "breaker",
    "box": [
-    1396,
+    1648,
     219,
-    26,
-    21
+    28,
+    19
    ],
    "score": 0.12,
-   "shape_score": 0.75
+   "shape_score": 0.87
   },
   {
    "id": "S3",
    "kind": "breaker",
    "box": [
-    2255,
-    220,
-    18,
+    2212,
+    219,
+    26,
     19
    ],
    "score": 0.13,
-   "shape_score": 0.75
+   "shape_score": 0.87
   },
   {
    "id": "S4",
    "kind": "breaker",
    "box": [
-    910,
-    242,
-    33,
-    25
+    908,
+    241,
+    34,
+    26
    ],
-   "score": 0.16,
-   "shape_score": 0.93
+   "score": 0.21,
+   "shape_score": 0.99
   },
   {
    "id": "S5",
-   "kind": "capacitor",
+   "kind": "breaker",
    "box": [
-    2399,
-    260,
-    22,
-    13
+    1389,
+    241,
+    38,
+    28
    ],
-   "score": 0.22,
-   "shape_score": 0.98
+   "score": 0.24,
+   "shape_score": 0.99
   },
   {
    "id": "S6",
-   "kind": "contactor",
+   "kind": "ct",
    "box": [
-    1663,
-    288,
-    34,
-    39
+    2228,
+    243,
+    29,
+    24
    ],
    "score": 0.14,
-   "shape_score": 0.75
+   "shape_score": 0.87
   },
   {
    "id": "S7",
-   "kind": "contactor",
+   "kind": "relay",
    "box": [
-    1393,
-    289,
-    31,
-    36
+    911,
+    334,
+    33,
+    44
    ],
-   "score": 0.17,
-   "shape_score": 0.93
+   "score": 0.22,
+   "shape_score": 0.99
   },
   {
    "id": "S8",
-   "kind": "contactor",
+   "kind": "relay",
    "box": [
     2226,
-    289,
-    32,
-    36
+    334,
+    34,
+    44
    ],
-   "score": 0.2,
-   "shape_score": 0.97
+   "score": 0.13,
+   "shape_score": 0.87
   },
   {
    "id": "S9",
-   "kind": "capacitor",
-   "box": [
-    2398,
-    298,
-    24,
-    20
-   ],
-   "score": 0.18,
-   "shape_score": 0.93
-  },
-  {
-   "id": "S10",
    "kind": "relay",
    "box": [
     1391,
@@ -787,803 +775,755 @@
     36,
     43
    ],
-   "score": 0.13,
-   "shape_score": 0.75
+   "score": 0.27,
+   "shape_score": 1.0
   },
   {
-   "id": "S11",
+   "id": "S10",
    "kind": "relay",
    "box": [
-    2227,
+    1664,
     335,
     33,
     43
    ],
-   "score": 0.13,
-   "shape_score": 0.75
+   "score": 0.24,
+   "shape_score": 0.99
   },
   {
-   "id": "S12",
-   "kind": "capacitor",
+   "id": "S11",
+   "kind": "earth",
    "box": [
-    2424,
-    350,
-    25,
-    15
+    2226,
+    388,
+    33,
+    38
    ],
-   "score": 0.33,
+   "score": 0.42,
    "shape_score": 1.0
   },
   {
-   "id": "S13",
-   "kind": "breaker",
-   "box": [
-    910,
-    389,
-    33,
-    36
-   ],
-   "score": 0.17,
-   "shape_score": 0.93
-  },
-  {
-   "id": "S14",
-   "kind": "ct",
-   "box": [
-    1894,
-    431,
-    36,
-    33
-   ],
-   "score": 0.22,
-   "shape_score": 0.98
-  },
-  {
-   "id": "S15",
+   "id": "S12",
    "kind": "breaker",
    "box": [
     1990,
     432,
-    39,
-    33
+    38,
+    32
    ],
-   "score": 0.18,
-   "shape_score": 0.97
+   "score": 0.2,
+   "shape_score": 0.99
   },
   {
-   "id": "S16",
-   "kind": "capacitor",
-   "box": [
-    2421,
-    436,
-    59,
-    17
-   ],
-   "score": 0.18,
-   "shape_score": 0.97
-  },
-  {
-   "id": "S17",
-   "kind": "capacitor",
-   "box": [
-    2398,
-    452,
-    23,
-    15
-   ],
-   "score": 0.23,
-   "shape_score": 0.98
-  },
-  {
-   "id": "S18",
+   "id": "S13",
    "kind": "contactor",
    "box": [
-    1010,
-    469,
-    34,
-    38
+    1011,
+    470,
+    31,
+    37
+   ],
+   "score": 0.12,
+   "shape_score": 0.87
+  },
+  {
+   "id": "S14",
+   "kind": "contactor",
+   "box": [
+    1292,
+    471,
+    29,
+    35
    ],
    "score": 0.14,
-   "shape_score": 0.75
+   "shape_score": 0.87
   },
   {
-   "id": "S19",
+   "id": "S15",
    "kind": "contactor",
    "box": [
-    2083,
-    470,
-    32,
+    1806,
+    471,
+    31,
     35
    ],
    "score": 0.12,
-   "shape_score": 0.75
+   "shape_score": 0.87
+  },
+  {
+   "id": "S16",
+   "kind": "contactor",
+   "box": [
+    2184,
+    471,
+    30,
+    34
+   ],
+   "score": 0.11,
+   "shape_score": 0.87
+  },
+  {
+   "id": "S17",
+   "kind": "relay",
+   "box": [
+    2182,
+    514,
+    33,
+    44
+   ],
+   "score": 0.12,
+   "shape_score": 0.87
+  },
+  {
+   "id": "S18",
+   "kind": "relay",
+   "box": [
+    1008,
+    515,
+    36,
+    44
+   ],
+   "score": 0.37,
+   "shape_score": 1.0
+  },
+  {
+   "id": "S19",
+   "kind": "relay",
+   "box": [
+    1804,
+    515,
+    33,
+    44
+   ],
+   "score": 0.21,
+   "shape_score": 0.99
   },
   {
    "id": "S20",
-   "kind": "contactor",
+   "kind": "relay",
    "box": [
-    2183,
-    471,
+    2082,
+    515,
     32,
-    34
+    44
    ],
-   "score": 0.14,
-   "shape_score": 0.75
+   "score": 0.24,
+   "shape_score": 0.99
   },
   {
    "id": "S21",
    "kind": "capacitor",
    "box": [
-    2425,
-    503,
-    24,
-    28
+    2398,
+    552,
+    23,
+    9
    ],
    "score": 0.15,
-   "shape_score": 0.93
+   "shape_score": 0.87
   },
   {
    "id": "S22",
-   "kind": "earth",
+   "kind": "capacitor",
    "box": [
-    1704,
-    514,
-    35,
-    93
+    2454,
+    552,
+    24,
+    9
    ],
-   "score": 0.21,
-   "shape_score": 0.97
+   "score": 0.16,
+   "shape_score": 0.87
   },
   {
    "id": "S23",
-   "kind": "relay",
+   "kind": "earth",
    "box": [
-    1009,
-    515,
-    36,
-    44
-   ],
-   "score": 0.33,
-   "shape_score": 1.0
-  },
-  {
-   "id": "S24",
-   "kind": "relay",
-   "box": [
-    2082,
-    515,
+    1292,
+    568,
     33,
-    44
-   ],
-   "score": 0.24,
-   "shape_score": 0.98
-  },
-  {
-   "id": "S25",
-   "kind": "relay",
-   "box": [
-    2182,
-    515,
-    33,
-    44
-   ],
-   "score": 0.2,
-   "shape_score": 0.97
-  },
-  {
-   "id": "S26",
-   "kind": "relay",
-   "box": [
-    1290,
-    516,
-    35,
-    43
-   ],
-   "score": 0.16,
-   "shape_score": 0.93
-  },
-  {
-   "id": "S27",
-   "kind": "relay",
-   "box": [
-    1805,
-    516,
-    32,
-    44
-   ],
-   "score": 0.17,
-   "shape_score": 0.93
-  },
-  {
-   "id": "S28",
-   "kind": "capacitor",
-   "box": [
-    2422,
-    545,
-    27,
-    13
-   ],
-   "score": 0.22,
-   "shape_score": 0.98
-  },
-  {
-   "id": "S29",
-   "kind": "capacitor",
-   "box": [
-    2398,
-    566,
-    26,
-    11
-   ],
-   "score": 0.19,
-   "shape_score": 0.97
-  },
-  {
-   "id": "S30",
-   "kind": "capacitor",
-   "box": [
-    2398,
-    598,
-    25,
-    10
-   ],
-   "score": 0.28,
-   "shape_score": 1.0
-  },
-  {
-   "id": "S31",
-   "kind": "capacitor",
-   "box": [
-    2425,
-    645,
-    24,
-    16
-   ],
-   "score": 0.17,
-   "shape_score": 0.93
-  },
-  {
-   "id": "S32",
-   "kind": "meter",
-   "box": [
-    285,
-    721,
-    37,
-    26
-   ],
-   "score": 0.12,
-   "shape_score": 0.75
-  },
-  {
-   "id": "S33",
-   "kind": "meter",
-   "box": [
-    487,
-    722,
-    33,
-    24
-   ],
-   "score": 0.13,
-   "shape_score": 0.75
-  },
-  {
-   "id": "S34",
-   "kind": "capacitor",
-   "box": [
-    2399,
-    729,
-    25,
-    15
-   ],
-   "score": 0.18,
-   "shape_score": 0.97
-  },
-  {
-   "id": "S35",
-   "kind": "capacitor",
-   "box": [
-    2398,
-    738,
-    25,
-    12
-   ],
-   "score": 0.18,
-   "shape_score": 0.93
-  },
-  {
-   "id": "S36",
-   "kind": "capacitor",
-   "box": [
-    2398,
-    741,
-    24,
-    20
-   ],
-   "score": 0.16,
-   "shape_score": 0.93
-  },
-  {
-   "id": "S37",
-   "kind": "contactor",
-   "box": [
-    502,
-    809,
-    29,
-    55
+    39
    ],
    "score": 0.31,
    "shape_score": 1.0
   },
   {
-   "id": "S38",
-   "kind": "capacitor",
+   "id": "S24",
+   "kind": "earth",
    "box": [
-    2396,
-    837,
-    25,
-    32
-   ],
-   "score": 0.15,
-   "shape_score": 0.93
-  },
-  {
-   "id": "S39",
-   "kind": "capacitor",
-   "box": [
-    2397,
-    837,
-    24,
-    15
-   ],
-   "score": 0.12,
-   "shape_score": 0.75
-  },
-  {
-   "id": "S40",
-   "kind": "relay",
-   "box": [
-    2393,
-    862,
-    28,
-    104
-   ],
-   "score": 0.11,
-   "shape_score": 0.75
-  },
-  {
-   "id": "S41",
-   "kind": "breaker",
-   "box": [
-    1972,
-    869,
-    36,
-    36
-   ],
-   "score": 0.24,
-   "shape_score": 0.98
-  },
-  {
-   "id": "S42",
-   "kind": "breaker",
-   "box": [
-    2069,
-    870,
-    37,
-    35
-   ],
-   "score": 0.28,
-   "shape_score": 1.0
-  },
-  {
-   "id": "S43",
-   "kind": "relay",
-   "box": [
-    2552,
-    871,
-    19,
-    39
-   ],
-   "score": 0.17,
-   "shape_score": 0.93
-  },
-  {
-   "id": "S44",
-   "kind": "fuse_switch",
-   "box": [
-    391,
-    883,
-    24,
-    23
-   ],
-   "score": 0.22,
-   "shape_score": 0.98
-  },
-  {
-   "id": "S45",
-   "kind": "fuse_switch",
-   "box": [
-    492,
-    883,
-    23,
-    23
+    1706,
+    568,
+    32,
+    38
    ],
    "score": 0.26,
    "shape_score": 1.0
   },
   {
-   "id": "S46",
+   "id": "S25",
    "kind": "earth",
    "box": [
-    2493,
-    925,
-    22,
-    40
+    1806,
+    568,
+    32,
+    38
    ],
-   "score": 0.24,
-   "shape_score": 0.98
+   "score": 0.15,
+   "shape_score": 0.87
   },
   {
-   "id": "S47",
+   "id": "S26",
+   "kind": "earth",
+   "box": [
+    2084,
+    568,
+    32,
+    38
+   ],
+   "score": 0.37,
+   "shape_score": 1.0
+  },
+  {
+   "id": "S27",
+   "kind": "motor",
+   "box": [
+    1011,
+    569,
+    30,
+    38
+   ],
+   "score": 0.22,
+   "shape_score": 0.99
+  },
+  {
+   "id": "S28",
+   "kind": "earth",
+   "box": [
+    2184,
+    569,
+    31,
+    37
+   ],
+   "score": 0.21,
+   "shape_score": 0.99
+  },
+  {
+   "id": "S29",
+   "kind": "capacitor",
+   "box": [
+    2399,
+    577,
+    23,
+    12
+   ],
+   "score": 0.16,
+   "shape_score": 0.87
+  },
+  {
+   "id": "S30",
+   "kind": "fuse_switch",
+   "box": [
+    485,
+    720,
+    34,
+    27
+   ],
+   "score": 0.19,
+   "shape_score": 0.99
+  },
+  {
+   "id": "S31",
+   "kind": "ct",
+   "box": [
+    285,
+    721,
+    33,
+    26
+   ],
+   "score": 0.46,
+   "shape_score": 1.0
+  },
+  {
+   "id": "S32",
+   "kind": "capacitor",
+   "box": [
+    2396,
+    835,
+    25,
+    35
+   ],
+   "score": 0.16,
+   "shape_score": 0.97
+  },
+  {
+   "id": "S33",
+   "kind": "breaker",
+   "box": [
+    1973,
+    870,
+    37,
+    35
+   ],
+   "score": 0.33,
+   "shape_score": 1.0
+  },
+  {
+   "id": "S34",
+   "kind": "breaker",
+   "box": [
+    2069,
+    871,
+    37,
+    34
+   ],
+   "score": 0.2,
+   "shape_score": 0.99
+  },
+  {
+   "id": "S35",
    "kind": "relay",
    "box": [
     2552,
-    935,
+    879,
     19,
     30
    ],
-   "score": 0.13,
-   "shape_score": 0.75
+   "score": 0.21,
+   "shape_score": 0.99
   },
   {
-   "id": "S48",
+   "id": "S36",
+   "kind": "breaker",
+   "box": [
+    291,
+    883,
+    23,
+    24
+   ],
+   "score": 0.26,
+   "shape_score": 1.0
+  },
+  {
+   "id": "S37",
+   "kind": "earth",
+   "box": [
+    492,
+    883,
+    23,
+    24
+   ],
+   "score": 0.25,
+   "shape_score": 1.0
+  },
+  {
+   "id": "S38",
+   "kind": "breaker",
+   "box": [
+    1743,
+    901,
+    52,
+    31
+   ],
+   "score": 0.25,
+   "shape_score": 1.0
+  },
+  {
+   "id": "S39",
+   "kind": "meter",
+   "box": [
+    2395,
+    923,
+    26,
+    43
+   ],
+   "score": 0.14,
+   "shape_score": 0.87
+  },
+  {
+   "id": "S40",
+   "kind": "fuse_switch",
+   "box": [
+    1508,
+    949,
+    21,
+    24
+   ],
+   "score": 0.11,
+   "shape_score": 0.87
+  },
+  {
+   "id": "S41",
+   "kind": "motor",
+   "box": [
+    1972,
+    949,
+    37,
+    36
+   ],
+   "score": 0.17,
+   "shape_score": 0.97
+  },
+  {
+   "id": "S42",
    "kind": "breaker",
    "box": [
     248,
-    949,
+    950,
     26,
-    42
-   ],
-   "score": 0.12,
-   "shape_score": 0.75
-  },
-  {
-   "id": "S49",
-   "kind": "fuse_switch",
-   "box": [
-    1268,
-    951,
-    22,
-    20
+    40
    ],
    "score": 0.14,
-   "shape_score": 0.75
+   "shape_score": 0.87
   },
   {
-   "id": "S50",
-   "kind": "transformer",
+   "id": "S43",
+   "kind": "ct",
    "box": [
-    449,
-    990,
-    31,
-    58
+    1589,
+    951,
+    22,
+    21
    ],
-   "score": 0.13,
-   "shape_score": 0.75
+   "score": 0.14,
+   "shape_score": 0.87
   },
   {
-   "id": "S51",
+   "id": "S44",
    "kind": "relay",
    "box": [
-    241,
+    242,
     1002,
-    25,
-    46
+    23,
+    45
    ],
-   "score": 0.23,
-   "shape_score": 0.98
+   "score": 0.12,
+   "shape_score": 0.87
   },
   {
-   "id": "S52",
+   "id": "S45",
    "kind": "fuse_switch",
    "box": [
     543,
     1063,
-    24,
+    22,
     23
    ],
-   "score": 0.22,
-   "shape_score": 0.98
+   "score": 0.16,
+   "shape_score": 0.97
   },
   {
-   "id": "S53",
-   "kind": "fuse_switch",
+   "id": "S46",
+   "kind": "breaker",
    "box": [
     1508,
     1063,
-    24,
+    23,
     22
    ],
-   "score": 0.23,
-   "shape_score": 0.98
+   "score": 0.22,
+   "shape_score": 0.99
   },
   {
-   "id": "S54",
+   "id": "S47",
+   "kind": "ct",
+   "box": [
+    1267,
+    1064,
+    23,
+    22
+   ],
+   "score": 0.12,
+   "shape_score": 0.87
+  },
+  {
+   "id": "S48",
+   "kind": "ct",
+   "box": [
+    1428,
+    1064,
+    23,
+    23
+   ],
+   "score": 0.15,
+   "shape_score": 0.87
+  },
+  {
+   "id": "S49",
+   "kind": "ct",
+   "box": [
+    1589,
+    1064,
+    23,
+    23
+   ],
+   "score": 0.21,
+   "shape_score": 0.99
+  },
+  {
+   "id": "S50",
+   "kind": "board",
+   "box": [
+    334,
+    1163,
+    56,
+    39
+   ],
+   "score": 0.23,
+   "shape_score": 0.99
+  },
+  {
+   "id": "S51",
+   "kind": "capacitor",
+   "box": [
+    1510,
+    1163,
+    19,
+    12
+   ],
+   "score": 0.12,
+   "shape_score": 0.87
+  },
+  {
+   "id": "S52",
    "kind": "capacitor",
    "box": [
     553,
     1227,
-    21,
-    17
+    20,
+    19
+   ],
+   "score": 0.15,
+   "shape_score": 0.87
+  },
+  {
+   "id": "S53",
+   "kind": "breaker",
+   "box": [
+    2139,
+    1233,
+    16,
+    10
    ],
    "score": 0.3,
    "shape_score": 1.0
   },
   {
-   "id": "S55",
-   "kind": "board",
+   "id": "S54",
+   "kind": "ct",
    "box": [
-    1225,
-    1227,
-    71,
-    25
+    353,
+    1239,
+    24,
+    21
    ],
-   "score": 0.19,
-   "shape_score": 0.97
+   "score": 0.11,
+   "shape_score": 0.87
+  },
+  {
+   "id": "S55",
+   "kind": "relay",
+   "box": [
+    1165,
+    1318,
+    33,
+    43
+   ],
+   "score": 0.16,
+   "shape_score": 0.87
   },
   {
    "id": "S56",
-   "kind": "capacitor",
+   "kind": "board",
    "box": [
-    2138,
-    1233,
-    18,
-    10
+    825,
+    1357,
+    64,
+    19
    ],
    "score": 0.11,
-   "shape_score": 0.75
+   "shape_score": 0.87
   },
   {
    "id": "S57",
-   "kind": "meter",
+   "kind": "capacitor",
    "box": [
-    456,
-    1240,
-    16,
-    19
+    2421,
+    1358,
+    33,
+    28
    ],
-   "score": 0.19,
+   "score": 0.18,
    "shape_score": 0.97
   },
   {
    "id": "S58",
-   "kind": "contactor",
+   "kind": "earth",
    "box": [
-    207,
-    1241,
-    52,
-    19
+    1167,
+    1371,
+    32,
+    38
    ],
-   "score": 0.11,
-   "shape_score": 0.75
+   "score": 0.22,
+   "shape_score": 0.99
   },
   {
    "id": "S59",
-   "kind": "meter",
+   "kind": "capacitor",
    "box": [
-    2147,
-    1258,
-    72,
-    44
-   ],
-   "score": 0.11,
-   "shape_score": 0.75
-  },
-  {
-   "id": "S60",
-   "kind": "breaker",
-   "box": [
-    767,
-    1382,
-    42,
-    23
-   ],
-   "score": 0.27,
-   "shape_score": 1.0
-  },
-  {
-   "id": "S61",
-   "kind": "relay",
-   "box": [
-    2017,
-    1455,
+    2541,
+    1375,
     24,
     20
    ],
+   "score": 0.54,
+   "shape_score": 1.0
+  },
+  {
+   "id": "S60",
+   "kind": "contactor",
+   "box": [
+    1984,
+    1378,
+    22,
+    21
+   ],
+   "score": 0.13,
+   "shape_score": 0.87
+  },
+  {
+   "id": "S61",
+   "kind": "breaker",
+   "box": [
+    768,
+    1382,
+    41,
+    22
+   ],
    "score": 0.2,
-   "shape_score": 0.97
+   "shape_score": 0.99
   },
   {
    "id": "S62",
-   "kind": "relay",
+   "kind": "contactor",
    "box": [
-    1691,
-    1456,
-    28,
-    18
+    1832,
+    1404,
+    29,
+    19
    ],
-   "score": 0.13,
-   "shape_score": 0.75
+   "score": 0.11,
+   "shape_score": 0.87
   },
   {
    "id": "S63",
    "kind": "relay",
    "box": [
-    2087,
-    1456,
-    16,
-    17
+    826,
+    1419,
+    47,
+    21
    ],
-   "score": 0.11,
-   "shape_score": 0.75
+   "score": 0.13,
+   "shape_score": 0.87
   },
   {
    "id": "S64",
-   "kind": "relay",
-   "box": [
-    2173,
-    1457,
-    14,
-    17
-   ],
-   "score": 0.18,
-   "shape_score": 0.93
-  },
-  {
-   "id": "S65",
-   "kind": "contactor",
-   "box": [
-    989,
-    1483,
-    34,
-    18
-   ],
-   "score": 0.13,
-   "shape_score": 0.75
-  },
-  {
-   "id": "S66",
-   "kind": "board",
+   "kind": "motor",
    "box": [
     2401,
     1504,
-    70,
-    74
+    69,
+    73
    ],
-   "score": 0.21,
-   "shape_score": 0.98
-  },
-  {
-   "id": "S67",
-   "kind": "board",
-   "box": [
-    739,
-    1522,
-    59,
-    39
-   ],
-   "score": 0.83,
+   "score": 0.34,
    "shape_score": 1.0
   },
   {
-   "id": "S68",
-   "kind": "contactor",
+   "id": "S65",
+   "kind": "board",
    "box": [
-    1983,
-    1524,
-    35,
-    57
+    739,
+    1521,
+    59,
+    39
    ],
-   "score": 0.12,
-   "shape_score": 0.75
+   "score": 0.33,
+   "shape_score": 1.0
   },
   {
-   "id": "S69",
-   "kind": "relay",
+   "id": "S66",
+   "kind": "capacitor",
    "box": [
-    2033,
-    1536,
-    20,
-    19
+    2541,
+    1530,
+    23,
+    15
    ],
-   "score": 0.11,
-   "shape_score": 0.75
+   "score": 0.14,
+   "shape_score": 0.87
   },
   {
-   "id": "S70",
-   "kind": "relay",
-   "box": [
-    2290,
-    1537,
-    21,
-    17
-   ],
-   "score": 0.24,
-   "shape_score": 0.98
-  },
-  {
-   "id": "S71",
-   "kind": "relay",
-   "box": [
-    939,
-    1561,
-    20,
-    18
-   ],
-   "score": 0.2,
-   "shape_score": 0.97
-  },
-  {
-   "id": "S72",
-   "kind": "relay",
-   "box": [
-    2083,
-    1561,
-    27,
-    18
-   ],
-   "score": 0.15,
-   "shape_score": 0.75
-  },
-  {
-   "id": "S73",
+   "id": "S67",
    "kind": "capacitor",
    "box": [
     2410,
     1587,
-    52,
-    10
+    51,
+    35
    ],
-   "score": 0.2,
+   "score": 0.16,
    "shape_score": 0.97
   },
   {
-   "id": "S74",
+   "id": "S68",
    "kind": "capacitor",
    "box": [
-    2415,
-    1600,
-    40,
-    43
+    2541,
+    1598,
+    24,
+    12
    ],
-   "score": 0.22,
-   "shape_score": 0.98
+   "score": 0.19,
+   "shape_score": 0.99
   },
   {
-   "id": "S75",
+   "id": "S69",
+   "kind": "meter",
+   "box": [
+    2416,
+    1604,
+    39,
+    40
+   ],
+   "score": 0.12,
+   "shape_score": 0.87
+  },
+  {
+   "id": "S70",
    "kind": "fuse_switch",
    "box": [
-    1539,
-    1611,
+    1538,
+    1610,
     19,
-    21
+    22
    ],
-   "score": 0.15,
-   "shape_score": 0.75
+   "score": 0.13,
+   "shape_score": 0.87
   }
  ],
  "devices": [
   {
    "symbol": "S1",
    "box": [
-    915,
+    1397,
     219,
-    20,
+    22,
     19
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.38,
-   "score": 0.15,
+   "conf": 0.43,
+   "score": 0.16,
    "type": "ACB",
    "rating": null,
    "poles": null,
@@ -1595,14 +1535,14 @@
   {
    "symbol": "S2",
    "box": [
-    1396,
+    1648,
     219,
-    26,
-    21
+    28,
+    19
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.38,
+   "conf": 0.43,
    "score": 0.12,
    "type": "ACB",
    "rating": null,
@@ -1615,14 +1555,14 @@
   {
    "symbol": "S3",
    "box": [
-    2255,
-    220,
-    18,
+    2212,
+    219,
+    26,
     19
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.38,
+   "conf": 0.43,
    "score": 0.13,
    "type": "ACB",
    "rating": null,
@@ -1635,15 +1575,17 @@
   {
    "symbol": "S4",
    "box": [
-    910,
-    242,
-    33,
-    25
+    908,
+    241,
+    34,
+    26
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.47,
-   "score": 0.16,
+   "label_texts": [
+    "T5"
+   ],
+   "label": "G1",
+   "conf": 0.95,
+   "score": 0.21,
    "type": "ACB",
    "rating": null,
    "poles": null,
@@ -1655,95 +1597,83 @@
   {
    "symbol": "S5",
    "box": [
-    2399,
-    260,
-    22,
-    13
+    1389,
+    241,
+    38,
+    28
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.49,
-   "score": 0.22,
-   "type": "CAPACITOR",
+   "label_texts": [
+    "T3"
+   ],
+   "label": "STANDEY GENERATORS",
+   "conf": 0.96,
+   "score": 0.24,
+   "type": "ACB",
    "rating": null,
+   "poles": null,
+   "kA": null,
    "on_bus": null,
-   "connected": false,
+   "connected": true,
    "id": "D5"
   },
   {
    "symbol": "S6",
    "box": [
-    1663,
-    288,
-    34,
-    39
+    2228,
+    243,
+    29,
+    24
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.38,
+   "label_texts": [
+    "T7"
+   ],
+   "label": "UTL 2",
+   "conf": 0.82,
    "score": 0.14,
-   "type": "CONTACTOR",
+   "type": "CT",
    "rating": null,
    "on_bus": null,
-   "connected": false,
+   "connected": true,
    "id": "D6"
   },
   {
    "symbol": "S7",
    "box": [
-    1393,
-    289,
-    31,
-    36
+    911,
+    334,
+    33,
+    44
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.47,
-   "score": 0.17,
-   "type": "CONTACTOR",
+   "conf": 0.49,
+   "score": 0.22,
+   "type": "RELAY",
    "rating": null,
    "on_bus": null,
-   "connected": false,
+   "connected": true,
    "id": "D7"
   },
   {
    "symbol": "S8",
    "box": [
     2226,
-    289,
-    32,
-    36
+    334,
+    34,
+    44
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.48,
-   "score": 0.2,
-   "type": "CONTACTOR",
+   "conf": 0.43,
+   "score": 0.13,
+   "type": "RELAY",
    "rating": null,
    "on_bus": null,
-   "connected": false,
+   "connected": true,
    "id": "D8"
   },
   {
    "symbol": "S9",
-   "box": [
-    2398,
-    298,
-    24,
-    20
-   ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.47,
-   "score": 0.18,
-   "type": "CAPACITOR",
-   "rating": null,
-   "on_bus": null,
-   "connected": false,
-   "id": "D9"
-  },
-  {
-   "symbol": "S10",
    "box": [
     1391,
     335,
@@ -1752,8 +1682,28 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.38,
-   "score": 0.13,
+   "conf": 0.5,
+   "score": 0.27,
+   "type": "RELAY",
+   "rating": null,
+   "on_bus": null,
+   "connected": true,
+   "id": "D9"
+  },
+  {
+   "symbol": "S10",
+   "box": [
+    1664,
+    335,
+    33,
+    43
+   ],
+   "label_texts": [
+    "T6"
+   ],
+   "label": "UTIL 1",
+   "conf": 0.98,
+   "score": 0.24,
    "type": "RELAY",
    "rating": null,
    "on_bus": null,
@@ -1763,35 +1713,37 @@
   {
    "symbol": "S11",
    "box": [
-    2227,
-    335,
+    2226,
+    388,
     33,
-    43
+    38
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.38,
-   "score": 0.13,
-   "type": "RELAY",
+   "conf": 0.5,
+   "score": 0.42,
+   "type": "EARTH",
    "rating": null,
    "on_bus": null,
-   "connected": true,
+   "connected": false,
    "id": "D11"
   },
   {
    "symbol": "S12",
    "box": [
-    2424,
-    350,
-    25,
-    15
+    1990,
+    432,
+    38,
+    32
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.5,
-   "score": 0.33,
-   "type": "CAPACITOR",
+   "conf": 0.49,
+   "score": 0.2,
+   "type": "ACB",
    "rating": null,
+   "poles": null,
+   "kA": null,
    "on_bus": null,
    "connected": false,
    "id": "D12"
@@ -1799,19 +1751,17 @@
   {
    "symbol": "S13",
    "box": [
-    910,
-    389,
-    33,
-    36
+    1011,
+    470,
+    31,
+    37
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.47,
-   "score": 0.17,
-   "type": "ACB",
+   "conf": 0.43,
+   "score": 0.12,
+   "type": "CONTACTOR",
    "rating": null,
-   "poles": null,
-   "kA": null,
    "on_bus": null,
    "connected": false,
    "id": "D13"
@@ -1819,16 +1769,16 @@
   {
    "symbol": "S14",
    "box": [
-    1894,
-    431,
-    36,
-    33
+    1292,
+    471,
+    29,
+    35
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.49,
-   "score": 0.22,
-   "type": "CT",
+   "conf": 0.43,
+   "score": 0.14,
+   "type": "CONTACTOR",
    "rating": null,
    "on_bus": null,
    "connected": false,
@@ -1837,19 +1787,17 @@
   {
    "symbol": "S15",
    "box": [
-    1990,
-    432,
-    39,
-    33
+    1806,
+    471,
+    31,
+    35
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.48,
-   "score": 0.18,
-   "type": "ACB",
+   "conf": 0.43,
+   "score": 0.12,
+   "type": "CONTACTOR",
    "rating": null,
-   "poles": null,
-   "kA": null,
    "on_bus": null,
    "connected": false,
    "id": "D15"
@@ -1857,16 +1805,16 @@
   {
    "symbol": "S16",
    "box": [
-    2421,
-    436,
-    59,
-    17
+    2184,
+    471,
+    30,
+    34
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.48,
-   "score": 0.18,
-   "type": "CAPACITOR",
+   "conf": 0.43,
+   "score": 0.11,
+   "type": "CONTACTOR",
    "rating": null,
    "on_bus": null,
    "connected": false,
@@ -1875,89 +1823,86 @@
   {
    "symbol": "S17",
    "box": [
-    2398,
-    452,
-    23,
-    15
+    2182,
+    514,
+    33,
+    44
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.49,
-   "score": 0.23,
-   "type": "CAPACITOR",
+   "conf": 0.43,
+   "score": 0.12,
+   "type": "RELAY",
    "rating": null,
    "on_bus": null,
-   "connected": false,
+   "connected": true,
    "id": "D17"
   },
   {
    "symbol": "S18",
    "box": [
-    1010,
-    469,
-    34,
-    38
+    1008,
+    515,
+    36,
+    44
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.38,
-   "score": 0.14,
-   "type": "CONTACTOR",
+   "conf": 0.5,
+   "score": 0.37,
+   "type": "RELAY",
    "rating": null,
    "on_bus": null,
-   "connected": false,
+   "connected": true,
    "id": "D18"
   },
   {
    "symbol": "S19",
    "box": [
-    2083,
-    470,
-    32,
-    35
+    1804,
+    515,
+    33,
+    44
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.38,
-   "score": 0.12,
-   "type": "CONTACTOR",
+   "conf": 0.49,
+   "score": 0.21,
+   "type": "RELAY",
    "rating": null,
    "on_bus": null,
-   "connected": false,
+   "connected": true,
    "id": "D19"
   },
   {
    "symbol": "S20",
    "box": [
-    2183,
-    471,
+    2082,
+    515,
     32,
-    34
+    44
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.38,
-   "score": 0.14,
-   "type": "CONTACTOR",
+   "conf": 0.49,
+   "score": 0.24,
+   "type": "RELAY",
    "rating": null,
    "on_bus": null,
-   "connected": false,
+   "connected": true,
    "id": "D20"
   },
   {
    "symbol": "S21",
    "box": [
-    2425,
-    503,
-    24,
-    28
+    2398,
+    552,
+    23,
+    9
    ],
-   "label_texts": [
-    "T9",
-    "T8"
-   ],
-   "label": "SINGLE OR MULTIPLE MISSION CRITICAL BUIL | SYSTEN GENERATORS AT PATIENT CARE BUILDI",
-   "conf": 0.93,
+   "label_texts": [],
+   "label": "",
+   "conf": 0.43,
    "score": 0.15,
    "type": "CAPACITOR",
    "rating": null,
@@ -1968,16 +1913,18 @@
   {
    "symbol": "S22",
    "box": [
-    1704,
-    514,
-    35,
-    93
+    2454,
+    552,
+    24,
+    9
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.48,
-   "score": 0.21,
-   "type": "EARTH",
+   "label_texts": [
+    "T9"
+   ],
+   "label": "SINGLE OR MULTIPLE MISSION CRITICAL BUIL",
+   "conf": 0.87,
+   "score": 0.16,
+   "type": "CAPACITOR",
    "rating": null,
    "on_bus": null,
    "connected": false,
@@ -1986,52 +1933,52 @@
   {
    "symbol": "S23",
    "box": [
-    1009,
-    515,
-    36,
-    44
+    1292,
+    568,
+    33,
+    39
    ],
    "label_texts": [],
    "label": "",
    "conf": 0.5,
-   "score": 0.33,
-   "type": "RELAY",
+   "score": 0.31,
+   "type": "EARTH",
    "rating": null,
    "on_bus": null,
-   "connected": true,
+   "connected": false,
    "id": "D23"
   },
   {
    "symbol": "S24",
    "box": [
-    2082,
-    515,
-    33,
-    44
+    1706,
+    568,
+    32,
+    38
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.49,
-   "score": 0.24,
-   "type": "RELAY",
+   "conf": 0.5,
+   "score": 0.26,
+   "type": "EARTH",
    "rating": null,
    "on_bus": null,
-   "connected": true,
+   "connected": false,
    "id": "D24"
   },
   {
    "symbol": "S25",
    "box": [
-    2182,
-    515,
-    33,
-    44
+    1806,
+    568,
+    32,
+    38
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.48,
-   "score": 0.2,
-   "type": "RELAY",
+   "conf": 0.43,
+   "score": 0.15,
+   "type": "EARTH",
    "rating": null,
    "on_bus": null,
    "connected": true,
@@ -2040,16 +1987,16 @@
   {
    "symbol": "S26",
    "box": [
-    1290,
-    516,
-    35,
-    43
+    2084,
+    568,
+    32,
+    38
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.47,
-   "score": 0.16,
-   "type": "RELAY",
+   "conf": 0.5,
+   "score": 0.37,
+   "type": "EARTH",
    "rating": null,
    "on_bus": null,
    "connected": true,
@@ -2058,16 +2005,16 @@
   {
    "symbol": "S27",
    "box": [
-    1805,
-    516,
-    32,
-    44
+    1011,
+    569,
+    30,
+    38
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.47,
-   "score": 0.17,
-   "type": "RELAY",
+   "conf": 0.49,
+   "score": 0.22,
+   "type": "MOTOR",
    "rating": null,
    "on_bus": null,
    "connected": true,
@@ -2076,33 +2023,35 @@
   {
    "symbol": "S28",
    "box": [
-    2422,
-    545,
-    27,
-    13
+    2184,
+    569,
+    31,
+    37
    ],
    "label_texts": [],
    "label": "",
    "conf": 0.49,
-   "score": 0.22,
-   "type": "CAPACITOR",
+   "score": 0.21,
+   "type": "EARTH",
    "rating": null,
    "on_bus": null,
-   "connected": false,
+   "connected": true,
    "id": "D28"
   },
   {
    "symbol": "S29",
    "box": [
-    2398,
-    566,
-    26,
-    11
+    2399,
+    577,
+    23,
+    12
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.48,
-   "score": 0.19,
+   "label_texts": [
+    "T8"
+   ],
+   "label": "SYSTEN GENERATORS AT PATIENT CARE BUILDI",
+   "conf": 0.87,
+   "score": 0.16,
    "type": "CAPACITOR",
    "rating": null,
    "on_bus": null,
@@ -2112,17 +2061,23 @@
   {
    "symbol": "S30",
    "box": [
-    2398,
-    598,
-    25,
-    10
+    485,
+    720,
+    34,
+    27
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.5,
-   "score": 0.28,
-   "type": "CAPACITOR",
+   "label_texts": [
+    "T10",
+    "T11"
+   ],
+   "label": "ESSENTIALELECTRICALSYSTEH | GENERATORS HITH N+1 RETUNDANCY",
+   "conf": 0.91,
+   "score": 0.19,
+   "type": "FUSE_SWITCH",
    "rating": null,
+   "poles": null,
+   "kA": null,
+   "dest": "ESSENTIALELECTRICALSYSTEH",
    "on_bus": null,
    "connected": false,
    "id": "D30"
@@ -2130,16 +2085,16 @@
   {
    "symbol": "S31",
    "box": [
-    2425,
-    645,
-    24,
-    16
+    285,
+    721,
+    33,
+    26
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.47,
-   "score": 0.17,
-   "type": "CAPACITOR",
+   "conf": 0.5,
+   "score": 0.46,
+   "type": "CT",
    "rating": null,
    "on_bus": null,
    "connected": false,
@@ -2148,16 +2103,16 @@
   {
    "symbol": "S32",
    "box": [
-    285,
-    721,
-    37,
-    26
+    2396,
+    835,
+    25,
+    35
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.38,
-   "score": 0.12,
-   "type": "METER",
+   "conf": 0.48,
+   "score": 0.16,
+   "type": "CAPACITOR",
    "rating": null,
    "on_bus": null,
    "connected": false,
@@ -2166,17 +2121,30 @@
   {
    "symbol": "S33",
    "box": [
-    487,
-    722,
-    33,
-    24
+    1973,
+    870,
+    37,
+    35
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.38,
-   "score": 0.13,
-   "type": "METER",
+   "label_texts": [
+    "T38",
+    "T40",
+    "T42",
+    "T45",
+    "T47",
+    "T49",
+    "T52",
+    "T53",
+    "T55"
+   ],
+   "label": "FOR A HISSION CRITICAL MEDICAL CENTER. THEY DEPICT A MECIUM-VOLTAGE | SERVCE ENTRANCE SET OF TWO UTIUTY SOURCES, SEPARATE STANDBY ANO | ESSENTIAL GENERATORS, AND SITE DISTRIBUTIQN TO ONE PATIENT-CARE BUILDING. | TOPOLOGY FOR NON-PATIENT OARE BLDGS IS NOT SHOWN. | THIS CRAWING IS INTENOEO TD ASSST THE A/E BY PROMDING A GRAPHICAL | REPRESENTATION CF GENERAL CONNECTIWTY AND/CR TOPOLOGY RECUIREHENTS | CF THE ELECTRICAL POWER DISTRIBUTICN AND RELATED SYSTEHS. THIS DRAYINC | IS FOR REFERENCE ONLY. | NORHAL TO ESSENTIAL TRANSFER TIME PER NATICNAL ELECTRIC CODE.",
+   "conf": 0.91,
+   "score": 0.33,
+   "type": "MCCB",
    "rating": null,
+   "poles": null,
+   "kA": null,
+   "dest": "FOR A HISSION CRITICAL MEDICAL CENTER. THEY DEPICT A MECIUM-VOLTAGE",
    "on_bus": null,
    "connected": false,
    "id": "D33"
@@ -2184,19 +2152,20 @@
   {
    "symbol": "S34",
    "box": [
-    2399,
-    729,
-    25,
-    15
+    2069,
+    871,
+    37,
+    34
    ],
-   "label_texts": [
-    "T13"
-   ],
-   "label": "DETAIL TITLE",
-   "conf": 0.97,
-   "score": 0.18,
-   "type": "CAPACITOR",
+   "label_texts": [],
+   "label": "",
+   "conf": 0.49,
+   "score": 0.2,
+   "type": "MCCB",
    "rating": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
    "on_bus": null,
    "connected": false,
    "id": "D34"
@@ -2204,16 +2173,16 @@
   {
    "symbol": "S35",
    "box": [
-    2398,
-    738,
-    25,
-    12
+    2552,
+    879,
+    19,
+    30
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.47,
-   "score": 0.18,
-   "type": "CAPACITOR",
+   "conf": 0.49,
+   "score": 0.21,
+   "type": "RELAY",
    "rating": null,
    "on_bus": null,
    "connected": false,
@@ -2222,17 +2191,24 @@
   {
    "symbol": "S36",
    "box": [
-    2398,
-    741,
-    24,
-    20
+    291,
+    883,
+    23,
+    24
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.47,
-   "score": 0.16,
-   "type": "CAPACITOR",
+   "label_texts": [
+    "T15",
+    "T17",
+    "T19"
+   ],
+   "label": "LOVLVOLTAGE | PARALLEUNG | SWITCHBOARD",
+   "conf": 0.85,
+   "score": 0.26,
+   "type": "MCCB",
    "rating": null,
+   "poles": null,
+   "kA": null,
+   "dest": "LOVLVOLTAGE",
    "on_bus": null,
    "connected": false,
    "id": "D36"
@@ -2240,16 +2216,16 @@
   {
    "symbol": "S37",
    "box": [
-    502,
-    809,
-    29,
-    55
+    492,
+    883,
+    23,
+    24
    ],
    "label_texts": [],
    "label": "",
    "conf": 0.5,
-   "score": 0.31,
-   "type": "CONTACTOR",
+   "score": 0.25,
+   "type": "EARTH",
    "rating": null,
    "on_bus": null,
    "connected": false,
@@ -2258,17 +2234,23 @@
   {
    "symbol": "S38",
    "box": [
-    2396,
-    837,
-    25,
-    32
+    1743,
+    901,
+    52,
+    31
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.47,
-   "score": 0.15,
-   "type": "CAPACITOR",
+   "label_texts": [
+    "T20",
+    "T21"
+   ],
+   "label": "BCOA | MAX",
+   "conf": 0.67,
+   "score": 0.25,
+   "type": "MCCB",
    "rating": null,
+   "poles": null,
+   "kA": null,
+   "dest": "BCOA",
    "on_bus": null,
    "connected": false,
    "id": "D38"
@@ -2276,16 +2258,16 @@
   {
    "symbol": "S39",
    "box": [
-    2397,
-    837,
-    24,
-    15
+    2395,
+    923,
+    26,
+    43
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.38,
-   "score": 0.12,
-   "type": "CAPACITOR",
+   "conf": 0.43,
+   "score": 0.14,
+   "type": "METER",
    "rating": null,
    "on_bus": null,
    "connected": false,
@@ -2294,17 +2276,23 @@
   {
    "symbol": "S40",
    "box": [
-    2393,
-    862,
-    28,
-    104
+    1508,
+    949,
+    21,
+    24
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.38,
+   "label_texts": [
+    "T16",
+    "T18"
+   ],
+   "label": "PATIENT CARE BLDG | NORMAL LOADS",
+   "conf": 0.87,
    "score": 0.11,
-   "type": "RELAY",
+   "type": "FUSE_SWITCH",
    "rating": null,
+   "poles": null,
+   "kA": null,
+   "dest": "PATIENT CARE BLDG",
    "on_bus": null,
    "connected": false,
    "id": "D40"
@@ -2313,19 +2301,16 @@
    "symbol": "S41",
    "box": [
     1972,
-    869,
-    36,
+    949,
+    37,
     36
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.49,
-   "score": 0.24,
-   "type": "MCCB",
+   "conf": 0.48,
+   "score": 0.17,
+   "type": "MOTOR",
    "rating": null,
-   "poles": null,
-   "kA": null,
-   "dest": "",
    "on_bus": null,
    "connected": false,
    "id": "D41"
@@ -2333,15 +2318,15 @@
   {
    "symbol": "S42",
    "box": [
-    2069,
-    870,
-    37,
-    35
+    248,
+    950,
+    26,
+    40
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.5,
-   "score": 0.28,
+   "conf": 0.43,
+   "score": 0.14,
    "type": "MCCB",
    "rating": null,
    "poles": null,
@@ -2354,18 +2339,16 @@
   {
    "symbol": "S43",
    "box": [
-    2552,
-    871,
-    19,
-    39
+    1589,
+    951,
+    22,
+    21
    ],
-   "label_texts": [
-    "T14"
-   ],
-   "label": "SCALE :NONE",
-   "conf": 0.93,
-   "score": 0.17,
-   "type": "RELAY",
+   "label_texts": [],
+   "label": "",
+   "conf": 0.43,
+   "score": 0.14,
+   "type": "CT",
    "rating": null,
    "on_bus": null,
    "connected": false,
@@ -2374,20 +2357,17 @@
   {
    "symbol": "S44",
    "box": [
-    391,
-    883,
-    24,
-    23
+    242,
+    1002,
+    23,
+    45
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.49,
-   "score": 0.22,
-   "type": "FUSE_SWITCH",
+   "conf": 0.43,
+   "score": 0.12,
+   "type": "RELAY",
    "rating": null,
-   "poles": null,
-   "kA": null,
-   "dest": "",
    "on_bus": null,
    "connected": false,
    "id": "D44"
@@ -2395,20 +2375,22 @@
   {
    "symbol": "S45",
    "box": [
-    492,
-    883,
-    23,
+    543,
+    1063,
+    22,
     23
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.5,
-   "score": 0.26,
+   "label_texts": [
+    "T22"
+   ],
+   "label": "RAR4",
+   "conf": 0.53,
+   "score": 0.16,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
    "kA": null,
-   "dest": "",
+   "dest": "RAR4",
    "on_bus": null,
    "connected": false,
    "id": "D45"
@@ -2416,17 +2398,22 @@
   {
    "symbol": "S46",
    "box": [
-    2493,
-    925,
-    22,
-    40
+    1508,
+    1063,
+    23,
+    22
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.49,
-   "score": 0.24,
-   "type": "EARTH",
+   "label_texts": [
+    "T24"
+   ],
+   "label": "NORMAL LOADS",
+   "conf": 0.98,
+   "score": 0.22,
+   "type": "MCCB",
    "rating": null,
+   "poles": null,
+   "kA": null,
+   "dest": "NORMAL LOADS",
    "on_bus": null,
    "connected": false,
    "id": "D46"
@@ -2434,16 +2421,16 @@
   {
    "symbol": "S47",
    "box": [
-    2552,
-    935,
-    19,
-    30
+    1267,
+    1064,
+    23,
+    22
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.38,
-   "score": 0.13,
-   "type": "RELAY",
+   "conf": 0.43,
+   "score": 0.12,
+   "type": "CT",
    "rating": null,
    "on_bus": null,
    "connected": false,
@@ -2452,20 +2439,17 @@
   {
    "symbol": "S48",
    "box": [
-    248,
-    949,
-    26,
-    42
+    1428,
+    1064,
+    23,
+    23
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.38,
-   "score": 0.12,
-   "type": "MCCB",
+   "conf": 0.43,
+   "score": 0.15,
+   "type": "CT",
    "rating": null,
-   "poles": null,
-   "kA": null,
-   "dest": "",
    "on_bus": null,
    "connected": false,
    "id": "D48"
@@ -2473,20 +2457,17 @@
   {
    "symbol": "S49",
    "box": [
-    1268,
-    951,
-    22,
-    20
+    1589,
+    1064,
+    23,
+    23
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.38,
-   "score": 0.14,
-   "type": "FUSE_SWITCH",
+   "conf": 0.49,
+   "score": 0.21,
+   "type": "CT",
    "rating": null,
-   "poles": null,
-   "kA": null,
-   "dest": "",
    "on_bus": null,
    "connected": false,
    "id": "D49"
@@ -2494,16 +2475,16 @@
   {
    "symbol": "S50",
    "box": [
-    449,
-    990,
-    31,
-    58
+    334,
+    1163,
+    56,
+    39
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.38,
-   "score": 0.13,
-   "type": "TRANSFORMER",
+   "conf": 0.49,
+   "score": 0.23,
+   "type": "BOARD",
    "rating": null,
    "on_bus": null,
    "connected": false,
@@ -2512,38 +2493,35 @@
   {
    "symbol": "S51",
    "box": [
-    241,
-    1002,
-    25,
-    46
+    1510,
+    1163,
+    19,
+    12
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.49,
-   "score": 0.23,
-   "type": "RELAY",
+   "conf": 0.43,
+   "score": 0.12,
+   "type": "CAPACITOR",
    "rating": null,
    "on_bus": null,
-   "connected": false,
+   "connected": true,
    "id": "D51"
   },
   {
    "symbol": "S52",
    "box": [
-    543,
-    1063,
-    24,
-    23
+    553,
+    1227,
+    20,
+    19
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.49,
-   "score": 0.22,
-   "type": "FUSE_SWITCH",
+   "conf": 0.43,
+   "score": 0.15,
+   "type": "CAPACITOR",
    "rating": null,
-   "poles": null,
-   "kA": null,
-   "dest": "",
    "on_bus": null,
    "connected": false,
    "id": "D52"
@@ -2551,68 +2529,9 @@
   {
    "symbol": "S53",
    "box": [
-    1508,
-    1063,
-    24,
-    22
-   ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.49,
-   "score": 0.23,
-   "type": "FUSE_SWITCH",
-   "rating": null,
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "on_bus": null,
-   "connected": false,
-   "id": "D53"
-  },
-  {
-   "symbol": "S54",
-   "box": [
-    553,
-    1227,
-    21,
-    17
-   ],
-   "label_texts": [
-    "T30"
-   ],
-   "label": "ESSENTIAL LOADS",
-   "conf": 0.95,
-   "score": 0.3,
-   "type": "CAPACITOR",
-   "rating": null,
-   "on_bus": null,
-   "connected": false,
-   "id": "D54"
-  },
-  {
-   "symbol": "S55",
-   "box": [
-    1225,
-    1227,
-    71,
-    25
-   ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.48,
-   "score": 0.19,
-   "type": "BOARD",
-   "rating": null,
-   "on_bus": null,
-   "connected": false,
-   "id": "D55"
-  },
-  {
-   "symbol": "S56",
-   "box": [
-    2138,
+    2139,
     1233,
-    18,
+    16,
     10
    ],
    "label_texts": [
@@ -2620,9 +2539,70 @@
     "T31"
    ],
    "label": "OTHER | BLDOS",
-   "conf": 0.75,
+   "conf": 0.88,
+   "score": 0.3,
+   "type": "MCCB",
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "dest": "OTHER",
+   "on_bus": null,
+   "connected": false,
+   "id": "D53"
+  },
+  {
+   "symbol": "S54",
+   "box": [
+    353,
+    1239,
+    24,
+    21
+   ],
+   "label_texts": [
+    "T26"
+   ],
+   "label": "LS",
+   "conf": 0.87,
    "score": 0.11,
-   "type": "CAPACITOR",
+   "type": "CT",
+   "rating": null,
+   "on_bus": null,
+   "connected": true,
+   "id": "D54"
+  },
+  {
+   "symbol": "S55",
+   "box": [
+    1165,
+    1318,
+    33,
+    43
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.43,
+   "score": 0.16,
+   "type": "RELAY",
+   "rating": null,
+   "on_bus": null,
+   "connected": true,
+   "id": "D55"
+  },
+  {
+   "symbol": "S56",
+   "box": [
+    825,
+    1357,
+    64,
+    19
+   ],
+   "label_texts": [
+    "T33"
+   ],
+   "label": "LEGEND",
+   "conf": 0.87,
+   "score": 0.11,
+   "type": "BOARD",
    "rating": null,
    "on_bus": null,
    "connected": false,
@@ -2631,36 +2611,34 @@
   {
    "symbol": "S57",
    "box": [
-    456,
-    1240,
-    16,
-    19
+    2421,
+    1358,
+    33,
+    28
    ],
    "label_texts": [],
    "label": "",
    "conf": 0.48,
-   "score": 0.19,
-   "type": "METER",
+   "score": 0.18,
+   "type": "CAPACITOR",
    "rating": null,
    "on_bus": null,
-   "connected": true,
+   "connected": false,
    "id": "D57"
   },
   {
    "symbol": "S58",
    "box": [
-    207,
-    1241,
-    52,
-    19
+    1167,
+    1371,
+    32,
+    38
    ],
-   "label_texts": [
-    "T29"
-   ],
-   "label": "CONNECTICN",
-   "conf": 0.75,
-   "score": 0.11,
-   "type": "CONTACTOR",
+   "label_texts": [],
+   "label": "",
+   "conf": 0.49,
+   "score": 0.22,
+   "type": "EARTH",
    "rating": null,
    "on_bus": null,
    "connected": false,
@@ -2669,16 +2647,16 @@
   {
    "symbol": "S59",
    "box": [
-    2147,
-    1258,
-    72,
-    44
+    2541,
+    1375,
+    24,
+    20
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.38,
-   "score": 0.11,
-   "type": "METER",
+   "conf": 0.5,
+   "score": 0.54,
+   "type": "CAPACITOR",
    "rating": null,
    "on_bus": null,
    "connected": false,
@@ -2687,22 +2665,17 @@
   {
    "symbol": "S60",
    "box": [
-    767,
-    1382,
-    42,
-    23
+    1984,
+    1378,
+    22,
+    21
    ],
-   "label_texts": [
-    "T36"
-   ],
-   "label": "NDRMAL POUER",
-   "conf": 0.85,
-   "score": 0.27,
-   "type": "MCCB",
+   "label_texts": [],
+   "label": "",
+   "conf": 0.43,
+   "score": 0.13,
+   "type": "CONTACTOR",
    "rating": null,
-   "poles": null,
-   "kA": null,
-   "dest": "NDRMAL POUER",
    "on_bus": null,
    "connected": false,
    "id": "D60"
@@ -2710,20 +2683,20 @@
   {
    "symbol": "S61",
    "box": [
-    2017,
-    1455,
-    24,
-    20
+    768,
+    1382,
+    41,
+    22
    ],
-   "label_texts": [
-    "T47",
-    "T49"
-   ],
-   "label": "THIS CRAWING IS INTENOEO TD ASSST THE A/E BY PROMDING A GRAPHICAL | REPRESENTATION CF GENERAL CONNECTIWTY AND/CR TOPOLOGY RECUIREHENTS",
-   "conf": 0.93,
+   "label_texts": [],
+   "label": "",
+   "conf": 0.49,
    "score": 0.2,
-   "type": "RELAY",
+   "type": "MCCB",
    "rating": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
    "on_bus": null,
    "connected": false,
    "id": "D61"
@@ -2731,18 +2704,16 @@
   {
    "symbol": "S62",
    "box": [
-    1691,
-    1456,
-    28,
-    18
+    1832,
+    1404,
+    29,
+    19
    ],
-   "label_texts": [
-    "T45"
-   ],
-   "label": "TOPOLOGY FOR NON-PATIENT OARE BLDGS IS NOT SHOWN.",
-   "conf": 0.75,
-   "score": 0.13,
-   "type": "RELAY",
+   "label_texts": [],
+   "label": "",
+   "conf": 0.43,
+   "score": 0.11,
+   "type": "CONTACTOR",
    "rating": null,
    "on_bus": null,
    "connected": false,
@@ -2751,15 +2722,15 @@
   {
    "symbol": "S63",
    "box": [
-    2087,
-    1456,
-    16,
-    17
+    826,
+    1419,
+    47,
+    21
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.38,
-   "score": 0.11,
+   "conf": 0.43,
+   "score": 0.13,
    "type": "RELAY",
    "rating": null,
    "on_bus": null,
@@ -2769,16 +2740,16 @@
   {
    "symbol": "S64",
    "box": [
-    2173,
-    1457,
-    14,
-    17
+    2401,
+    1504,
+    69,
+    73
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.47,
-   "score": 0.18,
-   "type": "RELAY",
+   "conf": 0.5,
+   "score": 0.34,
+   "type": "MOTOR",
    "rating": null,
    "on_bus": null,
    "connected": false,
@@ -2787,19 +2758,16 @@
   {
    "symbol": "S65",
    "box": [
-    989,
-    1483,
-    34,
-    18
+    739,
+    1521,
+    59,
+    39
    ],
-   "label_texts": [
-    "T48",
-    "T50"
-   ],
-   "label": "AUTOHATIC SYITCHING EOUIPHENT | [D = DELAYED TRANSMON]",
-   "conf": 0.75,
-   "score": 0.13,
-   "type": "CONTACTOR",
+   "label_texts": [],
+   "label": "",
+   "conf": 0.5,
+   "score": 0.33,
+   "type": "BOARD",
    "rating": null,
    "on_bus": null,
    "connected": false,
@@ -2808,16 +2776,16 @@
   {
    "symbol": "S66",
    "box": [
-    2401,
-    1504,
-    70,
-    74
+    2541,
+    1530,
+    23,
+    15
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.49,
-   "score": 0.21,
-   "type": "BOARD",
+   "conf": 0.43,
+   "score": 0.14,
+   "type": "CAPACITOR",
    "rating": null,
    "on_bus": null,
    "connected": false,
@@ -2826,16 +2794,16 @@
   {
    "symbol": "S67",
    "box": [
-    739,
-    1522,
-    59,
-    39
+    2410,
+    1587,
+    51,
+    35
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.5,
-   "score": 0.83,
-   "type": "BOARD",
+   "conf": 0.48,
+   "score": 0.16,
+   "type": "CAPACITOR",
    "rating": null,
    "on_bus": null,
    "connected": false,
@@ -2844,18 +2812,16 @@
   {
    "symbol": "S68",
    "box": [
-    1983,
-    1524,
-    35,
-    57
+    2541,
+    1598,
+    24,
+    12
    ],
-   "label_texts": [
-    "T55"
-   ],
-   "label": "NORHAL TO ESSENTIAL TRANSFER TIME PER NATICNAL ELECTRIC CODE.",
-   "conf": 0.75,
-   "score": 0.12,
-   "type": "CONTACTOR",
+   "label_texts": [],
+   "label": "",
+   "conf": 0.49,
+   "score": 0.19,
+   "type": "CAPACITOR",
    "rating": null,
    "on_bus": null,
    "connected": false,
@@ -2864,18 +2830,16 @@
   {
    "symbol": "S69",
    "box": [
-    2033,
-    1536,
-    20,
-    19
+    2416,
+    1604,
+    39,
+    40
    ],
-   "label_texts": [
-    "T52"
-   ],
-   "label": "CF THE ELECTRICAL POWER DISTRIBUTICN AND RELATED SYSTEHS. THIS DRAYINC",
-   "conf": 0.75,
-   "score": 0.11,
-   "type": "RELAY",
+   "label_texts": [],
+   "label": "",
+   "conf": 0.43,
+   "score": 0.12,
+   "type": "METER",
    "rating": null,
    "on_bus": null,
    "connected": false,
@@ -2884,113 +2848,25 @@
   {
    "symbol": "S70",
    "box": [
-    2290,
-    1537,
-    21,
-    17
-   ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.49,
-   "score": 0.24,
-   "type": "RELAY",
-   "rating": null,
-   "on_bus": null,
-   "connected": false,
-   "id": "D70"
-  },
-  {
-   "symbol": "S71",
-   "box": [
-    939,
-    1561,
-    20,
-    18
-   ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.48,
-   "score": 0.2,
-   "type": "RELAY",
-   "rating": null,
-   "on_bus": null,
-   "connected": false,
-   "id": "D71"
-  },
-  {
-   "symbol": "S72",
-   "box": [
-    2083,
-    1561,
-    27,
-    18
-   ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.38,
-   "score": 0.15,
-   "type": "RELAY",
-   "rating": null,
-   "on_bus": null,
-   "connected": false,
-   "id": "D72"
-  },
-  {
-   "symbol": "S73",
-   "box": [
-    2410,
-    1587,
-    52,
-    10
-   ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.48,
-   "score": 0.2,
-   "type": "CAPACITOR",
-   "rating": null,
-   "on_bus": null,
-   "connected": false,
-   "id": "D73"
-  },
-  {
-   "symbol": "S74",
-   "box": [
-    2415,
-    1600,
-    40,
-    43
-   ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.49,
-   "score": 0.22,
-   "type": "CAPACITOR",
-   "rating": null,
-   "on_bus": null,
-   "connected": false,
-   "id": "D74"
-  },
-  {
-   "symbol": "S75",
-   "box": [
-    1539,
-    1611,
+    1538,
+    1610,
     19,
-    21
+    22
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.38,
-   "score": 0.15,
+   "label_texts": [
+    "T51"
+   ],
+   "label": "DRAWOUT LY BREAKER",
+   "conf": 0.87,
+   "score": 0.13,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
    "kA": null,
-   "dest": "",
+   "dest": "DRAWOUT LY BREAKER",
    "on_bus": null,
    "connected": false,
-   "id": "D75"
+   "id": "D70"
   }
  ],
  "notes": {
@@ -3004,14 +2880,14 @@
  "ocr_engine": "rapidocr",
  "reader": "trained",
  "seconds": {
-  "total": 24.88,
-  "ocr": 12.1,
-  "detector": 12.48
+  "total": 15.1,
+  "ocr": 7.16,
+  "detector": 7.67
  },
  "detector": {
-  "weights": "weights/rtdetr_r18_full",
+  "weights": "weights/rtdetr_r18_plain_ema_fix_pass4",
   "device": "cpu",
-  "threads": 2,
+  "threads": 4,
   "score_threshold": 0.11,
   "score_threshold_source": "drawing",
   "nms_iou": 0.5,

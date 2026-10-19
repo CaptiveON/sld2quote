@@ -22,22 +22,22 @@
    "key": "text",
    "title": "Read the words",
    "count": 18,
-   "seconds": 1.91,
-   "plain": "Read 18 pieces of text in 1.91 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 1.32,
+   "plain": "Read 18 pieces of text in 1.32 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
-   "count": 8,
-   "seconds": 1.09,
-   "plain": "Found 8 symbols in 1.09 s: 6 fuse switches, 1 protection relay, 1 panel meter. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "count": 11,
+   "seconds": 0.59,
+   "plain": "Found 11 symbols in 0.59 s: 4 outgoing moulded-case breakers, 2 incoming air circuit breakers, 2 fuse switches, 1 protection relay, 1 current transformer, 1 panel meter. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
-   "count": 2,
-   "seconds": 0.12,
-   "plain": "Paired 2 of 8 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
+   "count": 6,
+   "seconds": 0.07,
+   "plain": "Paired 6 of 11 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
    "key": "spec",
@@ -49,14 +49,33 @@
   {
    "key": "price",
    "title": "Pick parts and price",
-   "count": 7,
+   "count": 8,
    "seconds": 0.0,
-   "plain": "Chose 7 catalogue lines and priced the board at \u00a310,530 (illustrative prices, 15% margin included); 9 items flagged for the estimator. Every line names the symbol, text or clause it rests on, so a reviewer can check it on the drawing."
+   "plain": "Chose 8 catalogue lines and priced the board at \u00a312,727 (illustrative prices, 15% margin included); 11 items flagged for the estimator. Every line names the symbol, text or clause it rests on, so a reviewer can check it on the drawing."
   }
  ],
  "devices": [
   {
    "id": "D1",
+   "type": "ACB",
+   "type_plain": "incoming air circuit breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.87,
+   "score": 0.16,
+   "box": [
+    818,
+    89,
+    27,
+    10
+   ],
+   "label": "Separated Commercial | Power Feeds | Each transformer capable of | carrying total critical load"
+  },
+  {
+   "id": "D2",
    "type": "RELAY",
    "type_plain": "protection relay",
    "rating": null,
@@ -64,18 +83,56 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.75,
-   "score": 0.13,
+   "conf": 0.96,
+   "score": 0.21,
    "box": [
     484,
-    154,
+    153,
     17,
-    19
+    21
    ],
-   "label": "480Y/277V | carrying total critical load"
+   "label": "480Y/277V | >NC"
   },
   {
-   "id": "D2",
+   "id": "D3",
+   "type": "CT",
+   "type_plain": "current transformer",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.43,
+   "score": 0.13,
+   "box": [
+    804,
+    156,
+    21,
+    20
+   ],
+   "label": ""
+  },
+  {
+   "id": "D4",
+   "type": "ACB",
+   "type_plain": "incoming air circuit breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 1.0,
+   "score": 0.59,
+   "box": [
+    792,
+    219,
+    28,
+    32
+   ],
+   "label": "480Y/277V | NC"
+  },
+  {
+   "id": "D5",
    "type": "METER",
    "type_plain": "panel meter",
    "rating": null,
@@ -83,70 +140,13 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.98,
-   "score": 0.23,
+   "conf": 0.5,
+   "score": 0.42,
    "box": [
     47,
-    252,
+    251,
     20,
-    20
-   ],
-   "label": "and interlocked | closed at one time"
-  },
-  {
-   "id": "D3",
-   "type": "FUSE_SWITCH",
-   "type_plain": "fuse switch",
-   "rating": null,
-   "unit": "A",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.38,
-   "score": 0.12,
-   "box": [
-    626,
-    322,
-    32,
-    27
-   ],
-   "label": ""
-  },
-  {
-   "id": "D4",
-   "type": "FUSE_SWITCH",
-   "type_plain": "fuse switch",
-   "rating": null,
-   "unit": "A",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.49,
-   "score": 0.22,
-   "box": [
-    361,
-    364,
-    17,
-    30
-   ],
-   "label": ""
-  },
-  {
-   "id": "D5",
-   "type": "FUSE_SWITCH",
-   "type_plain": "fuse switch",
-   "rating": null,
-   "unit": "A",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.5,
-   "score": 0.3,
-   "box": [
-    465,
-    364,
-    18,
-    30
+    21
    ],
    "label": ""
   },
@@ -158,16 +158,16 @@
    "unit": "A",
    "poles": null,
    "kA": null,
-   "dest": "",
-   "conf": 0.5,
-   "score": 0.45,
+   "dest": "Only 2 of 3 breakers",
+   "conf": 0.97,
+   "score": 0.18,
    "box": [
-    565,
+    361,
     364,
     17,
-    32
+    30
    ],
-   "label": ""
+   "label": "Only 2 of 3 breakers | closed at one time | and interlocked | To steady-state loads | that produce the least | power quality problems"
   },
   {
    "id": "D7",
@@ -178,11 +178,11 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.5,
-   "score": 0.43,
+   "conf": 0.49,
+   "score": 0.21,
    "box": [
-    811,
-    365,
+    465,
+    364,
     17,
     30
    ],
@@ -190,20 +190,77 @@
   },
   {
    "id": "D8",
-   "type": "FUSE_SWITCH",
-   "type_plain": "fuse switch",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "NO",
+   "conf": 1.0,
+   "score": 0.34,
+   "box": [
+    564,
+    364,
+    18,
+    31
+   ],
+   "label": "NO"
+  },
+  {
+   "id": "D9",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
    "rating": null,
    "unit": "A",
    "poles": null,
    "kA": null,
    "dest": "",
    "conf": 0.5,
-   "score": 0.36,
+   "score": 0.33,
+   "box": [
+    811,
+    365,
+    16,
+    30
+   ],
+   "label": ""
+  },
+  {
+   "id": "D10",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "To loads that create the most",
+   "conf": 0.98,
+   "score": 0.57,
    "box": [
     915,
     366,
     17,
     30
+   ],
+   "label": "To loads that create the most | disturbances such as large | motors or rectifiers"
+  },
+  {
+   "id": "D11",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.43,
+   "score": 0.14,
+   "box": [
+    1016,
+    367,
+    16,
+    29
    ],
    "label": ""
   }
@@ -213,7 +270,7 @@
   "form": "Form 4 Type 6",
   "ip": "IP31",
   "poles_default": 4,
-  "busbar_rating": 2500,
+  "busbar_rating": 0,
   "sections": 1,
   "ways": 0
  },
@@ -226,42 +283,53 @@
     "qty": 1,
     "unit_gbp": 950,
     "total_gbp": 950,
-    "conf": 0.75,
+    "conf": 0.96,
     "evidence": [
-     "S1",
+     "S2",
      "T5",
-     "T4"
+     "T9"
     ],
     "rule": "R-PROTECTION"
    },
    {
     "line": 2,
-    "part": "METER-and interlocked | closed at one time",
-    "description": "Panel meter (and interlocked | closed at one time)",
+    "part": "CT-SET",
+    "description": "Current transformers, set of three, class 1",
     "qty": 1,
-    "unit_gbp": 260,
-    "total_gbp": 260,
-    "conf": 0.98,
+    "unit_gbp": 280,
+    "total_gbp": 280,
+    "conf": 0.43,
     "evidence": [
-     "S2",
-     "T12",
-     "T8"
+     "S3"
     ],
     "rule": "R-METERING"
    },
    {
     "line": 3,
-    "part": "BUSBAR-CU-2500",
-    "description": "Copper busbar set 2500 A (4-bar), 1 sections, about 46 kg",
+    "part": "METER-MF",
+    "description": "Panel meter (multifunction)",
     "qty": 1,
-    "unit_gbp": 524.4,
-    "total_gbp": 524.4,
+    "unit_gbp": 260,
+    "total_gbp": 260,
+    "conf": 0.5,
+    "evidence": [
+     "S5"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 4,
+    "part": "BUSBAR-CU-1600",
+    "description": "Copper busbar set 1600 A (4-bar), 1 sections, about 29 kg",
+    "qty": 1,
+    "unit_gbp": 331.2,
+    "total_gbp": 331.2,
     "conf": 0.9,
     "evidence": [],
     "rule": "R-BUSBAR-SIZE"
    },
    {
-    "line": 4,
+    "line": 5,
     "part": "ENC-SECTION",
     "description": "Enclosure section, Form 4 Type 6, IP31, RAL 7035",
     "qty": 1,
@@ -272,18 +340,18 @@
     "rule": "R-ENCLOSURE"
    },
    {
-    "line": 5,
+    "line": 6,
     "part": "LAB-ASSY",
-    "description": "Assembly, wiring and routine verification: 54 hours",
+    "description": "Assembly, wiring and routine verification: 92 hours",
     "qty": 1,
-    "unit_gbp": 2592,
-    "total_gbp": 2592,
+    "unit_gbp": 4416,
+    "total_gbp": 4416,
     "conf": 0.9,
     "evidence": [],
     "rule": "R-LABOUR"
    },
    {
-    "line": 6,
+    "line": 7,
     "part": "DOC",
     "description": "Documentation, as-built drawings, test certificates",
     "qty": 1,
@@ -294,7 +362,7 @@
     "rule": "R-DOC"
    },
    {
-    "line": 7,
+    "line": 8,
     "part": "DEL",
     "description": "Delivery to site, crane and offload excluded",
     "qty": 1,
@@ -305,9 +373,9 @@
     "rule": "R-DELIVERY"
    }
   ],
-  "subtotal_gbp": 9156.4,
-  "margin_gbp": 1373.46,
-  "total_gbp": 10529.86
+  "subtotal_gbp": 11067.2,
+  "margin_gbp": 1660.08,
+  "total_gbp": 12727.28
  },
  "issues": [
   {
@@ -318,26 +386,24 @@
   },
   {
    "kind": "missing",
-   "what": "D3 (FUSE_SWITCH): rating not read",
+   "what": "D1 (ACB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S3"
+    "S1",
+    "T1",
+    "T2",
+    "T3",
+    "T4"
    ]
   },
   {
    "kind": "missing",
-   "what": "D4 (FUSE_SWITCH): rating not read",
+   "what": "D4 (ACB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S4"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D5 (FUSE_SWITCH): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S5"
+    "S4",
+    "T6",
+    "T11"
    ]
   },
   {
@@ -345,7 +411,13 @@
    "what": "D6 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S6"
+    "S6",
+    "T7",
+    "T8",
+    "T12",
+    "T13",
+    "T15",
+    "T17"
    ]
   },
   {
@@ -358,29 +430,56 @@
   },
   {
    "kind": "missing",
-   "what": "D8 (FUSE_SWITCH): rating not read",
+   "what": "D8 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S8"
+    "S8",
+    "T10"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D9 (MCCB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S9"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D10 (MCCB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S10",
+    "T14",
+    "T16",
+    "T18"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D11 (MCCB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S11"
    ]
   },
   {
    "kind": "assumed",
-   "what": "busbar rating not read; assumed 2500 A from the largest incomer",
+   "what": "busbar rating not read; assumed 0 A from the largest incomer",
    "action": "confirm",
    "evidence": []
   },
   {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D3, D4, D5, D6, D7, D8",
+   "what": "devices read with low confidence: D3, D5, D7, D9, D11",
    "action": "check against the drawing",
    "evidence": [
     "D3",
-    "D4",
     "D5",
-    "D6",
     "D7",
-    "D8"
+    "D9",
+    "D11"
    ]
   }
  ],
@@ -388,14 +487,14 @@
  "spec": null,
  "score": null,
  "timing": {
-  "total": 3.2,
-  "ocr": 1.91,
-  "detector": 1.09
+  "total": 2.06,
+  "ocr": 1.32,
+  "detector": 0.59
  },
  "reader": "trained",
  "engine": "rapidocr",
  "model": {
-  "weights": "weights/rtdetr_r18_full",
+  "weights": "weights/rtdetr_r18_plain_ema_fix_pass4",
   "threshold": 0.11
  },
  "files": {

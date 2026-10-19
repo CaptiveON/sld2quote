@@ -192,39 +192,39 @@
  "symbols": [
   {
    "id": "S1",
-   "kind": "motor",
+   "kind": "breaker",
    "box": [
-    153,
-    277,
-    47,
-    23
+    137,
+    162,
+    78,
+    33
    ],
-   "score": 0.12,
-   "shape_score": 0.75
+   "score": 0.29,
+   "shape_score": 1.0
   },
   {
    "id": "S2",
-   "kind": "breaker",
+   "kind": "capacitor",
    "box": [
-    603,
-    294,
-    33,
-    45
+    200,
+    194,
+    42,
+    9
    ],
-   "score": 0.37,
-   "shape_score": 1.0
+   "score": 0.19,
+   "shape_score": 0.99
   },
   {
    "id": "S3",
    "kind": "breaker",
    "box": [
-    152,
-    332,
-    48,
+    153,
+    331,
+    47,
     23
    ],
-   "score": 0.22,
-   "shape_score": 0.98
+   "score": 0.14,
+   "shape_score": 0.87
   },
   {
    "id": "S4",
@@ -233,63 +233,58 @@
     1026,
     379,
     69,
-    70
+    69
    ],
-   "score": 0.38,
-   "shape_score": 1.0
+   "score": 0.18,
+   "shape_score": 0.97
   },
   {
    "id": "S5",
-   "kind": "motor",
+   "kind": "board",
    "box": [
-    560,
-    506,
-    48,
+    152,
+    385,
+    46,
     24
    ],
-   "score": 0.17,
-   "shape_score": 0.93
+   "score": 0.18,
+   "shape_score": 0.97
   },
   {
    "id": "S6",
    "kind": "contactor",
    "box": [
-    560,
-    616,
+    646,
+    671,
     48,
     24
    ],
-   "score": 0.25,
-   "shape_score": 0.98
-  },
-  {
-   "id": "S7",
-   "kind": "board",
-   "box": [
-    576,
-    687,
-    100,
-    66
-   ],
-   "score": 0.12,
-   "shape_score": 0.75
+   "score": 0.11,
+   "shape_score": 0.87
   }
  ],
  "devices": [
   {
    "symbol": "S1",
    "box": [
-    153,
-    277,
-    47,
-    23
+    137,
+    162,
+    78,
+    33
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.38,
-   "score": 0.12,
-   "type": "MOTOR",
+   "label_texts": [
+    "T2",
+    "T3",
+    "T4",
+    "T5"
+   ],
+   "label": "DISTRIBUTION | TRANSFORMER | SERVICE | ENTRANCE",
+   "conf": 1.0,
+   "score": 0.29,
+   "type": "ACB",
    "rating": null,
+   "poles": null,
+   "kA": null,
    "on_bus": null,
    "connected": false,
    "id": "D1"
@@ -297,19 +292,17 @@
   {
    "symbol": "S2",
    "box": [
-    603,
-    294,
-    33,
-    45
+    200,
+    194,
+    42,
+    9
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.5,
-   "score": 0.37,
-   "type": "ACB",
+   "conf": 0.49,
+   "score": 0.19,
+   "type": "CAPACITOR",
    "rating": null,
-   "poles": null,
-   "kA": null,
    "on_bus": null,
    "connected": false,
    "id": "D2"
@@ -317,15 +310,15 @@
   {
    "symbol": "S3",
    "box": [
-    152,
-    332,
-    48,
+    153,
+    331,
+    47,
     23
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.49,
-   "score": 0.22,
+   "conf": 0.43,
+   "score": 0.14,
    "type": "ACB",
    "rating": null,
    "poles": null,
@@ -340,14 +333,14 @@
     1026,
     379,
     69,
-    70
+    69
    ],
    "label_texts": [
-    "T13"
+    "T12"
    ],
-   "label": "GENERATOR",
-   "conf": 1.0,
-   "score": 0.38,
+   "label": "G",
+   "conf": 0.97,
+   "score": 0.18,
    "type": "MOTOR",
    "rating": null,
    "on_bus": null,
@@ -357,16 +350,16 @@
   {
    "symbol": "S5",
    "box": [
-    560,
-    506,
-    48,
+    152,
+    385,
+    46,
     24
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.47,
-   "score": 0.17,
-   "type": "MOTOR",
+   "conf": 0.48,
+   "score": 0.18,
+   "type": "BOARD",
    "rating": null,
    "on_bus": null,
    "connected": false,
@@ -375,40 +368,20 @@
   {
    "symbol": "S6",
    "box": [
-    560,
-    616,
+    646,
+    671,
     48,
     24
    ],
-   "label_texts": [
-    "T14"
-   ],
-   "label": "ESSENTIAL",
-   "conf": 0.98,
-   "score": 0.25,
+   "label_texts": [],
+   "label": "",
+   "conf": 0.43,
+   "score": 0.11,
    "type": "CONTACTOR",
    "rating": null,
    "on_bus": null,
    "connected": false,
    "id": "D6"
-  },
-  {
-   "symbol": "S7",
-   "box": [
-    576,
-    687,
-    100,
-    66
-   ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.38,
-   "score": 0.12,
-   "type": "BOARD",
-   "rating": null,
-   "on_bus": null,
-   "connected": true,
-   "id": "D7"
   }
  ],
  "notes": {
@@ -422,14 +395,14 @@
  "ocr_engine": "rapidocr",
  "reader": "trained",
  "seconds": {
-  "total": 4.83,
-  "ocr": 1.77,
-  "detector": 2.93
+  "total": 2.48,
+  "ocr": 1.12,
+  "detector": 1.29
  },
  "detector": {
-  "weights": "weights/rtdetr_r18_full",
+  "weights": "weights/rtdetr_r18_plain_ema_fix_pass4",
   "device": "cpu",
-  "threads": 2,
+  "threads": 4,
   "score_threshold": 0.11,
   "score_threshold_source": "drawing",
   "nms_iou": 0.5,

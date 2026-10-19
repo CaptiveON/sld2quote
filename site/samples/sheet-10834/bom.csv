@@ -1,19 +1,22 @@
 line,part,description,qty,unit_gbp,total_gbp,conf,rule,evidence
 1,ACB-1600-4P-N,"Air circuit breaker 1600 A 4-pole, 36 kA band N, withdrawable, electronic trip",1,5124.0,5124.0,0.98,R-ACB-SELECT,S2 T3 T4
 2,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.98,R-FU-KIT,S2 T3 T4
-3,METER-CT 1600/5A | BUSBAR A 1600 A Cu 36 kA/1s,Panel meter (CT 1600/5A | BUSBAR A 1600 A Cu 36 kA/1s),1,260,260,1.0,R-METERING,S3 T5 T6
-4,CT-SET,"Current transformers, set of three, class 1",1,280,280,0.5,R-METERING,S4
-5,MCCB-250-4P-N,"Moulded-case circuit breaker 250 A 4-pole, 36 kA band N, adjustable trip",1,634.4,634.4,0.99,R-MCCB-SELECT,S6 T8
-6,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.99,R-FU-KIT,S6 T8
-7,ISOL-400-4P,Switch-disconnector 400 A 4-pole; feeds sdwnd,1,634.4,634.4,0.91,R-ISOL-SELECT,S8 T15 T12
-8,FU-KIT-ISOLATOR,"Outgoing functional unit: compartment door, terminals, labels",1,340,340,0.91,R-FU-KIT,S8 T15 T12
-9,ISOL-100-4P,Switch-disconnector 100 A 4-pole; feeds pumps,1,207.4,207.4,0.99,R-ISOL-SELECT,S9 T17 T14
-10,FU-KIT-ISOLATOR,"Outgoing functional unit: compartment door, terminals, labels",1,340,340,0.99,R-FU-KIT,S9 T17 T14
-11,MCCB-400-4P-N,"Moulded-case circuit breaker 400 A 4-pole, 36 kA band N, adjustable trip",1,1195.6,1195.6,0.99,R-MCCB-SELECT,S10 T13
-12,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.99,R-FU-KIT,S10 T13
-13,BUSBAR-CU-1600,"Copper busbar set 1600 A (4-bar), 2 sections, about 58 kg",1,662.4,662.4,0.9,R-BUSBAR-SIZE,T6
-14,ENC-SECTION,"Enclosure section, Form 4 Type 6, IP42, RAL 7035",2,3549.0,7098.0,0.95,R-ENCLOSURE,T20 T20 T22 T24
-15,LAB-ASSY,"Assembly, wiring and routine verification: 90 hours",1,4320,4320,0.9,R-LABOUR,
-16,DOC,"Documentation, as-built drawings, test certificates",1,600,600,1.0,R-DOC,
-17,CERT,Design-verification certificates per specification,1,0.0,0.0,1.0,R-SPEC-CERT,7.7
-18,DEL,"Delivery to site, crane and offload excluded",1,850,850,1.0,R-DELIVERY,
+3,METER-A,Panel meter (A),1,120,120,1.0,R-METERING,S3 S3g1
+4,CT-SET,"Current transformers 1600/5 A, set of three, class 1",1,280,280,1.0,R-METERING,S4 T5
+5,MCCB-250-3P-N,"Moulded-case circuit breaker 250 A 3-pole, 36 kA band N, adjustable trip; feeds pump P-4",1,520.0,520.0,1.0,R-MCCB-SELECT,S5 T7 T11
+6,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,1.0,R-FU-KIT,S5 T7 T11
+7,MCCB-250-4P-N,"Moulded-case circuit breaker 250 A 4-pole, 36 kA band N, adjustable trip; feeds UPS input",1,634.4,634.4,0.99,R-MCCB-SELECT,S6 T8 T10
+8,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.99,R-FU-KIT,S6 T8 T10
+9,STARTER-45KW,"Motor starter for 45 kW: contactor, overload relay and control circuit",1,1850,1850,1.0,R-STARTER,S7 T9
+10,ISOL-400-4P,Switch-disconnector 400 A 4-pole; feeds sdwnd,1,634.4,634.4,0.91,R-ISOL-SELECT,S8 T12 T15
+11,FU-KIT-ISOLATOR,"Outgoing functional unit: compartment door, terminals, labels",1,340,340,0.91,R-FU-KIT,S8 T12 T15
+12,ISOL-100-4P,Switch-disconnector 100 A 4-pole; feeds pumps,1,207.4,207.4,0.99,R-ISOL-SELECT,S9 T14 T17
+13,FU-KIT-ISOLATOR,"Outgoing functional unit: compartment door, terminals, labels",1,340,340,0.99,R-FU-KIT,S9 T14 T17
+14,MCCB-400-4P-N,"Moulded-case circuit breaker 400 A 4-pole, 36 kA band N, adjustable trip; feeds spare",1,1195.6,1195.6,0.99,R-MCCB-SELECT,S10 T13 T16
+15,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.99,R-FU-KIT,S10 T13 T16
+16,BUSBAR-CU-1600,"Copper busbar set 1600 A (4-bar), 3 sections, about 86 kg",1,993.6,993.6,0.9,R-BUSBAR-SIZE,T6
+17,ENC-SECTION,"Enclosure section, Form 4 Type 6, IP42, RAL 7035",3,3549.0,10647.0,0.95,R-ENCLOSURE,T20 T20 T22 T24
+18,LAB-ASSY,"Assembly, wiring and routine verification: 108 hours",1,5184,5184,0.9,R-LABOUR,
+19,DOC,"Documentation, as-built drawings, test certificates",1,600,600,1.0,R-DOC,
+20,CERT,Design-verification certificates per specification,1,0.0,0.0,1.0,R-SPEC-CERT,7.7
+21,DEL,"Delivery to site, crane and offload excluded",1,850,850,1.0,R-DELIVERY,

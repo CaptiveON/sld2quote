@@ -11,16 +11,17 @@
  "lines": [
   {
    "line": 1,
-   "part": "RELAY-OC",
-   "description": "Overcurrent and earth-fault protection relay",
+   "part": "CT-SET",
+   "description": "Current transformers, set of three, class 1",
    "qty": 1,
-   "unit_gbp": 950,
-   "total_gbp": 950,
+   "unit_gbp": 280,
+   "total_gbp": 280,
    "evidence": [
-    "S10"
+    "S6",
+    "T7"
    ],
-   "rule": "R-PROTECTION",
-   "conf": 0.38,
+   "rule": "R-METERING",
+   "conf": 0.82,
    "basis": ""
   },
   {
@@ -31,24 +32,24 @@
    "unit_gbp": 950,
    "total_gbp": 950,
    "evidence": [
-    "S11"
+    "S7"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.38,
+   "conf": 0.49,
    "basis": ""
   },
   {
    "line": 3,
-   "part": "CT-SET",
-   "description": "Current transformers, set of three, class 1",
+   "part": "RELAY-OC",
+   "description": "Overcurrent and earth-fault protection relay",
    "qty": 1,
-   "unit_gbp": 280,
-   "total_gbp": 280,
+   "unit_gbp": 950,
+   "total_gbp": 950,
    "evidence": [
-    "S14"
+    "S8"
    ],
-   "rule": "R-METERING",
-   "conf": 0.49,
+   "rule": "R-PROTECTION",
+   "conf": 0.43,
    "basis": ""
   },
   {
@@ -59,7 +60,7 @@
    "unit_gbp": 950,
    "total_gbp": 950,
    "evidence": [
-    "S23"
+    "S9"
    ],
    "rule": "R-PROTECTION",
    "conf": 0.5,
@@ -73,10 +74,11 @@
    "unit_gbp": 950,
    "total_gbp": 950,
    "evidence": [
-    "S24"
+    "S10",
+    "T6"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.49,
+   "conf": 0.98,
    "basis": ""
   },
   {
@@ -87,10 +89,10 @@
    "unit_gbp": 950,
    "total_gbp": 950,
    "evidence": [
-    "S25"
+    "S17"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.48,
+   "conf": 0.43,
    "basis": ""
   },
   {
@@ -101,10 +103,10 @@
    "unit_gbp": 950,
    "total_gbp": 950,
    "evidence": [
-    "S26"
+    "S18"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.47,
+   "conf": 0.5,
    "basis": ""
   },
   {
@@ -115,38 +117,38 @@
    "unit_gbp": 950,
    "total_gbp": 950,
    "evidence": [
-    "S27"
+    "S19"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.47,
+   "conf": 0.49,
    "basis": ""
   },
   {
    "line": 9,
-   "part": "METER-MF",
-   "description": "Panel meter (multifunction)",
+   "part": "RELAY-OC",
+   "description": "Overcurrent and earth-fault protection relay",
    "qty": 1,
-   "unit_gbp": 260,
-   "total_gbp": 260,
+   "unit_gbp": 950,
+   "total_gbp": 950,
    "evidence": [
-    "S32"
+    "S20"
    ],
-   "rule": "R-METERING",
-   "conf": 0.38,
+   "rule": "R-PROTECTION",
+   "conf": 0.49,
    "basis": ""
   },
   {
    "line": 10,
-   "part": "METER-MF",
-   "description": "Panel meter (multifunction)",
+   "part": "CT-SET",
+   "description": "Current transformers, set of three, class 1",
    "qty": 1,
-   "unit_gbp": 260,
-   "total_gbp": 260,
+   "unit_gbp": 280,
+   "total_gbp": 280,
    "evidence": [
-    "S33"
+    "S31"
    ],
    "rule": "R-METERING",
-   "conf": 0.38,
+   "conf": 0.5,
    "basis": ""
   },
   {
@@ -157,39 +159,38 @@
    "unit_gbp": 950,
    "total_gbp": 950,
    "evidence": [
-    "S40"
+    "S35"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.38,
+   "conf": 0.49,
    "basis": ""
   },
   {
    "line": 12,
-   "part": "RELAY-OC",
-   "description": "Overcurrent and earth-fault protection relay",
+   "part": "METER-MF",
+   "description": "Panel meter (multifunction)",
    "qty": 1,
-   "unit_gbp": 950,
-   "total_gbp": 950,
+   "unit_gbp": 260,
+   "total_gbp": 260,
    "evidence": [
-    "S43",
-    "T14"
+    "S39"
    ],
-   "rule": "R-PROTECTION",
-   "conf": 0.93,
+   "rule": "R-METERING",
+   "conf": 0.43,
    "basis": ""
   },
   {
    "line": 13,
-   "part": "RELAY-OC",
-   "description": "Overcurrent and earth-fault protection relay",
+   "part": "CT-SET",
+   "description": "Current transformers, set of three, class 1",
    "qty": 1,
-   "unit_gbp": 950,
-   "total_gbp": 950,
+   "unit_gbp": 280,
+   "total_gbp": 280,
    "evidence": [
-    "S47"
+    "S43"
    ],
-   "rule": "R-PROTECTION",
-   "conf": 0.38,
+   "rule": "R-METERING",
+   "conf": 0.43,
    "basis": ""
   },
   {
@@ -200,69 +201,67 @@
    "unit_gbp": 950,
    "total_gbp": 950,
    "evidence": [
-    "S51"
+    "S44"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.49,
+   "conf": 0.43,
    "basis": ""
   },
   {
    "line": 15,
-   "part": "METER-MF",
-   "description": "Panel meter (multifunction)",
+   "part": "CT-SET",
+   "description": "Current transformers, set of three, class 1",
    "qty": 1,
-   "unit_gbp": 260,
-   "total_gbp": 260,
+   "unit_gbp": 280,
+   "total_gbp": 280,
    "evidence": [
-    "S57"
+    "S47"
    ],
    "rule": "R-METERING",
-   "conf": 0.48,
+   "conf": 0.43,
    "basis": ""
   },
   {
    "line": 16,
-   "part": "METER-MF",
-   "description": "Panel meter (multifunction)",
+   "part": "CT-SET",
+   "description": "Current transformers, set of three, class 1",
    "qty": 1,
-   "unit_gbp": 260,
-   "total_gbp": 260,
+   "unit_gbp": 280,
+   "total_gbp": 280,
    "evidence": [
-    "S59"
+    "S48"
    ],
    "rule": "R-METERING",
-   "conf": 0.38,
+   "conf": 0.43,
    "basis": ""
   },
   {
    "line": 17,
-   "part": "RELAY-OC",
-   "description": "Overcurrent and earth-fault protection relay",
+   "part": "CT-SET",
+   "description": "Current transformers, set of three, class 1",
    "qty": 1,
-   "unit_gbp": 950,
-   "total_gbp": 950,
+   "unit_gbp": 280,
+   "total_gbp": 280,
    "evidence": [
-    "S61",
-    "T47",
-    "T49"
+    "S49"
    ],
-   "rule": "R-PROTECTION",
-   "conf": 0.93,
+   "rule": "R-METERING",
+   "conf": 0.49,
    "basis": ""
   },
   {
    "line": 18,
-   "part": "RELAY-OC",
-   "description": "Overcurrent and earth-fault protection relay",
+   "part": "CT-SET",
+   "description": "Current transformers, set of three, class 1",
    "qty": 1,
-   "unit_gbp": 950,
-   "total_gbp": 950,
+   "unit_gbp": 280,
+   "total_gbp": 280,
    "evidence": [
-    "S62",
-    "T45"
+    "S54",
+    "T26"
    ],
-   "rule": "R-PROTECTION",
-   "conf": 0.75,
+   "rule": "R-METERING",
+   "conf": 0.87,
    "basis": ""
   },
   {
@@ -273,10 +272,10 @@
    "unit_gbp": 950,
    "total_gbp": 950,
    "evidence": [
-    "S63"
+    "S55"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.38,
+   "conf": 0.43,
    "basis": ""
   },
   {
@@ -287,71 +286,28 @@
    "unit_gbp": 950,
    "total_gbp": 950,
    "evidence": [
-    "S64"
+    "S63"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.47,
+   "conf": 0.43,
    "basis": ""
   },
   {
    "line": 21,
-   "part": "RELAY-OC",
-   "description": "Overcurrent and earth-fault protection relay",
+   "part": "METER-MF",
+   "description": "Panel meter (multifunction)",
    "qty": 1,
-   "unit_gbp": 950,
-   "total_gbp": 950,
+   "unit_gbp": 260,
+   "total_gbp": 260,
    "evidence": [
-    "S69",
-    "T52"
+    "S69"
    ],
-   "rule": "R-PROTECTION",
-   "conf": 0.75,
+   "rule": "R-METERING",
+   "conf": 0.43,
    "basis": ""
   },
   {
    "line": 22,
-   "part": "RELAY-OC",
-   "description": "Overcurrent and earth-fault protection relay",
-   "qty": 1,
-   "unit_gbp": 950,
-   "total_gbp": 950,
-   "evidence": [
-    "S70"
-   ],
-   "rule": "R-PROTECTION",
-   "conf": 0.49,
-   "basis": ""
-  },
-  {
-   "line": 23,
-   "part": "RELAY-OC",
-   "description": "Overcurrent and earth-fault protection relay",
-   "qty": 1,
-   "unit_gbp": 950,
-   "total_gbp": 950,
-   "evidence": [
-    "S71"
-   ],
-   "rule": "R-PROTECTION",
-   "conf": 0.48,
-   "basis": ""
-  },
-  {
-   "line": 24,
-   "part": "RELAY-OC",
-   "description": "Overcurrent and earth-fault protection relay",
-   "qty": 1,
-   "unit_gbp": 950,
-   "total_gbp": 950,
-   "evidence": [
-    "S72"
-   ],
-   "rule": "R-PROTECTION",
-   "conf": 0.38,
-   "basis": ""
-  },
-  {
-   "line": 25,
    "part": "BUSBAR-CU-1600",
    "description": "Copper busbar set 1600 A (4-bar), 1 sections, about 29 kg",
    "qty": 1,
@@ -363,7 +319,7 @@
    "basis": "0 A busbar label; 1 sections"
   },
   {
-   "line": 26,
+   "line": 23,
    "part": "ENC-SECTION",
    "description": "Enclosure section, Form 4 Type 6, IP31, RAL 7035",
    "qty": 1,
@@ -375,19 +331,19 @@
    "basis": "0 ways at 4 per section plus incomers"
   },
   {
-   "line": 27,
+   "line": 24,
    "part": "LAB-ASSY",
-   "description": "Assembly, wiring and routine verification: 448 hours",
+   "description": "Assembly, wiring and routine verification: 362 hours",
    "qty": 1,
-   "unit_gbp": 21504,
-   "total_gbp": 21504,
+   "unit_gbp": 17376,
+   "total_gbp": 17376,
    "evidence": [],
    "rule": "R-LABOUR",
    "conf": 0.9,
    "basis": ""
   },
   {
-   "line": 28,
+   "line": 25,
    "part": "DOC",
    "description": "Documentation, as-built drawings, test certificates",
    "qty": 1,
@@ -399,7 +355,7 @@
    "basis": ""
   },
   {
-   "line": 29,
+   "line": 26,
    "part": "DEL",
    "description": "Delivery to site, crane and offload excluded",
    "qty": 1,
@@ -411,9 +367,9 @@
    "basis": ""
   }
  ],
- "subtotal_gbp": 46035.2,
- "margin_gbp": 6905.28,
- "total_gbp": 52940.48,
+ "subtotal_gbp": 36417.2,
+ "margin_gbp": 5462.58,
+ "total_gbp": 41879.78,
  "issues": [
   {
    "kind": "missing",
@@ -450,52 +406,22 @@
    "what": "D4 (ACB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S4"
+    "S4",
+    "T5"
    ]
   },
   {
    "kind": "missing",
-   "what": "D5 (CAPACITOR): kVAr not read",
+   "what": "D5 (ACB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S5"
+    "S5",
+    "T3"
    ]
   },
   {
    "kind": "missing",
-   "what": "D6 (CONTACTOR): kW not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S6"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D7 (CONTACTOR): kW not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S7"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D8 (CONTACTOR): kW not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S8"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D9 (CAPACITOR): kVAr not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S9"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D12 (CAPACITOR): kVAr not read",
+   "what": "D12 (ACB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
     "S12"
@@ -503,7 +429,7 @@
   },
   {
    "kind": "missing",
-   "what": "D13 (ACB): rating not read",
+   "what": "D13 (CONTACTOR): kW not read",
    "action": "read from drawing / schedule",
    "evidence": [
     "S13"
@@ -511,7 +437,15 @@
   },
   {
    "kind": "missing",
-   "what": "D15 (ACB): rating not read",
+   "what": "D14 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S14"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D15 (CONTACTOR): kW not read",
    "action": "read from drawing / schedule",
    "evidence": [
     "S15"
@@ -519,7 +453,7 @@
   },
   {
    "kind": "missing",
-   "what": "D16 (CAPACITOR): kVAr not read",
+   "what": "D16 (CONTACTOR): kW not read",
    "action": "read from drawing / schedule",
    "evidence": [
     "S16"
@@ -527,52 +461,19 @@
   },
   {
    "kind": "missing",
-   "what": "D17 (CAPACITOR): kVAr not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S17"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D18 (CONTACTOR): kW not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S18"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D19 (CONTACTOR): kW not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S19"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D20 (CONTACTOR): kW not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S20"
-   ]
-  },
-  {
-   "kind": "missing",
    "what": "D21 (CAPACITOR): kVAr not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S21",
-    "T9",
-    "T8"
+    "S21"
    ]
   },
   {
    "kind": "missing",
-   "what": "D28 (CAPACITOR): kVAr not read",
+   "what": "D22 (CAPACITOR): kVAr not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S28"
+    "S22",
+    "T9"
    ]
   },
   {
@@ -580,80 +481,82 @@
    "what": "D29 (CAPACITOR): kVAr not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S29"
+    "S29",
+    "T8"
    ]
   },
   {
    "kind": "missing",
-   "what": "D30 (CAPACITOR): kVAr not read",
+   "what": "D30 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S30"
+    "S30",
+    "T10",
+    "T11"
    ]
   },
   {
    "kind": "missing",
-   "what": "D31 (CAPACITOR): kVAr not read",
+   "what": "D32 (CAPACITOR): kVAr not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S31"
+    "S32"
    ]
   },
   {
    "kind": "missing",
-   "what": "D34 (CAPACITOR): kVAr not read",
+   "what": "D33 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S34",
-    "T13"
+    "S33",
+    "T38",
+    "T40",
+    "T42",
+    "T45",
+    "T47",
+    "T49",
+    "T52",
+    "T53",
+    "T55"
    ]
   },
   {
    "kind": "missing",
-   "what": "D35 (CAPACITOR): kVAr not read",
+   "what": "D34 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S35"
+    "S34"
    ]
   },
   {
    "kind": "missing",
-   "what": "D36 (CAPACITOR): kVAr not read",
+   "what": "D36 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S36"
+    "S36",
+    "T15",
+    "T17",
+    "T19"
    ]
   },
   {
    "kind": "missing",
-   "what": "D37 (CONTACTOR): kW not read",
+   "what": "D38 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S37"
+    "S38",
+    "T20",
+    "T21"
    ]
   },
   {
    "kind": "missing",
-   "what": "D38 (CAPACITOR): kVAr not read",
+   "what": "D40 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S38"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D39 (CAPACITOR): kVAr not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S39"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D41 (MCCB): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S41"
+    "S40",
+    "T16",
+    "T18"
    ]
   },
   {
@@ -666,39 +569,33 @@
   },
   {
    "kind": "missing",
-   "what": "D44 (FUSE_SWITCH): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S44"
-   ]
-  },
-  {
-   "kind": "missing",
    "what": "D45 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S45"
+    "S45",
+    "T22"
    ]
   },
   {
    "kind": "missing",
-   "what": "D48 (MCCB): rating not read",
+   "what": "D46 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S48"
+    "S46",
+    "T24"
    ]
   },
   {
    "kind": "missing",
-   "what": "D49 (FUSE_SWITCH): rating not read",
+   "what": "D51 (CAPACITOR): kVAr not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S49"
+    "S51"
    ]
   },
   {
    "kind": "missing",
-   "what": "D52 (FUSE_SWITCH): rating not read",
+   "what": "D52 (CAPACITOR): kVAr not read",
    "action": "read from drawing / schedule",
    "evidence": [
     "S52"
@@ -706,90 +603,85 @@
   },
   {
    "kind": "missing",
-   "what": "D53 (FUSE_SWITCH): rating not read",
+   "what": "D53 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S53"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D54 (CAPACITOR): kVAr not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S54",
-    "T30"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D56 (CAPACITOR): kVAr not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S56",
+    "S53",
     "T28",
     "T31"
    ]
   },
   {
    "kind": "missing",
-   "what": "D58 (CONTACTOR): kW not read",
+   "what": "D57 (CAPACITOR): kVAr not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S58",
-    "T29"
+    "S57"
    ]
   },
   {
    "kind": "missing",
-   "what": "D60 (MCCB): rating not read",
+   "what": "D59 (CAPACITOR): kVAr not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S60",
-    "T36"
+    "S59"
    ]
   },
   {
    "kind": "missing",
-   "what": "D65 (CONTACTOR): kW not read",
+   "what": "D60 (CONTACTOR): kW not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S65",
-    "T48",
-    "T50"
+    "S60"
    ]
   },
   {
    "kind": "missing",
-   "what": "D68 (CONTACTOR): kW not read",
+   "what": "D61 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S68",
-    "T55"
+    "S61"
    ]
   },
   {
    "kind": "missing",
-   "what": "D73 (CAPACITOR): kVAr not read",
+   "what": "D62 (CONTACTOR): kW not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S73"
+    "S62"
    ]
   },
   {
    "kind": "missing",
-   "what": "D74 (CAPACITOR): kVAr not read",
+   "what": "D66 (CAPACITOR): kVAr not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S74"
+    "S66"
    ]
   },
   {
    "kind": "missing",
-   "what": "D75 (FUSE_SWITCH): rating not read",
+   "what": "D67 (CAPACITOR): kVAr not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S75"
+    "S67"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D68 (CAPACITOR): kVAr not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S68"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D70 (FUSE_SWITCH): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S70",
+    "T51"
    ]
   },
   {
@@ -800,19 +692,15 @@
   },
   {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15, D16, D17, D18, D19, D20, D22, D23, D24, D25, D26, D27, D28, D29, D30, D31, D32, D33, D35, D36, D37, D38, D39, D40, D41, D42, D44, D45, D46, D47, D48, D49, D50, D51, D52, D53, D55, D57, D59, D63, D64, D66, D67, D70, D71, D72, D73, D74, D75",
+   "what": "devices read with low confidence: D1, D2, D3, D7, D8, D9, D11, D12, D13, D14, D15, D16, D17, D18, D19, D20, D21, D23, D24, D25, D26, D27, D28, D31, D32, D34, D35, D37, D39, D41, D42, D43, D44, D45, D47, D48, D49, D50, D51, D52, D55, D57, D58, D59, D60, D61, D62, D63, D64, D65, D66, D67, D68, D69",
    "action": "check against the drawing",
    "evidence": [
     "D1",
     "D2",
     "D3",
-    "D4",
-    "D5",
-    "D6",
     "D7",
     "D8",
     "D9",
-    "D10",
     "D11",
     "D12",
     "D13",
@@ -823,49 +711,44 @@
     "D18",
     "D19",
     "D20",
-    "D22",
+    "D21",
     "D23",
     "D24",
     "D25",
     "D26",
     "D27",
     "D28",
-    "D29",
-    "D30",
     "D31",
     "D32",
-    "D33",
+    "D34",
     "D35",
-    "D36",
     "D37",
-    "D38",
     "D39",
-    "D40",
     "D41",
     "D42",
+    "D43",
     "D44",
     "D45",
-    "D46",
     "D47",
     "D48",
     "D49",
     "D50",
     "D51",
     "D52",
-    "D53",
     "D55",
     "D57",
+    "D58",
     "D59",
+    "D60",
+    "D61",
+    "D62",
     "D63",
     "D64",
+    "D65",
     "D66",
     "D67",
-    "D70",
-    "D71",
-    "D72",
-    "D73",
-    "D74",
-    "D75"
+    "D68",
+    "D69"
    ]
   }
  ]

@@ -22,22 +22,22 @@
    "key": "text",
    "title": "Read the words",
    "count": 96,
-   "seconds": 8.3,
-   "plain": "Read 96 pieces of text in 8.3 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 6.52,
+   "plain": "Read 96 pieces of text in 6.52 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
-   "count": 59,
-   "seconds": 12.02,
-   "plain": "Found 59 symbols in 12.02 s: 13 motors, 11 panel meters, 10 incoming air circuit breakers, 7 fuse switches, 5 generators, 4 protection relays, 3 current transformers, 3 earths, 1 downstream board, 1 motor starter, 1 power-factor correction bank. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "count": 46,
+   "seconds": 7.11,
+   "plain": "Found 46 symbols in 7.11 s: 14 incoming air circuit breakers, 11 panel meters, 8 motors, 3 current transformers, 3 motor starters, 2 downstream boards, 2 power-factor correction banks, 2 fuse switches, 1 protection relay. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
-   "count": 28,
-   "seconds": 0.31,
-   "plain": "Paired 28 of 59 symbols with the label text beside them; 7 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
+   "count": 35,
+   "seconds": 0.27,
+   "plain": "Paired 35 of 46 symbols with the label text beside them; 5 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
    "key": "spec",
@@ -49,9 +49,9 @@
   {
    "key": "price",
    "title": "Pick parts and price",
-   "count": 40,
+   "count": 30,
    "seconds": 0.0,
-   "plain": "Chose 40 catalogue lines and priced the board at \u00a387,847 (illustrative prices, 15% margin included); 15 items flagged for the estimator. Every line names the symbol, text or clause it rests on, so a reviewer can check it on the drawing."
+   "plain": "Chose 30 catalogue lines and priced the board at \u00a387,506 (illustrative prices, 15% margin included); 19 items flagged for the estimator. Every line names the symbol, text or clause it rests on, so a reviewer can check it on the drawing."
   }
  ],
  "devices": [
@@ -64,34 +64,34 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.5,
-   "score": 0.63,
+   "conf": 0.87,
+   "score": 0.11,
    "box": [
     433,
-    211,
+    210,
     69,
     34
    ],
-   "label": ""
+   "label": "Utility Power Source | Circuit Switcher | C/S"
   },
   {
    "id": "D2",
-   "type": "METER",
-   "type_plain": "panel meter",
+   "type": "BOARD",
+   "type_plain": "downstream board",
    "rating": null,
    "unit": null,
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.93,
-   "score": 0.2,
+   "conf": 0.87,
+   "score": 0.12,
    "box": [
-    100,
-    255,
-    45,
-    42
+    1687,
+    211,
+    66,
+    33
    ],
-   "label": "50"
+   "label": "Utility Power Source | Circuit Switcher | C/S"
   },
   {
    "id": "D3",
@@ -102,53 +102,53 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.96,
-   "score": 0.25,
+   "conf": 0.63,
+   "score": 0.14,
    "box": [
-    2043,
-    255,
-    47,
-    43
+    327,
+    240,
+    46,
+    44
    ],
-   "label": "50"
+   "label": "CS"
   },
   {
    "id": "D4",
-   "type": "MOTOR",
-   "type_plain": "motor",
+   "type": "METER",
+   "type_plain": "panel meter",
    "rating": null,
-   "unit": "kW",
+   "unit": null,
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.98,
-   "score": 0.24,
+   "conf": 0.59,
+   "score": 0.17,
    "box": [
-    2044,
-    308,
+    1816,
+    240,
     46,
-    43
+    45
    ],
-   "label": "87"
+   "label": "CS | 86C"
   },
   {
    "id": "D5",
-   "type": "CT",
-   "type_plain": "current transformer",
+   "type": "METER",
+   "type_plain": "panel meter",
    "rating": null,
-   "unit": "A",
+   "unit": null,
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.5,
-   "score": 0.27,
+   "conf": 1.0,
+   "score": 0.31,
    "box": [
-    465,
-    318,
-    17,
-    42
+    100,
+    254,
+    46,
+    44
    ],
-   "label": ""
+   "label": "51"
   },
   {
    "id": "D6",
@@ -159,15 +159,15 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.5,
-   "score": 0.44,
+   "conf": 0.73,
+   "score": 0.16,
    "box": [
-    100,
-    360,
+    99,
+    307,
     46,
-    42
+    44
    ],
-   "label": ""
+   "label": "50 | B6C | 87 | AL"
   },
   {
    "id": "D7",
@@ -178,37 +178,56 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.38,
-   "score": 0.12,
+   "conf": 0.96,
+   "score": 0.32,
    "box": [
-    2043,
-    362,
-    46,
-    41
+    2044,
+    308,
+    45,
+    43
    ],
-   "label": ""
+   "label": "51 | 50 | 87"
   },
   {
    "id": "D8",
-   "type": "MOTOR",
-   "type_plain": "motor",
+   "type": "CT",
+   "type_plain": "current transformer",
    "rating": null,
-   "unit": "kW",
+   "unit": "A",
    "poles": null,
    "kA": null,
    "dest": "",
    "conf": 0.5,
-   "score": 0.31,
+   "score": 0.35,
    "box": [
-    1973,
-    455,
-    46,
-    44
+    1708,
+    337,
+    16,
+    25
    ],
    "label": ""
   },
   {
    "id": "D9",
+   "type": "CT",
+   "type_plain": "current transformer",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.43,
+   "score": 0.11,
+   "box": [
+    610,
+    399,
+    27,
+    23
+   ],
+   "label": ""
+  },
+  {
+   "id": "D10",
    "type": "ACB",
    "type_plain": "incoming air circuit breaker",
    "rating": null,
@@ -216,56 +235,94 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.38,
-   "score": 0.13,
+   "conf": 0.69,
+   "score": 0.25,
    "box": [
-    1621,
-    472,
-    44,
-    38
+    1627,
+    432,
+    31,
+    29
    ],
-   "label": ""
-  },
-  {
-   "id": "D10",
-   "type": "EARTH",
-   "type_plain": "earth",
-   "rating": null,
-   "unit": null,
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.38,
-   "score": 0.13,
-   "box": [
-    1451,
-    497,
-    38,
-    23
-   ],
-   "label": ""
+   "label": "Step Down Transformer | 12M5 MVA | 34,500 - 13,800 V | Zo=5.757 | DK"
   },
   {
    "id": "D11",
-   "type": "EARTH",
-   "type_plain": "earth",
+   "type": "ACB",
+   "type_plain": "incoming air circuit breaker",
    "rating": null,
-   "unit": null,
+   "unit": "A",
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.48,
-   "score": 0.19,
+   "conf": 0.92,
+   "score": 0.23,
    "box": [
-    570,
+    544,
+    433,
+    32,
+    30
+   ],
+   "label": "Step Down Transformer | 12/15 MVA | 34,500 - 13,800 V | Zo=5.757"
+  },
+  {
+   "id": "D12",
+   "type": "ACB",
+   "type_plain": "incoming air circuit breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.85,
+   "score": 0.15,
+   "box": [
+    428,
+    478,
+    79,
+    18
+   ],
+   "label": "49 | 63 | 1N{50/51 | 15 | NC"
+  },
+  {
+   "id": "D13",
+   "type": "CAPACITOR",
+   "type_plain": "power-factor correction bank",
+   "rating": null,
+   "unit": "kVAr",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.99,
+   "score": 0.25,
+   "box": [
+    1609,
     549,
-    25,
-    12
+    23,
+    10
+   ],
+   "label": "15 | NC"
+  },
+  {
+   "id": "D14",
+   "type": "ACB",
+   "type_plain": "incoming air circuit breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.5,
+   "score": 0.3,
+   "box": [
+    536,
+    575,
+    22,
+    25
    ],
    "label": ""
   },
   {
-   "id": "D12",
+   "id": "D15",
    "type": "METER",
    "type_plain": "panel meter",
    "rating": null,
@@ -273,18 +330,18 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.86,
-   "score": 0.49,
+   "conf": 0.59,
+   "score": 0.12,
    "box": [
     313,
     577,
-    46,
+    45,
     44
    ],
-   "label": "861"
+   "label": "50/51 | 861 | CS"
   },
   {
-   "id": "D13",
+   "id": "D16",
    "type": "MOTOR",
    "type_plain": "motor",
    "rating": null,
@@ -292,56 +349,18 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.49,
-   "score": 0.25,
+   "conf": 0.8,
+   "score": 0.2,
    "box": [
-    263,
-    579,
-    49,
+    1879,
+    580,
+    46,
     43
    ],
-   "label": ""
+   "label": "49 | AL | 63 | 50/51(51N} | 861"
   },
   {
-   "id": "D14",
-   "type": "FUSE_SWITCH",
-   "type_plain": "fuse switch",
-   "rating": null,
-   "unit": "A",
-   "poles": null,
-   "kA": null,
-   "dest": "15",
-   "conf": 0.75,
-   "score": 0.13,
-   "box": [
-    465,
-    592,
-    16,
-    48
-   ],
-   "label": "15 | NC"
-  },
-  {
-   "id": "D15",
-   "type": "RELAY",
-   "type_plain": "protection relay",
-   "rating": null,
-   "unit": null,
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.98,
-   "score": 0.22,
-   "box": [
-    874,
-    595,
-    22,
-    34
-   ],
-   "label": "25"
-  },
-  {
-   "id": "D16",
+   "id": "D17",
    "type": "METER",
    "type_plain": "panel meter",
    "rating": null,
@@ -349,34 +368,15 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.38,
-   "score": 0.14,
-   "box": [
-    1455,
-    623,
-    46,
-    44
-   ],
-   "label": ""
-  },
-  {
-   "id": "D17",
-   "type": "GENERATOR",
-   "type_plain": "generator",
-   "rating": null,
-   "unit": "kVA",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.5,
-   "score": 0.32,
+   "conf": 0.64,
+   "score": 0.21,
    "box": [
     1089,
-    631,
-    46,
-    43
+    630,
+    45,
+    44
    ],
-   "label": ""
+   "label": "CS"
   },
   {
    "id": "D18",
@@ -387,37 +387,18 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.47,
-   "score": 0.16,
+   "conf": 0.87,
+   "score": 0.12,
    "box": [
-    861,
-    638,
-    45,
-    44
+    860,
+    637,
+    46,
+    46
    ],
-   "label": ""
+   "label": "25 | 27"
   },
   {
    "id": "D19",
-   "type": "CT",
-   "type_plain": "current transformer",
-   "rating": null,
-   "unit": "A",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.47,
-   "score": 0.16,
-   "box": [
-    467,
-    684,
-    15,
-    24
-   ],
-   "label": ""
-  },
-  {
-   "id": "D20",
    "type": "ACB",
    "type_plain": "incoming air circuit breaker",
    "rating": 1200,
@@ -425,15 +406,34 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.75,
-   "score": 0.12,
+   "conf": 1.0,
+   "score": 0.24,
    "box": [
-    1717,
-    685,
+    467,
+    684,
     14,
-    23
+    24
    ],
-   "label": "NC | 1200A"
+   "label": "1200A"
+  },
+  {
+   "id": "D20",
+   "type": "ACB",
+   "type_plain": "incoming air circuit breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.61,
+   "score": 0.14,
+   "box": [
+    1718,
+    684,
+    13,
+    24
+   ],
+   "label": "CS"
   },
   {
    "id": "D21",
@@ -444,132 +444,56 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.5,
-   "score": 0.27,
+   "conf": 0.43,
+   "score": 0.13,
    "box": [
     936,
     703,
     36,
-    22
+    21
    ],
    "label": ""
   },
   {
    "id": "D22",
-   "type": "FUSE_SWITCH",
-   "type_plain": "fuse switch",
+   "type": "CAPACITOR",
+   "type_plain": "power-factor correction bank",
    "rating": null,
-   "unit": "A",
+   "unit": "kVAr",
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.38,
-   "score": 0.11,
+   "conf": 0.43,
+   "score": 0.13,
    "box": [
     1000,
-    709,
-    24,
+    708,
+    22,
     27
    ],
    "label": ""
   },
   {
    "id": "D23",
-   "type": "MOTOR",
-   "type_plain": "motor",
+   "type": "CT",
+   "type_plain": "current transformer",
    "rating": null,
-   "unit": "kW",
+   "unit": "A",
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.5,
-   "score": 0.4,
+   "conf": 0.43,
+   "score": 0.12,
    "box": [
-    331,
-    727,
-    47,
-    44
+    1710,
+    773,
+    11,
+    22
    ],
    "label": ""
   },
   {
    "id": "D24",
-   "type": "MOTOR",
-   "type_plain": "motor",
-   "rating": null,
-   "unit": "kW",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.5,
-   "score": 0.34,
-   "box": [
-    860,
-    750,
-    47,
-    44
-   ],
-   "label": ""
-  },
-  {
-   "id": "D25",
-   "type": "GENERATOR",
-   "type_plain": "generator",
-   "rating": null,
-   "unit": "kVA",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.38,
-   "score": 0.11,
-   "box": [
-    1321,
-    783,
-    47,
-    45
-   ],
-   "label": ""
-  },
-  {
-   "id": "D26",
-   "type": "RELAY",
-   "type_plain": "protection relay",
-   "rating": null,
-   "unit": null,
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.75,
-   "score": 0.12,
-   "box": [
-    2184,
-    914,
-    29,
-    20
-   ],
-   "label": "Control Switch"
-  },
-  {
-   "id": "D27",
-   "type": "RELAY",
-   "type_plain": "protection relay",
-   "rating": null,
-   "unit": null,
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.49,
-   "score": 0.23,
-   "box": [
-    2261,
-    914,
-    27,
-    20
-   ],
-   "label": ""
-  },
-  {
-   "id": "D28",
    "type": "METER",
    "type_plain": "panel meter",
    "rating": null,
@@ -577,75 +501,56 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.98,
-   "score": 0.25,
+   "conf": 0.97,
+   "score": 0.19,
+   "box": [
+    1045,
+    818,
+    47,
+    44
+   ],
+   "label": "25 | NO"
+  },
+  {
+   "id": "D25",
+   "type": "CONTACTOR",
+   "type_plain": "motor starter",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.49,
+   "score": 0.22,
+   "box": [
+    1002,
+    895,
+    23,
+    22
+   ],
+   "label": ""
+  },
+  {
+   "id": "D26",
+   "type": "METER",
+   "type_plain": "panel meter",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.59,
+   "score": 0.16,
    "box": [
     2019,
     938,
     46,
     44
    ],
-   "label": "AL"
+   "label": "LEGEND | CS | Control Switch | AL | Alarm | 49 | Over Temperature Relay | Instantaneous Overcurrent Relay | Over Current Relay | Sudden Pressure Relay | Lockout Relay | Differential Relay"
   },
   {
-   "id": "D29",
-   "type": "METER",
-   "type_plain": "panel meter",
-   "rating": null,
-   "unit": null,
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.75,
-   "score": 0.13,
-   "box": [
-    927,
-    940,
-    46,
-    45
-   ],
-   "label": "{typ}"
-  },
-  {
-   "id": "D30",
-   "type": "GENERATOR",
-   "type_plain": "generator",
-   "rating": null,
-   "unit": "kVA",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.9,
-   "score": 0.22,
-   "box": [
-    1720,
-    942,
-    47,
-    44
-   ],
-   "label": "(typ}"
-  },
-  {
-   "id": "D31",
-   "type": "ACB",
-   "type_plain": "incoming air circuit breaker",
-   "rating": 600,
-   "unit": "A",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.93,
-   "score": 0.17,
-   "box": [
-    1554,
-    968,
-    24,
-    22
-   ],
-   "label": "600A"
-  },
-  {
-   "id": "D32",
+   "id": "D27",
    "type": "MOTOR",
    "type_plain": "motor",
    "rating": null,
@@ -653,18 +558,18 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.98,
-   "score": 0.23,
+   "conf": 0.87,
+   "score": 0.32,
    "box": [
-    2020,
-    993,
-    49,
-    49
+    926,
+    940,
+    47,
+    46
    ],
-   "label": "49 | Alarm"
+   "label": "50/5151N | {typ} | 86L"
   },
   {
-   "id": "D33",
+   "id": "D28",
    "type": "ACB",
    "type_plain": "incoming air circuit breaker",
    "rating": 600,
@@ -672,170 +577,56 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.95,
-   "score": 0.35,
+   "conf": 0.87,
+   "score": 0.12,
    "box": [
-    531,
-    1002,
-    25,
+    414,
+    1001,
+    24,
     23
    ],
    "label": "600A"
   },
   {
-   "id": "D34",
+   "id": "D29",
    "type": "ACB",
    "type_plain": "incoming air circuit breaker",
-   "rating": 600,
-   "unit": "A",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.75,
-   "score": 0.13,
-   "box": [
-    655,
-    1002,
-    24,
-    20
-   ],
-   "label": "600A"
-  },
-  {
-   "id": "D35",
-   "type": "FUSE_SWITCH",
-   "type_plain": "fuse switch",
    "rating": 600,
    "unit": "A",
    "poles": null,
    "kA": null,
    "dest": "",
    "conf": 0.97,
-   "score": 0.18,
-   "box": [
-    1194,
-    1003,
-    26,
-    22
-   ],
-   "label": "600A"
-  },
-  {
-   "id": "D36",
-   "type": "GENERATOR",
-   "type_plain": "generator",
-   "rating": null,
-   "unit": "kVA",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.75,
-   "score": 0.12,
-   "box": [
-    1763,
-    1003,
-    44,
-    27
-   ],
-   "label": "86L"
-  },
-  {
-   "id": "D37",
-   "type": "FUSE_SWITCH",
-   "type_plain": "fuse switch",
-   "rating": 600,
-   "unit": "A",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.75,
-   "score": 0.14,
-   "box": [
-    1454,
-    1004,
-    26,
-    28
-   ],
-   "label": "600A"
-  },
-  {
-   "id": "D38",
-   "type": "FUSE_SWITCH",
-   "type_plain": "fuse switch",
-   "rating": 600,
-   "unit": "A",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.93,
    "score": 0.17,
    "box": [
-    1325,
-    1005,
-    24,
-    24
+    655,
+    1001,
+    23,
+    22
    ],
-   "label": "600A"
+   "label": "15 | 600A"
   },
   {
-   "id": "D39",
-   "type": "METER",
-   "type_plain": "panel meter",
-   "rating": null,
-   "unit": null,
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.5,
-   "score": 0.54,
-   "box": [
-    1720,
-    1048,
-    47,
-    43
-   ],
-   "label": ""
-  },
-  {
-   "id": "D40",
+   "id": "D30",
    "type": "ACB",
    "type_plain": "incoming air circuit breaker",
-   "rating": null,
+   "rating": 600,
    "unit": "A",
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.38,
-   "score": 0.14,
+   "conf": 0.87,
+   "score": 0.12,
    "box": [
-    531,
-    1051,
+    1454,
+    1005,
     24,
-    26
+    23
    ],
-   "label": ""
+   "label": "15 | 600A"
   },
   {
-   "id": "D41",
-   "type": "GENERATOR",
-   "type_plain": "generator",
-   "rating": null,
-   "unit": "kVA",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.63,
-   "score": 0.13,
-   "box": [
-    930,
-    1052,
-    46,
-    44
-   ],
-   "label": "CS"
-  },
-  {
-   "id": "D42",
+   "id": "D31",
    "type": "MOTOR",
    "type_plain": "motor",
    "rating": null,
@@ -843,15 +634,224 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.94,
+   "conf": 0.79,
+   "score": 0.11,
+   "box": [
+    1720,
+    1047,
+    48,
+    45
+   ],
+   "label": "50/51}51N | (typ} | 86L"
+  },
+  {
+   "id": "D32",
+   "type": "METER",
+   "type_plain": "panel meter",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.63,
+   "score": 0.12,
+   "box": [
+    855,
+    1088,
+    45,
+    46
+   ],
+   "label": "CS"
+  },
+  {
+   "id": "D33",
+   "type": "FUSE_SWITCH",
+   "type_plain": "fuse switch",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.5,
+   "score": 0.4,
+   "box": [
+    415,
+    1116,
+    24,
+    25
+   ],
+   "label": ""
+  },
+  {
+   "id": "D34",
+   "type": "FUSE_SWITCH",
+   "type_plain": "fuse switch",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "Load Feeders",
+   "conf": 0.97,
+   "score": 0.2,
+   "box": [
+    655,
+    1116,
+    24,
+    23
+   ],
+   "label": "Load Feeders"
+  },
+  {
+   "id": "D35",
+   "type": "ACB",
+   "type_plain": "incoming air circuit breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.5,
+   "score": 0.39,
+   "box": [
+    532,
+    1117,
+    25,
+    25
+   ],
+   "label": ""
+  },
+  {
+   "id": "D36",
+   "type": "ACB",
+   "type_plain": "incoming air circuit breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.97,
+   "score": 0.44,
+   "box": [
+    1456,
+    1119,
+    24,
+    23
+   ],
+   "label": "Load Feeders"
+  },
+  {
+   "id": "D37",
+   "type": "ACB",
+   "type_plain": "incoming air circuit breaker",
+   "rating": 600,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.99,
+   "score": 0.21,
+   "box": [
+    1325,
+    1120,
+    24,
+    22
+   ],
+   "label": "600A"
+  },
+  {
+   "id": "D38",
+   "type": "ACB",
+   "type_plain": "incoming air circuit breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.6,
+   "score": 0.2,
+   "box": [
+    1599,
+    1122,
+    24,
+    23
+   ],
+   "label": "CS"
+  },
+  {
+   "id": "D39",
+   "type": "ACB",
+   "type_plain": "incoming air circuit breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.49,
+   "score": 0.24,
+   "box": [
+    808,
+    1124,
+    25,
+    23
+   ],
+   "label": ""
+  },
+  {
+   "id": "D40",
+   "type": "METER",
+   "type_plain": "panel meter",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.98,
    "score": 0.47,
    "box": [
-    2023,
-    1059,
+    2024,
+    1125,
     47,
     45
    ],
-   "label": "50 | Over Temperature Relay"
+   "label": "50 | 51"
+  },
+  {
+   "id": "D41",
+   "type": "CONTACTOR",
+   "type_plain": "motor starter",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.43,
+   "score": 0.12,
+   "box": [
+    1197,
+    1148,
+    19,
+    17
+   ],
+   "label": ""
+  },
+  {
+   "id": "D42",
+   "type": "METER",
+   "type_plain": "panel meter",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 1.0,
+   "score": 0.36,
+   "box": [
+    2019,
+    1252,
+    47,
+    45
+   ],
+   "label": "63 | 86"
   },
   {
    "id": "D43",
@@ -862,15 +862,15 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.93,
-   "score": 0.18,
+   "conf": 0.97,
+   "score": 0.45,
    "box": [
-    2106,
-    1074,
-    16,
-    20
+    1655,
+    1318,
+    47,
+    45
    ],
-   "label": "Instantaneous Overcurrent Relay"
+   "label": "Synch. Check Relay | 25 | Undervoltage Relay"
   },
   {
    "id": "D44",
@@ -881,94 +881,37 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.75,
-   "score": 0.13,
+   "conf": 0.99,
+   "score": 0.2,
    "box": [
-    855,
-    1089,
-    45,
-    44
+    1655,
+    1376,
+    48,
+    46
    ],
-   "label": "86L"
+   "label": "27"
   },
   {
    "id": "D45",
-   "type": "ACB",
-   "type_plain": "incoming air circuit breaker",
+   "type": "MOTOR",
+   "type_plain": "motor",
    "rating": null,
-   "unit": "A",
+   "unit": "kW",
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.47,
-   "score": 0.18,
+   "conf": 1.0,
+   "score": 0.28,
    "box": [
-    655,
-    1114,
-    28,
-    25
+    2024,
+    1383,
+    46,
+    45
    ],
-   "label": ""
+   "label": "87"
   },
   {
    "id": "D46",
-   "type": "FUSE_SWITCH",
-   "type_plain": "fuse switch",
-   "rating": null,
-   "unit": "A",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.5,
-   "score": 0.44,
-   "box": [
-    415,
-    1116,
-    25,
-    26
-   ],
-   "label": ""
-  },
-  {
-   "id": "D47",
-   "type": "FUSE_SWITCH",
-   "type_plain": "fuse switch",
-   "rating": null,
-   "unit": "A",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.38,
-   "score": 0.12,
-   "box": [
-    530,
-    1117,
-    27,
-    49
-   ],
-   "label": ""
-  },
-  {
-   "id": "D48",
-   "type": "ACB",
-   "type_plain": "incoming air circuit breaker",
-   "rating": null,
-   "unit": "A",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.48,
-   "score": 0.19,
-   "box": [
-    1197,
-    1117,
-    24,
-    26
-   ],
-   "label": ""
-  },
-  {
-   "id": "D49",
    "type": "CONTACTOR",
    "type_plain": "motor starter",
    "rating": null,
@@ -976,205 +919,15 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.48,
-   "score": 0.19,
-   "box": [
-    1456,
-    1119,
-    24,
-    23
-   ],
-   "label": ""
-  },
-  {
-   "id": "D50",
-   "type": "ACB",
-   "type_plain": "incoming air circuit breaker",
-   "rating": null,
-   "unit": "A",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.47,
-   "score": 0.17,
-   "box": [
-    1325,
-    1120,
-    25,
-    21
-   ],
-   "label": ""
-  },
-  {
-   "id": "D51",
-   "type": "CAPACITOR",
-   "type_plain": "power-factor correction bank",
-   "rating": null,
-   "unit": "kVAr",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.5,
-   "score": 0.36,
-   "box": [
-    1598,
-    1122,
-    26,
-    23
-   ],
-   "label": ""
-  },
-  {
-   "id": "D52",
-   "type": "ACB",
-   "type_plain": "incoming air circuit breaker",
-   "rating": null,
-   "unit": "A",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.49,
-   "score": 0.25,
-   "box": [
-    809,
-    1124,
-    25,
-    22
-   ],
-   "label": ""
-  },
-  {
-   "id": "D53",
-   "type": "METER",
-   "type_plain": "panel meter",
-   "rating": null,
-   "unit": null,
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 1.0,
-   "score": 0.32,
-   "box": [
-    2024,
-    1125,
-    48,
-    46
-   ],
-   "label": "51"
-  },
-  {
-   "id": "D54",
-   "type": "EARTH",
-   "type_plain": "earth",
-   "rating": null,
-   "unit": null,
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.38,
-   "score": 0.15,
-   "box": [
-    1601,
-    1155,
-    19,
-    17
-   ],
-   "label": ""
-  },
-  {
-   "id": "D55",
-   "type": "METER",
-   "type_plain": "panel meter",
-   "rating": null,
-   "unit": null,
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.97,
-   "score": 0.43,
-   "box": [
-    1656,
-    1320,
-    47,
-    43
-   ],
-   "label": "27 | Synch. Check Relay"
-  },
-  {
-   "id": "D56",
-   "type": "METER",
-   "type_plain": "panel meter",
-   "rating": null,
-   "unit": null,
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.99,
-   "score": 0.41,
-   "box": [
-    2024,
-    1320,
-    47,
-    45
-   ],
-   "label": "87 | Lockout Relay"
-  },
-  {
-   "id": "D57",
-   "type": "MOTOR",
-   "type_plain": "motor",
-   "rating": null,
-   "unit": "kW",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.98,
-   "score": 0.27,
-   "box": [
-    1654,
-    1377,
-    49,
-    44
-   ],
-   "label": "Undervoltage Relay"
-  },
-  {
-   "id": "D58",
-   "type": "MOTOR",
-   "type_plain": "motor",
-   "rating": null,
-   "unit": "kW",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.96,
-   "score": 0.4,
-   "box": [
-    2023,
-    1384,
-    48,
-    44
-   ],
-   "label": "Differential Relay"
-  },
-  {
-   "id": "D59",
-   "type": "CT",
-   "type_plain": "current transformer",
-   "rating": null,
-   "unit": "A",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.38,
+   "conf": 0.87,
    "score": 0.12,
    "box": [
-    2100,
-    1574,
-    17,
-    21
+    2239,
+    1509,
+    34,
+    22
    ],
-   "label": ""
+   "label": "FIGURE 4-1 | MAIN POWERSYSTEM | SINGLELINEDIAGRAM"
   }
  ],
  "board": {
@@ -1184,40 +937,55 @@
   "poles_default": 4,
   "busbar_rating": 1200,
   "sections": 5,
-  "ways": 3
+  "ways": 0
  },
  "bom": {
   "lines": [
    {
     "line": 1,
-    "part": "METER-50",
-    "description": "Panel meter (50)",
+    "part": "METER-MF",
+    "description": "Panel meter (multifunction)",
     "qty": 1,
     "unit_gbp": 260,
     "total_gbp": 260,
-    "conf": 0.93,
+    "conf": 0.63,
     "evidence": [
-     "S2",
-     "T13"
+     "S3",
+     "T9"
     ],
     "rule": "R-METERING"
    },
    {
     "line": 2,
-    "part": "METER-50",
-    "description": "Panel meter (50)",
+    "part": "METER-MF",
+    "description": "Panel meter (multifunction)",
     "qty": 1,
     "unit_gbp": 260,
     "total_gbp": 260,
-    "conf": 0.96,
+    "conf": 0.59,
     "evidence": [
-     "S3",
-     "T14"
+     "S4",
+     "T10",
+     "T17"
     ],
     "rule": "R-METERING"
    },
    {
     "line": 3,
+    "part": "METER-MF",
+    "description": "Panel meter (multifunction)",
+    "qty": 1,
+    "unit_gbp": 260,
+    "total_gbp": 260,
+    "conf": 1.0,
+    "evidence": [
+     "S5",
+     "T11"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 4,
     "part": "CT-SET",
     "description": "Current transformers, set of three, class 1",
     "qty": 1,
@@ -1225,37 +993,22 @@
     "total_gbp": 280,
     "conf": 0.5,
     "evidence": [
-     "S5"
-    ],
-    "rule": "R-METERING"
-   },
-   {
-    "line": 4,
-    "part": "METER-861",
-    "description": "Panel meter (861)",
-    "qty": 1,
-    "unit_gbp": 260,
-    "total_gbp": 260,
-    "conf": 0.86,
-    "evidence": [
-     "S12",
-     "T43"
+     "S8"
     ],
     "rule": "R-METERING"
    },
    {
     "line": 5,
-    "part": "RELAY-OC",
-    "description": "Overcurrent and earth-fault protection relay",
+    "part": "CT-SET",
+    "description": "Current transformers, set of three, class 1",
     "qty": 1,
-    "unit_gbp": 950,
-    "total_gbp": 950,
-    "conf": 0.98,
+    "unit_gbp": 280,
+    "total_gbp": 280,
+    "conf": 0.43,
     "evidence": [
-     "S15",
-     "T40"
+     "S9"
     ],
-    "rule": "R-PROTECTION"
+    "rule": "R-METERING"
    },
    {
     "line": 6,
@@ -1264,22 +1017,26 @@
     "qty": 1,
     "unit_gbp": 260,
     "total_gbp": 260,
-    "conf": 0.38,
+    "conf": 0.59,
     "evidence": [
-     "S16"
+     "S15",
+     "S15g1",
+     "T43",
+     "T47"
     ],
     "rule": "R-METERING"
    },
    {
     "line": 7,
-    "part": "CT-SET",
-    "description": "Current transformers, set of three, class 1",
+    "part": "METER-MF",
+    "description": "Panel meter (multifunction)",
     "qty": 1,
-    "unit_gbp": 280,
-    "total_gbp": 280,
-    "conf": 0.47,
+    "unit_gbp": 260,
+    "total_gbp": 260,
+    "conf": 0.64,
     "evidence": [
-     "S19"
+     "S17",
+     "T39"
     ],
     "rule": "R-METERING"
    },
@@ -1290,11 +1047,10 @@
     "qty": 1,
     "unit_gbp": 5124.0,
     "total_gbp": 5124.0,
-    "conf": 0.75,
+    "conf": 1.0,
     "evidence": [
-     "S20",
-     "T46",
-     "T42"
+     "S19",
+     "T41"
     ],
     "rule": "R-ACB-SELECT"
    },
@@ -1305,11 +1061,10 @@
     "qty": 1,
     "unit_gbp": 1400,
     "total_gbp": 1400,
-    "conf": 0.75,
+    "conf": 1.0,
     "evidence": [
-     "S20",
-     "T46",
-     "T42"
+     "S19",
+     "T41"
     ],
     "rule": "R-FU-KIT"
    },
@@ -1320,7 +1075,7 @@
     "qty": 1,
     "unit_gbp": 950,
     "total_gbp": 950,
-    "conf": 0.5,
+    "conf": 0.43,
     "evidence": [
      "S21"
     ],
@@ -1328,355 +1083,235 @@
    },
    {
     "line": 11,
-    "part": "RELAY-OC",
-    "description": "Overcurrent and earth-fault protection relay",
-    "qty": 1,
-    "unit_gbp": 950,
-    "total_gbp": 950,
-    "conf": 0.75,
-    "evidence": [
-     "S26",
-     "T55"
-    ],
-    "rule": "R-PROTECTION"
-   },
-   {
-    "line": 12,
-    "part": "RELAY-OC",
-    "description": "Overcurrent and earth-fault protection relay",
-    "qty": 1,
-    "unit_gbp": 950,
-    "total_gbp": 950,
-    "conf": 0.49,
-    "evidence": [
-     "S27"
-    ],
-    "rule": "R-PROTECTION"
-   },
-   {
-    "line": 13,
-    "part": "METER-AL",
-    "description": "Panel meter (AL)",
-    "qty": 1,
-    "unit_gbp": 260,
-    "total_gbp": 260,
-    "conf": 0.98,
-    "evidence": [
-     "S28",
-     "T62"
-    ],
-    "rule": "R-METERING"
-   },
-   {
-    "line": 14,
-    "part": "METER-{typ}",
-    "description": "Panel meter ({typ})",
-    "qty": 1,
-    "unit_gbp": 260,
-    "total_gbp": 260,
-    "conf": 0.75,
-    "evidence": [
-     "S29",
-     "T60"
-    ],
-    "rule": "R-METERING"
-   },
-   {
-    "line": 15,
-    "part": "ACB-1600-4P-N",
-    "description": "Air circuit breaker 1600 A 4-pole, None kA band N, withdrawable, electronic trip",
-    "qty": 1,
-    "unit_gbp": 5124.0,
-    "total_gbp": 5124.0,
-    "conf": 0.93,
-    "evidence": [
-     "S31",
-     "T71"
-    ],
-    "rule": "R-ACB-SELECT"
-   },
-   {
-    "line": 16,
-    "part": "FU-KIT-ACB",
-    "description": "Incomer functional unit: compartment, shutters, terminals, controls",
-    "qty": 1,
-    "unit_gbp": 1400,
-    "total_gbp": 1400,
-    "conf": 0.93,
-    "evidence": [
-     "S31",
-     "T71"
-    ],
-    "rule": "R-FU-KIT"
-   },
-   {
-    "line": 17,
-    "part": "ACB-1600-4P-N",
-    "description": "Air circuit breaker 1600 A 4-pole, None kA band N, withdrawable, electronic trip",
-    "qty": 1,
-    "unit_gbp": 5124.0,
-    "total_gbp": 5124.0,
-    "conf": 0.95,
-    "evidence": [
-     "S33",
-     "T65"
-    ],
-    "rule": "R-ACB-SELECT"
-   },
-   {
-    "line": 18,
-    "part": "FU-KIT-ACB",
-    "description": "Incomer functional unit: compartment, shutters, terminals, controls",
-    "qty": 1,
-    "unit_gbp": 1400,
-    "total_gbp": 1400,
-    "conf": 0.95,
-    "evidence": [
-     "S33",
-     "T65"
-    ],
-    "rule": "R-FU-KIT"
-   },
-   {
-    "line": 19,
-    "part": "ACB-1600-4P-N",
-    "description": "Air circuit breaker 1600 A 4-pole, None kA band N, withdrawable, electronic trip",
-    "qty": 1,
-    "unit_gbp": 5124.0,
-    "total_gbp": 5124.0,
-    "conf": 0.75,
-    "evidence": [
-     "S34",
-     "T66"
-    ],
-    "rule": "R-ACB-SELECT"
-   },
-   {
-    "line": 20,
-    "part": "FU-KIT-ACB",
-    "description": "Incomer functional unit: compartment, shutters, terminals, controls",
-    "qty": 1,
-    "unit_gbp": 1400,
-    "total_gbp": 1400,
-    "conf": 0.75,
-    "evidence": [
-     "S34",
-     "T66"
-    ],
-    "rule": "R-FU-KIT"
-   },
-   {
-    "line": 21,
-    "part": "FSW-630-4P",
-    "description": "Fuse-switch-disconnector 630 A 4-pole",
-    "qty": 1,
-    "unit_gbp": 1439.6,
-    "total_gbp": 1439.6,
-    "conf": 0.97,
-    "evidence": [
-     "S35",
-     "T68"
-    ],
-    "rule": "R-FSW-SELECT"
-   },
-   {
-    "line": 22,
-    "part": "FUSE-630",
-    "description": "Fuse links 630 A, one per pole",
-    "qty": 4,
-    "unit_gbp": 72,
-    "total_gbp": 288,
-    "conf": 0.97,
-    "evidence": [
-     "S35",
-     "T68"
-    ],
-    "rule": "R-FUSE-LINKS"
-   },
-   {
-    "line": 23,
-    "part": "FU-KIT-FUSE_SWITCH",
-    "description": "Outgoing functional unit: compartment door, terminals, labels",
-    "qty": 1,
-    "unit_gbp": 380,
-    "total_gbp": 380,
-    "conf": 0.97,
-    "evidence": [
-     "S35",
-     "T68"
-    ],
-    "rule": "R-FU-KIT"
-   },
-   {
-    "line": 24,
-    "part": "FSW-630-4P",
-    "description": "Fuse-switch-disconnector 630 A 4-pole",
-    "qty": 1,
-    "unit_gbp": 1439.6,
-    "total_gbp": 1439.6,
-    "conf": 0.75,
-    "evidence": [
-     "S37",
-     "T70"
-    ],
-    "rule": "R-FSW-SELECT"
-   },
-   {
-    "line": 25,
-    "part": "FUSE-630",
-    "description": "Fuse links 630 A, one per pole",
-    "qty": 4,
-    "unit_gbp": 72,
-    "total_gbp": 288,
-    "conf": 0.75,
-    "evidence": [
-     "S37",
-     "T70"
-    ],
-    "rule": "R-FUSE-LINKS"
-   },
-   {
-    "line": 26,
-    "part": "FU-KIT-FUSE_SWITCH",
-    "description": "Outgoing functional unit: compartment door, terminals, labels",
-    "qty": 1,
-    "unit_gbp": 380,
-    "total_gbp": 380,
-    "conf": 0.75,
-    "evidence": [
-     "S37",
-     "T70"
-    ],
-    "rule": "R-FU-KIT"
-   },
-   {
-    "line": 27,
-    "part": "FSW-630-4P",
-    "description": "Fuse-switch-disconnector 630 A 4-pole",
-    "qty": 1,
-    "unit_gbp": 1439.6,
-    "total_gbp": 1439.6,
-    "conf": 0.93,
-    "evidence": [
-     "S38",
-     "T69"
-    ],
-    "rule": "R-FSW-SELECT"
-   },
-   {
-    "line": 28,
-    "part": "FUSE-630",
-    "description": "Fuse links 630 A, one per pole",
-    "qty": 4,
-    "unit_gbp": 72,
-    "total_gbp": 288,
-    "conf": 0.93,
-    "evidence": [
-     "S38",
-     "T69"
-    ],
-    "rule": "R-FUSE-LINKS"
-   },
-   {
-    "line": 29,
-    "part": "FU-KIT-FUSE_SWITCH",
-    "description": "Outgoing functional unit: compartment door, terminals, labels",
-    "qty": 1,
-    "unit_gbp": 380,
-    "total_gbp": 380,
-    "conf": 0.93,
-    "evidence": [
-     "S38",
-     "T69"
-    ],
-    "rule": "R-FU-KIT"
-   },
-   {
-    "line": 30,
-    "part": "METER-MF",
-    "description": "Panel meter (multifunction)",
-    "qty": 1,
-    "unit_gbp": 260,
-    "total_gbp": 260,
-    "conf": 0.5,
-    "evidence": [
-     "S39"
-    ],
-    "rule": "R-METERING"
-   },
-   {
-    "line": 31,
-    "part": "METER-Instantaneous Overcurrent Relay",
-    "description": "Panel meter (Instantaneous Overcurrent Relay)",
-    "qty": 1,
-    "unit_gbp": 260,
-    "total_gbp": 260,
-    "conf": 0.93,
-    "evidence": [
-     "S43",
-     "T79"
-    ],
-    "rule": "R-METERING"
-   },
-   {
-    "line": 32,
-    "part": "METER-51",
-    "description": "Panel meter (51)",
-    "qty": 1,
-    "unit_gbp": 260,
-    "total_gbp": 260,
-    "conf": 1.0,
-    "evidence": [
-     "S53",
-     "T80"
-    ],
-    "rule": "R-METERING"
-   },
-   {
-    "line": 33,
-    "part": "METER-27 | Synch. Check Relay",
-    "description": "Panel meter (27 | Synch. Check Relay)",
-    "qty": 1,
-    "unit_gbp": 260,
-    "total_gbp": 260,
-    "conf": 0.97,
-    "evidence": [
-     "S55",
-     "T91",
-     "T87"
-    ],
-    "rule": "R-METERING"
-   },
-   {
-    "line": 34,
-    "part": "METER-87 | Lockout Relay",
-    "description": "Panel meter (87 | Lockout Relay)",
-    "qty": 1,
-    "unit_gbp": 260,
-    "total_gbp": 260,
-    "conf": 0.99,
-    "evidence": [
-     "S56",
-     "T92",
-     "T89"
-    ],
-    "rule": "R-METERING"
-   },
-   {
-    "line": 35,
     "part": "CT-SET",
     "description": "Current transformers, set of three, class 1",
     "qty": 1,
     "unit_gbp": 280,
     "total_gbp": 280,
-    "conf": 0.38,
+    "conf": 0.43,
     "evidence": [
-     "S59"
+     "S23"
     ],
     "rule": "R-METERING"
    },
    {
-    "line": 36,
+    "line": 12,
+    "part": "METER-MF",
+    "description": "Panel meter (multifunction)",
+    "qty": 1,
+    "unit_gbp": 260,
+    "total_gbp": 260,
+    "conf": 0.97,
+    "evidence": [
+     "S24",
+     "T50",
+     "T51"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 13,
+    "part": "METER-MF",
+    "description": "Panel meter (multifunction)",
+    "qty": 1,
+    "unit_gbp": 260,
+    "total_gbp": 260,
+    "conf": 0.59,
+    "evidence": [
+     "S26",
+     "T54",
+     "S26g1",
+     "T55",
+     "T62",
+     "T63",
+     "T74",
+     "T75",
+     "T79",
+     "T81",
+     "T85",
+     "T89",
+     "T93"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 14,
+    "part": "ACB-1600-4P-N",
+    "description": "Air circuit breaker 1600 A 4-pole, None kA band N, withdrawable, electronic trip",
+    "qty": 1,
+    "unit_gbp": 5124.0,
+    "total_gbp": 5124.0,
+    "conf": 0.87,
+    "evidence": [
+     "S28",
+     "T64"
+    ],
+    "rule": "R-ACB-SELECT"
+   },
+   {
+    "line": 15,
+    "part": "FU-KIT-ACB",
+    "description": "Incomer functional unit: compartment, shutters, terminals, controls",
+    "qty": 1,
+    "unit_gbp": 1400,
+    "total_gbp": 1400,
+    "conf": 0.87,
+    "evidence": [
+     "S28",
+     "T64"
+    ],
+    "rule": "R-FU-KIT"
+   },
+   {
+    "line": 16,
+    "part": "ACB-1600-4P-N",
+    "description": "Air circuit breaker 1600 A 4-pole, None kA band N, withdrawable, electronic trip",
+    "qty": 1,
+    "unit_gbp": 5124.0,
+    "total_gbp": 5124.0,
+    "conf": 0.97,
+    "evidence": [
+     "S29",
+     "T58",
+     "T67"
+    ],
+    "rule": "R-ACB-SELECT"
+   },
+   {
+    "line": 17,
+    "part": "FU-KIT-ACB",
+    "description": "Incomer functional unit: compartment, shutters, terminals, controls",
+    "qty": 1,
+    "unit_gbp": 1400,
+    "total_gbp": 1400,
+    "conf": 0.97,
+    "evidence": [
+     "S29",
+     "T58",
+     "T67"
+    ],
+    "rule": "R-FU-KIT"
+   },
+   {
+    "line": 18,
+    "part": "ACB-1600-4P-N",
+    "description": "Air circuit breaker 1600 A 4-pole, None kA band N, withdrawable, electronic trip",
+    "qty": 1,
+    "unit_gbp": 5124.0,
+    "total_gbp": 5124.0,
+    "conf": 0.87,
+    "evidence": [
+     "S30",
+     "T59",
+     "T71"
+    ],
+    "rule": "R-ACB-SELECT"
+   },
+   {
+    "line": 19,
+    "part": "FU-KIT-ACB",
+    "description": "Incomer functional unit: compartment, shutters, terminals, controls",
+    "qty": 1,
+    "unit_gbp": 1400,
+    "total_gbp": 1400,
+    "conf": 0.87,
+    "evidence": [
+     "S30",
+     "T59",
+     "T71"
+    ],
+    "rule": "R-FU-KIT"
+   },
+   {
+    "line": 20,
+    "part": "METER-MF",
+    "description": "Panel meter (multifunction)",
+    "qty": 1,
+    "unit_gbp": 260,
+    "total_gbp": 260,
+    "conf": 0.63,
+    "evidence": [
+     "S32",
+     "T76"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 21,
+    "part": "ACB-1600-4P-N",
+    "description": "Air circuit breaker 1600 A 4-pole, None kA band N, withdrawable, electronic trip",
+    "qty": 1,
+    "unit_gbp": 5124.0,
+    "total_gbp": 5124.0,
+    "conf": 0.99,
+    "evidence": [
+     "S37",
+     "T69"
+    ],
+    "rule": "R-ACB-SELECT"
+   },
+   {
+    "line": 22,
+    "part": "FU-KIT-ACB",
+    "description": "Incomer functional unit: compartment, shutters, terminals, controls",
+    "qty": 1,
+    "unit_gbp": 1400,
+    "total_gbp": 1400,
+    "conf": 0.99,
+    "evidence": [
+     "S37",
+     "T69"
+    ],
+    "rule": "R-FU-KIT"
+   },
+   {
+    "line": 23,
+    "part": "METER-MF",
+    "description": "Panel meter (multifunction)",
+    "qty": 1,
+    "unit_gbp": 260,
+    "total_gbp": 260,
+    "conf": 0.98,
+    "evidence": [
+     "S40",
+     "T78",
+     "T80"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 24,
+    "part": "METER-MF",
+    "description": "Panel meter (multifunction)",
+    "qty": 1,
+    "unit_gbp": 260,
+    "total_gbp": 260,
+    "conf": 1.0,
+    "evidence": [
+     "S42",
+     "T84",
+     "T88"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 25,
+    "part": "METER-MF",
+    "description": "Panel meter (multifunction)",
+    "qty": 1,
+    "unit_gbp": 260,
+    "total_gbp": 260,
+    "conf": 0.97,
+    "evidence": [
+     "S43",
+     "T87",
+     "T86",
+     "T90"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 26,
     "part": "BUSBAR-CU-1600",
     "description": "Copper busbar set 1600 A (4-bar), 5 sections, about 144 kg",
     "qty": 1,
@@ -1687,7 +1322,7 @@
     "rule": "R-BUSBAR-SIZE"
    },
    {
-    "line": 37,
+    "line": 27,
     "part": "ENC-SECTION",
     "description": "Enclosure section, Form 4 Type 6, IP31, RAL 7035",
     "qty": 5,
@@ -1698,18 +1333,18 @@
     "rule": "R-ENCLOSURE"
    },
    {
-    "line": 38,
+    "line": 28,
     "part": "LAB-ASSY",
-    "description": "Assembly, wiring and routine verification: 343 hours",
+    "description": "Assembly, wiring and routine verification: 392 hours",
     "qty": 1,
-    "unit_gbp": 16464,
-    "total_gbp": 16464,
+    "unit_gbp": 18816,
+    "total_gbp": 18816,
     "conf": 0.9,
     "evidence": [],
     "rule": "R-LABOUR"
    },
    {
-    "line": 39,
+    "line": 29,
     "part": "DOC",
     "description": "Documentation, as-built drawings, test certificates",
     "qty": 1,
@@ -1720,7 +1355,7 @@
     "rule": "R-DOC"
    },
    {
-    "line": 40,
+    "line": 30,
     "part": "DEL",
     "description": "Delivery to site, crane and offload excluded",
     "qty": 1,
@@ -1731,9 +1366,9 @@
     "rule": "R-DELIVERY"
    }
   ],
-  "subtotal_gbp": 76388.8,
-  "margin_gbp": 11458.32,
-  "total_gbp": 87847.12
+  "subtotal_gbp": 76092.0,
+  "margin_gbp": 11413.8,
+  "total_gbp": 87505.8
  },
  "issues": [
   {
@@ -1744,25 +1379,72 @@
   },
   {
    "kind": "missing",
-   "what": "D9 (ACB): rating not read",
+   "what": "D10 (ACB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S9"
+    "S10",
+    "T20",
+    "T22",
+    "T26",
+    "T30",
+    "T33"
    ]
   },
   {
    "kind": "missing",
-   "what": "D14 (FUSE_SWITCH): rating not read",
+   "what": "D11 (ACB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S14",
+    "S11",
+    "T19",
+    "T21",
+    "T25",
+    "T29"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D12 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S12",
+    "T24",
+    "T31",
+    "T34",
     "T36",
     "T45"
    ]
   },
   {
    "kind": "missing",
-   "what": "D22 (FUSE_SWITCH): rating not read",
+   "what": "D13 (CAPACITOR): kVAr not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S13",
+    "T37",
+    "T46"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D14 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S14"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D20 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S20",
+    "T48"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D22 (CAPACITOR): kVAr not read",
    "action": "read from drawing / schedule",
    "evidence": [
     "S22"
@@ -1770,74 +1452,80 @@
   },
   {
    "kind": "missing",
-   "what": "D40 (ACB): rating not read",
+   "what": "D25 (CONTACTOR): kW not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S40"
+    "S25"
    ]
   },
   {
    "kind": "missing",
-   "what": "D45 (ACB): rating not read",
+   "what": "D33 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S45"
+    "S33"
    ]
   },
   {
    "kind": "missing",
-   "what": "D46 (FUSE_SWITCH): rating not read",
+   "what": "D34 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S46"
+    "S34",
+    "T82"
    ]
   },
   {
    "kind": "missing",
-   "what": "D47 (FUSE_SWITCH): rating not read",
+   "what": "D35 (ACB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S47"
+    "S35"
    ]
   },
   {
    "kind": "missing",
-   "what": "D48 (ACB): rating not read",
+   "what": "D36 (ACB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S48"
+    "S36",
+    "T83"
    ]
   },
   {
    "kind": "missing",
-   "what": "D49 (CONTACTOR): kW not read",
+   "what": "D38 (ACB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S49"
+    "S38",
+    "T77"
    ]
   },
   {
    "kind": "missing",
-   "what": "D50 (ACB): rating not read",
+   "what": "D39 (ACB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S50"
+    "S39"
    ]
   },
   {
    "kind": "missing",
-   "what": "D51 (CAPACITOR): kVAr not read",
+   "what": "D41 (CONTACTOR): kW not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S51"
+    "S41"
    ]
   },
   {
    "kind": "missing",
-   "what": "D52 (ACB): rating not read",
+   "what": "D46 (CONTACTOR): kW not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S52"
+    "S46",
+    "T94",
+    "T95",
+    "T96"
    ]
   },
   {
@@ -1848,40 +1536,23 @@
   },
   {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D1, D5, D6, D7, D8, D9, D10, D11, D13, D16, D17, D18, D19, D21, D22, D23, D24, D25, D27, D39, D40, D45, D46, D47, D48, D49, D50, D51, D52, D54, D59",
+   "what": "devices read with low confidence: D4, D8, D9, D14, D15, D21, D22, D23, D25, D26, D33, D35, D39, D41",
    "action": "check against the drawing",
    "evidence": [
-    "D1",
-    "D5",
-    "D6",
-    "D7",
+    "D4",
     "D8",
     "D9",
-    "D10",
-    "D11",
-    "D13",
-    "D16",
-    "D17",
-    "D18",
-    "D19",
+    "D14",
+    "D15",
     "D21",
     "D22",
     "D23",
-    "D24",
     "D25",
-    "D27",
+    "D26",
+    "D33",
+    "D35",
     "D39",
-    "D40",
-    "D45",
-    "D46",
-    "D47",
-    "D48",
-    "D49",
-    "D50",
-    "D51",
-    "D52",
-    "D54",
-    "D59"
+    "D41"
    ]
   }
  ],
@@ -1889,14 +1560,14 @@
  "spec": null,
  "score": null,
  "timing": {
-  "total": 21.27,
-  "ocr": 8.3,
-  "detector": 12.02
+  "total": 14.51,
+  "ocr": 6.52,
+  "detector": 7.11
  },
  "reader": "trained",
  "engine": "rapidocr",
  "model": {
-  "weights": "weights/rtdetr_r18_full",
+  "weights": "weights/rtdetr_r18_plain_ema_fix_pass4",
   "threshold": 0.11
  },
  "files": {

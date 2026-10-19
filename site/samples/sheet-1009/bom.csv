@@ -1,17 +1,24 @@
 line,part,description,qty,unit_gbp,total_gbp,conf,rule,evidence
-1,METER-CT 2500/5A,Panel meter (CT 2500/5A),1,260,260,1.0,R-METERING,S3 T10
-2,METER-CT 2500/5A | BUSBAR A 2500 A Cu 50 kA/1s,Panel meter (CT 2500/5A | BUSBAR A 2500 A Cu 50 kA/1s),1,260,260,1.0,R-METERING,S4 T9 T11
-3,CT-SET,"Current transformers, set of three, class 1",1,280,280,0.5,R-METERING,S5
-4,CT-SET,"Current transformers, set of three, class 1",1,280,280,0.5,R-METERING,S6
-5,BSS-2500-3P,"Bus-section switch 2500 A 3-pole, 50 kA",1,4100.0,4100.0,0.75,R-BUS-SECTION,S7 T13 T12
-6,FU-KIT-BS,Bus-section functional unit and interlocking,1,900,900,0.75,R-FU-KIT,S7 T13 T12
-7,SPD-T12,"Surge protective device, Type 1+2, with status indication",1,690,690,0.75,R-SPD,S9 T20 T21
-8,MCCB-250-3P-N,"Moulded-case circuit breaker 250 A 3-pole, 50 kA band N, adjustable trip; feeds spare",1,520.0,520.0,0.97,R-MCCB-SELECT,S12 T16 T19
-9,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.97,R-FU-KIT,S12 T16 T19
-10,BUSBAR-CU-2500,"Copper busbar set 2500 A (4-bar), 2 sections, about 91 kg",1,1048.8,1048.8,0.9,R-BUSBAR-SIZE,T12 T12
-11,ENC-SECTION,"Enclosure section, Form 4 Type 7, IP41, RAL 7035",2,3802.76,7605.52,0.95,R-ENCLOSURE,T23 T23 T25 T27
-12,LAB-ASSY,"Assembly, wiring and routine verification: 81 hours",1,3888,3888,0.9,R-LABOUR,
-13,DOC,"Documentation, as-built drawings, test certificates",1,600,600,1.0,R-DOC,
-14,CERT,Design-verification certificates per specification,1,0.0,0.0,1.0,R-SPEC-CERT,7.7
-15,WITNESS,Witness testing at works (specification),1,1200,1200,1.0,R-SPEC-WITNESS,7.8
-16,DEL,"Delivery to site, crane and offload excluded",1,850,850,1.0,R-DELIVERY,
+1,ACB-2500-3P-N,"Air circuit breaker 2500 A 3-pole, 50 kA band N, withdrawable, electronic trip",1,5600.0,5600.0,0.99,R-ACB-SELECT,S3 T6 T8
+2,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.99,R-FU-KIT,S3 T6 T8
+3,ACB-2500-3P-N,"Air circuit breaker 2500 A 3-pole, 50 kA band N, withdrawable, electronic trip",1,5600.0,5600.0,1.0,R-ACB-SELECT,S4 T7
+4,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,1.0,R-FU-KIT,S4 T7
+5,ATS-CTRL,Automatic transfer switch controller and interlocks,1,1850,1850,1.0,R-ATS,S4 T7
+6,METER-A,Panel meter (A),1,120,120,1.0,R-METERING,S5 S5g1
+7,METER-kWh,Panel meter (kWh),1,340,340,0.99,R-METERING,S6 S6g1
+8,CT-SET,"Current transformers 2500/5 A, set of three, class 1",1,280,280,1.0,R-METERING,S7 T9
+9,CT-SET,"Current transformers 2500/5 A, set of three, class 1",1,280,280,1.0,R-METERING,S8 T10
+10,BSS-2500-3P,"Bus-section switch 2500 A 3-pole, 50 kA",1,4100.0,4100.0,0.99,R-BUS-SECTION,S9 T13
+11,FU-KIT-BS,Bus-section functional unit and interlocking,1,900,900,0.99,R-FU-KIT,S9 T13
+12,MCCB-100-4P-N,"Moulded-case circuit breaker 100 A 4-pole, 50 kA band N, adjustable trip",1,378.2,378.2,1.0,R-MCCB-SELECT,S10 T20
+13,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,1.0,R-FU-KIT,S10 T20
+14,SPD-T12,"Surge protective device, Type 1+2, with status indication",1,690,690,1.0,R-SPD,S11 T21
+15,MCCB-250-3P-N,"Moulded-case circuit breaker 250 A 3-pole, 50 kA band N, adjustable trip",1,520.0,520.0,0.97,R-MCCB-SELECT,S14 T16
+16,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.97,R-FU-KIT,S14 T16
+17,BUSBAR-CU-2500,"Copper busbar set 2500 A (4-bar), 4 sections, about 182 kg",1,2097.6,2097.6,0.9,R-BUSBAR-SIZE,T12 T12
+18,ENC-SECTION,"Enclosure section, Form 4 Type 7, IP41, RAL 7035",4,3802.76,15211.04,0.95,R-ENCLOSURE,T23 T23 T25 T27
+19,LAB-ASSY,"Assembly, wiring and routine verification: 155 hours",1,7440,7440,0.9,R-LABOUR,
+20,DOC,"Documentation, as-built drawings, test certificates",1,600,600,1.0,R-DOC,
+21,CERT,Design-verification certificates per specification,1,0.0,0.0,1.0,R-SPEC-CERT,7.7
+22,WITNESS,Witness testing at works (specification),1,1200,1200,1.0,R-SPEC-WITNESS,7.8
+23,DEL,"Delivery to site, crane and offload excluded",1,850,850,1.0,R-DELIVERY,

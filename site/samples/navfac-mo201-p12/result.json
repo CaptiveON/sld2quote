@@ -22,22 +22,22 @@
    "key": "text",
    "title": "Read the words",
    "count": 16,
-   "seconds": 2.03,
-   "plain": "Read 16 pieces of text in 2.03 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 1.96,
+   "plain": "Read 16 pieces of text in 1.96 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
-   "count": 16,
-   "seconds": 1.8,
-   "plain": "Found 16 symbols in 1.8 s: 9 power-factor correction banks, 5 fuse switches, 1 incoming air circuit breaker, 1 protection relay. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "count": 23,
+   "seconds": 1.24,
+   "plain": "Found 23 symbols in 1.24 s: 11 outgoing moulded-case breakers, 3 current transformers, 3 power-factor correction banks, 2 protection relays, 1 panel meter, 1 motor starter, 1 fuse switch, 1 motor. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
-   "count": 0,
+   "count": 6,
    "seconds": 0.09,
-   "plain": "Paired 0 of 16 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
+   "plain": "Paired 6 of 23 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
    "key": "spec",
@@ -49,33 +49,185 @@
   {
    "key": "price",
    "title": "Pick parts and price",
-   "count": 6,
+   "count": 11,
    "seconds": 0.0,
-   "plain": "Chose 6 catalogue lines and priced the board at \u00a313,486 (illustrative prices, 15% margin included); 18 items flagged for the estimator. Every line names the symbol, text or clause it rests on, so a reviewer can check it on the drawing."
+   "plain": "Chose 11 catalogue lines and priced the board at \u00a316,839 (illustrative prices, 15% margin included); 19 items flagged for the estimator. Every line names the symbol, text or clause it rests on, so a reviewer can check it on the drawing."
   }
  ],
  "devices": [
   {
    "id": "D1",
-   "type": "ACB",
-   "type_plain": "incoming air circuit breaker",
+   "type": "METER",
+   "type_plain": "panel meter",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.48,
+   "score": 0.17,
+   "box": [
+    506,
+    72,
+    20,
+    18
+   ],
+   "label": ""
+  },
+  {
+   "id": "D2",
+   "type": "CT",
+   "type_plain": "current transformer",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.43,
+   "score": 0.13,
+   "box": [
+    484,
+    207,
+    53,
+    21
+   ],
+   "label": ""
+  },
+  {
+   "id": "D3",
+   "type": "CT",
+   "type_plain": "current transformer",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.43,
+   "score": 0.14,
+   "box": [
+    520,
+    208,
+    23,
+    19
+   ],
+   "label": ""
+  },
+  {
+   "id": "D4",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "TRANSMISSION",
+   "conf": 0.97,
+   "score": 0.18,
+   "box": [
+    634,
+    209,
+    21,
+    19
+   ],
+   "label": "TRANSMISSION | LINE"
+  },
+  {
+   "id": "D5",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "SUBSTATION B",
+   "conf": 0.98,
+   "score": 0.38,
+   "box": [
+    719,
+    265,
+    20,
+    21
+   ],
+   "label": "SUBSTATION B"
+  },
+  {
+   "id": "D6",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
    "rating": null,
    "unit": "A",
    "poles": null,
    "kA": null,
    "dest": "",
    "conf": 0.5,
-   "score": 0.34,
+   "score": 0.37,
    "box": [
-    634,
-    209,
-    22,
-    19
+    457,
+    490,
+    25,
+    15
    ],
    "label": ""
   },
   {
-   "id": "D2",
+   "id": "D7",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "DISTRIBUTION",
+   "conf": 0.98,
+   "score": 0.47,
+   "box": [
+    560,
+    498,
+    20,
+    19
+   ],
+   "label": "DISTRIBUTION | TRANSFORMER"
+  },
+  {
+   "id": "D8",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "FROM",
+   "conf": 0.87,
+   "score": 0.14,
+   "box": [
+    459,
+    511,
+    99,
+    17
+   ],
+   "label": "FROM | GENERATING STATION"
+  },
+  {
+   "id": "D9",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "SECONDARY",
+   "conf": 0.87,
+   "score": 0.15,
+   "box": [
+    278,
+    520,
+    44,
+    11
+   ],
+   "label": "SECONDARY | BUS"
+  },
+  {
+   "id": "D10",
    "type": "RELAY",
    "type_plain": "protection relay",
    "rating": null,
@@ -84,171 +236,38 @@
    "kA": null,
    "dest": "",
    "conf": 0.49,
-   "score": 0.26,
+   "score": 0.2,
    "box": [
     151,
     539,
     17,
-    19
-   ],
-   "label": ""
-  },
-  {
-   "id": "D3",
-   "type": "CAPACITOR",
-   "type_plain": "power-factor correction bank",
-   "rating": null,
-   "unit": "kVAr",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.5,
-   "score": 0.27,
-   "box": [
-    248,
-    578,
-    48,
-    8
-   ],
-   "label": ""
-  },
-  {
-   "id": "D4",
-   "type": "CAPACITOR",
-   "type_plain": "power-factor correction bank",
-   "rating": null,
-   "unit": "kVAr",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.5,
-   "score": 0.26,
-   "box": [
-    338,
-    578,
-    47,
-    8
-   ],
-   "label": ""
-  },
-  {
-   "id": "D5",
-   "type": "CAPACITOR",
-   "type_plain": "power-factor correction bank",
-   "rating": null,
-   "unit": "kVAr",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.47,
-   "score": 0.16,
-   "box": [
-    543,
-    579,
-    43,
-    8
-   ],
-   "label": ""
-  },
-  {
-   "id": "D6",
-   "type": "CAPACITOR",
-   "type_plain": "power-factor correction bank",
-   "rating": null,
-   "unit": "kVAr",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.49,
-   "score": 0.23,
-   "box": [
-    604,
-    579,
-    47,
-    8
-   ],
-   "label": ""
-  },
-  {
-   "id": "D7",
-   "type": "FUSE_SWITCH",
-   "type_plain": "fuse switch",
-   "rating": null,
-   "unit": "A",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.49,
-   "score": 0.21,
-   "box": [
-    372,
-    678,
-    16,
-    38
-   ],
-   "label": ""
-  },
-  {
-   "id": "D8",
-   "type": "FUSE_SWITCH",
-   "type_plain": "fuse switch",
-   "rating": null,
-   "unit": "A",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.49,
-   "score": 0.26,
-   "box": [
-    572,
-    679,
-    14,
-    37
-   ],
-   "label": ""
-  },
-  {
-   "id": "D9",
-   "type": "FUSE_SWITCH",
-   "type_plain": "fuse switch",
-   "rating": null,
-   "unit": "A",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.47,
-   "score": 0.17,
-   "box": [
-    755,
-    680,
-    16,
-    36
-   ],
-   "label": ""
-  },
-  {
-   "id": "D10",
-   "type": "FUSE_SWITCH",
-   "type_plain": "fuse switch",
-   "rating": null,
-   "unit": "A",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.49,
-   "score": 0.24,
-   "box": [
-    664,
-    681,
-    15,
-    35
+    20
    ],
    "label": ""
   },
   {
    "id": "D11",
-   "type": "FUSE_SWITCH",
-   "type_plain": "fuse switch",
+   "type": "CAPACITOR",
+   "type_plain": "power-factor correction bank",
+   "rating": null,
+   "unit": "kVAr",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.48,
+   "score": 0.17,
+   "box": [
+    846,
+    575,
+    122,
+    15
+   ],
+   "label": ""
+  },
+  {
+   "id": "D12",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
    "rating": null,
    "unit": "A",
    "poles": null,
@@ -257,29 +276,10 @@
    "conf": 0.5,
    "score": 0.36,
    "box": [
-    848,
-    681,
-    15,
-    37
-   ],
-   "label": ""
-  },
-  {
-   "id": "D12",
-   "type": "CAPACITOR",
-   "type_plain": "power-factor correction bank",
-   "rating": null,
-   "unit": "kVAr",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.38,
-   "score": 0.13,
-   "box": [
-    107,
-    896,
-    45,
-    8
+    53,
+    577,
+    55,
+    16
    ],
    "label": ""
   },
@@ -292,56 +292,170 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.47,
-   "score": 0.16,
+   "conf": 0.5,
+   "score": 0.38,
    "box": [
-    288,
-    897,
-    45,
-    7
+    473,
+    577,
+    48,
+    11
    ],
    "label": ""
   },
   {
    "id": "D14",
-   "type": "CAPACITOR",
-   "type_plain": "power-factor correction bank",
+   "type": "CONTACTOR",
+   "type_plain": "motor starter",
    "rating": null,
-   "unit": "kVAr",
+   "unit": "kW",
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.38,
-   "score": 0.15,
+   "conf": 0.43,
+   "score": 0.14,
    "box": [
-    591,
-    897,
-    47,
-    9
+    50,
+    645,
+    9,
+    35
    ],
    "label": ""
   },
   {
    "id": "D15",
-   "type": "CAPACITOR",
-   "type_plain": "power-factor correction bank",
+   "type": "FUSE_SWITCH",
+   "type_plain": "fuse switch",
    "rating": null,
-   "unit": "kVAr",
+   "unit": "A",
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.47,
-   "score": 0.16,
+   "conf": 0.49,
+   "score": 0.23,
    "box": [
-    658,
-    897,
-    45,
-    9
+    190,
+    678,
+    15,
+    38
    ],
    "label": ""
   },
   {
    "id": "D16",
+   "type": "MOTOR",
+   "type_plain": "motor",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.49,
+   "score": 0.23,
+   "box": [
+    465,
+    678,
+    15,
+    38
+   ],
+   "label": ""
+  },
+  {
+   "id": "D17",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.5,
+   "score": 0.33,
+   "box": [
+    755,
+    680,
+    15,
+    36
+   ],
+   "label": ""
+  },
+  {
+   "id": "D18",
+   "type": "CT",
+   "type_plain": "current transformer",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.43,
+   "score": 0.12,
+   "box": [
+    664,
+    681,
+    14,
+    35
+   ],
+   "label": ""
+  },
+  {
+   "id": "D19",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.5,
+   "score": 0.27,
+   "box": [
+    848,
+    683,
+    46,
+    33
+   ],
+   "label": ""
+  },
+  {
+   "id": "D20",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.43,
+   "score": 0.16,
+   "box": [
+    875,
+    688,
+    20,
+    20
+   ],
+   "label": ""
+  },
+  {
+   "id": "D21",
+   "type": "RELAY",
+   "type_plain": "protection relay",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.43,
+   "score": 0.14,
+   "box": [
+    1063,
+    715,
+    16,
+    18
+   ],
+   "label": ""
+  },
+  {
+   "id": "D22",
    "type": "CAPACITOR",
    "type_plain": "power-factor correction bank",
    "rating": null,
@@ -349,15 +463,34 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.48,
-   "score": 0.2,
+   "conf": 0.49,
+   "score": 0.23,
    "box": [
-    845,
-    898,
-    51,
-    9
+    718,
+    897,
+    104,
+    12
    ],
    "label": ""
+  },
+  {
+   "id": "D23",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "UTILIZATION EQUIPMENT",
+   "conf": 0.87,
+   "score": 0.12,
+   "box": [
+    541,
+    946,
+    38,
+    28
+   ],
+   "label": "UTILIZATION EQUIPMENT"
   }
  ],
  "board": {
@@ -365,7 +498,7 @@
   "form": "Form 4 Type 6",
   "ip": "IP31",
   "poles_default": 4,
-  "busbar_rating": 0,
+  "busbar_rating": 2500,
   "sections": 1,
   "ways": 0
  },
@@ -373,6 +506,45 @@
   "lines": [
    {
     "line": 1,
+    "part": "METER-MF",
+    "description": "Panel meter (multifunction)",
+    "qty": 1,
+    "unit_gbp": 260,
+    "total_gbp": 260,
+    "conf": 0.48,
+    "evidence": [
+     "S1"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 2,
+    "part": "CT-SET",
+    "description": "Current transformers, set of three, class 1",
+    "qty": 1,
+    "unit_gbp": 280,
+    "total_gbp": 280,
+    "conf": 0.43,
+    "evidence": [
+     "S2"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 3,
+    "part": "CT-SET",
+    "description": "Current transformers, set of three, class 1",
+    "qty": 1,
+    "unit_gbp": 280,
+    "total_gbp": 280,
+    "conf": 0.43,
+    "evidence": [
+     "S3"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 4,
     "part": "RELAY-OC",
     "description": "Overcurrent and earth-fault protection relay",
     "qty": 1,
@@ -380,23 +552,49 @@
     "total_gbp": 950,
     "conf": 0.49,
     "evidence": [
-     "S2"
+     "S10"
     ],
     "rule": "R-PROTECTION"
    },
    {
-    "line": 2,
-    "part": "BUSBAR-CU-1600",
-    "description": "Copper busbar set 1600 A (4-bar), 1 sections, about 29 kg",
+    "line": 5,
+    "part": "CT-SET",
+    "description": "Current transformers, set of three, class 1",
     "qty": 1,
-    "unit_gbp": 331.2,
-    "total_gbp": 331.2,
+    "unit_gbp": 280,
+    "total_gbp": 280,
+    "conf": 0.43,
+    "evidence": [
+     "S18"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 6,
+    "part": "RELAY-OC",
+    "description": "Overcurrent and earth-fault protection relay",
+    "qty": 1,
+    "unit_gbp": 950,
+    "total_gbp": 950,
+    "conf": 0.43,
+    "evidence": [
+     "S21"
+    ],
+    "rule": "R-PROTECTION"
+   },
+   {
+    "line": 7,
+    "part": "BUSBAR-CU-2500",
+    "description": "Copper busbar set 2500 A (4-bar), 1 sections, about 46 kg",
+    "qty": 1,
+    "unit_gbp": 524.4,
+    "total_gbp": 524.4,
     "conf": 0.9,
     "evidence": [],
     "rule": "R-BUSBAR-SIZE"
    },
    {
-    "line": 3,
+    "line": 8,
     "part": "ENC-SECTION",
     "description": "Enclosure section, Form 4 Type 6, IP31, RAL 7035",
     "qty": 1,
@@ -407,18 +605,18 @@
     "rule": "R-ENCLOSURE"
    },
    {
-    "line": 4,
+    "line": 9,
     "part": "LAB-ASSY",
-    "description": "Assembly, wiring and routine verification: 117 hours",
+    "description": "Assembly, wiring and routine verification: 131 hours",
     "qty": 1,
-    "unit_gbp": 5616,
-    "total_gbp": 5616,
+    "unit_gbp": 6288,
+    "total_gbp": 6288,
     "conf": 0.9,
     "evidence": [],
     "rule": "R-LABOUR"
    },
    {
-    "line": 5,
+    "line": 10,
     "part": "DOC",
     "description": "Documentation, as-built drawings, test certificates",
     "qty": 1,
@@ -429,7 +627,7 @@
     "rule": "R-DOC"
    },
    {
-    "line": 6,
+    "line": 11,
     "part": "DEL",
     "description": "Delivery to site, crane and offload excluded",
     "qty": 1,
@@ -440,9 +638,9 @@
     "rule": "R-DELIVERY"
    }
   ],
-  "subtotal_gbp": 11727.2,
-  "margin_gbp": 1759.08,
-  "total_gbp": 13486.28
+  "subtotal_gbp": 14642.4,
+  "margin_gbp": 2196.36,
+  "total_gbp": 16838.76
  },
  "issues": [
   {
@@ -453,39 +651,26 @@
   },
   {
    "kind": "missing",
-   "what": "D1 (ACB): rating not read",
+   "what": "D4 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S1"
+    "S4",
+    "T4",
+    "T5"
    ]
   },
   {
    "kind": "missing",
-   "what": "D3 (CAPACITOR): kVAr not read",
+   "what": "D5 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S3"
+    "S5",
+    "T6"
    ]
   },
   {
    "kind": "missing",
-   "what": "D4 (CAPACITOR): kVAr not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S4"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D5 (CAPACITOR): kVAr not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S5"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D6 (CAPACITOR): kVAr not read",
+   "what": "D6 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
     "S6"
@@ -493,39 +678,37 @@
   },
   {
    "kind": "missing",
-   "what": "D7 (FUSE_SWITCH): rating not read",
+   "what": "D7 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S7"
+    "S7",
+    "T8",
+    "T11"
    ]
   },
   {
    "kind": "missing",
-   "what": "D8 (FUSE_SWITCH): rating not read",
+   "what": "D8 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S8"
+    "S8",
+    "T1",
+    "T2"
    ]
   },
   {
    "kind": "missing",
-   "what": "D9 (FUSE_SWITCH): rating not read",
+   "what": "D9 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S9"
+    "S9",
+    "T9",
+    "T12"
    ]
   },
   {
    "kind": "missing",
-   "what": "D10 (FUSE_SWITCH): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S10"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D11 (FUSE_SWITCH): rating not read",
+   "what": "D11 (CAPACITOR): kVAr not read",
    "action": "read from drawing / schedule",
    "evidence": [
     "S11"
@@ -533,7 +716,7 @@
   },
   {
    "kind": "missing",
-   "what": "D12 (CAPACITOR): kVAr not read",
+   "what": "D12 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
     "S12"
@@ -549,7 +732,7 @@
   },
   {
    "kind": "missing",
-   "what": "D14 (CAPACITOR): kVAr not read",
+   "what": "D14 (CONTACTOR): kW not read",
    "action": "read from drawing / schedule",
    "evidence": [
     "S14"
@@ -557,7 +740,7 @@
   },
   {
    "kind": "missing",
-   "what": "D15 (CAPACITOR): kVAr not read",
+   "what": "D15 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
     "S15"
@@ -565,39 +748,73 @@
   },
   {
    "kind": "missing",
-   "what": "D16 (CAPACITOR): kVAr not read",
+   "what": "D17 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S16"
+    "S17"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D19 (MCCB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S19"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D20 (MCCB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S20"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D22 (CAPACITOR): kVAr not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S22"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D23 (MCCB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S23",
+    "T16"
    ]
   },
   {
    "kind": "assumed",
-   "what": "busbar rating not read; assumed 0 A from the largest incomer",
+   "what": "busbar rating not read; assumed 2500 A from the largest incomer",
    "action": "confirm",
    "evidence": []
   },
   {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15, D16",
+   "what": "devices read with low confidence: D1, D2, D3, D6, D10, D11, D12, D13, D14, D15, D16, D17, D18, D19, D20, D21, D22",
    "action": "check against the drawing",
    "evidence": [
     "D1",
     "D2",
     "D3",
-    "D4",
-    "D5",
     "D6",
-    "D7",
-    "D8",
-    "D9",
     "D10",
     "D11",
     "D12",
     "D13",
     "D14",
     "D15",
-    "D16"
+    "D16",
+    "D17",
+    "D18",
+    "D19",
+    "D20",
+    "D21",
+    "D22"
    ]
   }
  ],
@@ -605,14 +822,14 @@
  "spec": null,
  "score": null,
  "timing": {
-  "total": 4.1,
-  "ocr": 2.03,
-  "detector": 1.8
+  "total": 3.47,
+  "ocr": 1.96,
+  "detector": 1.24
  },
  "reader": "trained",
  "engine": "rapidocr",
  "model": {
-  "weights": "weights/rtdetr_r18_full",
+  "weights": "weights/rtdetr_r18_plain_ema_fix_pass4",
   "threshold": 0.11
  },
  "files": {

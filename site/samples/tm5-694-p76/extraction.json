@@ -664,203 +664,227 @@
    "box": [
     382,
     202,
-    66,
-    58
+    65,
+    57
    ],
-   "score": 0.84,
-   "shape_score": 1.0
+   "score": 0.18,
+   "shape_score": 0.97
   },
   {
    "id": "S2",
-   "kind": "earth",
+   "kind": "ct",
    "box": [
-    546,
-    220,
-    23,
-    16
+    1435,
+    351,
+    12,
+    26
    ],
-   "score": 0.17,
-   "shape_score": 0.93
+   "score": 0.12,
+   "shape_score": 0.87
   },
   {
    "id": "S3",
-   "kind": "relay",
+   "kind": "ct",
    "box": [
-    1482,
-    400,
-    15,
-    19
+    718,
+    353,
+    13,
+    22
    ],
-   "score": 0.35,
-   "shape_score": 1.0
+   "score": 0.11,
+   "shape_score": 0.87
   },
   {
    "id": "S4",
-   "kind": "earth",
-   "box": [
-    360,
-    430,
-    34,
-    22
-   ],
-   "score": 0.15,
-   "shape_score": 0.93
-  },
-  {
-   "id": "S5",
-   "kind": "relay",
-   "box": [
-    1474,
-    476,
-    16,
-    20
-   ],
-   "score": 0.21,
-   "shape_score": 0.97
-  },
-  {
-   "id": "S6",
    "kind": "meter",
    "box": [
-    1481,
+    1465,
     569,
-    20,
-    20
-   ],
-   "score": 0.29,
-   "shape_score": 1.0
-  },
-  {
-   "id": "S7",
-   "kind": "meter",
-   "box": [
-    751,
-    572,
     34,
     21
    ],
-   "score": 0.12,
-   "shape_score": 0.75
+   "score": 0.14,
+   "shape_score": 0.87
+  },
+  {
+   "id": "S5",
+   "kind": "ct",
+   "box": [
+    720,
+    571,
+    10,
+    22
+   ],
+   "score": 0.11,
+   "shape_score": 0.87
+  },
+  {
+   "id": "S6",
+   "kind": "board",
+   "box": [
+    1334,
+    596,
+    33,
+    21
+   ],
+   "score": 0.13,
+   "shape_score": 0.87
+  },
+  {
+   "id": "S7",
+   "kind": "ct",
+   "box": [
+    1430,
+    642,
+    10,
+    15
+   ],
+   "score": 0.14,
+   "shape_score": 0.87
   },
   {
    "id": "S8",
-   "kind": "meter",
+   "kind": "ct",
    "box": [
-    1334,
-    597,
-    32,
-    20
+    716,
+    644,
+    11,
+    11
    ],
-   "score": 0.2,
-   "shape_score": 0.97
+   "score": 0.15,
+   "shape_score": 0.87
   },
   {
    "id": "S9",
    "kind": "capacitor",
    "box": [
     206,
-    697,
-    81,
-    16
+    699,
+    70,
+    24
    ],
-   "score": 0.27,
+   "score": 0.26,
    "shape_score": 1.0
   },
   {
    "id": "S10",
    "kind": "capacitor",
    "box": [
-    228,
-    706,
-    38,
-    14
+    208,
+    724,
+    71,
+    20
    ],
-   "score": 0.18,
-   "shape_score": 0.97
+   "score": 0.2,
+   "shape_score": 0.99
   },
   {
    "id": "S11",
-   "kind": "capacitor",
+   "kind": "breaker",
    "box": [
-    203,
-    724,
-    87,
-    26
+    719,
+    730,
+    12,
+    21
    ],
-   "score": 0.29,
-   "shape_score": 1.0
+   "score": 0.12,
+   "shape_score": 0.87
   },
   {
    "id": "S12",
    "kind": "meter",
    "box": [
-    1461,
-    728,
-    35,
+    746,
+    731,
+    34,
     21
    ],
-   "score": 0.16,
-   "shape_score": 0.93
+   "score": 0.17,
+   "shape_score": 0.97
   },
   {
    "id": "S13",
-   "kind": "meter",
+   "kind": "capacitor",
    "box": [
-    746,
-    732,
-    35,
-    20
+    217,
+    738,
+    65,
+    41
    ],
-   "score": 0.14,
-   "shape_score": 0.75
+   "score": 0.18,
+   "shape_score": 0.97
   },
   {
    "id": "S14",
-   "kind": "breaker",
+   "kind": "meter",
    "box": [
-    1183,
-    963,
-    25,
-    39
+    1053,
+    866,
+    17,
+    19
    ],
-   "score": 0.25,
-   "shape_score": 0.98
+   "score": 0.21,
+   "shape_score": 0.99
   },
   {
    "id": "S15",
    "kind": "ct",
    "box": [
-    1916,
+    1919,
     999,
-    14,
-    23
+    11,
+    22
    ],
-   "score": 0.19,
-   "shape_score": 0.97
+   "score": 0.15,
+   "shape_score": 0.87
   },
   {
    "id": "S16",
-   "kind": "earth",
+   "kind": "capacitor",
    "box": [
-    979,
-    1041,
-    28,
-    41
+    1170,
+    1033,
+    55,
+    52
    ],
-   "score": 0.15,
-   "shape_score": 0.93
+   "score": 0.18,
+   "shape_score": 0.97
   },
   {
    "id": "S17",
-   "kind": "relay",
+   "kind": "contactor",
    "box": [
-    1232,
-    1113,
-    15,
-    19
+    1188,
+    1110,
+    22,
+    29
    ],
-   "score": 0.16,
-   "shape_score": 0.93
+   "score": 0.12,
+   "shape_score": 0.87
+  },
+  {
+   "id": "S18",
+   "kind": "breaker",
+   "box": [
+    615,
+    1398,
+    21,
+    22
+   ],
+   "score": 0.13,
+   "shape_score": 0.87
+  },
+  {
+   "id": "S19",
+   "kind": "breaker",
+   "box": [
+    756,
+    1398,
+    14,
+    23
+   ],
+   "score": 0.14,
+   "shape_score": 0.87
   }
  ],
  "devices": [
@@ -869,17 +893,19 @@
    "box": [
     382,
     202,
-    66,
-    58
+    65,
+    57
    ],
    "label_texts": [
-    "T7"
+    "T7",
+    "T11",
+    "T18"
    ],
-   "label": "Generator and Circuit Breaker",
+   "label": "Generator and Circuit Breaker | MODULE 1 | 200 kVA UPS",
    "conf": 0.95,
-   "score": 0.84,
+   "score": 0.18,
    "type": "GENERATOR",
-   "rating": null,
+   "rating": 200,
    "on_bus": "BUS-1",
    "connected": false,
    "id": "D1"
@@ -887,57 +913,65 @@
   {
    "symbol": "S2",
    "box": [
-    546,
-    220,
-    23,
-    16
+    1435,
+    351,
+    12,
+    26
    ],
    "label_texts": [
-    "T5"
+    "T14",
+    "T13",
+    "T15",
+    "T22",
+    "T25"
    ],
-   "label": "200 kW.480V,3 Phase Backup",
-   "conf": 0.92,
-   "score": 0.17,
-   "type": "EARTH",
+   "label": "Incoming | MODULE 2 | Breaker B | Rectifier/Battery | ChargerB",
+   "conf": 0.87,
+   "score": 0.12,
+   "type": "CT",
    "rating": null,
    "on_bus": "BUS-1",
-   "connected": false,
+   "connected": true,
    "id": "D2"
   },
   {
    "symbol": "S3",
    "box": [
-    1482,
-    400,
-    15,
-    19
+    718,
+    353,
+    13,
+    22
    ],
    "label_texts": [
-    "T22",
-    "T25"
+    "T12",
+    "T17",
+    "T21",
+    "T24"
    ],
-   "label": "Rectifier/Battery | ChargerB",
-   "conf": 0.99,
-   "score": 0.35,
-   "type": "RELAY",
+   "label": "Incoming | BreakerA | Rectifier/Battery | Charger A",
+   "conf": 0.87,
+   "score": 0.11,
+   "type": "CT",
    "rating": null,
    "on_bus": "BUS-1",
-   "connected": false,
+   "connected": true,
    "id": "D3"
   },
   {
    "symbol": "S4",
    "box": [
-    360,
-    430,
+    1465,
+    569,
     34,
-    22
+    21
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.47,
-   "score": 0.15,
-   "type": "EARTH",
+   "label_texts": [
+    "T27"
+   ],
+   "label": "CB",
+   "conf": 0.87,
+   "score": 0.14,
+   "type": "METER",
    "rating": null,
    "on_bus": "BUS-1",
    "connected": false,
@@ -946,34 +980,39 @@
   {
    "symbol": "S5",
    "box": [
-    1474,
-    476,
-    16,
-    20
+    720,
+    571,
+    10,
+    22
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.48,
-   "score": 0.21,
-   "type": "RELAY",
+   "label_texts": [
+    "T26",
+    "T28"
+   ],
+   "label": "CB | CBA",
+   "conf": 0.87,
+   "score": 0.11,
+   "type": "CT",
    "rating": null,
    "on_bus": "BUS-1",
-   "connected": false,
+   "connected": true,
    "id": "D5"
   },
   {
    "symbol": "S6",
    "box": [
-    1481,
-    569,
-    20,
-    20
+    1334,
+    596,
+    33,
+    21
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.5,
-   "score": 0.29,
-   "type": "METER",
+   "label_texts": [
+    "T29"
+   ],
+   "label": "CBB",
+   "conf": 0.87,
+   "score": 0.13,
+   "type": "BOARD",
    "rating": null,
    "on_bus": "BUS-1",
    "connected": false,
@@ -982,16 +1021,18 @@
   {
    "symbol": "S7",
    "box": [
-    751,
-    572,
-    34,
-    21
+    1430,
+    642,
+    10,
+    15
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.38,
-   "score": 0.12,
-   "type": "METER",
+   "label_texts": [
+    "T32"
+   ],
+   "label": "CB",
+   "conf": 0.87,
+   "score": 0.14,
+   "type": "CT",
    "rating": null,
    "on_bus": "BUS-1",
    "connected": false,
@@ -1000,16 +1041,16 @@
   {
    "symbol": "S8",
    "box": [
-    1334,
-    597,
-    32,
-    20
+    716,
+    644,
+    11,
+    11
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.48,
-   "score": 0.2,
-   "type": "METER",
+   "conf": 0.43,
+   "score": 0.15,
+   "type": "CT",
    "rating": null,
    "on_bus": "BUS-1",
    "connected": false,
@@ -1019,14 +1060,14 @@
    "symbol": "S9",
    "box": [
     206,
-    697,
-    81,
-    16
+    699,
+    70,
+    24
    ],
    "label_texts": [],
    "label": "",
    "conf": 0.5,
-   "score": 0.27,
+   "score": 0.26,
    "type": "CAPACITOR",
    "rating": null,
    "on_bus": "BUS-1",
@@ -1036,15 +1077,15 @@
   {
    "symbol": "S10",
    "box": [
-    228,
-    706,
-    38,
-    14
+    208,
+    724,
+    71,
+    20
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.48,
-   "score": 0.18,
+   "conf": 0.49,
+   "score": 0.2,
    "type": "CAPACITOR",
    "rating": null,
    "on_bus": "BUS-1",
@@ -1054,35 +1095,40 @@
   {
    "symbol": "S11",
    "box": [
-    203,
-    724,
-    87,
-    26
+    719,
+    730,
+    12,
+    21
    ],
    "label_texts": [
-    "T30"
+    "T9"
    ],
-   "label": "125VDC",
-   "conf": 1.0,
-   "score": 0.29,
-   "type": "CAPACITOR",
-   "rating": null,
+   "label": "300A",
+   "conf": 0.87,
+   "score": 0.12,
+   "type": "ACB",
+   "rating": 300,
+   "poles": null,
+   "kA": null,
    "on_bus": "BUS-1",
-   "connected": false,
+   "connected": true,
    "id": "D11"
   },
   {
    "symbol": "S12",
    "box": [
-    1461,
-    728,
-    35,
+    746,
+    731,
+    34,
     21
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.47,
-   "score": 0.16,
+   "label_texts": [
+    "T31",
+    "T34"
+   ],
+   "label": "CB | Inverter A",
+   "conf": 0.95,
+   "score": 0.17,
    "type": "METER",
    "rating": null,
    "on_bus": "BUS-1",
@@ -1092,39 +1138,38 @@
   {
    "symbol": "S13",
    "box": [
-    746,
-    732,
-    35,
-    20
+    217,
+    738,
+    65,
+    41
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.38,
-   "score": 0.14,
-   "type": "METER",
+   "label_texts": [
+    "T30",
+    "T33"
+   ],
+   "label": "125VDC | Battery",
+   "conf": 0.97,
+   "score": 0.18,
+   "type": "CAPACITOR",
    "rating": null,
    "on_bus": "BUS-1",
-   "connected": false,
+   "connected": true,
    "id": "D13"
   },
   {
    "symbol": "S14",
    "box": [
-    1183,
-    963,
-    25,
-    39
+    1053,
+    866,
+    17,
+    19
    ],
-   "label_texts": [
-    "T38"
-   ],
-   "label": "Static",
-   "conf": 0.98,
-   "score": 0.25,
-   "type": "ACB",
+   "label_texts": [],
+   "label": "",
+   "conf": 0.49,
+   "score": 0.21,
+   "type": "METER",
    "rating": null,
-   "poles": null,
-   "kA": null,
    "on_bus": "BUS-1",
    "connected": false,
    "id": "D14"
@@ -1132,15 +1177,15 @@
   {
    "symbol": "S15",
    "box": [
-    1916,
+    1919,
     999,
-    14,
-    23
+    11,
+    22
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.48,
-   "score": 0.19,
+   "conf": 0.43,
+   "score": 0.15,
    "type": "CT",
    "rating": null,
    "on_bus": "BUS-1",
@@ -1150,16 +1195,19 @@
   {
    "symbol": "S16",
    "box": [
-    979,
-    1041,
-    28,
-    41
+    1170,
+    1033,
+    55,
+    52
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.47,
-   "score": 0.15,
-   "type": "EARTH",
+   "label_texts": [
+    "T38",
+    "T41"
+   ],
+   "label": "Static | Switch B",
+   "conf": 0.97,
+   "score": 0.18,
+   "type": "CAPACITOR",
    "rating": null,
    "on_bus": "BUS-1",
    "connected": false,
@@ -1168,20 +1216,68 @@
   {
    "symbol": "S17",
    "box": [
-    1232,
-    1113,
-    15,
-    19
+    1188,
+    1110,
+    22,
+    29
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.47,
-   "score": 0.16,
-   "type": "RELAY",
+   "label_texts": [
+    "T43"
+   ],
+   "label": "Bypass Switch A",
+   "conf": 0.87,
+   "score": 0.12,
+   "type": "CONTACTOR",
    "rating": null,
    "on_bus": "BUS-1",
    "connected": false,
    "id": "D17"
+  },
+  {
+   "symbol": "S18",
+   "box": [
+    615,
+    1398,
+    21,
+    22
+   ],
+   "label_texts": [
+    "T47"
+   ],
+   "label": "200A",
+   "conf": 0.87,
+   "score": 0.13,
+   "type": "ACB",
+   "rating": 200,
+   "poles": null,
+   "kA": null,
+   "on_bus": "BUS-1",
+   "connected": true,
+   "id": "D18"
+  },
+  {
+   "symbol": "S19",
+   "box": [
+    756,
+    1398,
+    14,
+    23
+   ],
+   "label_texts": [
+    "T45",
+    "T48",
+    "T52"
+   ],
+   "label": "UPS Switchboard,120/208V,3 Phase | 200A | UPS Distribution Panels",
+   "conf": 0.87,
+   "score": 0.14,
+   "type": "ACB",
+   "rating": 200,
+   "poles": null,
+   "kA": null,
+   "on_bus": "BUS-1",
+   "connected": true,
+   "id": "D19"
   }
  ],
  "notes": {
@@ -1195,14 +1291,14 @@
  "ocr_engine": "rapidocr",
  "reader": "trained",
  "seconds": {
-  "total": 21.93,
-  "ocr": 7.43,
-  "detector": 14.23
+  "total": 12.57,
+  "ocr": 5.47,
+  "detector": 6.84
  },
  "detector": {
-  "weights": "weights/rtdetr_r18_full",
+  "weights": "weights/rtdetr_r18_plain_ema_fix_pass4",
   "device": "cpu",
-  "threads": 2,
+  "threads": 4,
   "score_threshold": 0.11,
   "score_threshold_source": "drawing",
   "nms_iou": 0.5,

@@ -1157,6 +1157,30 @@
    ],
    "src": "page",
    "id": "T96"
+  },
+  {
+   "text": "50/51",
+   "conf": 0.9888586640357971,
+   "box": [
+    315.0,
+    588.0,
+    39.333333333333336,
+    17.666666666666668
+   ],
+   "src": "tag",
+   "id": "S15g1"
+  },
+  {
+   "text": "CS",
+   "conf": 0.5914938747882843,
+   "box": [
+    2024.6666666666667,
+    944.6666666666666,
+    33.666666666666664,
+    25.333333333333332
+   ],
+   "src": "tag",
+   "id": "S26g1"
   }
  ],
  "busbars": [
@@ -1179,91 +1203,55 @@
    "kind": "board",
    "box": [
     433,
-    211,
+    210,
     69,
     34
    ],
-   "score": 0.63,
-   "shape_score": 1.0
+   "score": 0.11,
+   "shape_score": 0.87
   },
   {
    "id": "S2",
-   "kind": "meter",
+   "kind": "board",
    "box": [
-    100,
-    255,
-    45,
-    42
+    1687,
+    211,
+    66,
+    33
    ],
-   "score": 0.2,
-   "shape_score": 0.97
+   "score": 0.12,
+   "shape_score": 0.87
   },
   {
    "id": "S3",
    "kind": "meter",
    "box": [
-    2043,
-    255,
-    47,
-    43
+    327,
+    240,
+    46,
+    44
    ],
-   "score": 0.25,
-   "shape_score": 0.98
+   "score": 0.14,
+   "shape_score": 0.87
   },
   {
    "id": "S4",
-   "kind": "motor",
+   "kind": "meter",
    "box": [
-    2044,
-    308,
+    1816,
+    240,
     46,
-    43
+    45
    ],
-   "score": 0.24,
-   "shape_score": 0.98
+   "score": 0.17,
+   "shape_score": 0.97
   },
   {
    "id": "S5",
-   "kind": "ct",
-   "box": [
-    465,
-    318,
-    17,
-    42
-   ],
-   "score": 0.27,
-   "shape_score": 1.0
-  },
-  {
-   "id": "S6",
-   "kind": "motor",
+   "kind": "meter",
    "box": [
     100,
-    360,
-    46,
-    42
-   ],
-   "score": 0.44,
-   "shape_score": 1.0
-  },
-  {
-   "id": "S7",
-   "kind": "motor",
-   "box": [
-    2043,
-    362,
-    46,
-    41
-   ],
-   "score": 0.12,
-   "shape_score": 0.75
-  },
-  {
-   "id": "S8",
-   "kind": "motor",
-   "box": [
-    1973,
-    455,
+    254,
     46,
     44
    ],
@@ -1271,148 +1259,184 @@
    "shape_score": 1.0
   },
   {
-   "id": "S9",
-   "kind": "breaker",
+   "id": "S6",
+   "kind": "motor",
    "box": [
-    1621,
-    472,
-    44,
-    38
+    99,
+    307,
+    46,
+    44
    ],
-   "score": 0.13,
-   "shape_score": 0.75
-  },
-  {
-   "id": "S10",
-   "kind": "earth",
-   "box": [
-    1451,
-    497,
-    38,
-    23
-   ],
-   "score": 0.13,
-   "shape_score": 0.75
-  },
-  {
-   "id": "S11",
-   "kind": "earth",
-   "box": [
-    570,
-    549,
-    25,
-    12
-   ],
-   "score": 0.19,
+   "score": 0.16,
    "shape_score": 0.97
   },
   {
-   "id": "S12",
-   "kind": "meter",
-   "box": [
-    313,
-    577,
-    46,
-    44
-   ],
-   "score": 0.49,
-   "shape_score": 1.0
-  },
-  {
-   "id": "S13",
+   "id": "S7",
    "kind": "motor",
    "box": [
-    263,
-    579,
-    49,
-    43
-   ],
-   "score": 0.25,
-   "shape_score": 0.98
-  },
-  {
-   "id": "S14",
-   "kind": "fuse_switch",
-   "box": [
-    465,
-    592,
-    16,
-    48
-   ],
-   "score": 0.13,
-   "shape_score": 0.75
-  },
-  {
-   "id": "S15",
-   "kind": "relay",
-   "box": [
-    874,
-    595,
-    22,
-    34
-   ],
-   "score": 0.22,
-   "shape_score": 0.98
-  },
-  {
-   "id": "S16",
-   "kind": "meter",
-   "box": [
-    1455,
-    623,
-    46,
-    44
-   ],
-   "score": 0.14,
-   "shape_score": 0.75
-  },
-  {
-   "id": "S17",
-   "kind": "generator",
-   "box": [
-    1089,
-    631,
-    46,
+    2044,
+    308,
+    45,
     43
    ],
    "score": 0.32,
    "shape_score": 1.0
   },
   {
-   "id": "S18",
-   "kind": "motor",
+   "id": "S8",
+   "kind": "ct",
    "box": [
-    861,
-    638,
+    1708,
+    337,
+    16,
+    25
+   ],
+   "score": 0.35,
+   "shape_score": 1.0
+  },
+  {
+   "id": "S9",
+   "kind": "ct",
+   "box": [
+    610,
+    399,
+    27,
+    23
+   ],
+   "score": 0.11,
+   "shape_score": 0.87
+  },
+  {
+   "id": "S10",
+   "kind": "breaker",
+   "box": [
+    1627,
+    432,
+    31,
+    29
+   ],
+   "score": 0.25,
+   "shape_score": 1.0
+  },
+  {
+   "id": "S11",
+   "kind": "breaker",
+   "box": [
+    544,
+    433,
+    32,
+    30
+   ],
+   "score": 0.23,
+   "shape_score": 0.99
+  },
+  {
+   "id": "S12",
+   "kind": "breaker",
+   "box": [
+    428,
+    478,
+    79,
+    18
+   ],
+   "score": 0.15,
+   "shape_score": 0.87
+  },
+  {
+   "id": "S13",
+   "kind": "capacitor",
+   "box": [
+    1609,
+    549,
+    23,
+    10
+   ],
+   "score": 0.25,
+   "shape_score": 1.0
+  },
+  {
+   "id": "S14",
+   "kind": "breaker",
+   "box": [
+    536,
+    575,
+    22,
+    25
+   ],
+   "score": 0.3,
+   "shape_score": 1.0
+  },
+  {
+   "id": "S15",
+   "kind": "meter",
+   "box": [
+    313,
+    577,
     45,
     44
    ],
-   "score": 0.16,
-   "shape_score": 0.93
+   "score": 0.12,
+   "shape_score": 0.87
+  },
+  {
+   "id": "S16",
+   "kind": "motor",
+   "box": [
+    1879,
+    580,
+    46,
+    43
+   ],
+   "score": 0.2,
+   "shape_score": 0.99
+  },
+  {
+   "id": "S17",
+   "kind": "meter",
+   "box": [
+    1089,
+    630,
+    45,
+    44
+   ],
+   "score": 0.21,
+   "shape_score": 0.99
+  },
+  {
+   "id": "S18",
+   "kind": "motor",
+   "box": [
+    860,
+    637,
+    46,
+    46
+   ],
+   "score": 0.12,
+   "shape_score": 0.87
   },
   {
    "id": "S19",
-   "kind": "ct",
+   "kind": "breaker",
    "box": [
     467,
     684,
-    15,
+    14,
     24
    ],
-   "score": 0.16,
-   "shape_score": 0.93
+   "score": 0.24,
+   "shape_score": 1.0
   },
   {
    "id": "S20",
    "kind": "breaker",
    "box": [
-    1717,
-    685,
-    14,
-    23
+    1718,
+    684,
+    13,
+    24
    ],
-   "score": 0.12,
-   "shape_score": 0.75
+   "score": 0.14,
+   "shape_score": 0.87
   },
   {
    "id": "S21",
@@ -1421,85 +1445,61 @@
     936,
     703,
     36,
-    22
+    21
    ],
-   "score": 0.27,
-   "shape_score": 1.0
+   "score": 0.13,
+   "shape_score": 0.87
   },
   {
    "id": "S22",
-   "kind": "fuse_switch",
+   "kind": "capacitor",
    "box": [
     1000,
-    709,
-    24,
+    708,
+    22,
     27
    ],
-   "score": 0.11,
-   "shape_score": 0.75
+   "score": 0.13,
+   "shape_score": 0.87
   },
   {
    "id": "S23",
-   "kind": "motor",
+   "kind": "ct",
    "box": [
-    331,
-    727,
-    47,
-    44
+    1710,
+    773,
+    11,
+    22
    ],
-   "score": 0.4,
-   "shape_score": 1.0
+   "score": 0.12,
+   "shape_score": 0.87
   },
   {
    "id": "S24",
-   "kind": "motor",
+   "kind": "meter",
    "box": [
-    860,
-    750,
+    1045,
+    818,
     47,
     44
    ],
-   "score": 0.34,
-   "shape_score": 1.0
+   "score": 0.19,
+   "shape_score": 0.97
   },
   {
    "id": "S25",
-   "kind": "generator",
+   "kind": "contactor",
    "box": [
-    1321,
-    783,
-    47,
-    45
+    1002,
+    895,
+    23,
+    22
    ],
-   "score": 0.11,
-   "shape_score": 0.75
+   "score": 0.22,
+   "shape_score": 0.99
   },
   {
    "id": "S26",
-   "kind": "relay",
-   "box": [
-    2184,
-    914,
-    29,
-    20
-   ],
-   "score": 0.12,
-   "shape_score": 0.75
-  },
-  {
-   "id": "S27",
-   "kind": "relay",
-   "box": [
-    2261,
-    914,
-    27,
-    20
-   ],
-   "score": 0.23,
-   "shape_score": 0.98
-  },
-  {
-   "id": "S28",
    "kind": "meter",
    "box": [
     2019,
@@ -1507,171 +1507,171 @@
     46,
     44
    ],
-   "score": 0.25,
-   "shape_score": 0.98
+   "score": 0.16,
+   "shape_score": 0.87
+  },
+  {
+   "id": "S27",
+   "kind": "motor",
+   "box": [
+    926,
+    940,
+    47,
+    46
+   ],
+   "score": 0.32,
+   "shape_score": 1.0
+  },
+  {
+   "id": "S28",
+   "kind": "breaker",
+   "box": [
+    414,
+    1001,
+    24,
+    23
+   ],
+   "score": 0.12,
+   "shape_score": 0.87
   },
   {
    "id": "S29",
-   "kind": "meter",
-   "box": [
-    927,
-    940,
-    46,
-    45
-   ],
-   "score": 0.13,
-   "shape_score": 0.75
-  },
-  {
-   "id": "S30",
-   "kind": "generator",
-   "box": [
-    1720,
-    942,
-    47,
-    44
-   ],
-   "score": 0.22,
-   "shape_score": 0.98
-  },
-  {
-   "id": "S31",
    "kind": "breaker",
    "box": [
-    1554,
-    968,
-    24,
+    655,
+    1001,
+    23,
     22
    ],
    "score": 0.17,
-   "shape_score": 0.93
+   "shape_score": 0.97
+  },
+  {
+   "id": "S30",
+   "kind": "breaker",
+   "box": [
+    1454,
+    1005,
+    24,
+    23
+   ],
+   "score": 0.12,
+   "shape_score": 0.87
+  },
+  {
+   "id": "S31",
+   "kind": "motor",
+   "box": [
+    1720,
+    1047,
+    48,
+    45
+   ],
+   "score": 0.11,
+   "shape_score": 0.87
   },
   {
    "id": "S32",
-   "kind": "motor",
+   "kind": "meter",
    "box": [
-    2020,
-    993,
-    49,
-    49
+    855,
+    1088,
+    45,
+    46
    ],
-   "score": 0.23,
-   "shape_score": 0.98
+   "score": 0.12,
+   "shape_score": 0.87
   },
   {
    "id": "S33",
-   "kind": "breaker",
+   "kind": "fuse_switch",
    "box": [
-    531,
-    1002,
-    25,
-    23
+    415,
+    1116,
+    24,
+    25
    ],
-   "score": 0.35,
+   "score": 0.4,
    "shape_score": 1.0
   },
   {
    "id": "S34",
-   "kind": "breaker",
+   "kind": "fuse_switch",
    "box": [
     655,
-    1002,
+    1116,
     24,
-    20
+    23
    ],
-   "score": 0.13,
-   "shape_score": 0.75
+   "score": 0.2,
+   "shape_score": 0.99
   },
   {
    "id": "S35",
-   "kind": "fuse_switch",
+   "kind": "breaker",
    "box": [
-    1194,
-    1003,
-    26,
-    22
+    532,
+    1117,
+    25,
+    25
    ],
-   "score": 0.18,
-   "shape_score": 0.97
-  },
-  {
-   "id": "S36",
-   "kind": "generator",
-   "box": [
-    1763,
-    1003,
-    44,
-    27
-   ],
-   "score": 0.12,
-   "shape_score": 0.75
-  },
-  {
-   "id": "S37",
-   "kind": "fuse_switch",
-   "box": [
-    1454,
-    1004,
-    26,
-    28
-   ],
-   "score": 0.14,
-   "shape_score": 0.75
-  },
-  {
-   "id": "S38",
-   "kind": "fuse_switch",
-   "box": [
-    1325,
-    1005,
-    24,
-    24
-   ],
-   "score": 0.17,
-   "shape_score": 0.93
-  },
-  {
-   "id": "S39",
-   "kind": "meter",
-   "box": [
-    1720,
-    1048,
-    47,
-    43
-   ],
-   "score": 0.54,
+   "score": 0.39,
    "shape_score": 1.0
   },
   {
-   "id": "S40",
+   "id": "S36",
    "kind": "breaker",
    "box": [
-    531,
-    1051,
+    1456,
+    1119,
     24,
-    26
+    23
    ],
-   "score": 0.14,
-   "shape_score": 0.75
+   "score": 0.44,
+   "shape_score": 1.0
   },
   {
-   "id": "S41",
-   "kind": "generator",
+   "id": "S37",
+   "kind": "breaker",
    "box": [
-    930,
-    1052,
-    46,
-    44
+    1325,
+    1120,
+    24,
+    22
    ],
-   "score": 0.13,
-   "shape_score": 0.75
+   "score": 0.21,
+   "shape_score": 0.99
   },
   {
-   "id": "S42",
-   "kind": "motor",
+   "id": "S38",
+   "kind": "breaker",
    "box": [
-    2023,
-    1059,
+    1599,
+    1122,
+    24,
+    23
+   ],
+   "score": 0.2,
+   "shape_score": 0.99
+  },
+  {
+   "id": "S39",
+   "kind": "breaker",
+   "box": [
+    808,
+    1124,
+    25,
+    23
+   ],
+   "score": 0.24,
+   "shape_score": 0.99
+  },
+  {
+   "id": "S40",
+   "kind": "meter",
+   "box": [
+    2024,
+    1125,
     47,
     45
    ],
@@ -1679,208 +1679,76 @@
    "shape_score": 1.0
   },
   {
-   "id": "S43",
-   "kind": "meter",
-   "box": [
-    2106,
-    1074,
-    16,
-    20
-   ],
-   "score": 0.18,
-   "shape_score": 0.93
-  },
-  {
-   "id": "S44",
-   "kind": "motor",
-   "box": [
-    855,
-    1089,
-    45,
-    44
-   ],
-   "score": 0.13,
-   "shape_score": 0.75
-  },
-  {
-   "id": "S45",
-   "kind": "breaker",
-   "box": [
-    655,
-    1114,
-    28,
-    25
-   ],
-   "score": 0.18,
-   "shape_score": 0.93
-  },
-  {
-   "id": "S46",
-   "kind": "fuse_switch",
-   "box": [
-    415,
-    1116,
-    25,
-    26
-   ],
-   "score": 0.44,
-   "shape_score": 1.0
-  },
-  {
-   "id": "S47",
-   "kind": "fuse_switch",
-   "box": [
-    530,
-    1117,
-    27,
-    49
-   ],
-   "score": 0.12,
-   "shape_score": 0.75
-  },
-  {
-   "id": "S48",
-   "kind": "breaker",
-   "box": [
-    1197,
-    1117,
-    24,
-    26
-   ],
-   "score": 0.19,
-   "shape_score": 0.97
-  },
-  {
-   "id": "S49",
+   "id": "S41",
    "kind": "contactor",
    "box": [
-    1456,
-    1119,
-    24,
-    23
+    1197,
+    1148,
+    19,
+    17
    ],
-   "score": 0.19,
-   "shape_score": 0.97
+   "score": 0.12,
+   "shape_score": 0.87
   },
   {
-   "id": "S50",
-   "kind": "breaker",
+   "id": "S42",
+   "kind": "meter",
    "box": [
-    1325,
-    1120,
-    25,
-    21
-   ],
-   "score": 0.17,
-   "shape_score": 0.93
-  },
-  {
-   "id": "S51",
-   "kind": "capacitor",
-   "box": [
-    1598,
-    1122,
-    26,
-    23
+    2019,
+    1252,
+    47,
+    45
    ],
    "score": 0.36,
    "shape_score": 1.0
   },
   {
-   "id": "S52",
-   "kind": "breaker",
-   "box": [
-    809,
-    1124,
-    25,
-    22
-   ],
-   "score": 0.25,
-   "shape_score": 0.98
-  },
-  {
-   "id": "S53",
+   "id": "S43",
    "kind": "meter",
    "box": [
-    2024,
-    1125,
-    48,
-    46
-   ],
-   "score": 0.32,
-   "shape_score": 1.0
-  },
-  {
-   "id": "S54",
-   "kind": "earth",
-   "box": [
-    1601,
-    1155,
-    19,
-    17
-   ],
-   "score": 0.15,
-   "shape_score": 0.75
-  },
-  {
-   "id": "S55",
-   "kind": "meter",
-   "box": [
-    1656,
-    1320,
-    47,
-    43
-   ],
-   "score": 0.43,
-   "shape_score": 1.0
-  },
-  {
-   "id": "S56",
-   "kind": "meter",
-   "box": [
-    2024,
-    1320,
+    1655,
+    1318,
     47,
     45
    ],
-   "score": 0.41,
+   "score": 0.45,
    "shape_score": 1.0
   },
   {
-   "id": "S57",
+   "id": "S44",
    "kind": "motor",
    "box": [
-    1654,
-    1377,
-    49,
-    44
-   ],
-   "score": 0.27,
-   "shape_score": 1.0
-  },
-  {
-   "id": "S58",
-   "kind": "motor",
-   "box": [
-    2023,
-    1384,
+    1655,
+    1376,
     48,
-    44
+    46
    ],
-   "score": 0.4,
+   "score": 0.2,
+   "shape_score": 0.99
+  },
+  {
+   "id": "S45",
+   "kind": "motor",
+   "box": [
+    2024,
+    1383,
+    46,
+    45
+   ],
+   "score": 0.28,
    "shape_score": 1.0
   },
   {
-   "id": "S59",
-   "kind": "ct",
+   "id": "S46",
+   "kind": "contactor",
    "box": [
-    2100,
-    1574,
-    17,
-    21
+    2239,
+    1509,
+    34,
+    22
    ],
    "score": 0.12,
-   "shape_score": 0.75
+   "shape_score": 0.87
   }
  ],
  "devices": [
@@ -1888,14 +1756,18 @@
    "symbol": "S1",
    "box": [
     433,
-    211,
+    210,
     69,
     34
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.5,
-   "score": 0.63,
+   "label_texts": [
+    "T1",
+    "T3",
+    "T5"
+   ],
+   "label": "Utility Power Source | Circuit Switcher | C/S",
+   "conf": 0.87,
+   "score": 0.11,
    "type": "BOARD",
    "rating": null,
    "on_bus": "BUS-1",
@@ -1905,18 +1777,20 @@
   {
    "symbol": "S2",
    "box": [
-    100,
-    255,
-    45,
-    42
+    1687,
+    211,
+    66,
+    33
    ],
    "label_texts": [
-    "T13"
+    "T2",
+    "T4",
+    "T6"
    ],
-   "label": "50",
-   "conf": 0.93,
-   "score": 0.2,
-   "type": "METER",
+   "label": "Utility Power Source | Circuit Switcher | C/S",
+   "conf": 0.87,
+   "score": 0.12,
+   "type": "BOARD",
    "rating": null,
    "on_bus": "BUS-1",
    "connected": false,
@@ -1925,17 +1799,17 @@
   {
    "symbol": "S3",
    "box": [
-    2043,
-    255,
-    47,
-    43
+    327,
+    240,
+    46,
+    44
    ],
    "label_texts": [
-    "T14"
+    "T9"
    ],
-   "label": "50",
-   "conf": 0.96,
-   "score": 0.25,
+   "label": "CS",
+   "conf": 0.63,
+   "score": 0.14,
    "type": "METER",
    "rating": null,
    "on_bus": "BUS-1",
@@ -1945,18 +1819,19 @@
   {
    "symbol": "S4",
    "box": [
-    2044,
-    308,
+    1816,
+    240,
     46,
-    43
+    45
    ],
    "label_texts": [
-    "T18"
+    "T10",
+    "T17"
    ],
-   "label": "87",
-   "conf": 0.98,
-   "score": 0.24,
-   "type": "MOTOR",
+   "label": "CS | 86C",
+   "conf": 0.59,
+   "score": 0.17,
+   "type": "METER",
    "rating": null,
    "on_bus": "BUS-1",
    "connected": false,
@@ -1965,16 +1840,18 @@
   {
    "symbol": "S5",
    "box": [
-    465,
-    318,
-    17,
-    42
+    100,
+    254,
+    46,
+    44
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.5,
-   "score": 0.27,
-   "type": "CT",
+   "label_texts": [
+    "T11"
+   ],
+   "label": "51",
+   "conf": 1.0,
+   "score": 0.31,
+   "type": "METER",
    "rating": null,
    "on_bus": "BUS-1",
    "connected": false,
@@ -1983,52 +1860,61 @@
   {
    "symbol": "S6",
    "box": [
-    100,
-    360,
+    99,
+    307,
     46,
-    42
+    44
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.5,
-   "score": 0.44,
+   "label_texts": [
+    "T13",
+    "T16",
+    "T15",
+    "T23"
+   ],
+   "label": "50 | B6C | 87 | AL",
+   "conf": 0.73,
+   "score": 0.16,
    "type": "MOTOR",
    "rating": null,
    "on_bus": "BUS-1",
-   "connected": true,
+   "connected": false,
    "id": "D6"
   },
   {
    "symbol": "S7",
    "box": [
-    2043,
-    362,
-    46,
-    41
+    2044,
+    308,
+    45,
+    43
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.38,
-   "score": 0.12,
+   "label_texts": [
+    "T12",
+    "T14",
+    "T18"
+   ],
+   "label": "51 | 50 | 87",
+   "conf": 0.96,
+   "score": 0.32,
    "type": "MOTOR",
    "rating": null,
    "on_bus": "BUS-1",
-   "connected": true,
+   "connected": false,
    "id": "D7"
   },
   {
    "symbol": "S8",
    "box": [
-    1973,
-    455,
-    46,
-    44
+    1708,
+    337,
+    16,
+    25
    ],
    "label_texts": [],
    "label": "",
    "conf": 0.5,
-   "score": 0.31,
-   "type": "MOTOR",
+   "score": 0.35,
+   "type": "CT",
    "rating": null,
    "on_bus": "BUS-1",
    "connected": false,
@@ -2037,19 +1923,17 @@
   {
    "symbol": "S9",
    "box": [
-    1621,
-    472,
-    44,
-    38
+    610,
+    399,
+    27,
+    23
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.38,
-   "score": 0.13,
-   "type": "ACB",
+   "conf": 0.43,
+   "score": 0.11,
+   "type": "CT",
    "rating": null,
-   "poles": null,
-   "kA": null,
    "on_bus": "BUS-1",
    "connected": false,
    "id": "D9"
@@ -2057,17 +1941,25 @@
   {
    "symbol": "S10",
    "box": [
-    1451,
-    497,
-    38,
-    23
+    1627,
+    432,
+    31,
+    29
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.38,
-   "score": 0.13,
-   "type": "EARTH",
+   "label_texts": [
+    "T20",
+    "T22",
+    "T26",
+    "T30",
+    "T33"
+   ],
+   "label": "Step Down Transformer | 12M5 MVA | 34,500 - 13,800 V | Zo=5.757 | DK",
+   "conf": 0.69,
+   "score": 0.25,
+   "type": "ACB",
    "rating": null,
+   "poles": null,
+   "kA": null,
    "on_bus": "BUS-1",
    "connected": false,
    "id": "D10"
@@ -2075,17 +1967,24 @@
   {
    "symbol": "S11",
    "box": [
-    570,
-    549,
-    25,
-    12
+    544,
+    433,
+    32,
+    30
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.48,
-   "score": 0.19,
-   "type": "EARTH",
+   "label_texts": [
+    "T19",
+    "T21",
+    "T25",
+    "T29"
+   ],
+   "label": "Step Down Transformer | 12/15 MVA | 34,500 - 13,800 V | Zo=5.757",
+   "conf": 0.92,
+   "score": 0.23,
+   "type": "ACB",
    "rating": null,
+   "poles": null,
+   "kA": null,
    "on_bus": "BUS-1",
    "connected": false,
    "id": "D11"
@@ -2093,19 +1992,25 @@
   {
    "symbol": "S12",
    "box": [
-    313,
-    577,
-    46,
-    44
+    428,
+    478,
+    79,
+    18
    ],
    "label_texts": [
-    "T43"
+    "T24",
+    "T31",
+    "T34",
+    "T36",
+    "T45"
    ],
-   "label": "861",
-   "conf": 0.86,
-   "score": 0.49,
-   "type": "METER",
+   "label": "49 | 63 | 1N{50/51 | 15 | NC",
+   "conf": 0.85,
+   "score": 0.15,
+   "type": "ACB",
    "rating": null,
+   "poles": null,
+   "kA": null,
    "on_bus": "BUS-1",
    "connected": false,
    "id": "D12"
@@ -2113,16 +2018,19 @@
   {
    "symbol": "S13",
    "box": [
-    263,
-    579,
-    49,
-    43
+    1609,
+    549,
+    23,
+    10
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.49,
+   "label_texts": [
+    "T37",
+    "T46"
+   ],
+   "label": "15 | NC",
+   "conf": 0.99,
    "score": 0.25,
-   "type": "MOTOR",
+   "type": "CAPACITOR",
    "rating": null,
    "on_bus": "BUS-1",
    "connected": false,
@@ -2131,23 +2039,19 @@
   {
    "symbol": "S14",
    "box": [
-    465,
-    592,
-    16,
-    48
+    536,
+    575,
+    22,
+    25
    ],
-   "label_texts": [
-    "T36",
-    "T45"
-   ],
-   "label": "15 | NC",
-   "conf": 0.75,
-   "score": 0.13,
-   "type": "FUSE_SWITCH",
+   "label_texts": [],
+   "label": "",
+   "conf": 0.5,
+   "score": 0.3,
+   "type": "ACB",
    "rating": null,
    "poles": null,
    "kA": null,
-   "dest": "15",
    "on_bus": "BUS-1",
    "connected": false,
    "id": "D14"
@@ -2155,18 +2059,20 @@
   {
    "symbol": "S15",
    "box": [
-    874,
-    595,
-    22,
-    34
+    313,
+    577,
+    45,
+    44
    ],
    "label_texts": [
-    "T40"
+    "S15g1",
+    "T43",
+    "T47"
    ],
-   "label": "25",
-   "conf": 0.98,
-   "score": 0.22,
-   "type": "RELAY",
+   "label": "50/51 | 861 | CS",
+   "conf": 0.59,
+   "score": 0.12,
+   "type": "METER",
    "rating": null,
    "on_bus": "BUS-1",
    "connected": false,
@@ -2175,34 +2081,42 @@
   {
    "symbol": "S16",
    "box": [
-    1455,
-    623,
+    1879,
+    580,
     46,
-    44
+    43
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.38,
-   "score": 0.14,
-   "type": "METER",
+   "label_texts": [
+    "T27",
+    "T28",
+    "T32",
+    "T35",
+    "T44"
+   ],
+   "label": "49 | AL | 63 | 50/51(51N} | 861",
+   "conf": 0.8,
+   "score": 0.2,
+   "type": "MOTOR",
    "rating": null,
    "on_bus": "BUS-1",
-   "connected": true,
+   "connected": false,
    "id": "D16"
   },
   {
    "symbol": "S17",
    "box": [
     1089,
-    631,
-    46,
-    43
+    630,
+    45,
+    44
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.5,
-   "score": 0.32,
-   "type": "GENERATOR",
+   "label_texts": [
+    "T39"
+   ],
+   "label": "CS",
+   "conf": 0.64,
+   "score": 0.21,
+   "type": "METER",
    "rating": null,
    "on_bus": "BUS-1",
    "connected": false,
@@ -2211,15 +2125,18 @@
   {
    "symbol": "S18",
    "box": [
-    861,
-    638,
-    45,
-    44
+    860,
+    637,
+    46,
+    46
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.47,
-   "score": 0.16,
+   "label_texts": [
+    "T40",
+    "T49"
+   ],
+   "label": "25 | 27",
+   "conf": 0.87,
+   "score": 0.12,
    "type": "MOTOR",
    "rating": null,
    "on_bus": "BUS-1",
@@ -2231,15 +2148,19 @@
    "box": [
     467,
     684,
-    15,
+    14,
     24
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.47,
-   "score": 0.16,
-   "type": "CT",
-   "rating": null,
+   "label_texts": [
+    "T41"
+   ],
+   "label": "1200A",
+   "conf": 1.0,
+   "score": 0.24,
+   "type": "ACB",
+   "rating": 1200,
+   "poles": null,
+   "kA": null,
    "on_bus": "BUS-1",
    "connected": false,
    "id": "D19"
@@ -2247,20 +2168,19 @@
   {
    "symbol": "S20",
    "box": [
-    1717,
-    685,
-    14,
-    23
+    1718,
+    684,
+    13,
+    24
    ],
    "label_texts": [
-    "T46",
-    "T42"
+    "T48"
    ],
-   "label": "NC | 1200A",
-   "conf": 0.75,
-   "score": 0.12,
+   "label": "CS",
+   "conf": 0.61,
+   "score": 0.14,
    "type": "ACB",
-   "rating": 1200,
+   "rating": null,
    "poles": null,
    "kA": null,
    "on_bus": "BUS-1",
@@ -2273,12 +2193,12 @@
     936,
     703,
     36,
-    22
+    21
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.5,
-   "score": 0.27,
+   "conf": 0.43,
+   "score": 0.13,
    "type": "RELAY",
    "rating": null,
    "on_bus": "BUS-1",
@@ -2289,19 +2209,16 @@
    "symbol": "S22",
    "box": [
     1000,
-    709,
-    24,
+    708,
+    22,
     27
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.38,
-   "score": 0.11,
-   "type": "FUSE_SWITCH",
+   "conf": 0.43,
+   "score": 0.13,
+   "type": "CAPACITOR",
    "rating": null,
-   "poles": null,
-   "kA": null,
-   "dest": "",
    "on_bus": "BUS-1",
    "connected": false,
    "id": "D22"
@@ -2309,34 +2226,37 @@
   {
    "symbol": "S23",
    "box": [
-    331,
-    727,
-    47,
-    44
+    1710,
+    773,
+    11,
+    22
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.5,
-   "score": 0.4,
-   "type": "MOTOR",
+   "conf": 0.43,
+   "score": 0.12,
+   "type": "CT",
    "rating": null,
    "on_bus": "BUS-1",
-   "connected": false,
+   "connected": true,
    "id": "D23"
   },
   {
    "symbol": "S24",
    "box": [
-    860,
-    750,
+    1045,
+    818,
     47,
     44
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.5,
-   "score": 0.34,
-   "type": "MOTOR",
+   "label_texts": [
+    "T50",
+    "T51"
+   ],
+   "label": "25 | NO",
+   "conf": 0.97,
+   "score": 0.19,
+   "type": "METER",
    "rating": null,
    "on_bus": "BUS-1",
    "connected": false,
@@ -2345,16 +2265,16 @@
   {
    "symbol": "S25",
    "box": [
-    1321,
-    783,
-    47,
-    45
+    1002,
+    895,
+    23,
+    22
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.38,
-   "score": 0.11,
-   "type": "GENERATOR",
+   "conf": 0.49,
+   "score": 0.22,
+   "type": "CONTACTOR",
    "rating": null,
    "on_bus": "BUS-1",
    "connected": false,
@@ -2363,18 +2283,29 @@
   {
    "symbol": "S26",
    "box": [
-    2184,
-    914,
-    29,
-    20
+    2019,
+    938,
+    46,
+    44
    ],
    "label_texts": [
-    "T55"
+    "T54",
+    "S26g1",
+    "T55",
+    "T62",
+    "T63",
+    "T74",
+    "T75",
+    "T79",
+    "T81",
+    "T85",
+    "T89",
+    "T93"
    ],
-   "label": "Control Switch",
-   "conf": 0.75,
-   "score": 0.12,
-   "type": "RELAY",
+   "label": "LEGEND | CS | Control Switch | AL | Alarm | 49 | Over Temperature Relay | Instantaneous Overcurrent Relay | Over Current Relay | Sudden Pressure Relay | Lockout Relay | Differential Relay",
+   "conf": 0.59,
+   "score": 0.16,
+   "type": "METER",
    "rating": null,
    "on_bus": "BUS-1",
    "connected": false,
@@ -2383,16 +2314,20 @@
   {
    "symbol": "S27",
    "box": [
-    2261,
-    914,
-    27,
-    20
+    926,
+    940,
+    47,
+    46
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.49,
-   "score": 0.23,
-   "type": "RELAY",
+   "label_texts": [
+    "T56",
+    "T60",
+    "T72"
+   ],
+   "label": "50/5151N | {typ} | 86L",
+   "conf": 0.87,
+   "score": 0.32,
+   "type": "MOTOR",
    "rating": null,
    "on_bus": "BUS-1",
    "connected": false,
@@ -2401,19 +2336,21 @@
   {
    "symbol": "S28",
    "box": [
-    2019,
-    938,
-    46,
-    44
+    414,
+    1001,
+    24,
+    23
    ],
    "label_texts": [
-    "T62"
+    "T64"
    ],
-   "label": "AL",
-   "conf": 0.98,
-   "score": 0.25,
-   "type": "METER",
-   "rating": null,
+   "label": "600A",
+   "conf": 0.87,
+   "score": 0.12,
+   "type": "ACB",
+   "rating": 600,
+   "poles": null,
+   "kA": null,
    "on_bus": "BUS-1",
    "connected": false,
    "id": "D28"
@@ -2421,56 +2358,17 @@
   {
    "symbol": "S29",
    "box": [
-    927,
-    940,
-    46,
-    45
-   ],
-   "label_texts": [
-    "T60"
-   ],
-   "label": "{typ}",
-   "conf": 0.75,
-   "score": 0.13,
-   "type": "METER",
-   "rating": null,
-   "on_bus": "BUS-1",
-   "connected": false,
-   "id": "D29"
-  },
-  {
-   "symbol": "S30",
-   "box": [
-    1720,
-    942,
-    47,
-    44
-   ],
-   "label_texts": [
-    "T61"
-   ],
-   "label": "(typ}",
-   "conf": 0.9,
-   "score": 0.22,
-   "type": "GENERATOR",
-   "rating": null,
-   "on_bus": "BUS-1",
-   "connected": false,
-   "id": "D30"
-  },
-  {
-   "symbol": "S31",
-   "box": [
-    1554,
-    968,
-    24,
+    655,
+    1001,
+    23,
     22
    ],
    "label_texts": [
-    "T71"
+    "T58",
+    "T67"
    ],
-   "label": "600A",
-   "conf": 0.93,
+   "label": "15 | 600A",
+   "conf": 0.97,
    "score": 0.17,
    "type": "ACB",
    "rating": 600,
@@ -2478,24 +2376,68 @@
    "kA": null,
    "on_bus": "BUS-1",
    "connected": false,
+   "id": "D29"
+  },
+  {
+   "symbol": "S30",
+   "box": [
+    1454,
+    1005,
+    24,
+    23
+   ],
+   "label_texts": [
+    "T59",
+    "T71"
+   ],
+   "label": "15 | 600A",
+   "conf": 0.87,
+   "score": 0.12,
+   "type": "ACB",
+   "rating": 600,
+   "poles": null,
+   "kA": null,
+   "on_bus": "BUS-1",
+   "connected": false,
+   "id": "D30"
+  },
+  {
+   "symbol": "S31",
+   "box": [
+    1720,
+    1047,
+    48,
+    45
+   ],
+   "label_texts": [
+    "T57",
+    "T61",
+    "T73"
+   ],
+   "label": "50/51}51N | (typ} | 86L",
+   "conf": 0.79,
+   "score": 0.11,
+   "type": "MOTOR",
+   "rating": null,
+   "on_bus": "BUS-1",
+   "connected": false,
    "id": "D31"
   },
   {
    "symbol": "S32",
    "box": [
-    2020,
-    993,
-    49,
-    49
+    855,
+    1088,
+    45,
+    46
    ],
    "label_texts": [
-    "T74",
-    "T63"
+    "T76"
    ],
-   "label": "49 | Alarm",
-   "conf": 0.98,
-   "score": 0.23,
-   "type": "MOTOR",
+   "label": "CS",
+   "conf": 0.63,
+   "score": 0.12,
+   "type": "METER",
    "rating": null,
    "on_bus": "BUS-1",
    "connected": false,
@@ -2504,21 +2446,20 @@
   {
    "symbol": "S33",
    "box": [
-    531,
-    1002,
-    25,
-    23
+    415,
+    1116,
+    24,
+    25
    ],
-   "label_texts": [
-    "T65"
-   ],
-   "label": "600A",
-   "conf": 0.95,
-   "score": 0.35,
-   "type": "ACB",
-   "rating": 600,
+   "label_texts": [],
+   "label": "",
+   "conf": 0.5,
+   "score": 0.4,
+   "type": "FUSE_SWITCH",
+   "rating": null,
    "poles": null,
    "kA": null,
+   "dest": "",
    "on_bus": "BUS-1",
    "connected": false,
    "id": "D33"
@@ -2527,20 +2468,21 @@
    "symbol": "S34",
    "box": [
     655,
-    1002,
+    1116,
     24,
-    20
+    23
    ],
    "label_texts": [
-    "T66"
+    "T82"
    ],
-   "label": "600A",
-   "conf": 0.75,
-   "score": 0.13,
-   "type": "ACB",
-   "rating": 600,
+   "label": "Load Feeders",
+   "conf": 0.97,
+   "score": 0.2,
+   "type": "FUSE_SWITCH",
+   "rating": null,
    "poles": null,
    "kA": null,
+   "dest": "Load Feeders",
    "on_bus": "BUS-1",
    "connected": false,
    "id": "D34"
@@ -2548,22 +2490,19 @@
   {
    "symbol": "S35",
    "box": [
-    1194,
-    1003,
-    26,
-    22
+    532,
+    1117,
+    25,
+    25
    ],
-   "label_texts": [
-    "T68"
-   ],
-   "label": "600A",
-   "conf": 0.97,
-   "score": 0.18,
-   "type": "FUSE_SWITCH",
-   "rating": 600,
+   "label_texts": [],
+   "label": "",
+   "conf": 0.5,
+   "score": 0.39,
+   "type": "ACB",
+   "rating": null,
    "poles": null,
    "kA": null,
-   "dest": "",
    "on_bus": "BUS-1",
    "connected": false,
    "id": "D35"
@@ -2571,19 +2510,21 @@
   {
    "symbol": "S36",
    "box": [
-    1763,
-    1003,
-    44,
-    27
+    1456,
+    1119,
+    24,
+    23
    ],
    "label_texts": [
-    "T73"
+    "T83"
    ],
-   "label": "86L",
-   "conf": 0.75,
-   "score": 0.12,
-   "type": "GENERATOR",
+   "label": "Load Feeders",
+   "conf": 0.97,
+   "score": 0.44,
+   "type": "ACB",
    "rating": null,
+   "poles": null,
+   "kA": null,
    "on_bus": "BUS-1",
    "connected": false,
    "id": "D36"
@@ -2591,22 +2532,21 @@
   {
    "symbol": "S37",
    "box": [
-    1454,
-    1004,
-    26,
-    28
+    1325,
+    1120,
+    24,
+    22
    ],
    "label_texts": [
-    "T70"
+    "T69"
    ],
    "label": "600A",
-   "conf": 0.75,
-   "score": 0.14,
-   "type": "FUSE_SWITCH",
+   "conf": 0.99,
+   "score": 0.21,
+   "type": "ACB",
    "rating": 600,
    "poles": null,
    "kA": null,
-   "dest": "",
    "on_bus": "BUS-1",
    "connected": false,
    "id": "D37"
@@ -2614,22 +2554,21 @@
   {
    "symbol": "S38",
    "box": [
-    1325,
-    1005,
+    1599,
+    1122,
     24,
-    24
+    23
    ],
    "label_texts": [
-    "T69"
+    "T77"
    ],
-   "label": "600A",
-   "conf": 0.93,
-   "score": 0.17,
-   "type": "FUSE_SWITCH",
-   "rating": 600,
+   "label": "CS",
+   "conf": 0.6,
+   "score": 0.2,
+   "type": "ACB",
+   "rating": null,
    "poles": null,
    "kA": null,
-   "dest": "",
    "on_bus": "BUS-1",
    "connected": false,
    "id": "D38"
@@ -2637,17 +2576,19 @@
   {
    "symbol": "S39",
    "box": [
-    1720,
-    1048,
-    47,
-    43
+    808,
+    1124,
+    25,
+    23
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.5,
-   "score": 0.54,
-   "type": "METER",
+   "conf": 0.49,
+   "score": 0.24,
+   "type": "ACB",
    "rating": null,
+   "poles": null,
+   "kA": null,
    "on_bus": "BUS-1",
    "connected": false,
    "id": "D39"
@@ -2655,38 +2596,37 @@
   {
    "symbol": "S40",
    "box": [
-    531,
-    1051,
-    24,
-    26
+    2024,
+    1125,
+    47,
+    45
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.38,
-   "score": 0.14,
-   "type": "ACB",
+   "label_texts": [
+    "T78",
+    "T80"
+   ],
+   "label": "50 | 51",
+   "conf": 0.98,
+   "score": 0.47,
+   "type": "METER",
    "rating": null,
-   "poles": null,
-   "kA": null,
    "on_bus": "BUS-1",
-   "connected": true,
+   "connected": false,
    "id": "D40"
   },
   {
    "symbol": "S41",
    "box": [
-    930,
-    1052,
-    46,
-    44
+    1197,
+    1148,
+    19,
+    17
    ],
-   "label_texts": [
-    "T76"
-   ],
-   "label": "CS",
-   "conf": 0.63,
-   "score": 0.13,
-   "type": "GENERATOR",
+   "label_texts": [],
+   "label": "",
+   "conf": 0.43,
+   "score": 0.12,
+   "type": "CONTACTOR",
    "rating": null,
    "on_bus": "BUS-1",
    "connected": false,
@@ -2695,19 +2635,19 @@
   {
    "symbol": "S42",
    "box": [
-    2023,
-    1059,
+    2019,
+    1252,
     47,
     45
    ],
    "label_texts": [
-    "T78",
-    "T75"
+    "T84",
+    "T88"
    ],
-   "label": "50 | Over Temperature Relay",
-   "conf": 0.94,
-   "score": 0.47,
-   "type": "MOTOR",
+   "label": "63 | 86",
+   "conf": 1.0,
+   "score": 0.36,
+   "type": "METER",
    "rating": null,
    "on_bus": "BUS-1",
    "connected": false,
@@ -2716,17 +2656,19 @@
   {
    "symbol": "S43",
    "box": [
-    2106,
-    1074,
-    16,
-    20
+    1655,
+    1318,
+    47,
+    45
    ],
    "label_texts": [
-    "T79"
+    "T87",
+    "T86",
+    "T90"
    ],
-   "label": "Instantaneous Overcurrent Relay",
-   "conf": 0.93,
-   "score": 0.18,
+   "label": "Synch. Check Relay | 25 | Undervoltage Relay",
+   "conf": 0.97,
+   "score": 0.45,
    "type": "METER",
    "rating": null,
    "on_bus": "BUS-1",
@@ -2736,17 +2678,17 @@
   {
    "symbol": "S44",
    "box": [
-    855,
-    1089,
-    45,
-    44
+    1655,
+    1376,
+    48,
+    46
    ],
    "label_texts": [
-    "T72"
+    "T91"
    ],
-   "label": "86L",
-   "conf": 0.75,
-   "score": 0.13,
+   "label": "27",
+   "conf": 0.99,
+   "score": 0.2,
    "type": "MOTOR",
    "rating": null,
    "on_bus": "BUS-1",
@@ -2756,19 +2698,19 @@
   {
    "symbol": "S45",
    "box": [
-    655,
-    1114,
-    28,
-    25
+    2024,
+    1383,
+    46,
+    45
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.47,
-   "score": 0.18,
-   "type": "ACB",
+   "label_texts": [
+    "T92"
+   ],
+   "label": "87",
+   "conf": 1.0,
+   "score": 0.28,
+   "type": "MOTOR",
    "rating": null,
-   "poles": null,
-   "kA": null,
    "on_bus": "BUS-1",
    "connected": false,
    "id": "D45"
@@ -2776,278 +2718,24 @@
   {
    "symbol": "S46",
    "box": [
-    415,
-    1116,
-    25,
-    26
+    2239,
+    1509,
+    34,
+    22
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.5,
-   "score": 0.44,
-   "type": "FUSE_SWITCH",
-   "rating": null,
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "on_bus": "BUS-1",
-   "connected": false,
-   "id": "D46"
-  },
-  {
-   "symbol": "S47",
-   "box": [
-    530,
-    1117,
-    27,
-    49
+   "label_texts": [
+    "T94",
+    "T95",
+    "T96"
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.38,
+   "label": "FIGURE 4-1 | MAIN POWERSYSTEM | SINGLELINEDIAGRAM",
+   "conf": 0.87,
    "score": 0.12,
-   "type": "FUSE_SWITCH",
-   "rating": null,
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "on_bus": "BUS-1",
-   "connected": false,
-   "id": "D47"
-  },
-  {
-   "symbol": "S48",
-   "box": [
-    1197,
-    1117,
-    24,
-    26
-   ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.48,
-   "score": 0.19,
-   "type": "ACB",
-   "rating": null,
-   "poles": null,
-   "kA": null,
-   "on_bus": "BUS-1",
-   "connected": false,
-   "id": "D48"
-  },
-  {
-   "symbol": "S49",
-   "box": [
-    1456,
-    1119,
-    24,
-    23
-   ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.48,
-   "score": 0.19,
    "type": "CONTACTOR",
    "rating": null,
    "on_bus": "BUS-1",
    "connected": false,
-   "id": "D49"
-  },
-  {
-   "symbol": "S50",
-   "box": [
-    1325,
-    1120,
-    25,
-    21
-   ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.47,
-   "score": 0.17,
-   "type": "ACB",
-   "rating": null,
-   "poles": null,
-   "kA": null,
-   "on_bus": "BUS-1",
-   "connected": false,
-   "id": "D50"
-  },
-  {
-   "symbol": "S51",
-   "box": [
-    1598,
-    1122,
-    26,
-    23
-   ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.5,
-   "score": 0.36,
-   "type": "CAPACITOR",
-   "rating": null,
-   "on_bus": "BUS-1",
-   "connected": false,
-   "id": "D51"
-  },
-  {
-   "symbol": "S52",
-   "box": [
-    809,
-    1124,
-    25,
-    22
-   ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.49,
-   "score": 0.25,
-   "type": "ACB",
-   "rating": null,
-   "poles": null,
-   "kA": null,
-   "on_bus": "BUS-1",
-   "connected": false,
-   "id": "D52"
-  },
-  {
-   "symbol": "S53",
-   "box": [
-    2024,
-    1125,
-    48,
-    46
-   ],
-   "label_texts": [
-    "T80"
-   ],
-   "label": "51",
-   "conf": 1.0,
-   "score": 0.32,
-   "type": "METER",
-   "rating": null,
-   "on_bus": "BUS-1",
-   "connected": false,
-   "id": "D53"
-  },
-  {
-   "symbol": "S54",
-   "box": [
-    1601,
-    1155,
-    19,
-    17
-   ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.38,
-   "score": 0.15,
-   "type": "EARTH",
-   "rating": null,
-   "on_bus": "BUS-1",
-   "connected": false,
-   "id": "D54"
-  },
-  {
-   "symbol": "S55",
-   "box": [
-    1656,
-    1320,
-    47,
-    43
-   ],
-   "label_texts": [
-    "T91",
-    "T87"
-   ],
-   "label": "27 | Synch. Check Relay",
-   "conf": 0.97,
-   "score": 0.43,
-   "type": "METER",
-   "rating": null,
-   "on_bus": "BUS-1",
-   "connected": false,
-   "id": "D55"
-  },
-  {
-   "symbol": "S56",
-   "box": [
-    2024,
-    1320,
-    47,
-    45
-   ],
-   "label_texts": [
-    "T92",
-    "T89"
-   ],
-   "label": "87 | Lockout Relay",
-   "conf": 0.99,
-   "score": 0.41,
-   "type": "METER",
-   "rating": null,
-   "on_bus": "BUS-1",
-   "connected": false,
-   "id": "D56"
-  },
-  {
-   "symbol": "S57",
-   "box": [
-    1654,
-    1377,
-    49,
-    44
-   ],
-   "label_texts": [
-    "T90"
-   ],
-   "label": "Undervoltage Relay",
-   "conf": 0.98,
-   "score": 0.27,
-   "type": "MOTOR",
-   "rating": null,
-   "on_bus": "BUS-1",
-   "connected": false,
-   "id": "D57"
-  },
-  {
-   "symbol": "S58",
-   "box": [
-    2023,
-    1384,
-    48,
-    44
-   ],
-   "label_texts": [
-    "T93"
-   ],
-   "label": "Differential Relay",
-   "conf": 0.96,
-   "score": 0.4,
-   "type": "MOTOR",
-   "rating": null,
-   "on_bus": "BUS-1",
-   "connected": false,
-   "id": "D58"
-  },
-  {
-   "symbol": "S59",
-   "box": [
-    2100,
-    1574,
-    17,
-    21
-   ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.38,
-   "score": 0.12,
-   "type": "CT",
-   "rating": null,
-   "on_bus": "BUS-1",
-   "connected": false,
-   "id": "D59"
+   "id": "D46"
   }
  ],
  "notes": {
@@ -3061,14 +2749,14 @@
  "ocr_engine": "rapidocr",
  "reader": "trained",
  "seconds": {
-  "total": 20.63,
-  "ocr": 8.3,
-  "detector": 12.02
+  "total": 13.9,
+  "ocr": 6.52,
+  "detector": 7.11
  },
  "detector": {
-  "weights": "weights/rtdetr_r18_full",
+  "weights": "weights/rtdetr_r18_plain_ema_fix_pass4",
   "device": "cpu",
-  "threads": 2,
+  "threads": 4,
   "score_threshold": 0.11,
   "score_threshold_source": "drawing",
   "nms_iou": 0.5,

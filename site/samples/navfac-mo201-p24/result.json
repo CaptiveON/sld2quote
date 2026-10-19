@@ -22,22 +22,22 @@
    "key": "text",
    "title": "Read the words",
    "count": 9,
-   "seconds": 1.1,
-   "plain": "Read 9 pieces of text in 1.1 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 1.0,
+   "plain": "Read 9 pieces of text in 1.0 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
-   "count": 16,
-   "seconds": 1.09,
-   "plain": "Found 16 symbols in 1.09 s: 6 fuse switches, 4 outgoing moulded-case breakers, 3 incoming air circuit breakers, 2 motor starters, 1 power-factor correction bank. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "count": 12,
+   "seconds": 0.67,
+   "plain": "Found 12 symbols in 0.67 s: 7 outgoing moulded-case breakers, 3 fuse switches, 1 power-factor correction bank, 1 current transformer. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
-   "count": 2,
+   "count": 5,
    "seconds": 0.05,
-   "plain": "Paired 2 of 16 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
+   "plain": "Paired 5 of 12 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
    "key": "spec",
@@ -49,147 +49,166 @@
   {
    "key": "price",
    "title": "Pick parts and price",
-   "count": 5,
+   "count": 6,
    "seconds": 0.0,
-   "plain": "Chose 5 catalogue lines and priced the board at \u00a313,774 (illustrative prices, 15% margin included); 19 items flagged for the estimator. Every line names the symbol, text or clause it rests on, so a reviewer can check it on the drawing."
+   "plain": "Chose 6 catalogue lines and priced the board at \u00a311,061 (illustrative prices, 15% margin included); 14 items flagged for the estimator. Every line names the symbol, text or clause it rests on, so a reviewer can check it on the drawing."
   }
  ],
  "devices": [
   {
    "id": "D1",
-   "type": "ACB",
-   "type_plain": "incoming air circuit breaker",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "SUPPLY SOURCE",
+   "conf": 0.96,
+   "score": 0.17,
+   "box": [
+    516,
+    67,
+    15,
+    22
+   ],
+   "label": "SUPPLY SOURCE"
+  },
+  {
+   "id": "D2",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "MAIN BREAKER",
+   "conf": 0.97,
+   "score": 0.2,
+   "box": [
+    533,
+    73,
+    58,
+    14
+   ],
+   "label": "MAIN BREAKER"
+  },
+  {
+   "id": "D3",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
    "rating": null,
    "unit": "A",
    "poles": null,
    "kA": null,
    "dest": "",
    "conf": 0.49,
-   "score": 0.24,
+   "score": 0.19,
    "box": [
-    516,
-    67,
-    16,
-    21
-   ],
-   "label": ""
-  },
-  {
-   "id": "D2",
-   "type": "ACB",
-   "type_plain": "incoming air circuit breaker",
-   "rating": null,
-   "unit": "A",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.48,
-   "score": 0.18,
-   "box": [
-    534,
-    72,
-    19,
-    16
-   ],
-   "label": ""
-  },
-  {
-   "id": "D3",
-   "type": "FUSE_SWITCH",
-   "type_plain": "fuse switch",
-   "rating": null,
-   "unit": "A",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.38,
-   "score": 0.12,
-   "box": [
-    599,
+    318,
     123,
-    12,
-    24
+    22,
+    12
    ],
    "label": ""
   },
   {
    "id": "D4",
-   "type": "FUSE_SWITCH",
-   "type_plain": "fuse switch",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
    "rating": null,
    "unit": "A",
    "poles": null,
    "kA": null,
-   "dest": "",
-   "conf": 0.38,
-   "score": 0.13,
+   "dest": "CIRCUIT BREAKER",
+   "conf": 0.98,
+   "score": 0.35,
    "box": [
-    610,
-    146,
-    14,
-    22
+    700,
+    144,
+    34,
+    21
    ],
-   "label": ""
+   "label": "CIRCUIT BREAKER"
   },
   {
    "id": "D5",
-   "type": "FUSE_SWITCH",
-   "type_plain": "fuse switch",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
    "rating": null,
    "unit": "A",
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.38,
-   "score": 0.14,
+   "conf": 0.43,
+   "score": 0.13,
    "box": [
-    825,
-    215,
-    31,
-    34
+    611,
+    145,
+    13,
+    23
    ],
    "label": ""
   },
   {
    "id": "D6",
-   "type": "ACB",
-   "type_plain": "incoming air circuit breaker",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "-TRANSFORMER",
+   "conf": 0.64,
+   "score": 0.24,
+   "box": [
+    164,
+    274,
+    65,
+    20
+   ],
+   "label": "-TRANSFORMER | TPP?T"
+  },
+  {
+   "id": "D7",
+   "type": "FUSE_SWITCH",
+   "type_plain": "fuse switch",
    "rating": null,
    "unit": "A",
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.64,
-   "score": 0.22,
+   "conf": 0.43,
+   "score": 0.14,
    "box": [
-    164,
-    274,
-    65,
-    19
-   ],
-   "label": "TPP?T | -TRANSFORMER"
-  },
-  {
-   "id": "D7",
-   "type": "CONTACTOR",
-   "type_plain": "motor starter",
-   "rating": null,
-   "unit": "kW",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.38,
-   "score": 0.12,
-   "box": [
-    844,
-    308,
-    14,
+    242,
+    372,
+    11,
     22
    ],
    "label": ""
   },
   {
    "id": "D8",
+   "type": "FUSE_SWITCH",
+   "type_plain": "fuse switch",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.48,
+   "score": 0.16,
+   "box": [
+    728,
+    396,
+    26,
+    34
+   ],
+   "label": ""
+  },
+  {
+   "id": "D9",
    "type": "CAPACITOR",
    "type_plain": "power-factor correction bank",
    "rating": null,
@@ -197,56 +216,18 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.38,
+   "conf": 0.43,
    "score": 0.11,
    "box": [
-    834,
-    347,
-    43,
-    7
-   ],
-   "label": ""
-  },
-  {
-   "id": "D9",
-   "type": "FUSE_SWITCH",
-   "type_plain": "fuse switch",
-   "rating": null,
-   "unit": "A",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.48,
-   "score": 0.2,
-   "box": [
-    281,
-    372,
-    12,
-    21
-   ],
-   "label": ""
-  },
-  {
-   "id": "D10",
-   "type": "FUSE_SWITCH",
-   "type_plain": "fuse switch",
-   "rating": null,
-   "unit": "A",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.47,
-   "score": 0.16,
-   "box": [
-    241,
-    373,
-    13,
+    305,
+    452,
+    67,
     22
    ],
    "label": ""
   },
   {
-   "id": "D11",
+   "id": "D10",
    "type": "MCCB",
    "type_plain": "outgoing moulded-case breaker",
    "rating": null,
@@ -254,75 +235,37 @@
    "poles": null,
    "kA": null,
    "dest": "PRIMARY",
-   "conf": 0.97,
-   "score": 0.2,
+   "conf": 0.87,
+   "score": 0.11,
    "box": [
-    518,
-    402,
-    18,
-    27
-   ],
-   "label": "PRIMARY"
-  },
-  {
-   "id": "D12",
-   "type": "MCCB",
-   "type_plain": "outgoing moulded-case breaker",
-   "rating": null,
-   "unit": "A",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.47,
-   "score": 0.17,
-   "box": [
-    306,
+    703,
     452,
     65,
-    20
+    21
    ],
-   "label": ""
+   "label": "PRIMARY | FEEDER"
   },
   {
-   "id": "D13",
-   "type": "MCCB",
-   "type_plain": "outgoing moulded-case breaker",
+   "id": "D11",
+   "type": "CT",
+   "type_plain": "current transformer",
    "rating": null,
    "unit": "A",
    "poles": null,
    "kA": null,
    "dest": "",
    "conf": 0.49,
-   "score": 0.23,
+   "score": 0.21,
    "box": [
-    704,
-    452,
-    64,
-    21
+    510,
+    457,
+    28,
+    36
    ],
    "label": ""
   },
   {
-   "id": "D14",
-   "type": "MCCB",
-   "type_plain": "outgoing moulded-case breaker",
-   "rating": null,
-   "unit": "A",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.5,
-   "score": 0.32,
-   "box": [
-    512,
-    459,
-    26,
-    32
-   ],
-   "label": ""
-  },
-  {
-   "id": "D15",
+   "id": "D12",
    "type": "FUSE_SWITCH",
    "type_plain": "fuse switch",
    "rating": null,
@@ -331,31 +274,12 @@
    "kA": null,
    "dest": "",
    "conf": 0.48,
-   "score": 0.19,
+   "score": 0.16,
    "box": [
     486,
     513,
     68,
-    22
-   ],
-   "label": ""
-  },
-  {
-   "id": "D16",
-   "type": "CONTACTOR",
-   "type_plain": "motor starter",
-   "rating": null,
-   "unit": "kW",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.38,
-   "score": 0.12,
-   "box": [
-    517,
-    549,
-    22,
-    25
+    24
    ],
    "label": ""
   }
@@ -365,7 +289,7 @@
   "form": "Form 4 Type 6",
   "ip": "IP31",
   "poles_default": 4,
-  "busbar_rating": 0,
+  "busbar_rating": 2500,
   "sections": 1,
   "ways": 0
  },
@@ -373,17 +297,30 @@
   "lines": [
    {
     "line": 1,
-    "part": "BUSBAR-CU-1600",
-    "description": "Copper busbar set 1600 A (4-bar), 1 sections, about 29 kg",
+    "part": "CT-SET",
+    "description": "Current transformers, set of three, class 1",
     "qty": 1,
-    "unit_gbp": 331.2,
-    "total_gbp": 331.2,
+    "unit_gbp": 280,
+    "total_gbp": 280,
+    "conf": 0.49,
+    "evidence": [
+     "S11"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 2,
+    "part": "BUSBAR-CU-2500",
+    "description": "Copper busbar set 2500 A (4-bar), 1 sections, about 46 kg",
+    "qty": 1,
+    "unit_gbp": 524.4,
+    "total_gbp": 524.4,
     "conf": 0.9,
     "evidence": [],
     "rule": "R-BUSBAR-SIZE"
    },
    {
-    "line": 2,
+    "line": 3,
     "part": "ENC-SECTION",
     "description": "Enclosure section, Form 4 Type 6, IP31, RAL 7035",
     "qty": 1,
@@ -394,18 +331,18 @@
     "rule": "R-ENCLOSURE"
    },
    {
-    "line": 3,
+    "line": 4,
     "part": "LAB-ASSY",
-    "description": "Assembly, wiring and routine verification: 142 hours",
+    "description": "Assembly, wiring and routine verification: 83 hours",
     "qty": 1,
-    "unit_gbp": 6816,
-    "total_gbp": 6816,
+    "unit_gbp": 3984,
+    "total_gbp": 3984,
     "conf": 0.9,
     "evidence": [],
     "rule": "R-LABOUR"
    },
    {
-    "line": 4,
+    "line": 5,
     "part": "DOC",
     "description": "Documentation, as-built drawings, test certificates",
     "qty": 1,
@@ -416,7 +353,7 @@
     "rule": "R-DOC"
    },
    {
-    "line": 5,
+    "line": 6,
     "part": "DEL",
     "description": "Delivery to site, crane and offload excluded",
     "qty": 1,
@@ -427,9 +364,9 @@
     "rule": "R-DELIVERY"
    }
   ],
-  "subtotal_gbp": 11977.2,
-  "margin_gbp": 1796.58,
-  "total_gbp": 13773.78
+  "subtotal_gbp": 9618.4,
+  "margin_gbp": 1442.76,
+  "total_gbp": 11061.16
  },
  "issues": [
   {
@@ -440,23 +377,25 @@
   },
   {
    "kind": "missing",
-   "what": "D1 (ACB): rating not read",
+   "what": "D1 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S1"
+    "S1",
+    "T1"
    ]
   },
   {
    "kind": "missing",
-   "what": "D2 (ACB): rating not read",
+   "what": "D2 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S2"
+    "S2",
+    "T2"
    ]
   },
   {
    "kind": "missing",
-   "what": "D3 (FUSE_SWITCH): rating not read",
+   "what": "D3 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
     "S3"
@@ -464,15 +403,16 @@
   },
   {
    "kind": "missing",
-   "what": "D4 (FUSE_SWITCH): rating not read",
+   "what": "D4 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S4"
+    "S4",
+    "T3"
    ]
   },
   {
    "kind": "missing",
-   "what": "D5 (FUSE_SWITCH): rating not read",
+   "what": "D5 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
     "S5"
@@ -480,17 +420,17 @@
   },
   {
    "kind": "missing",
-   "what": "D6 (ACB): rating not read",
+   "what": "D6 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
     "S6",
-    "T7",
-    "T4"
+    "T4",
+    "T7"
    ]
   },
   {
    "kind": "missing",
-   "what": "D7 (CONTACTOR): kW not read",
+   "what": "D7 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
     "S7"
@@ -498,7 +438,7 @@
   },
   {
    "kind": "missing",
-   "what": "D8 (CAPACITOR): kVAr not read",
+   "what": "D8 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
     "S8"
@@ -506,7 +446,7 @@
   },
   {
    "kind": "missing",
-   "what": "D9 (FUSE_SWITCH): rating not read",
+   "what": "D9 (CAPACITOR): kVAr not read",
    "action": "read from drawing / schedule",
    "evidence": [
     "S9"
@@ -514,86 +454,40 @@
   },
   {
    "kind": "missing",
-   "what": "D10 (FUSE_SWITCH): rating not read",
+   "what": "D10 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S10"
+    "S10",
+    "T8",
+    "T9"
    ]
   },
   {
    "kind": "missing",
-   "what": "D11 (MCCB): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S11",
-    "T8"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D12 (MCCB): rating not read",
+   "what": "D12 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
     "S12"
    ]
   },
   {
-   "kind": "missing",
-   "what": "D13 (MCCB): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S13"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D14 (MCCB): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S14"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D15 (FUSE_SWITCH): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S15"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D16 (CONTACTOR): kW not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S16"
-   ]
-  },
-  {
    "kind": "assumed",
-   "what": "busbar rating not read; assumed 0 A from the largest incomer",
+   "what": "busbar rating not read; assumed 2500 A from the largest incomer",
    "action": "confirm",
    "evidence": []
   },
   {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D1, D2, D3, D4, D5, D7, D8, D9, D10, D12, D13, D14, D15, D16",
+   "what": "devices read with low confidence: D3, D5, D7, D8, D9, D11, D12",
    "action": "check against the drawing",
    "evidence": [
-    "D1",
-    "D2",
     "D3",
-    "D4",
     "D5",
     "D7",
     "D8",
     "D9",
-    "D10",
-    "D12",
-    "D13",
-    "D14",
-    "D15",
-    "D16"
+    "D11",
+    "D12"
    ]
   }
  ],
@@ -601,14 +495,14 @@
  "spec": null,
  "score": null,
  "timing": {
-  "total": 2.34,
-  "ocr": 1.1,
-  "detector": 1.09
+  "total": 1.82,
+  "ocr": 1.0,
+  "detector": 0.67
  },
  "reader": "trained",
  "engine": "rapidocr",
  "model": {
-  "weights": "weights/rtdetr_r18_full",
+  "weights": "weights/rtdetr_r18_plain_ema_fix_pass4",
   "threshold": 0.11
  },
  "files": {

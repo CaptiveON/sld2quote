@@ -18,12 +18,12 @@
    "total_gbp": 11956.0,
    "evidence": [
     "S4",
-    "T11",
-    "T8"
+    "T8",
+    "T11"
    ],
    "rule": "R-ACB-SELECT",
    "conf": 0.99,
-   "basis": "rating 4000 A from ['T11']; poles 4; kA 36"
+   "basis": "rating 4000 A from ['T8']; poles 4; kA 36"
   },
   {
    "line": 2,
@@ -34,8 +34,8 @@
    "total_gbp": 1400,
    "evidence": [
     "S4",
-    "T11",
-    "T8"
+    "T8",
+    "T11"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.99,
@@ -50,12 +50,12 @@
    "total_gbp": 11956.0,
    "evidence": [
     "S5",
-    "T12",
-    "T9"
+    "T9",
+    "T12"
    ],
    "rule": "R-ACB-SELECT",
    "conf": 0.97,
-   "basis": "rating 4000 A from ['T12']; poles 4; kA 36"
+   "basis": "rating 4000 A from ['T9']; poles 4; kA 36"
   },
   {
    "line": 4,
@@ -66,8 +66,8 @@
    "total_gbp": 1400,
    "evidence": [
     "S5",
-    "T12",
-    "T9"
+    "T9",
+    "T12"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.97,
@@ -120,42 +120,41 @@
   },
   {
    "line": 8,
-   "part": "METER-CT 2500/5A",
-   "description": "Panel meter (CT 2500/5A)",
+   "part": "METER-V",
+   "description": "Panel meter (V)",
    "qty": 1,
-   "unit_gbp": 260,
-   "total_gbp": 260,
+   "unit_gbp": 120,
+   "total_gbp": 120,
    "evidence": [
     "S7",
-    "T15"
+    "S7g1"
+   ],
+   "rule": "R-METERING",
+   "conf": 0.72,
+   "basis": ""
+  },
+  {
+   "line": 9,
+   "part": "METER-kWh",
+   "description": "Panel meter (kWh)",
+   "qty": 1,
+   "unit_gbp": 340,
+   "total_gbp": 340,
+   "evidence": [
+    "S8",
+    "T13"
    ],
    "rule": "R-METERING",
    "conf": 1.0,
    "basis": ""
   },
   {
-   "line": 9,
+   "line": 10,
    "part": "CT-SET",
    "description": "Current transformers 4000/5 A, set of three, class 1",
    "qty": 1,
    "unit_gbp": 280,
    "total_gbp": 280,
-   "evidence": [
-    "S8",
-    "T13",
-    "T16"
-   ],
-   "rule": "R-METERING",
-   "conf": 0.75,
-   "basis": ""
-  },
-  {
-   "line": 10,
-   "part": "METER-CT 4000/5A",
-   "description": "Panel meter (CT 4000/5A)",
-   "qty": 1,
-   "unit_gbp": 260,
-   "total_gbp": 260,
    "evidence": [
     "S9",
     "T14"
@@ -167,15 +166,16 @@
   {
    "line": 11,
    "part": "CT-SET",
-   "description": "Current transformers, set of three, class 1",
+   "description": "Current transformers 2500/5 A, set of three, class 1",
    "qty": 1,
    "unit_gbp": 280,
    "total_gbp": 280,
    "evidence": [
-    "S10"
+    "S10",
+    "T15"
    ],
    "rule": "R-METERING",
-   "conf": 0.5,
+   "conf": 1.0,
    "basis": ""
   },
   {
@@ -190,7 +190,7 @@
     "T18"
    ],
    "rule": "R-BUS-SECTION",
-   "conf": 1.0,
+   "conf": 0.97,
    "basis": ""
   },
   {
@@ -205,19 +205,18 @@
     "T18"
    ],
    "rule": "R-FU-KIT",
-   "conf": 1.0,
+   "conf": 0.97,
    "basis": ""
   },
   {
    "line": 14,
    "part": "MCCB-100-4P-N",
-   "description": "Moulded-case circuit breaker 100 A 4-pole, 36 kA band N, adjustable trip; feeds SPD Type 1+2",
+   "description": "Moulded-case circuit breaker 100 A 4-pole, 36 kA band N, adjustable trip",
    "qty": 1,
    "unit_gbp": 378.2,
    "total_gbp": 378.2,
    "evidence": [
     "S12",
-    "T24",
     "T19"
    ],
    "rule": "R-MCCB-SELECT",
@@ -233,7 +232,6 @@
    "total_gbp": 420,
    "evidence": [
     "S12",
-    "T24",
     "T19"
    ],
    "rule": "R-FU-KIT",
@@ -249,8 +247,9 @@
    "total_gbp": 634.4,
    "evidence": [
     "S13",
+    "T20",
     "T25",
-    "T20"
+    "T34"
    ],
    "rule": "R-MCCB-SELECT",
    "conf": 0.98,
@@ -265,8 +264,9 @@
    "total_gbp": 420,
    "evidence": [
     "S13",
+    "T20",
     "T25",
-    "T20"
+    "T34"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.98,
@@ -281,8 +281,9 @@
    "total_gbp": 520.0,
    "evidence": [
     "S14",
+    "T21",
     "T26",
-    "T21"
+    "T35"
    ],
    "rule": "R-ISOL-SELECT",
    "conf": 0.98,
@@ -297,8 +298,9 @@
    "total_gbp": 340,
    "evidence": [
     "S14",
+    "T21",
     "T26",
-    "T21"
+    "T35"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.98,
@@ -313,8 +315,9 @@
    "total_gbp": 634.4,
    "evidence": [
     "S15",
+    "T22",
     "T27",
-    "T22"
+    "T36"
    ],
    "rule": "R-MCCB-SELECT",
    "conf": 0.95,
@@ -329,8 +332,9 @@
    "total_gbp": 420,
    "evidence": [
     "S15",
+    "T22",
     "T27",
-    "T22"
+    "T36"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.95,
@@ -345,8 +349,9 @@
    "total_gbp": 1207.8,
    "evidence": [
     "S16",
+    "T23",
     "T28",
-    "T23"
+    "T37"
    ],
    "rule": "R-ISOL-SELECT",
    "conf": 0.94,
@@ -361,8 +366,9 @@
    "total_gbp": 340,
    "evidence": [
     "S16",
+    "T23",
     "T28",
-    "T23"
+    "T37"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.94,
@@ -377,8 +383,9 @@
    "total_gbp": 1195.6,
    "evidence": [
     "S17",
+    "T29",
     "T38",
-    "T29"
+    "T45"
    ],
    "rule": "R-MCCB-SELECT",
    "conf": 0.96,
@@ -393,8 +400,9 @@
    "total_gbp": 420,
    "evidence": [
     "S17",
+    "T29",
     "T38",
-    "T29"
+    "T45"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.96,
@@ -409,8 +417,9 @@
    "total_gbp": 1769.0,
    "evidence": [
     "S18",
+    "T30",
     "T39",
-    "T30"
+    "T46"
    ],
    "rule": "R-MCCB-SELECT",
    "conf": 0.94,
@@ -425,8 +434,9 @@
    "total_gbp": 420,
    "evidence": [
     "S18",
+    "T30",
     "T39",
-    "T30"
+    "T46"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.94,
@@ -434,19 +444,20 @@
   },
   {
    "line": 28,
-   "part": "MCCB-250-4P-L",
-   "description": "Moulded-case circuit breaker 250 A 4-pole, 80 kA band L, adjustable trip; feeds lighting",
+   "part": "MCCB-630-4P-N",
+   "description": "Moulded-case circuit breaker 630 A 4-pole, 36 kA band N, adjustable trip; feeds DB-8 theatres",
    "qty": 1,
-   "unit_gbp": 888.16,
-   "total_gbp": 888.16,
+   "unit_gbp": 1769.0,
+   "total_gbp": 1769.0,
    "evidence": [
     "S19",
-    "T41",
-    "T32"
+    "T31",
+    "T40",
+    "T47"
    ],
    "rule": "R-MCCB-SELECT",
-   "conf": 0.97,
-   "basis": "rating 250 A; poles 4; kA 80"
+   "conf": 0.96,
+   "basis": "rating 630 A; poles 4; kA 36"
   },
   {
    "line": 29,
@@ -457,28 +468,30 @@
    "total_gbp": 420,
    "evidence": [
     "S19",
-    "T41",
-    "T32"
+    "T31",
+    "T40",
+    "T47"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.97,
+   "conf": 0.96,
    "basis": ""
   },
   {
    "line": 30,
-   "part": "MCCB-630-4P-N",
-   "description": "Moulded-case circuit breaker 630 A 4-pole, 36 kA band N, adjustable trip; feeds DB-8 theatres",
+   "part": "MCCB-250-4P-L",
+   "description": "Moulded-case circuit breaker 250 A 4-pole, 80 kA band L, adjustable trip; feeds lighting",
    "qty": 1,
-   "unit_gbp": 1769.0,
-   "total_gbp": 1769.0,
+   "unit_gbp": 888.16,
+   "total_gbp": 888.16,
    "evidence": [
     "S20",
-    "T40",
-    "T31"
+    "T32",
+    "T41",
+    "T48"
    ],
    "rule": "R-MCCB-SELECT",
-   "conf": 0.96,
-   "basis": "rating 630 A; poles 4; kA 36"
+   "conf": 0.97,
+   "basis": "rating 250 A; poles 4; kA 80"
   },
   {
    "line": 31,
@@ -489,11 +502,12 @@
    "total_gbp": 420,
    "evidence": [
     "S20",
-    "T40",
-    "T31"
+    "T32",
+    "T41",
+    "T48"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.96,
+   "conf": 0.97,
    "basis": ""
   },
   {
@@ -505,8 +519,9 @@
    "total_gbp": 634.4,
    "evidence": [
     "S21",
+    "T33",
     "T42",
-    "T33"
+    "T49"
    ],
    "rule": "R-MCCB-SELECT",
    "conf": 0.98,
@@ -521,8 +536,9 @@
    "total_gbp": 420,
    "evidence": [
     "S21",
+    "T33",
     "T42",
-    "T33"
+    "T49"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.98,
@@ -536,27 +552,29 @@
    "unit_gbp": 690,
    "total_gbp": 690,
    "evidence": [
-    "S22"
+    "S22",
+    "T24"
    ],
    "rule": "R-SPD",
-   "conf": 0.47,
+   "conf": 0.99,
    "basis": ""
   },
   {
    "line": 35,
-   "part": "MCCB-400-3P-N",
-   "description": "Moulded-case circuit breaker 400 A 3-pole, 36 kA band N, adjustable trip; feeds MCC-5 AHU",
+   "part": "MCCB-100-4P-H",
+   "description": "Moulded-case circuit breaker 100 A 4-pole, 65 kA band H, adjustable trip; feeds spare",
    "qty": 1,
-   "unit_gbp": 980.0,
-   "total_gbp": 980.0,
+   "unit_gbp": 446.28,
+   "total_gbp": 446.28,
    "evidence": [
     "S23",
-    "T50",
-    "T43"
+    "T44",
+    "T51",
+    "T53"
    ],
    "rule": "R-MCCB-SELECT",
-   "conf": 0.96,
-   "basis": "rating 400 A; poles 3; kA 36"
+   "conf": 0.99,
+   "basis": "rating 100 A; poles 4; kA 65"
   },
   {
    "line": 36,
@@ -567,28 +585,30 @@
    "total_gbp": 420,
    "evidence": [
     "S23",
-    "T50",
-    "T43"
+    "T44",
+    "T51",
+    "T53"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.96,
+   "conf": 0.99,
    "basis": ""
   },
   {
    "line": 37,
-   "part": "MCCB-100-4P-H",
-   "description": "Moulded-case circuit breaker 100 A 4-pole, 65 kA band H, adjustable trip; feeds spare",
+   "part": "MCCB-400-3P-N",
+   "description": "Moulded-case circuit breaker 400 A 3-pole, 36 kA band N, adjustable trip; feeds MCC-5 AHU",
    "qty": 1,
-   "unit_gbp": 446.28,
-   "total_gbp": 446.28,
+   "unit_gbp": 980.0,
+   "total_gbp": 980.0,
    "evidence": [
     "S24",
-    "T51",
-    "T44"
+    "T43",
+    "T50",
+    "T52"
    ],
    "rule": "R-MCCB-SELECT",
-   "conf": 0.99,
-   "basis": "rating 100 A; poles 4; kA 65"
+   "conf": 0.96,
+   "basis": "rating 400 A; poles 3; kA 36"
   },
   {
    "line": 38,
@@ -599,11 +619,12 @@
    "total_gbp": 420,
    "evidence": [
     "S24",
-    "T51",
-    "T44"
+    "T43",
+    "T50",
+    "T52"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.99,
+   "conf": 0.96,
    "basis": ""
   },
   {
@@ -689,17 +710,16 @@
    "basis": ""
   }
  ],
- "subtotal_gbp": 102641.64,
- "margin_gbp": 15396.25,
- "total_gbp": 118037.89,
+ "subtotal_gbp": 102581.64,
+ "margin_gbp": 15387.25,
+ "total_gbp": 117968.89,
  "issues": [
   {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D10, D22",
+   "what": "devices read with low confidence: D25",
    "action": "check against the drawing",
    "evidence": [
-    "D10",
-    "D22"
+    "D25"
    ]
   }
  ]

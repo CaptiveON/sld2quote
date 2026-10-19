@@ -9,41 +9,43 @@ Prices are from the prototype's illustrative catalogue, not a supplier price lis
 
 | # | Part | Description | Qty | Unit £ | Total £ | Conf | Evidence |
 |---|---|---|---|---|---|---|---|
-| 1 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.38 | S4 R-METERING |
-| 2 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.47 | S10 R-PROTECTION |
-| 3 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.38 | S12 R-METERING |
-| 4 | BUSBAR-CU-2500 | Copper busbar set 2500 A (4-bar), 1 sections, about 46 kg | 1 | 524.40 | 524.40 | 0.9 |  R-BUSBAR-SIZE |
-| 5 | ENC-SECTION | Enclosure section, Form 4 Type 6, IP31, RAL 7035 | 1 | 3,380.00 | 3,380.00 | 0.95 |  R-ENCLOSURE |
-| 6 | LAB-ASSY | Assembly, wiring and routine verification: 134 hours | 1 | 6,432.00 | 6,432.00 | 0.9 |  R-LABOUR |
-| 7 | DOC | Documentation, as-built drawings, test certificates | 1 | 600.00 | 600.00 | 1.0 |  R-DOC |
-| 8 | DEL | Delivery to site, crane and offload excluded | 1 | 850.00 | 850.00 | 1.0 |  R-DELIVERY |
+| 1 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.5 | S6 R-METERING |
+| 2 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.43 | S7 R-METERING |
+| 3 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.43 | S8 R-METERING |
+| 4 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.43 | S20 R-METERING |
+| 5 | BUSBAR-CU-2500 | Copper busbar set 2500 A (4-bar), 1 sections, about 46 kg | 1 | 524.40 | 524.40 | 0.9 |  R-BUSBAR-SIZE |
+| 6 | ENC-SECTION | Enclosure section, Form 4 Type 6, IP31, RAL 7035 | 1 | 3,380.00 | 3,380.00 | 0.95 |  R-ENCLOSURE |
+| 7 | LAB-ASSY | Assembly, wiring and routine verification: 160 hours | 1 | 7,680.00 | 7,680.00 | 0.9 |  R-LABOUR |
+| 8 | DOC | Documentation, as-built drawings, test certificates | 1 | 600.00 | 600.00 | 1.0 |  R-DOC |
+| 9 | DEL | Delivery to site, crane and offload excluded | 1 | 850.00 | 850.00 | 1.0 |  R-DELIVERY |
 
-Subtotal £13,296.40; margin £1,994.46; **total £15,290.86**
+Subtotal £14,154.40; margin £2,123.16; **total £16,277.56**
 
 ## Clarifications and exclusions (from flagged items)
 - [missing] fault level not found on the drawing notes. Action: confirm with the consultant. Evidence: 
-- [missing] D1 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S1
-- [missing] D2 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S2
-- [missing] D3 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S3
-- [missing] D5 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S5
-- [missing] D6 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S6
-- [missing] D7 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S7
-- [missing] D8 (CAPACITOR): kVAr not read. Action: read from drawing / schedule. Evidence: S8 T5
-- [missing] D9 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S9
-- [missing] D11 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S11
-- [missing] D13 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S13
-- [missing] D14 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S14
+- [missing] D1 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S1 T1
+- [missing] D2 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S2
+- [missing] D3 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S3 T2
+- [missing] D4 (BUS_SECTION): rating not read. Action: read from drawing / schedule. Evidence: S4
+- [missing] D5 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S5
+- [missing] D9 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S9
+- [missing] D10 (CONTACTOR): kW not read. Action: read from drawing / schedule. Evidence: S10
+- [missing] D11 (CONTACTOR): kW not read. Action: read from drawing / schedule. Evidence: S11
+- [missing] D12 (CAPACITOR): kVAr not read. Action: read from drawing / schedule. Evidence: S12
+- [missing] D13 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S13
+- [missing] D14 (CAPACITOR): kVAr not read. Action: read from drawing / schedule. Evidence: S14
 - [missing] D15 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S15
-- [missing] D16 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S16 T9
-- [missing] D17 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S17
-- [missing] D18 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S18
-- [missing] D19 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S19
-- [missing] D20 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S20
-- [missing] D21 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S21
-- [missing] D22 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S22 T10
-- [missing] D23 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S23
-- [missing] D24 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S24
+- [missing] D16 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S16 T6
+- [missing] D17 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S17 T5
+- [missing] D19 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S19 T7 T8
+- [missing] D21 (CAPACITOR): kVAr not read. Action: read from drawing / schedule. Evidence: S21
+- [missing] D22 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S22
+- [missing] D23 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S23
+- [missing] D24 (CONTACTOR): kW not read. Action: read from drawing / schedule. Evidence: S24
+- [missing] D25 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S25 T9
+- [missing] D26 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S26 T10
+- [missing] D27 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S27
 - [assumed] busbar rating not read; assumed 2500 A from the largest incomer. Action: confirm. Evidence: 
-- [low_confidence] devices read with low confidence: D1, D2, D3, D4, D5, D6, D7, D9, D10, D11, D12, D13, D14, D15, D17, D18, D19, D20, D21, D23, D24. Action: check against the drawing. Evidence: D1 D2 D3 D4 D5 D6 D7 D9 D10 D11 D12 D13 D14 D15 D17 D18 D19 D20 D21 D23 D24
+- [low_confidence] devices read with low confidence: D2, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15, D18, D20, D21, D22, D23, D24, D27. Action: check against the drawing. Evidence: D2 D4 D5 D6 D7 D8 D9 D10 D11 D12 D13 D14 D15 D18 D20 D21 D22 D23 D24 D27
 
-Generated by sld2quote 0.2.0 in 3.1 s; reader deskew -0.2 deg.
+Generated by sld2quote 0.2.0 in 2.7 s; reader deskew -0.2 deg.

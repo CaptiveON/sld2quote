@@ -36,10 +36,10 @@
   {
    "line": 3,
    "part": "LAB-ASSY",
-   "description": "Assembly, wiring and routine verification: 58 hours",
+   "description": "Assembly, wiring and routine verification: 64 hours",
    "qty": 1,
-   "unit_gbp": 2784,
-   "total_gbp": 2784,
+   "unit_gbp": 3072,
+   "total_gbp": 3072,
    "evidence": [],
    "rule": "R-LABOUR",
    "conf": 0.9,
@@ -70,9 +70,9 @@
    "basis": ""
   }
  ],
- "subtotal_gbp": 7945.2,
- "margin_gbp": 1191.78,
- "total_gbp": 9136.98,
+ "subtotal_gbp": 8233.2,
+ "margin_gbp": 1234.98,
+ "total_gbp": 9468.18,
  "issues": [
   {
    "kind": "missing",
@@ -82,7 +82,19 @@
   },
   {
    "kind": "missing",
-   "what": "D2 (ACB): rating not read",
+   "what": "D1 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S1",
+    "T2",
+    "T3",
+    "T4",
+    "T5"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D2 (CAPACITOR): kVAr not read",
    "action": "read from drawing / schedule",
    "evidence": [
     "S2"
@@ -101,8 +113,7 @@
    "what": "D6 (CONTACTOR): kW not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S6",
-    "T14"
+    "S6"
    ]
   },
   {
@@ -113,14 +124,13 @@
   },
   {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D1, D2, D3, D5, D7",
+   "what": "devices read with low confidence: D2, D3, D5, D6",
    "action": "check against the drawing",
    "evidence": [
-    "D1",
     "D2",
     "D3",
     "D5",
-    "D7"
+    "D6"
    ]
   }
  ]

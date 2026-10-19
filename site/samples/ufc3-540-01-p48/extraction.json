@@ -303,24 +303,84 @@
    "kind": "generator",
    "box": [
     765,
-    77,
-    62,
-    61
+    76,
+    61,
+    62
    ],
-   "score": 0.82,
+   "score": 0.32,
    "shape_score": 1.0
   },
   {
    "id": "S2",
    "kind": "ct",
    "box": [
-    318,
-    266,
+    184,
+    182,
     22,
-    42
+    43
+   ],
+   "score": 0.33,
+   "shape_score": 1.0
+  },
+  {
+   "id": "S3",
+   "kind": "ct",
+   "box": [
+    375,
+    182,
+    24,
+    44
+   ],
+   "score": 0.17,
+   "shape_score": 0.97
+  },
+  {
+   "id": "S4",
+   "kind": "breaker",
+   "box": [
+    562,
+    229,
+    41,
+    23
+   ],
+   "score": 0.19,
+   "shape_score": 0.99
+  },
+  {
+   "id": "S5",
+   "kind": "contactor",
+   "box": [
+    238,
+    266,
+    20,
+    43
+   ],
+   "score": 0.13,
+   "shape_score": 0.87
+  },
+  {
+   "id": "S6",
+   "kind": "board",
+   "box": [
+    172,
+    332,
+    54,
+    18
    ],
    "score": 0.11,
-   "shape_score": 0.75
+   "shape_score": 0.87
+  },
+  {
+   "id": "S7",
+   "kind": "board",
+   "box": [
+    380,
+    380,
+    86,
+    63
+   ],
+   "score": 0.61,
+   "shape_score": 1.0
   }
  ],
  "devices": [
@@ -328,14 +388,21 @@
    "symbol": "S1",
    "box": [
     765,
-    77,
-    62,
-    61
+    76,
+    61,
+    62
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.5,
-   "score": 0.82,
+   "label_texts": [
+    "T6",
+    "T5",
+    "T9",
+    "T10",
+    "T14",
+    "T16"
+   ],
+   "label": "GENERATOR | GENERATOR | G | G | EMERGENCY | BUS",
+   "conf": 0.99,
+   "score": 0.32,
    "type": "GENERATOR",
    "rating": null,
    "on_bus": null,
@@ -345,20 +412,124 @@
   {
    "symbol": "S2",
    "box": [
-    318,
-    266,
+    184,
+    182,
     22,
-    42
+    43
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.38,
-   "score": 0.11,
+   "label_texts": [
+    "T7",
+    "T11",
+    "T13",
+    "T15"
+   ],
+   "label": "DISTRIBUTION | TRANSFORMER | NORMAL | BUS",
+   "conf": 1.0,
+   "score": 0.33,
    "type": "CT",
    "rating": null,
    "on_bus": null,
    "connected": false,
    "id": "D2"
+  },
+  {
+   "symbol": "S3",
+   "box": [
+    375,
+    182,
+    24,
+    44
+   ],
+   "label_texts": [
+    "T8",
+    "T12"
+   ],
+   "label": "DISTRIBUTION | TRANSFORMER",
+   "conf": 0.97,
+   "score": 0.17,
+   "type": "CT",
+   "rating": null,
+   "on_bus": null,
+   "connected": false,
+   "id": "D3"
+  },
+  {
+   "symbol": "S4",
+   "box": [
+    562,
+    229,
+    41,
+    23
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.49,
+   "score": 0.19,
+   "type": "ACB",
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "on_bus": null,
+   "connected": false,
+   "id": "D4"
+  },
+  {
+   "symbol": "S5",
+   "box": [
+    238,
+    266,
+    20,
+    43
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.43,
+   "score": 0.13,
+   "type": "CONTACTOR",
+   "rating": null,
+   "on_bus": null,
+   "connected": false,
+   "id": "D5"
+  },
+  {
+   "symbol": "S6",
+   "box": [
+    172,
+    332,
+    54,
+    18
+   ],
+   "label_texts": [
+    "T18"
+   ],
+   "label": "LOADS",
+   "conf": 0.87,
+   "score": 0.11,
+   "type": "BOARD",
+   "rating": null,
+   "on_bus": null,
+   "connected": false,
+   "id": "D6"
+  },
+  {
+   "symbol": "S7",
+   "box": [
+    380,
+    380,
+    86,
+    63
+   ],
+   "label_texts": [
+    "T21"
+   ],
+   "label": "UPS",
+   "conf": 1.0,
+   "score": 0.61,
+   "type": "BOARD",
+   "rating": null,
+   "on_bus": null,
+   "connected": false,
+   "id": "D7"
   }
  ],
  "notes": {
@@ -372,14 +543,14 @@
  "ocr_engine": "rapidocr",
  "reader": "trained",
  "seconds": {
-  "total": 1.77,
-  "ocr": 1.11,
-  "detector": 0.61
+  "total": 1.34,
+  "ocr": 0.9,
+  "detector": 0.39
  },
  "detector": {
-  "weights": "weights/rtdetr_r18_full",
+  "weights": "weights/rtdetr_r18_plain_ema_fix_pass4",
   "device": "cpu",
-  "threads": 2,
+  "threads": 4,
   "score_threshold": 0.11,
   "score_threshold_source": "drawing",
   "nms_iou": 0.5,

@@ -22,22 +22,22 @@
    "key": "text",
    "title": "Read the words",
    "count": 24,
-   "seconds": 2.26,
-   "plain": "Read 24 pieces of text in 2.26 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 1.81,
+   "plain": "Read 24 pieces of text in 1.81 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
-   "count": 7,
-   "seconds": 2.04,
-   "plain": "Found 7 symbols in 2.04 s: 3 motor starters, 2 power-factor correction banks, 1 generator, 1 incoming air circuit breaker. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "count": 16,
+   "seconds": 1.23,
+   "plain": "Found 16 symbols in 1.23 s: 8 motor starters, 2 protection relays, 2 power-factor correction banks, 1 generator, 1 current transformer, 1 earth, 1 incoming air circuit breaker. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
-   "count": 1,
+   "count": 7,
    "seconds": 0.1,
-   "plain": "Paired 1 of 7 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
+   "plain": "Paired 7 of 16 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
    "key": "spec",
@@ -49,9 +49,9 @@
   {
    "key": "price",
    "title": "Pick parts and price",
-   "count": 5,
+   "count": 8,
    "seconds": 0.0,
-   "plain": "Chose 5 catalogue lines and priced the board at \u00a39,799 (illustrative prices, 15% margin included); 9 items flagged for the estimator. Every line names the symbol, text or clause it rests on, so a reviewer can check it on the drawing."
+   "plain": "Chose 8 catalogue lines and priced the board at \u00a315,066 (illustrative prices, 15% margin included); 14 items flagged for the estimator. Every line names the symbol, text or clause it rests on, so a reviewer can check it on the drawing."
   }
  ],
  "devices": [
@@ -64,72 +64,72 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.5,
-   "score": 0.46,
+   "conf": 0.99,
+   "score": 0.32,
    "box": [
     1213,
-    54,
+    53,
     74,
-    78
+    77
    ],
-   "label": ""
+   "label": "GENERATOR | G"
   },
   {
    "id": "D2",
-   "type": "CONTACTOR",
-   "type_plain": "motor starter",
-   "rating": null,
-   "unit": "kW",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.49,
-   "score": 0.21,
-   "box": [
-    174,
-    333,
-    53,
-    26
-   ],
-   "label": ""
-  },
-  {
-   "id": "D3",
-   "type": "CONTACTOR",
-   "type_plain": "motor starter",
-   "rating": null,
-   "unit": "kW",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.5,
-   "score": 0.34,
-   "box": [
-    549,
-    393,
-    25,
-    52
-   ],
-   "label": ""
-  },
-  {
-   "id": "D4",
-   "type": "ACB",
-   "type_plain": "incoming air circuit breaker",
+   "type": "CT",
+   "type_plain": "current transformer",
    "rating": null,
    "unit": "A",
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.48,
-   "score": 0.2,
+   "conf": 0.87,
+   "score": 0.12,
    "box": [
-    159,
-    423,
-    67,
-    35
+    205,
+    103,
+    21,
+    13
    ],
-   "label": ""
+   "label": "UTILITY SUPPLY | DISTRIBUTICN | RANSHORMER"
+  },
+  {
+   "id": "D3",
+   "type": "RELAY",
+   "type_plain": "protection relay",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 1.0,
+   "score": 0.35,
+   "box": [
+    31,
+    180,
+    19,
+    18
+   ],
+   "label": "SERVICE | ENTRANCE"
+  },
+  {
+   "id": "D4",
+   "type": "CONTACTOR",
+   "type_plain": "motor starter",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.94,
+   "score": 0.18,
+   "box": [
+    538,
+    303,
+    35,
+    48
+   ],
+   "label": "FOUR POLE | AUTOMATIC | TRANSFER SWITCH"
   },
   {
    "id": "D5",
@@ -140,15 +140,15 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.38,
+   "conf": 0.87,
    "score": 0.12,
    "box": [
-    799,
-    681,
-    35,
-    46
+    270,
+    332,
+    50,
+    27
    ],
-   "label": ""
+   "label": "NORMAL"
   },
   {
    "id": "D6",
@@ -159,18 +159,189 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.38,
-   "score": 0.11,
+   "conf": 0.43,
+   "score": 0.12,
    "box": [
-    852,
-    825,
+    606,
+    379,
+    53,
+    19
+   ],
+   "label": ""
+  },
+  {
+   "id": "D7",
+   "type": "EARTH",
+   "type_plain": "earth",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.43,
+   "score": 0.14,
+   "box": [
+    591,
+    445,
+    51,
+    26
+   ],
+   "label": ""
+  },
+  {
+   "id": "D8",
+   "type": "ACB",
+   "type_plain": "incoming air circuit breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.49,
+   "score": 0.24,
+   "box": [
+    496,
+    446,
     52,
     27
    ],
    "label": ""
   },
   {
-   "id": "D7",
+   "id": "D9",
+   "type": "RELAY",
+   "type_plain": "protection relay",
+   "rating": null,
+   "unit": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.49,
+   "score": 0.19,
+   "box": [
+    1186,
+    466,
+    26,
+    19
+   ],
+   "label": ""
+  },
+  {
+   "id": "D10",
+   "type": "CONTACTOR",
+   "type_plain": "motor starter",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.87,
+   "score": 0.15,
+   "box": [
+    491,
+    474,
+    136,
+    120
+   ],
+   "label": "ESSENTIAL | LOADS | NORMAL"
+  },
+  {
+   "id": "D11",
+   "type": "CONTACTOR",
+   "type_plain": "motor starter",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.49,
+   "score": 0.2,
+   "box": [
+    591,
+    483,
+    52,
+    28
+   ],
+   "label": ""
+  },
+  {
+   "id": "D12",
+   "type": "CONTACTOR",
+   "type_plain": "motor starter",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.87,
+   "score": 0.13,
+   "box": [
+    798,
+    680,
+    37,
+    49
+   ],
+   "label": "FOUR POLE | AUTOMATIC | TRANSFER SWITCH"
+  },
+  {
+   "id": "D13",
+   "type": "CONTACTOR",
+   "type_plain": "motor starter",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.43,
+   "score": 0.14,
+   "box": [
+    756,
+    824,
+    52,
+    27
+   ],
+   "label": ""
+  },
+  {
+   "id": "D14",
+   "type": "CONTACTOR",
+   "type_plain": "motor starter",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.48,
+   "score": 0.18,
+   "box": [
+    852,
+    824,
+    51,
+    27
+   ],
+   "label": ""
+  },
+  {
+   "id": "D15",
+   "type": "CONTACTOR",
+   "type_plain": "motor starter",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.43,
+   "score": 0.13,
+   "box": [
+    756,
+    900,
+    48,
+    28
+   ],
+   "label": ""
+  },
+  {
+   "id": "D16",
    "type": "CAPACITOR",
    "type_plain": "power-factor correction bank",
    "rating": null,
@@ -178,15 +349,15 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.75,
-   "score": 0.13,
+   "conf": 0.5,
+   "score": 0.48,
    "box": [
-    752,
-    937,
-    56,
-    28
+    805,
+    967,
+    49,
+    13
    ],
-   "label": "ESSENTIAL | LOADS"
+   "label": ""
   }
  ],
  "board": {
@@ -202,6 +373,50 @@
   "lines": [
    {
     "line": 1,
+    "part": "CT-SET",
+    "description": "Current transformers, set of three, class 1",
+    "qty": 1,
+    "unit_gbp": 280,
+    "total_gbp": 280,
+    "conf": 0.87,
+    "evidence": [
+     "S2",
+     "T1",
+     "T4",
+     "T5"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 2,
+    "part": "RELAY-OC",
+    "description": "Overcurrent and earth-fault protection relay",
+    "qty": 1,
+    "unit_gbp": 950,
+    "total_gbp": 950,
+    "conf": 1.0,
+    "evidence": [
+     "S3",
+     "T6",
+     "T7"
+    ],
+    "rule": "R-PROTECTION"
+   },
+   {
+    "line": 3,
+    "part": "RELAY-OC",
+    "description": "Overcurrent and earth-fault protection relay",
+    "qty": 1,
+    "unit_gbp": 950,
+    "total_gbp": 950,
+    "conf": 0.49,
+    "evidence": [
+     "S9"
+    ],
+    "rule": "R-PROTECTION"
+   },
+   {
+    "line": 4,
     "part": "BUSBAR-CU-1600",
     "description": "Copper busbar set 1600 A (4-bar), 1 sections, about 29 kg",
     "qty": 1,
@@ -212,7 +427,7 @@
     "rule": "R-BUSBAR-SIZE"
    },
    {
-    "line": 2,
+    "line": 5,
     "part": "ENC-SECTION",
     "description": "Enclosure section, Form 4 Type 6, IP31, RAL 7035",
     "qty": 1,
@@ -223,18 +438,18 @@
     "rule": "R-ENCLOSURE"
    },
    {
-    "line": 3,
+    "line": 6,
     "part": "LAB-ASSY",
-    "description": "Assembly, wiring and routine verification: 70 hours",
+    "description": "Assembly, wiring and routine verification: 120 hours",
     "qty": 1,
-    "unit_gbp": 3360,
-    "total_gbp": 3360,
+    "unit_gbp": 5760,
+    "total_gbp": 5760,
     "conf": 0.9,
     "evidence": [],
     "rule": "R-LABOUR"
    },
    {
-    "line": 4,
+    "line": 7,
     "part": "DOC",
     "description": "Documentation, as-built drawings, test certificates",
     "qty": 1,
@@ -245,7 +460,7 @@
     "rule": "R-DOC"
    },
    {
-    "line": 5,
+    "line": 8,
     "part": "DEL",
     "description": "Delivery to site, crane and offload excluded",
     "qty": 1,
@@ -256,9 +471,9 @@
     "rule": "R-DELIVERY"
    }
   ],
-  "subtotal_gbp": 8521.2,
-  "margin_gbp": 1278.18,
-  "total_gbp": 9799.38
+  "subtotal_gbp": 13101.2,
+  "margin_gbp": 1965.18,
+  "total_gbp": 15066.38
  },
  "issues": [
   {
@@ -269,26 +484,13 @@
   },
   {
    "kind": "missing",
-   "what": "D2 (CONTACTOR): kW not read",
+   "what": "D4 (CONTACTOR): kW not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S2"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D3 (CONTACTOR): kW not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S3"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D4 (ACB): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S4"
+    "S4",
+    "T8",
+    "T9",
+    "T10"
    ]
   },
   {
@@ -296,7 +498,8 @@
    "what": "D5 (CONTACTOR): kW not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S5"
+    "S5",
+    "T11"
    ]
   },
   {
@@ -309,12 +512,72 @@
   },
   {
    "kind": "missing",
-   "what": "D7 (CAPACITOR): kVAr not read",
+   "what": "D8 (ACB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S7",
-    "T23",
-    "T24"
+    "S8"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D10 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S10",
+    "T17",
+    "T19",
+    "T21"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D11 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S11"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D12 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S12",
+    "T16",
+    "T18",
+    "T20"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D13 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S13"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D14 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S14"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D15 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S15"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D16 (CAPACITOR): kVAr not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S16"
    ]
   },
   {
@@ -325,15 +588,18 @@
   },
   {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D1, D2, D3, D4, D5, D6",
+   "what": "devices read with low confidence: D6, D7, D8, D9, D11, D13, D14, D15, D16",
    "action": "check against the drawing",
    "evidence": [
-    "D1",
-    "D2",
-    "D3",
-    "D4",
-    "D5",
-    "D6"
+    "D6",
+    "D7",
+    "D8",
+    "D9",
+    "D11",
+    "D13",
+    "D14",
+    "D15",
+    "D16"
    ]
   }
  ],
@@ -341,14 +607,14 @@
  "spec": null,
  "score": null,
  "timing": {
-  "total": 4.64,
-  "ocr": 2.26,
-  "detector": 2.04
+  "total": 3.37,
+  "ocr": 1.81,
+  "detector": 1.23
  },
  "reader": "trained",
  "engine": "rapidocr",
  "model": {
-  "weights": "weights/rtdetr_r18_full",
+  "weights": "weights/rtdetr_r18_plain_ema_fix_pass4",
   "threshold": 0.11
  },
  "files": {

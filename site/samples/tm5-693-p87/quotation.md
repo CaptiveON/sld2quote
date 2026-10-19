@@ -3,38 +3,38 @@
 Prices are from the prototype's illustrative catalogue, not a supplier price list. Every line names the evidence it rests on: S = symbol box, T = text box, clause numbers from the specification, R = rule.
 
 ## Board as read
-- Busbar rating 0 A; fault level None kA; Form 4 Type 6; IP31; default 4-pole; 0 outgoing ways in 1 sections.
+- Busbar rating 200 A; fault level None kA; Form 4 Type 6; IP31; default 4-pole; 1 outgoing ways in 2 sections.
 
 ## Bill of materials
 
 | # | Part | Description | Qty | Unit £ | Total £ | Conf | Evidence |
 |---|---|---|---|---|---|---|---|
-| 1 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.5 | S2 R-METERING |
-| 2 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.5 | S4 R-METERING |
-| 3 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.38 | S6 R-METERING |
-| 4 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.38 | S7 R-METERING |
-| 5 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.38 | S10 R-PROTECTION |
-| 6 | METER-Transfer | Switch | Panel meter (Transfer | Switch) | 1 | 260.00 | 260.00 | 0.93 | S12 T13 T14 R-METERING |
-| 7 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.47 | S16 R-PROTECTION |
-| 8 | BUSBAR-CU-1600 | Copper busbar set 1600 A (4-bar), 1 sections, about 29 kg | 1 | 331.20 | 331.20 | 0.9 |  R-BUSBAR-SIZE |
-| 9 | ENC-SECTION | Enclosure section, Form 4 Type 6, IP31, RAL 7035 | 1 | 3,380.00 | 3,380.00 | 0.95 |  R-ENCLOSURE |
-| 10 | LAB-ASSY | Assembly, wiring and routine verification: 108 hours | 1 | 5,184.00 | 5,184.00 | 0.9 |  R-LABOUR |
-| 11 | DOC | Documentation, as-built drawings, test certificates | 1 | 600.00 | 600.00 | 1.0 |  R-DOC |
-| 12 | DEL | Delivery to site, crane and offload excluded | 1 | 850.00 | 850.00 | 1.0 |  R-DELIVERY |
+| 1 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.97 | S1 T3 T4 R-METERING |
+| 2 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.48 | S5 R-METERING |
+| 3 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.43 | S6 R-PROTECTION |
+| 4 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.5 | S8 R-METERING |
+| 5 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.43 | S10 R-METERING |
+| 6 | ACB-1600-4P-N | Air circuit breaker 1600 A 4-pole, None kA band N, withdrawable, electronic trip | 1 | 5,124.00 | 5,124.00 | 0.87 | S11 T16 T19 R-ACB-SELECT |
+| 7 | FU-KIT-ACB | Incomer functional unit: compartment, shutters, terminals, controls | 1 | 1,400.00 | 1,400.00 | 0.87 | S11 T16 T19 R-FU-KIT |
+| 8 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.43 | S12 R-PROTECTION |
+| 9 | MCCB-250-4P-N | Moulded-case circuit breaker 250 A 4-pole, None kA band N, adjustable trip | 1 | 634.40 | 634.40 | 0.87 | S13 T18 R-MCCB-SELECT |
+| 10 | FU-KIT-MCCB | Outgoing functional unit: compartment door, terminals, labels | 1 | 420.00 | 420.00 | 0.87 | S13 T18 R-FU-KIT |
+| 11 | BUSBAR-CU-1600 | Copper busbar set 1600 A (4-bar), 2 sections, about 58 kg | 1 | 662.40 | 662.40 | 0.9 |  R-BUSBAR-SIZE |
+| 12 | ENC-SECTION | Enclosure section, Form 4 Type 6, IP31, RAL 7035 | 2 | 3,380.00 | 6,760.00 | 0.95 |  R-ENCLOSURE |
+| 13 | LAB-ASSY | Assembly, wiring and routine verification: 128 hours | 1 | 6,144.00 | 6,144.00 | 0.9 |  R-LABOUR |
+| 14 | DOC | Documentation, as-built drawings, test certificates | 1 | 600.00 | 600.00 | 1.0 |  R-DOC |
+| 15 | DEL | Delivery to site, crane and offload excluded | 1 | 850.00 | 850.00 | 1.0 |  R-DELIVERY |
 
-Subtotal £13,565.20; margin £2,034.78; **total £15,599.98**
+Subtotal £25,534.80; margin £3,830.22; **total £29,365.02**
 
 ## Clarifications and exclusions (from flagged items)
 - [missing] fault level not found on the drawing notes. Action: confirm with the consultant. Evidence: 
-- [missing] D1 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S1 T3
-- [missing] D3 (CONTACTOR): kW not read. Action: read from drawing / schedule. Evidence: S3 T8
-- [missing] D5 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S5 T6
-- [missing] D8 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S8
-- [missing] D9 (CONTACTOR): kW not read. Action: read from drawing / schedule. Evidence: S9
-- [missing] D11 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S11 T11
-- [missing] D13 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S13
-- [missing] D15 (CONTACTOR): kW not read. Action: read from drawing / schedule. Evidence: S15
-- [assumed] busbar rating not read; assumed 0 A from the largest incomer. Action: confirm. Evidence: 
-- [low_confidence] devices read with low confidence: D2, D4, D6, D7, D8, D9, D10, D13, D14, D15, D16. Action: check against the drawing. Evidence: D2 D4 D6 D7 D8 D9 D10 D13 D14 D15 D16
+- [missing] D2 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S2 T7
+- [missing] D3 (CONTACTOR): kW not read. Action: read from drawing / schedule. Evidence: S3 T5 T8
+- [missing] D4 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S4 T6 T9
+- [missing] D7 (CAPACITOR): kVAr not read. Action: read from drawing / schedule. Evidence: S7 T10 T12 T13 T14
+- [missing] D9 (CONTACTOR): kW not read. Action: read from drawing / schedule. Evidence: S9 T11
+- [assumed] busbar rating not read; assumed 200 A from the largest incomer. Action: confirm. Evidence: 
+- [low_confidence] devices read with low confidence: D5, D6, D8, D10, D12. Action: check against the drawing. Evidence: D5 D6 D8 D10 D12
 
-Generated by sld2quote 0.2.0 in 7.0 s; reader deskew -0.1 deg.
+Generated by sld2quote 0.2.0 in 5.0 s; reader deskew -0.1 deg.

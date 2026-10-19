@@ -9,24 +9,42 @@ Prices are from the prototype's illustrative catalogue, not a supplier price lis
 
 | # | Part | Description | Qty | Unit £ | Total £ | Conf | Evidence |
 |---|---|---|---|---|---|---|---|
-| 1 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.38 | S3 R-METERING |
-| 2 | BUSBAR-CU-1600 | Copper busbar set 1600 A (4-bar), 1 sections, about 29 kg | 1 | 331.20 | 331.20 | 0.9 |  R-BUSBAR-SIZE |
-| 3 | ENC-SECTION | Enclosure section, Form 4 Type 6, IP31, RAL 7035 | 1 | 3,380.00 | 3,380.00 | 0.95 |  R-ENCLOSURE |
-| 4 | LAB-ASSY | Assembly, wiring and routine verification: 80 hours | 1 | 3,840.00 | 3,840.00 | 0.9 |  R-LABOUR |
-| 5 | DOC | Documentation, as-built drawings, test certificates | 1 | 600.00 | 600.00 | 1.0 |  R-DOC |
-| 6 | DEL | Delivery to site, crane and offload excluded | 1 | 850.00 | 850.00 | 1.0 |  R-DELIVERY |
+| 1 | BUSBAR-CU-1600 | Copper busbar set 1600 A (4-bar), 1 sections, about 29 kg | 1 | 331.20 | 331.20 | 0.9 |  R-BUSBAR-SIZE |
+| 2 | ENC-SECTION | Enclosure section, Form 4 Type 6, IP31, RAL 7035 | 1 | 3,380.00 | 3,380.00 | 0.95 |  R-ENCLOSURE |
+| 3 | LAB-ASSY | Assembly, wiring and routine verification: 334 hours | 1 | 16,032.00 | 16,032.00 | 0.9 |  R-LABOUR |
+| 4 | DOC | Documentation, as-built drawings, test certificates | 1 | 600.00 | 600.00 | 1.0 |  R-DOC |
+| 5 | DEL | Delivery to site, crane and offload excluded | 1 | 850.00 | 850.00 | 1.0 |  R-DELIVERY |
 
-Subtotal £9,281.20; margin £1,392.18; **total £10,673.38**
+Subtotal £21,193.20; margin £3,178.98; **total £24,372.18**
 
 ## Clarifications and exclusions (from flagged items)
 - [missing] fault level not found on the drawing notes. Action: confirm with the consultant. Evidence: 
-- [missing] D1 (CONTACTOR): kW not read. Action: read from drawing / schedule. Evidence: S1
-- [missing] D2 (CONTACTOR): kW not read. Action: read from drawing / schedule. Evidence: S2
+- [missing] D1 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S1
+- [missing] D2 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S2
+- [missing] D3 (CONTACTOR): kW not read. Action: read from drawing / schedule. Evidence: S3
 - [missing] D4 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S4
 - [missing] D5 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S5
-- [missing] D6 (CONTACTOR): kW not read. Action: read from drawing / schedule. Evidence: S6
-- [missing] D7 (ISOLATOR): rating not read. Action: read from drawing / schedule. Evidence: S7
+- [missing] D7 (CONTACTOR): kW not read. Action: read from drawing / schedule. Evidence: S7
+- [missing] D8 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S8 T11
+- [missing] D9 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S9 T8 T12
+- [missing] D10 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S10 T14 T15
+- [missing] D11 (CAPACITOR): kVAr not read. Action: read from drawing / schedule. Evidence: S11
+- [missing] D12 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S12 T10
+- [missing] D13 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S13
+- [missing] D14 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S14
+- [missing] D15 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S15
+- [missing] D16 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S16 T13
+- [missing] D17 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S17
+- [missing] D18 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S18
+- [missing] D19 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S19 T16 T17 T18 T24
+- [missing] D20 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S20
+- [missing] D21 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S21 T25 T26
+- [missing] D22 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S22 T27 T28 T29
+- [missing] D23 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S23
+- [missing] D24 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S24 T30 T32
+- [missing] D25 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S25 T31
+- [missing] D26 (CONTACTOR): kW not read. Action: read from drawing / schedule. Evidence: S26
 - [assumed] busbar rating not read; assumed 0 A from the largest incomer. Action: confirm. Evidence: 
-- [low_confidence] devices read with low confidence: D1, D2, D3, D4, D5, D6, D7. Action: check against the drawing. Evidence: D1 D2 D3 D4 D5 D6 D7
+- [low_confidence] devices read with low confidence: D1, D2, D3, D4, D5, D7, D11, D13, D14, D15, D17, D18, D20, D23, D26. Action: check against the drawing. Evidence: D1 D2 D3 D4 D5 D7 D11 D13 D14 D15 D17 D18 D20 D23 D26
 
-Generated by sld2quote 0.2.0 in 9.7 s; reader deskew -0.1 deg.
+Generated by sld2quote 0.2.0 in 6.2 s; reader deskew -0.1 deg.

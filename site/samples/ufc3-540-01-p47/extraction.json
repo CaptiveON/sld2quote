@@ -336,189 +336,175 @@
  "symbols": [
   {
    "id": "S1",
-   "kind": "relay",
-   "box": [
-    212,
-    85,
-    13,
-    16
-   ],
-   "score": 0.14,
-   "shape_score": 0.75
-  },
-  {
-   "id": "S2",
-   "kind": "relay",
-   "box": [
-    587,
-    85,
-    16,
-    17
-   ],
-   "score": 0.15,
-   "shape_score": 0.93
-  },
-  {
-   "id": "S3",
-   "kind": "contactor",
-   "box": [
-    120,
-    149,
-    60,
-    71
-   ],
-   "score": 0.15,
-   "shape_score": 0.75
-  },
-  {
-   "id": "S4",
    "kind": "meter",
    "box": [
     871,
-    149,
-    27,
-    18
+    148,
+    15,
+    19
    ],
-   "score": 0.24,
-   "shape_score": 0.98
+   "score": 0.18,
+   "shape_score": 0.97
   },
   {
-   "id": "S5",
+   "id": "S2",
    "kind": "meter",
    "box": [
     1311,
-    149,
-    16,
-    18
+    148,
+    15,
+    19
    ],
-   "score": 0.22,
-   "shape_score": 0.98
+   "score": 0.27,
+   "shape_score": 1.0
   },
   {
-   "id": "S6",
+   "id": "S3",
+   "kind": "transformer",
+   "box": [
+    504,
+    159,
+    29,
+    60
+   ],
+   "score": 0.12,
+   "shape_score": 0.87
+  },
+  {
+   "id": "S4",
+   "kind": "contactor",
+   "box": [
+    129,
+    160,
+    29,
+    58
+   ],
+   "score": 0.19,
+   "shape_score": 0.97
+  },
+  {
+   "id": "S5",
    "kind": "generator",
    "box": [
     899,
     173,
-    85,
+    84,
     86
-   ],
-   "score": 0.63,
-   "shape_score": 1.0
-  },
-  {
-   "id": "S7",
-   "kind": "generator",
-   "box": [
-    1339,
-    174,
-    83,
-    85
    ],
    "score": 0.84,
    "shape_score": 1.0
   },
   {
-   "id": "S8",
-   "kind": "contactor",
+   "id": "S6",
+   "kind": "generator",
    "box": [
-    72,
-    295,
-    31,
-    59
+    1340,
+    173,
+    83,
+    86
    ],
-   "score": 0.12,
-   "shape_score": 0.75
-  },
-  {
-   "id": "S9",
-   "kind": "contactor",
-   "box": [
-    306,
-    400,
-    42,
-    56
-   ],
-   "score": 0.5,
+   "score": 0.51,
    "shape_score": 1.0
   },
   {
-   "id": "S10",
+   "id": "S7",
    "kind": "contactor",
    "box": [
-    1126,
+    563,
+    295,
+    29,
+    60
+   ],
+   "score": 0.16,
+   "shape_score": 0.87
+  },
+  {
+   "id": "S8",
+   "kind": "contactor",
+   "box": [
+    305,
     400,
     41,
     55
    ],
-   "score": 0.14,
-   "shape_score": 0.75
+   "score": 0.16,
+   "shape_score": 0.97
   },
   {
-   "id": "S11",
+   "id": "S9",
    "kind": "relay",
    "box": [
     923,
-    515,
+    516,
     15,
-    19
+    18
    ],
-   "score": 0.13,
-   "shape_score": 0.75
+   "score": 0.22,
+   "shape_score": 0.99
+  },
+  {
+   "id": "S10",
+   "kind": "breaker",
+   "box": [
+    692,
+    519,
+    38,
+    25
+   ],
+   "score": 0.12,
+   "shape_score": 0.87
+  },
+  {
+   "id": "S11",
+   "kind": "contactor",
+   "box": [
+    694,
+    519,
+    120,
+    90
+   ],
+   "score": 0.17,
+   "shape_score": 0.97
   },
   {
    "id": "S12",
    "kind": "contactor",
    "box": [
-    715,
-    535,
-    42,
-    56
+    694,
+    521,
+    61,
+    70
    ],
-   "score": 0.23,
-   "shape_score": 0.98
+   "score": 0.15,
+   "shape_score": 0.87
   },
   {
    "id": "S13",
-   "kind": "contactor",
+   "kind": "capacitor",
    "box": [
-    668,
-    833,
-    59,
-    29
+    789,
+    665,
+    64,
+    12
    ],
-   "score": 0.16,
-   "shape_score": 0.93
-  },
-  {
-   "id": "S14",
-   "kind": "contactor",
-   "box": [
-    776,
-    833,
-    58,
-    28
-   ],
-   "score": 0.12,
-   "shape_score": 0.75
+   "score": 0.13,
+   "shape_score": 0.87
   }
  ],
  "devices": [
   {
    "symbol": "S1",
    "box": [
-    212,
-    85,
-    13,
-    16
+    871,
+    148,
+    15,
+    19
    ],
-   "label_texts": [
-    "T7"
-   ],
-   "label": "TRANSFORMER",
-   "conf": 0.75,
-   "score": 0.14,
-   "type": "RELAY",
+   "label_texts": [],
+   "label": "",
+   "conf": 0.48,
+   "score": 0.18,
+   "type": "METER",
    "rating": null,
    "on_bus": null,
    "connected": false,
@@ -527,18 +513,16 @@
   {
    "symbol": "S2",
    "box": [
-    587,
-    85,
-    16,
-    17
+    1311,
+    148,
+    15,
+    19
    ],
-   "label_texts": [
-    "T8"
-   ],
-   "label": "TRANSFORMER",
-   "conf": 0.93,
-   "score": 0.15,
-   "type": "RELAY",
+   "label_texts": [],
+   "label": "",
+   "conf": 0.5,
+   "score": 0.27,
+   "type": "METER",
    "rating": null,
    "on_bus": null,
    "connected": false,
@@ -547,36 +531,41 @@
   {
    "symbol": "S3",
    "box": [
-    120,
-    149,
-    60,
-    71
+    504,
+    159,
+    29,
+    60
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.38,
-   "score": 0.15,
-   "type": "CONTACTOR",
+   "label_texts": [
+    "T3"
+   ],
+   "label": "UTILITY SUPPLY",
+   "conf": 0.87,
+   "score": 0.12,
+   "type": "TRANSFORMER",
    "rating": null,
    "on_bus": null,
-   "connected": true,
+   "connected": false,
    "id": "D3"
   },
   {
    "symbol": "S4",
    "box": [
-    871,
-    149,
-    27,
-    18
+    129,
+    160,
+    29,
+    58
    ],
    "label_texts": [
-    "T11"
+    "T1",
+    "T5",
+    "T7",
+    "T13"
    ],
-   "label": "G",
-   "conf": 0.98,
-   "score": 0.24,
-   "type": "METER",
+   "label": "UTILITY SUPPLY | DISTRIBUTION | TRANSFORMER | TIE-BREAKER",
+   "conf": 0.97,
+   "score": 0.19,
+   "type": "CONTACTOR",
    "rating": null,
    "on_bus": null,
    "connected": false,
@@ -585,35 +574,43 @@
   {
    "symbol": "S5",
    "box": [
-    1311,
-    149,
-    16,
-    18
+    899,
+    173,
+    84,
+    86
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.49,
-   "score": 0.22,
-   "type": "METER",
+   "label_texts": [
+    "T9",
+    "T11",
+    "T15",
+    "T16",
+    "T18",
+    "T20"
+   ],
+   "label": "GENERATOR | G | FOUR POLE | * | AUTOMATIC | TRANSFER SWITCH",
+   "conf": 0.86,
+   "score": 0.84,
+   "type": "GENERATOR",
    "rating": null,
    "on_bus": null,
-   "connected": false,
+   "connected": true,
    "id": "D5"
   },
   {
    "symbol": "S6",
    "box": [
-    899,
+    1340,
     173,
-    85,
+    83,
     86
    ],
    "label_texts": [
-    "T16"
+    "T10",
+    "T12"
    ],
-   "label": "*",
-   "conf": 0.86,
-   "score": 0.63,
+   "label": "GENERATOR | G",
+   "conf": 0.99,
+   "score": 0.51,
    "type": "GENERATOR",
    "rating": null,
    "on_bus": null,
@@ -623,33 +620,37 @@
   {
    "symbol": "S7",
    "box": [
-    1339,
-    174,
-    83,
-    85
+    563,
+    295,
+    29,
+    60
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.5,
-   "score": 0.84,
-   "type": "GENERATOR",
+   "conf": 0.43,
+   "score": 0.16,
+   "type": "CONTACTOR",
    "rating": null,
    "on_bus": null,
-   "connected": true,
+   "connected": false,
    "id": "D7"
   },
   {
    "symbol": "S8",
    "box": [
-    72,
-    295,
-    31,
-    59
+    305,
+    400,
+    41,
+    55
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.38,
-   "score": 0.12,
+   "label_texts": [
+    "T14",
+    "T17",
+    "T19"
+   ],
+   "label": "FOUR POLE | AUTOMATIC | TRANSFER SWITCH",
+   "conf": 0.95,
+   "score": 0.16,
    "type": "CONTACTOR",
    "rating": null,
    "on_bus": null,
@@ -659,16 +660,16 @@
   {
    "symbol": "S9",
    "box": [
-    306,
-    400,
-    42,
-    56
+    923,
+    516,
+    15,
+    18
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.5,
-   "score": 0.5,
-   "type": "CONTACTOR",
+   "conf": 0.49,
+   "score": 0.22,
+   "type": "RELAY",
    "rating": null,
    "on_bus": null,
    "connected": false,
@@ -677,17 +678,23 @@
   {
    "symbol": "S10",
    "box": [
-    1126,
-    400,
-    41,
-    55
+    692,
+    519,
+    38,
+    25
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.38,
-   "score": 0.14,
-   "type": "CONTACTOR",
+   "label_texts": [
+    "T21",
+    "T22",
+    "T23"
+   ],
+   "label": "FOUR POLE | AUTOMATIC | TRANSFER SWITCH",
+   "conf": 0.87,
+   "score": 0.12,
+   "type": "ACB",
    "rating": null,
+   "poles": null,
+   "kA": null,
    "on_bus": null,
    "connected": false,
    "id": "D10"
@@ -695,16 +702,16 @@
   {
    "symbol": "S11",
    "box": [
-    923,
-    515,
-    15,
-    19
+    694,
+    519,
+    120,
+    90
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.38,
-   "score": 0.13,
-   "type": "RELAY",
+   "conf": 0.48,
+   "score": 0.17,
+   "type": "CONTACTOR",
    "rating": null,
    "on_bus": null,
    "connected": false,
@@ -713,15 +720,15 @@
   {
    "symbol": "S12",
    "box": [
-    715,
-    535,
-    42,
-    56
+    694,
+    521,
+    61,
+    70
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.49,
-   "score": 0.23,
+   "conf": 0.43,
+   "score": 0.15,
    "type": "CONTACTOR",
    "rating": null,
    "on_bus": null,
@@ -731,38 +738,20 @@
   {
    "symbol": "S13",
    "box": [
-    668,
-    833,
-    59,
-    29
+    789,
+    665,
+    64,
+    12
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.47,
-   "score": 0.16,
-   "type": "CONTACTOR",
+   "conf": 0.43,
+   "score": 0.13,
+   "type": "CAPACITOR",
    "rating": null,
    "on_bus": null,
    "connected": false,
    "id": "D13"
-  },
-  {
-   "symbol": "S14",
-   "box": [
-    776,
-    833,
-    58,
-    28
-   ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.38,
-   "score": 0.12,
-   "type": "CONTACTOR",
-   "rating": null,
-   "on_bus": null,
-   "connected": false,
-   "id": "D14"
   }
  ],
  "notes": {
@@ -776,14 +765,14 @@
  "ocr_engine": "rapidocr",
  "reader": "trained",
  "seconds": {
-  "total": 5.11,
-  "ocr": 2.83,
-  "detector": 2.17
+  "total": 3.99,
+  "ocr": 2.45,
+  "detector": 1.43
  },
  "detector": {
-  "weights": "weights/rtdetr_r18_full",
+  "weights": "weights/rtdetr_r18_plain_ema_fix_pass4",
   "device": "cpu",
-  "threads": 2,
+  "threads": 4,
   "score_threshold": 0.11,
   "score_threshold_source": "drawing",
   "nms_iou": 0.5,

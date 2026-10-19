@@ -6,81 +6,81 @@
   "poles_default": 4,
   "busbar_rating": 1200,
   "sections": 5,
-  "ways": 3
+  "ways": 0
  },
  "lines": [
   {
    "line": 1,
-   "part": "METER-50",
-   "description": "Panel meter (50)",
-   "qty": 1,
-   "unit_gbp": 260,
-   "total_gbp": 260,
-   "evidence": [
-    "S2",
-    "T13"
-   ],
-   "rule": "R-METERING",
-   "conf": 0.93,
-   "basis": ""
-  },
-  {
-   "line": 2,
-   "part": "METER-50",
-   "description": "Panel meter (50)",
+   "part": "METER-MF",
+   "description": "Panel meter (multifunction)",
    "qty": 1,
    "unit_gbp": 260,
    "total_gbp": 260,
    "evidence": [
     "S3",
-    "T14"
+    "T9"
    ],
    "rule": "R-METERING",
-   "conf": 0.96,
+   "conf": 0.63,
+   "basis": ""
+  },
+  {
+   "line": 2,
+   "part": "METER-MF",
+   "description": "Panel meter (multifunction)",
+   "qty": 1,
+   "unit_gbp": 260,
+   "total_gbp": 260,
+   "evidence": [
+    "S4",
+    "T10",
+    "T17"
+   ],
+   "rule": "R-METERING",
+   "conf": 0.59,
    "basis": ""
   },
   {
    "line": 3,
+   "part": "METER-MF",
+   "description": "Panel meter (multifunction)",
+   "qty": 1,
+   "unit_gbp": 260,
+   "total_gbp": 260,
+   "evidence": [
+    "S5",
+    "T11"
+   ],
+   "rule": "R-METERING",
+   "conf": 1.0,
+   "basis": ""
+  },
+  {
+   "line": 4,
    "part": "CT-SET",
    "description": "Current transformers, set of three, class 1",
    "qty": 1,
    "unit_gbp": 280,
    "total_gbp": 280,
    "evidence": [
-    "S5"
+    "S8"
    ],
    "rule": "R-METERING",
    "conf": 0.5,
    "basis": ""
   },
   {
-   "line": 4,
-   "part": "METER-861",
-   "description": "Panel meter (861)",
+   "line": 5,
+   "part": "CT-SET",
+   "description": "Current transformers, set of three, class 1",
    "qty": 1,
-   "unit_gbp": 260,
-   "total_gbp": 260,
+   "unit_gbp": 280,
+   "total_gbp": 280,
    "evidence": [
-    "S12",
-    "T43"
+    "S9"
    ],
    "rule": "R-METERING",
-   "conf": 0.86,
-   "basis": ""
-  },
-  {
-   "line": 5,
-   "part": "RELAY-OC",
-   "description": "Overcurrent and earth-fault protection relay",
-   "qty": 1,
-   "unit_gbp": 950,
-   "total_gbp": 950,
-   "evidence": [
-    "S15",
-    "T40"
-   ],
-   "rule": "R-PROTECTION",
-   "conf": 0.98,
+   "conf": 0.43,
    "basis": ""
   },
   {
@@ -91,24 +91,28 @@
    "unit_gbp": 260,
    "total_gbp": 260,
    "evidence": [
-    "S16"
+    "S15",
+    "S15g1",
+    "T43",
+    "T47"
    ],
    "rule": "R-METERING",
-   "conf": 0.38,
+   "conf": 0.59,
    "basis": ""
   },
   {
    "line": 7,
-   "part": "CT-SET",
-   "description": "Current transformers, set of three, class 1",
+   "part": "METER-MF",
+   "description": "Panel meter (multifunction)",
    "qty": 1,
-   "unit_gbp": 280,
-   "total_gbp": 280,
+   "unit_gbp": 260,
+   "total_gbp": 260,
    "evidence": [
-    "S19"
+    "S17",
+    "T39"
    ],
    "rule": "R-METERING",
-   "conf": 0.47,
+   "conf": 0.64,
    "basis": ""
   },
   {
@@ -119,13 +123,12 @@
    "unit_gbp": 5124.0,
    "total_gbp": 5124.0,
    "evidence": [
-    "S20",
-    "T46",
-    "T42"
+    "S19",
+    "T41"
    ],
    "rule": "R-ACB-SELECT",
-   "conf": 0.75,
-   "basis": "rating 1200 A from ['T46']; poles 4; kA None"
+   "conf": 1.0,
+   "basis": "rating 1200 A from ['T41']; poles 4; kA None"
   },
   {
    "line": 9,
@@ -135,12 +138,11 @@
    "unit_gbp": 1400,
    "total_gbp": 1400,
    "evidence": [
-    "S20",
-    "T46",
-    "T42"
+    "S19",
+    "T41"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.75,
+   "conf": 1.0,
    "basis": ""
   },
   {
@@ -154,385 +156,255 @@
     "S21"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.5,
+   "conf": 0.43,
    "basis": ""
   },
   {
    "line": 11,
-   "part": "RELAY-OC",
-   "description": "Overcurrent and earth-fault protection relay",
-   "qty": 1,
-   "unit_gbp": 950,
-   "total_gbp": 950,
-   "evidence": [
-    "S26",
-    "T55"
-   ],
-   "rule": "R-PROTECTION",
-   "conf": 0.75,
-   "basis": ""
-  },
-  {
-   "line": 12,
-   "part": "RELAY-OC",
-   "description": "Overcurrent and earth-fault protection relay",
-   "qty": 1,
-   "unit_gbp": 950,
-   "total_gbp": 950,
-   "evidence": [
-    "S27"
-   ],
-   "rule": "R-PROTECTION",
-   "conf": 0.49,
-   "basis": ""
-  },
-  {
-   "line": 13,
-   "part": "METER-AL",
-   "description": "Panel meter (AL)",
-   "qty": 1,
-   "unit_gbp": 260,
-   "total_gbp": 260,
-   "evidence": [
-    "S28",
-    "T62"
-   ],
-   "rule": "R-METERING",
-   "conf": 0.98,
-   "basis": ""
-  },
-  {
-   "line": 14,
-   "part": "METER-{typ}",
-   "description": "Panel meter ({typ})",
-   "qty": 1,
-   "unit_gbp": 260,
-   "total_gbp": 260,
-   "evidence": [
-    "S29",
-    "T60"
-   ],
-   "rule": "R-METERING",
-   "conf": 0.75,
-   "basis": ""
-  },
-  {
-   "line": 15,
-   "part": "ACB-1600-4P-N",
-   "description": "Air circuit breaker 1600 A 4-pole, None kA band N, withdrawable, electronic trip",
-   "qty": 1,
-   "unit_gbp": 5124.0,
-   "total_gbp": 5124.0,
-   "evidence": [
-    "S31",
-    "T71"
-   ],
-   "rule": "R-ACB-SELECT",
-   "conf": 0.93,
-   "basis": "rating 600 A from ['T71']; poles 4; kA None"
-  },
-  {
-   "line": 16,
-   "part": "FU-KIT-ACB",
-   "description": "Incomer functional unit: compartment, shutters, terminals, controls",
-   "qty": 1,
-   "unit_gbp": 1400,
-   "total_gbp": 1400,
-   "evidence": [
-    "S31",
-    "T71"
-   ],
-   "rule": "R-FU-KIT",
-   "conf": 0.93,
-   "basis": ""
-  },
-  {
-   "line": 17,
-   "part": "ACB-1600-4P-N",
-   "description": "Air circuit breaker 1600 A 4-pole, None kA band N, withdrawable, electronic trip",
-   "qty": 1,
-   "unit_gbp": 5124.0,
-   "total_gbp": 5124.0,
-   "evidence": [
-    "S33",
-    "T65"
-   ],
-   "rule": "R-ACB-SELECT",
-   "conf": 0.95,
-   "basis": "rating 600 A from ['T65']; poles 4; kA None"
-  },
-  {
-   "line": 18,
-   "part": "FU-KIT-ACB",
-   "description": "Incomer functional unit: compartment, shutters, terminals, controls",
-   "qty": 1,
-   "unit_gbp": 1400,
-   "total_gbp": 1400,
-   "evidence": [
-    "S33",
-    "T65"
-   ],
-   "rule": "R-FU-KIT",
-   "conf": 0.95,
-   "basis": ""
-  },
-  {
-   "line": 19,
-   "part": "ACB-1600-4P-N",
-   "description": "Air circuit breaker 1600 A 4-pole, None kA band N, withdrawable, electronic trip",
-   "qty": 1,
-   "unit_gbp": 5124.0,
-   "total_gbp": 5124.0,
-   "evidence": [
-    "S34",
-    "T66"
-   ],
-   "rule": "R-ACB-SELECT",
-   "conf": 0.75,
-   "basis": "rating 600 A from ['T66']; poles 4; kA None"
-  },
-  {
-   "line": 20,
-   "part": "FU-KIT-ACB",
-   "description": "Incomer functional unit: compartment, shutters, terminals, controls",
-   "qty": 1,
-   "unit_gbp": 1400,
-   "total_gbp": 1400,
-   "evidence": [
-    "S34",
-    "T66"
-   ],
-   "rule": "R-FU-KIT",
-   "conf": 0.75,
-   "basis": ""
-  },
-  {
-   "line": 21,
-   "part": "FSW-630-4P",
-   "description": "Fuse-switch-disconnector 630 A 4-pole",
-   "qty": 1,
-   "unit_gbp": 1439.6,
-   "total_gbp": 1439.6,
-   "evidence": [
-    "S35",
-    "T68"
-   ],
-   "rule": "R-FSW-SELECT",
-   "conf": 0.97,
-   "basis": "rating 600 A; poles 4"
-  },
-  {
-   "line": 22,
-   "part": "FUSE-630",
-   "description": "Fuse links 630 A, one per pole",
-   "qty": 4,
-   "unit_gbp": 72,
-   "total_gbp": 288,
-   "evidence": [
-    "S35",
-    "T68"
-   ],
-   "rule": "R-FUSE-LINKS",
-   "conf": 0.97,
-   "basis": ""
-  },
-  {
-   "line": 23,
-   "part": "FU-KIT-FUSE_SWITCH",
-   "description": "Outgoing functional unit: compartment door, terminals, labels",
-   "qty": 1,
-   "unit_gbp": 380,
-   "total_gbp": 380,
-   "evidence": [
-    "S35",
-    "T68"
-   ],
-   "rule": "R-FU-KIT",
-   "conf": 0.97,
-   "basis": ""
-  },
-  {
-   "line": 24,
-   "part": "FSW-630-4P",
-   "description": "Fuse-switch-disconnector 630 A 4-pole",
-   "qty": 1,
-   "unit_gbp": 1439.6,
-   "total_gbp": 1439.6,
-   "evidence": [
-    "S37",
-    "T70"
-   ],
-   "rule": "R-FSW-SELECT",
-   "conf": 0.75,
-   "basis": "rating 600 A; poles 4"
-  },
-  {
-   "line": 25,
-   "part": "FUSE-630",
-   "description": "Fuse links 630 A, one per pole",
-   "qty": 4,
-   "unit_gbp": 72,
-   "total_gbp": 288,
-   "evidence": [
-    "S37",
-    "T70"
-   ],
-   "rule": "R-FUSE-LINKS",
-   "conf": 0.75,
-   "basis": ""
-  },
-  {
-   "line": 26,
-   "part": "FU-KIT-FUSE_SWITCH",
-   "description": "Outgoing functional unit: compartment door, terminals, labels",
-   "qty": 1,
-   "unit_gbp": 380,
-   "total_gbp": 380,
-   "evidence": [
-    "S37",
-    "T70"
-   ],
-   "rule": "R-FU-KIT",
-   "conf": 0.75,
-   "basis": ""
-  },
-  {
-   "line": 27,
-   "part": "FSW-630-4P",
-   "description": "Fuse-switch-disconnector 630 A 4-pole",
-   "qty": 1,
-   "unit_gbp": 1439.6,
-   "total_gbp": 1439.6,
-   "evidence": [
-    "S38",
-    "T69"
-   ],
-   "rule": "R-FSW-SELECT",
-   "conf": 0.93,
-   "basis": "rating 600 A; poles 4"
-  },
-  {
-   "line": 28,
-   "part": "FUSE-630",
-   "description": "Fuse links 630 A, one per pole",
-   "qty": 4,
-   "unit_gbp": 72,
-   "total_gbp": 288,
-   "evidence": [
-    "S38",
-    "T69"
-   ],
-   "rule": "R-FUSE-LINKS",
-   "conf": 0.93,
-   "basis": ""
-  },
-  {
-   "line": 29,
-   "part": "FU-KIT-FUSE_SWITCH",
-   "description": "Outgoing functional unit: compartment door, terminals, labels",
-   "qty": 1,
-   "unit_gbp": 380,
-   "total_gbp": 380,
-   "evidence": [
-    "S38",
-    "T69"
-   ],
-   "rule": "R-FU-KIT",
-   "conf": 0.93,
-   "basis": ""
-  },
-  {
-   "line": 30,
-   "part": "METER-MF",
-   "description": "Panel meter (multifunction)",
-   "qty": 1,
-   "unit_gbp": 260,
-   "total_gbp": 260,
-   "evidence": [
-    "S39"
-   ],
-   "rule": "R-METERING",
-   "conf": 0.5,
-   "basis": ""
-  },
-  {
-   "line": 31,
-   "part": "METER-Instantaneous Overcurrent Relay",
-   "description": "Panel meter (Instantaneous Overcurrent Relay)",
-   "qty": 1,
-   "unit_gbp": 260,
-   "total_gbp": 260,
-   "evidence": [
-    "S43",
-    "T79"
-   ],
-   "rule": "R-METERING",
-   "conf": 0.93,
-   "basis": ""
-  },
-  {
-   "line": 32,
-   "part": "METER-51",
-   "description": "Panel meter (51)",
-   "qty": 1,
-   "unit_gbp": 260,
-   "total_gbp": 260,
-   "evidence": [
-    "S53",
-    "T80"
-   ],
-   "rule": "R-METERING",
-   "conf": 1.0,
-   "basis": ""
-  },
-  {
-   "line": 33,
-   "part": "METER-27 | Synch. Check Relay",
-   "description": "Panel meter (27 | Synch. Check Relay)",
-   "qty": 1,
-   "unit_gbp": 260,
-   "total_gbp": 260,
-   "evidence": [
-    "S55",
-    "T91",
-    "T87"
-   ],
-   "rule": "R-METERING",
-   "conf": 0.97,
-   "basis": ""
-  },
-  {
-   "line": 34,
-   "part": "METER-87 | Lockout Relay",
-   "description": "Panel meter (87 | Lockout Relay)",
-   "qty": 1,
-   "unit_gbp": 260,
-   "total_gbp": 260,
-   "evidence": [
-    "S56",
-    "T92",
-    "T89"
-   ],
-   "rule": "R-METERING",
-   "conf": 0.99,
-   "basis": ""
-  },
-  {
-   "line": 35,
    "part": "CT-SET",
    "description": "Current transformers, set of three, class 1",
    "qty": 1,
    "unit_gbp": 280,
    "total_gbp": 280,
    "evidence": [
-    "S59"
+    "S23"
    ],
    "rule": "R-METERING",
-   "conf": 0.38,
+   "conf": 0.43,
    "basis": ""
   },
   {
-   "line": 36,
+   "line": 12,
+   "part": "METER-MF",
+   "description": "Panel meter (multifunction)",
+   "qty": 1,
+   "unit_gbp": 260,
+   "total_gbp": 260,
+   "evidence": [
+    "S24",
+    "T50",
+    "T51"
+   ],
+   "rule": "R-METERING",
+   "conf": 0.97,
+   "basis": ""
+  },
+  {
+   "line": 13,
+   "part": "METER-MF",
+   "description": "Panel meter (multifunction)",
+   "qty": 1,
+   "unit_gbp": 260,
+   "total_gbp": 260,
+   "evidence": [
+    "S26",
+    "T54",
+    "S26g1",
+    "T55",
+    "T62",
+    "T63",
+    "T74",
+    "T75",
+    "T79",
+    "T81",
+    "T85",
+    "T89",
+    "T93"
+   ],
+   "rule": "R-METERING",
+   "conf": 0.59,
+   "basis": ""
+  },
+  {
+   "line": 14,
+   "part": "ACB-1600-4P-N",
+   "description": "Air circuit breaker 1600 A 4-pole, None kA band N, withdrawable, electronic trip",
+   "qty": 1,
+   "unit_gbp": 5124.0,
+   "total_gbp": 5124.0,
+   "evidence": [
+    "S28",
+    "T64"
+   ],
+   "rule": "R-ACB-SELECT",
+   "conf": 0.87,
+   "basis": "rating 600 A from ['T64']; poles 4; kA None"
+  },
+  {
+   "line": 15,
+   "part": "FU-KIT-ACB",
+   "description": "Incomer functional unit: compartment, shutters, terminals, controls",
+   "qty": 1,
+   "unit_gbp": 1400,
+   "total_gbp": 1400,
+   "evidence": [
+    "S28",
+    "T64"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.87,
+   "basis": ""
+  },
+  {
+   "line": 16,
+   "part": "ACB-1600-4P-N",
+   "description": "Air circuit breaker 1600 A 4-pole, None kA band N, withdrawable, electronic trip",
+   "qty": 1,
+   "unit_gbp": 5124.0,
+   "total_gbp": 5124.0,
+   "evidence": [
+    "S29",
+    "T58",
+    "T67"
+   ],
+   "rule": "R-ACB-SELECT",
+   "conf": 0.97,
+   "basis": "rating 600 A from ['T58']; poles 4; kA None"
+  },
+  {
+   "line": 17,
+   "part": "FU-KIT-ACB",
+   "description": "Incomer functional unit: compartment, shutters, terminals, controls",
+   "qty": 1,
+   "unit_gbp": 1400,
+   "total_gbp": 1400,
+   "evidence": [
+    "S29",
+    "T58",
+    "T67"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.97,
+   "basis": ""
+  },
+  {
+   "line": 18,
+   "part": "ACB-1600-4P-N",
+   "description": "Air circuit breaker 1600 A 4-pole, None kA band N, withdrawable, electronic trip",
+   "qty": 1,
+   "unit_gbp": 5124.0,
+   "total_gbp": 5124.0,
+   "evidence": [
+    "S30",
+    "T59",
+    "T71"
+   ],
+   "rule": "R-ACB-SELECT",
+   "conf": 0.87,
+   "basis": "rating 600 A from ['T59']; poles 4; kA None"
+  },
+  {
+   "line": 19,
+   "part": "FU-KIT-ACB",
+   "description": "Incomer functional unit: compartment, shutters, terminals, controls",
+   "qty": 1,
+   "unit_gbp": 1400,
+   "total_gbp": 1400,
+   "evidence": [
+    "S30",
+    "T59",
+    "T71"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.87,
+   "basis": ""
+  },
+  {
+   "line": 20,
+   "part": "METER-MF",
+   "description": "Panel meter (multifunction)",
+   "qty": 1,
+   "unit_gbp": 260,
+   "total_gbp": 260,
+   "evidence": [
+    "S32",
+    "T76"
+   ],
+   "rule": "R-METERING",
+   "conf": 0.63,
+   "basis": ""
+  },
+  {
+   "line": 21,
+   "part": "ACB-1600-4P-N",
+   "description": "Air circuit breaker 1600 A 4-pole, None kA band N, withdrawable, electronic trip",
+   "qty": 1,
+   "unit_gbp": 5124.0,
+   "total_gbp": 5124.0,
+   "evidence": [
+    "S37",
+    "T69"
+   ],
+   "rule": "R-ACB-SELECT",
+   "conf": 0.99,
+   "basis": "rating 600 A from ['T69']; poles 4; kA None"
+  },
+  {
+   "line": 22,
+   "part": "FU-KIT-ACB",
+   "description": "Incomer functional unit: compartment, shutters, terminals, controls",
+   "qty": 1,
+   "unit_gbp": 1400,
+   "total_gbp": 1400,
+   "evidence": [
+    "S37",
+    "T69"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.99,
+   "basis": ""
+  },
+  {
+   "line": 23,
+   "part": "METER-MF",
+   "description": "Panel meter (multifunction)",
+   "qty": 1,
+   "unit_gbp": 260,
+   "total_gbp": 260,
+   "evidence": [
+    "S40",
+    "T78",
+    "T80"
+   ],
+   "rule": "R-METERING",
+   "conf": 0.98,
+   "basis": ""
+  },
+  {
+   "line": 24,
+   "part": "METER-MF",
+   "description": "Panel meter (multifunction)",
+   "qty": 1,
+   "unit_gbp": 260,
+   "total_gbp": 260,
+   "evidence": [
+    "S42",
+    "T84",
+    "T88"
+   ],
+   "rule": "R-METERING",
+   "conf": 1.0,
+   "basis": ""
+  },
+  {
+   "line": 25,
+   "part": "METER-MF",
+   "description": "Panel meter (multifunction)",
+   "qty": 1,
+   "unit_gbp": 260,
+   "total_gbp": 260,
+   "evidence": [
+    "S43",
+    "T87",
+    "T86",
+    "T90"
+   ],
+   "rule": "R-METERING",
+   "conf": 0.97,
+   "basis": ""
+  },
+  {
+   "line": 26,
    "part": "BUSBAR-CU-1600",
    "description": "Copper busbar set 1600 A (4-bar), 5 sections, about 144 kg",
    "qty": 1,
@@ -544,7 +416,7 @@
    "basis": "1200 A busbar label; 5 sections"
   },
   {
-   "line": 37,
+   "line": 27,
    "part": "ENC-SECTION",
    "description": "Enclosure section, Form 4 Type 6, IP31, RAL 7035",
    "qty": 5,
@@ -553,22 +425,22 @@
    "evidence": [],
    "rule": "R-ENCLOSURE",
    "conf": 0.95,
-   "basis": "3 ways at 4 per section plus incomers"
+   "basis": "0 ways at 4 per section plus incomers"
   },
   {
-   "line": 38,
+   "line": 28,
    "part": "LAB-ASSY",
-   "description": "Assembly, wiring and routine verification: 343 hours",
+   "description": "Assembly, wiring and routine verification: 392 hours",
    "qty": 1,
-   "unit_gbp": 16464,
-   "total_gbp": 16464,
+   "unit_gbp": 18816,
+   "total_gbp": 18816,
    "evidence": [],
    "rule": "R-LABOUR",
    "conf": 0.9,
    "basis": ""
   },
   {
-   "line": 39,
+   "line": 29,
    "part": "DOC",
    "description": "Documentation, as-built drawings, test certificates",
    "qty": 1,
@@ -580,7 +452,7 @@
    "basis": ""
   },
   {
-   "line": 40,
+   "line": 30,
    "part": "DEL",
    "description": "Delivery to site, crane and offload excluded",
    "qty": 1,
@@ -592,9 +464,9 @@
    "basis": ""
   }
  ],
- "subtotal_gbp": 76388.8,
- "margin_gbp": 11458.32,
- "total_gbp": 87847.12,
+ "subtotal_gbp": 76092.0,
+ "margin_gbp": 11413.8,
+ "total_gbp": 87505.8,
  "issues": [
   {
    "kind": "missing",
@@ -604,25 +476,72 @@
   },
   {
    "kind": "missing",
-   "what": "D9 (ACB): rating not read",
+   "what": "D10 (ACB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S9"
+    "S10",
+    "T20",
+    "T22",
+    "T26",
+    "T30",
+    "T33"
    ]
   },
   {
    "kind": "missing",
-   "what": "D14 (FUSE_SWITCH): rating not read",
+   "what": "D11 (ACB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S14",
+    "S11",
+    "T19",
+    "T21",
+    "T25",
+    "T29"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D12 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S12",
+    "T24",
+    "T31",
+    "T34",
     "T36",
     "T45"
    ]
   },
   {
    "kind": "missing",
-   "what": "D22 (FUSE_SWITCH): rating not read",
+   "what": "D13 (CAPACITOR): kVAr not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S13",
+    "T37",
+    "T46"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D14 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S14"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D20 (ACB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S20",
+    "T48"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D22 (CAPACITOR): kVAr not read",
    "action": "read from drawing / schedule",
    "evidence": [
     "S22"
@@ -630,74 +549,80 @@
   },
   {
    "kind": "missing",
-   "what": "D40 (ACB): rating not read",
+   "what": "D25 (CONTACTOR): kW not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S40"
+    "S25"
    ]
   },
   {
    "kind": "missing",
-   "what": "D45 (ACB): rating not read",
+   "what": "D33 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S45"
+    "S33"
    ]
   },
   {
    "kind": "missing",
-   "what": "D46 (FUSE_SWITCH): rating not read",
+   "what": "D34 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S46"
+    "S34",
+    "T82"
    ]
   },
   {
    "kind": "missing",
-   "what": "D47 (FUSE_SWITCH): rating not read",
+   "what": "D35 (ACB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S47"
+    "S35"
    ]
   },
   {
    "kind": "missing",
-   "what": "D48 (ACB): rating not read",
+   "what": "D36 (ACB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S48"
+    "S36",
+    "T83"
    ]
   },
   {
    "kind": "missing",
-   "what": "D49 (CONTACTOR): kW not read",
+   "what": "D38 (ACB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S49"
+    "S38",
+    "T77"
    ]
   },
   {
    "kind": "missing",
-   "what": "D50 (ACB): rating not read",
+   "what": "D39 (ACB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S50"
+    "S39"
    ]
   },
   {
    "kind": "missing",
-   "what": "D51 (CAPACITOR): kVAr not read",
+   "what": "D41 (CONTACTOR): kW not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S51"
+    "S41"
    ]
   },
   {
    "kind": "missing",
-   "what": "D52 (ACB): rating not read",
+   "what": "D46 (CONTACTOR): kW not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S52"
+    "S46",
+    "T94",
+    "T95",
+    "T96"
    ]
   },
   {
@@ -708,40 +633,23 @@
   },
   {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D1, D5, D6, D7, D8, D9, D10, D11, D13, D16, D17, D18, D19, D21, D22, D23, D24, D25, D27, D39, D40, D45, D46, D47, D48, D49, D50, D51, D52, D54, D59",
+   "what": "devices read with low confidence: D4, D8, D9, D14, D15, D21, D22, D23, D25, D26, D33, D35, D39, D41",
    "action": "check against the drawing",
    "evidence": [
-    "D1",
-    "D5",
-    "D6",
-    "D7",
+    "D4",
     "D8",
     "D9",
-    "D10",
-    "D11",
-    "D13",
-    "D16",
-    "D17",
-    "D18",
-    "D19",
+    "D14",
+    "D15",
     "D21",
     "D22",
     "D23",
-    "D24",
     "D25",
-    "D27",
+    "D26",
+    "D33",
+    "D35",
     "D39",
-    "D40",
-    "D45",
-    "D46",
-    "D47",
-    "D48",
-    "D49",
-    "D50",
-    "D51",
-    "D52",
-    "D54",
-    "D59"
+    "D41"
    ]
   }
  ]

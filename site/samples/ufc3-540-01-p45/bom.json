@@ -11,6 +11,53 @@
  "lines": [
   {
    "line": 1,
+   "part": "CT-SET",
+   "description": "Current transformers, set of three, class 1",
+   "qty": 1,
+   "unit_gbp": 280,
+   "total_gbp": 280,
+   "evidence": [
+    "S2",
+    "T1",
+    "T4",
+    "T5"
+   ],
+   "rule": "R-METERING",
+   "conf": 0.87,
+   "basis": ""
+  },
+  {
+   "line": 2,
+   "part": "RELAY-OC",
+   "description": "Overcurrent and earth-fault protection relay",
+   "qty": 1,
+   "unit_gbp": 950,
+   "total_gbp": 950,
+   "evidence": [
+    "S3",
+    "T6",
+    "T7"
+   ],
+   "rule": "R-PROTECTION",
+   "conf": 1.0,
+   "basis": ""
+  },
+  {
+   "line": 3,
+   "part": "RELAY-OC",
+   "description": "Overcurrent and earth-fault protection relay",
+   "qty": 1,
+   "unit_gbp": 950,
+   "total_gbp": 950,
+   "evidence": [
+    "S9"
+   ],
+   "rule": "R-PROTECTION",
+   "conf": 0.49,
+   "basis": ""
+  },
+  {
+   "line": 4,
    "part": "BUSBAR-CU-1600",
    "description": "Copper busbar set 1600 A (4-bar), 1 sections, about 29 kg",
    "qty": 1,
@@ -22,7 +69,7 @@
    "basis": "0 A busbar label; 1 sections"
   },
   {
-   "line": 2,
+   "line": 5,
    "part": "ENC-SECTION",
    "description": "Enclosure section, Form 4 Type 6, IP31, RAL 7035",
    "qty": 1,
@@ -34,19 +81,19 @@
    "basis": "0 ways at 4 per section plus incomers"
   },
   {
-   "line": 3,
+   "line": 6,
    "part": "LAB-ASSY",
-   "description": "Assembly, wiring and routine verification: 70 hours",
+   "description": "Assembly, wiring and routine verification: 120 hours",
    "qty": 1,
-   "unit_gbp": 3360,
-   "total_gbp": 3360,
+   "unit_gbp": 5760,
+   "total_gbp": 5760,
    "evidence": [],
    "rule": "R-LABOUR",
    "conf": 0.9,
    "basis": ""
   },
   {
-   "line": 4,
+   "line": 7,
    "part": "DOC",
    "description": "Documentation, as-built drawings, test certificates",
    "qty": 1,
@@ -58,7 +105,7 @@
    "basis": ""
   },
   {
-   "line": 5,
+   "line": 8,
    "part": "DEL",
    "description": "Delivery to site, crane and offload excluded",
    "qty": 1,
@@ -70,9 +117,9 @@
    "basis": ""
   }
  ],
- "subtotal_gbp": 8521.2,
- "margin_gbp": 1278.18,
- "total_gbp": 9799.38,
+ "subtotal_gbp": 13101.2,
+ "margin_gbp": 1965.18,
+ "total_gbp": 15066.38,
  "issues": [
   {
    "kind": "missing",
@@ -82,26 +129,13 @@
   },
   {
    "kind": "missing",
-   "what": "D2 (CONTACTOR): kW not read",
+   "what": "D4 (CONTACTOR): kW not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S2"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D3 (CONTACTOR): kW not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S3"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D4 (ACB): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S4"
+    "S4",
+    "T8",
+    "T9",
+    "T10"
    ]
   },
   {
@@ -109,7 +143,8 @@
    "what": "D5 (CONTACTOR): kW not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S5"
+    "S5",
+    "T11"
    ]
   },
   {
@@ -122,12 +157,72 @@
   },
   {
    "kind": "missing",
-   "what": "D7 (CAPACITOR): kVAr not read",
+   "what": "D8 (ACB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S7",
-    "T23",
-    "T24"
+    "S8"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D10 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S10",
+    "T17",
+    "T19",
+    "T21"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D11 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S11"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D12 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S12",
+    "T16",
+    "T18",
+    "T20"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D13 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S13"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D14 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S14"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D15 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S15"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D16 (CAPACITOR): kVAr not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S16"
    ]
   },
   {
@@ -138,15 +233,18 @@
   },
   {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D1, D2, D3, D4, D5, D6",
+   "what": "devices read with low confidence: D6, D7, D8, D9, D11, D13, D14, D15, D16",
    "action": "check against the drawing",
    "evidence": [
-    "D1",
-    "D2",
-    "D3",
-    "D4",
-    "D5",
-    "D6"
+    "D6",
+    "D7",
+    "D8",
+    "D9",
+    "D11",
+    "D13",
+    "D14",
+    "D15",
+    "D16"
    ]
   }
  ]

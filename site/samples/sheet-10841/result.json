@@ -22,22 +22,22 @@
    "key": "text",
    "title": "Read the words",
    "count": 31,
-   "seconds": 4.32,
-   "plain": "Read 31 pieces of text in 4.32 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 3.44,
+   "plain": "Read 31 pieces of text in 3.44 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
-   "count": 15,
-   "seconds": 3.48,
-   "plain": "Found 15 symbols in 3.48 s: 6 fuse switches, 1 transformer, 1 incoming air circuit breaker, 1 panel meter, 1 current transformer, 1 bus-section switch, 1 power-factor correction bank, 1 motor starter, 1 motor, 1 earth. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "count": 12,
+   "seconds": 2.08,
+   "plain": "Found 12 symbols in 2.08 s: 6 fuse switches, 1 transformer, 1 incoming air circuit breaker, 1 panel meter, 1 current transformer, 1 motor starter, 1 motor. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
-   "count": 11,
-   "seconds": 0.15,
-   "plain": "Paired 11 of 15 symbols with the label text beside them; 8 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
+   "count": 12,
+   "seconds": 0.13,
+   "plain": "Paired 12 of 12 symbols with the label text beside them; 11 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
    "key": "spec",
@@ -49,9 +49,9 @@
   {
    "key": "price",
    "title": "Pick parts and price",
-   "count": 27,
+   "count": 29,
    "seconds": 0.0,
-   "plain": "Chose 27 catalogue lines and priced the board at \u00a355,399 (illustrative prices, 15% margin included); 4 items flagged for the estimator. Every line names the symbol, text or clause it rests on, so a reviewer can check it on the drawing."
+   "plain": "Chose 29 catalogue lines and priced the board at \u00a342,924 (illustrative prices, 15% margin included); 0 items flagged for the estimator. Every line names the symbol, text or clause it rests on, so a reviewer can check it on the drawing."
   }
  ],
  "devices": [
@@ -65,14 +65,14 @@
    "kA": null,
    "dest": "",
    "conf": 0.98,
-   "score": 0.97,
+   "score": 0.58,
    "box": [
     198,
-    69,
+    68,
     45,
-    73
+    74
    ],
-   "label": "11 kV / 415 V | TX-1 2500 kVA"
+   "label": "TX-1 2500 kVA | 11 kV / 415 V"
   },
   {
    "id": "D2",
@@ -83,8 +83,8 @@
    "poles": 3,
    "kA": 65,
    "dest": "",
-   "conf": 0.75,
-   "score": 0.13,
+   "conf": 0.98,
+   "score": 0.58,
    "box": [
     205,
     200,
@@ -102,113 +102,56 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.96,
-   "score": 0.33,
+   "conf": 1.0,
+   "score": 0.51,
    "box": [
     257,
     282,
-    26,
-    26
+    27,
+    27
    ],
-   "label": "CT 3200/5A | BUSBAR A 3200 A Cu 65 kA/1s"
+   "label": "A"
   },
   {
    "id": "D4",
    "type": "CT",
    "type_plain": "current transformer",
-   "rating": null,
-   "unit": "A",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.5,
-   "score": 0.29,
-   "box": [
-    209,
-    285,
-    22,
-    21
-   ],
-   "label": ""
-  },
-  {
-   "id": "D5",
-   "type": "BUS_SECTION",
-   "type_plain": "bus-section switch",
    "rating": 3200,
    "unit": "A",
    "poles": null,
-   "kA": 65,
-   "dest": "",
-   "conf": 1.0,
-   "score": 0.34,
-   "box": [
-    1135,
-    385,
-    30,
-    31
-   ],
-   "label": "BS-1 3200 A | BUSBAR B 3200 A Cu 65 kA/1s"
-  },
-  {
-   "id": "D6",
-   "type": "FUSE_SWITCH",
-   "type_plain": "fuse switch",
-   "rating": null,
-   "unit": "A",
-   "poles": null,
-   "kA": null,
-   "dest": "DOL 11 kW",
-   "conf": 1.0,
-   "score": 0.69,
-   "box": [
-    1687,
-    499,
-    19,
-    34
-   ],
-   "label": "DOL 11 kW | M"
-  },
-  {
-   "id": "D7",
-   "type": "CAPACITOR",
-   "type_plain": "power-factor correction bank",
-   "rating": null,
-   "unit": "kVAr",
-   "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.47,
-   "score": 0.16,
+   "conf": 0.96,
+   "score": 0.49,
    "box": [
-    1856,
-    512,
-    29,
-    17
+    209,
+    284,
+    22,
+    22
    ],
-   "label": ""
+   "label": "CT 3200/5A"
   },
   {
-   "id": "D8",
+   "id": "D5",
    "type": "FUSE_SWITCH",
    "type_plain": "fuse switch",
-   "rating": 400,
+   "rating": 100,
    "unit": "A",
    "poles": 3,
    "kA": null,
-   "dest": "data hall",
+   "dest": "fan F-5",
    "conf": 0.99,
-   "score": 0.44,
+   "score": 0.51,
    "box": [
-    187,
-    520,
-    18,
-    31
+    1687,
+    498,
+    19,
+    35
    ],
-   "label": "data hall | FSW 400 A 3P"
+   "label": "FSW 100 A 3P | fan F-5"
   },
   {
-   "id": "D9",
+   "id": "D6",
    "type": "FUSE_SWITCH",
    "type_plain": "fuse switch",
    "rating": 800,
@@ -217,36 +160,55 @@
    "kA": null,
    "dest": "data hall",
    "conf": 0.99,
-   "score": 0.27,
+   "score": 0.47,
    "box": [
-    1387,
-    520,
-    18,
-    31
+    1385,
+    518,
+    22,
+    35
    ],
-   "label": "data hall | FSW 800 A 4P"
+   "label": "FSW 800 A 4P | data hall"
   },
   {
-   "id": "D10",
+   "id": "D7",
+   "type": "FUSE_SWITCH",
+   "type_plain": "fuse switch",
+   "rating": 400,
+   "unit": "A",
+   "poles": 3,
+   "kA": null,
+   "dest": "data hall",
+   "conf": 0.99,
+   "score": 0.89,
+   "box": [
+    187,
+    519,
+    18,
+    32
+   ],
+   "label": "FSW 400 A 3P | data hall"
+  },
+  {
+   "id": "D8",
    "type": "CONTACTOR",
    "type_plain": "motor starter",
-   "rating": null,
+   "rating": 11,
    "unit": "kW",
    "poles": null,
    "kA": null,
    "dest": "",
    "conf": 1.0,
-   "score": 0.71,
+   "score": 0.64,
    "box": [
     1687,
     545,
-    20,
-    36
+    19,
+    35
    ],
-   "label": "fan F-5"
+   "label": "DOL 11 kW"
   },
   {
-   "id": "D11",
+   "id": "D9",
    "type": "FUSE_SWITCH",
    "type_plain": "fuse switch",
    "rating": 160,
@@ -255,17 +217,17 @@
    "kA": null,
    "dest": "spare",
    "conf": 0.93,
-   "score": 0.51,
+   "score": 0.83,
    "box": [
-    787,
+    786,
     549,
     19,
     32
    ],
-   "label": "spare | FSW 160 A 3P"
+   "label": "FSW 160 A 3P | spare"
   },
   {
-   "id": "D12",
+   "id": "D10",
    "type": "FUSE_SWITCH",
    "type_plain": "fuse switch",
    "rating": 630,
@@ -274,17 +236,17 @@
    "kA": null,
    "dest": "data hall",
    "conf": 1.0,
-   "score": 0.6,
+   "score": 0.87,
    "box": [
-    487,
-    579,
-    19,
-    33
+    485,
+    578,
+    22,
+    34
    ],
-   "label": "data hall | FSW 630 A 4P"
+   "label": "FSW 630 A 4P | data hall"
   },
   {
-   "id": "D13",
+   "id": "D11",
    "type": "FUSE_SWITCH",
    "type_plain": "fuse switch",
    "rating": 630,
@@ -293,52 +255,33 @@
    "kA": null,
    "dest": "DB-6 wards",
    "conf": 1.0,
-   "score": 0.59,
+   "score": 0.84,
    "box": [
-    1987,
-    579,
-    19,
-    34
+    1985,
+    578,
+    21,
+    37
    ],
-   "label": "DB-6 wards | FSW 630 A 3P"
+   "label": "FSW 630 A 3P | DB-6 wards"
   },
   {
-   "id": "D14",
+   "id": "D12",
    "type": "MOTOR",
    "type_plain": "motor",
-   "rating": null,
+   "rating": 11,
    "unit": "kW",
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.5,
-   "score": 0.42,
+   "conf": 1.0,
+   "score": 0.63,
    "box": [
-    1683,
-    588,
-    34,
-    35
+    1684,
+    589,
+    33,
+    33
    ],
-   "label": ""
-  },
-  {
-   "id": "D15",
-   "type": "EARTH",
-   "type_plain": "earth",
-   "rating": null,
-   "unit": null,
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.47,
-   "score": 0.16,
-   "box": [
-    2154,
-    591,
-    31,
-    18
-   ],
-   "label": ""
+   "label": "M"
   }
  ],
  "board": {
@@ -347,8 +290,8 @@
   "ip": "IP41",
   "poles_default": 3,
   "busbar_rating": 3200,
-  "sections": 4,
-  "ways": 5
+  "sections": 3,
+  "ways": 6
  },
  "bom": {
   "lines": [
@@ -359,7 +302,7 @@
     "qty": 1,
     "unit_gbp": 8732.0,
     "total_gbp": 8732.0,
-    "conf": 0.75,
+    "conf": 0.98,
     "evidence": [
      "S2",
      "T3",
@@ -374,7 +317,7 @@
     "qty": 1,
     "unit_gbp": 1400,
     "total_gbp": 1400,
-    "conf": 0.75,
+    "conf": 0.98,
     "evidence": [
      "S2",
      "T3",
@@ -384,94 +327,64 @@
    },
    {
     "line": 3,
-    "part": "METER-CT 3200/5A | BUSBAR A 3200 A Cu 65 kA/1s",
-    "description": "Panel meter (CT 3200/5A | BUSBAR A 3200 A Cu 65 kA/1s)",
+    "part": "METER-A",
+    "description": "Panel meter (A)",
     "qty": 1,
-    "unit_gbp": 260,
-    "total_gbp": 260,
-    "conf": 0.96,
+    "unit_gbp": 120,
+    "total_gbp": 120,
+    "conf": 1.0,
     "evidence": [
      "S3",
-     "T5",
-     "T6"
+     "S3g1"
     ],
     "rule": "R-METERING"
    },
    {
     "line": 4,
     "part": "CT-SET",
-    "description": "Current transformers, set of three, class 1",
+    "description": "Current transformers 3200/5 A, set of three, class 1",
     "qty": 1,
     "unit_gbp": 280,
     "total_gbp": 280,
-    "conf": 0.5,
+    "conf": 0.96,
     "evidence": [
-     "S4"
+     "S4",
+     "T5"
     ],
     "rule": "R-METERING"
    },
    {
     "line": 5,
-    "part": "BSS-3200-3P",
-    "description": "Bus-section switch 3200 A 3-pole, 65 kA",
+    "part": "FSW-100-3P",
+    "description": "Fuse-switch-disconnector 100 A 3-pole; feeds fan F-5",
     "qty": 1,
-    "unit_gbp": 6136.0,
-    "total_gbp": 6136.0,
-    "conf": 1.0,
-    "evidence": [
-     "S5",
-     "T8",
-     "T7"
-    ],
-    "rule": "R-BUS-SECTION"
-   },
-   {
-    "line": 6,
-    "part": "FU-KIT-BS",
-    "description": "Bus-section functional unit and interlocking",
-    "qty": 1,
-    "unit_gbp": 900,
-    "total_gbp": 900,
-    "conf": 1.0,
-    "evidence": [
-     "S5",
-     "T8",
-     "T7"
-    ],
-    "rule": "R-FU-KIT"
-   },
-   {
-    "line": 7,
-    "part": "FSW-400-3P",
-    "description": "Fuse-switch-disconnector 400 A 3-pole; feeds data hall",
-    "qty": 1,
-    "unit_gbp": 780.0,
-    "total_gbp": 780.0,
+    "unit_gbp": 260.0,
+    "total_gbp": 260.0,
     "conf": 0.99,
     "evidence": [
-     "S8",
-     "T13",
-     "T10"
+     "S5",
+     "T9",
+     "T15"
     ],
     "rule": "R-FSW-SELECT"
    },
    {
-    "line": 8,
-    "part": "FUSE-400",
-    "description": "Fuse links 400 A, one per pole",
+    "line": 6,
+    "part": "FUSE-100",
+    "description": "Fuse links 100 A, one per pole",
     "qty": 3,
-    "unit_gbp": 46,
-    "total_gbp": 138,
+    "unit_gbp": 16,
+    "total_gbp": 48,
     "conf": 0.99,
     "evidence": [
-     "S8",
-     "T13",
-     "T10"
+     "S5",
+     "T9",
+     "T15"
     ],
     "rule": "R-FUSE-LINKS"
    },
    {
-    "line": 9,
+    "line": 7,
     "part": "FU-KIT-FUSE_SWITCH",
     "description": "Outgoing functional unit: compartment door, terminals, labels",
     "qty": 1,
@@ -479,14 +392,14 @@
     "total_gbp": 380,
     "conf": 0.99,
     "evidence": [
-     "S8",
-     "T13",
-     "T10"
+     "S5",
+     "T9",
+     "T15"
     ],
     "rule": "R-FU-KIT"
    },
    {
-    "line": 10,
+    "line": 8,
     "part": "FSW-800-4P",
     "description": "Fuse-switch-disconnector 800 A 4-pole; feeds data hall",
     "qty": 1,
@@ -494,14 +407,14 @@
     "total_gbp": 1854.4,
     "conf": 0.99,
     "evidence": [
-     "S9",
-     "T14",
-     "T11"
+     "S6",
+     "T11",
+     "T14"
     ],
     "rule": "R-FSW-SELECT"
    },
    {
-    "line": 11,
+    "line": 9,
     "part": "FUSE-800",
     "description": "Fuse links 800 A, one per pole",
     "qty": 4,
@@ -509,14 +422,14 @@
     "total_gbp": 376,
     "conf": 0.99,
     "evidence": [
-     "S9",
-     "T14",
-     "T11"
+     "S6",
+     "T11",
+     "T14"
     ],
     "rule": "R-FUSE-LINKS"
    },
    {
-    "line": 12,
+    "line": 10,
     "part": "FU-KIT-FUSE_SWITCH",
     "description": "Outgoing functional unit: compartment door, terminals, labels",
     "qty": 1,
@@ -524,14 +437,73 @@
     "total_gbp": 380,
     "conf": 0.99,
     "evidence": [
-     "S9",
-     "T14",
-     "T11"
+     "S6",
+     "T11",
+     "T14"
     ],
     "rule": "R-FU-KIT"
    },
    {
+    "line": 11,
+    "part": "FSW-400-3P",
+    "description": "Fuse-switch-disconnector 400 A 3-pole; feeds data hall",
+    "qty": 1,
+    "unit_gbp": 780.0,
+    "total_gbp": 780.0,
+    "conf": 0.99,
+    "evidence": [
+     "S7",
+     "T10",
+     "T13"
+    ],
+    "rule": "R-FSW-SELECT"
+   },
+   {
+    "line": 12,
+    "part": "FUSE-400",
+    "description": "Fuse links 400 A, one per pole",
+    "qty": 3,
+    "unit_gbp": 46,
+    "total_gbp": 138,
+    "conf": 0.99,
+    "evidence": [
+     "S7",
+     "T10",
+     "T13"
+    ],
+    "rule": "R-FUSE-LINKS"
+   },
+   {
     "line": 13,
+    "part": "FU-KIT-FUSE_SWITCH",
+    "description": "Outgoing functional unit: compartment door, terminals, labels",
+    "qty": 1,
+    "unit_gbp": 380,
+    "total_gbp": 380,
+    "conf": 0.99,
+    "evidence": [
+     "S7",
+     "T10",
+     "T13"
+    ],
+    "rule": "R-FU-KIT"
+   },
+   {
+    "line": 14,
+    "part": "STARTER-11KW",
+    "description": "Motor starter for 11 kW: contactor, overload relay and control circuit",
+    "qty": 1,
+    "unit_gbp": 640,
+    "total_gbp": 640,
+    "conf": 1.0,
+    "evidence": [
+     "S8",
+     "T12"
+    ],
+    "rule": "R-STARTER"
+   },
+   {
+    "line": 15,
     "part": "FSW-160-3P",
     "description": "Fuse-switch-disconnector 160 A 3-pole; feeds spare",
     "qty": 1,
@@ -539,14 +511,14 @@
     "total_gbp": 300.0,
     "conf": 0.93,
     "evidence": [
-     "S11",
-     "T17",
-     "T16"
+     "S9",
+     "T16",
+     "T17"
     ],
     "rule": "R-FSW-SELECT"
    },
    {
-    "line": 14,
+    "line": 16,
     "part": "FUSE-160",
     "description": "Fuse links 160 A, one per pole",
     "qty": 3,
@@ -554,14 +526,14 @@
     "total_gbp": 63,
     "conf": 0.93,
     "evidence": [
-     "S11",
-     "T17",
-     "T16"
+     "S9",
+     "T16",
+     "T17"
     ],
     "rule": "R-FUSE-LINKS"
    },
    {
-    "line": 15,
+    "line": 17,
     "part": "FU-KIT-FUSE_SWITCH",
     "description": "Outgoing functional unit: compartment door, terminals, labels",
     "qty": 1,
@@ -569,14 +541,14 @@
     "total_gbp": 380,
     "conf": 0.93,
     "evidence": [
-     "S11",
-     "T17",
-     "T16"
+     "S9",
+     "T16",
+     "T17"
     ],
     "rule": "R-FU-KIT"
    },
    {
-    "line": 16,
+    "line": 18,
     "part": "FSW-630-4P",
     "description": "Fuse-switch-disconnector 630 A 4-pole; feeds data hall",
     "qty": 1,
@@ -584,14 +556,14 @@
     "total_gbp": 1439.6,
     "conf": 1.0,
     "evidence": [
-     "S12",
-     "T21",
-     "T18"
+     "S10",
+     "T18",
+     "T21"
     ],
     "rule": "R-FSW-SELECT"
    },
    {
-    "line": 17,
+    "line": 19,
     "part": "FUSE-630",
     "description": "Fuse links 630 A, one per pole",
     "qty": 4,
@@ -599,14 +571,14 @@
     "total_gbp": 288,
     "conf": 1.0,
     "evidence": [
-     "S12",
-     "T21",
-     "T18"
+     "S10",
+     "T18",
+     "T21"
     ],
     "rule": "R-FUSE-LINKS"
    },
    {
-    "line": 18,
+    "line": 20,
     "part": "FU-KIT-FUSE_SWITCH",
     "description": "Outgoing functional unit: compartment door, terminals, labels",
     "qty": 1,
@@ -614,14 +586,14 @@
     "total_gbp": 380,
     "conf": 1.0,
     "evidence": [
-     "S12",
-     "T21",
-     "T18"
+     "S10",
+     "T18",
+     "T21"
     ],
     "rule": "R-FU-KIT"
    },
    {
-    "line": 19,
+    "line": 21,
     "part": "FSW-630-3P",
     "description": "Fuse-switch-disconnector 630 A 3-pole; feeds DB-6 wards",
     "qty": 1,
@@ -629,14 +601,14 @@
     "total_gbp": 1180.0,
     "conf": 1.0,
     "evidence": [
-     "S13",
-     "T22",
-     "T19"
+     "S11",
+     "T19",
+     "T22"
     ],
     "rule": "R-FSW-SELECT"
    },
    {
-    "line": 20,
+    "line": 22,
     "part": "FUSE-630",
     "description": "Fuse links 630 A, one per pole",
     "qty": 3,
@@ -644,14 +616,14 @@
     "total_gbp": 216,
     "conf": 1.0,
     "evidence": [
-     "S13",
-     "T22",
-     "T19"
+     "S11",
+     "T19",
+     "T22"
     ],
     "rule": "R-FUSE-LINKS"
    },
    {
-    "line": 21,
+    "line": 23,
     "part": "FU-KIT-FUSE_SWITCH",
     "description": "Outgoing functional unit: compartment door, terminals, labels",
     "qty": 1,
@@ -659,19 +631,19 @@
     "total_gbp": 380,
     "conf": 1.0,
     "evidence": [
-     "S13",
-     "T22",
-     "T19"
+     "S11",
+     "T19",
+     "T22"
     ],
     "rule": "R-FU-KIT"
    },
    {
-    "line": 22,
+    "line": 24,
     "part": "BUSBAR-CU-3200",
-    "description": "Copper busbar set 3200 A (4-bar), 4 sections, about 240 kg",
+    "description": "Copper busbar set 3200 A (4-bar), 3 sections, about 180 kg",
     "qty": 1,
-    "unit_gbp": 2760.0,
-    "total_gbp": 2760.0,
+    "unit_gbp": 2070.0,
+    "total_gbp": 2070.0,
     "conf": 0.9,
     "evidence": [
      "T7",
@@ -680,12 +652,12 @@
     "rule": "R-BUSBAR-SIZE"
    },
    {
-    "line": 23,
+    "line": 25,
     "part": "ENC-SECTION",
     "description": "Enclosure section, Form 3b, IP41, RAL 7035",
-    "qty": 4,
+    "qty": 3,
     "unit_gbp": 2678.0,
-    "total_gbp": 10712.0,
+    "total_gbp": 8034.0,
     "conf": 0.95,
     "evidence": [
      "T24",
@@ -696,18 +668,18 @@
     "rule": "R-ENCLOSURE"
    },
    {
-    "line": 24,
+    "line": 26,
     "part": "LAB-ASSY",
-    "description": "Assembly, wiring and routine verification: 146 hours",
+    "description": "Assembly, wiring and routine verification: 112 hours",
     "qty": 1,
-    "unit_gbp": 7008,
-    "total_gbp": 7008,
+    "unit_gbp": 5376,
+    "total_gbp": 5376,
     "conf": 0.9,
     "evidence": [],
     "rule": "R-LABOUR"
    },
    {
-    "line": 25,
+    "line": 27,
     "part": "DOC",
     "description": "Documentation, as-built drawings, test certificates",
     "qty": 1,
@@ -718,7 +690,7 @@
     "rule": "R-DOC"
    },
    {
-    "line": 26,
+    "line": 28,
     "part": "CERT",
     "description": "Design-verification certificates per specification",
     "qty": 1,
@@ -731,7 +703,7 @@
     "rule": "R-SPEC-CERT"
    },
    {
-    "line": 27,
+    "line": 29,
     "part": "DEL",
     "description": "Delivery to site, crane and offload excluded",
     "qty": 1,
@@ -742,50 +714,11 @@
     "rule": "R-DELIVERY"
    }
   ],
-  "subtotal_gbp": 48173.0,
-  "margin_gbp": 7225.95,
-  "total_gbp": 55398.95
+  "subtotal_gbp": 37325.0,
+  "margin_gbp": 5598.75,
+  "total_gbp": 42923.75
  },
- "issues": [
-  {
-   "kind": "missing",
-   "what": "D6 (FUSE_SWITCH): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S6",
-    "T12",
-    "T20"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D7 (CAPACITOR): kVAr not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S7"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D10 (CONTACTOR): kW not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S10",
-    "T15"
-   ]
-  },
-  {
-   "kind": "low_confidence",
-   "what": "devices read with low confidence: D4, D7, D14, D15",
-   "action": "check against the drawing",
-   "evidence": [
-    "D4",
-    "D7",
-    "D14",
-    "D15"
-   ]
-  }
- ],
+ "issues": [],
  "conflicts": [],
  "spec": {
   "clauses": [
@@ -825,10 +758,10 @@
  },
  "score": {
   "symbols_total": 13,
-  "symbols_found": 13,
-  "symbols_reported": 15,
-  "precision": 0.867,
-  "recall": 1.0,
+  "symbols_found": 12,
+  "symbols_reported": 12,
+  "precision": 1.0,
+  "recall": 0.923,
   "per_type": [
    {
     "type": "ACB",
@@ -839,8 +772,8 @@
    {
     "type": "BUS_SECTION",
     "total": 1,
-    "found": 1,
-    "reported": 1
+    "found": 0,
+    "reported": 0
    },
    {
     "type": "FUSE_SWITCH",
@@ -877,34 +810,22 @@
     "total": 1,
     "found": 1,
     "reported": 1
-   },
-   {
-    "type": "CAPACITOR",
-    "total": 0,
-    "found": 0,
-    "reported": 1
-   },
-   {
-    "type": "EARTH",
-    "total": 0,
-    "found": 0,
-    "reported": 1
    }
   ],
   "reference_total_gbp": 56433.95,
-  "price_error": 0.0183,
-  "rating_accuracy": 0.692,
+  "price_error": 0.2394,
+  "rating_accuracy": 1.0,
   "notes_accuracy": 1.0
  },
  "timing": {
-  "total": 8.19,
-  "ocr": 4.32,
-  "detector": 3.48
+  "total": 5.88,
+  "ocr": 3.44,
+  "detector": 2.08
  },
  "reader": "trained",
  "engine": "rapidocr",
  "model": {
-  "weights": "weights/rtdetr_r18_full",
+  "weights": "weights/rtdetr_r18_plain_ema_fix_pass4",
   "threshold": 0.11
  },
  "files": {

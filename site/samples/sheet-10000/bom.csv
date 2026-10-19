@@ -1,28 +1,35 @@
 line,part,description,qty,unit_gbp,total_gbp,conf,rule,evidence
 1,ACB-1600-3P-N,"Air circuit breaker 1600 A 3-pole, 36 kA band N, withdrawable, electronic trip",1,4200.0,4200.0,0.96,R-ACB-SELECT,S4 T8 T11
 2,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.96,R-FU-KIT,S4 T8 T11
-3,ACB-1600-3P-N,"Air circuit breaker 1600 A 3-pole, 36 kA band N, withdrawable, electronic trip",1,4200.0,4200.0,1.0,R-ACB-SELECT,S5 T14 T10
-4,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,1.0,R-FU-KIT,S5 T14 T10
-5,ATS-CTRL,Automatic transfer switch controller and interlocks,1,1850,1850,1.0,R-ATS,S5 T14 T10
-6,ACB-1600-3P-N,"Air circuit breaker 1600 A 3-pole, 36 kA band N, withdrawable, electronic trip",1,4200.0,4200.0,0.96,R-ACB-SELECT,S6 T9 T12
-7,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.96,R-FU-KIT,S6 T9 T12
-8,METER-CT 1600/5A | BUSBAR A 1600 A Cu 36 kA/1s,Panel meter (CT 1600/5A | BUSBAR A 1600 A Cu 36 kA/1s),1,260,260,1.0,R-METERING,S7 T15 T18
-9,CT-SET,"Current transformers, set of three, class 1",1,280,280,0.38,R-METERING,S8
-10,METER-CT 1600/5A | BUSBAR B 1600 A Cu 36 kA/1s,Panel meter (CT 1600/5A | BUSBAR B 1600 A Cu 36 kA/1s),1,260,260,0.99,R-METERING,S9 T16 T19
-11,CT-SET,"Current transformers, set of three, class 1",1,280,280,0.5,R-METERING,S10
-12,METER-CT 1600/5A,Panel meter (CT 1600/5A),1,260,260,0.93,R-METERING,S11 T17
-13,CT-SET,"Current transformers, set of three, class 1",1,280,280,0.75,R-METERING,S12 T13
-14,MCCB-800-3P-N,"Moulded-case circuit breaker 800 A 3-pole, 36 kA band N, adjustable trip",1,1900.0,1900.0,0.98,R-MCCB-SELECT,S14 T20
-15,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.98,R-FU-KIT,S14 T20
-16,MCCB-250-3P-N,"Moulded-case circuit breaker 250 A 3-pole, 36 kA band N, adjustable trip",1,520.0,520.0,0.99,R-MCCB-SELECT,S15 T30
-17,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.99,R-FU-KIT,S15 T30
-18,MCCB-400-3P-N,"Moulded-case circuit breaker 400 A 3-pole, 50 kA band N, adjustable trip; feeds purhps",1,980.0,980.0,0.97,R-MCCB-SELECT,S21 T27 T35
-19,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.97,R-FU-KIT,S21 T27 T35
-20,MCCB-800-3P-H,"Moulded-case circuit breaker 800 A 3-pole, 65 kA band H, adjustable trip; feeds data'hall",1,2242.0,2242.0,0.98,R-MCCB-SELECT,S29 T41 T52
-21,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.98,R-FU-KIT,S29 T41 T52
-22,BUSBAR-CU-1600,"Copper busbar set 1600 A (4-bar), 4 sections, about 115 kg",1,1324.8,1324.8,0.9,R-BUSBAR-SIZE,T19 T19
-23,ENC-SECTION,"Enclosure section, Form 4 Type 4, IP42, RAL 7035",4,3221.4,12885.6,0.95,R-ENCLOSURE,T66 T66 T68 T70
-24,LAB-ASSY,"Assembly, wiring and routine verification: 252 hours",1,12096,12096,0.9,R-LABOUR,
-25,DOC,"Documentation, as-built drawings, test certificates",1,600,600,1.0,R-DOC,
-26,CERT,Design-verification certificates per specification,1,0.0,0.0,1.0,R-SPEC-CERT,7.7
-27,DEL,"Delivery to site, crane and offload excluded",1,850,850,1.0,R-DELIVERY,
+3,ACB-1600-3P-N,"Air circuit breaker 1600 A 3-pole, 36 kA band N, withdrawable, electronic trip",1,4200.0,4200.0,0.96,R-ACB-SELECT,S5 T9 T12
+4,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.96,R-FU-KIT,S5 T9 T12
+5,ACB-1600-3P-N,"Air circuit breaker 1600 A 3-pole, 36 kA band N, withdrawable, electronic trip",1,4200.0,4200.0,1.0,R-ACB-SELECT,S6 T10
+6,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,1.0,R-FU-KIT,S6 T10
+7,ATS-CTRL,Automatic transfer switch controller and interlocks,1,1850,1850,1.0,R-ATS,S6 T10
+8,METER-kW,Panel meter (kW),1,260,260,0.96,R-METERING,S7 S7g1
+9,METER-kWh,Panel meter (kWh),1,340,340,1.0,R-METERING,S8 T13
+10,METER-kWh,Panel meter (kWh),1,340,340,1.0,R-METERING,S9 T14
+11,CT-SET,"Current transformers 1600/5 A, set of three, class 1",1,280,280,1.0,R-METERING,S10 T15
+12,CT-SET,"Current transformers 1600/5 A, set of three, class 1",1,280,280,0.99,R-METERING,S11 T16
+13,CT-SET,"Current transformers 1600/5 A, set of three, class 1",1,280,280,1.0,R-METERING,S12 T17
+14,BSS-1600-3P,"Bus-section switch 1600 A 3-pole, 36 kA",1,3100.0,3100.0,0.98,R-BUS-SECTION,S13 T20
+15,FU-KIT-BS,Bus-section functional unit and interlocking,1,900,900,0.98,R-FU-KIT,S13 T20
+16,MCCB-100-3P-N,"Moulded-case circuit breaker 100 A 3-pole, 36 kA band N, adjustable trip; feeds pump P-8",1,310.0,310.0,0.99,R-MCCB-SELECT,S14 T50 T61 T63
+17,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.99,R-FU-KIT,S14 T50 T61 T63
+18,MCCB-250-3P-N,"Moulded-case circuit breaker 250 A 3-pole, 36 kA band N, adjustable trip",1,520.0,520.0,0.98,R-MCCB-SELECT,S15 T30 T49
+19,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.98,R-FU-KIT,S15 T30 T49
+20,MCCB-100-3P-N,"Moulded-case circuit breaker 100 A 3-pole, 36 kA band N, adjustable trip; feeds compressor C-14",1,310.0,310.0,0.96,R-MCCB-SELECT,S16 T54 T62 T64
+21,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.96,R-FU-KIT,S16 T54 T62 T64
+22,MCCB-400-3P-N,"Moulded-case circuit breaker 400 A 3-pole, 50 kA band N, adjustable trip; feeds purhps",1,980.0,980.0,0.97,R-MCCB-SELECT,S19 T27 T35 T45
+23,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.97,R-FU-KIT,S19 T27 T35 T45
+24,PFC-100KVAR,"Power-factor correction bank 100 kVAr, detuned, in its own section",1,3400,3400,1.0,R-PFC,S24 T38
+25,STARTER-22KW,"Motor starter for 22 kW: contactor, overload relay and control circuit",1,820,820,1.0,R-STARTER,S25 T56
+26,STARTER-22KW,"Motor starter for 22 kW: contactor, overload relay and control circuit",1,820,820,1.0,R-STARTER,S26 T60
+27,MCCB-800-3P-H,"Moulded-case circuit breaker 800 A 3-pole, 65 kA band H, adjustable trip; feeds data'hall",1,2242.0,2242.0,0.98,R-MCCB-SELECT,S31 T41 T52 T58
+28,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.98,R-FU-KIT,S31 T41 T52 T58
+29,BUSBAR-CU-1600,"Copper busbar set 1600 A (4-bar), 7 sections, about 202 kg",1,2318.4,2318.4,0.9,R-BUSBAR-SIZE,T19 T19
+30,ENC-SECTION,"Enclosure section, Form 4 Type 4, IP42, RAL 7035",7,3221.4,22549.8,0.95,R-ENCLOSURE,T66 T66 T68 T70
+31,LAB-ASSY,"Assembly, wiring and routine verification: 300 hours",1,14400,14400,0.9,R-LABOUR,
+32,DOC,"Documentation, as-built drawings, test certificates",1,600,600,1.0,R-DOC,
+33,CERT,Design-verification certificates per specification,1,0.0,0.0,1.0,R-SPEC-CERT,7.7
+34,DEL,"Delivery to site, crane and offload excluded",1,850,850,1.0,R-DELIVERY,

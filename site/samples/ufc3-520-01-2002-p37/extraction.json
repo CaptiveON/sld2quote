@@ -251,224 +251,267 @@
  "symbols": [
   {
    "id": "S1",
-   "kind": "relay",
+   "kind": "breaker",
    "box": [
-    484,
-    154,
-    17,
-    19
+    818,
+    89,
+    27,
+    10
    ],
-   "score": 0.13,
-   "shape_score": 0.75
+   "score": 0.16,
+   "shape_score": 0.87
   },
   {
    "id": "S2",
-   "kind": "meter",
+   "kind": "relay",
    "box": [
-    47,
-    252,
-    20,
-    20
+    484,
+    153,
+    17,
+    21
    ],
-   "score": 0.23,
-   "shape_score": 0.98
+   "score": 0.21,
+   "shape_score": 0.99
   },
   {
    "id": "S3",
-   "kind": "fuse_switch",
+   "kind": "ct",
    "box": [
-    626,
-    322,
-    32,
-    27
+    804,
+    156,
+    21,
+    20
    ],
-   "score": 0.12,
-   "shape_score": 0.75
+   "score": 0.13,
+   "shape_score": 0.87
   },
   {
    "id": "S4",
-   "kind": "fuse_switch",
+   "kind": "breaker",
    "box": [
-    361,
-    364,
-    17,
-    30
+    792,
+    219,
+    28,
+    32
    ],
-   "score": 0.22,
-   "shape_score": 0.98
+   "score": 0.59,
+   "shape_score": 1.0
   },
   {
    "id": "S5",
-   "kind": "fuse_switch",
+   "kind": "meter",
    "box": [
-    465,
-    364,
-    18,
-    30
+    47,
+    251,
+    20,
+    21
    ],
-   "score": 0.3,
+   "score": 0.42,
    "shape_score": 1.0
   },
   {
    "id": "S6",
    "kind": "fuse_switch",
    "box": [
-    565,
+    361,
     364,
     17,
-    32
+    30
    ],
-   "score": 0.45,
-   "shape_score": 1.0
+   "score": 0.18,
+   "shape_score": 0.97
   },
   {
    "id": "S7",
    "kind": "fuse_switch",
    "box": [
-    811,
-    365,
+    465,
+    364,
     17,
     30
    ],
-   "score": 0.43,
-   "shape_score": 1.0
+   "score": 0.21,
+   "shape_score": 0.99
   },
   {
    "id": "S8",
-   "kind": "fuse_switch",
+   "kind": "breaker",
+   "box": [
+    564,
+    364,
+    18,
+    31
+   ],
+   "score": 0.34,
+   "shape_score": 1.0
+  },
+  {
+   "id": "S9",
+   "kind": "breaker",
+   "box": [
+    811,
+    365,
+    16,
+    30
+   ],
+   "score": 0.33,
+   "shape_score": 1.0
+  },
+  {
+   "id": "S10",
+   "kind": "breaker",
    "box": [
     915,
     366,
     17,
     30
    ],
-   "score": 0.36,
+   "score": 0.57,
    "shape_score": 1.0
+  },
+  {
+   "id": "S11",
+   "kind": "breaker",
+   "box": [
+    1016,
+    367,
+    16,
+    29
+   ],
+   "score": 0.14,
+   "shape_score": 0.87
   }
  ],
  "devices": [
   {
    "symbol": "S1",
    "box": [
-    484,
-    154,
-    17,
-    19
+    818,
+    89,
+    27,
+    10
    ],
    "label_texts": [
-    "T5",
+    "T1",
+    "T2",
+    "T3",
     "T4"
    ],
-   "label": "480Y/277V | carrying total critical load",
-   "conf": 0.75,
-   "score": 0.13,
-   "type": "RELAY",
+   "label": "Separated Commercial | Power Feeds | Each transformer capable of | carrying total critical load",
+   "conf": 0.87,
+   "score": 0.16,
+   "type": "ACB",
    "rating": null,
-   "on_bus": "BUS-1",
+   "poles": null,
+   "kA": null,
+   "on_bus": "BUS-2",
    "connected": false,
    "id": "D1"
   },
   {
    "symbol": "S2",
    "box": [
-    47,
-    252,
-    20,
-    20
+    484,
+    153,
+    17,
+    21
    ],
    "label_texts": [
-    "T12",
-    "T8"
+    "T5",
+    "T9"
    ],
-   "label": "and interlocked | closed at one time",
-   "conf": 0.98,
-   "score": 0.23,
-   "type": "METER",
+   "label": "480Y/277V | >NC",
+   "conf": 0.96,
+   "score": 0.21,
+   "type": "RELAY",
    "rating": null,
-   "on_bus": null,
+   "on_bus": "BUS-1",
    "connected": false,
    "id": "D2"
   },
   {
    "symbol": "S3",
    "box": [
-    626,
-    322,
-    32,
-    27
+    804,
+    156,
+    21,
+    20
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.38,
-   "score": 0.12,
-   "type": "FUSE_SWITCH",
+   "conf": 0.43,
+   "score": 0.13,
+   "type": "CT",
    "rating": null,
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "on_bus": null,
+   "on_bus": "BUS-2",
    "connected": false,
    "id": "D3"
   },
   {
    "symbol": "S4",
    "box": [
-    361,
-    364,
-    17,
-    30
+    792,
+    219,
+    28,
+    32
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.49,
-   "score": 0.22,
-   "type": "FUSE_SWITCH",
+   "label_texts": [
+    "T6",
+    "T11"
+   ],
+   "label": "480Y/277V | NC",
+   "conf": 1.0,
+   "score": 0.59,
+   "type": "ACB",
    "rating": null,
    "poles": null,
    "kA": null,
-   "dest": "",
-   "on_bus": "BUS-1",
+   "on_bus": "BUS-2",
    "connected": false,
    "id": "D4"
   },
   {
    "symbol": "S5",
    "box": [
-    465,
-    364,
-    18,
-    30
+    47,
+    251,
+    20,
+    21
    ],
    "label_texts": [],
    "label": "",
    "conf": 0.5,
-   "score": 0.3,
-   "type": "FUSE_SWITCH",
+   "score": 0.42,
+   "type": "METER",
    "rating": null,
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "on_bus": "BUS-1",
+   "on_bus": null,
    "connected": false,
    "id": "D5"
   },
   {
    "symbol": "S6",
    "box": [
-    565,
+    361,
     364,
     17,
-    32
+    30
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.5,
-   "score": 0.45,
+   "label_texts": [
+    "T7",
+    "T8",
+    "T12",
+    "T13",
+    "T15",
+    "T17"
+   ],
+   "label": "Only 2 of 3 breakers | closed at one time | and interlocked | To steady-state loads | that produce the least | power quality problems",
+   "conf": 0.97,
+   "score": 0.18,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
    "kA": null,
-   "dest": "",
+   "dest": "Only 2 of 3 breakers",
    "on_bus": "BUS-1",
    "connected": false,
    "id": "D6"
@@ -476,44 +519,113 @@
   {
    "symbol": "S7",
    "box": [
-    811,
-    365,
+    465,
+    364,
     17,
     30
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.5,
-   "score": 0.43,
+   "conf": 0.49,
+   "score": 0.21,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
    "kA": null,
    "dest": "",
-   "on_bus": "BUS-2",
+   "on_bus": "BUS-1",
    "connected": false,
    "id": "D7"
   },
   {
    "symbol": "S8",
    "box": [
-    915,
-    366,
-    17,
+    564,
+    364,
+    18,
+    31
+   ],
+   "label_texts": [
+    "T10"
+   ],
+   "label": "NO",
+   "conf": 1.0,
+   "score": 0.34,
+   "type": "MCCB",
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "dest": "NO",
+   "on_bus": "BUS-1",
+   "connected": false,
+   "id": "D8"
+  },
+  {
+   "symbol": "S9",
+   "box": [
+    811,
+    365,
+    16,
     30
    ],
    "label_texts": [],
    "label": "",
    "conf": 0.5,
-   "score": 0.36,
-   "type": "FUSE_SWITCH",
+   "score": 0.33,
+   "type": "MCCB",
    "rating": null,
    "poles": null,
    "kA": null,
    "dest": "",
    "on_bus": "BUS-2",
    "connected": false,
-   "id": "D8"
+   "id": "D9"
+  },
+  {
+   "symbol": "S10",
+   "box": [
+    915,
+    366,
+    17,
+    30
+   ],
+   "label_texts": [
+    "T14",
+    "T16",
+    "T18"
+   ],
+   "label": "To loads that create the most | disturbances such as large | motors or rectifiers",
+   "conf": 0.98,
+   "score": 0.57,
+   "type": "MCCB",
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "dest": "To loads that create the most",
+   "on_bus": "BUS-2",
+   "connected": false,
+   "id": "D10"
+  },
+  {
+   "symbol": "S11",
+   "box": [
+    1016,
+    367,
+    16,
+    29
+   ],
+   "label_texts": [],
+   "label": "",
+   "conf": 0.43,
+   "score": 0.14,
+   "type": "MCCB",
+   "rating": null,
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "on_bus": "BUS-2",
+   "connected": false,
+   "id": "D11"
   }
  ],
  "notes": {
@@ -527,14 +639,14 @@
  "ocr_engine": "rapidocr",
  "reader": "trained",
  "seconds": {
-  "total": 3.12,
-  "ocr": 1.91,
-  "detector": 1.09
+  "total": 1.98,
+  "ocr": 1.32,
+  "detector": 0.59
  },
  "detector": {
-  "weights": "weights/rtdetr_r18_full",
+  "weights": "weights/rtdetr_r18_plain_ema_fix_pass4",
   "device": "cpu",
-  "threads": 2,
+  "threads": 4,
   "score_threshold": 0.11,
   "score_threshold_source": "drawing",
   "nms_iou": 0.5,

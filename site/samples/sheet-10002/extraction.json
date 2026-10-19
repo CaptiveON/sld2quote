@@ -833,6 +833,30 @@
    ],
    "src": "page",
    "id": "T69"
+  },
+  {
+   "text": "V",
+   "conf": 0.6981315612792969,
+   "box": [
+    1379.0,
+    290.6666666666667,
+    10.333333333333334,
+    11.333333333333334
+   ],
+   "src": "tag",
+   "id": "S7g1"
+  },
+  {
+   "text": "kW",
+   "conf": 0.9856286644935608,
+   "box": [
+    2290.3333333333335,
+    290.0,
+    22.0,
+    12.666666666666666
+   ],
+   "src": "tag",
+   "id": "S8g1"
   }
  ],
  "busbars": [
@@ -866,11 +890,11 @@
    "kind": "generator",
    "box": [
     2224,
-    67,
-    49,
+    66,
+    47,
     47
    ],
-   "score": 0.61,
+   "score": 0.4,
    "shape_score": 1.0
   },
   {
@@ -878,11 +902,11 @@
    "kind": "transformer",
    "box": [
     1309,
-    68,
-    44,
-    73
+    67,
+    45,
+    75
    ],
-   "score": 0.4,
+   "score": 0.47,
    "shape_score": 1.0
   },
   {
@@ -890,35 +914,35 @@
    "kind": "transformer",
    "box": [
     198,
-    71,
+    68,
     44,
-    71
+    74
    ],
-   "score": 0.73,
+   "score": 0.41,
    "shape_score": 1.0
   },
   {
    "id": "S4",
    "kind": "breaker",
    "box": [
-    1314,
+    203,
     200,
-    33,
-    34
+    34,
+    33
    ],
-   "score": 0.41,
+   "score": 0.64,
    "shape_score": 1.0
   },
   {
    "id": "S5",
    "kind": "breaker",
    "box": [
-    203,
-    201,
+    1314,
+    200,
     34,
-    33
+    34
    ],
-   "score": 0.57,
+   "score": 0.64,
    "shape_score": 1.0
   },
   {
@@ -926,12 +950,12 @@
    "kind": "breaker",
    "box": [
     2231,
-    201,
+    200,
     34,
-    34
+    33
    ],
-   "score": 0.18,
-   "shape_score": 0.93
+   "score": 0.64,
+   "shape_score": 1.0
   },
   {
    "id": "S7",
@@ -939,70 +963,70 @@
    "box": [
     1369,
     282,
-    29,
+    28,
     30
    ],
-   "score": 0.32,
+   "score": 0.37,
    "shape_score": 1.0
   },
   {
    "id": "S8",
    "kind": "meter",
    "box": [
-    2285,
+    2286,
     282,
-    30,
+    29,
     30
    ],
-   "score": 0.33,
+   "score": 0.44,
    "shape_score": 1.0
   },
   {
    "id": "S9",
-   "kind": "relay",
-   "box": [
-    313,
-    284,
-    27,
-    25
-   ],
-   "score": 0.14,
-   "shape_score": 0.75
-  },
-  {
-   "id": "S10",
    "kind": "meter",
    "box": [
     257,
-    285,
+    284,
     35,
-    25
+    26
    ],
-   "score": 0.61,
+   "score": 0.34,
    "shape_score": 1.0
+  },
+  {
+   "id": "S10",
+   "kind": "relay",
+   "box": [
+    314,
+    284,
+    26,
+    26
+   ],
+   "score": 0.21,
+   "shape_score": 0.99
   },
   {
    "id": "S11",
    "kind": "ct",
    "box": [
     208,
-    286,
-    23,
-    23
+    285,
+    24,
+    24
    ],
-   "score": 0.13,
-   "shape_score": 0.75
+   "score": 0.24,
+   "shape_score": 1.0
   },
   {
    "id": "S12",
    "kind": "ct",
    "box": [
     1319,
-    286,
+    285,
     24,
-    23
+    24
    ],
-   "score": 0.34,
+   "score": 0.3,
    "shape_score": 1.0
   },
   {
@@ -1010,75 +1034,63 @@
    "kind": "ct",
    "box": [
     2236,
-    286,
+    285,
     24,
-    23
+    24
    ],
-   "score": 0.43,
+   "score": 0.54,
    "shape_score": 1.0
   },
   {
    "id": "S14",
-   "kind": "relay",
-   "box": [
-    1349,
-    375,
-    15,
-    16
-   ],
-   "score": 0.12,
-   "shape_score": 0.75
-  },
-  {
-   "id": "S15",
    "kind": "breaker",
    "box": [
     1217,
     383,
     34,
-    35
+    34
    ],
-   "score": 0.14,
-   "shape_score": 0.75
+   "score": 0.51,
+   "shape_score": 1.0
+  },
+  {
+   "id": "S15",
+   "kind": "breaker",
+   "box": [
+    562,
+    500,
+    28,
+    28
+   ],
+   "score": 0.39,
+   "shape_score": 1.0
   },
   {
    "id": "S16",
    "kind": "breaker",
    "box": [
-    561,
+    938,
     500,
-    30,
-    29
+    28,
+    28
    ],
-   "score": 0.48,
+   "score": 0.45,
    "shape_score": 1.0
   },
   {
    "id": "S17",
    "kind": "breaker",
    "box": [
-    938,
+    1690,
     500,
-    29,
+    28,
     28
    ],
-   "score": 0.49,
+   "score": 0.35,
    "shape_score": 1.0
   },
   {
    "id": "S18",
-   "kind": "breaker",
-   "box": [
-    1690,
-    500,
-    27,
-    28
-   ],
-   "score": 0.13,
-   "shape_score": 0.75
-  },
-  {
-   "id": "S19",
    "kind": "breaker",
    "box": [
     1314,
@@ -1086,23 +1098,23 @@
     28,
     28
    ],
-   "score": 0.48,
+   "score": 0.65,
+   "shape_score": 1.0
+  },
+  {
+   "id": "S19",
+   "kind": "breaker",
+   "box": [
+    1878,
+    520,
+    27,
+    28
+   ],
+   "score": 0.78,
    "shape_score": 1.0
   },
   {
    "id": "S20",
-   "kind": "breaker",
-   "box": [
-    1877,
-    520,
-    29,
-    29
-   ],
-   "score": 0.57,
-   "shape_score": 1.0
-  },
-  {
-   "id": "S21",
    "kind": "breaker",
    "box": [
     2254,
@@ -1110,11 +1122,11 @@
     28,
     28
    ],
-   "score": 0.58,
+   "score": 0.88,
    "shape_score": 1.0
   },
   {
-   "id": "S22",
+   "id": "S21",
    "kind": "contactor",
    "box": [
     562,
@@ -1122,11 +1134,11 @@
     20,
     38
    ],
-   "score": 0.4,
+   "score": 0.43,
    "shape_score": 1.0
   },
   {
-   "id": "S23",
+   "id": "S22",
    "kind": "contactor",
    "box": [
     1690,
@@ -1134,35 +1146,35 @@
     20,
     38
    ],
-   "score": 0.34,
+   "score": 0.3,
    "shape_score": 1.0
   },
   {
-   "id": "S24",
+   "id": "S23",
    "kind": "spd",
    "box": [
     940,
     544,
-    24,
+    25,
     38
    ],
-   "score": 0.39,
+   "score": 0.16,
+   "shape_score": 0.87
+  },
+  {
+   "id": "S24",
+   "kind": "fuse_switch",
+   "box": [
+    184,
+    549,
+    22,
+    37
+   ],
+   "score": 0.47,
    "shape_score": 1.0
   },
   {
    "id": "S25",
-   "kind": "fuse_switch",
-   "box": [
-    185,
-    550,
-    21,
-    34
-   ],
-   "score": 0.57,
-   "shape_score": 1.0
-  },
-  {
-   "id": "S26",
    "kind": "breaker",
    "box": [
     750,
@@ -1170,47 +1182,47 @@
     28,
     28
    ],
-   "score": 0.22,
-   "shape_score": 0.98
+   "score": 0.21,
+   "shape_score": 0.99
+  },
+  {
+   "id": "S26",
+   "kind": "breaker",
+   "box": [
+    1500,
+    550,
+    29,
+    28
+   ],
+   "score": 0.28,
+   "shape_score": 1.0
   },
   {
    "id": "S27",
    "kind": "breaker",
    "box": [
-    1502,
-    550,
+    374,
+    579,
     28,
-    28
+    29
    ],
-   "score": 0.4,
+   "score": 0.45,
    "shape_score": 1.0
   },
   {
    "id": "S28",
    "kind": "breaker",
    "box": [
-    374,
+    1126,
     580,
     28,
-    29
-   ],
-   "score": 0.21,
-   "shape_score": 0.98
-  },
-  {
-   "id": "S29",
-   "kind": "breaker",
-   "box": [
-    1125,
-    580,
-    29,
     28
    ],
    "score": 0.24,
-   "shape_score": 0.98
+   "shape_score": 0.99
   },
   {
-   "id": "S30",
+   "id": "S29",
    "kind": "breaker",
    "box": [
     2066,
@@ -1218,44 +1230,44 @@
     28,
     28
    ],
-   "score": 0.15,
-   "shape_score": 0.75
+   "score": 0.2,
+   "shape_score": 0.99
+  },
+  {
+   "id": "S30",
+   "kind": "motor",
+   "box": [
+    557,
+    591,
+    38,
+    39
+   ],
+   "score": 0.32,
+   "shape_score": 1.0
   },
   {
    "id": "S31",
    "kind": "motor",
    "box": [
-    1684,
+    1685,
     591,
-    40,
+    37,
     39
    ],
-   "score": 0.39,
+   "score": 0.27,
    "shape_score": 1.0
   },
   {
    "id": "S32",
-   "kind": "motor",
-   "box": [
-    557,
-    592,
-    38,
-    37
-   ],
-   "score": 0.48,
-   "shape_score": 1.0
-  },
-  {
-   "id": "S33",
    "kind": "earth",
    "box": [
     938,
     592,
-    29,
-    21
+    28,
+    20
    ],
-   "score": 0.52,
-   "shape_score": 1.0
+   "score": 0.16,
+   "shape_score": 0.87
   }
  ],
  "devices": [
@@ -1263,17 +1275,18 @@
    "symbol": "S1",
    "box": [
     2224,
-    67,
-    49,
+    66,
+    47,
     47
    ],
    "label_texts": [
-    "T4",
-    "T1"
+    "T1",
+    "T5",
+    "T4"
    ],
-   "label": "standby | GEN-1 800 kVA",
+   "label": "GEN-1 800 kVA | G | standby",
    "conf": 0.97,
-   "score": 0.61,
+   "score": 0.4,
    "type": "GENERATOR",
    "rating": 800,
    "on_bus": "BUS-2",
@@ -1284,17 +1297,17 @@
    "symbol": "S2",
    "box": [
     1309,
-    68,
-    44,
-    73
+    67,
+    45,
+    75
    ],
    "label_texts": [
-    "T7",
-    "T3"
+    "T3",
+    "T7"
    ],
-   "label": "ll kV / 4l5 V | TX-2 2500 kVA",
+   "label": "TX-2 2500 kVA | ll kV / 4l5 V",
    "conf": 0.86,
-   "score": 0.4,
+   "score": 0.47,
    "type": "TRANSFORMER",
    "rating": 2500,
    "on_bus": "BUS-2",
@@ -1305,17 +1318,17 @@
    "symbol": "S3",
    "box": [
     198,
-    71,
+    68,
     44,
-    71
+    74
    ],
    "label_texts": [
-    "T6",
-    "T2"
+    "T2",
+    "T6"
    ],
-   "label": "1l kV / 415 V | TX-1 1000 kVA",
+   "label": "TX-1 1000 kVA | 1l kV / 415 V",
    "conf": 0.8,
-   "score": 0.73,
+   "score": 0.41,
    "type": "TRANSFORMER",
    "rating": 1000,
    "on_bus": "BUS-1",
@@ -1325,9 +1338,32 @@
   {
    "symbol": "S4",
    "box": [
+    203,
+    200,
+    34,
+    33
+   ],
+   "label_texts": [
+    "T8",
+    "T11"
+   ],
+   "label": "ACB-1 2000 A 4P | Icu 36 kA, withdrawable",
+   "conf": 0.98,
+   "score": 0.64,
+   "type": "ACB",
+   "rating": 2000,
+   "poles": 4,
+   "kA": 36,
+   "on_bus": "BUS-1",
+   "connected": true,
+   "id": "D4"
+  },
+  {
+   "symbol": "S5",
+   "box": [
     1314,
     200,
-    33,
+    34,
     34
    ],
    "label_texts": [
@@ -1336,35 +1372,12 @@
    ],
    "label": "ACB-2 2000 A 4P | Icu 36 kA, withdrawable",
    "conf": 0.97,
-   "score": 0.41,
+   "score": 0.64,
    "type": "ACB",
    "rating": 2000,
    "poles": 4,
    "kA": 36,
    "on_bus": "BUS-2",
-   "connected": true,
-   "id": "D4"
-  },
-  {
-   "symbol": "S5",
-   "box": [
-    203,
-    201,
-    34,
-    33
-   ],
-   "label_texts": [
-    "T13",
-    "T8"
-   ],
-   "label": "kWh | ACB-1 2000 A 4P",
-   "conf": 0.98,
-   "score": 0.57,
-   "type": "ACB",
-   "rating": 2000,
-   "poles": 4,
-   "kA": null,
-   "on_bus": "BUS-1",
    "connected": true,
    "id": "D5"
   },
@@ -1372,16 +1385,16 @@
    "symbol": "S6",
    "box": [
     2231,
-    201,
+    200,
     34,
-    34
+    33
    ],
    "label_texts": [
     "T10"
    ],
    "label": "ACB-3 1600 A 4P ATS",
-   "conf": 0.93,
-   "score": 0.18,
+   "conf": 0.99,
+   "score": 0.64,
    "type": "ACB",
    "rating": 1600,
    "poles": 4,
@@ -1395,16 +1408,15 @@
    "box": [
     1369,
     282,
-    29,
+    28,
     30
    ],
    "label_texts": [
-    "T15",
-    "T18"
+    "S7g1"
    ],
-   "label": "CT 2000/5A | BUSBAR B 2000 A Cu 36 kA/1s",
-   "conf": 0.96,
-   "score": 0.32,
+   "label": "V",
+   "conf": 0.7,
+   "score": 0.37,
    "type": "METER",
    "rating": null,
    "on_bus": "BUS-2",
@@ -1414,17 +1426,17 @@
   {
    "symbol": "S8",
    "box": [
-    2285,
+    2286,
     282,
-    30,
+    29,
     30
    ],
    "label_texts": [
-    "T16"
+    "S8g1"
    ],
-   "label": "CT 1600/5A",
-   "conf": 0.97,
-   "score": 0.33,
+   "label": "kW",
+   "conf": 0.99,
+   "score": 0.44,
    "type": "METER",
    "rating": null,
    "on_bus": "BUS-2",
@@ -1434,19 +1446,18 @@
   {
    "symbol": "S9",
    "box": [
-    313,
+    257,
     284,
-    27,
-    25
+    35,
+    26
    ],
    "label_texts": [
-    "T14",
-    "T17"
+    "T13"
    ],
-   "label": "CT 2000/5A | BUSBAR A 2000 A Cu 36 kA/1s",
-   "conf": 0.75,
-   "score": 0.14,
-   "type": "RELAY",
+   "label": "kWh",
+   "conf": 1.0,
+   "score": 0.34,
+   "type": "METER",
    "rating": null,
    "on_bus": "BUS-1",
    "connected": false,
@@ -1455,16 +1466,16 @@
   {
    "symbol": "S10",
    "box": [
-    257,
-    285,
-    35,
-    25
+    314,
+    284,
+    26,
+    26
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.5,
-   "score": 0.61,
-   "type": "METER",
+   "conf": 0.49,
+   "score": 0.21,
+   "type": "RELAY",
    "rating": null,
    "on_bus": "BUS-1",
    "connected": false,
@@ -1474,16 +1485,18 @@
    "symbol": "S11",
    "box": [
     208,
-    286,
-    23,
-    23
+    285,
+    24,
+    24
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.38,
-   "score": 0.13,
+   "label_texts": [
+    "T14"
+   ],
+   "label": "CT 2000/5A",
+   "conf": 0.99,
+   "score": 0.24,
    "type": "CT",
-   "rating": null,
+   "rating": 2000,
    "on_bus": "BUS-1",
    "connected": false,
    "id": "D11"
@@ -1492,16 +1505,18 @@
    "symbol": "S12",
    "box": [
     1319,
-    286,
+    285,
     24,
-    23
+    24
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.5,
-   "score": 0.34,
+   "label_texts": [
+    "T15"
+   ],
+   "label": "CT 2000/5A",
+   "conf": 0.96,
+   "score": 0.3,
    "type": "CT",
-   "rating": null,
+   "rating": 2000,
    "on_bus": "BUS-2",
    "connected": false,
    "id": "D12"
@@ -1510,16 +1525,18 @@
    "symbol": "S13",
    "box": [
     2236,
-    286,
+    285,
     24,
-    23
+    24
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.5,
-   "score": 0.43,
+   "label_texts": [
+    "T16"
+   ],
+   "label": "CT 1600/5A",
+   "conf": 0.97,
+   "score": 0.54,
    "type": "CT",
-   "rating": null,
+   "rating": 1600,
    "on_bus": "BUS-2",
    "connected": false,
    "id": "D13"
@@ -1527,58 +1544,67 @@
   {
    "symbol": "S14",
    "box": [
-    1349,
-    375,
-    15,
-    16
-   ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.38,
-   "score": 0.12,
-   "type": "RELAY",
-   "rating": null,
-   "on_bus": "BUS-2",
-   "connected": false,
-   "id": "D14"
-  },
-  {
-   "symbol": "S15",
-   "box": [
     1217,
     383,
     34,
-    35
+    34
    ],
    "label_texts": [
     "T19"
    ],
    "label": "BS-1 2000 A",
-   "conf": 0.75,
-   "score": 0.14,
+   "conf": 0.95,
+   "score": 0.51,
    "type": "BUS_SECTION",
    "rating": 2000,
    "poles": null,
    "kA": null,
    "on_bus": null,
    "connected": true,
+   "id": "D14"
+  },
+  {
+   "symbol": "S15",
+   "box": [
+    562,
+    500,
+    28,
+    28
+   ],
+   "label_texts": [
+    "T45",
+    "T55",
+    "T57"
+   ],
+   "label": "MCCB 250 A 3P | compressor C-3 | 3C 120 mm- XLPE/SWA",
+   "conf": 0.91,
+   "score": 0.39,
+   "type": "MCCB",
+   "rating": 250,
+   "poles": 3,
+   "kA": null,
+   "dest": "compressor C-3",
+   "on_bus": "BUS-1",
+   "connected": true,
    "id": "D15"
   },
   {
    "symbol": "S16",
    "box": [
-    561,
+    938,
     500,
-    30,
-    29
+    28,
+    28
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.5,
-   "score": 0.48,
+   "label_texts": [
+    "T38"
+   ],
+   "label": "MCCB 100 A 4P",
+   "conf": 0.94,
+   "score": 0.45,
    "type": "MCCB",
-   "rating": null,
-   "poles": null,
+   "rating": 100,
+   "poles": 4,
    "kA": null,
    "dest": "",
    "on_bus": "BUS-1",
@@ -1588,47 +1614,30 @@
   {
    "symbol": "S17",
    "box": [
-    938,
+    1690,
     500,
-    29,
+    28,
     28
    ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.5,
-   "score": 0.49,
+   "label_texts": [
+    "T48",
+    "T56",
+    "T58"
+   ],
+   "label": "MCCB 100 A 3P | chiller CH-9 | 3C 35 mm- XLPE/SWA",
+   "conf": 0.94,
+   "score": 0.35,
    "type": "MCCB",
-   "rating": null,
-   "poles": null,
+   "rating": 100,
+   "poles": 3,
    "kA": null,
-   "dest": "",
-   "on_bus": "BUS-1",
+   "dest": "chiller CH-9",
+   "on_bus": "BUS-2",
    "connected": true,
    "id": "D17"
   },
   {
    "symbol": "S18",
-   "box": [
-    1690,
-    500,
-    27,
-    28
-   ],
-   "label_texts": [],
-   "label": "",
-   "conf": 0.38,
-   "score": 0.13,
-   "type": "MCCB",
-   "rating": null,
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "on_bus": "BUS-2",
-   "connected": true,
-   "id": "D18"
-  },
-  {
-   "symbol": "S19",
    "box": [
     1314,
     520,
@@ -1637,35 +1646,37 @@
    ],
    "label_texts": [
     "T20",
-    "T23"
+    "T23",
+    "T30"
    ],
-   "label": "MCCB 400  3P 65 kA | UPS input",
-   "conf": 0.93,
-   "score": 0.48,
+   "label": "MCCB 400  3P 65 kA | UPS input | 3C 240 mm- XLPE/SWA",
+   "conf": 0.92,
+   "score": 0.65,
    "type": "MCCB",
    "rating": null,
    "poles": 3,
    "kA": 65,
-   "dest": "MCCB 400  3P 65 kA",
+   "dest": "UPS input",
    "on_bus": "BUS-2",
    "connected": true,
-   "id": "D19"
+   "id": "D18"
   },
   {
-   "symbol": "S20",
+   "symbol": "S19",
    "box": [
-    1877,
+    1878,
     520,
-    29,
-    29
+    27,
+    28
    ],
    "label_texts": [
     "T21",
-    "T24"
+    "T24",
+    "T31"
    ],
-   "label": "MCCB 250 A 3P | lighking",
+   "label": "MCCB 250 A 3P | lighking | 3C 120 mm- XLPE/SWA",
    "conf": 0.9,
-   "score": 0.57,
+   "score": 0.78,
    "type": "MCCB",
    "rating": 250,
    "poles": 3,
@@ -1673,10 +1684,10 @@
    "dest": "lighking",
    "on_bus": "BUS-2",
    "connected": true,
-   "id": "D20"
+   "id": "D19"
   },
   {
-   "symbol": "S21",
+   "symbol": "S20",
    "box": [
     2254,
     520,
@@ -1685,11 +1696,12 @@
    ],
    "label_texts": [
     "T22",
-    "T25"
+    "T25",
+    "T32"
    ],
-   "label": "MCCB 250 A 4P | datalhall",
+   "label": "MCCB 250 A 4P | datalhall | 4C 120 mm- XLPE/SWA",
    "conf": 0.91,
-   "score": 0.58,
+   "score": 0.88,
    "type": "MCCB",
    "rating": 250,
    "poles": 4,
@@ -1697,10 +1709,10 @@
    "dest": "datalhall",
    "on_bus": "BUS-2",
    "connected": true,
-   "id": "D21"
+   "id": "D20"
   },
   {
-   "symbol": "S22",
+   "symbol": "S21",
    "box": [
     562,
     543,
@@ -1708,20 +1720,19 @@
     38
    ],
    "label_texts": [
-    "T29",
-    "T45"
+    "T51"
    ],
-   "label": "M | MCCB 250 A 3P",
-   "conf": 0.97,
-   "score": 0.4,
+   "label": "S/D 55 kW",
+   "conf": 1.0,
+   "score": 0.43,
    "type": "CONTACTOR",
-   "rating": null,
+   "rating": 55,
    "on_bus": "BUS-1",
    "connected": false,
-   "id": "D22"
+   "id": "D21"
   },
   {
-   "symbol": "S23",
+   "symbol": "S22",
    "box": [
     1690,
     543,
@@ -1729,65 +1740,64 @@
     38
    ],
    "label_texts": [
-    "T35",
-    "T48"
+    "T53"
    ],
-   "label": "M | MCCB 100 A 3P",
-   "conf": 0.94,
-   "score": 0.34,
+   "label": "DOL l5 kW",
+   "conf": 0.97,
+   "score": 0.3,
    "type": "CONTACTOR",
-   "rating": null,
+   "rating": 15,
    "on_bus": "BUS-2",
+   "connected": false,
+   "id": "D22"
+  },
+  {
+   "symbol": "S23",
+   "box": [
+    940,
+    544,
+    25,
+    38
+   ],
+   "label_texts": [
+    "T46"
+   ],
+   "label": "SPD Type l+2",
+   "conf": 0.87,
+   "score": 0.16,
+   "type": "SPD",
+   "rating": null,
+   "on_bus": "BUS-1",
    "connected": false,
    "id": "D23"
   },
   {
    "symbol": "S24",
    "box": [
-    940,
-    544,
-    24,
-    38
-   ],
-   "label_texts": [
-    "T38",
-    "T46"
-   ],
-   "label": "MCCB 100 A 4P | SPD Type l+2",
-   "conf": 0.94,
-   "score": 0.39,
-   "type": "SPD",
-   "rating": null,
-   "on_bus": "BUS-1",
-   "connected": false,
-   "id": "D24"
-  },
-  {
-   "symbol": "S25",
-   "box": [
-    185,
-    550,
-    21,
-    34
+    184,
+    549,
+    22,
+    37
    ],
    "label_texts": [
     "T28",
-    "T36"
+    "T36",
+    "T43"
    ],
-   "label": "FSW l6p A 4P | MCC-l chiilers",
+   "label": "FSW l6p A 4P | MCC-l chiilers | 4C 70 mm- XLPE/SWA",
    "conf": 0.92,
-   "score": 0.57,
+   "score": 0.47,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": 4,
    "kA": null,
-   "dest": "FSW l6p A 4P",
+   "dest": "MCC-l chiilers",
    "on_bus": "BUS-1",
    "connected": true,
-   "id": "D25"
+   "id": "D24"
   },
   {
-   "symbol": "S26",
+   "symbol": "S25",
    "box": [
     750,
     550,
@@ -1796,11 +1806,12 @@
    ],
    "label_texts": [
     "T26",
-    "T33"
+    "T33",
+    "T41"
    ],
-   "label": "MCCB 890 A 3P | lifts",
+   "label": "MCCB 890 A 3P | lifts | 3C 2x240 mm- XLPE/SWA",
    "conf": 0.9,
-   "score": 0.22,
+   "score": 0.21,
    "type": "MCCB",
    "rating": 890,
    "poles": 3,
@@ -1808,47 +1819,49 @@
    "dest": "lifts",
    "on_bus": "BUS-1",
    "connected": true,
+   "id": "D25"
+  },
+  {
+   "symbol": "S26",
+   "box": [
+    1500,
+    550,
+    29,
+    28
+   ],
+   "label_texts": [
+    "T27",
+    "T34",
+    "T42"
+   ],
+   "label": "MCCB 630  4P 80 kA | datalhall | 4C 2xl85 mm- XLPE/SWA",
+   "conf": 0.92,
+   "score": 0.28,
+   "type": "MCCB",
+   "rating": null,
+   "poles": 4,
+   "kA": 80,
+   "dest": "datalhall",
+   "on_bus": "BUS-2",
+   "connected": true,
    "id": "D26"
   },
   {
    "symbol": "S27",
    "box": [
-    1502,
-    550,
-    28,
-    28
-   ],
-   "label_texts": [
-    "T27",
-    "T34"
-   ],
-   "label": "MCCB 630  4P 80 kA | datalhall",
-   "conf": 0.92,
-   "score": 0.4,
-   "type": "MCCB",
-   "rating": null,
-   "poles": 4,
-   "kA": 80,
-   "dest": "MCCB 630  4P 80 kA",
-   "on_bus": "BUS-2",
-   "connected": true,
-   "id": "D27"
-  },
-  {
-   "symbol": "S28",
-   "box": [
     374,
-    580,
+    579,
     28,
     29
    ],
    "label_texts": [
     "T37",
-    "T44"
+    "T44",
+    "T50"
    ],
-   "label": "MCCB 490 A 4P | MCC-2 chillers",
+   "label": "MCCB 490 A 4P | MCC-2 chillers | 4C 240 mm XLPE/SWA",
    "conf": 0.9,
-   "score": 0.21,
+   "score": 0.45,
    "type": "MCCB",
    "rating": 490,
    "poles": 4,
@@ -1856,34 +1869,35 @@
    "dest": "MCC-2 chillers",
    "on_bus": "BUS-1",
    "connected": true,
-   "id": "D28"
+   "id": "D27"
   },
   {
-   "symbol": "S29",
+   "symbol": "S28",
    "box": [
-    1125,
+    1126,
     580,
-    29,
+    28,
     28
    ],
    "label_texts": [
     "T39",
-    "T47"
+    "T47",
+    "T52"
    ],
-   "label": "MCCB 4q0 A 4P | datalhall",
+   "label": "MCCB 4q0 A 4P | datalhall | 4C 240 mm XLPE/SWA",
    "conf": 0.92,
    "score": 0.24,
    "type": "MCCB",
    "rating": null,
    "poles": 4,
    "kA": null,
-   "dest": "MCCB 4q0 A 4P",
+   "dest": "datalhall",
    "on_bus": "BUS-1",
    "connected": true,
-   "id": "D29"
+   "id": "D28"
   },
   {
-   "symbol": "S30",
+   "symbol": "S29",
    "box": [
     2066,
     580,
@@ -1892,37 +1906,57 @@
    ],
    "label_texts": [
     "T40",
-    "T49"
+    "T49",
+    "T54"
    ],
-   "label": "MCCB 8q0 A 4P | sub-bohrd ll",
-   "conf": 0.75,
-   "score": 0.15,
+   "label": "MCCB 8q0 A 4P | sub-bohrd ll | 4C 2x240 mm- XLPE/SWA",
+   "conf": 0.92,
+   "score": 0.2,
    "type": "MCCB",
    "rating": null,
    "poles": 4,
    "kA": null,
-   "dest": "MCCB 8q0 A 4P",
+   "dest": "sub-bohrd ll",
    "on_bus": "BUS-2",
    "connected": true,
+   "id": "D29"
+  },
+  {
+   "symbol": "S30",
+   "box": [
+    557,
+    591,
+    38,
+    39
+   ],
+   "label_texts": [
+    "T29"
+   ],
+   "label": "M",
+   "conf": 0.99,
+   "score": 0.32,
+   "type": "MOTOR",
+   "rating": 55,
+   "on_bus": "BUS-1",
+   "connected": false,
    "id": "D30"
   },
   {
    "symbol": "S31",
    "box": [
-    1684,
+    1685,
     591,
-    40,
+    37,
     39
    ],
    "label_texts": [
-    "T53",
-    "T56"
+    "T35"
    ],
-   "label": "DOL l5 kW | chiller CH-9",
-   "conf": 0.97,
-   "score": 0.39,
+   "label": "M",
+   "conf": 0.99,
+   "score": 0.27,
    "type": "MOTOR",
-   "rating": null,
+   "rating": 15,
    "on_bus": "BUS-2",
    "connected": false,
    "id": "D31"
@@ -1930,41 +1964,20 @@
   {
    "symbol": "S32",
    "box": [
-    557,
-    592,
-    38,
-    37
-   ],
-   "label_texts": [
-    "T51",
-    "T55"
-   ],
-   "label": "S/D 55 kW | compressor C-3",
-   "conf": 1.0,
-   "score": 0.48,
-   "type": "MOTOR",
-   "rating": null,
-   "on_bus": "BUS-1",
-   "connected": false,
-   "id": "D32"
-  },
-  {
-   "symbol": "S33",
-   "box": [
     938,
     592,
-    29,
-    21
+    28,
+    20
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.5,
-   "score": 0.52,
+   "conf": 0.43,
+   "score": 0.16,
    "type": "EARTH",
    "rating": null,
    "on_bus": "BUS-1",
    "connected": false,
-   "id": "D33"
+   "id": "D32"
   }
  ],
  "notes": {
@@ -1983,14 +1996,14 @@
  "ocr_engine": "rapidocr",
  "reader": "trained",
  "seconds": {
-  "total": 9.59,
-  "ocr": 5.77,
-  "detector": 3.66
+  "total": 6.82,
+  "ocr": 4.63,
+  "detector": 2.04
  },
  "detector": {
-  "weights": "weights/rtdetr_r18_full",
+  "weights": "weights/rtdetr_r18_plain_ema_fix_pass4",
   "device": "cpu",
-  "threads": 2,
+  "threads": 4,
   "score_threshold": 0.11,
   "score_threshold_source": "drawing",
   "nms_iou": 0.5,

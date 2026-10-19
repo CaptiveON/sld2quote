@@ -3,7 +3,7 @@
 Prices are from the prototype's illustrative catalogue, not a supplier price list. Every line names the evidence it rests on: S = symbol box, T = text box, clause numbers from the specification, R = rule.
 
 ## Board as read
-- Busbar rating 1600 A; fault level 36 kA; Form 4 Type 6; IP42; default 4-pole; 4 outgoing ways in 2 sections.
+- Busbar rating 1600 A; fault level 36 kA; Form 4 Type 6; IP42; default 4-pole; 5 outgoing ways in 3 sections.
 
 ## Bill of materials
 
@@ -11,29 +11,30 @@ Prices are from the prototype's illustrative catalogue, not a supplier price lis
 |---|---|---|---|---|---|---|---|
 | 1 | ACB-1600-4P-N | Air circuit breaker 1600 A 4-pole, 36 kA band N, withdrawable, electronic trip | 1 | 5,124.00 | 5,124.00 | 0.98 | S2 T3 T4 R-ACB-SELECT |
 | 2 | FU-KIT-ACB | Incomer functional unit: compartment, shutters, terminals, controls | 1 | 1,400.00 | 1,400.00 | 0.98 | S2 T3 T4 R-FU-KIT |
-| 3 | METER-CT 1600/5A | BUSBAR A 1600 A Cu 36 kA/1s | Panel meter (CT 1600/5A | BUSBAR A 1600 A Cu 36 kA/1s) | 1 | 260.00 | 260.00 | 1.0 | S3 T5 T6 R-METERING |
-| 4 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.5 | S4 R-METERING |
-| 5 | MCCB-250-4P-N | Moulded-case circuit breaker 250 A 4-pole, 36 kA band N, adjustable trip | 1 | 634.40 | 634.40 | 0.99 | S6 T8 R-MCCB-SELECT |
-| 6 | FU-KIT-MCCB | Outgoing functional unit: compartment door, terminals, labels | 1 | 420.00 | 420.00 | 0.99 | S6 T8 R-FU-KIT |
-| 7 | ISOL-400-4P | Switch-disconnector 400 A 4-pole; feeds sdwnd | 1 | 634.40 | 634.40 | 0.91 | S8 T15 T12 R-ISOL-SELECT |
-| 8 | FU-KIT-ISOLATOR | Outgoing functional unit: compartment door, terminals, labels | 1 | 340.00 | 340.00 | 0.91 | S8 T15 T12 R-FU-KIT |
-| 9 | ISOL-100-4P | Switch-disconnector 100 A 4-pole; feeds pumps | 1 | 207.40 | 207.40 | 0.99 | S9 T17 T14 R-ISOL-SELECT |
-| 10 | FU-KIT-ISOLATOR | Outgoing functional unit: compartment door, terminals, labels | 1 | 340.00 | 340.00 | 0.99 | S9 T17 T14 R-FU-KIT |
-| 11 | MCCB-400-4P-N | Moulded-case circuit breaker 400 A 4-pole, 36 kA band N, adjustable trip | 1 | 1,195.60 | 1,195.60 | 0.99 | S10 T13 R-MCCB-SELECT |
-| 12 | FU-KIT-MCCB | Outgoing functional unit: compartment door, terminals, labels | 1 | 420.00 | 420.00 | 0.99 | S10 T13 R-FU-KIT |
-| 13 | BUSBAR-CU-1600 | Copper busbar set 1600 A (4-bar), 2 sections, about 58 kg | 1 | 662.40 | 662.40 | 0.9 | T6 R-BUSBAR-SIZE |
-| 14 | ENC-SECTION | Enclosure section, Form 4 Type 6, IP42, RAL 7035 | 2 | 3,549.00 | 7,098.00 | 0.95 | T20 T20 T22 T24 R-ENCLOSURE |
-| 15 | LAB-ASSY | Assembly, wiring and routine verification: 90 hours | 1 | 4,320.00 | 4,320.00 | 0.9 |  R-LABOUR |
-| 16 | DOC | Documentation, as-built drawings, test certificates | 1 | 600.00 | 600.00 | 1.0 |  R-DOC |
-| 17 | CERT | Design-verification certificates per specification | 1 | 0.00 | 0.00 | 1.0 | 7.7 R-SPEC-CERT |
-| 18 | DEL | Delivery to site, crane and offload excluded | 1 | 850.00 | 850.00 | 1.0 |  R-DELIVERY |
+| 3 | METER-A | Panel meter (A) | 1 | 120.00 | 120.00 | 1.0 | S3 S3g1 R-METERING |
+| 4 | CT-SET | Current transformers 1600/5 A, set of three, class 1 | 1 | 280.00 | 280.00 | 1.0 | S4 T5 R-METERING |
+| 5 | MCCB-250-3P-N | Moulded-case circuit breaker 250 A 3-pole, 36 kA band N, adjustable trip; feeds pump P-4 | 1 | 520.00 | 520.00 | 1.0 | S5 T7 T11 R-MCCB-SELECT |
+| 6 | FU-KIT-MCCB | Outgoing functional unit: compartment door, terminals, labels | 1 | 420.00 | 420.00 | 1.0 | S5 T7 T11 R-FU-KIT |
+| 7 | MCCB-250-4P-N | Moulded-case circuit breaker 250 A 4-pole, 36 kA band N, adjustable trip; feeds UPS input | 1 | 634.40 | 634.40 | 0.99 | S6 T8 T10 R-MCCB-SELECT |
+| 8 | FU-KIT-MCCB | Outgoing functional unit: compartment door, terminals, labels | 1 | 420.00 | 420.00 | 0.99 | S6 T8 T10 R-FU-KIT |
+| 9 | STARTER-45KW | Motor starter for 45 kW: contactor, overload relay and control circuit | 1 | 1,850.00 | 1,850.00 | 1.0 | S7 T9 R-STARTER |
+| 10 | ISOL-400-4P | Switch-disconnector 400 A 4-pole; feeds sdwnd | 1 | 634.40 | 634.40 | 0.91 | S8 T12 T15 R-ISOL-SELECT |
+| 11 | FU-KIT-ISOLATOR | Outgoing functional unit: compartment door, terminals, labels | 1 | 340.00 | 340.00 | 0.91 | S8 T12 T15 R-FU-KIT |
+| 12 | ISOL-100-4P | Switch-disconnector 100 A 4-pole; feeds pumps | 1 | 207.40 | 207.40 | 0.99 | S9 T14 T17 R-ISOL-SELECT |
+| 13 | FU-KIT-ISOLATOR | Outgoing functional unit: compartment door, terminals, labels | 1 | 340.00 | 340.00 | 0.99 | S9 T14 T17 R-FU-KIT |
+| 14 | MCCB-400-4P-N | Moulded-case circuit breaker 400 A 4-pole, 36 kA band N, adjustable trip; feeds spare | 1 | 1,195.60 | 1,195.60 | 0.99 | S10 T13 T16 R-MCCB-SELECT |
+| 15 | FU-KIT-MCCB | Outgoing functional unit: compartment door, terminals, labels | 1 | 420.00 | 420.00 | 0.99 | S10 T13 T16 R-FU-KIT |
+| 16 | BUSBAR-CU-1600 | Copper busbar set 1600 A (4-bar), 3 sections, about 86 kg | 1 | 993.60 | 993.60 | 0.9 | T6 R-BUSBAR-SIZE |
+| 17 | ENC-SECTION | Enclosure section, Form 4 Type 6, IP42, RAL 7035 | 3 | 3,549.00 | 10,647.00 | 0.95 | T20 T20 T22 T24 R-ENCLOSURE |
+| 18 | LAB-ASSY | Assembly, wiring and routine verification: 108 hours | 1 | 5,184.00 | 5,184.00 | 0.9 |  R-LABOUR |
+| 19 | DOC | Documentation, as-built drawings, test certificates | 1 | 600.00 | 600.00 | 1.0 |  R-DOC |
+| 20 | CERT | Design-verification certificates per specification | 1 | 0.00 | 0.00 | 1.0 | 7.7 R-SPEC-CERT |
+| 21 | DEL | Delivery to site, crane and offload excluded | 1 | 850.00 | 850.00 | 1.0 |  R-DELIVERY |
 
-Subtotal £24,786.20; margin £3,717.93; **total £28,504.13**
+Subtotal £32,180.40; margin £4,827.06; **total £37,007.46**
 
 ## Clarifications and exclusions (from flagged items)
-- [missing] D5 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S5 T9 T18
-- [missing] D7 (CONTACTOR): kW not read. Action: read from drawing / schedule. Evidence: S7 T11
-- [low_confidence] devices read with low confidence: D4, D11. Action: check against the drawing. Evidence: D4 D11
+- None raised by the reader.
 
 ## Specification clauses matched
 
@@ -46,4 +47,4 @@ Subtotal £24,786.20; margin £3,717.93; **total £28,504.13**
 - certificates: clause 7.7 -> True
 - other (not priced automatically): clause 7.8: Two years' spares for all trip units shall be included.
 
-Generated by sld2quote 0.2.0 in 5.1 s; reader deskew -0.1 deg.
+Generated by sld2quote 0.2.0 in 3.9 s; reader deskew -0.1 deg.

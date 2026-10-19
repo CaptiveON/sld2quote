@@ -3,39 +3,45 @@
 Prices are from the prototype's illustrative catalogue, not a supplier price list. Every line names the evidence it rests on: S = symbol box, T = text box, clause numbers from the specification, R = rule.
 
 ## Board as read
-- Busbar rating 0 A; fault level None kA; Form 4 Type 6; IP31; default 4-pole; 0 outgoing ways in 1 sections.
+- Busbar rating 2500 A; fault level None kA; Form 4 Type 6; IP31; default 4-pole; 0 outgoing ways in 1 sections.
 
 ## Bill of materials
 
 | # | Part | Description | Qty | Unit £ | Total £ | Conf | Evidence |
 |---|---|---|---|---|---|---|---|
-| 1 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.49 | S2 R-PROTECTION |
-| 2 | BUSBAR-CU-1600 | Copper busbar set 1600 A (4-bar), 1 sections, about 29 kg | 1 | 331.20 | 331.20 | 0.9 |  R-BUSBAR-SIZE |
-| 3 | ENC-SECTION | Enclosure section, Form 4 Type 6, IP31, RAL 7035 | 1 | 3,380.00 | 3,380.00 | 0.95 |  R-ENCLOSURE |
-| 4 | LAB-ASSY | Assembly, wiring and routine verification: 117 hours | 1 | 5,616.00 | 5,616.00 | 0.9 |  R-LABOUR |
-| 5 | DOC | Documentation, as-built drawings, test certificates | 1 | 600.00 | 600.00 | 1.0 |  R-DOC |
-| 6 | DEL | Delivery to site, crane and offload excluded | 1 | 850.00 | 850.00 | 1.0 |  R-DELIVERY |
+| 1 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.48 | S1 R-METERING |
+| 2 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.43 | S2 R-METERING |
+| 3 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.43 | S3 R-METERING |
+| 4 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.49 | S10 R-PROTECTION |
+| 5 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.43 | S18 R-METERING |
+| 6 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.43 | S21 R-PROTECTION |
+| 7 | BUSBAR-CU-2500 | Copper busbar set 2500 A (4-bar), 1 sections, about 46 kg | 1 | 524.40 | 524.40 | 0.9 |  R-BUSBAR-SIZE |
+| 8 | ENC-SECTION | Enclosure section, Form 4 Type 6, IP31, RAL 7035 | 1 | 3,380.00 | 3,380.00 | 0.95 |  R-ENCLOSURE |
+| 9 | LAB-ASSY | Assembly, wiring and routine verification: 131 hours | 1 | 6,288.00 | 6,288.00 | 0.9 |  R-LABOUR |
+| 10 | DOC | Documentation, as-built drawings, test certificates | 1 | 600.00 | 600.00 | 1.0 |  R-DOC |
+| 11 | DEL | Delivery to site, crane and offload excluded | 1 | 850.00 | 850.00 | 1.0 |  R-DELIVERY |
 
-Subtotal £11,727.20; margin £1,759.08; **total £13,486.28**
+Subtotal £14,642.40; margin £2,196.36; **total £16,838.76**
 
 ## Clarifications and exclusions (from flagged items)
 - [missing] fault level not found on the drawing notes. Action: confirm with the consultant. Evidence: 
-- [missing] D1 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S1
-- [missing] D3 (CAPACITOR): kVAr not read. Action: read from drawing / schedule. Evidence: S3
-- [missing] D4 (CAPACITOR): kVAr not read. Action: read from drawing / schedule. Evidence: S4
-- [missing] D5 (CAPACITOR): kVAr not read. Action: read from drawing / schedule. Evidence: S5
-- [missing] D6 (CAPACITOR): kVAr not read. Action: read from drawing / schedule. Evidence: S6
-- [missing] D7 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S7
-- [missing] D8 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S8
-- [missing] D9 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S9
-- [missing] D10 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S10
-- [missing] D11 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S11
-- [missing] D12 (CAPACITOR): kVAr not read. Action: read from drawing / schedule. Evidence: S12
+- [missing] D4 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S4 T4 T5
+- [missing] D5 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S5 T6
+- [missing] D6 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S6
+- [missing] D7 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S7 T8 T11
+- [missing] D8 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S8 T1 T2
+- [missing] D9 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S9 T9 T12
+- [missing] D11 (CAPACITOR): kVAr not read. Action: read from drawing / schedule. Evidence: S11
+- [missing] D12 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S12
 - [missing] D13 (CAPACITOR): kVAr not read. Action: read from drawing / schedule. Evidence: S13
-- [missing] D14 (CAPACITOR): kVAr not read. Action: read from drawing / schedule. Evidence: S14
-- [missing] D15 (CAPACITOR): kVAr not read. Action: read from drawing / schedule. Evidence: S15
-- [missing] D16 (CAPACITOR): kVAr not read. Action: read from drawing / schedule. Evidence: S16
-- [assumed] busbar rating not read; assumed 0 A from the largest incomer. Action: confirm. Evidence: 
-- [low_confidence] devices read with low confidence: D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15, D16. Action: check against the drawing. Evidence: D1 D2 D3 D4 D5 D6 D7 D8 D9 D10 D11 D12 D13 D14 D15 D16
+- [missing] D14 (CONTACTOR): kW not read. Action: read from drawing / schedule. Evidence: S14
+- [missing] D15 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S15
+- [missing] D17 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S17
+- [missing] D19 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S19
+- [missing] D20 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S20
+- [missing] D22 (CAPACITOR): kVAr not read. Action: read from drawing / schedule. Evidence: S22
+- [missing] D23 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S23 T16
+- [assumed] busbar rating not read; assumed 2500 A from the largest incomer. Action: confirm. Evidence: 
+- [low_confidence] devices read with low confidence: D1, D2, D3, D6, D10, D11, D12, D13, D14, D15, D16, D17, D18, D19, D20, D21, D22. Action: check against the drawing. Evidence: D1 D2 D3 D6 D10 D11 D12 D13 D14 D15 D16 D17 D18 D19 D20 D21 D22
 
-Generated by sld2quote 0.2.0 in 3.9 s; reader deskew -0.1 deg.
+Generated by sld2quote 0.2.0 in 3.3 s; reader deskew -0.1 deg.

@@ -3,70 +3,64 @@
 Prices are from the prototype's illustrative catalogue, not a supplier price list. Every line names the evidence it rests on: S = symbol box, T = text box, clause numbers from the specification, R = rule.
 
 ## Board as read
-- Busbar rating 1200 A; fault level None kA; Form 4 Type 6; IP31; default 4-pole; 3 outgoing ways in 5 sections.
+- Busbar rating 1200 A; fault level None kA; Form 4 Type 6; IP31; default 4-pole; 0 outgoing ways in 5 sections.
 
 ## Bill of materials
 
 | # | Part | Description | Qty | Unit £ | Total £ | Conf | Evidence |
 |---|---|---|---|---|---|---|---|
-| 1 | METER-50 | Panel meter (50) | 1 | 260.00 | 260.00 | 0.93 | S2 T13 R-METERING |
-| 2 | METER-50 | Panel meter (50) | 1 | 260.00 | 260.00 | 0.96 | S3 T14 R-METERING |
-| 3 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.5 | S5 R-METERING |
-| 4 | METER-861 | Panel meter (861) | 1 | 260.00 | 260.00 | 0.86 | S12 T43 R-METERING |
-| 5 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.98 | S15 T40 R-PROTECTION |
-| 6 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.38 | S16 R-METERING |
-| 7 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.47 | S19 R-METERING |
-| 8 | ACB-1600-4P-N | Air circuit breaker 1600 A 4-pole, None kA band N, withdrawable, electronic trip | 1 | 5,124.00 | 5,124.00 | 0.75 | S20 T46 T42 R-ACB-SELECT |
-| 9 | FU-KIT-ACB | Incomer functional unit: compartment, shutters, terminals, controls | 1 | 1,400.00 | 1,400.00 | 0.75 | S20 T46 T42 R-FU-KIT |
-| 10 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.5 | S21 R-PROTECTION |
-| 11 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.75 | S26 T55 R-PROTECTION |
-| 12 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.49 | S27 R-PROTECTION |
-| 13 | METER-AL | Panel meter (AL) | 1 | 260.00 | 260.00 | 0.98 | S28 T62 R-METERING |
-| 14 | METER-{typ} | Panel meter ({typ}) | 1 | 260.00 | 260.00 | 0.75 | S29 T60 R-METERING |
-| 15 | ACB-1600-4P-N | Air circuit breaker 1600 A 4-pole, None kA band N, withdrawable, electronic trip | 1 | 5,124.00 | 5,124.00 | 0.93 | S31 T71 R-ACB-SELECT |
-| 16 | FU-KIT-ACB | Incomer functional unit: compartment, shutters, terminals, controls | 1 | 1,400.00 | 1,400.00 | 0.93 | S31 T71 R-FU-KIT |
-| 17 | ACB-1600-4P-N | Air circuit breaker 1600 A 4-pole, None kA band N, withdrawable, electronic trip | 1 | 5,124.00 | 5,124.00 | 0.95 | S33 T65 R-ACB-SELECT |
-| 18 | FU-KIT-ACB | Incomer functional unit: compartment, shutters, terminals, controls | 1 | 1,400.00 | 1,400.00 | 0.95 | S33 T65 R-FU-KIT |
-| 19 | ACB-1600-4P-N | Air circuit breaker 1600 A 4-pole, None kA band N, withdrawable, electronic trip | 1 | 5,124.00 | 5,124.00 | 0.75 | S34 T66 R-ACB-SELECT |
-| 20 | FU-KIT-ACB | Incomer functional unit: compartment, shutters, terminals, controls | 1 | 1,400.00 | 1,400.00 | 0.75 | S34 T66 R-FU-KIT |
-| 21 | FSW-630-4P | Fuse-switch-disconnector 630 A 4-pole | 1 | 1,439.60 | 1,439.60 | 0.97 | S35 T68 R-FSW-SELECT |
-| 22 | FUSE-630 | Fuse links 630 A, one per pole | 4 | 72.00 | 288.00 | 0.97 | S35 T68 R-FUSE-LINKS |
-| 23 | FU-KIT-FUSE_SWITCH | Outgoing functional unit: compartment door, terminals, labels | 1 | 380.00 | 380.00 | 0.97 | S35 T68 R-FU-KIT |
-| 24 | FSW-630-4P | Fuse-switch-disconnector 630 A 4-pole | 1 | 1,439.60 | 1,439.60 | 0.75 | S37 T70 R-FSW-SELECT |
-| 25 | FUSE-630 | Fuse links 630 A, one per pole | 4 | 72.00 | 288.00 | 0.75 | S37 T70 R-FUSE-LINKS |
-| 26 | FU-KIT-FUSE_SWITCH | Outgoing functional unit: compartment door, terminals, labels | 1 | 380.00 | 380.00 | 0.75 | S37 T70 R-FU-KIT |
-| 27 | FSW-630-4P | Fuse-switch-disconnector 630 A 4-pole | 1 | 1,439.60 | 1,439.60 | 0.93 | S38 T69 R-FSW-SELECT |
-| 28 | FUSE-630 | Fuse links 630 A, one per pole | 4 | 72.00 | 288.00 | 0.93 | S38 T69 R-FUSE-LINKS |
-| 29 | FU-KIT-FUSE_SWITCH | Outgoing functional unit: compartment door, terminals, labels | 1 | 380.00 | 380.00 | 0.93 | S38 T69 R-FU-KIT |
-| 30 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.5 | S39 R-METERING |
-| 31 | METER-Instantaneous Overcurrent Relay | Panel meter (Instantaneous Overcurrent Relay) | 1 | 260.00 | 260.00 | 0.93 | S43 T79 R-METERING |
-| 32 | METER-51 | Panel meter (51) | 1 | 260.00 | 260.00 | 1.0 | S53 T80 R-METERING |
-| 33 | METER-27 | Synch. Check Relay | Panel meter (27 | Synch. Check Relay) | 1 | 260.00 | 260.00 | 0.97 | S55 T91 T87 R-METERING |
-| 34 | METER-87 | Lockout Relay | Panel meter (87 | Lockout Relay) | 1 | 260.00 | 260.00 | 0.99 | S56 T92 T89 R-METERING |
-| 35 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.38 | S59 R-METERING |
-| 36 | BUSBAR-CU-1600 | Copper busbar set 1600 A (4-bar), 5 sections, about 144 kg | 1 | 1,656.00 | 1,656.00 | 0.9 |  R-BUSBAR-SIZE |
-| 37 | ENC-SECTION | Enclosure section, Form 4 Type 6, IP31, RAL 7035 | 5 | 3,380.00 | 16,900.00 | 0.95 |  R-ENCLOSURE |
-| 38 | LAB-ASSY | Assembly, wiring and routine verification: 343 hours | 1 | 16,464.00 | 16,464.00 | 0.9 |  R-LABOUR |
-| 39 | DOC | Documentation, as-built drawings, test certificates | 1 | 600.00 | 600.00 | 1.0 |  R-DOC |
-| 40 | DEL | Delivery to site, crane and offload excluded | 1 | 850.00 | 850.00 | 1.0 |  R-DELIVERY |
+| 1 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.63 | S3 T9 R-METERING |
+| 2 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.59 | S4 T10 T17 R-METERING |
+| 3 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 1.0 | S5 T11 R-METERING |
+| 4 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.5 | S8 R-METERING |
+| 5 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.43 | S9 R-METERING |
+| 6 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.59 | S15 S15g1 T43 T47 R-METERING |
+| 7 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.64 | S17 T39 R-METERING |
+| 8 | ACB-1600-4P-N | Air circuit breaker 1600 A 4-pole, None kA band N, withdrawable, electronic trip | 1 | 5,124.00 | 5,124.00 | 1.0 | S19 T41 R-ACB-SELECT |
+| 9 | FU-KIT-ACB | Incomer functional unit: compartment, shutters, terminals, controls | 1 | 1,400.00 | 1,400.00 | 1.0 | S19 T41 R-FU-KIT |
+| 10 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.43 | S21 R-PROTECTION |
+| 11 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.43 | S23 R-METERING |
+| 12 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.97 | S24 T50 T51 R-METERING |
+| 13 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.59 | S26 T54 S26g1 T55 T62 T63 T74 T75 T79 T81 T85 T89 T93 R-METERING |
+| 14 | ACB-1600-4P-N | Air circuit breaker 1600 A 4-pole, None kA band N, withdrawable, electronic trip | 1 | 5,124.00 | 5,124.00 | 0.87 | S28 T64 R-ACB-SELECT |
+| 15 | FU-KIT-ACB | Incomer functional unit: compartment, shutters, terminals, controls | 1 | 1,400.00 | 1,400.00 | 0.87 | S28 T64 R-FU-KIT |
+| 16 | ACB-1600-4P-N | Air circuit breaker 1600 A 4-pole, None kA band N, withdrawable, electronic trip | 1 | 5,124.00 | 5,124.00 | 0.97 | S29 T58 T67 R-ACB-SELECT |
+| 17 | FU-KIT-ACB | Incomer functional unit: compartment, shutters, terminals, controls | 1 | 1,400.00 | 1,400.00 | 0.97 | S29 T58 T67 R-FU-KIT |
+| 18 | ACB-1600-4P-N | Air circuit breaker 1600 A 4-pole, None kA band N, withdrawable, electronic trip | 1 | 5,124.00 | 5,124.00 | 0.87 | S30 T59 T71 R-ACB-SELECT |
+| 19 | FU-KIT-ACB | Incomer functional unit: compartment, shutters, terminals, controls | 1 | 1,400.00 | 1,400.00 | 0.87 | S30 T59 T71 R-FU-KIT |
+| 20 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.63 | S32 T76 R-METERING |
+| 21 | ACB-1600-4P-N | Air circuit breaker 1600 A 4-pole, None kA band N, withdrawable, electronic trip | 1 | 5,124.00 | 5,124.00 | 0.99 | S37 T69 R-ACB-SELECT |
+| 22 | FU-KIT-ACB | Incomer functional unit: compartment, shutters, terminals, controls | 1 | 1,400.00 | 1,400.00 | 0.99 | S37 T69 R-FU-KIT |
+| 23 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.98 | S40 T78 T80 R-METERING |
+| 24 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 1.0 | S42 T84 T88 R-METERING |
+| 25 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.97 | S43 T87 T86 T90 R-METERING |
+| 26 | BUSBAR-CU-1600 | Copper busbar set 1600 A (4-bar), 5 sections, about 144 kg | 1 | 1,656.00 | 1,656.00 | 0.9 |  R-BUSBAR-SIZE |
+| 27 | ENC-SECTION | Enclosure section, Form 4 Type 6, IP31, RAL 7035 | 5 | 3,380.00 | 16,900.00 | 0.95 |  R-ENCLOSURE |
+| 28 | LAB-ASSY | Assembly, wiring and routine verification: 392 hours | 1 | 18,816.00 | 18,816.00 | 0.9 |  R-LABOUR |
+| 29 | DOC | Documentation, as-built drawings, test certificates | 1 | 600.00 | 600.00 | 1.0 |  R-DOC |
+| 30 | DEL | Delivery to site, crane and offload excluded | 1 | 850.00 | 850.00 | 1.0 |  R-DELIVERY |
 
-Subtotal £76,388.80; margin £11,458.32; **total £87,847.12**
+Subtotal £76,092.00; margin £11,413.80; **total £87,505.80**
 
 ## Clarifications and exclusions (from flagged items)
 - [missing] fault level not found on the drawing notes. Action: confirm with the consultant. Evidence: 
-- [missing] D9 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S9
-- [missing] D14 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S14 T36 T45
-- [missing] D22 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S22
-- [missing] D40 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S40
-- [missing] D45 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S45
-- [missing] D46 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S46
-- [missing] D47 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S47
-- [missing] D48 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S48
-- [missing] D49 (CONTACTOR): kW not read. Action: read from drawing / schedule. Evidence: S49
-- [missing] D50 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S50
-- [missing] D51 (CAPACITOR): kVAr not read. Action: read from drawing / schedule. Evidence: S51
-- [missing] D52 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S52
+- [missing] D10 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S10 T20 T22 T26 T30 T33
+- [missing] D11 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S11 T19 T21 T25 T29
+- [missing] D12 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S12 T24 T31 T34 T36 T45
+- [missing] D13 (CAPACITOR): kVAr not read. Action: read from drawing / schedule. Evidence: S13 T37 T46
+- [missing] D14 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S14
+- [missing] D20 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S20 T48
+- [missing] D22 (CAPACITOR): kVAr not read. Action: read from drawing / schedule. Evidence: S22
+- [missing] D25 (CONTACTOR): kW not read. Action: read from drawing / schedule. Evidence: S25
+- [missing] D33 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S33
+- [missing] D34 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S34 T82
+- [missing] D35 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S35
+- [missing] D36 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S36 T83
+- [missing] D38 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S38 T77
+- [missing] D39 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S39
+- [missing] D41 (CONTACTOR): kW not read. Action: read from drawing / schedule. Evidence: S41
+- [missing] D46 (CONTACTOR): kW not read. Action: read from drawing / schedule. Evidence: S46 T94 T95 T96
 - [assumed] busbar rating not read; assumed 1200 A from the largest incomer. Action: confirm. Evidence: 
-- [low_confidence] devices read with low confidence: D1, D5, D6, D7, D8, D9, D10, D11, D13, D16, D17, D18, D19, D21, D22, D23, D24, D25, D27, D39, D40, D45, D46, D47, D48, D49, D50, D51, D52, D54, D59. Action: check against the drawing. Evidence: D1 D5 D6 D7 D8 D9 D10 D11 D13 D16 D17 D18 D19 D21 D22 D23 D24 D25 D27 D39 D40 D45 D46 D47 D48 D49 D50 D51 D52 D54 D59
+- [low_confidence] devices read with low confidence: D4, D8, D9, D14, D15, D21, D22, D23, D25, D26, D33, D35, D39, D41. Action: check against the drawing. Evidence: D4 D8 D9 D14 D15 D21 D22 D23 D25 D26 D33 D35 D39 D41
 
-Generated by sld2quote 0.2.0 in 20.6 s; reader deskew 0.0 deg.
+Generated by sld2quote 0.2.0 in 13.9 s; reader deskew 0.0 deg.

@@ -4,25 +4,39 @@
   "form": "Form 4 Type 6",
   "ip": "IP31",
   "poles_default": 4,
-  "busbar_rating": 0,
+  "busbar_rating": 2500,
   "sections": 1,
   "ways": 0
  },
  "lines": [
   {
    "line": 1,
-   "part": "BUSBAR-CU-1600",
-   "description": "Copper busbar set 1600 A (4-bar), 1 sections, about 29 kg",
+   "part": "CT-SET",
+   "description": "Current transformers, set of three, class 1",
    "qty": 1,
-   "unit_gbp": 331.2,
-   "total_gbp": 331.2,
-   "evidence": [],
-   "rule": "R-BUSBAR-SIZE",
-   "conf": 0.9,
-   "basis": "0 A busbar label; 1 sections"
+   "unit_gbp": 280,
+   "total_gbp": 280,
+   "evidence": [
+    "S11"
+   ],
+   "rule": "R-METERING",
+   "conf": 0.49,
+   "basis": ""
   },
   {
    "line": 2,
+   "part": "BUSBAR-CU-2500",
+   "description": "Copper busbar set 2500 A (4-bar), 1 sections, about 46 kg",
+   "qty": 1,
+   "unit_gbp": 524.4,
+   "total_gbp": 524.4,
+   "evidence": [],
+   "rule": "R-BUSBAR-SIZE",
+   "conf": 0.9,
+   "basis": "2500 A busbar label; 1 sections"
+  },
+  {
+   "line": 3,
    "part": "ENC-SECTION",
    "description": "Enclosure section, Form 4 Type 6, IP31, RAL 7035",
    "qty": 1,
@@ -34,19 +48,19 @@
    "basis": "0 ways at 4 per section plus incomers"
   },
   {
-   "line": 3,
+   "line": 4,
    "part": "LAB-ASSY",
-   "description": "Assembly, wiring and routine verification: 142 hours",
+   "description": "Assembly, wiring and routine verification: 83 hours",
    "qty": 1,
-   "unit_gbp": 6816,
-   "total_gbp": 6816,
+   "unit_gbp": 3984,
+   "total_gbp": 3984,
    "evidence": [],
    "rule": "R-LABOUR",
    "conf": 0.9,
    "basis": ""
   },
   {
-   "line": 4,
+   "line": 5,
    "part": "DOC",
    "description": "Documentation, as-built drawings, test certificates",
    "qty": 1,
@@ -58,7 +72,7 @@
    "basis": ""
   },
   {
-   "line": 5,
+   "line": 6,
    "part": "DEL",
    "description": "Delivery to site, crane and offload excluded",
    "qty": 1,
@@ -70,9 +84,9 @@
    "basis": ""
   }
  ],
- "subtotal_gbp": 11977.2,
- "margin_gbp": 1796.58,
- "total_gbp": 13773.78,
+ "subtotal_gbp": 9618.4,
+ "margin_gbp": 1442.76,
+ "total_gbp": 11061.16,
  "issues": [
   {
    "kind": "missing",
@@ -82,23 +96,25 @@
   },
   {
    "kind": "missing",
-   "what": "D1 (ACB): rating not read",
+   "what": "D1 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S1"
+    "S1",
+    "T1"
    ]
   },
   {
    "kind": "missing",
-   "what": "D2 (ACB): rating not read",
+   "what": "D2 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S2"
+    "S2",
+    "T2"
    ]
   },
   {
    "kind": "missing",
-   "what": "D3 (FUSE_SWITCH): rating not read",
+   "what": "D3 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
     "S3"
@@ -106,15 +122,16 @@
   },
   {
    "kind": "missing",
-   "what": "D4 (FUSE_SWITCH): rating not read",
+   "what": "D4 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S4"
+    "S4",
+    "T3"
    ]
   },
   {
    "kind": "missing",
-   "what": "D5 (FUSE_SWITCH): rating not read",
+   "what": "D5 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
     "S5"
@@ -122,17 +139,17 @@
   },
   {
    "kind": "missing",
-   "what": "D6 (ACB): rating not read",
+   "what": "D6 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
     "S6",
-    "T7",
-    "T4"
+    "T4",
+    "T7"
    ]
   },
   {
    "kind": "missing",
-   "what": "D7 (CONTACTOR): kW not read",
+   "what": "D7 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
     "S7"
@@ -140,7 +157,7 @@
   },
   {
    "kind": "missing",
-   "what": "D8 (CAPACITOR): kVAr not read",
+   "what": "D8 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
     "S8"
@@ -148,7 +165,7 @@
   },
   {
    "kind": "missing",
-   "what": "D9 (FUSE_SWITCH): rating not read",
+   "what": "D9 (CAPACITOR): kVAr not read",
    "action": "read from drawing / schedule",
    "evidence": [
     "S9"
@@ -156,86 +173,40 @@
   },
   {
    "kind": "missing",
-   "what": "D10 (FUSE_SWITCH): rating not read",
+   "what": "D10 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S10"
+    "S10",
+    "T8",
+    "T9"
    ]
   },
   {
    "kind": "missing",
-   "what": "D11 (MCCB): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S11",
-    "T8"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D12 (MCCB): rating not read",
+   "what": "D12 (FUSE_SWITCH): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
     "S12"
    ]
   },
   {
-   "kind": "missing",
-   "what": "D13 (MCCB): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S13"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D14 (MCCB): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S14"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D15 (FUSE_SWITCH): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S15"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D16 (CONTACTOR): kW not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S16"
-   ]
-  },
-  {
    "kind": "assumed",
-   "what": "busbar rating not read; assumed 0 A from the largest incomer",
+   "what": "busbar rating not read; assumed 2500 A from the largest incomer",
    "action": "confirm",
    "evidence": []
   },
   {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D1, D2, D3, D4, D5, D7, D8, D9, D10, D12, D13, D14, D15, D16",
+   "what": "devices read with low confidence: D3, D5, D7, D8, D9, D11, D12",
    "action": "check against the drawing",
    "evidence": [
-    "D1",
-    "D2",
     "D3",
-    "D4",
     "D5",
     "D7",
     "D8",
     "D9",
-    "D10",
-    "D12",
-    "D13",
-    "D14",
-    "D15",
-    "D16"
+    "D11",
+    "D12"
    ]
   }
  ]

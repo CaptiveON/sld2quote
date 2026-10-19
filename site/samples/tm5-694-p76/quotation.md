@@ -3,36 +3,43 @@
 Prices are from the prototype's illustrative catalogue, not a supplier price list. Every line names the evidence it rests on: S = symbol box, T = text box, clause numbers from the specification, R = rule.
 
 ## Board as read
-- Busbar rating 0 A; fault level None kA; Form 4 Type 6; IP31; default 4-pole; 0 outgoing ways in 1 sections.
+- Busbar rating 300 A; fault level None kA; Form 4 Type 6; IP31; default 4-pole; 0 outgoing ways in 3 sections.
 
 ## Bill of materials
 
 | # | Part | Description | Qty | Unit £ | Total £ | Conf | Evidence |
 |---|---|---|---|---|---|---|---|
-| 1 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.99 | S3 T22 T25 R-PROTECTION |
-| 2 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.48 | S5 R-PROTECTION |
-| 3 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.5 | S6 R-METERING |
-| 4 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.38 | S7 R-METERING |
-| 5 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.48 | S8 R-METERING |
-| 6 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.47 | S12 R-METERING |
-| 7 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.38 | S13 R-METERING |
-| 8 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.48 | S15 R-METERING |
-| 9 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.47 | S17 R-PROTECTION |
-| 10 | BUSBAR-CU-1600 | Copper busbar set 1600 A (4-bar), 1 sections, about 29 kg | 1 | 331.20 | 331.20 | 0.9 |  R-BUSBAR-SIZE |
-| 11 | ENC-SECTION | Enclosure section, Form 4 Type 6, IP31, RAL 7035 | 1 | 3,380.00 | 3,380.00 | 0.95 |  R-ENCLOSURE |
-| 12 | LAB-ASSY | Assembly, wiring and routine verification: 76 hours | 1 | 3,648.00 | 3,648.00 | 0.9 |  R-LABOUR |
-| 13 | DOC | Documentation, as-built drawings, test certificates | 1 | 600.00 | 600.00 | 1.0 |  R-DOC |
-| 14 | DEL | Delivery to site, crane and offload excluded | 1 | 850.00 | 850.00 | 1.0 |  R-DELIVERY |
+| 1 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.87 | S2 T14 T13 T15 T22 T25 R-METERING |
+| 2 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.87 | S3 T12 T17 T21 T24 R-METERING |
+| 3 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.87 | S4 T27 R-METERING |
+| 4 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.87 | S5 T26 T28 R-METERING |
+| 5 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.87 | S7 T32 R-METERING |
+| 6 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.43 | S8 R-METERING |
+| 7 | ACB-1600-4P-N | Air circuit breaker 1600 A 4-pole, None kA band N, withdrawable, electronic trip | 1 | 5,124.00 | 5,124.00 | 0.87 | S11 T9 R-ACB-SELECT |
+| 8 | FU-KIT-ACB | Incomer functional unit: compartment, shutters, terminals, controls | 1 | 1,400.00 | 1,400.00 | 0.87 | S11 T9 R-FU-KIT |
+| 9 | METER-A | Panel meter (A) | 1 | 120.00 | 120.00 | 0.95 | S12 T31 T34 R-METERING |
+| 10 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.49 | S14 R-METERING |
+| 11 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.43 | S15 R-METERING |
+| 12 | ACB-1600-4P-N | Air circuit breaker 1600 A 4-pole, None kA band N, withdrawable, electronic trip | 1 | 5,124.00 | 5,124.00 | 0.87 | S18 T47 R-ACB-SELECT |
+| 13 | FU-KIT-ACB | Incomer functional unit: compartment, shutters, terminals, controls | 1 | 1,400.00 | 1,400.00 | 0.87 | S18 T47 R-FU-KIT |
+| 14 | ACB-1600-4P-N | Air circuit breaker 1600 A 4-pole, None kA band N, withdrawable, electronic trip | 1 | 5,124.00 | 5,124.00 | 0.87 | S19 T45 T48 T52 R-ACB-SELECT |
+| 15 | FU-KIT-ACB | Incomer functional unit: compartment, shutters, terminals, controls | 1 | 1,400.00 | 1,400.00 | 0.87 | S19 T45 T48 T52 R-FU-KIT |
+| 16 | BUSBAR-CU-1600 | Copper busbar set 1600 A (4-bar), 3 sections, about 86 kg | 1 | 993.60 | 993.60 | 0.9 |  R-BUSBAR-SIZE |
+| 17 | ENC-SECTION | Enclosure section, Form 4 Type 6, IP31, RAL 7035 | 3 | 3,380.00 | 10,140.00 | 0.95 |  R-ENCLOSURE |
+| 18 | LAB-ASSY | Assembly, wiring and routine verification: 152 hours | 1 | 7,296.00 | 7,296.00 | 0.9 |  R-LABOUR |
+| 19 | DOC | Documentation, as-built drawings, test certificates | 1 | 600.00 | 600.00 | 1.0 |  R-DOC |
+| 20 | DEL | Delivery to site, crane and offload excluded | 1 | 850.00 | 850.00 | 1.0 |  R-DELIVERY |
 
-Subtotal £13,239.20; margin £1,985.88; **total £15,225.08**
+Subtotal £41,771.60; margin £6,265.74; **total £48,037.34**
 
 ## Clarifications and exclusions (from flagged items)
 - [missing] fault level not found on the drawing notes. Action: confirm with the consultant. Evidence: 
 - [missing] D9 (CAPACITOR): kVAr not read. Action: read from drawing / schedule. Evidence: S9
 - [missing] D10 (CAPACITOR): kVAr not read. Action: read from drawing / schedule. Evidence: S10
-- [missing] D11 (CAPACITOR): kVAr not read. Action: read from drawing / schedule. Evidence: S11 T30
-- [missing] D14 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S14 T38
-- [assumed] busbar rating not read; assumed 0 A from the largest incomer. Action: confirm. Evidence: 
-- [low_confidence] devices read with low confidence: D4, D5, D6, D7, D8, D9, D10, D12, D13, D15, D16, D17. Action: check against the drawing. Evidence: D4 D5 D6 D7 D8 D9 D10 D12 D13 D15 D16 D17
+- [missing] D13 (CAPACITOR): kVAr not read. Action: read from drawing / schedule. Evidence: S13 T30 T33
+- [missing] D16 (CAPACITOR): kVAr not read. Action: read from drawing / schedule. Evidence: S16 T38 T41
+- [missing] D17 (CONTACTOR): kW not read. Action: read from drawing / schedule. Evidence: S17 T43
+- [assumed] busbar rating not read; assumed 300 A from the largest incomer. Action: confirm. Evidence: 
+- [low_confidence] devices read with low confidence: D8, D9, D10, D14, D15. Action: check against the drawing. Evidence: D8 D9 D10 D14 D15
 
-Generated by sld2quote 0.2.0 in 21.9 s; reader deskew 0.0 deg.
+Generated by sld2quote 0.2.0 in 12.6 s; reader deskew 0.0 deg.

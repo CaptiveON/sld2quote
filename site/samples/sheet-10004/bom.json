@@ -5,8 +5,8 @@
   "ip": "IP41",
   "poles_default": 3,
   "busbar_rating": 1600,
-  "sections": 5,
-  "ways": 3
+  "sections": 7,
+  "ways": 5
  },
  "lines": [
   {
@@ -17,7 +17,7 @@
    "unit_gbp": 5880.0,
    "total_gbp": 5880.0,
    "evidence": [
-    "S5",
+    "S4",
     "T7",
     "T10"
    ],
@@ -33,7 +33,7 @@
    "unit_gbp": 1400,
    "total_gbp": 1400,
    "evidence": [
-    "S5",
+    "S4",
     "T7",
     "T10"
    ],
@@ -49,7 +49,7 @@
    "unit_gbp": 5880.0,
    "total_gbp": 5880.0,
    "evidence": [
-    "S6",
+    "S5",
     "T8",
     "T11"
    ],
@@ -65,7 +65,7 @@
    "unit_gbp": 1400,
    "total_gbp": 1400,
    "evidence": [
-    "S6",
+    "S5",
     "T8",
     "T11"
    ],
@@ -81,11 +81,11 @@
    "unit_gbp": 5880.0,
    "total_gbp": 5880.0,
    "evidence": [
-    "S7",
+    "S6",
     "T9"
    ],
    "rule": "R-ACB-SELECT",
-   "conf": 0.98,
+   "conf": 1.0,
    "basis": "rating 1600 A from ['T9']; poles 3; kA 80"
   },
   {
@@ -96,11 +96,11 @@
    "unit_gbp": 1400,
    "total_gbp": 1400,
    "evidence": [
-    "S7",
+    "S6",
     "T9"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.98,
+   "conf": 1.0,
    "basis": ""
   },
   {
@@ -111,38 +111,81 @@
    "unit_gbp": 1850,
    "total_gbp": 1850,
    "evidence": [
-    "S7",
+    "S6",
     "T9"
    ],
    "rule": "R-ATS",
-   "conf": 0.98,
+   "conf": 1.0,
    "basis": ""
   },
   {
    "line": 8,
-   "part": "METER-CT 1600/5A | BUSBAR A 1600 A Cu 80 kA/1s",
-   "description": "Panel meter (CT 1600/5A | BUSBAR A 1600 A Cu 80 kA/1s)",
+   "part": "METER-A",
+   "description": "Panel meter (A)",
    "qty": 1,
-   "unit_gbp": 260,
-   "total_gbp": 260,
+   "unit_gbp": 120,
+   "total_gbp": 120,
+   "evidence": [
+    "S7",
+    "S7g1"
+   ],
+   "rule": "R-METERING",
+   "conf": 1.0,
+   "basis": ""
+  },
+  {
+   "line": 9,
+   "part": "METER-V",
+   "description": "Panel meter (V)",
+   "qty": 1,
+   "unit_gbp": 120,
+   "total_gbp": 120,
    "evidence": [
     "S8",
-    "T12",
-    "T14"
+    "S8g1"
+   ],
+   "rule": "R-METERING",
+   "conf": 0.63,
+   "basis": ""
+  },
+  {
+   "line": 10,
+   "part": "RELAY-OC",
+   "description": "Overcurrent and earth-fault protection relay",
+   "qty": 1,
+   "unit_gbp": 950,
+   "total_gbp": 950,
+   "evidence": [
+    "S9"
+   ],
+   "rule": "R-PROTECTION",
+   "conf": 0.5,
+   "basis": ""
+  },
+  {
+   "line": 11,
+   "part": "CT-SET",
+   "description": "Current transformers 1600/5 A, set of three, class 1",
+   "qty": 1,
+   "unit_gbp": 280,
+   "total_gbp": 280,
+   "evidence": [
+    "S10",
+    "T12"
    ],
    "rule": "R-METERING",
    "conf": 0.97,
    "basis": ""
   },
   {
-   "line": 9,
-   "part": "METER-CT 1600/5A",
-   "description": "Panel meter (CT 1600/5A)",
+   "line": 12,
+   "part": "CT-SET",
+   "description": "Current transformers 1600/5 A, set of three, class 1",
    "qty": 1,
-   "unit_gbp": 260,
-   "total_gbp": 260,
+   "unit_gbp": 280,
+   "total_gbp": 280,
    "evidence": [
-    "S9",
+    "S11",
     "T13"
    ],
    "rule": "R-METERING",
@@ -150,110 +193,64 @@
    "basis": ""
   },
   {
-   "line": 10,
-   "part": "CT-SET",
-   "description": "Current transformers, set of three, class 1",
+   "line": 13,
+   "part": "METER-MF",
+   "description": "Panel meter (multifunction)",
    "qty": 1,
-   "unit_gbp": 280,
-   "total_gbp": 280,
+   "unit_gbp": 260,
+   "total_gbp": 260,
    "evidence": [
-    "S10"
-   ],
-   "rule": "R-METERING",
-   "conf": 0.49,
-   "basis": ""
-  },
-  {
-   "line": 11,
-   "part": "CT-SET",
-   "description": "Current transformers, set of three, class 1",
-   "qty": 1,
-   "unit_gbp": 280,
-   "total_gbp": 280,
-   "evidence": [
-    "S11"
+    "S12"
    ],
    "rule": "R-METERING",
    "conf": 0.5,
    "basis": ""
   },
   {
-   "line": 12,
+   "line": 14,
    "part": "BSS-1600-3P",
    "description": "Bus-section switch 1600 A 3-pole, 80 kA",
    "qty": 1,
    "unit_gbp": 4340.0,
    "total_gbp": 4340.0,
    "evidence": [
-    "S12",
-    "T16",
-    "T15"
+    "S13",
+    "T16"
    ],
    "rule": "R-BUS-SECTION",
    "conf": 0.98,
    "basis": ""
   },
   {
-   "line": 13,
+   "line": 15,
    "part": "FU-KIT-BS",
    "description": "Bus-section functional unit and interlocking",
    "qty": 1,
    "unit_gbp": 900,
    "total_gbp": 900,
    "evidence": [
-    "S12",
-    "T16",
-    "T15"
+    "S13",
+    "T16"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.98,
    "basis": ""
   },
   {
-   "line": 14,
+   "line": 16,
    "part": "MCCB-630-3P-L",
    "description": "Moulded-case circuit breaker 630 A 3-pole, 80 kA band L, adjustable trip",
    "qty": 1,
    "unit_gbp": 2030.0,
    "total_gbp": 2030.0,
    "evidence": [
-    "S13",
-    "T27"
+    "S14",
+    "T27",
+    "T47"
    ],
    "rule": "R-MCCB-SELECT",
-   "conf": 0.93,
+   "conf": 1.0,
    "basis": "rating 630 A; poles 3; kA 80"
-  },
-  {
-   "line": 15,
-   "part": "FU-KIT-MCCB",
-   "description": "Outgoing functional unit: compartment door, terminals, labels",
-   "qty": 1,
-   "unit_gbp": 420,
-   "total_gbp": 420,
-   "evidence": [
-    "S13",
-    "T27"
-   ],
-   "rule": "R-FU-KIT",
-   "conf": 0.93,
-   "basis": ""
-  },
-  {
-   "line": 16,
-   "part": "MCCB-400-3P-L",
-   "description": "Moulded-case circuit breaker 400 A 3-pole, 80 kA band L, adjustable trip; feeds UPS fnput",
-   "qty": 1,
-   "unit_gbp": 1372.0,
-   "total_gbp": 1372.0,
-   "evidence": [
-    "S18",
-    "T19",
-    "T24"
-   ],
-   "rule": "R-MCCB-SELECT",
-   "conf": 0.97,
-   "basis": "rating 400 A; poles 3; kA 80"
   },
   {
    "line": 17,
@@ -263,16 +260,95 @@
    "unit_gbp": 420,
    "total_gbp": 420,
    "evidence": [
-    "S18",
-    "T19",
-    "T24"
+    "S14",
+    "T27",
+    "T47"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.97,
+   "conf": 1.0,
    "basis": ""
   },
   {
    "line": 18,
+   "part": "MCCB-100-3P-L",
+   "description": "Moulded-case circuit breaker 100 A 3-pole, 80 kA band L, adjustable trip",
+   "qty": 1,
+   "unit_gbp": 434.0,
+   "total_gbp": 434.0,
+   "evidence": [
+    "S15",
+    "T39"
+   ],
+   "rule": "R-MCCB-SELECT",
+   "conf": 0.98,
+   "basis": "rating 100 A; poles 3; kA 80"
+  },
+  {
+   "line": 19,
+   "part": "FU-KIT-MCCB",
+   "description": "Outgoing functional unit: compartment door, terminals, labels",
+   "qty": 1,
+   "unit_gbp": 420,
+   "total_gbp": 420,
+   "evidence": [
+    "S15",
+    "T39"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.98,
+   "basis": ""
+  },
+  {
+   "line": 20,
+   "part": "MCCB-400-3P-L",
+   "description": "Moulded-case circuit breaker 400 A 3-pole, 80 kA band L, adjustable trip; feeds fan F-5",
+   "qty": 1,
+   "unit_gbp": 1372.0,
+   "total_gbp": 1372.0,
+   "evidence": [
+    "S16",
+    "T45",
+    "T56",
+    "T58"
+   ],
+   "rule": "R-MCCB-SELECT",
+   "conf": 0.98,
+   "basis": "rating 400 A; poles 3; kA 80"
+  },
+  {
+   "line": 21,
+   "part": "FU-KIT-MCCB",
+   "description": "Outgoing functional unit: compartment door, terminals, labels",
+   "qty": 1,
+   "unit_gbp": 420,
+   "total_gbp": 420,
+   "evidence": [
+    "S16",
+    "T45",
+    "T56",
+    "T58"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.98,
+   "basis": ""
+  },
+  {
+   "line": 22,
+   "part": "PFC-250KVAR",
+   "description": "Power-factor correction bank 250 kVAr, detuned, in its own section",
+   "qty": 1,
+   "unit_gbp": 8500,
+   "total_gbp": 8500,
+   "evidence": [
+    "S21",
+    "T38"
+   ],
+   "rule": "R-PFC",
+   "conf": 0.99,
+   "basis": ""
+  },
+  {
+   "line": 23,
    "part": "SPD-T12",
    "description": "Surge protective device, Type 1+2, with status indication",
    "qty": 1,
@@ -280,31 +356,46 @@
    "total_gbp": 690,
    "evidence": [
     "S22",
-    "T39",
     "T48"
    ],
    "rule": "R-SPD",
-   "conf": 0.98,
+   "conf": 0.87,
    "basis": ""
   },
   {
-   "line": 19,
-   "part": "MCCB-250-3P-L",
-   "description": "Moulded-case circuit breaker 250 A 3-pole, 80 kA band L, adjustable trip; feeds lighting",
+   "line": 24,
+   "part": "STARTER-75KW",
+   "description": "Motor starter for 75 kW: contactor, overload relay and control circuit",
    "qty": 1,
-   "unit_gbp": 728.0,
-   "total_gbp": 728.0,
+   "unit_gbp": 2650,
+   "total_gbp": 2650,
    "evidence": [
-    "S25",
-    "T28",
-    "T40"
+    "S23",
+    "T53"
    ],
-   "rule": "R-MCCB-SELECT",
-   "conf": 0.99,
-   "basis": "rating 250 A; poles 3; kA 80"
+   "rule": "R-STARTER",
+   "conf": 1.0,
+   "basis": "75 kW from the starter label"
   },
   {
-   "line": 20,
+   "line": 25,
+   "part": "MCCB-400-3P-L",
+   "description": "Moulded-case circuit breaker 400 A 3-pole, 80 kA band L, adjustable trip; feeds MCC-10lchillers",
+   "qty": 1,
+   "unit_gbp": 1372.0,
+   "total_gbp": 1372.0,
+   "evidence": [
+    "S25",
+    "T29",
+    "T41",
+    "T50"
+   ],
+   "rule": "R-MCCB-SELECT",
+   "conf": 0.95,
+   "basis": "rating 400 A; poles 3; kA 80"
+  },
+  {
+   "line": 26,
    "part": "FU-KIT-MCCB",
    "description": "Outgoing functional unit: compartment door, terminals, labels",
    "qty": 1,
@@ -312,35 +403,70 @@
    "total_gbp": 420,
    "evidence": [
     "S25",
+    "T29",
+    "T41",
+    "T50"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.95,
+   "basis": ""
+  },
+  {
+   "line": 27,
+   "part": "MCCB-250-3P-L",
+   "description": "Moulded-case circuit breaker 250 A 3-pole, 80 kA band L, adjustable trip; feeds lighting",
+   "qty": 1,
+   "unit_gbp": 728.0,
+   "total_gbp": 728.0,
+   "evidence": [
+    "S27",
     "T28",
-    "T40"
+    "T40",
+    "T49"
+   ],
+   "rule": "R-MCCB-SELECT",
+   "conf": 0.99,
+   "basis": "rating 250 A; poles 3; kA 80"
+  },
+  {
+   "line": 28,
+   "part": "FU-KIT-MCCB",
+   "description": "Outgoing functional unit: compartment door, terminals, labels",
+   "qty": 1,
+   "unit_gbp": 420,
+   "total_gbp": 420,
+   "evidence": [
+    "S27",
+    "T28",
+    "T40",
+    "T49"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.99,
    "basis": ""
   },
   {
-   "line": 21,
+   "line": 29,
    "part": "BUSBAR-CU-1600",
-   "description": "Copper busbar set 1600 A (4-bar), 5 sections, about 144 kg",
+   "description": "Copper busbar set 1600 A (4-bar), 7 sections, about 202 kg",
    "qty": 1,
-   "unit_gbp": 1656.0,
-   "total_gbp": 1656.0,
+   "unit_gbp": 2318.4,
+   "total_gbp": 2318.4,
    "evidence": [
     "T15",
     "T15"
    ],
    "rule": "R-BUSBAR-SIZE",
    "conf": 0.9,
-   "basis": "1600 A busbar label; 5 sections"
+   "basis": "1600 A busbar label; 7 sections"
   },
   {
-   "line": 22,
+   "line": 30,
    "part": "ENC-SECTION",
    "description": "Enclosure section, Form 3b, IP41, RAL 7035",
-   "qty": 5,
+   "qty": 7,
    "unit_gbp": 2678.0,
-   "total_gbp": 13390.0,
+   "total_gbp": 18746.0,
    "evidence": [
     "T60",
     "T60",
@@ -349,22 +475,22 @@
    ],
    "rule": "R-ENCLOSURE",
    "conf": 0.95,
-   "basis": "3 ways at 4 per section plus incomers"
+   "basis": "5 ways at 4 per section plus incomers"
   },
   {
-   "line": 23,
+   "line": 31,
    "part": "LAB-ASSY",
-   "description": "Assembly, wiring and routine verification: 243 hours",
+   "description": "Assembly, wiring and routine verification: 291 hours",
    "qty": 1,
-   "unit_gbp": 11664,
-   "total_gbp": 11664,
+   "unit_gbp": 13968,
+   "total_gbp": 13968,
    "evidence": [],
    "rule": "R-LABOUR",
    "conf": 0.9,
    "basis": ""
   },
   {
-   "line": 24,
+   "line": 32,
    "part": "DOC",
    "description": "Documentation, as-built drawings, test certificates",
    "qty": 1,
@@ -376,7 +502,7 @@
    "basis": ""
   },
   {
-   "line": 25,
+   "line": 33,
    "part": "CERT",
    "description": "Design-verification certificates per specification",
    "qty": 1,
@@ -390,7 +516,7 @@
    "basis": ""
   },
   {
-   "line": 26,
+   "line": 34,
    "part": "WITNESS",
    "description": "Witness testing at works (specification)",
    "qty": 1,
@@ -404,7 +530,7 @@
    "basis": ""
   },
   {
-   "line": 27,
+   "line": 35,
    "part": "DEL",
    "description": "Delivery to site, crane and offload excluded",
    "qty": 1,
@@ -416,58 +542,30 @@
    "basis": ""
   }
  ],
- "subtotal_gbp": 65450.0,
- "margin_gbp": 9817.5,
- "total_gbp": 75267.5,
+ "subtotal_gbp": 88498.4,
+ "margin_gbp": 13274.76,
+ "total_gbp": 101773.16,
  "issues": [
-  {
-   "kind": "missing",
-   "what": "D14 (MCCB): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S14"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D15 (MCCB): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S15"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D16 (MCCB): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S16",
-    "T21",
-    "T26"
-   ]
-  },
   {
    "kind": "missing",
    "what": "D17 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
     "S17",
-    "T18",
-    "T23"
+    "T17",
+    "T22",
+    "T32"
    ]
   },
   {
-   "kind": "below_fault",
-   "what": "D18 (MCCB 400 A) shows 36 kA but the board fault level is 80 kA",
-   "action": "proposed: select the 80 kA band; confirm with the designer",
+   "kind": "missing",
+   "what": "D18 (MCCB): rating not read",
+   "action": "read from drawing / schedule",
    "evidence": [
     "S18",
-    "T19",
-    "T24",
-    "T60",
-    "T60",
-    "T62",
-    "T64"
+    "T18",
+    "T23",
+    "T33"
    ]
   },
   {
@@ -477,46 +575,56 @@
    "evidence": [
     "S19",
     "T20",
-    "T25"
+    "T25",
+    "T36"
    ]
   },
   {
    "kind": "missing",
-   "what": "D20 (CAPACITOR): kVAr not read",
+   "what": "D20 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
     "S20",
-    "T38"
+    "T21",
+    "T26",
+    "T37"
    ]
   },
   {
    "kind": "missing",
-   "what": "D21 (CONTACTOR): kW not read",
+   "what": "D24 (ISOLATOR): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S21",
-    "T45",
-    "T53"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D23 (ISOLATOR): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S23",
+    "S24",
     "T34",
-    "T44"
+    "T44",
+    "T54"
    ]
   },
   {
    "kind": "below_fault",
-   "what": "D25 (MCCB 250 A) shows 50 kA but the board fault level is 80 kA",
+   "what": "D25 (MCCB 400 A) shows 65 kA but the board fault level is 80 kA",
    "action": "proposed: select the 80 kA band; confirm with the designer",
    "evidence": [
     "S25",
+    "T29",
+    "T41",
+    "T50",
+    "T60",
+    "T60",
+    "T62",
+    "T64"
+   ]
+  },
+  {
+   "kind": "below_fault",
+   "what": "D27 (MCCB 250 A) shows 50 kA but the board fault level is 80 kA",
+   "action": "proposed: select the 80 kA band; confirm with the designer",
+   "evidence": [
+    "S27",
     "T28",
     "T40",
+    "T49",
     "T60",
     "T60",
     "T62",
@@ -525,45 +633,47 @@
   },
   {
    "kind": "missing",
-   "what": "D26 (MCCB): rating not read",
+   "what": "D28 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S26",
+    "S28",
     "T30",
-    "T42"
+    "T42",
+    "T51"
    ]
   },
   {
    "kind": "missing",
-   "what": "D27 (MCCB): rating not read",
+   "what": "D29 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S27",
+    "S29",
     "T31",
-    "T43"
+    "T43",
+    "T52"
    ]
   },
   {
    "kind": "missing",
-   "what": "D30 (MCCB): rating not read",
+   "what": "D32 (MCCB): rating not read",
    "action": "read from drawing / schedule",
    "evidence": [
-    "S30",
+    "S32",
     "T46",
-    "T55"
+    "T55",
+    "T57"
    ]
   },
   {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D1, D10, D11, D14, D15, D28",
+   "what": "devices read with low confidence: D9, D12, D26, D30, D31",
    "action": "check against the drawing",
    "evidence": [
-    "D1",
-    "D10",
-    "D11",
-    "D14",
-    "D15",
-    "D28"
+    "D9",
+    "D12",
+    "D26",
+    "D30",
+    "D31"
    ]
   }
  ]

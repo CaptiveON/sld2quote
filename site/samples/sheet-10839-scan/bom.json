@@ -5,42 +5,74 @@
   "ip": "IP42",
   "poles_default": 3,
   "busbar_rating": 2500,
-  "sections": 3,
+  "sections": 5,
   "ways": 6
  },
  "lines": [
   {
    "line": 1,
-   "part": "METER-CT 2500/5A | BUSBARA 2500 A Cu 65 kA/1s",
-   "description": "Panel meter (CT 2500/5A | BUSBARA 2500 A Cu 65 kA/1s)",
+   "part": "ACB-2500-3P-H",
+   "description": "Air circuit breaker 2500 A 3-pole, 65 kA band H, withdrawable, electronic trip",
    "qty": 1,
-   "unit_gbp": 260,
-   "total_gbp": 260,
+   "unit_gbp": 6608.0,
+   "total_gbp": 6608.0,
+   "evidence": [
+    "S2",
+    "T3",
+    "T4"
+   ],
+   "rule": "R-ACB-SELECT",
+   "conf": 0.91,
+   "basis": "rating 2500 A from ['T3']; poles 3; kA 65"
+  },
+  {
+   "line": 2,
+   "part": "FU-KIT-ACB",
+   "description": "Incomer functional unit: compartment, shutters, terminals, controls",
+   "qty": 1,
+   "unit_gbp": 1400,
+   "total_gbp": 1400,
+   "evidence": [
+    "S2",
+    "T3",
+    "T4"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.91,
+   "basis": ""
+  },
+  {
+   "line": 3,
+   "part": "METER-V",
+   "description": "Panel meter (V)",
+   "qty": 1,
+   "unit_gbp": 120,
+   "total_gbp": 120,
    "evidence": [
     "S3",
-    "T5",
-    "T6"
+    "S3g1"
+   ],
+   "rule": "R-METERING",
+   "conf": 0.68,
+   "basis": ""
+  },
+  {
+   "line": 4,
+   "part": "CT-SET",
+   "description": "Current transformers 2500/5 A, set of three, class 1",
+   "qty": 1,
+   "unit_gbp": 280,
+   "total_gbp": 280,
+   "evidence": [
+    "S4",
+    "T5"
    ],
    "rule": "R-METERING",
    "conf": 0.96,
    "basis": ""
   },
   {
-   "line": 2,
-   "part": "CT-SET",
-   "description": "Current transformers, set of three, class 1",
-   "qty": 1,
-   "unit_gbp": 280,
-   "total_gbp": 280,
-   "evidence": [
-    "S4"
-   ],
-   "rule": "R-METERING",
-   "conf": 0.49,
-   "basis": ""
-  },
-  {
-   "line": 3,
+   "line": 5,
    "part": "BSS-2500-3P",
    "description": "Bus-section switch 2500 A 3-pole, 65 kA",
    "qty": 1,
@@ -55,7 +87,7 @@
    "basis": ""
   },
   {
-   "line": 4,
+   "line": 6,
    "part": "FU-KIT-BS",
    "description": "Bus-section functional unit and interlocking",
    "qty": 1,
@@ -70,23 +102,23 @@
    "basis": ""
   },
   {
-   "line": 5,
+   "line": 7,
    "part": "FSW-250-3P",
-   "description": "Fuse-switch-disconnector 250 A 3-pole; feeds S/D 55 kW",
+   "description": "Fuse-switch-disconnector 250 A 3-pole; feeds fan F-4",
    "qty": 1,
    "unit_gbp": 430.0,
    "total_gbp": 430.0,
    "evidence": [
     "S6",
-    "T12",
-    "T9"
+    "T9",
+    "T16"
    ],
    "rule": "R-FSW-SELECT",
    "conf": 0.85,
    "basis": "rating 250 A; poles 3"
   },
   {
-   "line": 6,
+   "line": 8,
    "part": "FUSE-250",
    "description": "Fuse links 250 A, one per pole",
    "qty": 3,
@@ -94,15 +126,15 @@
    "total_gbp": 87,
    "evidence": [
     "S6",
-    "T12",
-    "T9"
+    "T9",
+    "T16"
    ],
    "rule": "R-FUSE-LINKS",
    "conf": 0.85,
    "basis": ""
   },
   {
-   "line": 7,
+   "line": 9,
    "part": "FU-KIT-FUSE_SWITCH",
    "description": "Outgoing functional unit: compartment door, terminals, labels",
    "qty": 1,
@@ -110,31 +142,30 @@
    "total_gbp": 380,
    "evidence": [
     "S6",
-    "T12",
-    "T9"
+    "T9",
+    "T16"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.85,
    "basis": ""
   },
   {
-   "line": 8,
+   "line": 10,
    "part": "FSW-400-3P",
-   "description": "Fuse-switch-disconnector 400 A 3-pole; feeds PFC 150.kVAr",
+   "description": "Fuse-switch-disconnector 400 A 3-pole",
    "qty": 1,
    "unit_gbp": 780.0,
    "total_gbp": 780.0,
    "evidence": [
     "S7",
-    "T14",
     "T10"
    ],
    "rule": "R-FSW-SELECT",
-   "conf": 0.96,
+   "conf": 1.0,
    "basis": "rating 400 A; poles 3"
   },
   {
-   "line": 9,
+   "line": 11,
    "part": "FUSE-400",
    "description": "Fuse links 400 A, one per pole",
    "qty": 3,
@@ -142,15 +173,14 @@
    "total_gbp": 138,
    "evidence": [
     "S7",
-    "T14",
     "T10"
    ],
    "rule": "R-FUSE-LINKS",
-   "conf": 0.96,
+   "conf": 1.0,
    "basis": ""
   },
   {
-   "line": 10,
+   "line": 12,
    "part": "FU-KIT-FUSE_SWITCH",
    "description": "Outgoing functional unit: compartment door, terminals, labels",
    "qty": 1,
@@ -158,95 +188,94 @@
    "total_gbp": 380,
    "evidence": [
     "S7",
-    "T14",
     "T10"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.96,
-   "basis": ""
-  },
-  {
-   "line": 11,
-   "part": "FSW-250-3P",
-   "description": "Fuse-switch-disconnector 250 A 3-pole; feeds data hall",
-   "qty": 1,
-   "unit_gbp": 430.0,
-   "total_gbp": 430.0,
-   "evidence": [
-    "S8",
-    "T17",
-    "T13"
-   ],
-   "rule": "R-FSW-SELECT",
-   "conf": 0.94,
-   "basis": "rating 250 A; poles 3"
-  },
-  {
-   "line": 12,
-   "part": "FUSE-250",
-   "description": "Fuse links 250 A, one per pole",
-   "qty": 3,
-   "unit_gbp": 29,
-   "total_gbp": 87,
-   "evidence": [
-    "S8",
-    "T17",
-    "T13"
-   ],
-   "rule": "R-FUSE-LINKS",
-   "conf": 0.94,
+   "conf": 1.0,
    "basis": ""
   },
   {
    "line": 13,
-   "part": "FU-KIT-FUSE_SWITCH",
-   "description": "Outgoing functional unit: compartment door, terminals, labels",
-   "qty": 1,
-   "unit_gbp": 380,
-   "total_gbp": 380,
-   "evidence": [
-    "S8",
-    "T17",
-    "T13"
-   ],
-   "rule": "R-FU-KIT",
-   "conf": 0.94,
-   "basis": ""
-  },
-  {
-   "line": 14,
    "part": "FSW-400-3P",
    "description": "Fuse-switch-disconnector 400 A 3-pole; feeds lighting",
    "qty": 1,
    "unit_gbp": 780.0,
    "total_gbp": 780.0,
    "evidence": [
-    "S9",
-    "T15",
-    "T11"
+    "S8",
+    "T11",
+    "T15"
    ],
    "rule": "R-FSW-SELECT",
    "conf": 0.99,
    "basis": "rating 400 A; poles 3"
   },
   {
-   "line": 15,
+   "line": 14,
    "part": "FUSE-400",
    "description": "Fuse links 400 A, one per pole",
    "qty": 3,
    "unit_gbp": 46,
    "total_gbp": 138,
    "evidence": [
-    "S9",
-    "T15",
-    "T11"
+    "S8",
+    "T11",
+    "T15"
    ],
    "rule": "R-FUSE-LINKS",
    "conf": 0.99,
    "basis": ""
   },
   {
+   "line": 15,
+   "part": "FU-KIT-FUSE_SWITCH",
+   "description": "Outgoing functional unit: compartment door, terminals, labels",
+   "qty": 1,
+   "unit_gbp": 380,
+   "total_gbp": 380,
+   "evidence": [
+    "S8",
+    "T11",
+    "T15"
+   ],
+   "rule": "R-FU-KIT",
+   "conf": 0.99,
+   "basis": ""
+  },
+  {
    "line": 16,
+   "part": "FSW-250-3P",
+   "description": "Fuse-switch-disconnector 250 A 3-pole; feeds data hall",
+   "qty": 1,
+   "unit_gbp": 430.0,
+   "total_gbp": 430.0,
+   "evidence": [
+    "S9",
+    "T13",
+    "T17"
+   ],
+   "rule": "R-FSW-SELECT",
+   "conf": 0.94,
+   "basis": "rating 250 A; poles 3"
+  },
+  {
+   "line": 17,
+   "part": "FUSE-250",
+   "description": "Fuse links 250 A, one per pole",
+   "qty": 3,
+   "unit_gbp": 29,
+   "total_gbp": 87,
+   "evidence": [
+    "S9",
+    "T13",
+    "T17"
+   ],
+   "rule": "R-FUSE-LINKS",
+   "conf": 0.94,
+   "basis": ""
+  },
+  {
+   "line": 18,
    "part": "FU-KIT-FUSE_SWITCH",
    "description": "Outgoing functional unit: compartment door, terminals, labels",
    "qty": 1,
@@ -254,15 +283,15 @@
    "total_gbp": 380,
    "evidence": [
     "S9",
-    "T15",
-    "T11"
+    "T13",
+    "T17"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.99,
+   "conf": 0.94,
    "basis": ""
   },
   {
-   "line": 17,
+   "line": 19,
    "part": "FSW-630-3P",
    "description": "Fuse-switch-disconnector 630 A 3-pole; feeds UPS input",
    "qty": 1,
@@ -270,15 +299,15 @@
    "total_gbp": 1180.0,
    "evidence": [
     "S10",
-    "T20",
-    "T18"
+    "T18",
+    "T20"
    ],
    "rule": "R-FSW-SELECT",
    "conf": 0.93,
    "basis": "rating 630 A; poles 3"
   },
   {
-   "line": 18,
+   "line": 20,
    "part": "FUSE-630",
    "description": "Fuse links 630 A, one per pole",
    "qty": 3,
@@ -286,15 +315,15 @@
    "total_gbp": 216,
    "evidence": [
     "S10",
-    "T20",
-    "T18"
+    "T18",
+    "T20"
    ],
    "rule": "R-FUSE-LINKS",
    "conf": 0.93,
    "basis": ""
   },
   {
-   "line": 19,
+   "line": 21,
    "part": "FU-KIT-FUSE_SWITCH",
    "description": "Outgoing functional unit: compartment door, terminals, labels",
    "qty": 1,
@@ -302,15 +331,15 @@
    "total_gbp": 380,
    "evidence": [
     "S10",
-    "T20",
-    "T18"
+    "T18",
+    "T20"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.93,
    "basis": ""
   },
   {
-   "line": 20,
+   "line": 22,
    "part": "FSW-800-3P",
    "description": "Fuse-switch-disconnector 800 A 3-pole; feeds data'hall. :",
    "qty": 1,
@@ -318,15 +347,15 @@
    "total_gbp": 1520.0,
    "evidence": [
     "S11",
-    "T21",
-    "T19"
+    "T19",
+    "T21"
    ],
    "rule": "R-FSW-SELECT",
    "conf": 0.94,
    "basis": "rating 800 A; poles 3"
   },
   {
-   "line": 21,
+   "line": 23,
    "part": "FUSE-800",
    "description": "Fuse links 800 A, one per pole",
    "qty": 3,
@@ -334,15 +363,15 @@
    "total_gbp": 282,
    "evidence": [
     "S11",
-    "T21",
-    "T19"
+    "T19",
+    "T21"
    ],
    "rule": "R-FUSE-LINKS",
    "conf": 0.94,
    "basis": ""
   },
   {
-   "line": 22,
+   "line": 24,
    "part": "FU-KIT-FUSE_SWITCH",
    "description": "Outgoing functional unit: compartment door, terminals, labels",
    "qty": 1,
@@ -350,38 +379,69 @@
    "total_gbp": 380,
    "evidence": [
     "S11",
-    "T21",
-    "T19"
+    "T19",
+    "T21"
    ],
    "rule": "R-FU-KIT",
    "conf": 0.94,
    "basis": ""
   },
   {
-   "line": 23,
-   "part": "BUSBAR-CU-2500",
-   "description": "Copper busbar set 2500 A (4-bar), 3 sections, about 137 kg",
+   "line": 25,
+   "part": "STARTER-55KW",
+   "description": "Motor starter for 55 kW: contactor, overload relay and control circuit",
    "qty": 1,
-   "unit_gbp": 1573.2,
-   "total_gbp": 1573.2,
+   "unit_gbp": 2150,
+   "total_gbp": 2150,
+   "evidence": [
+    "S12",
+    "T12"
+   ],
+   "rule": "R-STARTER",
+   "conf": 0.94,
+   "basis": "55 kW from the starter label"
+  },
+  {
+   "line": 26,
+   "part": "PFC-150KVAR",
+   "description": "Power-factor correction bank 150 kVAr, detuned, in its own section",
+   "qty": 1,
+   "unit_gbp": 5100,
+   "total_gbp": 5100,
+   "evidence": [
+    "S13",
+    "T14"
+   ],
+   "rule": "R-PFC",
+   "conf": 0.96,
+   "basis": ""
+  },
+  {
+   "line": 27,
+   "part": "BUSBAR-CU-2500",
+   "description": "Copper busbar set 2500 A (4-bar), 5 sections, about 228 kg",
+   "qty": 1,
+   "unit_gbp": 2622.0,
+   "total_gbp": 2622.0,
    "evidence": [
     "T7",
     "T7"
    ],
    "rule": "R-BUSBAR-SIZE",
    "conf": 0.9,
-   "basis": "2500 A busbar label; 3 sections"
+   "basis": "2500 A busbar label; 5 sections"
   },
   {
-   "line": 24,
+   "line": 28,
    "part": "ENC-SECTION",
    "description": "Enclosure section, Form 4 Type 6, IP42, RAL 7035",
-   "qty": 3,
+   "qty": 5,
    "unit_gbp": 3549.0,
-   "total_gbp": 10647.0,
+   "total_gbp": 17745.0,
    "evidence": [
     "T23",
     "T23",
+    "T25",
     "T27"
    ],
    "rule": "R-ENCLOSURE",
@@ -389,19 +449,19 @@
    "basis": "6 ways at 4 per section plus incomers"
   },
   {
-   "line": 25,
+   "line": 29,
    "part": "LAB-ASSY",
-   "description": "Assembly, wiring and routine verification: 128 hours",
+   "description": "Assembly, wiring and routine verification: 164 hours",
    "qty": 1,
-   "unit_gbp": 6144,
-   "total_gbp": 6144,
+   "unit_gbp": 7872,
+   "total_gbp": 7872,
    "evidence": [],
    "rule": "R-LABOUR",
    "conf": 0.9,
    "basis": ""
   },
   {
-   "line": 26,
+   "line": 30,
    "part": "DOC",
    "description": "Documentation, as-built drawings, test certificates",
    "qty": 1,
@@ -413,7 +473,7 @@
    "basis": ""
   },
   {
-   "line": 27,
+   "line": 31,
    "part": "CERT",
    "description": "Design-verification certificates per specification",
    "qty": 1,
@@ -427,7 +487,7 @@
    "basis": ""
   },
   {
-   "line": 28,
+   "line": 32,
    "part": "DEL",
    "description": "Delivery to site, crane and offload excluded",
    "qty": 1,
@@ -439,50 +499,15 @@
    "basis": ""
   }
  ],
- "subtotal_gbp": 34440.2,
- "margin_gbp": 5166.03,
- "total_gbp": 39606.23,
+ "subtotal_gbp": 59433.0,
+ "margin_gbp": 8914.95,
+ "total_gbp": 68347.95,
  "issues": [
   {
-   "kind": "missing",
-   "what": "fault level not found on the drawing notes",
-   "action": "confirm with the consultant",
-   "evidence": []
-  },
-  {
-   "kind": "missing",
-   "what": "D2 (ACB): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S2",
-    "T3",
-    "T4"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D12 (CAPACITOR): kVAr not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S12"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D13 (CONTACTOR): kW not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S13",
-    "T16"
-   ]
-  },
-  {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D4, D12, D14, D15",
+   "what": "devices read with low confidence: D14, D15",
    "action": "check against the drawing",
    "evidence": [
-    "D4",
-    "D12",
     "D14",
     "D15"
    ]

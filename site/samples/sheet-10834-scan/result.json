@@ -22,22 +22,22 @@
    "key": "text",
    "title": "Read the words",
    "count": 26,
-   "seconds": 2.33,
-   "plain": "Read 26 pieces of text in 2.33 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 2.05,
+   "plain": "Read 26 pieces of text in 2.05 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
-   "count": 10,
-   "seconds": 2.02,
-   "plain": "Found 10 symbols in 2.02 s: 3 incoming air circuit breakers, 2 isolators, 1 transformer, 1 panel meter, 1 current transformer, 1 motor starter, 1 motor. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "count": 11,
+   "seconds": 1.24,
+   "plain": "Found 11 symbols in 1.24 s: 3 outgoing moulded-case breakers, 2 isolators, 1 transformer, 1 incoming air circuit breaker, 1 panel meter, 1 current transformer, 1 motor starter, 1 motor. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
-   "count": 8,
-   "seconds": 0.11,
-   "plain": "Paired 8 of 10 symbols with the label text beside them; 4 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
+   "count": 9,
+   "seconds": 0.09,
+   "plain": "Paired 9 of 11 symbols with the label text beside them; 10 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
    "key": "spec",
@@ -49,9 +49,9 @@
   {
    "key": "price",
    "title": "Pick parts and price",
-   "count": 14,
+   "count": 21,
    "seconds": 0.0,
-   "plain": "Chose 14 catalogue lines and priced the board at \u00a343,855 (illustrative prices, 15% margin included); 5 items flagged for the estimator. Every line names the symbol, text or clause it rests on, so a reviewer can check it on the drawing."
+   "plain": "Chose 21 catalogue lines and priced the board at \u00a337,168 (illustrative prices, 15% margin included); 2 items flagged for the estimator. Every line names the symbol, text or clause it rests on, so a reviewer can check it on the drawing."
   }
  ],
  "devices": [
@@ -65,17 +65,36 @@
    "kA": null,
    "dest": "",
    "conf": 0.95,
-   "score": 0.63,
+   "score": 0.25,
    "box": [
     199,
-    67,
-    45,
-    73
+    65,
+    44,
+    75
    ],
-   "label": "11 kV/415V | TX-11250 kVA"
+   "label": "TX-11250 kVA | 11 kV/415V"
   },
   {
    "id": "D2",
+   "type": "ACB",
+   "type_plain": "incoming air circuit breaker",
+   "rating": 1600,
+   "unit": "A",
+   "poles": 4,
+   "kA": 36,
+   "dest": "",
+   "conf": 0.91,
+   "score": 0.17,
+   "box": [
+    206,
+    197,
+    30,
+    30
+   ],
+   "label": "ACB-11600 A4P | icu 36 kA,withdrawable"
+  },
+  {
+   "id": "D3",
    "type": "METER",
    "type_plain": "panel meter",
    "rating": null,
@@ -83,160 +102,160 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.94,
-   "score": 0.33,
+   "conf": 0.5,
+   "score": 0.34,
    "box": [
     258,
     280,
     26,
     26
    ],
-   "label": "CT 1600/5A | BUSBAR A 1600 ACu 36 kA/1s"
-  },
-  {
-   "id": "D3",
-   "type": "CT",
-   "type_plain": "current transformer",
-   "rating": null,
-   "unit": "A",
-   "poles": null,
-   "kA": null,
-   "dest": "",
-   "conf": 0.5,
-   "score": 0.4,
-   "box": [
-    210,
-    282,
-    21,
-    22
-   ],
    "label": ""
   },
   {
    "id": "D4",
-   "type": "ACB",
-   "type_plain": "incoming air circuit breaker",
+   "type": "CT",
+   "type_plain": "current transformer",
+   "rating": 1600,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "",
+   "conf": 0.87,
+   "score": 0.13,
+   "box": [
+    209,
+    282,
+    23,
+    21
+   ],
+   "label": "CT 1600/5A"
+  },
+  {
+   "id": "D5",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
    "rating": 250,
    "unit": "A",
    "poles": 3,
    "kA": null,
-   "dest": "",
-   "conf": 0.75,
-   "score": 0.12,
+   "dest": "pump p-4",
+   "conf": 0.9,
+   "score": 0.21,
    "box": [
-    1028,
+    1029,
     501,
-    25,
-    24
+    24,
+    23
    ],
-   "label": "S/D'45 kW | MCCB:250 A 3P"
+   "label": "MCCB:250 A 3P | pump p-4"
   },
   {
-   "id": "D5",
-   "type": "ACB",
-   "type_plain": "incoming air circuit breaker",
+   "id": "D6",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
    "rating": 250,
    "unit": "A",
    "poles": 4,
    "kA": null,
-   "dest": "",
+   "dest": "UPS input ..",
    "conf": 0.89,
-   "score": 0.18,
+   "score": 0.68,
    "box": [
     187,
-    518,
+    517,
     25,
-    24
+    25
    ],
-   "label": "MCCB 250 A.4P"
+   "label": "MCCB 250 A.4P | UPS input .."
   },
   {
-   "id": "D6",
+   "id": "D7",
    "type": "CONTACTOR",
    "type_plain": "motor starter",
-   "rating": null,
+   "rating": 45,
    "unit": "kW",
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.92,
-   "score": 0.43,
+   "conf": 0.9,
+   "score": 0.38,
    "box": [
-    1027,
-    537,
-    21,
-    38
+    1028,
+    539,
+    18,
+    33
    ],
-   "label": "pump p-4"
-  },
-  {
-   "id": "D7",
-   "type": "ISOLATOR",
-   "type_plain": "isolator",
-   "rating": null,
-   "unit": "A",
-   "poles": null,
-   "kA": null,
-   "dest": "sdund",
-   "conf": 0.75,
-   "score": 0.13,
-   "box": [
-    464,
-    546,
-    23,
-    37
-   ],
-   "label": "sdund | ISOL400 A4P"
+   "label": "S/D'45 kW"
   },
   {
    "id": "D8",
-   "type": "ACB",
-   "type_plain": "incoming air circuit breaker",
+   "type": "ISOLATOR",
+   "type_plain": "isolator",
    "rating": 400,
    "unit": "A",
    "poles": 4,
    "kA": null,
-   "dest": "",
+   "dest": "sdund",
+   "conf": 0.94,
+   "score": 0.45,
+   "box": [
+    466,
+    546,
+    20,
+    37
+   ],
+   "label": "ISOL400 A4P | sdund"
+  },
+  {
+   "id": "D9",
+   "type": "MCCB",
+   "type_plain": "outgoing moulded-case breaker",
+   "rating": 400,
+   "unit": "A",
+   "poles": 4,
+   "kA": null,
+   "dest": "spare",
    "conf": 0.93,
-   "score": 0.25,
+   "score": 0.68,
    "box": [
     748,
     550,
     25,
-    24
+    23
    ],
-   "label": "MCCB 400 A.4P"
-  },
-  {
-   "id": "D9",
-   "type": "ISOLATOR",
-   "type_plain": "isolator",
-   "rating": null,
-   "unit": "A",
-   "poles": null,
-   "kA": null,
-   "dest": "pumps",
-   "conf": 0.95,
-   "score": 0.48,
-   "box": [
-    1308,
-    550,
-    21,
-    35
-   ],
-   "label": "pumps | ISOL100 A4P"
+   "label": "MCCB 400 A.4P | spare"
   },
   {
    "id": "D10",
+   "type": "ISOLATOR",
+   "type_plain": "isolator",
+   "rating": 100,
+   "unit": "A",
+   "poles": 4,
+   "kA": null,
+   "dest": "pumps",
+   "conf": 0.95,
+   "score": 0.47,
+   "box": [
+    1309,
+    550,
+    20,
+    34
+   ],
+   "label": "ISOL100 A4P | pumps"
+  },
+  {
+   "id": "D11",
    "type": "MOTOR",
    "type_plain": "motor",
-   "rating": null,
+   "rating": 45,
    "unit": "kW",
    "poles": null,
    "kA": null,
    "dest": "",
    "conf": 0.5,
-   "score": 0.5,
+   "score": 0.47,
    "box": [
     1025,
     583,
@@ -251,34 +270,49 @@
   "form": "Form 4 Type 6",
   "ip": "IP42",
   "poles_default": 4,
-  "busbar_rating": 400,
+  "busbar_rating": 1600,
   "sections": 3,
-  "ways": 0
+  "ways": 5
  },
  "bom": {
   "lines": [
    {
     "line": 1,
-    "part": "METER-CT 1600/5A | BUSBAR A 1600 ACu 36 kA/1s",
-    "description": "Panel meter (CT 1600/5A | BUSBAR A 1600 ACu 36 kA/1s)",
+    "part": "ACB-1600-4P-N",
+    "description": "Air circuit breaker 1600 A 4-pole, 36 kA band N, withdrawable, electronic trip",
     "qty": 1,
-    "unit_gbp": 260,
-    "total_gbp": 260,
-    "conf": 0.94,
+    "unit_gbp": 5124.0,
+    "total_gbp": 5124.0,
+    "conf": 0.91,
     "evidence": [
      "S2",
-     "T5",
-     "T6"
+     "T3",
+     "T4"
     ],
-    "rule": "R-METERING"
+    "rule": "R-ACB-SELECT"
    },
    {
     "line": 2,
-    "part": "CT-SET",
-    "description": "Current transformers, set of three, class 1",
+    "part": "FU-KIT-ACB",
+    "description": "Incomer functional unit: compartment, shutters, terminals, controls",
     "qty": 1,
-    "unit_gbp": 280,
-    "total_gbp": 280,
+    "unit_gbp": 1400,
+    "total_gbp": 1400,
+    "conf": 0.91,
+    "evidence": [
+     "S2",
+     "T3",
+     "T4"
+    ],
+    "rule": "R-FU-KIT"
+   },
+   {
+    "line": 3,
+    "part": "METER-MF",
+    "description": "Panel meter (multifunction)",
+    "qty": 1,
+    "unit_gbp": 260,
+    "total_gbp": 260,
     "conf": 0.5,
     "evidence": [
      "S3"
@@ -286,93 +320,185 @@
     "rule": "R-METERING"
    },
    {
-    "line": 3,
-    "part": "ACB-1600-3P-N",
-    "description": "Air circuit breaker 1600 A 3-pole, 36 kA band N, withdrawable, electronic trip",
-    "qty": 1,
-    "unit_gbp": 4200.0,
-    "total_gbp": 4200.0,
-    "conf": 0.75,
-    "evidence": [
-     "S4",
-     "T9",
-     "T7"
-    ],
-    "rule": "R-ACB-SELECT"
-   },
-   {
     "line": 4,
-    "part": "FU-KIT-ACB",
-    "description": "Incomer functional unit: compartment, shutters, terminals, controls",
+    "part": "CT-SET",
+    "description": "Current transformers 1600/5 A, set of three, class 1",
     "qty": 1,
-    "unit_gbp": 1400,
-    "total_gbp": 1400,
-    "conf": 0.75,
+    "unit_gbp": 280,
+    "total_gbp": 280,
+    "conf": 0.87,
     "evidence": [
      "S4",
-     "T9",
-     "T7"
+     "T5"
     ],
-    "rule": "R-FU-KIT"
+    "rule": "R-METERING"
    },
    {
     "line": 5,
-    "part": "ACB-1600-4P-N",
-    "description": "Air circuit breaker 1600 A 4-pole, 36 kA band N, withdrawable, electronic trip",
+    "part": "MCCB-250-3P-N",
+    "description": "Moulded-case circuit breaker 250 A 3-pole, 36 kA band N, adjustable trip; feeds pump p-4",
     "qty": 1,
-    "unit_gbp": 5124.0,
-    "total_gbp": 5124.0,
-    "conf": 0.89,
+    "unit_gbp": 520.0,
+    "total_gbp": 520.0,
+    "conf": 0.9,
     "evidence": [
      "S5",
-     "T8"
+     "T7",
+     "T12"
     ],
-    "rule": "R-ACB-SELECT"
+    "rule": "R-MCCB-SELECT"
    },
    {
     "line": 6,
-    "part": "FU-KIT-ACB",
-    "description": "Incomer functional unit: compartment, shutters, terminals, controls",
+    "part": "FU-KIT-MCCB",
+    "description": "Outgoing functional unit: compartment door, terminals, labels",
     "qty": 1,
-    "unit_gbp": 1400,
-    "total_gbp": 1400,
-    "conf": 0.89,
+    "unit_gbp": 420,
+    "total_gbp": 420,
+    "conf": 0.9,
     "evidence": [
      "S5",
-     "T8"
+     "T7",
+     "T12"
     ],
     "rule": "R-FU-KIT"
    },
    {
     "line": 7,
-    "part": "ACB-1600-4P-N",
-    "description": "Air circuit breaker 1600 A 4-pole, 36 kA band N, withdrawable, electronic trip",
+    "part": "MCCB-250-4P-N",
+    "description": "Moulded-case circuit breaker 250 A 4-pole, 36 kA band N, adjustable trip; feeds UPS input ..",
     "qty": 1,
-    "unit_gbp": 5124.0,
-    "total_gbp": 5124.0,
-    "conf": 0.93,
+    "unit_gbp": 634.4,
+    "total_gbp": 634.4,
+    "conf": 0.89,
     "evidence": [
-     "S8",
-     "T11"
+     "S6",
+     "T8",
+     "T10"
     ],
-    "rule": "R-ACB-SELECT"
+    "rule": "R-MCCB-SELECT"
    },
    {
     "line": 8,
-    "part": "FU-KIT-ACB",
-    "description": "Incomer functional unit: compartment, shutters, terminals, controls",
+    "part": "FU-KIT-MCCB",
+    "description": "Outgoing functional unit: compartment door, terminals, labels",
     "qty": 1,
-    "unit_gbp": 1400,
-    "total_gbp": 1400,
-    "conf": 0.93,
+    "unit_gbp": 420,
+    "total_gbp": 420,
+    "conf": 0.89,
     "evidence": [
-     "S8",
-     "T11"
+     "S6",
+     "T8",
+     "T10"
     ],
     "rule": "R-FU-KIT"
    },
    {
     "line": 9,
+    "part": "STARTER-45KW",
+    "description": "Motor starter for 45 kW: contactor, overload relay and control circuit",
+    "qty": 1,
+    "unit_gbp": 1850,
+    "total_gbp": 1850,
+    "conf": 0.9,
+    "evidence": [
+     "S7",
+     "T9"
+    ],
+    "rule": "R-STARTER"
+   },
+   {
+    "line": 10,
+    "part": "ISOL-400-4P",
+    "description": "Switch-disconnector 400 A 4-pole; feeds sdund",
+    "qty": 1,
+    "unit_gbp": 634.4,
+    "total_gbp": 634.4,
+    "conf": 0.94,
+    "evidence": [
+     "S8",
+     "T13",
+     "T15"
+    ],
+    "rule": "R-ISOL-SELECT"
+   },
+   {
+    "line": 11,
+    "part": "FU-KIT-ISOLATOR",
+    "description": "Outgoing functional unit: compartment door, terminals, labels",
+    "qty": 1,
+    "unit_gbp": 340,
+    "total_gbp": 340,
+    "conf": 0.94,
+    "evidence": [
+     "S8",
+     "T13",
+     "T15"
+    ],
+    "rule": "R-FU-KIT"
+   },
+   {
+    "line": 12,
+    "part": "MCCB-400-4P-N",
+    "description": "Moulded-case circuit breaker 400 A 4-pole, 36 kA band N, adjustable trip; feeds spare",
+    "qty": 1,
+    "unit_gbp": 1195.6,
+    "total_gbp": 1195.6,
+    "conf": 0.93,
+    "evidence": [
+     "S9",
+     "T11",
+     "T16"
+    ],
+    "rule": "R-MCCB-SELECT"
+   },
+   {
+    "line": 13,
+    "part": "FU-KIT-MCCB",
+    "description": "Outgoing functional unit: compartment door, terminals, labels",
+    "qty": 1,
+    "unit_gbp": 420,
+    "total_gbp": 420,
+    "conf": 0.93,
+    "evidence": [
+     "S9",
+     "T11",
+     "T16"
+    ],
+    "rule": "R-FU-KIT"
+   },
+   {
+    "line": 14,
+    "part": "ISOL-100-4P",
+    "description": "Switch-disconnector 100 A 4-pole; feeds pumps",
+    "qty": 1,
+    "unit_gbp": 207.4,
+    "total_gbp": 207.4,
+    "conf": 0.95,
+    "evidence": [
+     "S10",
+     "T14",
+     "T17"
+    ],
+    "rule": "R-ISOL-SELECT"
+   },
+   {
+    "line": 15,
+    "part": "FU-KIT-ISOLATOR",
+    "description": "Outgoing functional unit: compartment door, terminals, labels",
+    "qty": 1,
+    "unit_gbp": 340,
+    "total_gbp": 340,
+    "conf": 0.95,
+    "evidence": [
+     "S10",
+     "T14",
+     "T17"
+    ],
+    "rule": "R-FU-KIT"
+   },
+   {
+    "line": 16,
     "part": "BUSBAR-CU-1600",
     "description": "Copper busbar set 1600 A (4-bar), 3 sections, about 86 kg",
     "qty": 1,
@@ -387,7 +513,7 @@
     "rule": "R-BUSBAR-SIZE"
    },
    {
-    "line": 10,
+    "line": 17,
     "part": "ENC-SECTION",
     "description": "Enclosure section, Form 4 Type 6, IP42, RAL 7035",
     "qty": 3,
@@ -403,18 +529,18 @@
     "rule": "R-ENCLOSURE"
    },
    {
-    "line": 11,
+    "line": 18,
     "part": "LAB-ASSY",
-    "description": "Assembly, wiring and routine verification: 122 hours",
+    "description": "Assembly, wiring and routine verification: 108 hours",
     "qty": 1,
-    "unit_gbp": 5856,
-    "total_gbp": 5856,
+    "unit_gbp": 5184,
+    "total_gbp": 5184,
     "conf": 0.9,
     "evidence": [],
     "rule": "R-LABOUR"
    },
    {
-    "line": 12,
+    "line": 19,
     "part": "DOC",
     "description": "Documentation, as-built drawings, test certificates",
     "qty": 1,
@@ -425,7 +551,7 @@
     "rule": "R-DOC"
    },
    {
-    "line": 13,
+    "line": 20,
     "part": "CERT",
     "description": "Design-verification certificates per specification",
     "qty": 1,
@@ -438,7 +564,7 @@
     "rule": "R-SPEC-CERT"
    },
    {
-    "line": 14,
+    "line": 21,
     "part": "DEL",
     "description": "Delivery to site, crane and offload excluded",
     "qty": 1,
@@ -449,53 +575,24 @@
     "rule": "R-DELIVERY"
    }
   ],
-  "subtotal_gbp": 38134.6,
-  "margin_gbp": 5720.19,
-  "total_gbp": 43854.79
+  "subtotal_gbp": 32320.4,
+  "margin_gbp": 4848.06,
+  "total_gbp": 37168.46
  },
  "issues": [
   {
-   "kind": "missing",
-   "what": "D6 (CONTACTOR): kW not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S6",
-    "T12"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D7 (ISOLATOR): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S7",
-    "T15",
-    "T13"
-   ]
-  },
-  {
-   "kind": "missing",
-   "what": "D9 (ISOLATOR): rating not read",
-   "action": "read from drawing / schedule",
-   "evidence": [
-    "S9",
-    "T17",
-    "T14"
-   ]
-  },
-  {
    "kind": "assumed",
-   "what": "busbar rating not read; assumed 400 A from the largest incomer",
+   "what": "busbar rating not read; assumed 1600 A from the largest incomer",
    "action": "confirm",
    "evidence": []
   },
   {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D3, D10",
+   "what": "devices read with low confidence: D3, D11",
    "action": "check against the drawing",
    "evidence": [
     "D3",
-    "D10"
+    "D11"
    ]
   }
  ],
@@ -538,22 +635,22 @@
  },
  "score": {
   "symbols_total": 11,
-  "symbols_found": 7,
-  "symbols_reported": 10,
-  "precision": 0.7,
-  "recall": 0.636,
+  "symbols_found": 11,
+  "symbols_reported": 11,
+  "precision": 1.0,
+  "recall": 1.0,
   "per_type": [
    {
     "type": "ACB",
     "total": 1,
-    "found": 0,
-    "reported": 3
+    "found": 1,
+    "reported": 1
    },
    {
     "type": "MCCB",
     "total": 3,
-    "found": 0,
-    "reported": 0
+    "found": 3,
+    "reported": 3
    },
    {
     "type": "ISOLATOR",
@@ -593,19 +690,19 @@
    }
   ],
   "reference_total_gbp": 37007.46,
-  "price_error": 0.185,
-  "rating_accuracy": 0.286,
+  "price_error": 0.0044,
+  "rating_accuracy": 1.0,
   "notes_accuracy": 1.0
  },
  "timing": {
-  "total": 4.66,
-  "ocr": 2.33,
-  "detector": 2.02
+  "total": 3.58,
+  "ocr": 2.05,
+  "detector": 1.24
  },
  "reader": "trained",
  "engine": "rapidocr",
  "model": {
-  "weights": "weights/rtdetr_r18_full",
+  "weights": "weights/rtdetr_r18_plain_ema_fix_pass4",
   "threshold": 0.11
  },
  "files": {

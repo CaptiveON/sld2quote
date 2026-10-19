@@ -1,45 +1,50 @@
 line,part,description,qty,unit_gbp,total_gbp,conf,rule,evidence
-1,ACB-2000-4P-H,"Air circuit breaker 2000 A 4-pole, 65 kA band H, withdrawable, electronic trip",1,7054.04,7054.04,0.97,R-ACB-SELECT,S4 T9 T12
-2,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.97,R-FU-KIT,S4 T9 T12
-3,ACB-1600-4P-H,"Air circuit breaker 1600 A 4-pole, 65 kA band H, withdrawable, electronic trip",1,6046.32,6046.32,0.75,R-ACB-SELECT,S5 T10
-4,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.75,R-FU-KIT,S5 T10
-5,ATS-CTRL,Automatic transfer switch controller and interlocks,1,1850,1850,0.75,R-ATS,S5 T10
-6,ACB-2000-4P-H,"Air circuit breaker 2000 A 4-pole, 65 kA band H, withdrawable, electronic trip",1,7054.04,7054.04,0.98,R-ACB-SELECT,S6 T8 T11
-7,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.98,R-FU-KIT,S6 T8 T11
-8,METER-CT 2000/5A | BUSBAR A 2000 A Cu 65 kA/1s,Panel meter (CT 2000/5A | BUSBAR A 2000 A Cu 65 kA/1s),1,260,260,0.97,R-METERING,S7 T13 T14
-9,CT-SET,"Current transformers, set of three, class 1",1,280,280,0.38,R-METERING,S8
-10,BSS-2000-4P,"Bus-section switch 2000 A 4-pole, 65 kA",1,4248.0,4248.0,0.75,R-BUS-SECTION,S9 T16 T15
-11,FU-KIT-BS,Bus-section functional unit and interlocking,1,900,900,0.75,R-FU-KIT,S9 T16 T15
-12,MCCB-250-3P-L,"Moulded-case circuit breaker 250 A 3-pole, 80 kA band L, adjustable trip",1,728.0,728.0,0.97,R-MCCB-SELECT,S10 T17
-13,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.97,R-FU-KIT,S10 T17
-14,MCCB-100-3P-L,"Moulded-case circuit breaker 100 A 3-pole, 80 kA band L, adjustable trip",1,434.0,434.0,0.94,R-MCCB-SELECT,S11 T18
-15,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.94,R-FU-KIT,S11 T18
-16,ISOL-400-4P,Switch-disconnector 400 A 4-pole; feeds kitchen,1,634.4,634.4,0.96,R-ISOL-SELECT,S12 T28 T19
-17,FU-KIT-ISOLATOR,"Outgoing functional unit: compartment door, terminals, labels",1,340,340,0.96,R-FU-KIT,S12 T28 T19
-18,ISOL-160-3P,Switch-disconnector 160 A 3-pole; feeds kitchen,1,205.0,205.0,0.97,R-ISOL-SELECT,S13 T32 T23
-19,FU-KIT-ISOLATOR,"Outgoing functional unit: compartment door, terminals, labels",1,340,340,0.97,R-FU-KIT,S13 T32 T23
-20,MCCB-630-4P-H,"Moulded-case circuit breaker 630 A 4-pole, 65 kA band H, adjustable trip",1,2087.42,2087.42,1.0,R-MCCB-SELECT,S15 T22
-21,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,1.0,R-FU-KIT,S15 T22
-22,MCCB-400-4P-H,"Moulded-case circuit breaker 400 A 4-pole, 65 kA band H, adjustable trip",1,1410.81,1410.81,0.99,R-MCCB-SELECT,S16 T24
-23,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.99,R-FU-KIT,S16 T24
-24,MCCB-400-4P-H,"Moulded-case circuit breaker 400 A 4-pole, 65 kA band H, adjustable trip; feeds lifts",1,1410.81,1410.81,0.97,R-MCCB-SELECT,S17 T34 T25
-25,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.97,R-FU-KIT,S17 T34 T25
-26,MCCB-400-4P-H,"Moulded-case circuit breaker 400 A 4-pole, 65 kA band H, adjustable trip",1,1410.81,1410.81,0.98,R-MCCB-SELECT,S18 T27
-27,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.98,R-FU-KIT,S18 T27
-28,MCCB-250-3P-H,"Moulded-case circuit breaker 250 A 3-pole, 65 kA band H, adjustable trip",1,613.6,613.6,1.0,R-MCCB-SELECT,S21 T37
-29,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,1.0,R-FU-KIT,S21 T37
-30,MCCB-400-4P-H,"Moulded-case circuit breaker 400 A 4-pole, 65 kA band H, adjustable trip",1,1410.81,1410.81,0.99,R-MCCB-SELECT,S24 T48
-31,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.99,R-FU-KIT,S24 T48
-32,MCCB-250-4P-H,"Moulded-case circuit breaker 250 A 4-pole, 65 kA band H, adjustable trip; feeds SB-4",1,748.59,748.59,1.0,R-MCCB-SELECT,S25 T62 T49
-33,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,1.0,R-FU-KIT,S25 T62 T49
-34,MCCB-630-4P-H,"Moulded-case circuit breaker 630 A 4-pole, 65 kA band H, adjustable trip",1,2087.42,2087.42,1.0,R-MCCB-SELECT,S26 T50
-35,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,1.0,R-FU-KIT,S26 T50
-36,MCCB-800-4P-H,"Moulded-case circuit breaker 800 A 4-pole, 65 kA band H, adjustable trip",1,2735.24,2735.24,0.98,R-MCCB-SELECT,S27 T51
-37,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.98,R-FU-KIT,S27 T51
-38,BUSBAR-CU-2000,"Copper busbar set 2000 A (4-bar), 8 sections, about 288 kg",1,3312.0,3312.0,0.9,R-BUSBAR-SIZE,T15 T15
-39,ENC-SECTION,"Enclosure section, Form 3b, IP42, RAL 7035",8,2730.0,21840.0,0.95,R-ENCLOSURE,T64 T64 T66 T68
-40,LAB-ASSY,"Assembly, wiring and routine verification: 300 hours",1,14400,14400,0.9,R-LABOUR,
-41,DOC,"Documentation, as-built drawings, test certificates",1,600,600,1.0,R-DOC,
-42,CERT,Design-verification certificates per specification,1,0.0,0.0,1.0,R-SPEC-CERT,7.7
-43,WITNESS,Witness testing at works (specification),1,1200,1200,1.0,R-SPEC-WITNESS,7.8
-44,DEL,"Delivery to site, crane and offload excluded",1,850,850,1.0,R-DELIVERY,
+1,ACB-2000-4P-H,"Air circuit breaker 2000 A 4-pole, 65 kA band H, withdrawable, electronic trip",1,7054.04,7054.04,0.98,R-ACB-SELECT,S4 T8 T11
+2,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.98,R-FU-KIT,S4 T8 T11
+3,ACB-2000-4P-H,"Air circuit breaker 2000 A 4-pole, 65 kA band H, withdrawable, electronic trip",1,7054.04,7054.04,0.97,R-ACB-SELECT,S5 T9 T12
+4,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.97,R-FU-KIT,S5 T9 T12
+5,ACB-1600-4P-H,"Air circuit breaker 1600 A 4-pole, 65 kA band H, withdrawable, electronic trip",1,6046.32,6046.32,0.97,R-ACB-SELECT,S6 T10
+6,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.97,R-FU-KIT,S6 T10
+7,ATS-CTRL,Automatic transfer switch controller and interlocks,1,1850,1850,0.97,R-ATS,S6 T10
+8,METER-V,Panel meter (V),1,120,120,0.64,R-METERING,S7 S7g1
+9,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.43,R-PROTECTION,S8
+10,CT-SET,"Current transformers 2000/5 A, set of three, class 1",1,280,280,0.97,R-METERING,S9 T13
+11,BSS-2000-4P,"Bus-section switch 2000 A 4-pole, 65 kA",1,4248.0,4248.0,1.0,R-BUS-SECTION,S10 T16
+12,FU-KIT-BS,Bus-section functional unit and interlocking,1,900,900,1.0,R-FU-KIT,S10 T16
+13,MCCB-250-3P-L,"Moulded-case circuit breaker 250 A 3-pole, 80 kA band L, adjustable trip; feeds fan F-5",1,728.0,728.0,0.97,R-MCCB-SELECT,S11 T17 T29 T39
+14,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.97,R-FU-KIT,S11 T17 T29 T39
+15,MCCB-100-3P-L,"Moulded-case circuit breaker 100 A 3-pole, 80 kA band L, adjustable trip; feeds compressor C-6",1,434.0,434.0,0.94,R-MCCB-SELECT,S12 T18 T30 T40
+16,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.94,R-FU-KIT,S12 T18 T30 T40
+17,ISOL-400-4P,Switch-disconnector 400 A 4-pole; feeds kitchen,1,634.4,634.4,0.96,R-ISOL-SELECT,S13 T19 T28 T38
+18,FU-KIT-ISOLATOR,"Outgoing functional unit: compartment door, terminals, labels",1,340,340,0.96,R-FU-KIT,S13 T19 T28 T38
+19,MCCB-630-4P-H,"Moulded-case circuit breaker 630 A 4-pole, 65 kA band H, adjustable trip; feeds UPS input",1,2087.42,2087.42,0.97,R-MCCB-SELECT,S14 T22 T31 T41
+20,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.97,R-FU-KIT,S14 T22 T31 T41
+21,ISOL-160-3P,Switch-disconnector 160 A 3-pole; feeds kitchen,1,205.0,205.0,0.97,R-ISOL-SELECT,S15 T23 T32 T42
+22,FU-KIT-ISOLATOR,"Outgoing functional unit: compartment door, terminals, labels",1,340,340,0.97,R-FU-KIT,S15 T23 T32 T42
+23,MCCB-400-4P-H,"Moulded-case circuit breaker 400 A 4-pole, 65 kA band H, adjustable trip; feeds spare",1,1410.81,1410.81,0.99,R-MCCB-SELECT,S16 T24 T33 T43
+24,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.99,R-FU-KIT,S16 T24 T33 T43
+25,MCCB-400-4P-H,"Moulded-case circuit breaker 400 A 4-pole, 65 kA band H, adjustable trip; feeds lifts",1,1410.81,1410.81,0.97,R-MCCB-SELECT,S17 T25 T34 T44
+26,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.97,R-FU-KIT,S17 T25 T34 T44
+27,ISOL-250-4P,Switch-disconnector 250 A 4-pole; feeds sub-board 13,1,353.8,353.8,0.99,R-ISOL-SELECT,S18 T26 T35 T45
+28,FU-KIT-ISOLATOR,"Outgoing functional unit: compartment door, terminals, labels",1,340,340,0.99,R-FU-KIT,S18 T26 T35 T45
+29,MCCB-400-4P-H,"Moulded-case circuit breaker 400 A 4-pole, 65 kA band H, adjustable trip; feeds spare",1,1410.81,1410.81,0.98,R-MCCB-SELECT,S19 T27 T36 T46
+30,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.98,R-FU-KIT,S19 T27 T36 T46
+31,STARTER-11KW,"Motor starter for 11 kW: contactor, overload relay and control circuit",1,640,640,0.97,R-STARTER,S20 T21
+32,STARTER-55KW,"Motor starter for 55 kW: contactor, overload relay and control circuit",1,2150,2150,1.0,R-STARTER,S21 T20
+33,MCCB-250-3P-H,"Moulded-case circuit breaker 250 A 3-pole, 65 kA band H, adjustable trip; feeds data hall",1,613.6,613.6,0.99,R-MCCB-SELECT,S22 T37 T47 T52
+34,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.99,R-FU-KIT,S22 T37 T47 T52
+35,MCCB-400-4P-H,"Moulded-case circuit breaker 400 A 4-pole, 65 kA band H, adjustable trip; feeds lighting",1,1410.81,1410.81,0.99,R-MCCB-SELECT,S25 T48 T53 T58
+36,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.99,R-FU-KIT,S25 T48 T53 T58
+37,MCCB-250-4P-H,"Moulded-case circuit breaker 250 A 4-pole, 65 kA band H, adjustable trip; feeds sub-board 4",1,748.59,748.59,0.99,R-MCCB-SELECT,S26 T49 T54 T59
+38,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.99,R-FU-KIT,S26 T49 T54 T59
+39,MCCB-630-4P-H,"Moulded-case circuit breaker 630 A 4-pole, 65 kA band H, adjustable trip; feeds data hall",1,2087.42,2087.42,0.99,R-MCCB-SELECT,S27 T50 T55 T60
+40,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.99,R-FU-KIT,S27 T50 T55 T60
+41,MCCB-800-4P-H,"Moulded-case circuit breaker 800 A 4-pole, 65 kA band H, adjustable trip; feeds spare",1,2735.24,2735.24,0.99,R-MCCB-SELECT,S28 T51 T56 T61
+42,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.99,R-FU-KIT,S28 T51 T56 T61
+43,BUSBAR-CU-2000,"Copper busbar set 2000 A (4-bar), 8 sections, about 288 kg",1,3312.0,3312.0,0.9,R-BUSBAR-SIZE,T15 T15
+44,ENC-SECTION,"Enclosure section, Form 3b, IP42, RAL 7035",8,2730.0,21840.0,0.95,R-ENCLOSURE,T64 T64 T66 T68
+45,LAB-ASSY,"Assembly, wiring and routine verification: 304 hours",1,14592,14592,0.9,R-LABOUR,
+46,DOC,"Documentation, as-built drawings, test certificates",1,600,600,1.0,R-DOC,
+47,CERT,Design-verification certificates per specification,1,0.0,0.0,1.0,R-SPEC-CERT,7.7
+48,WITNESS,Witness testing at works (specification),1,1200,1200,1.0,R-SPEC-WITNESS,7.8
+49,DEL,"Delivery to site, crane and offload excluded",1,850,850,1.0,R-DELIVERY,
