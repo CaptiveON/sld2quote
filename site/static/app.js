@@ -99,8 +99,8 @@ function showStep(step, push) {
   $$('.stepper button').forEach(b => { const s = b.dataset.step; b.setAttribute('aria-current', s === step ? 'step' : 'false');
     b.disabled = s === 'run' ? !S.running && step !== 'run' : s === 'results' ? !S.result : false; b.classList.toggle('done', (s === 'choose' && step !== 'choose') || (s === 'run' && step === 'results' && !!S.result)); });
   if (push) syncUrl(true);
-  if (step === 'results') { $('#rtitle').focus({preventScroll: true}); $('#step-results').scrollIntoView({block: 'start'}); }
-  if (step === 'run') $('#step-run').scrollIntoView({block: 'start'});
+  if (step === 'results') $('#rtitle').focus({preventScroll: true});
+  if (step !== 'choose') $('.stepper').scrollIntoView({block: 'start'});  // the stepper, so the highlighted step and the title sit under the header, never beneath it
 }
 function syncUrl(push) {
   const q = new URLSearchParams(); if (S.key && S.key.sample) q.set('sample', S.key.sample); if (S.key && S.key.run) q.set('run', S.key.run);
@@ -353,8 +353,9 @@ async function scorecards() {
 }
 
 // ---------------------------------------------------------------- boot
+function padTop() { document.documentElement.style.scrollPaddingTop = ($('.top').offsetHeight + 8) + 'px'; }  // anchors and scrolls clear the sticky header at any width
 async function boot() {
-  setPill('loading');
+  setPill('loading'); padTop(); window.addEventListener('resize', padTop);
   $$('.nav a').forEach(a => a.addEventListener('click', () => { if (a.getAttribute('href') === '#try') warm(); }));
   $('.hero .btn.primary').addEventListener('click', warm);
   tabs($('#step-choose [role=tablist]'));
