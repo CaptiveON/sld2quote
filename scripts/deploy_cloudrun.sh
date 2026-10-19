@@ -5,17 +5,17 @@
 # .gcloudignore), so nothing is downloaded at start-up. A model switch is two edits: MODEL below and the one weights/
 # line in .gcloudignore (the build stops early if they disagree).
 # Billing is per request (--cpu-throttling): CPU is allocated only while a request is served and while the instance starts.
-# The models load during start-up: /api/health answers 503 until they are warm, and the HTTP startup probe waits for its
-# 200 (every 2 s, for up to 240 s), so the CPU stays on while they load and the instance takes traffic only when ready; a
-# revision whose models fail to load never goes live. At most one instance, scaled to zero when idle; live runs are capped
-# per UTC day (SLD2QUOTE_DAILY_RUNS). gen2: the default gen1 sandbox ran the detector and OCR about half as fast.
+# The instance takes traffic as soon as uvicorn listens (TCP startup probe), so the page answers in seconds from cold; the
+# models load inside the first request that needs them (/api/health, which the page calls when Try it opens; about 20 s),
+# and with --concurrency 8 the page's files and the samples are served while that warm-up or a live run is in flight (the
+# app runs live runs one at a time itself). The health check after the deploy warms the new revision and fails the script
+# if the models do not load. At most one instance, scaled to zero when idle; live runs are capped per UTC day
+# (SLD2QUOTE_DAILY_RUNS). gen2: the default gen1 sandbox ran the detector and OCR about half as fast.
 # Needs gcloud logged in as the owner. Every gcloud call names the project (gc below); nothing here changes gcloud's
 # configuration. After a successful deploy the registry keeps only the deployed image (the free tier stores 0.5 GB).
 set -euo pipefail
 P=sld2quote-demo R=europe-west1 MODEL=rtdetr_r18_full
-PROBE=httpGet.path=/api/health,httpGet.port=7860,periodSeconds=2,timeoutSeconds=1,failureThreshold=120 CONC=1
-# once site/app.py warms the models inside the first request (no start-up thread), the page's files can be served while a
-# run or the warm-up is in flight:   PROBE=tcpSocket.port=7860,periodSeconds=2,timeoutSeconds=1,failureThreshold=120 CONC=8
+PROBE=tcpSocket.port=7860,periodSeconds=2,timeoutSeconds=1,failureThreshold=120 CONC=8
 SA=sld2quote-run@$P.iam.gserviceaccount.com  # runtime identity: no project role and no secret, it only runs the container
 cd "$(dirname "$0")/.."
 TAG=$(git rev-parse --short HEAD)$([ -z "$(git status --porcelain)" ] || echo -dirty)
@@ -39,4 +39,6 @@ KEEP=$(gc artifacts docker images describe "$IMAGE" --format 'value(image_summar
 gc artifacts docker images list "$REPO" --format 'value(package,version)' | while read -r pkg digest; do
   [ "$digest" = "$KEEP" ] || gc artifacts docker images delete "$pkg@$digest" --delete-tags
 done
-gc run services describe sld2quote --region "$R" --format 'value(status.url)'
+URL=$(gc run services describe sld2quote --region "$R" --format 'value(status.url)')
+curl -fsS --max-time 240 "$URL/api/health" >/dev/null || { echo "deployed, but the models did not load: see $URL/api/health" >&2; exit 1; }
+echo "$URL"
