@@ -441,7 +441,7 @@ const C = {
   fit(s, L) { s = String(s); const n = Math.floor((L - 12) / 6.3); return s.length <= n ? s : s.slice(0, Math.max(3, n - 1)) + '\u2026'; },
   rw: labels => Math.max(44, Math.ceil(Math.max(...labels.map(s => String(s).length * 6.6 + 12)))),  // room for the longest value label at 11 px mono, so none is cut at the right edge
 };
-const CS = {scoresSet: 0, typesCopy: 'clean', priceSet: 0};  // the chart controls' state
+const CS = {scoresSet: 0, typesCopy: 'clean', priceSet: 0, trainingAll: 0};  // the chart controls' state
 const MEAS = [['symbol_recall', 'Symbols found'], ['symbol_precision', 'Boxes that were right'], ['rating_accuracy', 'Ratings read right'], ['bom_recall', 'Bill-of-materials lines found'], ['price_error', 'Price error (lower is better)']];
 const SERIES = [['trained', 'clean', 'f-trained', 'Trained, clean'], ['trained', 'scan', 'f-trained f-scan', 'Trained, scan-like'], ['classical', 'clean', 'f-classical', 'Classical, clean'], ['classical', 'scan', 'f-classical f-scan', 'Classical, scan-like']];
 function setButtons(chart, key, items, current) {
@@ -484,7 +484,8 @@ function chartTypes(ch, w) {
     controls: setButtons('types', 'typesCopy', [['clean', 'Clean copies'], ['scan', 'Scan-like copies']], CS.typesCopy)});
 }
 function chartTraining(ch, w) {
-  const runs = (ch.training || []).filter(r => (r.passes || []).length && (r.score || []).length); if (!runs.length) return null;
+  const all = (ch.training || []).filter(r => (r.passes || []).length && (r.score || []).length); if (!all.length) return null;
+  const few = all.filter(r => r.live || r.ema), runs = CS.trainingAll || few.length < 2 ? all : few;  // by default the live model and the averaged-weight runs; the rest behind a toggle
   const L = 46, R = 110, T = 12, B = 34, h = 240, maxP = Math.max(...runs.map(r => Math.max(...r.passes))), ys = runs.flatMap(r => r.score), lo = Math.floor(Math.min(...ys) * 20) / 20, hi = Math.ceil(Math.max(...ys) * 20) / 20;
   const x = C.lin(1, maxP, L, w - R), y = C.lin(lo, hi, h - B, T), yt = C.ticks(lo, hi, 4), xt = C.ticks(1, maxP, Math.min(maxP, 10)).filter(Number.isInteger);
   let g = C.hgrid(y, yt, L, w - R) + C.yaxis(y, yt, L, v => v.toFixed(2)) + C.xaxis(x, xt, h - B, v => String(v)) + C.t((L + w - R) / 2, h - 4, 'pass', 'tick', 'middle');
@@ -492,11 +493,12 @@ function chartTraining(ch, w) {
   const nameOf = r => (r.label || r.run).replace(/\s*\((site|live) model\)\s*$/i, '');  // the data may already say (site model); the legend says it once
   runs.forEach((r, i) => { const k4 = i % 4, cls = r.live ? 'ln-live' : 'ln-run' + k4 + (i >= 4 ? ' ln-alt' : ''), pts = r.passes.map((p, k) => [x(p), y(r.score[k])]);
     g += C.pl(pts, cls + (r.ema ? ' ln-ema' : '')); const bi = r.passes.indexOf(r.best_pass); if (bi >= 0) g += C.dot(x(r.passes[bi]), y(r.score[bi]), 4, 'dot-' + (r.live ? 'live' : 'run' + k4), `${nameOf(r)}: best pass ${r.best_pass}, ${r.score[bi]}`);
-    if (r.live) { const last = pts[pts.length - 1]; g += C.t(last[0] + 6, last[1] + 4, 'live model', 'val'); } legend.push([r.live ? 'sw-live' : 'sw-run' + k4, nameOf(r) + (r.live ? ' (live model)' : '') + (r.ema ? ', averaged weights (dashed)' : '') + (i >= 4 && !r.ema ? ' (dotted)' : '')]); });
+    if (r.live) { const last = pts[pts.length - 1]; g += C.t(last[0] + 6, last[1] + 4, 'live model', 'val'); } legend.push([r.live ? 'sw-live' : 'sw-run' + k4, nameOf(r) + (r.live ? ' (live model)' : '') + (r.ema ? (/EMA|averaged/i.test(nameOf(r)) ? ' (dashed)' : ', averaged weights (dashed)') : '') + (i >= 4 && !r.ema ? ' (dotted)' : '')]); });
   const live = runs.find(r => r.live) || runs[0], metrics = [...new Set(runs.map(r => r.metric).filter(Boolean))];
-  return {title: 'Training runs: the selection score pass by pass', caption: `The score each run was judged by after every pass${metrics.length > 1 ? ` (${metrics.map(m => `${m} for ${runs.filter(r => r.metric === m).map(nameOf).join(', ')}`).join('; ')})` : live.metric ? ` (${live.metric})` : ''}; the live model's line is emphasised, averaged-weight runs are dashed, the chosen pass is dotted. The swings between adjacent passes are why averaged weights are preferred.`,
+  return {title: 'Training runs: the selection score pass by pass', caption: `The score each run was judged by after every pass${metrics.length > 1 ? ` (${metrics.map(m => `${m} for ${all.filter(r => r.metric === m).length} runs`).join('; ')}; the table under Show the numbers names each run's metric)` : live.metric ? ` (${live.metric})` : ''}; the live model's line is emphasised, averaged-weight runs are dashed, the chosen pass is dotted. The swings between adjacent passes are why averaged weights are preferred.`,
+    controls: all.length > few.length && few.length >= 2 ? setButtons('training', 'trainingAll', [[0, 'Live model and averaged-weight runs'], [1, `All ${all.length} runs`]], CS.trainingAll) : '',
     svg: C.svg(w, h, g, `${runs.length} training runs; the live model ${nameOf(live)} peaks at pass ${live.best_pass} with ${Math.max(...live.score)}`), legend: C.legend(legend),
-    table: C.table(['Run', 'Best pass', ...Array.from({length: maxP}, (_, i) => 'pass ' + (i + 1))], runs.map(r => [nameOf(r) + (r.live ? ' (live model)' : ''), r.best_pass, ...Array.from({length: maxP}, (_, i) => { const k = r.passes.indexOf(i + 1); return k < 0 ? '' : r.score[k]; })]))};
+    table: C.table(['Run', 'Metric', 'Best pass', ...Array.from({length: maxP}, (_, i) => 'pass ' + (i + 1))], all.map(r => [nameOf(r) + (r.live ? ' (live model)' : ''), r.metric || '', r.best_pass, ...Array.from({length: maxP}, (_, i) => { const k = r.passes.indexOf(i + 1); return k < 0 ? '' : r.score[k]; })]))};
 }
 function chartThreshold(ch, w) {
   const th = ch.threshold; if (!th || !(th.thresholds || []).length) return null;
