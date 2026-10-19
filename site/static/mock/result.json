@@ -1,0 +1,738 @@
+{
+ "id": "sheet-0104",
+ "source": {
+  "kind": "sample",
+  "title": "Synthetic switchboard, simple board, clean copy (seed 104)",
+  "seed": 104,
+  "level": "simple",
+  "copy": "clean",
+  "has_answer_key": true,
+  "note": ""
+ },
+ "images": {
+  "sheet": "mock/sheet.png",
+  "overlay": "mock/overlay.png"
+ },
+ "size": [
+  1600,
+  1000
+ ],
+ "steps": [
+  {
+   "key": "text",
+   "title": "Read the words",
+   "plain": "Read every piece of text on the sheet: the labels, the busbar rating and the notes box.",
+   "count": 51,
+   "seconds": 3.62
+  },
+  {
+   "key": "symbols",
+   "title": "Find the symbols",
+   "plain": "Found the device symbols with the trained detector, one box per symbol, duplicates removed where the tiles overlap.",
+   "count": 11,
+   "seconds": 1.51
+  },
+  {
+   "key": "labels",
+   "title": "Pair labels with symbols",
+   "plain": "Paired each symbol with the nearest label to its right or below it and read the type, rating, poles and fault rating from the words; took the board's fault level, form and IP from the notes.",
+   "count": 6,
+   "seconds": null
+  },
+  {
+   "key": "spec",
+   "title": "Read the specification and compare",
+   "plain": "Split the specification into clauses, pulled out what each one requires, and compared that with what the drawing says.",
+   "count": 8,
+   "seconds": null
+  },
+  {
+   "key": "price",
+   "title": "Pick parts and price",
+   "plain": "Chose a catalogue part for every device by fixed rules inside the board's fault level, added busbars, enclosure, labour and documents, and wrote the quotation with the evidence behind each line.",
+   "count": 18,
+   "seconds": null
+  }
+ ],
+ "devices": [
+  {
+   "id": "D1",
+   "type": "TRANSFORMER",
+   "type_plain": "Transformer",
+   "rating": 2500,
+   "unit": "kVA",
+   "poles": null,
+   "kA": null,
+   "dest": null,
+   "conf": 0.55,
+   "score": 0.55,
+   "box": [
+    197,
+    70,
+    45,
+    71
+   ],
+   "label": "11 kV / 415 V | TX-1 2500 kVA"
+  },
+  {
+   "id": "D2",
+   "type": "ACB",
+   "type_plain": "Air circuit breaker (incomer)",
+   "rating": 1600,
+   "unit": "A",
+   "poles": 3,
+   "kA": 36,
+   "dest": null,
+   "conf": 0.29,
+   "score": 0.29,
+   "box": [
+    206,
+    199,
+    19,
+    36
+   ],
+   "label": "ACB-1 1600 A 3P | Icu 36 kA, withdrawable"
+  },
+  {
+   "id": "D3",
+   "type": "METER",
+   "type_plain": "Meter",
+   "rating": null,
+   "unit": "",
+   "poles": null,
+   "kA": null,
+   "dest": null,
+   "conf": 0.57,
+   "score": 0.57,
+   "box": [
+    256,
+    285,
+    22,
+    23
+   ],
+   "label": "CT 1600/5A | BAR A 1600 A Cu 36 kA/1s"
+  },
+  {
+   "id": "D4",
+   "type": "CT",
+   "type_plain": "Current transformer",
+   "rating": 1600,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": null,
+   "conf": 0.32,
+   "score": 0.32,
+   "box": [
+    211,
+    288,
+    18,
+    18
+   ],
+   "label": "kV | BUSBAR A 1600 A Cu 36 kA/1s"
+  },
+  {
+   "id": "D5",
+   "type": "MCCB",
+   "type_plain": "Moulded-case circuit breaker",
+   "rating": null,
+   "unit": "A",
+   "poles": null,
+   "kA": null,
+   "dest": "fan F-2",
+   "conf": 0.58,
+   "score": 0.58,
+   "box": [
+    577,
+    498,
+    17,
+    31
+   ],
+   "label": "fan F-2 | DOL 15 kW"
+  },
+  {
+   "id": "D6",
+   "type": "MCCB",
+   "type_plain": "Moulded-case circuit breaker",
+   "rating": 100,
+   "unit": "A",
+   "poles": null,
+   "kA": 65,
+   "dest": "SPD Type 1+2",
+   "conf": 0.23,
+   "score": 0.23,
+   "box": [
+    968,
+    499,
+    14,
+    29
+   ],
+   "label": "SPD Type 1+2 | MCCB 100 A \u0417P 65 kA"
+  },
+  {
+   "id": "D7",
+   "type": "ISOLATOR",
+   "type_plain": "Switch-disconnector",
+   "rating": 160,
+   "unit": "A",
+   "poles": 3,
+   "kA": null,
+   "dest": "lifts",
+   "conf": 0.62,
+   "score": 0.62,
+   "box": [
+    189,
+    519,
+    17,
+    28
+   ],
+   "label": "lifts | ISOL 160 A 3P"
+  },
+  {
+   "id": "D8",
+   "type": "CONTACTOR",
+   "type_plain": "Contactor (motor starter)",
+   "rating": null,
+   "unit": "kW",
+   "poles": null,
+   "kA": null,
+   "dest": null,
+   "conf": 0.66,
+   "score": 0.66,
+   "box": [
+    577,
+    538,
+    18,
+    33
+   ],
+   "label": "fan F-2 | DOL 15 kW"
+  },
+  {
+   "id": "D9",
+   "type": "SPD",
+   "type_plain": "Surge protective device",
+   "rating": null,
+   "unit": "",
+   "poles": null,
+   "kA": null,
+   "dest": null,
+   "conf": 0.27,
+   "score": 0.27,
+   "box": [
+    969,
+    541,
+    18,
+    27
+   ],
+   "label": "SPD Type 1+2"
+  },
+  {
+   "id": "D10",
+   "type": "MCCB",
+   "type_plain": "Moulded-case circuit breaker",
+   "rating": 800,
+   "unit": "A",
+   "poles": 4,
+   "kA": null,
+   "dest": "sub-board 4",
+   "conf": 0.17,
+   "score": 0.17,
+   "box": [
+    1356,
+    549,
+    17,
+    28
+   ],
+   "label": "sub-board 4 | MCCB 800 A 4P"
+  },
+  {
+   "id": "D11",
+   "type": "EARTH",
+   "type_plain": "Earth",
+   "rating": null,
+   "unit": "",
+   "poles": null,
+   "kA": null,
+   "dest": null,
+   "conf": 0.14,
+   "score": 0.14,
+   "box": [
+    965,
+    577,
+    24,
+    20
+   ],
+   "label": ""
+  }
+ ],
+ "board": {
+  "fault_kA": 36,
+  "form": "Form 4 Type 2",
+  "ip": "IP31",
+  "poles_default": 3,
+  "busbar_rating": 1600,
+  "sections": 2,
+  "ways": 3
+ },
+ "bom": {
+  "lines": [
+   {
+    "line": 1,
+    "part": "ACB-1600-3P-N",
+    "description": "Air circuit breaker 1600 A 3-pole, 36 kA band N, withdrawable, electronic trip",
+    "qty": 1,
+    "unit_gbp": 4200.0,
+    "total_gbp": 4200.0,
+    "conf": 0.29,
+    "evidence": [
+     "S2",
+     "S2t1",
+     "S2t2"
+    ],
+    "rule": "R-ACB-SELECT"
+   },
+   {
+    "line": 2,
+    "part": "FU-KIT-ACB",
+    "description": "Incomer functional unit: compartment, shutters, terminals, controls",
+    "qty": 1,
+    "unit_gbp": 1400,
+    "total_gbp": 1400,
+    "conf": 0.29,
+    "evidence": [
+     "S2",
+     "S2t1",
+     "S2t2"
+    ],
+    "rule": "R-FU-KIT"
+   },
+   {
+    "line": 3,
+    "part": "METER-CT 1600/5A | BAR A 1600 A Cu 36 kA/1s",
+    "description": "Panel meter (CT 1600/5A | BAR A 1600 A Cu 36 kA/1s)",
+    "qty": 1,
+    "unit_gbp": 260,
+    "total_gbp": 260,
+    "conf": 0.57,
+    "evidence": [
+     "S3",
+     "S3t2",
+     "S3t3"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 4,
+    "part": "CT-SET",
+    "description": "Current transformers 1600/5 A, set of three, class 1",
+    "qty": 1,
+    "unit_gbp": 280,
+    "total_gbp": 280,
+    "conf": 0.32,
+    "evidence": [
+     "S4",
+     "S4t1",
+     "S4t3"
+    ],
+    "rule": "R-METERING"
+   },
+   {
+    "line": 5,
+    "part": "MCCB-100-3P-H",
+    "description": "Moulded-case circuit breaker 100 A 3-pole, 65 kA band H, adjustable trip; feeds SPD Type 1+2",
+    "qty": 1,
+    "unit_gbp": 365.8,
+    "total_gbp": 365.8,
+    "conf": 0.23,
+    "evidence": [
+     "S6",
+     "S6t2",
+     "S6t1"
+    ],
+    "rule": "R-MCCB-SELECT"
+   },
+   {
+    "line": 6,
+    "part": "FU-KIT-MCCB",
+    "description": "Outgoing functional unit: compartment door, terminals, labels",
+    "qty": 1,
+    "unit_gbp": 420,
+    "total_gbp": 420,
+    "conf": 0.23,
+    "evidence": [
+     "S6",
+     "S6t2",
+     "S6t1"
+    ],
+    "rule": "R-FU-KIT"
+   },
+   {
+    "line": 7,
+    "part": "ISOL-160-3P",
+    "description": "Switch-disconnector 160 A 3-pole; feeds lifts",
+    "qty": 1,
+    "unit_gbp": 205.0,
+    "total_gbp": 205.0,
+    "conf": 0.62,
+    "evidence": [
+     "S7",
+     "S7t2",
+     "S7t1"
+    ],
+    "rule": "R-ISOL-SELECT"
+   },
+   {
+    "line": 8,
+    "part": "FU-KIT-ISOLATOR",
+    "description": "Outgoing functional unit: compartment door, terminals, labels",
+    "qty": 1,
+    "unit_gbp": 340,
+    "total_gbp": 340,
+    "conf": 0.62,
+    "evidence": [
+     "S7",
+     "S7t2",
+     "S7t1"
+    ],
+    "rule": "R-FU-KIT"
+   },
+   {
+    "line": 9,
+    "part": "SPD-T12",
+    "description": "Surge protective device, Type 1+2, with status indication",
+    "qty": 1,
+    "unit_gbp": 690,
+    "total_gbp": 690,
+    "conf": 0.27,
+    "evidence": [
+     "S9",
+     "S9t2"
+    ],
+    "rule": "R-SPD"
+   },
+   {
+    "line": 10,
+    "part": "MCCB-800-4P-N",
+    "description": "Moulded-case circuit breaker 800 A 4-pole, 36 kA band N, adjustable trip; feeds sub-board 4",
+    "qty": 1,
+    "unit_gbp": 2318.0,
+    "total_gbp": 2318.0,
+    "conf": 0.17,
+    "evidence": [
+     "S10",
+     "S10t2",
+     "S10t1"
+    ],
+    "rule": "R-MCCB-SELECT"
+   },
+   {
+    "line": 11,
+    "part": "FU-KIT-MCCB",
+    "description": "Outgoing functional unit: compartment door, terminals, labels",
+    "qty": 1,
+    "unit_gbp": 420,
+    "total_gbp": 420,
+    "conf": 0.17,
+    "evidence": [
+     "S10",
+     "S10t2",
+     "S10t1"
+    ],
+    "rule": "R-FU-KIT"
+   },
+   {
+    "line": 12,
+    "part": "BUSBAR-CU-1600",
+    "description": "Copper busbar set 1600 A (4-bar), 2 sections, about 58 kg",
+    "qty": 1,
+    "unit_gbp": 662.4,
+    "total_gbp": 662.4,
+    "conf": 0.9,
+    "evidence": [
+     "T6"
+    ],
+    "rule": "R-BUSBAR-SIZE"
+   },
+   {
+    "line": 13,
+    "part": "ENC-SECTION",
+    "description": "Enclosure section, Form 4 Type 2, IP31, RAL 7035",
+    "qty": 2,
+    "unit_gbp": 2912.0,
+    "total_gbp": 5824.0,
+    "conf": 0.95,
+    "evidence": [
+     "T10",
+     "T10",
+     "T11",
+     "T12"
+    ],
+    "rule": "R-ENCLOSURE"
+   },
+   {
+    "line": 14,
+    "part": "LAB-ASSY",
+    "description": "Assembly, wiring and routine verification: 89 hours",
+    "qty": 1,
+    "unit_gbp": 4272,
+    "total_gbp": 4272,
+    "conf": 0.9,
+    "evidence": [],
+    "rule": "R-LABOUR"
+   },
+   {
+    "line": 15,
+    "part": "DOC",
+    "description": "Documentation, as-built drawings, test certificates",
+    "qty": 1,
+    "unit_gbp": 600,
+    "total_gbp": 600,
+    "conf": 1.0,
+    "evidence": [],
+    "rule": "R-DOC"
+   },
+   {
+    "line": 16,
+    "part": "CERT",
+    "description": "Design-verification certificates per specification",
+    "qty": 1,
+    "unit_gbp": 0.0,
+    "total_gbp": 0.0,
+    "conf": 1.0,
+    "evidence": [
+     "7.7"
+    ],
+    "rule": "R-SPEC-CERT"
+   },
+   {
+    "line": 17,
+    "part": "WITNESS",
+    "description": "Witness testing at works (specification)",
+    "qty": 1,
+    "unit_gbp": 1200,
+    "total_gbp": 1200,
+    "conf": 1.0,
+    "evidence": [
+     "7.8"
+    ],
+    "rule": "R-SPEC-WITNESS"
+   },
+   {
+    "line": 18,
+    "part": "DEL",
+    "description": "Delivery to site, crane and offload excluded",
+    "qty": 1,
+    "unit_gbp": 850,
+    "total_gbp": 850,
+    "conf": 1.0,
+    "evidence": [],
+    "rule": "R-DELIVERY"
+   }
+  ],
+  "subtotal_gbp": 24307.2,
+  "margin_gbp": 3646.08,
+  "total_gbp": 27953.28
+ },
+ "issues": [
+  {
+   "kind": "missing",
+   "what": "D5 (MCCB): rating not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S5",
+    "S5t3",
+    "S5t2"
+   ]
+  },
+  {
+   "kind": "missing",
+   "what": "D8 (CONTACTOR): kW not read",
+   "action": "read from drawing / schedule",
+   "evidence": [
+    "S8",
+    "S8t3",
+    "S8t2"
+   ]
+  },
+  {
+   "kind": "conflict",
+   "what": "fault_kA: drawing says 36, specification clause 7.3 says 80",
+   "action": "clarify with the consultant before order; priced to the drawing",
+   "evidence": [
+    "T10",
+    "T10",
+    "T11",
+    "T12",
+    "7.3"
+   ]
+  },
+  {
+   "kind": "conflict",
+   "what": "form: drawing says Form 4 Type 2, specification clause 7.2 says Form 4 Type 7",
+   "action": "clarify with the consultant before order; priced to the drawing",
+   "evidence": [
+    "T10",
+    "T10",
+    "T11",
+    "T12",
+    "7.2"
+   ]
+  },
+  {
+   "kind": "low_confidence",
+   "what": "devices read with low confidence: D1, D2, D3, D4, D5, D6, D9, D10, D11",
+   "action": "check against the drawing",
+   "evidence": [
+    "D1",
+    "D2",
+    "D3",
+    "D4",
+    "D5",
+    "D6",
+    "D9",
+    "D10",
+    "D11"
+   ]
+  }
+ ],
+ "conflicts": [
+  {
+   "field": "fault_kA",
+   "drawing": 36,
+   "spec": 80,
+   "spec_clause": "7.3"
+  },
+  {
+   "field": "form",
+   "drawing": "Form 4 Type 2",
+   "spec": "Form 4 Type 7",
+   "spec_clause": "7.2"
+  }
+ ],
+ "spec": {
+  "clauses": [
+   {
+    "id": "7.1",
+    "text": "The switchboard shall be designed, manufactured and verified in accordance with BS EN IEC 61439-2:2021."
+   },
+   {
+    "id": "7.2",
+    "text": "Internal separation shall be Form 4 Type 7 as defined in the UK National Annex."
+   },
+   {
+    "id": "7.3",
+    "text": "The assembly shall withstand a prospective short-circuit current of 80 kA for 1 second at the main busbars."
+   },
+   {
+    "id": "7.4",
+    "text": "Outgoing moulded-case circuit breakers shall be 3-pole with adjustable thermal-magnetic or electronic trip units."
+   },
+   {
+    "id": "7.5",
+    "text": "Degree of protection shall be not less than IP31 with doors closed."
+   },
+   {
+    "id": "7.6",
+    "text": "Main busbars shall be hard-drawn high-conductivity copper, tin-plated at joints."
+   },
+   {
+    "id": "7.7",
+    "text": "The contractor shall provide type-test or design-verification certificates prior to manufacture."
+   },
+   {
+    "id": "7.8",
+    "text": "Witness testing at the manufacturer's works shall be allowed for."
+   }
+  ]
+ },
+ "score": {
+  "symbols_total": 12,
+  "symbols_found": 11,
+  "symbols_reported": 11,
+  "precision": 1.0,
+  "recall": 0.917,
+  "per_type": [
+   {
+    "type": "TRANSFORMER",
+    "total": 1,
+    "found": 1,
+    "reported": 1
+   },
+   {
+    "type": "ACB",
+    "total": 1,
+    "found": 1,
+    "reported": 1
+   },
+   {
+    "type": "CT",
+    "total": 1,
+    "found": 1,
+    "reported": 1
+   },
+   {
+    "type": "METER",
+    "total": 1,
+    "found": 1,
+    "reported": 1
+   },
+   {
+    "type": "ISOLATOR",
+    "total": 1,
+    "found": 1,
+    "reported": 1
+   },
+   {
+    "type": "MCCB",
+    "total": 3,
+    "found": 3,
+    "reported": 3
+   },
+   {
+    "type": "CONTACTOR",
+    "total": 1,
+    "found": 1,
+    "reported": 1
+   },
+   {
+    "type": "MOTOR",
+    "total": 1,
+    "found": 0,
+    "reported": 0
+   },
+   {
+    "type": "SPD",
+    "total": 1,
+    "found": 1,
+    "reported": 1
+   },
+   {
+    "type": "EARTH",
+    "total": 1,
+    "found": 1,
+    "reported": 1
+   }
+  ],
+  "reference_total_gbp": 29597.78,
+  "price_error": 0.056,
+  "rating_accuracy": 0.818,
+  "notes_accuracy": 1.0
+ },
+ "timing": {
+  "total": 5.25,
+  "ocr": 3.62,
+  "detector": 1.51
+ },
+ "reader": "trained",
+ "engine": "vision",
+ "model": {
+  "weights": "weights/rtdetr_r18_full",
+  "threshold": 0.11
+ },
+ "files": {
+  "quotation_md": "mock/quotation.md",
+  "bom_csv": "mock/bom.csv",
+  "review_html": "mock/review.html",
+  "extraction_json": "mock/extraction.json"
+ }
+}
