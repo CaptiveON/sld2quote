@@ -336,10 +336,13 @@ function enginesHtml(md) {
   return `<table class="kv"><thead><tr><th>Engine</th><th>Labels and notes</th><th class="n">s per sheet</th></tr></thead><tbody>${rows.map(r => `<tr><th scope="row">${esc(r[0])}${r[0] === chosen ? ' <span class="tag ok">chosen</span>' : ''}</th><td>${bar(r[4])}<span class="mono small">${pct(r[4])}</span></td><td class="n mono small">${esc(r[6])}</td></tr>`).join('')}</tbody></table><p class="foot">Vision is the Mac's built-in reader and the reference; it does not run on Linux, where the server lives.</p>`;
 }
 function runsHtml(md) {
-  const live = liveModel().run, tag = liveTag(), out = []; let wrong = '';
+  const lm = liveModel(), live = lm.run, tag = liveTag(), out = []; let wrong = '';
   for (const sec of md.split(/\n(?=## )/)) { const h = sec.match(/^## (.+?) \(`weights\/(\w+)`\)/); if (!h) continue;
-    const row = sec.match(/\| test_unseen \| (\d+) \| with NMS \| ([\d.]+) \| ([\d.]+) \| [^|]+\| ([\d.]+) \|/), rule = sec.match(/Size rule: (\d+) of (\d+) classes pass/), pass = sec.match(/best pass's weights, epoch (\d+)/);
-    if (!row) continue; const isLive = h[2] === live; if (isLive) wrong = (sec.match(/What it still gets wrong: ([^\n]+)/) || [])[1] || '';
+    const isLive = h[2] === live, dp = isLive && lm.pass, cell = '\\| (\\d+) \\| with NMS \\| ([\\d.]+) \\| ([\\d.]+) \\| [^|]+\\| ([\\d.]+) \\|';
+    const liveRow = dp && sec.match(new RegExp('\\| test_unseen, pass ' + dp + ', the site model[^|]*' + cell));  // the deployed pass's own per-tile row, when the summary carries it
+    const row = liveRow || sec.match(new RegExp('\\| test_unseen ' + cell)), rule = (dp && sec.match(new RegExp('Size rule for pass ' + dp + '[^:]*: (\\d+) of (\\d+) classes pass'))) || sec.match(/Size rule: (\d+) of (\d+) classes pass/);
+    const best = sec.match(/best pass's weights, epoch (\d+)/), pass = liveRow ? [null, dp + ', the deployed pass'] : best;
+    if (!row) continue; if (isLive) wrong = (sec.match(/What it still gets wrong: ([^\n]+)/) || [])[1] || '';
     out.push(`<tr><th scope="row">${esc(h[2])}${isLive ? ` <span class="tag ok">${esc(tag)}</span>` : ''}<br><small class="muted">${esc(h[1])}</small></th><td class="n mono small">${esc(pass ? pass[1] : '')}</td><td>${bar(row[2])}<span class="mono small">${esc(row[2])}</span></td><td class="n mono small">${pct(row[3])}</td><td class="n mono small">${pct(row[4])}</td><td class="n mono small">${rule ? `${rule[1]} of ${rule[2]}` : ''}</td></tr>`); }
   $('#wrong').textContent = wrong || 'See the full record below.';
   return out.length ? `<table class="kv"><thead><tr><th>Run</th><th class="n">Best pass</th><th>mAP@0.5</th><th class="n">Precision</th><th class="n">Recall</th><th class="n">Classes passing</th></tr></thead><tbody>${out.join('')}</tbody></table>` : '';
