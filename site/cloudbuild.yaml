@@ -1,0 +1,7 @@
+# The site image from the repo root with site/Dockerfile (gcloud builds submit has no --dockerfile flag); run by
+# scripts/deploy_cloudrun.sh with --substitutions _IMAGE=europe-west1-docker.pkg.dev/sld2quote-demo/sld2quote/site:<tag>
+steps:
+- name: gcr.io/cloud-builders/docker
+  args: [build, -f, site/Dockerfile, -t, $_IMAGE, .]
+images: [$_IMAGE]
+timeout: 1800s

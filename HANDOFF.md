@@ -399,6 +399,19 @@ switch the site to r18_plain_ema at 0.08 (fewer invented parts for 0.002 of F1);
 Cloud Run URL review, front-end review, README AI sentence [CONFIRM], CITATION name split (Muhammad / Adnan), the go-public checklist
 (model repo public or a read token in the secret, GitHub repo public, README "Live demo" URL).
 
+**State at 01:15, 19 Oct.** Live on Cloud Run: https://sld2quote-500318073364.europe-west1.run.app (revision 00003, image
+site:24729b6-dirty, gen2, CPU always on, runtime account `sld2quote-run` with access to the secret only; checked from outside: page,
+34 samples, scorecards, generate 48 s for a medium sheet, upload 16 to 18 s, warm 20 s after a cold start; redeploy with
+`scripts/deploy_cloudrun.sh`, committed with `site/cloudbuild.yaml` and `.gcloudignore`; README "Live demo" filled). HF static fallback
+https://huggingface.co/spaces/itsmoadnan/sld2quote-samples (private). Adnan's decision at 01:05: the site stays on `rtdetr_r18_full`;
+the plain EMA training is to finish, and when it has certainly ended he gets the report and selects the model. `rtdetr_r18_plain_ema`
+itself ended by its cap of 10 passes (best pass 8; passes 9 and 10 did not improve); the fixed repeat `rtdetr_r18_plain_ema_fix`
+(same recipe with the MPS fix, patience 3, cap 10, then the auto-resume) is queued behind run 4 and should end around 10:00 if the Mac
+stays free, with the drawing-level comparison about an hour after. Open for Adnan after his review of the page: `--concurrency 4`
+(pages stay responsive during a run), health 503 until warm with a startup probe to return to per-request billing, the page's "10 to 25
+seconds" wording (measured 16 to 18 s for an upload, 48 to 51 s for a medium generated sheet), a read-only HF token in the secret, a
+budget alert on the billing account, the go-public checklist.
+
 ## 8. Metrics (as implemented in `evaluate.py`; keep the names)
 
 symbol precision and recall (IoU >= 0.3, same type); rating accuracy, poles accuracy, kA accuracy over matched devices; notes accuracy over

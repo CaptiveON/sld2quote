@@ -1,0 +1,17 @@
+# What gcloud builds submit uploads (scripts/deploy_cloudrun.sh): only what site/Dockerfile copies into the image, since
+# this upload is the build context. Everything is out unless named below.
+/*
+!/site/
+!/sld2quote/
+!/assets/
+!/eval/
+/eval/*
+!/eval/*.md
+!/docs/
+/docs/*
+!/docs/PROBLEMS.md
+!/data/
+/data/*
+!/data/preview/
+__pycache__/
+.DS_Store

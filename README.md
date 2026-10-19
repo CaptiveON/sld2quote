@@ -7,7 +7,9 @@ check, and measures every step against an answer key. It was built as evidence f
 small: every drawing it was trained and scored on is synthetic, drawn by its own generator; the catalogue, part
 numbers and prices are invented; nothing in it comes from R&B.
 
-Live demo: <Space URL>
+Live demo: https://sld2quote-500318073364.europe-west1.run.app (one page: try it on precomputed samples, a freshly generated drawing or your own upload; how it
+works, with the scorecards; the road map of the real project). It runs on Google Cloud Run and sleeps when nobody visits, so the first
+visit takes about 20 seconds to wake it; a run then takes 16 to 50 seconds depending on the drawing.
 
 ![The review page for a synthetic drawing the detector never saw](docs/review-sheet-1007.png)
 *The review page (`review.html`) for a synthetic drawing the detector never saw (`sheet-1007`, trained reader): each

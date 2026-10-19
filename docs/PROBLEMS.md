@@ -324,3 +324,19 @@ have no label of their own.
 form the way's label block, the block goes to the way with the shortest edge-to-edge gap, and each line is routed to a device by what it
 says. The generator records which device each text was drawn for, so the link gets its own precision and recall. The real project replaces
 the rule with a learned link model trained on estimators' corrections.
+
+## 21. Putting the demo on a server that sleeps
+
+**What happened.** The free Hugging Face plan refused a Docker Space (payment required), so the site went to Google Cloud Run, which
+charges nothing while nobody visits. Three things bit on the first deployment. The default sandbox ran the detector and the text reader
+about ten times slower than a laptop core (95 seconds for one generated drawing); the second-generation runtime halves that. The server
+loads its models in a background thread when it starts, and Cloud Run gives a container processor time only while it is answering a
+request, so that thread was starved and took 171 seconds to be ready; with the processor kept on it is ready in 20 to 24 seconds, at the
+price of being billed for the whole time the instance is awake (about 16 minutes per visit, which the free allowance covers for roughly
+110 visits a month). The token the server uses to fetch the private model was the owner's write token for every repository; it should be
+a read-only token for that one model. The service now runs under its own account that can reach nothing but that token.
+
+**What a real deployment does differently.** A readiness probe (the health check answering "not yet" until the models are loaded) lets
+the platform keep the processor on only during start-up and go back to per-request billing; a copy of the model baked into the image
+removes the token altogether; a few requests at a time keep the page responsive while a run is in progress; and a budget alert on the
+billing account catches a demo that something keeps awake around the clock.
