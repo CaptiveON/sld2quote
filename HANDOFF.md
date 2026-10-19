@@ -515,7 +515,7 @@ references R&B's drawings, parts or prices. Synthetic is said out loud in every 
 
 ## 10. Open items for Adnan
 
-1. README AI-assistance wording (current placeholder: "written with AI coding agents as implementation tools under the author's direction and tests").
+1. README AI-assistance wording: settled by Adnan on 19 Oct ("keep it but lean more on myself: I designed, researched and planned the architecture and used LLM tools to help organise and automate the work; no grades"): the author designed, researched and planned the project and its architecture, took every decision and reviewed every result; AI coding tools wrote code, tests and documents to the author's direction. The same sentence, in the first person, goes on the site; no degree grades anywhere.
 2. LICENSE: MIT in Adnan's name, or another.
 3. When the repository goes public and whether the link goes into form answer Q6 / Link 4 (only if Phases 1 to 4 and 6 are done by 22 Oct).
 4. Whether to request the PETRONAS/Mahidol SLD data from a Salford address after joining.

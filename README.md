@@ -276,9 +276,9 @@ the drawings in `data/real/sheets/` are public domain; dependencies and download
 
 ## AI assistance
 
-Written with AI coding agents (Claude, by Anthropic) as implementation tools: they wrote the code, tests and documents
-under the author's direction, and the author set the scope and the plan, took the decisions, set the acceptance tests and
-reviewed the results. [CONFIRM wording with the author]
+The author designed, researched and planned this project and its architecture, took every decision in it and reviewed every
+result. AI coding tools (Claude, by Anthropic) wrote code, tests and documents to the author's direction, which is what let one
+person build and measure it in days.
 
 ## More detail
 
