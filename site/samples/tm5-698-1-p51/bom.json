@@ -20,7 +20,7 @@
     "S9"
    ],
    "rule": "R-METERING",
-   "conf": 0.07,
+   "conf": 0.38,
    "basis": ""
   },
   {
@@ -34,7 +34,7 @@
     "S10"
    ],
    "rule": "R-METERING",
-   "conf": 0.1,
+   "conf": 0.48,
    "basis": ""
   },
   {
@@ -173,7 +173,7 @@
   },
   {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D1, D2, D3, D4, D5, D6, D7, D8, D9, D10",
+   "what": "devices read with low confidence: D1, D2, D3, D4, D5, D6, D9, D10",
    "action": "check against the drawing",
    "evidence": [
     "D1",
@@ -182,8 +182,6 @@
     "D4",
     "D5",
     "D6",
-    "D7",
-    "D8",
     "D9",
     "D10"
    ]

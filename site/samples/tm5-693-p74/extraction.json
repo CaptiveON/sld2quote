@@ -499,7 +499,8 @@
     42,
     26
    ],
-   "shape_score": 0.12
+   "score": 0.12,
+   "shape_score": 0.75
   },
   {
    "id": "S2",
@@ -510,7 +511,8 @@
     32,
     25
    ],
-   "shape_score": 0.17
+   "score": 0.17,
+   "shape_score": 0.93
   },
   {
    "id": "S3",
@@ -521,7 +523,8 @@
     18,
     13
    ],
-   "shape_score": 0.11
+   "score": 0.11,
+   "shape_score": 0.75
   },
   {
    "id": "S4",
@@ -532,7 +535,8 @@
     17,
     33
    ],
-   "shape_score": 0.13
+   "score": 0.13,
+   "shape_score": 0.75
   },
   {
    "id": "S5",
@@ -543,7 +547,8 @@
     18,
     14
    ],
-   "shape_score": 0.15
+   "score": 0.15,
+   "shape_score": 0.75
   },
   {
    "id": "S6",
@@ -554,7 +559,8 @@
     42,
     25
    ],
-   "shape_score": 0.16
+   "score": 0.16,
+   "shape_score": 0.93
   },
   {
    "id": "S7",
@@ -565,7 +571,8 @@
     38,
     28
    ],
-   "shape_score": 0.16
+   "score": 0.16,
+   "shape_score": 0.93
   },
   {
    "id": "S8",
@@ -576,7 +583,8 @@
     61,
     7
    ],
-   "shape_score": 0.11
+   "score": 0.11,
+   "shape_score": 0.75
   }
  ],
  "devices": [
@@ -590,7 +598,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.06,
+   "conf": 0.38,
+   "score": 0.12,
    "type": "CONTACTOR",
    "rating": null,
    "on_bus": null,
@@ -607,7 +616,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.09,
+   "conf": 0.47,
+   "score": 0.17,
    "type": "CONTACTOR",
    "rating": null,
    "on_bus": null,
@@ -624,7 +634,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.06,
+   "conf": 0.38,
+   "score": 0.11,
    "type": "CT",
    "rating": null,
    "on_bus": null,
@@ -641,7 +652,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.07,
+   "conf": 0.38,
+   "score": 0.13,
    "type": "ACB",
    "rating": null,
    "poles": null,
@@ -660,7 +672,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.07,
+   "conf": 0.38,
+   "score": 0.15,
    "type": "ACB",
    "rating": null,
    "poles": null,
@@ -679,7 +692,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.08,
+   "conf": 0.47,
+   "score": 0.16,
    "type": "CONTACTOR",
    "rating": null,
    "on_bus": null,
@@ -696,7 +710,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.08,
+   "conf": 0.47,
+   "score": 0.16,
    "type": "ISOLATOR",
    "rating": null,
    "poles": null,
@@ -718,7 +733,8 @@
     "T32"
    ],
    "label": "COMPUTER LOADS ONLY",
-   "conf": 0.11,
+   "conf": 0.75,
+   "score": 0.11,
    "type": "EARTH",
    "rating": null,
    "on_bus": null,
@@ -734,21 +750,23 @@
   "evidence": []
  },
  "crops": false,
+ "ocr_engine": "rapidocr",
  "reader": "trained",
  "seconds": {
-  "total": 15.26,
-  "ocr": 8.42,
-  "detector": 6.57
+  "total": 9.65,
+  "ocr": 4.95,
+  "detector": 4.55
  },
  "detector": {
   "weights": "weights/rtdetr_r18_full",
   "device": "cpu",
-  "threads": 4,
+  "threads": 2,
   "score_threshold": 0.11,
   "score_threshold_source": "drawing",
   "nms_iou": 0.5,
   "merge_iou": 0.5,
   "edge_px": 2,
-  "contain": 0.8
+  "contain": 0.8,
+  "calibrated": true
  }
 }

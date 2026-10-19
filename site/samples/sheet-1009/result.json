@@ -22,21 +22,21 @@
    "key": "text",
    "title": "Read the words",
    "count": 30,
-   "seconds": 3.59,
-   "plain": "Read 30 pieces of text in 3.59 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 3.01,
+   "plain": "Read 30 pieces of text in 3.01 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
    "count": 13,
-   "seconds": 2.75,
-   "plain": "Found 13 symbols in 2.75 s: 4 outgoing moulded-case breakers, 2 panel meters, 2 current transformers, 1 generator, 1 transformer, 1 bus-section switch, 1 surge protector, 1 earth. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "seconds": 2.4,
+   "plain": "Found 13 symbols in 2.4 s: 4 outgoing moulded-case breakers, 2 panel meters, 2 current transformers, 1 generator, 1 transformer, 1 bus-section switch, 1 surge protector, 1 earth. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
    "count": 9,
-   "seconds": 0.21,
+   "seconds": 0.11,
    "plain": "Paired 9 of 13 symbols with the label text beside them; 4 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
@@ -64,7 +64,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.59,
+   "conf": 0.99,
+   "score": 0.59,
    "box": [
     1356,
     66,
@@ -83,6 +84,7 @@
    "kA": null,
    "dest": "",
    "conf": 0.96,
+   "score": 0.98,
    "box": [
     198,
     69,
@@ -100,7 +102,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.49,
+   "conf": 1.0,
+   "score": 0.49,
    "box": [
     1415,
     281,
@@ -118,7 +121,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.59,
+   "conf": 1.0,
+   "score": 0.59,
    "box": [
     254,
     283,
@@ -136,7 +140,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.21,
+   "conf": 0.5,
+   "score": 0.42,
    "box": [
     211,
     284,
@@ -154,7 +159,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.2,
+   "conf": 0.5,
+   "score": 0.4,
    "box": [
     1370,
     284,
@@ -172,7 +178,8 @@
    "poles": null,
    "kA": 50,
    "dest": "",
-   "conf": 0.14,
+   "conf": 0.75,
+   "score": 0.14,
    "box": [
     787,
     387,
@@ -190,7 +197,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.17,
+   "conf": 0.5,
+   "score": 0.33,
    "box": [
     1389,
     499,
@@ -208,7 +216,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.13,
+   "conf": 0.75,
+   "score": 0.13,
    "box": [
     1391,
     536,
@@ -226,7 +235,8 @@
    "poles": 3,
    "kA": null,
    "dest": "MCCB 4b0 A 3P",
-   "conf": 0.43,
+   "conf": 0.9,
+   "score": 0.43,
    "box": [
     190,
     550,
@@ -244,7 +254,8 @@
    "poles": 4,
    "kA": null,
    "dest": "MCCB 4b0 A 4P",
-   "conf": 0.4,
+   "conf": 0.94,
+   "score": 0.4,
    "box": [
     590,
     550,
@@ -262,7 +273,8 @@
    "poles": 3,
    "kA": null,
    "dest": "spare",
-   "conf": 0.35,
+   "conf": 0.97,
+   "score": 0.35,
    "box": [
     988,
     550,
@@ -280,7 +292,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.18,
+   "conf": 0.5,
+   "score": 0.36,
    "box": [
     1388,
     572,
@@ -308,7 +321,7 @@
     "qty": 1,
     "unit_gbp": 260,
     "total_gbp": 260,
-    "conf": 0.49,
+    "conf": 1.0,
     "evidence": [
      "S3",
      "T10"
@@ -322,7 +335,7 @@
     "qty": 1,
     "unit_gbp": 260,
     "total_gbp": 260,
-    "conf": 0.59,
+    "conf": 1.0,
     "evidence": [
      "S4",
      "T9",
@@ -337,7 +350,7 @@
     "qty": 1,
     "unit_gbp": 280,
     "total_gbp": 280,
-    "conf": 0.21,
+    "conf": 0.5,
     "evidence": [
      "S5"
     ],
@@ -350,7 +363,7 @@
     "qty": 1,
     "unit_gbp": 280,
     "total_gbp": 280,
-    "conf": 0.2,
+    "conf": 0.5,
     "evidence": [
      "S6"
     ],
@@ -363,7 +376,7 @@
     "qty": 1,
     "unit_gbp": 4100.0,
     "total_gbp": 4100.0,
-    "conf": 0.14,
+    "conf": 0.75,
     "evidence": [
      "S7",
      "T13",
@@ -378,7 +391,7 @@
     "qty": 1,
     "unit_gbp": 900,
     "total_gbp": 900,
-    "conf": 0.14,
+    "conf": 0.75,
     "evidence": [
      "S7",
      "T13",
@@ -393,7 +406,7 @@
     "qty": 1,
     "unit_gbp": 690,
     "total_gbp": 690,
-    "conf": 0.13,
+    "conf": 0.75,
     "evidence": [
      "S9",
      "T20",
@@ -408,7 +421,7 @@
     "qty": 1,
     "unit_gbp": 520.0,
     "total_gbp": 520.0,
-    "conf": 0.35,
+    "conf": 0.97,
     "evidence": [
      "S12",
      "T16",
@@ -423,7 +436,7 @@
     "qty": 1,
     "unit_gbp": 420,
     "total_gbp": 420,
-    "conf": 0.35,
+    "conf": 0.97,
     "evidence": [
      "S12",
      "T16",
@@ -568,20 +581,12 @@
   },
   {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D1, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13",
+   "what": "devices read with low confidence: D5, D6, D8, D13",
    "action": "check against the drawing",
    "evidence": [
-    "D1",
-    "D3",
-    "D4",
     "D5",
     "D6",
-    "D7",
     "D8",
-    "D9",
-    "D10",
-    "D11",
-    "D12",
     "D13"
    ]
   }
@@ -698,9 +703,9 @@
   "notes_accuracy": 1.0
  },
  "timing": {
-  "total": 6.79,
-  "ocr": 3.59,
-  "detector": 2.75
+  "total": 5.7,
+  "ocr": 3.01,
+  "detector": 2.4
  },
  "reader": "trained",
  "engine": "rapidocr",

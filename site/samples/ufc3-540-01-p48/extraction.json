@@ -307,7 +307,8 @@
     62,
     61
    ],
-   "shape_score": 0.82
+   "score": 0.82,
+   "shape_score": 1.0
   },
   {
    "id": "S2",
@@ -318,7 +319,8 @@
     22,
     42
    ],
-   "shape_score": 0.11
+   "score": 0.11,
+   "shape_score": 0.75
   }
  ],
  "devices": [
@@ -332,7 +334,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.41,
+   "conf": 0.5,
+   "score": 0.82,
    "type": "GENERATOR",
    "rating": null,
    "on_bus": null,
@@ -349,7 +352,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.06,
+   "conf": 0.38,
+   "score": 0.11,
    "type": "CT",
    "rating": null,
    "on_bus": null,
@@ -365,21 +369,23 @@
   "evidence": []
  },
  "crops": false,
+ "ocr_engine": "rapidocr",
  "reader": "trained",
  "seconds": {
-  "total": 3.68,
-  "ocr": 1.98,
-  "detector": 1.65
+  "total": 1.77,
+  "ocr": 1.11,
+  "detector": 0.61
  },
  "detector": {
   "weights": "weights/rtdetr_r18_full",
   "device": "cpu",
-  "threads": 4,
+  "threads": 2,
   "score_threshold": 0.11,
   "score_threshold_source": "drawing",
   "nms_iou": 0.5,
   "merge_iou": 0.5,
   "edge_px": 2,
-  "contain": 0.8
+  "contain": 0.8,
+  "calibrated": true
  }
 }

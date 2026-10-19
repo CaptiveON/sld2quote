@@ -1,11 +1,11 @@
 line,part,description,qty,unit_gbp,total_gbp,conf,rule,evidence
-1,METER-MF,Panel meter (multifunction),1,260,260,0.2,R-METERING,S2
-2,CT-SET,"Current transformers, set of three, class 1",1,280,280,0.14,R-METERING,S4
-3,METER-MF,Panel meter (multifunction),1,260,260,0.07,R-METERING,S6
-4,METER-MF,Panel meter (multifunction),1,260,260,0.06,R-METERING,S7
-5,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.07,R-PROTECTION,S10
-6,METER-Transfer | Switch,Panel meter (Transfer | Switch),1,260,260,0.17,R-METERING,S12 T13 T14
-7,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.07,R-PROTECTION,S16
+1,METER-MF,Panel meter (multifunction),1,260,260,0.5,R-METERING,S2
+2,CT-SET,"Current transformers, set of three, class 1",1,280,280,0.5,R-METERING,S4
+3,METER-MF,Panel meter (multifunction),1,260,260,0.38,R-METERING,S6
+4,METER-MF,Panel meter (multifunction),1,260,260,0.38,R-METERING,S7
+5,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.38,R-PROTECTION,S10
+6,METER-Transfer | Switch,Panel meter (Transfer | Switch),1,260,260,0.93,R-METERING,S12 T13 T14
+7,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.47,R-PROTECTION,S16
 8,BUSBAR-CU-1600,"Copper busbar set 1600 A (4-bar), 1 sections, about 29 kg",1,331.2,331.2,0.9,R-BUSBAR-SIZE,
 9,ENC-SECTION,"Enclosure section, Form 4 Type 6, IP31, RAL 7035",1,3380.0,3380.0,0.95,R-ENCLOSURE,
 10,LAB-ASSY,"Assembly, wiring and routine verification: 108 hours",1,5184,5184,0.9,R-LABOUR,

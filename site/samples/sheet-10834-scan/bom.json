@@ -22,7 +22,7 @@
     "T6"
    ],
    "rule": "R-METERING",
-   "conf": 0.33,
+   "conf": 0.94,
    "basis": ""
   },
   {
@@ -36,7 +36,7 @@
     "S3"
    ],
    "rule": "R-METERING",
-   "conf": 0.2,
+   "conf": 0.5,
    "basis": ""
   },
   {
@@ -52,7 +52,7 @@
     "T7"
    ],
    "rule": "R-ACB-SELECT",
-   "conf": 0.12,
+   "conf": 0.75,
    "basis": "rating 250 A from ['T9']; poles 3; kA 36"
   },
   {
@@ -68,7 +68,7 @@
     "T7"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.12,
+   "conf": 0.75,
    "basis": ""
   },
   {
@@ -83,7 +83,7 @@
     "T8"
    ],
    "rule": "R-ACB-SELECT",
-   "conf": 0.18,
+   "conf": 0.89,
    "basis": "rating 250 A from ['T8']; poles 4; kA 36"
   },
   {
@@ -98,7 +98,7 @@
     "T8"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.18,
+   "conf": 0.89,
    "basis": ""
   },
   {
@@ -113,7 +113,7 @@
     "T11"
    ],
    "rule": "R-ACB-SELECT",
-   "conf": 0.25,
+   "conf": 0.93,
    "basis": "rating 400 A from ['T11']; poles 4; kA 36"
   },
   {
@@ -128,7 +128,7 @@
     "T11"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.25,
+   "conf": 0.93,
    "basis": ""
   },
   {
@@ -256,17 +256,10 @@
   },
   {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D2, D3, D4, D5, D6, D7, D8, D9, D10",
+   "what": "devices read with low confidence: D3, D10",
    "action": "check against the drawing",
    "evidence": [
-    "D2",
     "D3",
-    "D4",
-    "D5",
-    "D6",
-    "D7",
-    "D8",
-    "D9",
     "D10"
    ]
   }

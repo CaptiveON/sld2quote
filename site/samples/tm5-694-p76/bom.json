@@ -22,7 +22,7 @@
     "T25"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.35,
+   "conf": 0.99,
    "basis": ""
   },
   {
@@ -36,7 +36,7 @@
     "S5"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.1,
+   "conf": 0.48,
    "basis": ""
   },
   {
@@ -50,7 +50,7 @@
     "S6"
    ],
    "rule": "R-METERING",
-   "conf": 0.14,
+   "conf": 0.5,
    "basis": ""
   },
   {
@@ -64,7 +64,7 @@
     "S7"
    ],
    "rule": "R-METERING",
-   "conf": 0.06,
+   "conf": 0.38,
    "basis": ""
   },
   {
@@ -78,7 +78,7 @@
     "S8"
    ],
    "rule": "R-METERING",
-   "conf": 0.1,
+   "conf": 0.48,
    "basis": ""
   },
   {
@@ -92,7 +92,7 @@
     "S12"
    ],
    "rule": "R-METERING",
-   "conf": 0.08,
+   "conf": 0.47,
    "basis": ""
   },
   {
@@ -106,7 +106,7 @@
     "S13"
    ],
    "rule": "R-METERING",
-   "conf": 0.07,
+   "conf": 0.38,
    "basis": ""
   },
   {
@@ -120,7 +120,7 @@
     "S15"
    ],
    "rule": "R-METERING",
-   "conf": 0.1,
+   "conf": 0.48,
    "basis": ""
   },
   {
@@ -134,7 +134,7 @@
     "S17"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.08,
+   "conf": 0.47,
    "basis": ""
   },
   {
@@ -250,11 +250,9 @@
   },
   {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15, D16, D17",
+   "what": "devices read with low confidence: D4, D5, D6, D7, D8, D9, D10, D12, D13, D15, D16, D17",
    "action": "check against the drawing",
    "evidence": [
-    "D2",
-    "D3",
     "D4",
     "D5",
     "D6",
@@ -262,10 +260,8 @@
     "D8",
     "D9",
     "D10",
-    "D11",
     "D12",
     "D13",
-    "D14",
     "D15",
     "D16",
     "D17"

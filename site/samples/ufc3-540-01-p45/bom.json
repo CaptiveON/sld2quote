@@ -138,7 +138,7 @@
   },
   {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D1, D2, D3, D4, D5, D6, D7",
+   "what": "devices read with low confidence: D1, D2, D3, D4, D5, D6",
    "action": "check against the drawing",
    "evidence": [
     "D1",
@@ -146,8 +146,7 @@
     "D3",
     "D4",
     "D5",
-    "D6",
-    "D7"
+    "D6"
    ]
   }
  ]

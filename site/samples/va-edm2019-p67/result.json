@@ -22,21 +22,21 @@
    "key": "text",
    "title": "Read the words",
    "count": 55,
-   "seconds": 18.59,
-   "plain": "Read 55 pieces of text in 18.59 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 12.1,
+   "plain": "Read 55 pieces of text in 12.1 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
    "count": 75,
-   "seconds": 22.1,
-   "plain": "Found 75 symbols in 22.1 s: 19 power-factor correction banks, 19 protection relays, 10 motor starters, 6 incoming air circuit breakers, 6 fuse switches, 4 panel meters, 4 outgoing moulded-case breakers, 3 downstream boards, 2 earths, 1 current transformer, 1 transformer. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "seconds": 12.48,
+   "plain": "Found 75 symbols in 12.48 s: 19 power-factor correction banks, 19 protection relays, 10 motor starters, 6 incoming air circuit breakers, 6 fuse switches, 4 panel meters, 4 outgoing moulded-case breakers, 3 downstream boards, 2 earths, 1 current transformer, 1 transformer. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
    "count": 12,
-   "seconds": 0.34,
+   "seconds": 0.3,
    "plain": "Paired 12 of 75 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
@@ -64,7 +64,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.07,
+   "conf": 0.38,
+   "score": 0.15,
    "box": [
     915,
     219,
@@ -82,7 +83,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.06,
+   "conf": 0.38,
+   "score": 0.12,
    "box": [
     1396,
     219,
@@ -100,7 +102,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.07,
+   "conf": 0.38,
+   "score": 0.13,
    "box": [
     2255,
     220,
@@ -118,7 +121,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.08,
+   "conf": 0.47,
+   "score": 0.16,
    "box": [
     910,
     242,
@@ -136,7 +140,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.11,
+   "conf": 0.49,
+   "score": 0.22,
    "box": [
     2399,
     260,
@@ -154,7 +159,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.07,
+   "conf": 0.38,
+   "score": 0.14,
    "box": [
     1663,
     288,
@@ -172,7 +178,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.09,
+   "conf": 0.47,
+   "score": 0.17,
    "box": [
     1393,
     289,
@@ -190,7 +197,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.1,
+   "conf": 0.48,
+   "score": 0.2,
    "box": [
     2226,
     289,
@@ -208,7 +216,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.09,
+   "conf": 0.47,
+   "score": 0.18,
    "box": [
     2398,
     298,
@@ -226,7 +235,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.07,
+   "conf": 0.38,
+   "score": 0.13,
    "box": [
     1391,
     335,
@@ -244,7 +254,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.07,
+   "conf": 0.38,
+   "score": 0.13,
    "box": [
     2227,
     335,
@@ -262,7 +273,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.17,
+   "conf": 0.5,
+   "score": 0.33,
    "box": [
     2424,
     350,
@@ -280,7 +292,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.09,
+   "conf": 0.47,
+   "score": 0.17,
    "box": [
     910,
     389,
@@ -298,7 +311,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.11,
+   "conf": 0.49,
+   "score": 0.22,
    "box": [
     1894,
     431,
@@ -316,7 +330,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.09,
+   "conf": 0.48,
+   "score": 0.18,
    "box": [
     1990,
     432,
@@ -334,7 +349,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.09,
+   "conf": 0.48,
+   "score": 0.18,
    "box": [
     2421,
     436,
@@ -352,7 +368,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.12,
+   "conf": 0.49,
+   "score": 0.23,
    "box": [
     2398,
     452,
@@ -370,7 +387,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.07,
+   "conf": 0.38,
+   "score": 0.14,
    "box": [
     1010,
     469,
@@ -388,7 +406,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.06,
+   "conf": 0.38,
+   "score": 0.12,
    "box": [
     2083,
     470,
@@ -406,7 +425,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.07,
+   "conf": 0.38,
+   "score": 0.14,
    "box": [
     2183,
     471,
@@ -424,7 +444,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.15,
+   "conf": 0.93,
+   "score": 0.15,
    "box": [
     2425,
     503,
@@ -442,7 +463,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.1,
+   "conf": 0.48,
+   "score": 0.21,
    "box": [
     1704,
     514,
@@ -460,7 +482,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.17,
+   "conf": 0.5,
+   "score": 0.33,
    "box": [
     1009,
     515,
@@ -478,7 +501,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.12,
+   "conf": 0.49,
+   "score": 0.24,
    "box": [
     2082,
     515,
@@ -496,7 +520,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.1,
+   "conf": 0.48,
+   "score": 0.2,
    "box": [
     2182,
     515,
@@ -514,7 +539,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.08,
+   "conf": 0.47,
+   "score": 0.16,
    "box": [
     1290,
     516,
@@ -532,7 +558,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.09,
+   "conf": 0.47,
+   "score": 0.17,
    "box": [
     1805,
     516,
@@ -550,7 +577,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.11,
+   "conf": 0.49,
+   "score": 0.22,
    "box": [
     2422,
     545,
@@ -568,7 +596,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.1,
+   "conf": 0.48,
+   "score": 0.19,
    "box": [
     2398,
     566,
@@ -586,7 +615,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.14,
+   "conf": 0.5,
+   "score": 0.28,
    "box": [
     2398,
     598,
@@ -604,7 +634,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.09,
+   "conf": 0.47,
+   "score": 0.17,
    "box": [
     2425,
     645,
@@ -622,7 +653,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.06,
+   "conf": 0.38,
+   "score": 0.12,
    "box": [
     285,
     721,
@@ -640,7 +672,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.07,
+   "conf": 0.38,
+   "score": 0.13,
    "box": [
     487,
     722,
@@ -658,7 +691,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.18,
+   "conf": 0.97,
+   "score": 0.18,
    "box": [
     2399,
     729,
@@ -676,7 +710,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.09,
+   "conf": 0.47,
+   "score": 0.18,
    "box": [
     2398,
     738,
@@ -694,7 +729,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.08,
+   "conf": 0.47,
+   "score": 0.16,
    "box": [
     2398,
     741,
@@ -712,7 +748,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.15,
+   "conf": 0.5,
+   "score": 0.31,
    "box": [
     502,
     809,
@@ -730,7 +767,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.07,
+   "conf": 0.47,
+   "score": 0.15,
    "box": [
     2396,
     837,
@@ -748,7 +786,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.06,
+   "conf": 0.38,
+   "score": 0.12,
    "box": [
     2397,
     837,
@@ -766,7 +805,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.06,
+   "conf": 0.38,
+   "score": 0.11,
    "box": [
     2393,
     862,
@@ -784,7 +824,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.12,
+   "conf": 0.49,
+   "score": 0.24,
    "box": [
     1972,
     869,
@@ -802,7 +843,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.14,
+   "conf": 0.5,
+   "score": 0.28,
    "box": [
     2069,
     870,
@@ -820,7 +862,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.17,
+   "conf": 0.93,
+   "score": 0.17,
    "box": [
     2552,
     871,
@@ -838,7 +881,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.11,
+   "conf": 0.49,
+   "score": 0.22,
    "box": [
     391,
     883,
@@ -856,7 +900,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.13,
+   "conf": 0.5,
+   "score": 0.26,
    "box": [
     492,
     883,
@@ -874,7 +919,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.12,
+   "conf": 0.49,
+   "score": 0.24,
    "box": [
     2493,
     925,
@@ -892,7 +938,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.07,
+   "conf": 0.38,
+   "score": 0.13,
    "box": [
     2552,
     935,
@@ -910,7 +957,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.06,
+   "conf": 0.38,
+   "score": 0.12,
    "box": [
     248,
     949,
@@ -928,7 +976,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.07,
+   "conf": 0.38,
+   "score": 0.14,
    "box": [
     1268,
     951,
@@ -946,7 +995,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.07,
+   "conf": 0.38,
+   "score": 0.13,
    "box": [
     449,
     990,
@@ -964,7 +1014,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.12,
+   "conf": 0.49,
+   "score": 0.23,
    "box": [
     241,
     1002,
@@ -982,7 +1033,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.11,
+   "conf": 0.49,
+   "score": 0.22,
    "box": [
     543,
     1063,
@@ -1000,7 +1052,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.12,
+   "conf": 0.49,
+   "score": 0.23,
    "box": [
     1508,
     1063,
@@ -1018,7 +1071,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.3,
+   "conf": 0.95,
+   "score": 0.3,
    "box": [
     553,
     1227,
@@ -1036,7 +1090,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.1,
+   "conf": 0.48,
+   "score": 0.19,
    "box": [
     1225,
     1227,
@@ -1054,7 +1109,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.11,
+   "conf": 0.75,
+   "score": 0.11,
    "box": [
     2138,
     1233,
@@ -1072,7 +1128,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.1,
+   "conf": 0.48,
+   "score": 0.19,
    "box": [
     456,
     1240,
@@ -1090,7 +1147,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.11,
+   "conf": 0.75,
+   "score": 0.11,
    "box": [
     207,
     1241,
@@ -1108,7 +1166,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.06,
+   "conf": 0.38,
+   "score": 0.11,
    "box": [
     2147,
     1258,
@@ -1126,7 +1185,8 @@
    "poles": null,
    "kA": null,
    "dest": "NDRMAL POUER",
-   "conf": 0.27,
+   "conf": 0.85,
+   "score": 0.27,
    "box": [
     767,
     1382,
@@ -1144,7 +1204,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.2,
+   "conf": 0.93,
+   "score": 0.2,
    "box": [
     2017,
     1455,
@@ -1162,7 +1223,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.13,
+   "conf": 0.75,
+   "score": 0.13,
    "box": [
     1691,
     1456,
@@ -1180,7 +1242,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.06,
+   "conf": 0.38,
+   "score": 0.11,
    "box": [
     2087,
     1456,
@@ -1198,7 +1261,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.09,
+   "conf": 0.47,
+   "score": 0.18,
    "box": [
     2173,
     1457,
@@ -1216,7 +1280,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.13,
+   "conf": 0.75,
+   "score": 0.13,
    "box": [
     989,
     1483,
@@ -1234,7 +1299,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.1,
+   "conf": 0.49,
+   "score": 0.21,
    "box": [
     2401,
     1504,
@@ -1252,7 +1318,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.41,
+   "conf": 0.5,
+   "score": 0.83,
    "box": [
     739,
     1522,
@@ -1270,7 +1337,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.12,
+   "conf": 0.75,
+   "score": 0.12,
    "box": [
     1983,
     1524,
@@ -1288,7 +1356,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.11,
+   "conf": 0.75,
+   "score": 0.11,
    "box": [
     2033,
     1536,
@@ -1306,7 +1375,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.12,
+   "conf": 0.49,
+   "score": 0.24,
    "box": [
     2290,
     1537,
@@ -1324,7 +1394,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.1,
+   "conf": 0.48,
+   "score": 0.2,
    "box": [
     939,
     1561,
@@ -1342,7 +1413,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.07,
+   "conf": 0.38,
+   "score": 0.15,
    "box": [
     2083,
     1561,
@@ -1360,7 +1432,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.1,
+   "conf": 0.48,
+   "score": 0.2,
    "box": [
     2410,
     1587,
@@ -1378,7 +1451,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.11,
+   "conf": 0.49,
+   "score": 0.22,
    "box": [
     2415,
     1600,
@@ -1396,7 +1470,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.07,
+   "conf": 0.38,
+   "score": 0.15,
    "box": [
     1539,
     1611,
@@ -1424,7 +1499,7 @@
     "qty": 1,
     "unit_gbp": 950,
     "total_gbp": 950,
-    "conf": 0.07,
+    "conf": 0.38,
     "evidence": [
      "S10"
     ],
@@ -1437,7 +1512,7 @@
     "qty": 1,
     "unit_gbp": 950,
     "total_gbp": 950,
-    "conf": 0.07,
+    "conf": 0.38,
     "evidence": [
      "S11"
     ],
@@ -1450,7 +1525,7 @@
     "qty": 1,
     "unit_gbp": 280,
     "total_gbp": 280,
-    "conf": 0.11,
+    "conf": 0.49,
     "evidence": [
      "S14"
     ],
@@ -1463,7 +1538,7 @@
     "qty": 1,
     "unit_gbp": 950,
     "total_gbp": 950,
-    "conf": 0.17,
+    "conf": 0.5,
     "evidence": [
      "S23"
     ],
@@ -1476,7 +1551,7 @@
     "qty": 1,
     "unit_gbp": 950,
     "total_gbp": 950,
-    "conf": 0.12,
+    "conf": 0.49,
     "evidence": [
      "S24"
     ],
@@ -1489,7 +1564,7 @@
     "qty": 1,
     "unit_gbp": 950,
     "total_gbp": 950,
-    "conf": 0.1,
+    "conf": 0.48,
     "evidence": [
      "S25"
     ],
@@ -1502,7 +1577,7 @@
     "qty": 1,
     "unit_gbp": 950,
     "total_gbp": 950,
-    "conf": 0.08,
+    "conf": 0.47,
     "evidence": [
      "S26"
     ],
@@ -1515,7 +1590,7 @@
     "qty": 1,
     "unit_gbp": 950,
     "total_gbp": 950,
-    "conf": 0.09,
+    "conf": 0.47,
     "evidence": [
      "S27"
     ],
@@ -1528,7 +1603,7 @@
     "qty": 1,
     "unit_gbp": 260,
     "total_gbp": 260,
-    "conf": 0.06,
+    "conf": 0.38,
     "evidence": [
      "S32"
     ],
@@ -1541,7 +1616,7 @@
     "qty": 1,
     "unit_gbp": 260,
     "total_gbp": 260,
-    "conf": 0.07,
+    "conf": 0.38,
     "evidence": [
      "S33"
     ],
@@ -1554,7 +1629,7 @@
     "qty": 1,
     "unit_gbp": 950,
     "total_gbp": 950,
-    "conf": 0.06,
+    "conf": 0.38,
     "evidence": [
      "S40"
     ],
@@ -1567,7 +1642,7 @@
     "qty": 1,
     "unit_gbp": 950,
     "total_gbp": 950,
-    "conf": 0.17,
+    "conf": 0.93,
     "evidence": [
      "S43",
      "T14"
@@ -1581,7 +1656,7 @@
     "qty": 1,
     "unit_gbp": 950,
     "total_gbp": 950,
-    "conf": 0.07,
+    "conf": 0.38,
     "evidence": [
      "S47"
     ],
@@ -1594,7 +1669,7 @@
     "qty": 1,
     "unit_gbp": 950,
     "total_gbp": 950,
-    "conf": 0.12,
+    "conf": 0.49,
     "evidence": [
      "S51"
     ],
@@ -1607,7 +1682,7 @@
     "qty": 1,
     "unit_gbp": 260,
     "total_gbp": 260,
-    "conf": 0.1,
+    "conf": 0.48,
     "evidence": [
      "S57"
     ],
@@ -1620,7 +1695,7 @@
     "qty": 1,
     "unit_gbp": 260,
     "total_gbp": 260,
-    "conf": 0.06,
+    "conf": 0.38,
     "evidence": [
      "S59"
     ],
@@ -1633,7 +1708,7 @@
     "qty": 1,
     "unit_gbp": 950,
     "total_gbp": 950,
-    "conf": 0.2,
+    "conf": 0.93,
     "evidence": [
      "S61",
      "T47",
@@ -1648,7 +1723,7 @@
     "qty": 1,
     "unit_gbp": 950,
     "total_gbp": 950,
-    "conf": 0.13,
+    "conf": 0.75,
     "evidence": [
      "S62",
      "T45"
@@ -1662,7 +1737,7 @@
     "qty": 1,
     "unit_gbp": 950,
     "total_gbp": 950,
-    "conf": 0.06,
+    "conf": 0.38,
     "evidence": [
      "S63"
     ],
@@ -1675,7 +1750,7 @@
     "qty": 1,
     "unit_gbp": 950,
     "total_gbp": 950,
-    "conf": 0.09,
+    "conf": 0.47,
     "evidence": [
      "S64"
     ],
@@ -1688,7 +1763,7 @@
     "qty": 1,
     "unit_gbp": 950,
     "total_gbp": 950,
-    "conf": 0.11,
+    "conf": 0.75,
     "evidence": [
      "S69",
      "T52"
@@ -1702,7 +1777,7 @@
     "qty": 1,
     "unit_gbp": 950,
     "total_gbp": 950,
-    "conf": 0.12,
+    "conf": 0.49,
     "evidence": [
      "S70"
     ],
@@ -1715,7 +1790,7 @@
     "qty": 1,
     "unit_gbp": 950,
     "total_gbp": 950,
-    "conf": 0.1,
+    "conf": 0.48,
     "evidence": [
      "S71"
     ],
@@ -1728,7 +1803,7 @@
     "qty": 1,
     "unit_gbp": 950,
     "total_gbp": 950,
-    "conf": 0.07,
+    "conf": 0.38,
     "evidence": [
      "S72"
     ],
@@ -2180,7 +2255,7 @@
   },
   {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15, D16, D17, D18, D19, D20, D21, D22, D23, D24, D25, D26, D27, D28, D29, D30, D31, D32, D33, D34, D35, D36, D37, D38, D39, D40, D41, D42, D43, D44, D45, D46, D47, D48, D49, D50, D51, D52, D53, D54, D55, D56, D57, D58, D59, D60, D61, D62, D63, D64, D65, D66, D67, D68, D69, D70, D71, D72, D73, D74, D75",
+   "what": "devices read with low confidence: D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15, D16, D17, D18, D19, D20, D22, D23, D24, D25, D26, D27, D28, D29, D30, D31, D32, D33, D35, D36, D37, D38, D39, D40, D41, D42, D44, D45, D46, D47, D48, D49, D50, D51, D52, D53, D55, D57, D59, D63, D64, D66, D67, D70, D71, D72, D73, D74, D75",
    "action": "check against the drawing",
    "evidence": [
     "D1",
@@ -2203,7 +2278,6 @@
     "D18",
     "D19",
     "D20",
-    "D21",
     "D22",
     "D23",
     "D24",
@@ -2216,7 +2290,6 @@
     "D31",
     "D32",
     "D33",
-    "D34",
     "D35",
     "D36",
     "D37",
@@ -2225,7 +2298,6 @@
     "D40",
     "D41",
     "D42",
-    "D43",
     "D44",
     "D45",
     "D46",
@@ -2236,22 +2308,13 @@
     "D51",
     "D52",
     "D53",
-    "D54",
     "D55",
-    "D56",
     "D57",
-    "D58",
     "D59",
-    "D60",
-    "D61",
-    "D62",
     "D63",
     "D64",
-    "D65",
     "D66",
     "D67",
-    "D68",
-    "D69",
     "D70",
     "D71",
     "D72",
@@ -2265,9 +2328,9 @@
  "spec": null,
  "score": null,
  "timing": {
-  "total": 41.72,
-  "ocr": 18.59,
-  "detector": 22.1
+  "total": 25.5,
+  "ocr": 12.1,
+  "detector": 12.48
  },
  "reader": "trained",
  "engine": "rapidocr",

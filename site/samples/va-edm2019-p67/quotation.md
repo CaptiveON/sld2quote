@@ -9,30 +9,30 @@ Prices are from the prototype's illustrative catalogue, not a supplier price lis
 
 | # | Part | Description | Qty | Unit £ | Total £ | Conf | Evidence |
 |---|---|---|---|---|---|---|---|
-| 1 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.07 | S10 R-PROTECTION |
-| 2 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.07 | S11 R-PROTECTION |
-| 3 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.11 | S14 R-METERING |
-| 4 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.17 | S23 R-PROTECTION |
-| 5 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.12 | S24 R-PROTECTION |
-| 6 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.1 | S25 R-PROTECTION |
-| 7 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.08 | S26 R-PROTECTION |
-| 8 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.09 | S27 R-PROTECTION |
-| 9 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.06 | S32 R-METERING |
-| 10 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.07 | S33 R-METERING |
-| 11 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.06 | S40 R-PROTECTION |
-| 12 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.17 | S43 T14 R-PROTECTION |
-| 13 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.07 | S47 R-PROTECTION |
-| 14 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.12 | S51 R-PROTECTION |
-| 15 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.1 | S57 R-METERING |
-| 16 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.06 | S59 R-METERING |
-| 17 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.2 | S61 T47 T49 R-PROTECTION |
-| 18 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.13 | S62 T45 R-PROTECTION |
-| 19 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.06 | S63 R-PROTECTION |
-| 20 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.09 | S64 R-PROTECTION |
-| 21 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.11 | S69 T52 R-PROTECTION |
-| 22 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.12 | S70 R-PROTECTION |
-| 23 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.1 | S71 R-PROTECTION |
-| 24 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.07 | S72 R-PROTECTION |
+| 1 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.38 | S10 R-PROTECTION |
+| 2 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.38 | S11 R-PROTECTION |
+| 3 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.49 | S14 R-METERING |
+| 4 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.5 | S23 R-PROTECTION |
+| 5 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.49 | S24 R-PROTECTION |
+| 6 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.48 | S25 R-PROTECTION |
+| 7 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.47 | S26 R-PROTECTION |
+| 8 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.47 | S27 R-PROTECTION |
+| 9 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.38 | S32 R-METERING |
+| 10 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.38 | S33 R-METERING |
+| 11 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.38 | S40 R-PROTECTION |
+| 12 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.93 | S43 T14 R-PROTECTION |
+| 13 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.38 | S47 R-PROTECTION |
+| 14 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.49 | S51 R-PROTECTION |
+| 15 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.48 | S57 R-METERING |
+| 16 | METER-MF | Panel meter (multifunction) | 1 | 260.00 | 260.00 | 0.38 | S59 R-METERING |
+| 17 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.93 | S61 T47 T49 R-PROTECTION |
+| 18 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.75 | S62 T45 R-PROTECTION |
+| 19 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.38 | S63 R-PROTECTION |
+| 20 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.47 | S64 R-PROTECTION |
+| 21 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.75 | S69 T52 R-PROTECTION |
+| 22 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.49 | S70 R-PROTECTION |
+| 23 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.48 | S71 R-PROTECTION |
+| 24 | RELAY-OC | Overcurrent and earth-fault protection relay | 1 | 950.00 | 950.00 | 0.38 | S72 R-PROTECTION |
 | 25 | BUSBAR-CU-1600 | Copper busbar set 1600 A (4-bar), 1 sections, about 29 kg | 1 | 331.20 | 331.20 | 0.9 |  R-BUSBAR-SIZE |
 | 26 | ENC-SECTION | Enclosure section, Form 4 Type 6, IP31, RAL 7035 | 1 | 3,380.00 | 3,380.00 | 0.95 |  R-ENCLOSURE |
 | 27 | LAB-ASSY | Assembly, wiring and routine verification: 448 hours | 1 | 21,504.00 | 21,504.00 | 0.9 |  R-LABOUR |
@@ -89,6 +89,6 @@ Subtotal £46,035.20; margin £6,905.28; **total £52,940.48**
 - [missing] D74 (CAPACITOR): kVAr not read. Action: read from drawing / schedule. Evidence: S74
 - [missing] D75 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S75
 - [assumed] busbar rating not read; assumed 0 A from the largest incomer. Action: confirm. Evidence: 
-- [low_confidence] devices read with low confidence: D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15, D16, D17, D18, D19, D20, D21, D22, D23, D24, D25, D26, D27, D28, D29, D30, D31, D32, D33, D34, D35, D36, D37, D38, D39, D40, D41, D42, D43, D44, D45, D46, D47, D48, D49, D50, D51, D52, D53, D54, D55, D56, D57, D58, D59, D60, D61, D62, D63, D64, D65, D66, D67, D68, D69, D70, D71, D72, D73, D74, D75. Action: check against the drawing. Evidence: D1 D2 D3 D4 D5 D6 D7 D8 D9 D10 D11 D12 D13 D14 D15 D16 D17 D18 D19 D20 D21 D22 D23 D24 D25 D26 D27 D28 D29 D30 D31 D32 D33 D34 D35 D36 D37 D38 D39 D40 D41 D42 D43 D44 D45 D46 D47 D48 D49 D50 D51 D52 D53 D54 D55 D56 D57 D58 D59 D60 D61 D62 D63 D64 D65 D66 D67 D68 D69 D70 D71 D72 D73 D74 D75
+- [low_confidence] devices read with low confidence: D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15, D16, D17, D18, D19, D20, D22, D23, D24, D25, D26, D27, D28, D29, D30, D31, D32, D33, D35, D36, D37, D38, D39, D40, D41, D42, D44, D45, D46, D47, D48, D49, D50, D51, D52, D53, D55, D57, D59, D63, D64, D66, D67, D70, D71, D72, D73, D74, D75. Action: check against the drawing. Evidence: D1 D2 D3 D4 D5 D6 D7 D8 D9 D10 D11 D12 D13 D14 D15 D16 D17 D18 D19 D20 D22 D23 D24 D25 D26 D27 D28 D29 D30 D31 D32 D33 D35 D36 D37 D38 D39 D40 D41 D42 D44 D45 D46 D47 D48 D49 D50 D51 D52 D53 D55 D57 D59 D63 D64 D66 D67 D70 D71 D72 D73 D74 D75
 
-Generated by sld2quote 0.2.0 in 41.0 s; reader deskew 0.0 deg.
+Generated by sld2quote 0.2.0 in 24.9 s; reader deskew 0.0 deg.

@@ -1,6 +1,6 @@
 line,part,description,qty,unit_gbp,total_gbp,conf,rule,evidence
-1,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.13,R-PROTECTION,S1 T5 T4
-2,METER-and interlocked | closed at one time,Panel meter (and interlocked | closed at one time),1,260,260,0.23,R-METERING,S2 T12 T8
+1,RELAY-OC,Overcurrent and earth-fault protection relay,1,950,950,0.75,R-PROTECTION,S1 T5 T4
+2,METER-and interlocked | closed at one time,Panel meter (and interlocked | closed at one time),1,260,260,0.98,R-METERING,S2 T12 T8
 3,BUSBAR-CU-2500,"Copper busbar set 2500 A (4-bar), 1 sections, about 46 kg",1,524.4,524.4,0.9,R-BUSBAR-SIZE,
 4,ENC-SECTION,"Enclosure section, Form 4 Type 6, IP31, RAL 7035",1,3380.0,3380.0,0.95,R-ENCLOSURE,
 5,LAB-ASSY,"Assembly, wiring and routine verification: 54 hours",1,2592,2592,0.9,R-LABOUR,

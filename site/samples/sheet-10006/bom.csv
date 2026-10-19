@@ -1,19 +1,19 @@
 line,part,description,qty,unit_gbp,total_gbp,conf,rule,evidence
-1,ACB-2500-3P-N,"Air circuit breaker 2500 A 3-pole, 50 kA band N, withdrawable, electronic trip",1,5600.0,5600.0,0.63,R-ACB-SELECT,S3 T6 T8
-2,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.63,R-FU-KIT,S3 T6 T8
-3,ACB-1600-3P-N,"Air circuit breaker 1600 A 3-pole, 50 kA band N, withdrawable, electronic trip",1,4200.0,4200.0,0.2,R-ACB-SELECT,S4 T7
-4,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.2,R-FU-KIT,S4 T7
-5,ATS-CTRL,Automatic transfer switch controller and interlocks,1,1850,1850,0.2,R-ATS,S4 T7
-6,METER-CT 1600/5A,Panel meter (CT 1600/5A),1,260,260,0.64,R-METERING,S5 T9
-7,CT-SET,"Current transformers, set of three, class 1",1,280,280,0.11,R-METERING,S6
-8,BSS-2500-3P,"Bus-section switch 2500 A 3-pole, 50 kA",1,4100.0,4100.0,0.56,R-BUS-SECTION,S7 T12
-9,FU-KIT-BS,Bus-section functional unit and interlocking,1,900,900,0.56,R-FU-KIT,S7 T12
-10,MCCB-400-3P-N,"Moulded-case circuit breaker 400 A 3-pole, 50 kA band N, adjustable trip",1,980.0,980.0,0.34,R-MCCB-SELECT,S9 T16
-11,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.34,R-FU-KIT,S9 T16
-12,MCCB-160-4P-N,"Moulded-case circuit breaker 160 A 4-pole, 50 kA band N, adjustable trip; feeds Mcc-4/chillers",1,463.6,463.6,0.4,R-MCCB-SELECT,S14 T20 T23
-13,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.4,R-FU-KIT,S14 T20 T23
-14,ISOL-630-3P,Switch-disconnector 630 A 3-pole; feeds lighting,1,790.0,790.0,0.13,R-ISOL-SELECT,S15 T21 T24
-15,FU-KIT-ISOLATOR,"Outgoing functional unit: compartment door, terminals, labels",1,340,340,0.13,R-FU-KIT,S15 T21 T24
+1,ACB-2500-3P-N,"Air circuit breaker 2500 A 3-pole, 50 kA band N, withdrawable, electronic trip",1,5600.0,5600.0,0.96,R-ACB-SELECT,S3 T6 T8
+2,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.96,R-FU-KIT,S3 T6 T8
+3,ACB-1600-3P-N,"Air circuit breaker 1600 A 3-pole, 50 kA band N, withdrawable, electronic trip",1,4200.0,4200.0,0.97,R-ACB-SELECT,S4 T7
+4,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.97,R-FU-KIT,S4 T7
+5,ATS-CTRL,Automatic transfer switch controller and interlocks,1,1850,1850,0.97,R-ATS,S4 T7
+6,METER-CT 1600/5A,Panel meter (CT 1600/5A),1,260,260,1.0,R-METERING,S5 T9
+7,CT-SET,"Current transformers, set of three, class 1",1,280,280,0.49,R-METERING,S6
+8,BSS-2500-3P,"Bus-section switch 2500 A 3-pole, 50 kA",1,4100.0,4100.0,1.0,R-BUS-SECTION,S7 T12
+9,FU-KIT-BS,Bus-section functional unit and interlocking,1,900,900,1.0,R-FU-KIT,S7 T12
+10,MCCB-400-3P-N,"Moulded-case circuit breaker 400 A 3-pole, 50 kA band N, adjustable trip",1,980.0,980.0,0.98,R-MCCB-SELECT,S9 T16
+11,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.98,R-FU-KIT,S9 T16
+12,MCCB-160-4P-N,"Moulded-case circuit breaker 160 A 4-pole, 50 kA band N, adjustable trip; feeds Mcc-4/chillers",1,463.6,463.6,0.93,R-MCCB-SELECT,S14 T20 T23
+13,FU-KIT-MCCB,"Outgoing functional unit: compartment door, terminals, labels",1,420,420,0.93,R-FU-KIT,S14 T20 T23
+14,ISOL-630-3P,Switch-disconnector 630 A 3-pole; feeds lighting,1,790.0,790.0,0.75,R-ISOL-SELECT,S15 T21 T24
+15,FU-KIT-ISOLATOR,"Outgoing functional unit: compartment door, terminals, labels",1,340,340,0.75,R-FU-KIT,S15 T21 T24
 16,BUSBAR-CU-2500,"Copper busbar set 2500 A (4-bar), 4 sections, about 182 kg",1,2097.6,2097.6,0.9,R-BUSBAR-SIZE,T11 T11
 17,ENC-SECTION,"Enclosure section, Form 3b, IP42, RAL 7035",4,2730.0,10920.0,0.95,R-ENCLOSURE,T28 T28 T30 T32
 18,LAB-ASSY,"Assembly, wiring and routine verification: 166 hours",1,7968,7968,0.9,R-LABOUR,

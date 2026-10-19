@@ -22,7 +22,7 @@
     "T8"
    ],
    "rule": "R-ACB-SELECT",
-   "conf": 0.63,
+   "conf": 0.96,
    "basis": "rating 2500 A from ['T6']; poles 3; kA 50"
   },
   {
@@ -38,7 +38,7 @@
     "T8"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.63,
+   "conf": 0.96,
    "basis": ""
   },
   {
@@ -53,7 +53,7 @@
     "T7"
    ],
    "rule": "R-ACB-SELECT",
-   "conf": 0.2,
+   "conf": 0.97,
    "basis": "rating 1600 A from ['T7']; poles 3; kA 50"
   },
   {
@@ -68,7 +68,7 @@
     "T7"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.2,
+   "conf": 0.97,
    "basis": ""
   },
   {
@@ -83,7 +83,7 @@
     "T7"
    ],
    "rule": "R-ATS",
-   "conf": 0.2,
+   "conf": 0.97,
    "basis": ""
   },
   {
@@ -98,7 +98,7 @@
     "T9"
    ],
    "rule": "R-METERING",
-   "conf": 0.64,
+   "conf": 1.0,
    "basis": ""
   },
   {
@@ -112,7 +112,7 @@
     "S6"
    ],
    "rule": "R-METERING",
-   "conf": 0.11,
+   "conf": 0.49,
    "basis": ""
   },
   {
@@ -127,7 +127,7 @@
     "T12"
    ],
    "rule": "R-BUS-SECTION",
-   "conf": 0.56,
+   "conf": 1.0,
    "basis": ""
   },
   {
@@ -142,7 +142,7 @@
     "T12"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.56,
+   "conf": 1.0,
    "basis": ""
   },
   {
@@ -157,7 +157,7 @@
     "T16"
    ],
    "rule": "R-MCCB-SELECT",
-   "conf": 0.34,
+   "conf": 0.98,
    "basis": "rating 400 A; poles 3; kA 50"
   },
   {
@@ -172,7 +172,7 @@
     "T16"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.34,
+   "conf": 0.98,
    "basis": ""
   },
   {
@@ -188,7 +188,7 @@
     "T23"
    ],
    "rule": "R-MCCB-SELECT",
-   "conf": 0.4,
+   "conf": 0.93,
    "basis": "rating 150 A; poles 4; kA 50"
   },
   {
@@ -204,7 +204,7 @@
     "T23"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.4,
+   "conf": 0.93,
    "basis": ""
   },
   {
@@ -220,7 +220,7 @@
     "T24"
    ],
    "rule": "R-ISOL-SELECT",
-   "conf": 0.13,
+   "conf": 0.75,
    "basis": "rating 630 A; poles 3"
   },
   {
@@ -236,7 +236,7 @@
     "T24"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.13,
+   "conf": 0.75,
    "basis": ""
   },
   {
@@ -375,20 +375,11 @@
   },
   {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D1, D4, D6, D7, D8, D9, D10, D11, D12, D14, D15",
+   "what": "devices read with low confidence: D6, D8",
    "action": "check against the drawing",
    "evidence": [
-    "D1",
-    "D4",
     "D6",
-    "D7",
-    "D8",
-    "D9",
-    "D10",
-    "D11",
-    "D12",
-    "D14",
-    "D15"
+    "D8"
    ]
   }
  ]

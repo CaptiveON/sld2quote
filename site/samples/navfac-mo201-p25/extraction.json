@@ -184,7 +184,8 @@
     12,
     29
    ],
-   "shape_score": 0.32
+   "score": 0.32,
+   "shape_score": 1.0
   },
   {
    "id": "S2",
@@ -195,7 +196,8 @@
     13,
     25
    ],
-   "shape_score": 0.17
+   "score": 0.17,
+   "shape_score": 0.93
   },
   {
    "id": "S3",
@@ -206,7 +208,8 @@
     15,
     16
    ],
-   "shape_score": 0.13
+   "score": 0.13,
+   "shape_score": 0.75
   },
   {
    "id": "S4",
@@ -217,7 +220,8 @@
     17,
     17
    ],
-   "shape_score": 0.11
+   "score": 0.11,
+   "shape_score": 0.75
   },
   {
    "id": "S5",
@@ -228,7 +232,8 @@
     22,
     36
    ],
-   "shape_score": 0.32
+   "score": 0.32,
+   "shape_score": 1.0
   },
   {
    "id": "S6",
@@ -239,7 +244,8 @@
     22,
     40
    ],
-   "shape_score": 0.13
+   "score": 0.13,
+   "shape_score": 0.75
   },
   {
    "id": "S7",
@@ -250,7 +256,8 @@
     20,
     41
    ],
-   "shape_score": 0.15
+   "score": 0.15,
+   "shape_score": 0.93
   },
   {
    "id": "S8",
@@ -261,7 +268,8 @@
     21,
     15
    ],
-   "shape_score": 0.12
+   "score": 0.12,
+   "shape_score": 0.75
   },
   {
    "id": "S9",
@@ -272,7 +280,8 @@
     19,
     28
    ],
-   "shape_score": 0.14
+   "score": 0.14,
+   "shape_score": 0.75
   },
   {
    "id": "S10",
@@ -283,7 +292,8 @@
     19,
     27
    ],
-   "shape_score": 0.17
+   "score": 0.17,
+   "shape_score": 0.93
   },
   {
    "id": "S11",
@@ -294,7 +304,8 @@
     72,
     29
    ],
-   "shape_score": 0.14
+   "score": 0.14,
+   "shape_score": 0.75
   },
   {
    "id": "S12",
@@ -305,7 +316,8 @@
     17,
     15
    ],
-   "shape_score": 0.12
+   "score": 0.12,
+   "shape_score": 0.75
   },
   {
    "id": "S13",
@@ -316,7 +328,8 @@
     23,
     27
    ],
-   "shape_score": 0.12
+   "score": 0.12,
+   "shape_score": 0.75
   },
   {
    "id": "S14",
@@ -327,7 +340,8 @@
     24,
     29
    ],
-   "shape_score": 0.16
+   "score": 0.16,
+   "shape_score": 0.93
   },
   {
    "id": "S15",
@@ -338,7 +352,8 @@
     14,
     30
    ],
-   "shape_score": 0.22
+   "score": 0.22,
+   "shape_score": 0.98
   },
   {
    "id": "S16",
@@ -349,7 +364,8 @@
     12,
     28
    ],
-   "shape_score": 0.48
+   "score": 0.48,
+   "shape_score": 1.0
   },
   {
    "id": "S17",
@@ -360,7 +376,8 @@
     13,
     28
    ],
-   "shape_score": 0.2
+   "score": 0.2,
+   "shape_score": 0.97
   },
   {
    "id": "S18",
@@ -371,7 +388,8 @@
     13,
     28
    ],
-   "shape_score": 0.38
+   "score": 0.38,
+   "shape_score": 1.0
   },
   {
    "id": "S19",
@@ -382,7 +400,8 @@
     13,
     28
    ],
-   "shape_score": 0.32
+   "score": 0.32,
+   "shape_score": 1.0
   },
   {
    "id": "S20",
@@ -393,7 +412,8 @@
     13,
     26
    ],
-   "shape_score": 0.22
+   "score": 0.22,
+   "shape_score": 0.98
   },
   {
    "id": "S21",
@@ -404,7 +424,8 @@
     14,
     29
    ],
-   "shape_score": 0.34
+   "score": 0.34,
+   "shape_score": 1.0
   },
   {
    "id": "S22",
@@ -415,7 +436,8 @@
     14,
     27
    ],
-   "shape_score": 0.32
+   "score": 0.32,
+   "shape_score": 1.0
   },
   {
    "id": "S23",
@@ -426,7 +448,8 @@
     13,
     29
    ],
-   "shape_score": 0.18
+   "score": 0.18,
+   "shape_score": 0.93
   },
   {
    "id": "S24",
@@ -437,7 +460,8 @@
     14,
     26
    ],
-   "shape_score": 0.24
+   "score": 0.24,
+   "shape_score": 0.98
   }
  ],
  "devices": [
@@ -451,7 +475,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.16,
+   "conf": 0.5,
+   "score": 0.32,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
@@ -471,7 +496,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.09,
+   "conf": 0.47,
+   "score": 0.17,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
@@ -491,7 +517,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.07,
+   "conf": 0.38,
+   "score": 0.13,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
@@ -511,7 +538,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.06,
+   "conf": 0.38,
+   "score": 0.11,
    "type": "CT",
    "rating": null,
    "on_bus": "BUS-1",
@@ -528,7 +556,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.16,
+   "conf": 0.5,
+   "score": 0.32,
    "type": "MCCB",
    "rating": null,
    "poles": null,
@@ -548,7 +577,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.07,
+   "conf": 0.38,
+   "score": 0.13,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
@@ -568,7 +598,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.07,
+   "conf": 0.47,
+   "score": 0.15,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
@@ -590,7 +621,8 @@
     "T5"
    ],
    "label": "10",
-   "conf": 0.12,
+   "conf": 0.68,
+   "score": 0.12,
    "type": "CAPACITOR",
    "rating": null,
    "on_bus": "BUS-1",
@@ -607,7 +639,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.07,
+   "conf": 0.38,
+   "score": 0.14,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
@@ -627,7 +660,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.09,
+   "conf": 0.47,
+   "score": 0.17,
    "type": "RELAY",
    "rating": null,
    "on_bus": "BUS-1",
@@ -644,7 +678,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.07,
+   "conf": 0.38,
+   "score": 0.14,
    "type": "MCCB",
    "rating": null,
    "poles": null,
@@ -664,7 +699,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.06,
+   "conf": 0.38,
+   "score": 0.12,
    "type": "CT",
    "rating": null,
    "on_bus": "BUS-1",
@@ -681,7 +717,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.06,
+   "conf": 0.38,
+   "score": 0.12,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
@@ -701,7 +738,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.08,
+   "conf": 0.47,
+   "score": 0.16,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
@@ -721,7 +759,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.11,
+   "conf": 0.49,
+   "score": 0.22,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
@@ -743,7 +782,8 @@
     "T9"
    ],
    "label": "LOAD CIRCUITS",
-   "conf": 0.48,
+   "conf": 0.99,
+   "score": 0.48,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
@@ -763,7 +803,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.1,
+   "conf": 0.48,
+   "score": 0.2,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
@@ -783,7 +824,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.19,
+   "conf": 0.5,
+   "score": 0.38,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
@@ -803,7 +845,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.16,
+   "conf": 0.5,
+   "score": 0.32,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
@@ -823,7 +866,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.11,
+   "conf": 0.49,
+   "score": 0.22,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
@@ -843,7 +887,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.17,
+   "conf": 0.5,
+   "score": 0.34,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
@@ -865,7 +910,8 @@
     "T10"
    ],
    "label": "LOAD CIRCUITS",
-   "conf": 0.32,
+   "conf": 1.0,
+   "score": 0.32,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
@@ -885,7 +931,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.09,
+   "conf": 0.47,
+   "score": 0.18,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
@@ -905,7 +952,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.12,
+   "conf": 0.49,
+   "score": 0.24,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
@@ -924,21 +972,23 @@
   "evidence": []
  },
  "crops": false,
+ "ocr_engine": "rapidocr",
  "reader": "trained",
  "seconds": {
-  "total": 6.32,
-  "ocr": 2.79,
-  "detector": 3.39
+  "total": 3.12,
+  "ocr": 1.37,
+  "detector": 1.67
  },
  "detector": {
   "weights": "weights/rtdetr_r18_full",
   "device": "cpu",
-  "threads": 4,
+  "threads": 2,
   "score_threshold": 0.11,
   "score_threshold_source": "drawing",
   "nms_iou": 0.5,
   "merge_iou": 0.5,
   "edge_px": 2,
-  "contain": 0.8
+  "contain": 0.8,
+  "calibrated": true
  }
 }

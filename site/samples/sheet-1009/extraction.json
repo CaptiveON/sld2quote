@@ -402,7 +402,8 @@
     49,
     48
    ],
-   "shape_score": 0.59
+   "score": 0.59,
+   "shape_score": 1.0
   },
   {
    "id": "S2",
@@ -413,7 +414,8 @@
     46,
     72
    ],
-   "shape_score": 0.98
+   "score": 0.98,
+   "shape_score": 1.0
   },
   {
    "id": "S3",
@@ -424,7 +426,8 @@
     23,
     24
    ],
-   "shape_score": 0.49
+   "score": 0.49,
+   "shape_score": 1.0
   },
   {
    "id": "S4",
@@ -435,7 +438,8 @@
     27,
     20
    ],
-   "shape_score": 0.59
+   "score": 0.59,
+   "shape_score": 1.0
   },
   {
    "id": "S5",
@@ -446,7 +450,8 @@
     18,
     18
    ],
-   "shape_score": 0.42
+   "score": 0.42,
+   "shape_score": 1.0
   },
   {
    "id": "S6",
@@ -457,7 +462,8 @@
     20,
     18
    ],
-   "shape_score": 0.4
+   "score": 0.4,
+   "shape_score": 1.0
   },
   {
    "id": "S7",
@@ -468,7 +474,8 @@
     27,
     26
    ],
-   "shape_score": 0.14
+   "score": 0.14,
+   "shape_score": 0.75
   },
   {
    "id": "S8",
@@ -479,7 +486,8 @@
     22,
     22
    ],
-   "shape_score": 0.33
+   "score": 0.33,
+   "shape_score": 1.0
   },
   {
    "id": "S9",
@@ -490,7 +498,8 @@
     18,
     27
    ],
-   "shape_score": 0.13
+   "score": 0.13,
+   "shape_score": 0.75
   },
   {
    "id": "S10",
@@ -501,7 +510,8 @@
     21,
     20
    ],
-   "shape_score": 0.43
+   "score": 0.43,
+   "shape_score": 1.0
   },
   {
    "id": "S11",
@@ -512,7 +522,8 @@
     20,
     20
    ],
-   "shape_score": 0.4
+   "score": 0.4,
+   "shape_score": 1.0
   },
   {
    "id": "S12",
@@ -523,7 +534,8 @@
     22,
     21
    ],
-   "shape_score": 0.35
+   "score": 0.35,
+   "shape_score": 1.0
   },
   {
    "id": "S13",
@@ -534,7 +546,8 @@
     23,
     18
    ],
-   "shape_score": 0.36
+   "score": 0.36,
+   "shape_score": 1.0
   }
  ],
  "devices": [
@@ -551,7 +564,8 @@
     "T1"
    ],
    "label": "standby | GEN-1 630 kVA",
-   "conf": 0.59,
+   "conf": 0.99,
+   "score": 0.59,
    "type": "GENERATOR",
    "rating": 630,
    "on_bus": "BUS-2",
@@ -572,6 +586,7 @@
    ],
    "label": "11kV/415V | TX-1 2500 kVA",
    "conf": 0.96,
+   "score": 0.98,
    "type": "TRANSFORMER",
    "rating": 2500,
    "on_bus": "BUS-1",
@@ -590,7 +605,8 @@
     "T10"
    ],
    "label": "CT 2500/5A",
-   "conf": 0.49,
+   "conf": 1.0,
+   "score": 0.49,
    "type": "METER",
    "rating": null,
    "on_bus": "BUS-2",
@@ -610,7 +626,8 @@
     "T11"
    ],
    "label": "CT 2500/5A | BUSBAR A 2500 A Cu 50 kA/1s",
-   "conf": 0.59,
+   "conf": 1.0,
+   "score": 0.59,
    "type": "METER",
    "rating": null,
    "on_bus": "BUS-1",
@@ -627,7 +644,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.21,
+   "conf": 0.5,
+   "score": 0.42,
    "type": "CT",
    "rating": null,
    "on_bus": "BUS-1",
@@ -644,7 +662,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.2,
+   "conf": 0.5,
+   "score": 0.4,
    "type": "CT",
    "rating": null,
    "on_bus": "BUS-2",
@@ -664,7 +683,8 @@
     "T12"
    ],
    "label": "BS-1 2500 A | BUSBAR B 2500 A Cu 50 kA/1s",
-   "conf": 0.14,
+   "conf": 0.75,
+   "score": 0.14,
    "type": "BUS_SECTION",
    "rating": 2500,
    "poles": null,
@@ -683,7 +703,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.17,
+   "conf": 0.5,
+   "score": 0.33,
    "type": "MCCB",
    "rating": null,
    "poles": null,
@@ -706,7 +727,8 @@
     "T21"
    ],
    "label": "MCCB 100 A 4P 36 kA | SPD Type 1+2",
-   "conf": 0.13,
+   "conf": 0.75,
+   "score": 0.13,
    "type": "SPD",
    "rating": null,
    "on_bus": "BUS-2",
@@ -726,7 +748,8 @@
     "T17"
    ],
    "label": "MCCB 4b0 A 3P | lifls",
-   "conf": 0.43,
+   "conf": 0.9,
+   "score": 0.43,
    "type": "MCCB",
    "rating": null,
    "poles": 3,
@@ -749,7 +772,8 @@
     "T18"
    ],
    "label": "MCCB 4b0 A 4P | datal hall",
-   "conf": 0.4,
+   "conf": 0.94,
+   "score": 0.4,
    "type": "MCCB",
    "rating": null,
    "poles": 4,
@@ -772,7 +796,8 @@
     "T19"
    ],
    "label": "MCCB 250 A 3P | spare",
-   "conf": 0.35,
+   "conf": 0.97,
+   "score": 0.35,
    "type": "MCCB",
    "rating": 250,
    "poles": 3,
@@ -792,7 +817,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.18,
+   "conf": 0.5,
+   "score": 0.36,
    "type": "EARTH",
    "rating": null,
    "on_bus": "BUS-2",
@@ -813,21 +839,23 @@
   ]
  },
  "crops": false,
+ "ocr_engine": "rapidocr",
  "reader": "trained",
  "seconds": {
-  "total": 6.55,
-  "ocr": 3.59,
-  "detector": 2.75
+  "total": 5.52,
+  "ocr": 3.01,
+  "detector": 2.4
  },
  "detector": {
   "weights": "weights/rtdetr_r18_full",
   "device": "cpu",
-  "threads": 4,
+  "threads": 2,
   "score_threshold": 0.11,
   "score_threshold_source": "drawing",
   "nms_iou": 0.5,
   "merge_iou": 0.5,
   "edge_px": 2,
-  "contain": 0.8
+  "contain": 0.8,
+  "calibrated": true
  }
 }

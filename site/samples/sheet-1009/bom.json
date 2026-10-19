@@ -21,7 +21,7 @@
     "T10"
    ],
    "rule": "R-METERING",
-   "conf": 0.49,
+   "conf": 1.0,
    "basis": ""
   },
   {
@@ -37,7 +37,7 @@
     "T11"
    ],
    "rule": "R-METERING",
-   "conf": 0.59,
+   "conf": 1.0,
    "basis": ""
   },
   {
@@ -51,7 +51,7 @@
     "S5"
    ],
    "rule": "R-METERING",
-   "conf": 0.21,
+   "conf": 0.5,
    "basis": ""
   },
   {
@@ -65,7 +65,7 @@
     "S6"
    ],
    "rule": "R-METERING",
-   "conf": 0.2,
+   "conf": 0.5,
    "basis": ""
   },
   {
@@ -81,7 +81,7 @@
     "T12"
    ],
    "rule": "R-BUS-SECTION",
-   "conf": 0.14,
+   "conf": 0.75,
    "basis": ""
   },
   {
@@ -97,7 +97,7 @@
     "T12"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.14,
+   "conf": 0.75,
    "basis": ""
   },
   {
@@ -113,7 +113,7 @@
     "T21"
    ],
    "rule": "R-SPD",
-   "conf": 0.13,
+   "conf": 0.75,
    "basis": ""
   },
   {
@@ -129,7 +129,7 @@
     "T19"
    ],
    "rule": "R-MCCB-SELECT",
-   "conf": 0.35,
+   "conf": 0.97,
    "basis": "rating 250 A; poles 3; kA 50"
   },
   {
@@ -145,7 +145,7 @@
     "T19"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.35,
+   "conf": 0.97,
    "basis": ""
   },
   {
@@ -291,20 +291,12 @@
   },
   {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D1, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13",
+   "what": "devices read with low confidence: D5, D6, D8, D13",
    "action": "check against the drawing",
    "evidence": [
-    "D1",
-    "D3",
-    "D4",
     "D5",
     "D6",
-    "D7",
     "D8",
-    "D9",
-    "D10",
-    "D11",
-    "D12",
     "D13"
    ]
   }

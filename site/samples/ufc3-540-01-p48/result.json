@@ -22,15 +22,15 @@
    "key": "text",
    "title": "Read the words",
    "count": 24,
-   "seconds": 1.98,
-   "plain": "Read 24 pieces of text in 1.98 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 1.11,
+   "plain": "Read 24 pieces of text in 1.11 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
    "count": 2,
-   "seconds": 1.65,
-   "plain": "Found 2 symbols in 1.65 s: 1 generator, 1 current transformer. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "seconds": 0.61,
+   "plain": "Found 2 symbols in 0.61 s: 1 generator, 1 current transformer. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
@@ -64,7 +64,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.41,
+   "conf": 0.5,
+   "score": 0.82,
    "box": [
     765,
     77,
@@ -82,7 +83,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.06,
+   "conf": 0.38,
+   "score": 0.11,
    "box": [
     318,
     266,
@@ -110,7 +112,7 @@
     "qty": 1,
     "unit_gbp": 280,
     "total_gbp": 280,
-    "conf": 0.06,
+    "conf": 0.38,
     "evidence": [
      "S2"
     ],
@@ -203,9 +205,9 @@
  "spec": null,
  "score": null,
  "timing": {
-  "total": 3.78,
-  "ocr": 1.98,
-  "detector": 1.65
+  "total": 1.85,
+  "ocr": 1.11,
+  "detector": 0.61
  },
  "reader": "trained",
  "engine": "rapidocr",

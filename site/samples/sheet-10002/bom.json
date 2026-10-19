@@ -22,7 +22,7 @@
     "T12"
    ],
    "rule": "R-ACB-SELECT",
-   "conf": 0.41,
+   "conf": 0.97,
    "basis": "rating 2000 A from ['T9']; poles 4; kA 36"
   },
   {
@@ -38,7 +38,7 @@
     "T12"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.41,
+   "conf": 0.97,
    "basis": ""
   },
   {
@@ -54,7 +54,7 @@
     "T8"
    ],
    "rule": "R-ACB-SELECT",
-   "conf": 0.57,
+   "conf": 0.98,
    "basis": "rating 2000 A from ['T13']; poles 4; kA 36"
   },
   {
@@ -70,7 +70,7 @@
     "T8"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.57,
+   "conf": 0.98,
    "basis": ""
   },
   {
@@ -85,7 +85,7 @@
     "T10"
    ],
    "rule": "R-ACB-SELECT",
-   "conf": 0.18,
+   "conf": 0.93,
    "basis": "rating 1600 A from ['T10']; poles 4; kA 36"
   },
   {
@@ -100,7 +100,7 @@
     "T10"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.18,
+   "conf": 0.93,
    "basis": ""
   },
   {
@@ -115,7 +115,7 @@
     "T10"
    ],
    "rule": "R-ATS",
-   "conf": 0.18,
+   "conf": 0.93,
    "basis": ""
   },
   {
@@ -131,7 +131,7 @@
     "T18"
    ],
    "rule": "R-METERING",
-   "conf": 0.32,
+   "conf": 0.96,
    "basis": ""
   },
   {
@@ -146,7 +146,7 @@
     "T16"
    ],
    "rule": "R-METERING",
-   "conf": 0.33,
+   "conf": 0.97,
    "basis": ""
   },
   {
@@ -162,7 +162,7 @@
     "T17"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.14,
+   "conf": 0.75,
    "basis": ""
   },
   {
@@ -176,7 +176,7 @@
     "S10"
    ],
    "rule": "R-METERING",
-   "conf": 0.3,
+   "conf": 0.5,
    "basis": ""
   },
   {
@@ -190,7 +190,7 @@
     "S11"
    ],
    "rule": "R-METERING",
-   "conf": 0.07,
+   "conf": 0.38,
    "basis": ""
   },
   {
@@ -204,7 +204,7 @@
     "S12"
    ],
    "rule": "R-METERING",
-   "conf": 0.17,
+   "conf": 0.5,
    "basis": ""
   },
   {
@@ -218,7 +218,7 @@
     "S13"
    ],
    "rule": "R-METERING",
-   "conf": 0.21,
+   "conf": 0.5,
    "basis": ""
   },
   {
@@ -232,7 +232,7 @@
     "S14"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.06,
+   "conf": 0.38,
    "basis": ""
   },
   {
@@ -247,7 +247,7 @@
     "T19"
    ],
    "rule": "R-BUS-SECTION",
-   "conf": 0.14,
+   "conf": 0.75,
    "basis": ""
   },
   {
@@ -262,7 +262,7 @@
     "T19"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.14,
+   "conf": 0.75,
    "basis": ""
   },
   {
@@ -278,7 +278,7 @@
     "T24"
    ],
    "rule": "R-MCCB-SELECT",
-   "conf": 0.57,
+   "conf": 0.9,
    "basis": "rating 250 A; poles 3; kA 36"
   },
   {
@@ -294,7 +294,7 @@
     "T24"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.57,
+   "conf": 0.9,
    "basis": ""
   },
   {
@@ -310,7 +310,7 @@
     "T25"
    ],
    "rule": "R-MCCB-SELECT",
-   "conf": 0.58,
+   "conf": 0.91,
    "basis": "rating 250 A; poles 4; kA 36"
   },
   {
@@ -326,7 +326,7 @@
     "T25"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.58,
+   "conf": 0.91,
    "basis": ""
   },
   {
@@ -342,7 +342,7 @@
     "T46"
    ],
    "rule": "R-SPD",
-   "conf": 0.39,
+   "conf": 0.94,
    "basis": ""
   },
   {
@@ -358,7 +358,7 @@
     "T33"
    ],
    "rule": "R-MCCB-SELECT",
-   "conf": 0.22,
+   "conf": 0.9,
    "basis": "rating 890 A; poles 3; kA 36"
   },
   {
@@ -374,7 +374,7 @@
     "T33"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.22,
+   "conf": 0.9,
    "basis": ""
   },
   {
@@ -390,7 +390,7 @@
     "T44"
    ],
    "rule": "R-MCCB-SELECT",
-   "conf": 0.21,
+   "conf": 0.9,
    "basis": "rating 490 A; poles 4; kA 36"
   },
   {
@@ -406,7 +406,7 @@
     "T44"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.21,
+   "conf": 0.9,
    "basis": ""
   },
   {
@@ -604,39 +604,17 @@
   },
   {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D2, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15, D16, D17, D18, D19, D20, D21, D22, D23, D24, D25, D26, D27, D28, D29, D30, D31, D32, D33",
+   "what": "devices read with low confidence: D10, D11, D12, D13, D14, D16, D17, D18, D33",
    "action": "check against the drawing",
    "evidence": [
-    "D2",
-    "D4",
-    "D5",
-    "D6",
-    "D7",
-    "D8",
-    "D9",
     "D10",
     "D11",
     "D12",
     "D13",
     "D14",
-    "D15",
     "D16",
     "D17",
     "D18",
-    "D19",
-    "D20",
-    "D21",
-    "D22",
-    "D23",
-    "D24",
-    "D25",
-    "D26",
-    "D27",
-    "D28",
-    "D29",
-    "D30",
-    "D31",
-    "D32",
     "D33"
    ]
   }

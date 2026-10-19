@@ -22,21 +22,21 @@
    "key": "text",
    "title": "Read the words",
    "count": 24,
-   "seconds": 4.21,
-   "plain": "Read 24 pieces of text in 4.21 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 2.26,
+   "plain": "Read 24 pieces of text in 2.26 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
    "count": 7,
-   "seconds": 3.24,
-   "plain": "Found 7 symbols in 3.24 s: 3 motor starters, 2 power-factor correction banks, 1 generator, 1 incoming air circuit breaker. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "seconds": 2.04,
+   "plain": "Found 7 symbols in 2.04 s: 3 motor starters, 2 power-factor correction banks, 1 generator, 1 incoming air circuit breaker. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
    "count": 1,
-   "seconds": 0.19,
+   "seconds": 0.1,
    "plain": "Paired 1 of 7 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
@@ -64,7 +64,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.23,
+   "conf": 0.5,
+   "score": 0.46,
    "box": [
     1213,
     54,
@@ -82,7 +83,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.1,
+   "conf": 0.49,
+   "score": 0.21,
    "box": [
     174,
     333,
@@ -100,7 +102,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.17,
+   "conf": 0.5,
+   "score": 0.34,
    "box": [
     549,
     393,
@@ -118,7 +121,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.1,
+   "conf": 0.48,
+   "score": 0.2,
    "box": [
     159,
     423,
@@ -136,7 +140,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.06,
+   "conf": 0.38,
+   "score": 0.12,
    "box": [
     799,
     681,
@@ -154,7 +159,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.06,
+   "conf": 0.38,
+   "score": 0.11,
    "box": [
     852,
     825,
@@ -172,7 +178,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.13,
+   "conf": 0.75,
+   "score": 0.13,
    "box": [
     752,
     937,
@@ -318,7 +325,7 @@
   },
   {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D1, D2, D3, D4, D5, D6, D7",
+   "what": "devices read with low confidence: D1, D2, D3, D4, D5, D6",
    "action": "check against the drawing",
    "evidence": [
     "D1",
@@ -326,8 +333,7 @@
     "D3",
     "D4",
     "D5",
-    "D6",
-    "D7"
+    "D6"
    ]
   }
  ],
@@ -335,9 +341,9 @@
  "spec": null,
  "score": null,
  "timing": {
-  "total": 7.98,
-  "ocr": 4.21,
-  "detector": 3.24
+  "total": 4.64,
+  "ocr": 2.26,
+  "detector": 2.04
  },
  "reader": "trained",
  "engine": "rapidocr",

@@ -22,7 +22,7 @@
     "T4"
    ],
    "rule": "R-ACB-SELECT",
-   "conf": 0.13,
+   "conf": 0.75,
    "basis": "rating 3200 A from ['T3']; poles 3; kA 65"
   },
   {
@@ -38,7 +38,7 @@
     "T4"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.13,
+   "conf": 0.75,
    "basis": ""
   },
   {
@@ -54,7 +54,7 @@
     "T6"
    ],
    "rule": "R-METERING",
-   "conf": 0.33,
+   "conf": 0.96,
    "basis": ""
   },
   {
@@ -68,7 +68,7 @@
     "S4"
    ],
    "rule": "R-METERING",
-   "conf": 0.14,
+   "conf": 0.5,
    "basis": ""
   },
   {
@@ -84,7 +84,7 @@
     "T7"
    ],
    "rule": "R-BUS-SECTION",
-   "conf": 0.34,
+   "conf": 1.0,
    "basis": ""
   },
   {
@@ -100,7 +100,7 @@
     "T7"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.34,
+   "conf": 1.0,
    "basis": ""
   },
   {
@@ -116,7 +116,7 @@
     "T10"
    ],
    "rule": "R-FSW-SELECT",
-   "conf": 0.44,
+   "conf": 0.99,
    "basis": "rating 400 A; poles 3"
   },
   {
@@ -132,7 +132,7 @@
     "T10"
    ],
    "rule": "R-FUSE-LINKS",
-   "conf": 0.44,
+   "conf": 0.99,
    "basis": ""
   },
   {
@@ -148,7 +148,7 @@
     "T10"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.44,
+   "conf": 0.99,
    "basis": ""
   },
   {
@@ -164,7 +164,7 @@
     "T11"
    ],
    "rule": "R-FSW-SELECT",
-   "conf": 0.27,
+   "conf": 0.99,
    "basis": "rating 800 A; poles 4"
   },
   {
@@ -180,7 +180,7 @@
     "T11"
    ],
    "rule": "R-FUSE-LINKS",
-   "conf": 0.27,
+   "conf": 0.99,
    "basis": ""
   },
   {
@@ -196,7 +196,7 @@
     "T11"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.27,
+   "conf": 0.99,
    "basis": ""
   },
   {
@@ -212,7 +212,7 @@
     "T16"
    ],
    "rule": "R-FSW-SELECT",
-   "conf": 0.51,
+   "conf": 0.93,
    "basis": "rating 160 A; poles 3"
   },
   {
@@ -228,7 +228,7 @@
     "T16"
    ],
    "rule": "R-FUSE-LINKS",
-   "conf": 0.51,
+   "conf": 0.93,
    "basis": ""
   },
   {
@@ -244,7 +244,7 @@
     "T16"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.51,
+   "conf": 0.93,
    "basis": ""
   },
   {
@@ -260,7 +260,7 @@
     "T18"
    ],
    "rule": "R-FSW-SELECT",
-   "conf": 0.6,
+   "conf": 1.0,
    "basis": "rating 630 A; poles 4"
   },
   {
@@ -276,7 +276,7 @@
     "T18"
    ],
    "rule": "R-FUSE-LINKS",
-   "conf": 0.6,
+   "conf": 1.0,
    "basis": ""
   },
   {
@@ -292,7 +292,7 @@
     "T18"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.6,
+   "conf": 1.0,
    "basis": ""
   },
   {
@@ -308,7 +308,7 @@
     "T19"
    ],
    "rule": "R-FSW-SELECT",
-   "conf": 0.59,
+   "conf": 1.0,
    "basis": "rating 630 A; poles 3"
   },
   {
@@ -324,7 +324,7 @@
     "T19"
    ],
    "rule": "R-FUSE-LINKS",
-   "conf": 0.59,
+   "conf": 1.0,
    "basis": ""
   },
   {
@@ -340,7 +340,7 @@
     "T19"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.59,
+   "conf": 1.0,
    "basis": ""
   },
   {
@@ -459,18 +459,11 @@
   },
   {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D2, D3, D4, D5, D7, D8, D9, D11, D13, D14, D15",
+   "what": "devices read with low confidence: D4, D7, D14, D15",
    "action": "check against the drawing",
    "evidence": [
-    "D2",
-    "D3",
     "D4",
-    "D5",
     "D7",
-    "D8",
-    "D9",
-    "D11",
-    "D13",
     "D14",
     "D15"
    ]

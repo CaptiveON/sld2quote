@@ -22,21 +22,21 @@
    "key": "text",
    "title": "Read the words",
    "count": 73,
-   "seconds": 11.12,
-   "plain": "Read 73 pieces of text in 11.12 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 5.86,
+   "plain": "Read 73 pieces of text in 5.86 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
    "count": 32,
-   "seconds": 7.39,
-   "plain": "Found 32 symbols in 7.39 s: 13 outgoing moulded-case breakers, 4 incoming air circuit breakers, 3 panel meters, 3 current transformers, 2 transformers, 2 motor starters, 2 motors, 1 generator, 1 isolator, 1 power-factor correction bank. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "seconds": 4.28,
+   "plain": "Found 32 symbols in 4.28 s: 13 outgoing moulded-case breakers, 4 incoming air circuit breakers, 3 panel meters, 3 current transformers, 2 transformers, 2 motor starters, 2 motors, 1 generator, 1 isolator, 1 power-factor correction bank. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
    "count": 27,
-   "seconds": 0.25,
+   "seconds": 0.19,
    "plain": "Paired 27 of 32 symbols with the label text beside them; 10 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
@@ -64,7 +64,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.28,
+   "conf": 0.99,
+   "score": 0.28,
    "box": [
     2651,
     66,
@@ -83,6 +84,7 @@
    "kA": null,
    "dest": "",
    "conf": 0.96,
+   "score": 0.99,
    "box": [
     198,
     69,
@@ -100,7 +102,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.76,
+   "conf": 0.97,
+   "score": 0.76,
    "box": [
     1526,
     69,
@@ -118,7 +121,8 @@
    "poles": 3,
    "kA": 36,
    "dest": "",
-   "conf": 0.24,
+   "conf": 0.96,
+   "score": 0.24,
    "box": [
     203,
     198,
@@ -136,7 +140,8 @@
    "poles": 3,
    "kA": null,
    "dest": "",
-   "conf": 0.26,
+   "conf": 1.0,
+   "score": 0.26,
    "box": [
     2658,
     198,
@@ -154,7 +159,8 @@
    "poles": 3,
    "kA": 36,
    "dest": "",
-   "conf": 0.61,
+   "conf": 0.96,
+   "score": 0.61,
    "box": [
     1531,
     199,
@@ -172,7 +178,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.58,
+   "conf": 1.0,
+   "score": 0.58,
    "box": [
     258,
     288,
@@ -190,7 +197,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.06,
+   "conf": 0.38,
+   "score": 0.12,
    "box": [
     208,
     290,
@@ -208,7 +216,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.44,
+   "conf": 0.99,
+   "score": 0.44,
    "box": [
     1585,
     290,
@@ -226,7 +235,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.33,
+   "conf": 0.5,
+   "score": 0.65,
    "box": [
     2663,
     290,
@@ -244,7 +254,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.17,
+   "conf": 0.93,
+   "score": 0.17,
    "box": [
     2712,
     290,
@@ -262,7 +273,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.12,
+   "conf": 0.75,
+   "score": 0.12,
    "box": [
     1536,
     291,
@@ -280,7 +292,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.07,
+   "conf": 0.38,
+   "score": 0.13,
    "box": [
     1567,
     375,
@@ -298,7 +311,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.65,
+   "conf": 0.98,
+   "score": 0.65,
    "box": [
     1425,
     396,
@@ -316,7 +330,8 @@
    "poles": 3,
    "kA": null,
    "dest": "",
-   "conf": 0.51,
+   "conf": 0.99,
+   "score": 0.51,
    "box": [
     1337,
     499,
@@ -334,7 +349,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.33,
+   "conf": 0.5,
+   "score": 0.66,
    "box": [
     1529,
     499,
@@ -352,7 +368,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.2,
+   "conf": 0.5,
+   "score": 0.39,
    "box": [
     2681,
     499,
@@ -370,7 +387,8 @@
    "poles": 3,
    "kA": null,
    "dest": "MCCB 8b0 A 3P",
-   "conf": 0.4,
+   "conf": 0.98,
+   "score": 0.4,
    "box": [
     2488,
     519,
@@ -388,7 +406,8 @@
    "poles": 3,
    "kA": null,
    "dest": "ISOL 1q0 A 3P",
-   "conf": 0.85,
+   "conf": 0.91,
+   "score": 0.85,
    "box": [
     568,
     520,
@@ -406,7 +425,8 @@
    "poles": 4,
    "kA": null,
    "dest": "MCCB 8p0 A 4P",
-   "conf": 0.34,
+   "conf": 0.94,
+   "score": 0.34,
    "box": [
     761,
     549,
@@ -424,7 +444,8 @@
    "poles": 3,
    "kA": 50,
    "dest": "purhps",
-   "conf": 0.36,
+   "conf": 0.97,
+   "score": 0.36,
    "box": [
     952,
     549,
@@ -442,7 +463,8 @@
    "poles": 3,
    "kA": null,
    "dest": "MCCB 1p0 A 3P",
-   "conf": 0.33,
+   "conf": 0.92,
+   "score": 0.33,
    "box": [
     1144,
     549,
@@ -460,7 +482,8 @@
    "poles": 3,
    "kA": null,
    "dest": "MCCB 1b0 A 3P",
-   "conf": 0.23,
+   "conf": 0.97,
+   "score": 0.23,
    "box": [
     1720,
     549,
@@ -478,7 +501,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.38,
+   "conf": 1.0,
+   "score": 0.38,
    "box": [
     1337,
     550,
@@ -496,7 +520,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.45,
+   "conf": 0.99,
+   "score": 0.45,
    "box": [
     1529,
     551,
@@ -514,7 +539,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.28,
+   "conf": 0.96,
+   "score": 0.28,
    "box": [
     2681,
     551,
@@ -532,7 +558,8 @@
    "poles": 3,
    "kA": null,
    "dest": "MCCB 6B0 A 3P",
-   "conf": 0.22,
+   "conf": 0.97,
+   "score": 0.22,
    "box": [
     376,
     579,
@@ -550,7 +577,8 @@
    "poles": 3,
    "kA": null,
    "dest": "MCCB 2b0 A 3P",
-   "conf": 0.34,
+   "conf": 0.95,
+   "score": 0.34,
    "box": [
     1912,
     579,
@@ -568,7 +596,8 @@
    "poles": 3,
    "kA": 65,
    "dest": "data'hall",
-   "conf": 0.27,
+   "conf": 0.98,
+   "score": 0.27,
    "box": [
     2104,
     579,
@@ -586,7 +615,8 @@
    "poles": 3,
    "kA": null,
    "dest": "MCCB 2b0 A 3P",
-   "conf": 0.37,
+   "conf": 0.97,
+   "score": 0.37,
    "box": [
     2296,
     579,
@@ -604,7 +634,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.37,
+   "conf": 1.0,
+   "score": 0.37,
    "box": [
     2676,
     599,
@@ -622,7 +653,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.82,
+   "conf": 1.0,
+   "score": 0.82,
    "box": [
     1524,
     600,
@@ -650,7 +682,7 @@
     "qty": 1,
     "unit_gbp": 4200.0,
     "total_gbp": 4200.0,
-    "conf": 0.24,
+    "conf": 0.96,
     "evidence": [
      "S4",
      "T8",
@@ -665,7 +697,7 @@
     "qty": 1,
     "unit_gbp": 1400,
     "total_gbp": 1400,
-    "conf": 0.24,
+    "conf": 0.96,
     "evidence": [
      "S4",
      "T8",
@@ -680,7 +712,7 @@
     "qty": 1,
     "unit_gbp": 4200.0,
     "total_gbp": 4200.0,
-    "conf": 0.26,
+    "conf": 1.0,
     "evidence": [
      "S5",
      "T14",
@@ -695,7 +727,7 @@
     "qty": 1,
     "unit_gbp": 1400,
     "total_gbp": 1400,
-    "conf": 0.26,
+    "conf": 1.0,
     "evidence": [
      "S5",
      "T14",
@@ -710,7 +742,7 @@
     "qty": 1,
     "unit_gbp": 1850,
     "total_gbp": 1850,
-    "conf": 0.26,
+    "conf": 1.0,
     "evidence": [
      "S5",
      "T14",
@@ -725,7 +757,7 @@
     "qty": 1,
     "unit_gbp": 4200.0,
     "total_gbp": 4200.0,
-    "conf": 0.61,
+    "conf": 0.96,
     "evidence": [
      "S6",
      "T9",
@@ -740,7 +772,7 @@
     "qty": 1,
     "unit_gbp": 1400,
     "total_gbp": 1400,
-    "conf": 0.61,
+    "conf": 0.96,
     "evidence": [
      "S6",
      "T9",
@@ -755,7 +787,7 @@
     "qty": 1,
     "unit_gbp": 260,
     "total_gbp": 260,
-    "conf": 0.58,
+    "conf": 1.0,
     "evidence": [
      "S7",
      "T15",
@@ -770,7 +802,7 @@
     "qty": 1,
     "unit_gbp": 280,
     "total_gbp": 280,
-    "conf": 0.06,
+    "conf": 0.38,
     "evidence": [
      "S8"
     ],
@@ -783,7 +815,7 @@
     "qty": 1,
     "unit_gbp": 260,
     "total_gbp": 260,
-    "conf": 0.44,
+    "conf": 0.99,
     "evidence": [
      "S9",
      "T16",
@@ -798,7 +830,7 @@
     "qty": 1,
     "unit_gbp": 280,
     "total_gbp": 280,
-    "conf": 0.33,
+    "conf": 0.5,
     "evidence": [
      "S10"
     ],
@@ -811,7 +843,7 @@
     "qty": 1,
     "unit_gbp": 260,
     "total_gbp": 260,
-    "conf": 0.17,
+    "conf": 0.93,
     "evidence": [
      "S11",
      "T17"
@@ -825,7 +857,7 @@
     "qty": 1,
     "unit_gbp": 280,
     "total_gbp": 280,
-    "conf": 0.12,
+    "conf": 0.75,
     "evidence": [
      "S12",
      "T13"
@@ -839,7 +871,7 @@
     "qty": 1,
     "unit_gbp": 1900.0,
     "total_gbp": 1900.0,
-    "conf": 0.65,
+    "conf": 0.98,
     "evidence": [
      "S14",
      "T20"
@@ -853,7 +885,7 @@
     "qty": 1,
     "unit_gbp": 420,
     "total_gbp": 420,
-    "conf": 0.65,
+    "conf": 0.98,
     "evidence": [
      "S14",
      "T20"
@@ -867,7 +899,7 @@
     "qty": 1,
     "unit_gbp": 520.0,
     "total_gbp": 520.0,
-    "conf": 0.51,
+    "conf": 0.99,
     "evidence": [
      "S15",
      "T30"
@@ -881,7 +913,7 @@
     "qty": 1,
     "unit_gbp": 420,
     "total_gbp": 420,
-    "conf": 0.51,
+    "conf": 0.99,
     "evidence": [
      "S15",
      "T30"
@@ -895,7 +927,7 @@
     "qty": 1,
     "unit_gbp": 980.0,
     "total_gbp": 980.0,
-    "conf": 0.36,
+    "conf": 0.97,
     "evidence": [
      "S21",
      "T27",
@@ -910,7 +942,7 @@
     "qty": 1,
     "unit_gbp": 420,
     "total_gbp": 420,
-    "conf": 0.36,
+    "conf": 0.97,
     "evidence": [
      "S21",
      "T27",
@@ -925,7 +957,7 @@
     "qty": 1,
     "unit_gbp": 2242.0,
     "total_gbp": 2242.0,
-    "conf": 0.27,
+    "conf": 0.98,
     "evidence": [
      "S29",
      "T41",
@@ -940,7 +972,7 @@
     "qty": 1,
     "unit_gbp": 420,
     "total_gbp": 420,
-    "conf": 0.27,
+    "conf": 0.98,
     "evidence": [
      "S29",
      "T41",
@@ -1175,35 +1207,14 @@
   },
   {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D1, D4, D5, D7, D8, D9, D10, D11, D12, D13, D15, D16, D17, D18, D20, D21, D22, D23, D24, D25, D26, D27, D28, D29, D30, D31",
+   "what": "devices read with low confidence: D8, D10, D13, D16, D17",
    "action": "check against the drawing",
    "evidence": [
-    "D1",
-    "D4",
-    "D5",
-    "D7",
     "D8",
-    "D9",
     "D10",
-    "D11",
-    "D12",
     "D13",
-    "D15",
     "D16",
-    "D17",
-    "D18",
-    "D20",
-    "D21",
-    "D22",
-    "D23",
-    "D24",
-    "D25",
-    "D26",
-    "D27",
-    "D28",
-    "D29",
-    "D30",
-    "D31"
+    "D17"
    ]
   }
  ],
@@ -1337,9 +1348,9 @@
   "notes_accuracy": 1.0
  },
  "timing": {
-  "total": 19.11,
-  "ocr": 11.12,
-  "detector": 7.39
+  "total": 10.63,
+  "ocr": 5.86,
+  "detector": 4.28
  },
  "reader": "trained",
  "engine": "rapidocr",

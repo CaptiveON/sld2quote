@@ -894,7 +894,8 @@
     48,
     48
    ],
-   "shape_score": 0.44
+   "score": 0.44,
+   "shape_score": 1.0
   },
   {
    "id": "S2",
@@ -905,7 +906,8 @@
     45,
     72
    ],
-   "shape_score": 0.97
+   "score": 0.97,
+   "shape_score": 1.0
   },
   {
    "id": "S3",
@@ -916,7 +918,8 @@
     45,
     72
    ],
-   "shape_score": 0.68
+   "score": 0.68,
+   "shape_score": 1.0
   },
   {
    "id": "S4",
@@ -927,7 +930,8 @@
     26,
     26
    ],
-   "shape_score": 0.28
+   "score": 0.28,
+   "shape_score": 1.0
   },
   {
    "id": "S5",
@@ -938,7 +942,8 @@
     26,
     27
    ],
-   "shape_score": 0.15
+   "score": 0.15,
+   "shape_score": 0.75
   },
   {
    "id": "S6",
@@ -949,7 +954,8 @@
     29,
     26
    ],
-   "shape_score": 0.34
+   "score": 0.34,
+   "shape_score": 1.0
   },
   {
    "id": "S7",
@@ -960,7 +966,8 @@
     22,
     24
    ],
-   "shape_score": 0.63
+   "score": 0.63,
+   "shape_score": 1.0
   },
   {
    "id": "S8",
@@ -971,7 +978,8 @@
     19,
     18
    ],
-   "shape_score": 0.12
+   "score": 0.12,
+   "shape_score": 0.75
   },
   {
    "id": "S9",
@@ -982,7 +990,8 @@
     28,
     27
    ],
-   "shape_score": 0.15
+   "score": 0.15,
+   "shape_score": 0.75
   },
   {
    "id": "S10",
@@ -993,7 +1002,8 @@
     20,
     20
    ],
-   "shape_score": 0.42
+   "score": 0.42,
+   "shape_score": 1.0
   },
   {
    "id": "S11",
@@ -1004,7 +1014,8 @@
     21,
     20
    ],
-   "shape_score": 0.61
+   "score": 0.61,
+   "shape_score": 1.0
   },
   {
    "id": "S12",
@@ -1015,7 +1026,8 @@
     16,
     29
    ],
-   "shape_score": 0.69
+   "score": 0.69,
+   "shape_score": 1.0
   },
   {
    "id": "S13",
@@ -1026,7 +1038,8 @@
     17,
     29
    ],
-   "shape_score": 0.8
+   "score": 0.8,
+   "shape_score": 1.0
   },
   {
    "id": "S14",
@@ -1037,7 +1050,8 @@
     17,
     28
    ],
-   "shape_score": 0.78
+   "score": 0.78,
+   "shape_score": 1.0
   },
   {
    "id": "S15",
@@ -1048,7 +1062,8 @@
     21,
     20
    ],
-   "shape_score": 0.4
+   "score": 0.4,
+   "shape_score": 1.0
   },
   {
    "id": "S16",
@@ -1059,7 +1074,8 @@
     20,
     20
    ],
-   "shape_score": 0.37
+   "score": 0.37,
+   "shape_score": 1.0
   },
   {
    "id": "S17",
@@ -1070,7 +1086,8 @@
     22,
     20
    ],
-   "shape_score": 0.69
+   "score": 0.69,
+   "shape_score": 1.0
   },
   {
    "id": "S18",
@@ -1081,7 +1098,8 @@
     22,
     20
    ],
-   "shape_score": 0.58
+   "score": 0.58,
+   "shape_score": 1.0
   },
   {
    "id": "S19",
@@ -1092,7 +1110,8 @@
     17,
     29
    ],
-   "shape_score": 0.33
+   "score": 0.33,
+   "shape_score": 1.0
   },
   {
    "id": "S20",
@@ -1103,7 +1122,8 @@
     17,
     29
    ],
-   "shape_score": 0.36
+   "score": 0.36,
+   "shape_score": 1.0
   },
   {
    "id": "S21",
@@ -1114,7 +1134,8 @@
     22,
     20
    ],
-   "shape_score": 0.29
+   "score": 0.29,
+   "shape_score": 1.0
   },
   {
    "id": "S22",
@@ -1125,7 +1146,8 @@
     29,
     30
    ],
-   "shape_score": 0.47
+   "score": 0.47,
+   "shape_score": 1.0
   },
   {
    "id": "S23",
@@ -1136,7 +1158,8 @@
     28,
     28
    ],
-   "shape_score": 0.27
+   "score": 0.27,
+   "shape_score": 1.0
   },
   {
    "id": "S24",
@@ -1147,7 +1170,8 @@
     21,
     20
    ],
-   "shape_score": 0.42
+   "score": 0.42,
+   "shape_score": 1.0
   },
   {
    "id": "S25",
@@ -1158,7 +1182,8 @@
     22,
     20
    ],
-   "shape_score": 0.35
+   "score": 0.35,
+   "shape_score": 1.0
   },
   {
    "id": "S26",
@@ -1169,7 +1194,8 @@
     22,
     21
    ],
-   "shape_score": 0.55
+   "score": 0.55,
+   "shape_score": 1.0
   },
   {
    "id": "S27",
@@ -1180,7 +1206,8 @@
     21,
     20
    ],
-   "shape_score": 0.25
+   "score": 0.25,
+   "shape_score": 0.98
   },
   {
    "id": "S28",
@@ -1191,7 +1218,8 @@
     52,
     25
    ],
-   "shape_score": 0.91
+   "score": 0.91,
+   "shape_score": 1.0
   },
   {
    "id": "S29",
@@ -1202,7 +1230,8 @@
     45,
     25
    ],
-   "shape_score": 0.87
+   "score": 0.87,
+   "shape_score": 1.0
   }
  ],
  "devices": [
@@ -1219,7 +1248,8 @@
     "T1"
    ],
    "label": "standby | GEN-1 500 kVA",
-   "conf": 0.44,
+   "conf": 0.99,
+   "score": 0.44,
    "type": "GENERATOR",
    "rating": 500,
    "on_bus": "BUS-2",
@@ -1240,6 +1270,7 @@
    ],
    "label": "11 kV / 415 V | TX-1 2000 kVA",
    "conf": 0.96,
+   "score": 0.97,
    "type": "TRANSFORMER",
    "rating": 2000,
    "on_bus": "BUS-1",
@@ -1259,7 +1290,8 @@
     "T3"
    ],
    "label": "11 kV / 415 V | TX-2 2500 kVA",
-   "conf": 0.68,
+   "conf": 0.93,
+   "score": 0.68,
    "type": "TRANSFORMER",
    "rating": 2500,
    "on_bus": "BUS-2",
@@ -1279,7 +1311,8 @@
     "T12"
    ],
    "label": "ACB-2 2000 A 4P | Icu 65 kA, withdrawable",
-   "conf": 0.28,
+   "conf": 0.97,
+   "score": 0.28,
    "type": "ACB",
    "rating": 2000,
    "poles": 4,
@@ -1300,7 +1333,8 @@
     "T10"
    ],
    "label": "ACB-3 1600 A 4P ATS",
-   "conf": 0.15,
+   "conf": 0.75,
+   "score": 0.15,
    "type": "ACB",
    "rating": 1600,
    "poles": 4,
@@ -1322,7 +1356,8 @@
     "T11"
    ],
    "label": "ACB-1 2000 A 4P | Icu 65 kA, withdrawable",
-   "conf": 0.34,
+   "conf": 0.98,
+   "score": 0.34,
    "type": "ACB",
    "rating": 2000,
    "poles": 4,
@@ -1344,7 +1379,8 @@
     "T14"
    ],
    "label": "CT 2000/5A | BUSBAR A 2000 A Cu 65 kA/1s",
-   "conf": 0.63,
+   "conf": 0.97,
+   "score": 0.63,
    "type": "METER",
    "rating": null,
    "on_bus": "BUS-1",
@@ -1361,7 +1397,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.06,
+   "conf": 0.38,
+   "score": 0.12,
    "type": "CT",
    "rating": null,
    "on_bus": "BUS-1",
@@ -1381,7 +1418,8 @@
     "T15"
    ],
    "label": "BS-1 2000 A | BUSBAR B 2000 A Cu 65 kA/1s",
-   "conf": 0.15,
+   "conf": 0.75,
+   "score": 0.15,
    "type": "BUS_SECTION",
    "rating": 2000,
    "poles": null,
@@ -1402,7 +1440,8 @@
     "T17"
    ],
    "label": "MCCB 250 A 3P 80 kA",
-   "conf": 0.42,
+   "conf": 0.97,
+   "score": 0.42,
    "type": "MCCB",
    "rating": 250,
    "poles": 3,
@@ -1424,7 +1463,8 @@
     "T18"
    ],
    "label": "MCCB 100 A 3P 80 kA",
-   "conf": 0.61,
+   "conf": 0.94,
+   "score": 0.61,
    "type": "MCCB",
    "rating": 100,
    "poles": 3,
@@ -1447,7 +1487,8 @@
     "T19"
    ],
    "label": "kitchen | ISOL 400 A 4P",
-   "conf": 0.69,
+   "conf": 0.96,
+   "score": 0.69,
    "type": "ISOLATOR",
    "rating": 400,
    "poles": 4,
@@ -1470,7 +1511,8 @@
     "T23"
    ],
    "label": "kitchen | ISOL 160 A 3P",
-   "conf": 0.8,
+   "conf": 0.97,
+   "score": 0.8,
    "type": "ISOLATOR",
    "rating": 160,
    "poles": 3,
@@ -1493,7 +1535,8 @@
     "T35"
    ],
    "label": "SB-13 | sub-board 13",
-   "conf": 0.78,
+   "conf": 1.0,
+   "score": 0.78,
    "type": "ISOLATOR",
    "rating": null,
    "poles": null,
@@ -1515,7 +1558,8 @@
     "T22"
    ],
    "label": "MCCB 630 A 4P",
-   "conf": 0.4,
+   "conf": 1.0,
+   "score": 0.4,
    "type": "MCCB",
    "rating": 630,
    "poles": 4,
@@ -1537,7 +1581,8 @@
     "T24"
    ],
    "label": "MCCB 400 A 4P",
-   "conf": 0.37,
+   "conf": 0.99,
+   "score": 0.37,
    "type": "MCCB",
    "rating": 400,
    "poles": 4,
@@ -1560,7 +1605,8 @@
     "T25"
    ],
    "label": "lifts | MCCB 400 A 4P",
-   "conf": 0.69,
+   "conf": 0.97,
+   "score": 0.69,
    "type": "MCCB",
    "rating": 400,
    "poles": 4,
@@ -1582,7 +1628,8 @@
     "T27"
    ],
    "label": "MCCB 400 A 4P",
-   "conf": 0.58,
+   "conf": 0.98,
+   "score": 0.58,
    "type": "MCCB",
    "rating": 400,
    "poles": 4,
@@ -1605,7 +1652,8 @@
     "T20"
    ],
    "label": "fan F-5 | S/D 55 kW",
-   "conf": 0.33,
+   "conf": 1.0,
+   "score": 0.33,
    "type": "CONTACTOR",
    "rating": null,
    "on_bus": "BUS-1",
@@ -1625,7 +1673,8 @@
     "T30"
    ],
    "label": "DOL 11 kW | compressor C-6",
-   "conf": 0.36,
+   "conf": 0.97,
+   "score": 0.36,
    "type": "CONTACTOR",
    "rating": null,
    "on_bus": "BUS-1",
@@ -1644,7 +1693,8 @@
     "T37"
    ],
    "label": "MCCB 250 A 3P",
-   "conf": 0.29,
+   "conf": 1.0,
+   "score": 0.29,
    "type": "MCCB",
    "rating": 250,
    "poles": 3,
@@ -1666,7 +1716,8 @@
     "T40"
    ],
    "label": "3C 35 mm2 XLPE/SWA",
-   "conf": 0.47,
+   "conf": 0.97,
+   "score": 0.47,
    "type": "MOTOR",
    "rating": null,
    "on_bus": "BUS-1",
@@ -1685,7 +1736,8 @@
     "T39"
    ],
    "label": "3C 120 mm2 XLPE/SWA",
-   "conf": 0.27,
+   "conf": 0.99,
+   "score": 0.27,
    "type": "MOTOR",
    "rating": null,
    "on_bus": "BUS-1",
@@ -1704,7 +1756,8 @@
     "T48"
    ],
    "label": "MCCB 400 A 4P",
-   "conf": 0.42,
+   "conf": 0.99,
+   "score": 0.42,
    "type": "MCCB",
    "rating": 400,
    "poles": 4,
@@ -1727,7 +1780,8 @@
     "T49"
    ],
    "label": "SB-4 | MCCB 250 A 4P",
-   "conf": 0.35,
+   "conf": 1.0,
+   "score": 0.35,
    "type": "MCCB",
    "rating": 250,
    "poles": 4,
@@ -1749,7 +1803,8 @@
     "T50"
    ],
    "label": "MCCB 630 A 4P",
-   "conf": 0.55,
+   "conf": 1.0,
+   "score": 0.55,
    "type": "MCCB",
    "rating": 630,
    "poles": 4,
@@ -1771,7 +1826,8 @@
     "T51"
    ],
    "label": "MCCB 800 A 4P",
-   "conf": 0.25,
+   "conf": 0.98,
+   "score": 0.25,
    "type": "MCCB",
    "rating": 800,
    "poles": 4,
@@ -1793,7 +1849,8 @@
     "T61"
    ],
    "label": "4C 2x240 mm2 XLPE/SWA",
-   "conf": 0.91,
+   "conf": 0.99,
+   "score": 0.91,
    "type": "BOARD",
    "rating": null,
    "on_bus": "BUS-2",
@@ -1810,7 +1867,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.43,
+   "conf": 0.5,
+   "score": 0.87,
    "type": "BOARD",
    "rating": null,
    "on_bus": "BUS-1",
@@ -1831,21 +1889,23 @@
   ]
  },
  "crops": false,
+ "ocr_engine": "rapidocr",
  "reader": "trained",
  "seconds": {
-  "total": 32.02,
-  "ocr": 13.66,
-  "detector": 17.9
+  "total": 19.31,
+  "ocr": 7.51,
+  "detector": 11.55
  },
  "detector": {
   "weights": "weights/rtdetr_r18_full",
   "device": "cpu",
-  "threads": 4,
+  "threads": 2,
   "score_threshold": 0.11,
   "score_threshold_source": "drawing",
   "nms_iou": 0.5,
   "merge_iou": 0.5,
   "edge_px": 2,
-  "contain": 0.8
+  "contain": 0.8,
+  "calibrated": true
  }
 }

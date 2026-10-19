@@ -414,7 +414,8 @@
     45,
     73
    ],
-   "shape_score": 0.97
+   "score": 0.97,
+   "shape_score": 1.0
   },
   {
    "id": "S2",
@@ -425,7 +426,8 @@
     30,
     30
    ],
-   "shape_score": 0.13
+   "score": 0.13,
+   "shape_score": 0.75
   },
   {
    "id": "S3",
@@ -436,7 +438,8 @@
     26,
     26
    ],
-   "shape_score": 0.33
+   "score": 0.33,
+   "shape_score": 1.0
   },
   {
    "id": "S4",
@@ -447,7 +450,8 @@
     22,
     21
    ],
-   "shape_score": 0.29
+   "score": 0.29,
+   "shape_score": 1.0
   },
   {
    "id": "S5",
@@ -458,7 +462,8 @@
     30,
     31
    ],
-   "shape_score": 0.34
+   "score": 0.34,
+   "shape_score": 1.0
   },
   {
    "id": "S6",
@@ -469,7 +474,8 @@
     19,
     34
    ],
-   "shape_score": 0.69
+   "score": 0.69,
+   "shape_score": 1.0
   },
   {
    "id": "S7",
@@ -480,7 +486,8 @@
     29,
     17
    ],
-   "shape_score": 0.16
+   "score": 0.16,
+   "shape_score": 0.93
   },
   {
    "id": "S8",
@@ -491,7 +498,8 @@
     18,
     31
    ],
-   "shape_score": 0.44
+   "score": 0.44,
+   "shape_score": 1.0
   },
   {
    "id": "S9",
@@ -502,7 +510,8 @@
     18,
     31
    ],
-   "shape_score": 0.27
+   "score": 0.27,
+   "shape_score": 1.0
   },
   {
    "id": "S10",
@@ -513,7 +522,8 @@
     20,
     36
    ],
-   "shape_score": 0.71
+   "score": 0.71,
+   "shape_score": 1.0
   },
   {
    "id": "S11",
@@ -524,7 +534,8 @@
     19,
     32
    ],
-   "shape_score": 0.51
+   "score": 0.51,
+   "shape_score": 1.0
   },
   {
    "id": "S12",
@@ -535,7 +546,8 @@
     19,
     33
    ],
-   "shape_score": 0.6
+   "score": 0.6,
+   "shape_score": 1.0
   },
   {
    "id": "S13",
@@ -546,7 +558,8 @@
     19,
     34
    ],
-   "shape_score": 0.59
+   "score": 0.59,
+   "shape_score": 1.0
   },
   {
    "id": "S14",
@@ -557,7 +570,8 @@
     34,
     35
    ],
-   "shape_score": 0.42
+   "score": 0.42,
+   "shape_score": 1.0
   },
   {
    "id": "S15",
@@ -568,7 +582,8 @@
     31,
     18
    ],
-   "shape_score": 0.16
+   "score": 0.16,
+   "shape_score": 0.93
   }
  ],
  "devices": [
@@ -585,7 +600,8 @@
     "T1"
    ],
    "label": "11 kV / 415 V | TX-1 2500 kVA",
-   "conf": 0.97,
+   "conf": 0.98,
+   "score": 0.97,
    "type": "TRANSFORMER",
    "rating": 2500,
    "on_bus": "BUS-1",
@@ -605,7 +621,8 @@
     "T4"
    ],
    "label": "ACB-1 3200 A 3P | Icu 65 kA, withdrawabIe",
-   "conf": 0.13,
+   "conf": 0.75,
+   "score": 0.13,
    "type": "ACB",
    "rating": 3200,
    "poles": 3,
@@ -627,7 +644,8 @@
     "T6"
    ],
    "label": "CT 3200/5A | BUSBAR A 3200 A Cu 65 kA/1s",
-   "conf": 0.33,
+   "conf": 0.96,
+   "score": 0.33,
    "type": "METER",
    "rating": null,
    "on_bus": "BUS-1",
@@ -644,7 +662,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.14,
+   "conf": 0.5,
+   "score": 0.29,
    "type": "CT",
    "rating": null,
    "on_bus": "BUS-1",
@@ -664,7 +683,8 @@
     "T7"
    ],
    "label": "BS-1 3200 A | BUSBAR B 3200 A Cu 65 kA/1s",
-   "conf": 0.34,
+   "conf": 1.0,
+   "score": 0.34,
    "type": "BUS_SECTION",
    "rating": 3200,
    "poles": null,
@@ -686,7 +706,8 @@
     "T20"
    ],
    "label": "DOL 11 kW | M",
-   "conf": 0.69,
+   "conf": 1.0,
+   "score": 0.69,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
@@ -706,7 +727,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.08,
+   "conf": 0.47,
+   "score": 0.16,
    "type": "CAPACITOR",
    "rating": null,
    "on_bus": "BUS-2",
@@ -726,7 +748,8 @@
     "T10"
    ],
    "label": "data hall | FSW 400 A 3P",
-   "conf": 0.44,
+   "conf": 0.99,
+   "score": 0.44,
    "type": "FUSE_SWITCH",
    "rating": 400,
    "poles": 3,
@@ -749,7 +772,8 @@
     "T11"
    ],
    "label": "data hall | FSW 800 A 4P",
-   "conf": 0.27,
+   "conf": 0.99,
+   "score": 0.27,
    "type": "FUSE_SWITCH",
    "rating": 800,
    "poles": 4,
@@ -771,7 +795,8 @@
     "T15"
    ],
    "label": "fan F-5",
-   "conf": 0.71,
+   "conf": 1.0,
+   "score": 0.71,
    "type": "CONTACTOR",
    "rating": null,
    "on_bus": "BUS-2",
@@ -791,7 +816,8 @@
     "T16"
    ],
    "label": "spare | FSW 160 A 3P",
-   "conf": 0.51,
+   "conf": 0.93,
+   "score": 0.51,
    "type": "FUSE_SWITCH",
    "rating": 160,
    "poles": 3,
@@ -814,7 +840,8 @@
     "T18"
    ],
    "label": "data hall | FSW 630 A 4P",
-   "conf": 0.6,
+   "conf": 1.0,
+   "score": 0.6,
    "type": "FUSE_SWITCH",
    "rating": 630,
    "poles": 4,
@@ -837,7 +864,8 @@
     "T19"
    ],
    "label": "DB-6 wards | FSW 630 A 3P",
-   "conf": 0.59,
+   "conf": 1.0,
+   "score": 0.59,
    "type": "FUSE_SWITCH",
    "rating": 630,
    "poles": 3,
@@ -857,7 +885,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.21,
+   "conf": 0.5,
+   "score": 0.42,
    "type": "MOTOR",
    "rating": null,
    "on_bus": "BUS-2",
@@ -874,7 +903,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.08,
+   "conf": 0.47,
+   "score": 0.16,
    "type": "EARTH",
    "rating": null,
    "on_bus": null,
@@ -895,21 +925,23 @@
   ]
  },
  "crops": false,
+ "ocr_engine": "rapidocr",
  "reader": "trained",
  "seconds": {
-  "total": 15.52,
-  "ocr": 7.25,
-  "detector": 8.07
+  "total": 7.95,
+  "ocr": 4.32,
+  "detector": 3.48
  },
  "detector": {
   "weights": "weights/rtdetr_r18_full",
   "device": "cpu",
-  "threads": 4,
+  "threads": 2,
   "score_threshold": 0.11,
   "score_threshold_source": "drawing",
   "nms_iou": 0.5,
   "merge_iou": 0.5,
   "edge_px": 2,
-  "contain": 0.8
+  "contain": 0.8,
+  "calibrated": true
  }
 }

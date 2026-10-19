@@ -22,21 +22,21 @@
    "key": "text",
    "title": "Read the words",
    "count": 26,
-   "seconds": 3.3,
-   "plain": "Read 26 pieces of text in 3.3 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 2.33,
+   "plain": "Read 26 pieces of text in 2.33 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
    "count": 10,
-   "seconds": 3.07,
-   "plain": "Found 10 symbols in 3.07 s: 3 incoming air circuit breakers, 2 isolators, 1 transformer, 1 panel meter, 1 current transformer, 1 motor starter, 1 motor. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "seconds": 2.02,
+   "plain": "Found 10 symbols in 2.02 s: 3 incoming air circuit breakers, 2 isolators, 1 transformer, 1 panel meter, 1 current transformer, 1 motor starter, 1 motor. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
    "count": 8,
-   "seconds": 0.16,
+   "seconds": 0.11,
    "plain": "Paired 8 of 10 symbols with the label text beside them; 4 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
@@ -64,7 +64,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.63,
+   "conf": 0.95,
+   "score": 0.63,
    "box": [
     199,
     67,
@@ -82,7 +83,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.33,
+   "conf": 0.94,
+   "score": 0.33,
    "box": [
     258,
     280,
@@ -100,7 +102,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.2,
+   "conf": 0.5,
+   "score": 0.4,
    "box": [
     210,
     282,
@@ -118,7 +121,8 @@
    "poles": 3,
    "kA": null,
    "dest": "",
-   "conf": 0.12,
+   "conf": 0.75,
+   "score": 0.12,
    "box": [
     1028,
     501,
@@ -136,7 +140,8 @@
    "poles": 4,
    "kA": null,
    "dest": "",
-   "conf": 0.18,
+   "conf": 0.89,
+   "score": 0.18,
    "box": [
     187,
     518,
@@ -154,7 +159,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.43,
+   "conf": 0.92,
+   "score": 0.43,
    "box": [
     1027,
     537,
@@ -172,7 +178,8 @@
    "poles": null,
    "kA": null,
    "dest": "sdund",
-   "conf": 0.13,
+   "conf": 0.75,
+   "score": 0.13,
    "box": [
     464,
     546,
@@ -190,7 +197,8 @@
    "poles": 4,
    "kA": null,
    "dest": "",
-   "conf": 0.25,
+   "conf": 0.93,
+   "score": 0.25,
    "box": [
     748,
     550,
@@ -208,7 +216,8 @@
    "poles": null,
    "kA": null,
    "dest": "pumps",
-   "conf": 0.48,
+   "conf": 0.95,
+   "score": 0.48,
    "box": [
     1308,
     550,
@@ -226,7 +235,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.25,
+   "conf": 0.5,
+   "score": 0.5,
    "box": [
     1025,
     583,
@@ -254,7 +264,7 @@
     "qty": 1,
     "unit_gbp": 260,
     "total_gbp": 260,
-    "conf": 0.33,
+    "conf": 0.94,
     "evidence": [
      "S2",
      "T5",
@@ -269,7 +279,7 @@
     "qty": 1,
     "unit_gbp": 280,
     "total_gbp": 280,
-    "conf": 0.2,
+    "conf": 0.5,
     "evidence": [
      "S3"
     ],
@@ -282,7 +292,7 @@
     "qty": 1,
     "unit_gbp": 4200.0,
     "total_gbp": 4200.0,
-    "conf": 0.12,
+    "conf": 0.75,
     "evidence": [
      "S4",
      "T9",
@@ -297,7 +307,7 @@
     "qty": 1,
     "unit_gbp": 1400,
     "total_gbp": 1400,
-    "conf": 0.12,
+    "conf": 0.75,
     "evidence": [
      "S4",
      "T9",
@@ -312,7 +322,7 @@
     "qty": 1,
     "unit_gbp": 5124.0,
     "total_gbp": 5124.0,
-    "conf": 0.18,
+    "conf": 0.89,
     "evidence": [
      "S5",
      "T8"
@@ -326,7 +336,7 @@
     "qty": 1,
     "unit_gbp": 1400,
     "total_gbp": 1400,
-    "conf": 0.18,
+    "conf": 0.89,
     "evidence": [
      "S5",
      "T8"
@@ -340,7 +350,7 @@
     "qty": 1,
     "unit_gbp": 5124.0,
     "total_gbp": 5124.0,
-    "conf": 0.25,
+    "conf": 0.93,
     "evidence": [
      "S8",
      "T11"
@@ -354,7 +364,7 @@
     "qty": 1,
     "unit_gbp": 1400,
     "total_gbp": 1400,
-    "conf": 0.25,
+    "conf": 0.93,
     "evidence": [
      "S8",
      "T11"
@@ -481,17 +491,10 @@
   },
   {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D2, D3, D4, D5, D6, D7, D8, D9, D10",
+   "what": "devices read with low confidence: D3, D10",
    "action": "check against the drawing",
    "evidence": [
-    "D2",
     "D3",
-    "D4",
-    "D5",
-    "D6",
-    "D7",
-    "D8",
-    "D9",
     "D10"
    ]
   }
@@ -595,9 +598,9 @@
   "notes_accuracy": 1.0
  },
  "timing": {
-  "total": 6.81,
-  "ocr": 3.3,
-  "detector": 3.07
+  "total": 4.66,
+  "ocr": 2.33,
+  "detector": 2.02
  },
  "reader": "trained",
  "engine": "rapidocr",

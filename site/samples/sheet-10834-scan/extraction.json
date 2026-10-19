@@ -387,7 +387,8 @@
     45,
     73
    ],
-   "shape_score": 0.63
+   "score": 0.63,
+   "shape_score": 1.0
   },
   {
    "id": "S2",
@@ -398,7 +399,8 @@
     26,
     26
    ],
-   "shape_score": 0.33
+   "score": 0.33,
+   "shape_score": 1.0
   },
   {
    "id": "S3",
@@ -409,7 +411,8 @@
     21,
     22
    ],
-   "shape_score": 0.4
+   "score": 0.4,
+   "shape_score": 1.0
   },
   {
    "id": "S4",
@@ -420,7 +423,8 @@
     25,
     24
    ],
-   "shape_score": 0.12
+   "score": 0.12,
+   "shape_score": 0.75
   },
   {
    "id": "S5",
@@ -431,7 +435,8 @@
     25,
     24
    ],
-   "shape_score": 0.18
+   "score": 0.18,
+   "shape_score": 0.93
   },
   {
    "id": "S6",
@@ -442,7 +447,8 @@
     21,
     38
    ],
-   "shape_score": 0.43
+   "score": 0.43,
+   "shape_score": 1.0
   },
   {
    "id": "S7",
@@ -453,7 +459,8 @@
     23,
     37
    ],
-   "shape_score": 0.13
+   "score": 0.13,
+   "shape_score": 0.75
   },
   {
    "id": "S8",
@@ -464,7 +471,8 @@
     25,
     24
    ],
-   "shape_score": 0.25
+   "score": 0.25,
+   "shape_score": 0.98
   },
   {
    "id": "S9",
@@ -475,7 +483,8 @@
     21,
     35
    ],
-   "shape_score": 0.48
+   "score": 0.48,
+   "shape_score": 1.0
   },
   {
    "id": "S10",
@@ -486,7 +495,8 @@
     32,
     32
    ],
-   "shape_score": 0.5
+   "score": 0.5,
+   "shape_score": 1.0
   }
  ],
  "devices": [
@@ -503,7 +513,8 @@
     "T1"
    ],
    "label": "11 kV/415V | TX-11250 kVA",
-   "conf": 0.63,
+   "conf": 0.95,
+   "score": 0.63,
    "type": "TRANSFORMER",
    "rating": 1250,
    "on_bus": "BUS-1",
@@ -523,7 +534,8 @@
     "T6"
    ],
    "label": "CT 1600/5A | BUSBAR A 1600 ACu 36 kA/1s",
-   "conf": 0.33,
+   "conf": 0.94,
+   "score": 0.33,
    "type": "METER",
    "rating": null,
    "on_bus": "BUS-1",
@@ -540,7 +552,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.2,
+   "conf": 0.5,
+   "score": 0.4,
    "type": "CT",
    "rating": null,
    "on_bus": "BUS-1",
@@ -560,7 +573,8 @@
     "T7"
    ],
    "label": "S/D'45 kW | MCCB:250 A 3P",
-   "conf": 0.12,
+   "conf": 0.75,
+   "score": 0.12,
    "type": "ACB",
    "rating": 250,
    "poles": 3,
@@ -581,7 +595,8 @@
     "T8"
    ],
    "label": "MCCB 250 A.4P",
-   "conf": 0.18,
+   "conf": 0.89,
+   "score": 0.18,
    "type": "ACB",
    "rating": 250,
    "poles": 4,
@@ -602,7 +617,8 @@
     "T12"
    ],
    "label": "pump p-4",
-   "conf": 0.43,
+   "conf": 0.92,
+   "score": 0.43,
    "type": "CONTACTOR",
    "rating": null,
    "on_bus": "BUS-1",
@@ -622,7 +638,8 @@
     "T13"
    ],
    "label": "sdund | ISOL400 A4P",
-   "conf": 0.13,
+   "conf": 0.75,
+   "score": 0.13,
    "type": "ISOLATOR",
    "rating": null,
    "poles": null,
@@ -644,7 +661,8 @@
     "T11"
    ],
    "label": "MCCB 400 A.4P",
-   "conf": 0.25,
+   "conf": 0.93,
+   "score": 0.25,
    "type": "ACB",
    "rating": 400,
    "poles": 4,
@@ -666,7 +684,8 @@
     "T14"
    ],
    "label": "pumps | ISOL100 A4P",
-   "conf": 0.48,
+   "conf": 0.95,
+   "score": 0.48,
    "type": "ISOLATOR",
    "rating": null,
    "poles": null,
@@ -686,7 +705,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.25,
+   "conf": 0.5,
+   "score": 0.5,
    "type": "MOTOR",
    "rating": null,
    "on_bus": "BUS-1",
@@ -707,21 +727,23 @@
   ]
  },
  "crops": false,
+ "ocr_engine": "rapidocr",
  "reader": "trained",
  "seconds": {
-  "total": 6.53,
-  "ocr": 3.3,
-  "detector": 3.07
+  "total": 4.46,
+  "ocr": 2.33,
+  "detector": 2.02
  },
  "detector": {
   "weights": "weights/rtdetr_r18_full",
   "device": "cpu",
-  "threads": 4,
+  "threads": 2,
   "score_threshold": 0.11,
   "score_threshold_source": "drawing",
   "nms_iou": 0.5,
   "merge_iou": 0.5,
   "edge_px": 2,
-  "contain": 0.8
+  "contain": 0.8,
+  "calibrated": true
  }
 }

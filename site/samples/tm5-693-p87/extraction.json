@@ -294,7 +294,8 @@
     16,
     29
    ],
-   "shape_score": 0.13
+   "score": 0.13,
+   "shape_score": 0.75
   },
   {
    "id": "S2",
@@ -305,7 +306,8 @@
     19,
     23
    ],
-   "shape_score": 0.4
+   "score": 0.4,
+   "shape_score": 1.0
   },
   {
    "id": "S3",
@@ -316,7 +318,8 @@
     43,
     28
    ],
-   "shape_score": 0.14
+   "score": 0.14,
+   "shape_score": 0.75
   },
   {
    "id": "S4",
@@ -327,7 +330,8 @@
     22,
     25
    ],
-   "shape_score": 0.28
+   "score": 0.28,
+   "shape_score": 1.0
   },
   {
    "id": "S5",
@@ -338,7 +342,8 @@
     16,
     27
    ],
-   "shape_score": 0.11
+   "score": 0.11,
+   "shape_score": 0.75
   },
   {
    "id": "S6",
@@ -349,7 +354,8 @@
     23,
     26
    ],
-   "shape_score": 0.13
+   "score": 0.13,
+   "shape_score": 0.75
   },
   {
    "id": "S7",
@@ -360,7 +366,8 @@
     20,
     25
    ],
-   "shape_score": 0.12
+   "score": 0.12,
+   "shape_score": 0.75
   },
   {
    "id": "S8",
@@ -371,7 +378,8 @@
     18,
     29
    ],
-   "shape_score": 0.14
+   "score": 0.14,
+   "shape_score": 0.75
   },
   {
    "id": "S9",
@@ -382,7 +390,8 @@
     51,
     22
    ],
-   "shape_score": 0.18
+   "score": 0.18,
+   "shape_score": 0.97
   },
   {
    "id": "S10",
@@ -393,7 +402,8 @@
     21,
     24
    ],
-   "shape_score": 0.13
+   "score": 0.13,
+   "shape_score": 0.75
   },
   {
    "id": "S11",
@@ -404,7 +414,8 @@
     16,
     17
    ],
-   "shape_score": 0.14
+   "score": 0.14,
+   "shape_score": 0.75
   },
   {
    "id": "S12",
@@ -415,7 +426,8 @@
     22,
     25
    ],
-   "shape_score": 0.17
+   "score": 0.17,
+   "shape_score": 0.93
   },
   {
    "id": "S13",
@@ -426,7 +438,8 @@
     56,
     76
    ],
-   "shape_score": 0.3
+   "score": 0.3,
+   "shape_score": 1.0
   },
   {
    "id": "S14",
@@ -437,7 +450,8 @@
     22,
     27
    ],
-   "shape_score": 0.14
+   "score": 0.14,
+   "shape_score": 0.75
   },
   {
    "id": "S15",
@@ -448,7 +462,8 @@
     36,
     27
    ],
-   "shape_score": 0.24
+   "score": 0.24,
+   "shape_score": 0.98
   },
   {
    "id": "S16",
@@ -459,7 +474,8 @@
     19,
     24
    ],
-   "shape_score": 0.15
+   "score": 0.15,
+   "shape_score": 0.93
   }
  ],
  "devices": [
@@ -475,7 +491,8 @@
     "T3"
    ],
    "label": "CB",
-   "conf": 0.13,
+   "conf": 0.75,
+   "score": 0.13,
    "type": "ACB",
    "rating": null,
    "poles": null,
@@ -494,7 +511,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.2,
+   "conf": 0.5,
+   "score": 0.4,
    "type": "METER",
    "rating": null,
    "on_bus": "BUS-1",
@@ -513,7 +531,8 @@
     "T8"
    ],
    "label": "Battery",
-   "conf": 0.14,
+   "conf": 0.75,
+   "score": 0.14,
    "type": "CONTACTOR",
    "rating": null,
    "on_bus": "BUS-2",
@@ -530,7 +549,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.14,
+   "conf": 0.5,
+   "score": 0.28,
    "type": "CT",
    "rating": null,
    "on_bus": "BUS-2",
@@ -549,7 +569,8 @@
     "T6"
    ],
    "label": "CB",
-   "conf": 0.11,
+   "conf": 0.75,
+   "score": 0.11,
    "type": "ACB",
    "rating": null,
    "poles": null,
@@ -568,7 +589,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.07,
+   "conf": 0.38,
+   "score": 0.13,
    "type": "METER",
    "rating": null,
    "on_bus": "BUS-1",
@@ -585,7 +607,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.06,
+   "conf": 0.38,
+   "score": 0.12,
    "type": "METER",
    "rating": null,
    "on_bus": "BUS-2",
@@ -602,7 +625,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.07,
+   "conf": 0.38,
+   "score": 0.14,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
@@ -622,7 +646,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.09,
+   "conf": 0.48,
+   "score": 0.18,
    "type": "CONTACTOR",
    "rating": null,
    "on_bus": "BUS-2",
@@ -639,7 +664,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.07,
+   "conf": 0.38,
+   "score": 0.13,
    "type": "RELAY",
    "rating": null,
    "on_bus": "BUS-1",
@@ -658,7 +684,8 @@
     "T11"
    ],
    "label": "Sync",
-   "conf": 0.14,
+   "conf": 0.75,
+   "score": 0.14,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
@@ -681,7 +708,8 @@
     "T14"
    ],
    "label": "Transfer | Switch",
-   "conf": 0.17,
+   "conf": 0.93,
+   "score": 0.17,
    "type": "METER",
    "rating": null,
    "on_bus": "BUS-1",
@@ -698,7 +726,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.15,
+   "conf": 0.5,
+   "score": 0.3,
    "type": "MCCB",
    "rating": null,
    "poles": null,
@@ -718,7 +747,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.07,
+   "conf": 0.38,
+   "score": 0.14,
    "type": "EARTH",
    "rating": null,
    "on_bus": "BUS-1",
@@ -735,7 +765,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.12,
+   "conf": 0.49,
+   "score": 0.24,
    "type": "CONTACTOR",
    "rating": null,
    "on_bus": "BUS-2",
@@ -752,7 +783,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.07,
+   "conf": 0.47,
+   "score": 0.15,
    "type": "RELAY",
    "rating": null,
    "on_bus": "BUS-1",
@@ -768,21 +800,23 @@
   "evidence": []
  },
  "crops": false,
+ "ocr_engine": "rapidocr",
  "reader": "trained",
  "seconds": {
-  "total": 15.49,
-  "ocr": 7.26,
-  "detector": 7.96
+  "total": 7.03,
+  "ocr": 3.19,
+  "detector": 3.71
  },
  "detector": {
   "weights": "weights/rtdetr_r18_full",
   "device": "cpu",
-  "threads": 4,
+  "threads": 2,
   "score_threshold": 0.11,
   "score_threshold_source": "drawing",
   "nms_iou": 0.5,
   "merge_iou": 0.5,
   "edge_px": 2,
-  "contain": 0.8
+  "contain": 0.8,
+  "calibrated": true
  }
 }

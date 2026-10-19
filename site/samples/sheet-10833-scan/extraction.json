@@ -796,7 +796,8 @@
     46,
     74
    ],
-   "shape_score": 0.98
+   "score": 0.98,
+   "shape_score": 1.0
   },
   {
    "id": "S2",
@@ -807,7 +808,8 @@
     45,
     73
    ],
-   "shape_score": 0.41
+   "score": 0.41,
+   "shape_score": 1.0
   },
   {
    "id": "S3",
@@ -818,7 +820,8 @@
     18,
     35
    ],
-   "shape_score": 0.23
+   "score": 0.23,
+   "shape_score": 0.98
   },
   {
    "id": "S4",
@@ -829,7 +832,8 @@
     19,
     37
    ],
-   "shape_score": 0.34
+   "score": 0.34,
+   "shape_score": 1.0
   },
   {
    "id": "S5",
@@ -840,7 +844,8 @@
     23,
     24
    ],
-   "shape_score": 0.27
+   "score": 0.27,
+   "shape_score": 1.0
   },
   {
    "id": "S6",
@@ -851,7 +856,8 @@
     24,
     24
    ],
-   "shape_score": 0.52
+   "score": 0.52,
+   "shape_score": 1.0
   },
   {
    "id": "S7",
@@ -862,7 +868,8 @@
     18,
     17
    ],
-   "shape_score": 0.29
+   "score": 0.29,
+   "shape_score": 1.0
   },
   {
    "id": "S8",
@@ -873,7 +880,8 @@
     18,
     17
    ],
-   "shape_score": 0.41
+   "score": 0.41,
+   "shape_score": 1.0
   },
   {
    "id": "S9",
@@ -884,7 +892,8 @@
     37,
     18
    ],
-   "shape_score": 0.24
+   "score": 0.24,
+   "shape_score": 0.98
   },
   {
    "id": "S10",
@@ -895,7 +904,8 @@
     17,
     28
    ],
-   "shape_score": 0.34
+   "score": 0.34,
+   "shape_score": 1.0
   },
   {
    "id": "S11",
@@ -906,7 +916,8 @@
     17,
     28
    ],
-   "shape_score": 0.34
+   "score": 0.34,
+   "shape_score": 1.0
   },
   {
    "id": "S12",
@@ -917,7 +928,8 @@
     18,
     27
    ],
-   "shape_score": 0.53
+   "score": 0.53,
+   "shape_score": 1.0
   },
   {
    "id": "S13",
@@ -928,7 +940,8 @@
     16,
     28
    ],
-   "shape_score": 0.3
+   "score": 0.3,
+   "shape_score": 1.0
   },
   {
    "id": "S14",
@@ -939,7 +952,8 @@
     18,
     29
    ],
-   "shape_score": 0.73
+   "score": 0.73,
+   "shape_score": 1.0
   },
   {
    "id": "S15",
@@ -950,7 +964,8 @@
     18,
     31
    ],
-   "shape_score": 0.71
+   "score": 0.71,
+   "shape_score": 1.0
   },
   {
    "id": "S16",
@@ -961,7 +976,8 @@
     16,
     30
    ],
-   "shape_score": 0.28
+   "score": 0.28,
+   "shape_score": 1.0
   },
   {
    "id": "S17",
@@ -972,7 +988,8 @@
     16,
     28
    ],
-   "shape_score": 0.23
+   "score": 0.23,
+   "shape_score": 0.98
   },
   {
    "id": "S18",
@@ -983,7 +1000,8 @@
     29,
     29
    ],
-   "shape_score": 0.17
+   "score": 0.17,
+   "shape_score": 0.93
   },
   {
    "id": "S19",
@@ -994,7 +1012,8 @@
     19,
     30
    ],
-   "shape_score": 0.39
+   "score": 0.39,
+   "shape_score": 1.0
   },
   {
    "id": "S20",
@@ -1005,7 +1024,8 @@
     21,
     16
    ],
-   "shape_score": 0.24
+   "score": 0.24,
+   "shape_score": 0.98
   },
   {
    "id": "S21",
@@ -1016,7 +1036,8 @@
     15,
     28
    ],
-   "shape_score": 0.31
+   "score": 0.31,
+   "shape_score": 1.0
   },
   {
    "id": "S22",
@@ -1027,7 +1048,8 @@
     17,
     30
    ],
-   "shape_score": 0.47
+   "score": 0.47,
+   "shape_score": 1.0
   },
   {
    "id": "S23",
@@ -1038,7 +1060,8 @@
     29,
     28
    ],
-   "shape_score": 0.3
+   "score": 0.3,
+   "shape_score": 1.0
   },
   {
    "id": "S24",
@@ -1049,7 +1072,8 @@
     18,
     29
    ],
-   "shape_score": 0.53
+   "score": 0.53,
+   "shape_score": 1.0
   },
   {
    "id": "S25",
@@ -1060,7 +1084,8 @@
     17,
     28
    ],
-   "shape_score": 0.27
+   "score": 0.27,
+   "shape_score": 1.0
   },
   {
    "id": "S26",
@@ -1071,7 +1096,8 @@
     44,
     25
    ],
-   "shape_score": 0.67
+   "score": 0.67,
+   "shape_score": 1.0
   },
   {
    "id": "S27",
@@ -1082,7 +1108,8 @@
     50,
     25
    ],
-   "shape_score": 0.78
+   "score": 0.78,
+   "shape_score": 1.0
   }
  ],
  "devices": [
@@ -1100,6 +1127,7 @@
    ],
    "label": "11kV/415V | TX-12500 kVA",
    "conf": 0.95,
+   "score": 0.98,
    "type": "TRANSFORMER",
    "rating": 2500,
    "on_bus": "BUS-1",
@@ -1119,7 +1147,8 @@
     "T2"
    ],
    "label": "11kV415V | TX-2 2000 kVA",
-   "conf": 0.41,
+   "conf": 0.96,
+   "score": 0.41,
    "type": "TRANSFORMER",
    "rating": 2000,
    "on_bus": "BUS-2",
@@ -1139,7 +1168,8 @@
     "T7"
    ],
    "label": "ACB-1 1600 A4P | Icu 80 kA,withdrawable",
-   "conf": 0.23,
+   "conf": 0.9,
+   "score": 0.23,
    "type": "ACB",
    "rating": null,
    "poles": null,
@@ -1161,7 +1191,8 @@
     "T8"
    ],
    "label": "ACB-2 1600 A4P | Icu 80 kA,withdrawable.",
-   "conf": 0.34,
+   "conf": 0.9,
+   "score": 0.34,
    "type": "ACB",
    "rating": null,
    "poles": null,
@@ -1183,7 +1214,8 @@
     "T11"
    ],
    "label": "CT 1600/5A | BUSBAR A 1600A Cu 80 kA/1s",
-   "conf": 0.27,
+   "conf": 0.92,
+   "score": 0.27,
    "type": "METER",
    "rating": null,
    "on_bus": "BUS-1",
@@ -1203,7 +1235,8 @@
     "T12"
    ],
    "label": "CT 1600/5A | BUSBAR B 1600 A Cu 80 kA/1s",
-   "conf": 0.52,
+   "conf": 0.93,
+   "score": 0.52,
    "type": "METER",
    "rating": null,
    "on_bus": "BUS-2",
@@ -1220,7 +1253,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.14,
+   "conf": 0.5,
+   "score": 0.29,
    "type": "CT",
    "rating": null,
    "on_bus": "BUS-1",
@@ -1237,7 +1271,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.2,
+   "conf": 0.5,
+   "score": 0.41,
    "type": "CT",
    "rating": null,
    "on_bus": "BUS-2",
@@ -1256,7 +1291,8 @@
     "T13"
    ],
    "label": "BS-1.1600-A",
-   "conf": 0.24,
+   "conf": 0.9,
+   "score": 0.24,
    "type": "BUS_SECTION",
    "rating": null,
    "poles": null,
@@ -1278,7 +1314,8 @@
     "T14"
    ],
    "label": "SPD Type 1+2 | FSW 100A 4P",
-   "conf": 0.34,
+   "conf": 0.92,
+   "score": 0.34,
    "type": "FUSE_SWITCH",
    "rating": 100,
    "poles": 4,
@@ -1301,7 +1338,8 @@
     "T16"
    ],
    "label": "PFC200kVAr | FSW400 A 3P",
-   "conf": 0.34,
+   "conf": 0.95,
+   "score": 0.34,
    "type": "FUSE_SWITCH",
    "rating": 400,
    "poles": 3,
@@ -1324,7 +1362,8 @@
     "T17"
    ],
    "label": "S/D55kW | FSW 250 A3P",
-   "conf": 0.53,
+   "conf": 0.95,
+   "score": 0.53,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
@@ -1347,7 +1386,8 @@
     "T26"
    ],
    "label": "DB-8 | DB-8 theatres",
-   "conf": 0.3,
+   "conf": 0.95,
+   "score": 0.3,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
@@ -1370,7 +1410,8 @@
     "T27"
    ],
    "label": "SB-10 | sub-board 10",
-   "conf": 0.73,
+   "conf": 0.94,
+   "score": 0.73,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
@@ -1393,7 +1434,8 @@
     "T33"
    ],
    "label": "fan F-11 | 3C 120mmXLPE/SWA",
-   "conf": 0.71,
+   "conf": 0.89,
+   "score": 0.71,
    "type": "CONTACTOR",
    "rating": null,
    "on_bus": "BUS-2",
@@ -1413,7 +1455,8 @@
     "T24"
    ],
    "label": "DOL37 kW | compressorC-3",
-   "conf": 0.28,
+   "conf": 0.92,
+   "score": 0.28,
    "type": "CONTACTOR",
    "rating": null,
    "on_bus": "BUS-1",
@@ -1433,7 +1476,8 @@
     "T29"
    ],
    "label": "lighting | MCCB 630 A4P",
-   "conf": 0.23,
+   "conf": 0.95,
+   "score": 0.23,
    "type": "ACB",
    "rating": null,
    "poles": null,
@@ -1454,7 +1498,8 @@
     "T30"
    ],
    "label": "3C 70 mmXLPE/SWA",
-   "conf": 0.17,
+   "conf": 0.93,
+   "score": 0.17,
    "type": "MOTOR",
    "rating": null,
    "on_bus": "BUS-1",
@@ -1474,7 +1519,8 @@
     "T37"
    ],
    "label": "MCC-7chillers | FSW,400 A 3P",
-   "conf": 0.39,
+   "conf": 0.89,
+   "score": 0.39,
    "type": "FUSE_SWITCH",
    "rating": 400,
    "poles": 3,
@@ -1494,7 +1540,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.12,
+   "conf": 0.49,
+   "score": 0.24,
    "type": "EARTH",
    "rating": null,
    "on_bus": "BUS-1",
@@ -1514,7 +1561,8 @@
     "T35"
    ],
    "label": "kitchen : | FSW 800 A 4P",
-   "conf": 0.31,
+   "conf": 0.88,
+   "score": 0.31,
    "type": "FUSE_SWITCH",
    "rating": 800,
    "poles": 4,
@@ -1537,7 +1585,8 @@
     "T36"
    ],
    "label": "spare | FSW 100A4P",
-   "conf": 0.47,
+   "conf": 0.93,
+   "score": 0.47,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
@@ -1557,7 +1606,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.15,
+   "conf": 0.5,
+   "score": 0.3,
    "type": "MOTOR",
    "rating": null,
    "on_bus": "BUS-2",
@@ -1577,7 +1627,8 @@
     "T39"
    ],
    "label": "kitchen | FSW 250 A 4P",
-   "conf": 0.53,
+   "conf": 0.94,
+   "score": 0.53,
    "type": "FUSE_SWITCH",
    "rating": 250,
    "poles": 4,
@@ -1600,7 +1651,8 @@
     "T38"
    ],
    "label": "DB-9.theatres | FSW 250 A 4P",
-   "conf": 0.27,
+   "conf": 0.98,
+   "score": 0.27,
    "type": "FUSE_SWITCH",
    "rating": 250,
    "poles": 4,
@@ -1620,7 +1672,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.34,
+   "conf": 0.5,
+   "score": 0.67,
    "type": "BOARD",
    "rating": null,
    "on_bus": "BUS-2",
@@ -1637,7 +1690,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.39,
+   "conf": 0.5,
+   "score": 0.78,
    "type": "BOARD",
    "rating": null,
    "on_bus": "BUS-2",
@@ -1658,21 +1712,23 @@
   ]
  },
  "crops": false,
+ "ocr_engine": "rapidocr",
  "reader": "trained",
  "seconds": {
-  "total": 23.68,
-  "ocr": 7.53,
-  "detector": 15.65
+  "total": 15.63,
+  "ocr": 4.42,
+  "detector": 10.88
  },
  "detector": {
   "weights": "weights/rtdetr_r18_full",
   "device": "cpu",
-  "threads": 4,
+  "threads": 2,
   "score_threshold": 0.11,
   "score_threshold_source": "drawing",
   "nms_iou": 0.5,
   "merge_iou": 0.5,
   "edge_px": 2,
-  "contain": 0.8
+  "contain": 0.8,
+  "calibrated": true
  }
 }

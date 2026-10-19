@@ -22,21 +22,21 @@
    "key": "text",
    "title": "Read the words",
    "count": 31,
-   "seconds": 7.25,
-   "plain": "Read 31 pieces of text in 7.25 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 4.32,
+   "plain": "Read 31 pieces of text in 4.32 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
    "count": 15,
-   "seconds": 8.07,
-   "plain": "Found 15 symbols in 8.07 s: 6 fuse switches, 1 transformer, 1 incoming air circuit breaker, 1 panel meter, 1 current transformer, 1 bus-section switch, 1 power-factor correction bank, 1 motor starter, 1 motor, 1 earth. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "seconds": 3.48,
+   "plain": "Found 15 symbols in 3.48 s: 6 fuse switches, 1 transformer, 1 incoming air circuit breaker, 1 panel meter, 1 current transformer, 1 bus-section switch, 1 power-factor correction bank, 1 motor starter, 1 motor, 1 earth. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
    "count": 11,
-   "seconds": 0.2,
+   "seconds": 0.15,
    "plain": "Paired 11 of 15 symbols with the label text beside them; 8 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
@@ -64,7 +64,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.97,
+   "conf": 0.98,
+   "score": 0.97,
    "box": [
     198,
     69,
@@ -82,7 +83,8 @@
    "poles": 3,
    "kA": 65,
    "dest": "",
-   "conf": 0.13,
+   "conf": 0.75,
+   "score": 0.13,
    "box": [
     205,
     200,
@@ -100,7 +102,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.33,
+   "conf": 0.96,
+   "score": 0.33,
    "box": [
     257,
     282,
@@ -118,7 +121,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.14,
+   "conf": 0.5,
+   "score": 0.29,
    "box": [
     209,
     285,
@@ -136,7 +140,8 @@
    "poles": null,
    "kA": 65,
    "dest": "",
-   "conf": 0.34,
+   "conf": 1.0,
+   "score": 0.34,
    "box": [
     1135,
     385,
@@ -154,7 +159,8 @@
    "poles": null,
    "kA": null,
    "dest": "DOL 11 kW",
-   "conf": 0.69,
+   "conf": 1.0,
+   "score": 0.69,
    "box": [
     1687,
     499,
@@ -172,7 +178,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.08,
+   "conf": 0.47,
+   "score": 0.16,
    "box": [
     1856,
     512,
@@ -190,7 +197,8 @@
    "poles": 3,
    "kA": null,
    "dest": "data hall",
-   "conf": 0.44,
+   "conf": 0.99,
+   "score": 0.44,
    "box": [
     187,
     520,
@@ -208,7 +216,8 @@
    "poles": 4,
    "kA": null,
    "dest": "data hall",
-   "conf": 0.27,
+   "conf": 0.99,
+   "score": 0.27,
    "box": [
     1387,
     520,
@@ -226,7 +235,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.71,
+   "conf": 1.0,
+   "score": 0.71,
    "box": [
     1687,
     545,
@@ -244,7 +254,8 @@
    "poles": 3,
    "kA": null,
    "dest": "spare",
-   "conf": 0.51,
+   "conf": 0.93,
+   "score": 0.51,
    "box": [
     787,
     549,
@@ -262,7 +273,8 @@
    "poles": 4,
    "kA": null,
    "dest": "data hall",
-   "conf": 0.6,
+   "conf": 1.0,
+   "score": 0.6,
    "box": [
     487,
     579,
@@ -280,7 +292,8 @@
    "poles": 3,
    "kA": null,
    "dest": "DB-6 wards",
-   "conf": 0.59,
+   "conf": 1.0,
+   "score": 0.59,
    "box": [
     1987,
     579,
@@ -298,7 +311,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.21,
+   "conf": 0.5,
+   "score": 0.42,
    "box": [
     1683,
     588,
@@ -316,7 +330,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.08,
+   "conf": 0.47,
+   "score": 0.16,
    "box": [
     2154,
     591,
@@ -344,7 +359,7 @@
     "qty": 1,
     "unit_gbp": 8732.0,
     "total_gbp": 8732.0,
-    "conf": 0.13,
+    "conf": 0.75,
     "evidence": [
      "S2",
      "T3",
@@ -359,7 +374,7 @@
     "qty": 1,
     "unit_gbp": 1400,
     "total_gbp": 1400,
-    "conf": 0.13,
+    "conf": 0.75,
     "evidence": [
      "S2",
      "T3",
@@ -374,7 +389,7 @@
     "qty": 1,
     "unit_gbp": 260,
     "total_gbp": 260,
-    "conf": 0.33,
+    "conf": 0.96,
     "evidence": [
      "S3",
      "T5",
@@ -389,7 +404,7 @@
     "qty": 1,
     "unit_gbp": 280,
     "total_gbp": 280,
-    "conf": 0.14,
+    "conf": 0.5,
     "evidence": [
      "S4"
     ],
@@ -402,7 +417,7 @@
     "qty": 1,
     "unit_gbp": 6136.0,
     "total_gbp": 6136.0,
-    "conf": 0.34,
+    "conf": 1.0,
     "evidence": [
      "S5",
      "T8",
@@ -417,7 +432,7 @@
     "qty": 1,
     "unit_gbp": 900,
     "total_gbp": 900,
-    "conf": 0.34,
+    "conf": 1.0,
     "evidence": [
      "S5",
      "T8",
@@ -432,7 +447,7 @@
     "qty": 1,
     "unit_gbp": 780.0,
     "total_gbp": 780.0,
-    "conf": 0.44,
+    "conf": 0.99,
     "evidence": [
      "S8",
      "T13",
@@ -447,7 +462,7 @@
     "qty": 3,
     "unit_gbp": 46,
     "total_gbp": 138,
-    "conf": 0.44,
+    "conf": 0.99,
     "evidence": [
      "S8",
      "T13",
@@ -462,7 +477,7 @@
     "qty": 1,
     "unit_gbp": 380,
     "total_gbp": 380,
-    "conf": 0.44,
+    "conf": 0.99,
     "evidence": [
      "S8",
      "T13",
@@ -477,7 +492,7 @@
     "qty": 1,
     "unit_gbp": 1854.4,
     "total_gbp": 1854.4,
-    "conf": 0.27,
+    "conf": 0.99,
     "evidence": [
      "S9",
      "T14",
@@ -492,7 +507,7 @@
     "qty": 4,
     "unit_gbp": 94,
     "total_gbp": 376,
-    "conf": 0.27,
+    "conf": 0.99,
     "evidence": [
      "S9",
      "T14",
@@ -507,7 +522,7 @@
     "qty": 1,
     "unit_gbp": 380,
     "total_gbp": 380,
-    "conf": 0.27,
+    "conf": 0.99,
     "evidence": [
      "S9",
      "T14",
@@ -522,7 +537,7 @@
     "qty": 1,
     "unit_gbp": 300.0,
     "total_gbp": 300.0,
-    "conf": 0.51,
+    "conf": 0.93,
     "evidence": [
      "S11",
      "T17",
@@ -537,7 +552,7 @@
     "qty": 3,
     "unit_gbp": 21,
     "total_gbp": 63,
-    "conf": 0.51,
+    "conf": 0.93,
     "evidence": [
      "S11",
      "T17",
@@ -552,7 +567,7 @@
     "qty": 1,
     "unit_gbp": 380,
     "total_gbp": 380,
-    "conf": 0.51,
+    "conf": 0.93,
     "evidence": [
      "S11",
      "T17",
@@ -567,7 +582,7 @@
     "qty": 1,
     "unit_gbp": 1439.6,
     "total_gbp": 1439.6,
-    "conf": 0.6,
+    "conf": 1.0,
     "evidence": [
      "S12",
      "T21",
@@ -582,7 +597,7 @@
     "qty": 4,
     "unit_gbp": 72,
     "total_gbp": 288,
-    "conf": 0.6,
+    "conf": 1.0,
     "evidence": [
      "S12",
      "T21",
@@ -597,7 +612,7 @@
     "qty": 1,
     "unit_gbp": 380,
     "total_gbp": 380,
-    "conf": 0.6,
+    "conf": 1.0,
     "evidence": [
      "S12",
      "T21",
@@ -612,7 +627,7 @@
     "qty": 1,
     "unit_gbp": 1180.0,
     "total_gbp": 1180.0,
-    "conf": 0.59,
+    "conf": 1.0,
     "evidence": [
      "S13",
      "T22",
@@ -627,7 +642,7 @@
     "qty": 3,
     "unit_gbp": 72,
     "total_gbp": 216,
-    "conf": 0.59,
+    "conf": 1.0,
     "evidence": [
      "S13",
      "T22",
@@ -642,7 +657,7 @@
     "qty": 1,
     "unit_gbp": 380,
     "total_gbp": 380,
-    "conf": 0.59,
+    "conf": 1.0,
     "evidence": [
      "S13",
      "T22",
@@ -761,18 +776,11 @@
   },
   {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D2, D3, D4, D5, D7, D8, D9, D11, D13, D14, D15",
+   "what": "devices read with low confidence: D4, D7, D14, D15",
    "action": "check against the drawing",
    "evidence": [
-    "D2",
-    "D3",
     "D4",
-    "D5",
     "D7",
-    "D8",
-    "D9",
-    "D11",
-    "D13",
     "D14",
     "D15"
    ]
@@ -889,9 +897,9 @@
   "notes_accuracy": 1.0
  },
  "timing": {
-  "total": 15.88,
-  "ocr": 7.25,
-  "detector": 8.07
+  "total": 8.19,
+  "ocr": 4.32,
+  "detector": 3.48
  },
  "reader": "trained",
  "engine": "rapidocr",

@@ -22,7 +22,7 @@
     "T12"
    ],
    "rule": "R-ACB-SELECT",
-   "conf": 0.28,
+   "conf": 0.97,
    "basis": "rating 3200 A from ['T9']; poles 4; kA 65"
   },
   {
@@ -38,7 +38,7 @@
     "T12"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.28,
+   "conf": 0.97,
    "basis": ""
   },
   {
@@ -54,7 +54,7 @@
     "T10"
    ],
    "rule": "R-ACB-SELECT",
-   "conf": 0.18,
+   "conf": 0.93,
    "basis": "rating 1600 A from ['T13']; poles 4; kA 65"
   },
   {
@@ -70,7 +70,7 @@
     "T10"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.18,
+   "conf": 0.93,
    "basis": ""
   },
   {
@@ -86,7 +86,7 @@
     "T10"
    ],
    "rule": "R-ATS",
-   "conf": 0.18,
+   "conf": 0.93,
    "basis": ""
   },
   {
@@ -102,7 +102,7 @@
     "T17"
    ],
    "rule": "R-METERING",
-   "conf": 0.65,
+   "conf": 0.99,
    "basis": ""
   },
   {
@@ -116,7 +116,7 @@
     "S7"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.1,
+   "conf": 0.49,
    "basis": ""
   },
   {
@@ -130,7 +130,7 @@
     "S8"
    ],
    "rule": "R-METERING",
-   "conf": 0.28,
+   "conf": 0.5,
    "basis": ""
   },
   {
@@ -144,7 +144,7 @@
     "S9"
    ],
    "rule": "R-METERING",
-   "conf": 0.24,
+   "conf": 0.5,
    "basis": ""
   },
   {
@@ -159,7 +159,7 @@
     "T15"
    ],
    "rule": "R-METERING",
-   "conf": 0.2,
+   "conf": 0.97,
    "basis": ""
   },
   {
@@ -174,7 +174,7 @@
     "T18"
    ],
    "rule": "R-BUS-SECTION",
-   "conf": 0.62,
+   "conf": 1.0,
    "basis": ""
   },
   {
@@ -189,7 +189,7 @@
     "T18"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.62,
+   "conf": 1.0,
    "basis": ""
   },
   {
@@ -205,7 +205,7 @@
     "T19"
    ],
    "rule": "R-MCCB-SELECT",
-   "conf": 0.56,
+   "conf": 1.0,
    "basis": "rating 630 A; poles 3; kA 65"
   },
   {
@@ -221,7 +221,7 @@
     "T19"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.56,
+   "conf": 1.0,
    "basis": ""
   },
   {
@@ -237,7 +237,7 @@
     "T20"
    ],
    "rule": "R-MCCB-SELECT",
-   "conf": 0.62,
+   "conf": 0.96,
    "basis": "rating 100 A; poles 4; kA 65"
   },
   {
@@ -253,7 +253,7 @@
     "T20"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.62,
+   "conf": 0.96,
    "basis": ""
   },
   {
@@ -269,7 +269,7 @@
     "T21"
    ],
    "rule": "R-MCCB-SELECT",
-   "conf": 0.4,
+   "conf": 1.0,
    "basis": "rating 250 A; poles 3; kA 65"
   },
   {
@@ -285,7 +285,7 @@
     "T21"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.4,
+   "conf": 1.0,
    "basis": ""
   },
   {
@@ -301,7 +301,7 @@
     "T22"
    ],
    "rule": "R-MCCB-SELECT",
-   "conf": 0.27,
+   "conf": 0.99,
    "basis": "rating 800 A; poles 4; kA 65"
   },
   {
@@ -317,7 +317,7 @@
     "T22"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.27,
+   "conf": 0.99,
    "basis": ""
   },
   {
@@ -333,7 +333,7 @@
     "T23"
    ],
    "rule": "R-MCCB-SELECT",
-   "conf": 0.42,
+   "conf": 0.98,
    "basis": "rating 800 A; poles 4; kA 65"
   },
   {
@@ -349,7 +349,7 @@
     "T23"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.42,
+   "conf": 0.98,
    "basis": ""
   },
   {
@@ -365,7 +365,7 @@
     "T24"
    ],
    "rule": "R-MCCB-SELECT",
-   "conf": 0.26,
+   "conf": 0.98,
    "basis": "rating 630 A; poles 3; kA 65"
   },
   {
@@ -381,7 +381,7 @@
     "T24"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.26,
+   "conf": 0.98,
    "basis": ""
   },
   {
@@ -397,7 +397,7 @@
     "T25"
    ],
    "rule": "R-ISOL-SELECT",
-   "conf": 0.87,
+   "conf": 0.99,
    "basis": "rating 160 A; poles 4"
   },
   {
@@ -413,7 +413,7 @@
     "T25"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.87,
+   "conf": 0.99,
    "basis": ""
   },
   {
@@ -429,7 +429,7 @@
     "T35"
    ],
    "rule": "R-MCCB-SELECT",
-   "conf": 0.26,
+   "conf": 0.96,
    "basis": "rating 630 A; poles 3; kA 65"
   },
   {
@@ -445,7 +445,7 @@
     "T35"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.26,
+   "conf": 0.96,
    "basis": ""
   },
   {
@@ -461,7 +461,7 @@
     "T30"
    ],
    "rule": "R-MCCB-SELECT",
-   "conf": 0.23,
+   "conf": 0.98,
    "basis": "rating 250 A; poles 4; kA 65"
   },
   {
@@ -477,7 +477,7 @@
     "T30"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.23,
+   "conf": 0.98,
    "basis": ""
   },
   {
@@ -493,7 +493,7 @@
     "T38"
    ],
    "rule": "R-MCCB-SELECT",
-   "conf": 0.4,
+   "conf": 0.97,
    "basis": "rating 100 A; poles 3; kA 65"
   },
   {
@@ -509,7 +509,7 @@
     "T38"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.4,
+   "conf": 0.97,
    "basis": ""
   },
   {
@@ -525,7 +525,7 @@
     "T39"
    ],
    "rule": "R-ISOL-SELECT",
-   "conf": 0.62,
+   "conf": 0.97,
    "basis": "rating 630 A; poles 3"
   },
   {
@@ -541,7 +541,7 @@
     "T39"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.62,
+   "conf": 0.97,
    "basis": ""
   },
   {
@@ -556,7 +556,7 @@
     "T44"
    ],
    "rule": "R-SPD",
-   "conf": 0.35,
+   "conf": 0.98,
    "basis": ""
   },
   {
@@ -572,7 +572,7 @@
     "T49"
    ],
    "rule": "R-MCCB-SELECT",
-   "conf": 0.34,
+   "conf": 0.96,
    "basis": "rating 100 A; poles 4; kA 65"
   },
   {
@@ -588,7 +588,7 @@
     "T49"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.34,
+   "conf": 0.96,
    "basis": ""
   },
   {
@@ -604,7 +604,7 @@
     "T50"
    ],
    "rule": "R-MCCB-SELECT",
-   "conf": 0.39,
+   "conf": 0.98,
    "basis": "rating 250 A; poles 3; kA 65"
   },
   {
@@ -620,7 +620,7 @@
     "T50"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.39,
+   "conf": 0.98,
    "basis": ""
   },
   {
@@ -635,7 +635,7 @@
     "T51"
    ],
    "rule": "R-MCCB-SELECT",
-   "conf": 0.28,
+   "conf": 0.99,
    "basis": "rating 250 A; poles 3; kA 65"
   },
   {
@@ -650,7 +650,7 @@
     "T51"
    ],
    "rule": "R-FU-KIT",
-   "conf": 0.28,
+   "conf": 0.99,
    "basis": ""
   },
   {
@@ -772,33 +772,14 @@
   },
   {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D1, D2, D3, D4, D5, D7, D8, D9, D10, D12, D14, D15, D16, D17, D19, D20, D21, D23, D25, D26, D27, D28, D29, D30, D31",
+   "what": "devices read with low confidence: D7, D8, D9, D23, D26, D31",
    "action": "check against the drawing",
    "evidence": [
-    "D1",
-    "D2",
-    "D3",
-    "D4",
-    "D5",
     "D7",
     "D8",
     "D9",
-    "D10",
-    "D12",
-    "D14",
-    "D15",
-    "D16",
-    "D17",
-    "D19",
-    "D20",
-    "D21",
     "D23",
-    "D25",
     "D26",
-    "D27",
-    "D28",
-    "D29",
-    "D30",
     "D31"
    ]
   }

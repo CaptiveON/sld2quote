@@ -245,7 +245,8 @@
     22,
     19
    ],
-   "shape_score": 0.34
+   "score": 0.34,
+   "shape_score": 1.0
   },
   {
    "id": "S2",
@@ -256,7 +257,8 @@
     17,
     19
    ],
-   "shape_score": 0.26
+   "score": 0.26,
+   "shape_score": 0.98
   },
   {
    "id": "S3",
@@ -267,7 +269,8 @@
     48,
     8
    ],
-   "shape_score": 0.27
+   "score": 0.27,
+   "shape_score": 1.0
   },
   {
    "id": "S4",
@@ -278,7 +281,8 @@
     47,
     8
    ],
-   "shape_score": 0.26
+   "score": 0.26,
+   "shape_score": 1.0
   },
   {
    "id": "S5",
@@ -289,7 +293,8 @@
     43,
     8
    ],
-   "shape_score": 0.16
+   "score": 0.16,
+   "shape_score": 0.93
   },
   {
    "id": "S6",
@@ -300,7 +305,8 @@
     47,
     8
    ],
-   "shape_score": 0.23
+   "score": 0.23,
+   "shape_score": 0.98
   },
   {
    "id": "S7",
@@ -311,7 +317,8 @@
     16,
     38
    ],
-   "shape_score": 0.21
+   "score": 0.21,
+   "shape_score": 0.98
   },
   {
    "id": "S8",
@@ -322,7 +329,8 @@
     14,
     37
    ],
-   "shape_score": 0.26
+   "score": 0.26,
+   "shape_score": 0.98
   },
   {
    "id": "S9",
@@ -333,7 +341,8 @@
     16,
     36
    ],
-   "shape_score": 0.17
+   "score": 0.17,
+   "shape_score": 0.93
   },
   {
    "id": "S10",
@@ -344,7 +353,8 @@
     15,
     35
    ],
-   "shape_score": 0.24
+   "score": 0.24,
+   "shape_score": 0.98
   },
   {
    "id": "S11",
@@ -355,7 +365,8 @@
     15,
     37
    ],
-   "shape_score": 0.36
+   "score": 0.36,
+   "shape_score": 1.0
   },
   {
    "id": "S12",
@@ -366,7 +377,8 @@
     45,
     8
    ],
-   "shape_score": 0.13
+   "score": 0.13,
+   "shape_score": 0.75
   },
   {
    "id": "S13",
@@ -377,7 +389,8 @@
     45,
     7
    ],
-   "shape_score": 0.16
+   "score": 0.16,
+   "shape_score": 0.93
   },
   {
    "id": "S14",
@@ -388,7 +401,8 @@
     47,
     9
    ],
-   "shape_score": 0.15
+   "score": 0.15,
+   "shape_score": 0.75
   },
   {
    "id": "S15",
@@ -399,7 +413,8 @@
     45,
     9
    ],
-   "shape_score": 0.16
+   "score": 0.16,
+   "shape_score": 0.93
   },
   {
    "id": "S16",
@@ -410,7 +425,8 @@
     51,
     9
    ],
-   "shape_score": 0.2
+   "score": 0.2,
+   "shape_score": 0.97
   }
  ],
  "devices": [
@@ -424,7 +440,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.17,
+   "conf": 0.5,
+   "score": 0.34,
    "type": "ACB",
    "rating": null,
    "poles": null,
@@ -443,7 +460,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.13,
+   "conf": 0.49,
+   "score": 0.26,
    "type": "RELAY",
    "rating": null,
    "on_bus": "BUS-1",
@@ -460,7 +478,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.14,
+   "conf": 0.5,
+   "score": 0.27,
    "type": "CAPACITOR",
    "rating": null,
    "on_bus": "BUS-1",
@@ -477,7 +496,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.13,
+   "conf": 0.5,
+   "score": 0.26,
    "type": "CAPACITOR",
    "rating": null,
    "on_bus": "BUS-1",
@@ -494,7 +514,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.08,
+   "conf": 0.47,
+   "score": 0.16,
    "type": "CAPACITOR",
    "rating": null,
    "on_bus": "BUS-1",
@@ -511,7 +532,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.12,
+   "conf": 0.49,
+   "score": 0.23,
    "type": "CAPACITOR",
    "rating": null,
    "on_bus": "BUS-1",
@@ -528,7 +550,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.1,
+   "conf": 0.49,
+   "score": 0.21,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
@@ -548,7 +571,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.13,
+   "conf": 0.49,
+   "score": 0.26,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
@@ -568,7 +592,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.09,
+   "conf": 0.47,
+   "score": 0.17,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
@@ -588,7 +613,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.12,
+   "conf": 0.49,
+   "score": 0.24,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
@@ -608,7 +634,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.18,
+   "conf": 0.5,
+   "score": 0.36,
    "type": "FUSE_SWITCH",
    "rating": null,
    "poles": null,
@@ -628,7 +655,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.07,
+   "conf": 0.38,
+   "score": 0.13,
    "type": "CAPACITOR",
    "rating": null,
    "on_bus": "BUS-1",
@@ -645,7 +673,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.08,
+   "conf": 0.47,
+   "score": 0.16,
    "type": "CAPACITOR",
    "rating": null,
    "on_bus": "BUS-1",
@@ -662,7 +691,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.07,
+   "conf": 0.38,
+   "score": 0.15,
    "type": "CAPACITOR",
    "rating": null,
    "on_bus": "BUS-1",
@@ -679,7 +709,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.08,
+   "conf": 0.47,
+   "score": 0.16,
    "type": "CAPACITOR",
    "rating": null,
    "on_bus": "BUS-1",
@@ -696,7 +727,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.1,
+   "conf": 0.48,
+   "score": 0.2,
    "type": "CAPACITOR",
    "rating": null,
    "on_bus": "BUS-1",
@@ -712,21 +744,23 @@
   "evidence": []
  },
  "crops": false,
+ "ocr_engine": "rapidocr",
  "reader": "trained",
  "seconds": {
-  "total": 7.41,
-  "ocr": 3.8,
-  "detector": 3.47
+  "total": 3.92,
+  "ocr": 2.03,
+  "detector": 1.8
  },
  "detector": {
   "weights": "weights/rtdetr_r18_full",
   "device": "cpu",
-  "threads": 4,
+  "threads": 2,
   "score_threshold": 0.11,
   "score_threshold_source": "drawing",
   "nms_iou": 0.5,
   "merge_iou": 0.5,
   "edge_px": 2,
-  "contain": 0.8
+  "contain": 0.8,
+  "calibrated": true
  }
 }

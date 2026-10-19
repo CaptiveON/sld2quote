@@ -9,28 +9,28 @@ Prices are from the prototype's illustrative catalogue, not a supplier price lis
 
 | # | Part | Description | Qty | Unit £ | Total £ | Conf | Evidence |
 |---|---|---|---|---|---|---|---|
-| 1 | METER-CT 1600/5A | BUSBAR A 1600A Cu 80 kA/1s | Panel meter (CT 1600/5A | BUSBAR A 1600A Cu 80 kA/1s) | 1 | 260.00 | 260.00 | 0.27 | S5 T9 T11 R-METERING |
-| 2 | METER-CT 1600/5A | BUSBAR B 1600 A Cu 80 kA/1s | Panel meter (CT 1600/5A | BUSBAR B 1600 A Cu 80 kA/1s) | 1 | 260.00 | 260.00 | 0.52 | S6 T10 T12 R-METERING |
-| 3 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.14 | S7 R-METERING |
-| 4 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.2 | S8 R-METERING |
-| 5 | FSW-100-4P | Fuse-switch-disconnector 100 A 4-pole; feeds SPD Type 1+2 | 1 | 317.20 | 317.20 | 0.34 | S10 T18 T14 R-FSW-SELECT |
-| 6 | FUSE-100 | Fuse links 100 A, one per pole | 4 | 16.00 | 64.00 | 0.34 | S10 T18 T14 R-FUSE-LINKS |
-| 7 | FU-KIT-FUSE_SWITCH | Outgoing functional unit: compartment door, terminals, labels | 1 | 380.00 | 380.00 | 0.34 | S10 T18 T14 R-FU-KIT |
-| 8 | FSW-400-3P | Fuse-switch-disconnector 400 A 3-pole | 1 | 780.00 | 780.00 | 0.34 | S11 T20 T16 R-FSW-SELECT |
-| 9 | FUSE-400 | Fuse links 400 A, one per pole | 3 | 46.00 | 138.00 | 0.34 | S11 T20 T16 R-FUSE-LINKS |
-| 10 | FU-KIT-FUSE_SWITCH | Outgoing functional unit: compartment door, terminals, labels | 1 | 380.00 | 380.00 | 0.34 | S11 T20 T16 R-FU-KIT |
-| 11 | FSW-400-3P | Fuse-switch-disconnector 400 A 3-pole; feeds MCC-7chillers | 1 | 780.00 | 780.00 | 0.39 | S19 T43 T37 R-FSW-SELECT |
-| 12 | FUSE-400 | Fuse links 400 A, one per pole | 3 | 46.00 | 138.00 | 0.39 | S19 T43 T37 R-FUSE-LINKS |
-| 13 | FU-KIT-FUSE_SWITCH | Outgoing functional unit: compartment door, terminals, labels | 1 | 380.00 | 380.00 | 0.39 | S19 T43 T37 R-FU-KIT |
-| 14 | FSW-800-4P | Fuse-switch-disconnector 800 A 4-pole; feeds kitchen : | 1 | 1,854.40 | 1,854.40 | 0.31 | S21 T41 T35 R-FSW-SELECT |
-| 15 | FUSE-800 | Fuse links 800 A, one per pole | 4 | 94.00 | 376.00 | 0.31 | S21 T41 T35 R-FUSE-LINKS |
-| 16 | FU-KIT-FUSE_SWITCH | Outgoing functional unit: compartment door, terminals, labels | 1 | 380.00 | 380.00 | 0.31 | S21 T41 T35 R-FU-KIT |
-| 17 | FSW-250-4P | Fuse-switch-disconnector 250 A 4-pole; feeds kitchen | 1 | 524.60 | 524.60 | 0.53 | S24 T47 T39 R-FSW-SELECT |
-| 18 | FUSE-250 | Fuse links 250 A, one per pole | 4 | 29.00 | 116.00 | 0.53 | S24 T47 T39 R-FUSE-LINKS |
-| 19 | FU-KIT-FUSE_SWITCH | Outgoing functional unit: compartment door, terminals, labels | 1 | 380.00 | 380.00 | 0.53 | S24 T47 T39 R-FU-KIT |
-| 20 | FSW-250-4P | Fuse-switch-disconnector 250 A 4-pole; feeds DB-9.theatres | 1 | 524.60 | 524.60 | 0.27 | S25 T45 T38 R-FSW-SELECT |
-| 21 | FUSE-250 | Fuse links 250 A, one per pole | 4 | 29.00 | 116.00 | 0.27 | S25 T45 T38 R-FUSE-LINKS |
-| 22 | FU-KIT-FUSE_SWITCH | Outgoing functional unit: compartment door, terminals, labels | 1 | 380.00 | 380.00 | 0.27 | S25 T45 T38 R-FU-KIT |
+| 1 | METER-CT 1600/5A | BUSBAR A 1600A Cu 80 kA/1s | Panel meter (CT 1600/5A | BUSBAR A 1600A Cu 80 kA/1s) | 1 | 260.00 | 260.00 | 0.92 | S5 T9 T11 R-METERING |
+| 2 | METER-CT 1600/5A | BUSBAR B 1600 A Cu 80 kA/1s | Panel meter (CT 1600/5A | BUSBAR B 1600 A Cu 80 kA/1s) | 1 | 260.00 | 260.00 | 0.93 | S6 T10 T12 R-METERING |
+| 3 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.5 | S7 R-METERING |
+| 4 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.5 | S8 R-METERING |
+| 5 | FSW-100-4P | Fuse-switch-disconnector 100 A 4-pole; feeds SPD Type 1+2 | 1 | 317.20 | 317.20 | 0.92 | S10 T18 T14 R-FSW-SELECT |
+| 6 | FUSE-100 | Fuse links 100 A, one per pole | 4 | 16.00 | 64.00 | 0.92 | S10 T18 T14 R-FUSE-LINKS |
+| 7 | FU-KIT-FUSE_SWITCH | Outgoing functional unit: compartment door, terminals, labels | 1 | 380.00 | 380.00 | 0.92 | S10 T18 T14 R-FU-KIT |
+| 8 | FSW-400-3P | Fuse-switch-disconnector 400 A 3-pole | 1 | 780.00 | 780.00 | 0.95 | S11 T20 T16 R-FSW-SELECT |
+| 9 | FUSE-400 | Fuse links 400 A, one per pole | 3 | 46.00 | 138.00 | 0.95 | S11 T20 T16 R-FUSE-LINKS |
+| 10 | FU-KIT-FUSE_SWITCH | Outgoing functional unit: compartment door, terminals, labels | 1 | 380.00 | 380.00 | 0.95 | S11 T20 T16 R-FU-KIT |
+| 11 | FSW-400-3P | Fuse-switch-disconnector 400 A 3-pole; feeds MCC-7chillers | 1 | 780.00 | 780.00 | 0.89 | S19 T43 T37 R-FSW-SELECT |
+| 12 | FUSE-400 | Fuse links 400 A, one per pole | 3 | 46.00 | 138.00 | 0.89 | S19 T43 T37 R-FUSE-LINKS |
+| 13 | FU-KIT-FUSE_SWITCH | Outgoing functional unit: compartment door, terminals, labels | 1 | 380.00 | 380.00 | 0.89 | S19 T43 T37 R-FU-KIT |
+| 14 | FSW-800-4P | Fuse-switch-disconnector 800 A 4-pole; feeds kitchen : | 1 | 1,854.40 | 1,854.40 | 0.88 | S21 T41 T35 R-FSW-SELECT |
+| 15 | FUSE-800 | Fuse links 800 A, one per pole | 4 | 94.00 | 376.00 | 0.88 | S21 T41 T35 R-FUSE-LINKS |
+| 16 | FU-KIT-FUSE_SWITCH | Outgoing functional unit: compartment door, terminals, labels | 1 | 380.00 | 380.00 | 0.88 | S21 T41 T35 R-FU-KIT |
+| 17 | FSW-250-4P | Fuse-switch-disconnector 250 A 4-pole; feeds kitchen | 1 | 524.60 | 524.60 | 0.94 | S24 T47 T39 R-FSW-SELECT |
+| 18 | FUSE-250 | Fuse links 250 A, one per pole | 4 | 29.00 | 116.00 | 0.94 | S24 T47 T39 R-FUSE-LINKS |
+| 19 | FU-KIT-FUSE_SWITCH | Outgoing functional unit: compartment door, terminals, labels | 1 | 380.00 | 380.00 | 0.94 | S24 T47 T39 R-FU-KIT |
+| 20 | FSW-250-4P | Fuse-switch-disconnector 250 A 4-pole; feeds DB-9.theatres | 1 | 524.60 | 524.60 | 0.98 | S25 T45 T38 R-FSW-SELECT |
+| 21 | FUSE-250 | Fuse links 250 A, one per pole | 4 | 29.00 | 116.00 | 0.98 | S25 T45 T38 R-FUSE-LINKS |
+| 22 | FU-KIT-FUSE_SWITCH | Outgoing functional unit: compartment door, terminals, labels | 1 | 380.00 | 380.00 | 0.98 | S25 T45 T38 R-FU-KIT |
 | 23 | BUSBAR-CU-1600 | Copper busbar set 1600 A (4-bar), 2 sections, about 58 kg | 1 | 662.40 | 662.40 | 0.9 | T12 T12 T60 R-BUSBAR-SIZE |
 | 24 | ENC-SECTION | Enclosure section, Form 4 Type 4, IP41, RAL 7035 | 2 | 3,160.04 | 6,320.08 | 0.95 | T54 T54 T56 T58 R-ENCLOSURE |
 | 25 | LAB-ASSY | Assembly, wiring and routine verification: 168 hours | 1 | 8,064.00 | 8,064.00 | 0.9 |  R-LABOUR |
@@ -52,7 +52,7 @@ Subtotal £25,585.28; margin £3,837.79; **total £29,423.07**
 - [missing] D17 (ACB): rating not read. Action: read from drawing / schedule. Evidence: S17 T34 T29
 - [missing] D22 (FUSE_SWITCH): rating not read. Action: read from drawing / schedule. Evidence: S22 T42 T36
 - [conflict] fault_kA: drawing says 80, specification clause 7.3 says 50. Action: clarify with the consultant before order; priced to the drawing. Evidence: T54 T54 T56 T58 7.3
-- [low_confidence] devices read with low confidence: D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D16, D17, D18, D19, D20, D21, D22, D23, D24, D25, D26, D27. Action: check against the drawing. Evidence: D2 D3 D4 D5 D6 D7 D8 D9 D10 D11 D12 D13 D16 D17 D18 D19 D20 D21 D22 D23 D24 D25 D26 D27
+- [low_confidence] devices read with low confidence: D7, D8, D20, D23, D26, D27. Action: check against the drawing. Evidence: D7 D8 D20 D23 D26 D27
 
 ## Specification clauses matched
 
@@ -65,4 +65,4 @@ Subtotal £25,585.28; margin £3,837.79; **total £29,423.07**
 - certificates: clause 7.7 -> True
 - other (not priced automatically): clause 7.8: Two years' spares for all trip units shall be included.
 
-Generated by sld2quote 0.2.0 in 23.7 s; reader deskew -0.7 deg.
+Generated by sld2quote 0.2.0 in 15.6 s; reader deskew -0.7 deg.

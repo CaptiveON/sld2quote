@@ -21,7 +21,7 @@
     "T7"
    ],
    "rule": "R-METERING",
-   "conf": 0.21,
+   "conf": 0.97,
    "basis": ""
   },
   {
@@ -35,7 +35,7 @@
     "S2"
    ],
    "rule": "R-METERING",
-   "conf": 0.2,
+   "conf": 0.5,
    "basis": ""
   },
   {
@@ -49,7 +49,7 @@
     "S3"
    ],
    "rule": "R-METERING",
-   "conf": 0.14,
+   "conf": 0.5,
    "basis": ""
   },
   {
@@ -63,7 +63,7 @@
     "S7"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.06,
+   "conf": 0.38,
    "basis": ""
   },
   {
@@ -77,7 +77,7 @@
     "S17"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.06,
+   "conf": 0.38,
    "basis": ""
   },
   {
@@ -91,7 +91,7 @@
     "S18"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.06,
+   "conf": 0.38,
    "basis": ""
   },
   {
@@ -106,7 +106,7 @@
     "T27"
    ],
    "rule": "R-METERING",
-   "conf": 0.7,
+   "conf": 0.86,
    "basis": ""
   },
   {
@@ -121,7 +121,7 @@
     "T36"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.12,
+   "conf": 0.75,
    "basis": ""
   },
   {
@@ -135,7 +135,7 @@
     "S30"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.09,
+   "conf": 0.47,
    "basis": ""
   },
   {
@@ -149,7 +149,7 @@
     "S31"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.09,
+   "conf": 0.47,
    "basis": ""
   },
   {
@@ -164,7 +164,7 @@
     "T66"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.18,
+   "conf": 0.9,
    "basis": ""
   },
   {
@@ -180,7 +180,7 @@
     "T76"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.16,
+   "conf": 0.93,
    "basis": ""
   },
   {
@@ -196,7 +196,7 @@
     "T73"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.26,
+   "conf": 0.88,
    "basis": ""
   },
   {
@@ -211,7 +211,7 @@
     "T81"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.15,
+   "conf": 0.93,
    "basis": ""
   },
   {
@@ -225,7 +225,7 @@
     "S59"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.09,
+   "conf": 0.47,
    "basis": ""
   },
   {
@@ -239,7 +239,7 @@
     "S60"
    ],
    "rule": "R-PROTECTION",
-   "conf": 0.07,
+   "conf": 0.38,
    "basis": ""
   },
   {
@@ -626,10 +626,9 @@
   },
   {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15, D16, D17, D18, D19, D20, D21, D22, D23, D24, D26, D27, D28, D29, D30, D31, D32, D33, D34, D35, D36, D37, D38, D39, D40, D41, D42, D43, D44, D45, D46, D47, D48, D49, D50, D51, D52, D53, D54, D55, D56, D57, D58, D59, D60, D61, D62",
+   "what": "devices read with low confidence: D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D13, D15, D17, D18, D19, D20, D21, D22, D23, D24, D26, D27, D28, D30, D31, D32, D33, D35, D36, D37, D38, D39, D40, D41, D42, D44, D45, D46, D47, D55, D58, D59, D60, D61, D62",
    "action": "check against the drawing",
    "evidence": [
-    "D1",
     "D2",
     "D3",
     "D4",
@@ -640,11 +639,8 @@
     "D9",
     "D10",
     "D11",
-    "D12",
     "D13",
-    "D14",
     "D15",
-    "D16",
     "D17",
     "D18",
     "D19",
@@ -656,12 +652,10 @@
     "D26",
     "D27",
     "D28",
-    "D29",
     "D30",
     "D31",
     "D32",
     "D33",
-    "D34",
     "D35",
     "D36",
     "D37",
@@ -670,21 +664,11 @@
     "D40",
     "D41",
     "D42",
-    "D43",
     "D44",
     "D45",
     "D46",
     "D47",
-    "D48",
-    "D49",
-    "D50",
-    "D51",
-    "D52",
-    "D53",
-    "D54",
     "D55",
-    "D56",
-    "D57",
     "D58",
     "D59",
     "D60",

@@ -355,7 +355,8 @@
     45,
     72
    ],
-   "shape_score": 0.96
+   "score": 0.96,
+   "shape_score": 1.0
   },
   {
    "id": "S2",
@@ -366,7 +367,8 @@
     29,
     30
    ],
-   "shape_score": 0.46
+   "score": 0.46,
+   "shape_score": 1.0
   },
   {
    "id": "S3",
@@ -377,7 +379,8 @@
     26,
     26
    ],
-   "shape_score": 0.56
+   "score": 0.56,
+   "shape_score": 1.0
   },
   {
    "id": "S4",
@@ -388,7 +391,8 @@
     22,
     20
    ],
-   "shape_score": 0.38
+   "score": 0.38,
+   "shape_score": 1.0
   },
   {
    "id": "S5",
@@ -399,7 +403,8 @@
     26,
     26
    ],
-   "shape_score": 0.44
+   "score": 0.44,
+   "shape_score": 1.0
   },
   {
    "id": "S6",
@@ -410,7 +415,8 @@
     24,
     24
    ],
-   "shape_score": 0.38
+   "score": 0.38,
+   "shape_score": 1.0
   },
   {
    "id": "S7",
@@ -421,7 +427,8 @@
     22,
     37
    ],
-   "shape_score": 0.58
+   "score": 0.58,
+   "shape_score": 1.0
   },
   {
    "id": "S8",
@@ -432,7 +439,8 @@
     19,
     33
    ],
-   "shape_score": 0.77
+   "score": 0.77,
+   "shape_score": 1.0
   },
   {
    "id": "S9",
@@ -443,7 +451,8 @@
     19,
     34
    ],
-   "shape_score": 0.75
+   "score": 0.75,
+   "shape_score": 1.0
   },
   {
    "id": "S10",
@@ -454,7 +463,8 @@
     25,
     24
    ],
-   "shape_score": 0.27
+   "score": 0.27,
+   "shape_score": 1.0
   },
   {
    "id": "S11",
@@ -465,7 +475,8 @@
     33,
     32
    ],
-   "shape_score": 0.35
+   "score": 0.35,
+   "shape_score": 1.0
   }
  ],
  "devices": [
@@ -482,7 +493,8 @@
     "T1"
    ],
    "label": "11 kV / 415 V | TX-1 1250 kVA",
-   "conf": 0.96,
+   "conf": 0.99,
+   "score": 0.96,
    "type": "TRANSFORMER",
    "rating": 1250,
    "on_bus": "BUS-1",
@@ -502,7 +514,8 @@
     "T4"
    ],
    "label": "ACB-1 1600 A 4P | Icu 36 kA, withdrawable",
-   "conf": 0.46,
+   "conf": 0.98,
+   "score": 0.46,
    "type": "ACB",
    "rating": 1600,
    "poles": 4,
@@ -524,7 +537,8 @@
     "T6"
    ],
    "label": "CT 1600/5A | BUSBAR A 1600 A Cu 36 kA/1s",
-   "conf": 0.56,
+   "conf": 1.0,
+   "score": 0.56,
    "type": "METER",
    "rating": null,
    "on_bus": "BUS-1",
@@ -541,7 +555,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.19,
+   "conf": 0.5,
+   "score": 0.38,
    "type": "CT",
    "rating": null,
    "on_bus": "BUS-1",
@@ -561,7 +576,8 @@
     "T18"
    ],
    "label": "S/D 45 kW | M",
-   "conf": 0.44,
+   "conf": 1.0,
+   "score": 0.44,
    "type": "MCCB",
    "rating": null,
    "poles": null,
@@ -583,7 +599,8 @@
     "T8"
    ],
    "label": "MCCB 250 A 4P",
-   "conf": 0.38,
+   "conf": 0.99,
+   "score": 0.38,
    "type": "MCCB",
    "rating": 250,
    "poles": 4,
@@ -605,7 +622,8 @@
     "T11"
    ],
    "label": "pump P-4",
-   "conf": 0.58,
+   "conf": 1.0,
+   "score": 0.58,
    "type": "CONTACTOR",
    "rating": null,
    "on_bus": "BUS-1",
@@ -625,7 +643,8 @@
     "T12"
    ],
    "label": "sdwnd | ISOL 400 A 4P",
-   "conf": 0.77,
+   "conf": 0.91,
+   "score": 0.77,
    "type": "ISOLATOR",
    "rating": 400,
    "poles": 4,
@@ -648,7 +667,8 @@
     "T14"
    ],
    "label": "pumps | ISOL 100 A 4P",
-   "conf": 0.75,
+   "conf": 0.99,
+   "score": 0.75,
    "type": "ISOLATOR",
    "rating": 100,
    "poles": 4,
@@ -670,7 +690,8 @@
     "T13"
    ],
    "label": "MCCB 400 A 4P",
-   "conf": 0.27,
+   "conf": 0.99,
+   "score": 0.27,
    "type": "MCCB",
    "rating": 400,
    "poles": 4,
@@ -690,7 +711,8 @@
    ],
    "label_texts": [],
    "label": "",
-   "conf": 0.17,
+   "conf": 0.5,
+   "score": 0.35,
    "type": "MOTOR",
    "rating": null,
    "on_bus": "BUS-1",
@@ -711,21 +733,23 @@
   ]
  },
  "crops": false,
+ "ocr_engine": "rapidocr",
  "reader": "trained",
  "seconds": {
-  "total": 9.76,
-  "ocr": 5.35,
-  "detector": 4.26
+  "total": 5.13,
+  "ocr": 3.14,
+  "detector": 1.86
  },
  "detector": {
   "weights": "weights/rtdetr_r18_full",
   "device": "cpu",
-  "threads": 4,
+  "threads": 2,
   "score_threshold": 0.11,
   "score_threshold_source": "drawing",
   "nms_iou": 0.5,
   "merge_iou": 0.5,
   "edge_px": 2,
-  "contain": 0.8
+  "contain": 0.8,
+  "calibrated": true
  }
 }

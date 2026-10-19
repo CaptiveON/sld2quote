@@ -9,21 +9,21 @@ Prices are from the prototype's illustrative catalogue, not a supplier price lis
 
 | # | Part | Description | Qty | Unit £ | Total £ | Conf | Evidence |
 |---|---|---|---|---|---|---|---|
-| 1 | ACB-2500-3P-N | Air circuit breaker 2500 A 3-pole, 50 kA band N, withdrawable, electronic trip | 1 | 5,600.00 | 5,600.00 | 0.63 | S3 T6 T8 R-ACB-SELECT |
-| 2 | FU-KIT-ACB | Incomer functional unit: compartment, shutters, terminals, controls | 1 | 1,400.00 | 1,400.00 | 0.63 | S3 T6 T8 R-FU-KIT |
-| 3 | ACB-1600-3P-N | Air circuit breaker 1600 A 3-pole, 50 kA band N, withdrawable, electronic trip | 1 | 4,200.00 | 4,200.00 | 0.2 | S4 T7 R-ACB-SELECT |
-| 4 | FU-KIT-ACB | Incomer functional unit: compartment, shutters, terminals, controls | 1 | 1,400.00 | 1,400.00 | 0.2 | S4 T7 R-FU-KIT |
-| 5 | ATS-CTRL | Automatic transfer switch controller and interlocks | 1 | 1,850.00 | 1,850.00 | 0.2 | S4 T7 R-ATS |
-| 6 | METER-CT 1600/5A | Panel meter (CT 1600/5A) | 1 | 260.00 | 260.00 | 0.64 | S5 T9 R-METERING |
-| 7 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.11 | S6 R-METERING |
-| 8 | BSS-2500-3P | Bus-section switch 2500 A 3-pole, 50 kA | 1 | 4,100.00 | 4,100.00 | 0.56 | S7 T12 R-BUS-SECTION |
-| 9 | FU-KIT-BS | Bus-section functional unit and interlocking | 1 | 900.00 | 900.00 | 0.56 | S7 T12 R-FU-KIT |
-| 10 | MCCB-400-3P-N | Moulded-case circuit breaker 400 A 3-pole, 50 kA band N, adjustable trip | 1 | 980.00 | 980.00 | 0.34 | S9 T16 R-MCCB-SELECT |
-| 11 | FU-KIT-MCCB | Outgoing functional unit: compartment door, terminals, labels | 1 | 420.00 | 420.00 | 0.34 | S9 T16 R-FU-KIT |
-| 12 | MCCB-160-4P-N | Moulded-case circuit breaker 160 A 4-pole, 50 kA band N, adjustable trip; feeds Mcc-4/chillers | 1 | 463.60 | 463.60 | 0.4 | S14 T20 T23 R-MCCB-SELECT |
-| 13 | FU-KIT-MCCB | Outgoing functional unit: compartment door, terminals, labels | 1 | 420.00 | 420.00 | 0.4 | S14 T20 T23 R-FU-KIT |
-| 14 | ISOL-630-3P | Switch-disconnector 630 A 3-pole; feeds lighting | 1 | 790.00 | 790.00 | 0.13 | S15 T21 T24 R-ISOL-SELECT |
-| 15 | FU-KIT-ISOLATOR | Outgoing functional unit: compartment door, terminals, labels | 1 | 340.00 | 340.00 | 0.13 | S15 T21 T24 R-FU-KIT |
+| 1 | ACB-2500-3P-N | Air circuit breaker 2500 A 3-pole, 50 kA band N, withdrawable, electronic trip | 1 | 5,600.00 | 5,600.00 | 0.96 | S3 T6 T8 R-ACB-SELECT |
+| 2 | FU-KIT-ACB | Incomer functional unit: compartment, shutters, terminals, controls | 1 | 1,400.00 | 1,400.00 | 0.96 | S3 T6 T8 R-FU-KIT |
+| 3 | ACB-1600-3P-N | Air circuit breaker 1600 A 3-pole, 50 kA band N, withdrawable, electronic trip | 1 | 4,200.00 | 4,200.00 | 0.97 | S4 T7 R-ACB-SELECT |
+| 4 | FU-KIT-ACB | Incomer functional unit: compartment, shutters, terminals, controls | 1 | 1,400.00 | 1,400.00 | 0.97 | S4 T7 R-FU-KIT |
+| 5 | ATS-CTRL | Automatic transfer switch controller and interlocks | 1 | 1,850.00 | 1,850.00 | 0.97 | S4 T7 R-ATS |
+| 6 | METER-CT 1600/5A | Panel meter (CT 1600/5A) | 1 | 260.00 | 260.00 | 1.0 | S5 T9 R-METERING |
+| 7 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.49 | S6 R-METERING |
+| 8 | BSS-2500-3P | Bus-section switch 2500 A 3-pole, 50 kA | 1 | 4,100.00 | 4,100.00 | 1.0 | S7 T12 R-BUS-SECTION |
+| 9 | FU-KIT-BS | Bus-section functional unit and interlocking | 1 | 900.00 | 900.00 | 1.0 | S7 T12 R-FU-KIT |
+| 10 | MCCB-400-3P-N | Moulded-case circuit breaker 400 A 3-pole, 50 kA band N, adjustable trip | 1 | 980.00 | 980.00 | 0.98 | S9 T16 R-MCCB-SELECT |
+| 11 | FU-KIT-MCCB | Outgoing functional unit: compartment door, terminals, labels | 1 | 420.00 | 420.00 | 0.98 | S9 T16 R-FU-KIT |
+| 12 | MCCB-160-4P-N | Moulded-case circuit breaker 160 A 4-pole, 50 kA band N, adjustable trip; feeds Mcc-4/chillers | 1 | 463.60 | 463.60 | 0.93 | S14 T20 T23 R-MCCB-SELECT |
+| 13 | FU-KIT-MCCB | Outgoing functional unit: compartment door, terminals, labels | 1 | 420.00 | 420.00 | 0.93 | S14 T20 T23 R-FU-KIT |
+| 14 | ISOL-630-3P | Switch-disconnector 630 A 3-pole; feeds lighting | 1 | 790.00 | 790.00 | 0.75 | S15 T21 T24 R-ISOL-SELECT |
+| 15 | FU-KIT-ISOLATOR | Outgoing functional unit: compartment door, terminals, labels | 1 | 340.00 | 340.00 | 0.75 | S15 T21 T24 R-FU-KIT |
 | 16 | BUSBAR-CU-2500 | Copper busbar set 2500 A (4-bar), 4 sections, about 182 kg | 1 | 2,097.60 | 2,097.60 | 0.9 | T11 T11 R-BUSBAR-SIZE |
 | 17 | ENC-SECTION | Enclosure section, Form 3b, IP42, RAL 7035 | 4 | 2,730.00 | 10,920.00 | 0.95 | T28 T28 T30 T32 R-ENCLOSURE |
 | 18 | LAB-ASSY | Assembly, wiring and routine verification: 166 hours | 1 | 7,968.00 | 7,968.00 | 0.9 |  R-LABOUR |
@@ -39,7 +39,7 @@ Subtotal £45,839.20; margin £6,875.88; **total £52,715.08**
 - [missing] D11 (MCCB): rating not read. Action: read from drawing / schedule. Evidence: S11 T15 T17
 - [missing] D12 (CAPACITOR): kVAr not read. Action: read from drawing / schedule. Evidence: S12 T19
 - [missing] D13 (CONTACTOR): kW not read. Action: read from drawing / schedule. Evidence: S13 T18 T22
-- [low_confidence] devices read with low confidence: D1, D4, D6, D7, D8, D9, D10, D11, D12, D14, D15. Action: check against the drawing. Evidence: D1 D4 D6 D7 D8 D9 D10 D11 D12 D14 D15
+- [low_confidence] devices read with low confidence: D6, D8. Action: check against the drawing. Evidence: D6 D8
 
 ## Specification clauses matched
 
@@ -52,4 +52,4 @@ Subtotal £45,839.20; margin £6,875.88; **total £52,715.08**
 - certificates: clause 7.7 -> True
 - other (not priced automatically): clause 7.8: Enclosure finish RAL 7035, front access only.
 
-Generated by sld2quote 0.2.0 in 10.0 s; reader deskew -0.1 deg.
+Generated by sld2quote 0.2.0 in 4.1 s; reader deskew -0.1 deg.

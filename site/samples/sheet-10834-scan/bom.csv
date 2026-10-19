@@ -1,12 +1,12 @@
 line,part,description,qty,unit_gbp,total_gbp,conf,rule,evidence
-1,METER-CT 1600/5A | BUSBAR A 1600 ACu 36 kA/1s,Panel meter (CT 1600/5A | BUSBAR A 1600 ACu 36 kA/1s),1,260,260,0.33,R-METERING,S2 T5 T6
-2,CT-SET,"Current transformers, set of three, class 1",1,280,280,0.2,R-METERING,S3
-3,ACB-1600-3P-N,"Air circuit breaker 1600 A 3-pole, 36 kA band N, withdrawable, electronic trip",1,4200.0,4200.0,0.12,R-ACB-SELECT,S4 T9 T7
-4,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.12,R-FU-KIT,S4 T9 T7
-5,ACB-1600-4P-N,"Air circuit breaker 1600 A 4-pole, 36 kA band N, withdrawable, electronic trip",1,5124.0,5124.0,0.18,R-ACB-SELECT,S5 T8
-6,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.18,R-FU-KIT,S5 T8
-7,ACB-1600-4P-N,"Air circuit breaker 1600 A 4-pole, 36 kA band N, withdrawable, electronic trip",1,5124.0,5124.0,0.25,R-ACB-SELECT,S8 T11
-8,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.25,R-FU-KIT,S8 T11
+1,METER-CT 1600/5A | BUSBAR A 1600 ACu 36 kA/1s,Panel meter (CT 1600/5A | BUSBAR A 1600 ACu 36 kA/1s),1,260,260,0.94,R-METERING,S2 T5 T6
+2,CT-SET,"Current transformers, set of three, class 1",1,280,280,0.5,R-METERING,S3
+3,ACB-1600-3P-N,"Air circuit breaker 1600 A 3-pole, 36 kA band N, withdrawable, electronic trip",1,4200.0,4200.0,0.75,R-ACB-SELECT,S4 T9 T7
+4,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.75,R-FU-KIT,S4 T9 T7
+5,ACB-1600-4P-N,"Air circuit breaker 1600 A 4-pole, 36 kA band N, withdrawable, electronic trip",1,5124.0,5124.0,0.89,R-ACB-SELECT,S5 T8
+6,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.89,R-FU-KIT,S5 T8
+7,ACB-1600-4P-N,"Air circuit breaker 1600 A 4-pole, 36 kA band N, withdrawable, electronic trip",1,5124.0,5124.0,0.93,R-ACB-SELECT,S8 T11
+8,FU-KIT-ACB,"Incomer functional unit: compartment, shutters, terminals, controls",1,1400,1400,0.93,R-FU-KIT,S8 T11
 9,BUSBAR-CU-1600,"Copper busbar set 1600 A (4-bar), 3 sections, about 86 kg",1,993.6,993.6,0.9,R-BUSBAR-SIZE,T6 T24 T24
 10,ENC-SECTION,"Enclosure section, Form 4 Type 6, IP42, RAL 7035",3,3549.0,10647.0,0.95,R-ENCLOSURE,T19 T19 T21 T23
 11,LAB-ASSY,"Assembly, wiring and routine verification: 122 hours",1,5856,5856,0.9,R-LABOUR,

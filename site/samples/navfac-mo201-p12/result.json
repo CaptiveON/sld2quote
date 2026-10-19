@@ -22,21 +22,21 @@
    "key": "text",
    "title": "Read the words",
    "count": 16,
-   "seconds": 3.8,
-   "plain": "Read 16 pieces of text in 3.8 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 2.03,
+   "plain": "Read 16 pieces of text in 2.03 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
    "count": 16,
-   "seconds": 3.47,
-   "plain": "Found 16 symbols in 3.47 s: 9 power-factor correction banks, 5 fuse switches, 1 incoming air circuit breaker, 1 protection relay. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "seconds": 1.8,
+   "plain": "Found 16 symbols in 1.8 s: 9 power-factor correction banks, 5 fuse switches, 1 incoming air circuit breaker, 1 protection relay. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
    "count": 0,
-   "seconds": 0.14,
+   "seconds": 0.09,
    "plain": "Paired 0 of 16 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
@@ -64,7 +64,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.17,
+   "conf": 0.5,
+   "score": 0.34,
    "box": [
     634,
     209,
@@ -82,7 +83,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.13,
+   "conf": 0.49,
+   "score": 0.26,
    "box": [
     151,
     539,
@@ -100,7 +102,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.14,
+   "conf": 0.5,
+   "score": 0.27,
    "box": [
     248,
     578,
@@ -118,7 +121,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.13,
+   "conf": 0.5,
+   "score": 0.26,
    "box": [
     338,
     578,
@@ -136,7 +140,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.08,
+   "conf": 0.47,
+   "score": 0.16,
    "box": [
     543,
     579,
@@ -154,7 +159,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.12,
+   "conf": 0.49,
+   "score": 0.23,
    "box": [
     604,
     579,
@@ -172,7 +178,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.1,
+   "conf": 0.49,
+   "score": 0.21,
    "box": [
     372,
     678,
@@ -190,7 +197,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.13,
+   "conf": 0.49,
+   "score": 0.26,
    "box": [
     572,
     679,
@@ -208,7 +216,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.09,
+   "conf": 0.47,
+   "score": 0.17,
    "box": [
     755,
     680,
@@ -226,7 +235,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.12,
+   "conf": 0.49,
+   "score": 0.24,
    "box": [
     664,
     681,
@@ -244,7 +254,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.18,
+   "conf": 0.5,
+   "score": 0.36,
    "box": [
     848,
     681,
@@ -262,7 +273,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.07,
+   "conf": 0.38,
+   "score": 0.13,
    "box": [
     107,
     896,
@@ -280,7 +292,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.08,
+   "conf": 0.47,
+   "score": 0.16,
    "box": [
     288,
     897,
@@ -298,7 +311,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.07,
+   "conf": 0.38,
+   "score": 0.15,
    "box": [
     591,
     897,
@@ -316,7 +330,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.08,
+   "conf": 0.47,
+   "score": 0.16,
    "box": [
     658,
     897,
@@ -334,7 +349,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.1,
+   "conf": 0.48,
+   "score": 0.2,
    "box": [
     845,
     898,
@@ -362,7 +378,7 @@
     "qty": 1,
     "unit_gbp": 950,
     "total_gbp": 950,
-    "conf": 0.13,
+    "conf": 0.49,
     "evidence": [
      "S2"
     ],
@@ -589,9 +605,9 @@
  "spec": null,
  "score": null,
  "timing": {
-  "total": 7.66,
-  "ocr": 3.8,
-  "detector": 3.47
+  "total": 4.1,
+  "ocr": 2.03,
+  "detector": 1.8
  },
  "reader": "trained",
  "engine": "rapidocr",

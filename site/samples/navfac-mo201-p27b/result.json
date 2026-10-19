@@ -22,21 +22,21 @@
    "key": "text",
    "title": "Read the words",
    "count": 10,
-   "seconds": 4.07,
-   "plain": "Read 10 pieces of text in 4.07 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
+   "seconds": 1.93,
+   "plain": "Read 10 pieces of text in 1.93 s. An estimator starts by reading every rating, label and note on the drawing; here the computer did it, and read again around each symbol for the small print."
   },
   {
    "key": "symbols",
    "title": "Find the symbols",
    "count": 20,
-   "seconds": 3.32,
-   "plain": "Found 20 symbols in 3.32 s: 5 incoming air circuit breakers, 4 outgoing moulded-case breakers, 4 fuse switches, 3 current transformers, 2 motor starters, 1 motor, 1 earth. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
+   "seconds": 2.16,
+   "plain": "Found 20 symbols in 2.16 s: 5 incoming air circuit breakers, 4 outgoing moulded-case breakers, 4 fuse switches, 3 current transformers, 2 motor starters, 1 motor, 1 earth. Each symbol is a device the switchboard must contain, so a missed symbol is a missing line on the quotation."
   },
   {
    "key": "labels",
    "title": "Pair labels with symbols",
    "count": 2,
-   "seconds": 0.2,
+   "seconds": 0.13,
    "plain": "Paired 2 of 20 symbols with the label text beside them; 0 carry a rating the pricing rules can use. A breaker is priced by its amps, poles and fault rating, so the right label on the right symbol is what makes the price right."
   },
   {
@@ -64,7 +64,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.06,
+   "conf": 0.38,
+   "score": 0.12,
    "box": [
     637,
     101,
@@ -82,7 +83,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.15,
+   "conf": 0.5,
+   "score": 0.31,
    "box": [
     568,
     102,
@@ -100,7 +102,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.17,
+   "conf": 0.5,
+   "score": 0.33,
    "box": [
     705,
     102,
@@ -118,7 +121,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.06,
+   "conf": 0.38,
+   "score": 0.12,
    "box": [
     646,
     176,
@@ -136,7 +140,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.06,
+   "conf": 0.38,
+   "score": 0.11,
    "box": [
     718,
     212,
@@ -154,7 +159,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.07,
+   "conf": 0.38,
+   "score": 0.14,
    "box": [
     1097,
     232,
@@ -172,7 +178,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.06,
+   "conf": 0.38,
+   "score": 0.12,
    "box": [
     960,
     235,
@@ -190,7 +197,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.09,
+   "conf": 0.47,
+   "score": 0.17,
    "box": [
     1097,
     252,
@@ -208,7 +216,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.06,
+   "conf": 0.38,
+   "score": 0.12,
    "box": [
     1104,
     331,
@@ -226,7 +235,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.12,
+   "conf": 0.49,
+   "score": 0.25,
    "box": [
     248,
     394,
@@ -244,7 +254,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.1,
+   "conf": 0.49,
+   "score": 0.21,
    "box": [
     387,
     394,
@@ -262,7 +273,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.11,
+   "conf": 0.49,
+   "score": 0.22,
    "box": [
     727,
     428,
@@ -280,7 +292,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.06,
+   "conf": 0.38,
+   "score": 0.11,
    "box": [
     418,
     439,
@@ -298,7 +311,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.07,
+   "conf": 0.38,
+   "score": 0.13,
    "box": [
     144,
     441,
@@ -316,7 +330,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.06,
+   "conf": 0.38,
+   "score": 0.11,
    "box": [
     376,
     519,
@@ -334,7 +349,8 @@
    "poles": null,
    "kA": null,
    "dest": "LOAD CIRCUITS",
-   "conf": 0.29,
+   "conf": 0.99,
+   "score": 0.29,
    "box": [
     252,
     520,
@@ -352,7 +368,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.12,
+   "conf": 0.49,
+   "score": 0.24,
    "box": [
     292,
     520,
@@ -370,7 +387,8 @@
    "poles": null,
    "kA": null,
    "dest": "DISCONNECT SWITCH",
-   "conf": 0.12,
+   "conf": 0.75,
+   "score": 0.12,
    "box": [
     582,
     535,
@@ -388,7 +406,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.1,
+   "conf": 0.48,
+   "score": 0.2,
    "box": [
     320,
     581,
@@ -406,7 +425,8 @@
    "poles": null,
    "kA": null,
    "dest": "",
-   "conf": 0.07,
+   "conf": 0.38,
+   "score": 0.14,
    "box": [
     937,
     625,
@@ -434,7 +454,7 @@
     "qty": 1,
     "unit_gbp": 280,
     "total_gbp": 280,
-    "conf": 0.06,
+    "conf": 0.38,
     "evidence": [
      "S4"
     ],
@@ -447,7 +467,7 @@
     "qty": 1,
     "unit_gbp": 280,
     "total_gbp": 280,
-    "conf": 0.06,
+    "conf": 0.38,
     "evidence": [
      "S5"
     ],
@@ -460,7 +480,7 @@
     "qty": 1,
     "unit_gbp": 280,
     "total_gbp": 280,
-    "conf": 0.07,
+    "conf": 0.38,
     "evidence": [
      "S14"
     ],
@@ -663,7 +683,7 @@
   },
   {
    "kind": "low_confidence",
-   "what": "devices read with low confidence: D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15, D16, D17, D18, D19, D20",
+   "what": "devices read with low confidence: D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12, D13, D14, D15, D17, D19, D20",
    "action": "check against the drawing",
    "evidence": [
     "D1",
@@ -681,9 +701,7 @@
     "D13",
     "D14",
     "D15",
-    "D16",
     "D17",
-    "D18",
     "D19",
     "D20"
    ]
@@ -693,9 +711,9 @@
  "spec": null,
  "score": null,
  "timing": {
-  "total": 8.2,
-  "ocr": 4.07,
-  "detector": 3.32
+  "total": 4.37,
+  "ocr": 1.93,
+  "detector": 2.16
  },
  "reader": "trained",
  "engine": "rapidocr",

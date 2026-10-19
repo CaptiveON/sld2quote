@@ -9,30 +9,30 @@ Prices are from the prototype's illustrative catalogue, not a supplier price lis
 
 | # | Part | Description | Qty | Unit £ | Total £ | Conf | Evidence |
 |---|---|---|---|---|---|---|---|
-| 1 | ACB-2500-3P-H | Air circuit breaker 2500 A 3-pole, 65 kA band H, withdrawable, electronic trip | 1 | 6,608.00 | 6,608.00 | 0.3 | S2 T3 T4 R-ACB-SELECT |
-| 2 | FU-KIT-ACB | Incomer functional unit: compartment, shutters, terminals, controls | 1 | 1,400.00 | 1,400.00 | 0.3 | S2 T3 T4 R-FU-KIT |
-| 3 | METER-CT 2500/5A | BUSBAR A 2500 A Cu 65 kA/1s | Panel meter (CT 2500/5A | BUSBAR A 2500 A Cu 65 kA/1s) | 1 | 260.00 | 260.00 | 0.49 | S3 T5 T6 R-METERING |
-| 4 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.08 | S4 R-METERING |
-| 5 | BSS-2500-3P | Bus-section switch 2500 A 3-pole, 65 kA | 1 | 4,838.00 | 4,838.00 | 0.73 | S5 T8 R-BUS-SECTION |
-| 6 | FU-KIT-BS | Bus-section functional unit and interlocking | 1 | 900.00 | 900.00 | 0.73 | S5 T8 R-FU-KIT |
-| 7 | FSW-250-3P | Fuse-switch-disconnector 250 A 3-pole; feeds S/D 55 kW | 1 | 430.00 | 430.00 | 0.6 | S6 T12 T9 R-FSW-SELECT |
-| 8 | FUSE-250 | Fuse links 250 A, one per pole | 3 | 29.00 | 87.00 | 0.6 | S6 T12 T9 R-FUSE-LINKS |
-| 9 | FU-KIT-FUSE_SWITCH | Outgoing functional unit: compartment door, terminals, labels | 1 | 380.00 | 380.00 | 0.6 | S6 T12 T9 R-FU-KIT |
-| 10 | FSW-400-3P | Fuse-switch-disconnector 400 A 3-pole | 1 | 780.00 | 780.00 | 0.44 | S7 T14 T10 R-FSW-SELECT |
-| 11 | FUSE-400 | Fuse links 400 A, one per pole | 3 | 46.00 | 138.00 | 0.44 | S7 T14 T10 R-FUSE-LINKS |
-| 12 | FU-KIT-FUSE_SWITCH | Outgoing functional unit: compartment door, terminals, labels | 1 | 380.00 | 380.00 | 0.44 | S7 T14 T10 R-FU-KIT |
-| 13 | FSW-250-3P | Fuse-switch-disconnector 250 A 3-pole; feeds data hall | 1 | 430.00 | 430.00 | 0.79 | S8 T17 T13 R-FSW-SELECT |
-| 14 | FUSE-250 | Fuse links 250 A, one per pole | 3 | 29.00 | 87.00 | 0.79 | S8 T17 T13 R-FUSE-LINKS |
-| 15 | FU-KIT-FUSE_SWITCH | Outgoing functional unit: compartment door, terminals, labels | 1 | 380.00 | 380.00 | 0.79 | S8 T17 T13 R-FU-KIT |
-| 16 | FSW-400-3P | Fuse-switch-disconnector 400 A 3-pole; feeds lighting | 1 | 780.00 | 780.00 | 0.47 | S9 T15 T11 R-FSW-SELECT |
-| 17 | FUSE-400 | Fuse links 400 A, one per pole | 3 | 46.00 | 138.00 | 0.47 | S9 T15 T11 R-FUSE-LINKS |
-| 18 | FU-KIT-FUSE_SWITCH | Outgoing functional unit: compartment door, terminals, labels | 1 | 380.00 | 380.00 | 0.47 | S9 T15 T11 R-FU-KIT |
-| 19 | FSW-630-3P | Fuse-switch-disconnector 630 A 3-pole; feeds UPS input | 1 | 1,180.00 | 1,180.00 | 0.54 | S11 T20 T18 R-FSW-SELECT |
-| 20 | FUSE-630 | Fuse links 630 A, one per pole | 3 | 72.00 | 216.00 | 0.54 | S11 T20 T18 R-FUSE-LINKS |
-| 21 | FU-KIT-FUSE_SWITCH | Outgoing functional unit: compartment door, terminals, labels | 1 | 380.00 | 380.00 | 0.54 | S11 T20 T18 R-FU-KIT |
-| 22 | FSW-800-3P | Fuse-switch-disconnector 800 A 3-pole; feeds data hall | 1 | 1,520.00 | 1,520.00 | 0.56 | S12 T21 T19 R-FSW-SELECT |
-| 23 | FUSE-800 | Fuse links 800 A, one per pole | 3 | 94.00 | 282.00 | 0.56 | S12 T21 T19 R-FUSE-LINKS |
-| 24 | FU-KIT-FUSE_SWITCH | Outgoing functional unit: compartment door, terminals, labels | 1 | 380.00 | 380.00 | 0.56 | S12 T21 T19 R-FU-KIT |
+| 1 | ACB-2500-3P-H | Air circuit breaker 2500 A 3-pole, 65 kA band H, withdrawable, electronic trip | 1 | 6,608.00 | 6,608.00 | 0.98 | S2 T3 T4 R-ACB-SELECT |
+| 2 | FU-KIT-ACB | Incomer functional unit: compartment, shutters, terminals, controls | 1 | 1,400.00 | 1,400.00 | 0.98 | S2 T3 T4 R-FU-KIT |
+| 3 | METER-CT 2500/5A | BUSBAR A 2500 A Cu 65 kA/1s | Panel meter (CT 2500/5A | BUSBAR A 2500 A Cu 65 kA/1s) | 1 | 260.00 | 260.00 | 1.0 | S3 T5 T6 R-METERING |
+| 4 | CT-SET | Current transformers, set of three, class 1 | 1 | 280.00 | 280.00 | 0.47 | S4 R-METERING |
+| 5 | BSS-2500-3P | Bus-section switch 2500 A 3-pole, 65 kA | 1 | 4,838.00 | 4,838.00 | 0.98 | S5 T8 R-BUS-SECTION |
+| 6 | FU-KIT-BS | Bus-section functional unit and interlocking | 1 | 900.00 | 900.00 | 0.98 | S5 T8 R-FU-KIT |
+| 7 | FSW-250-3P | Fuse-switch-disconnector 250 A 3-pole; feeds S/D 55 kW | 1 | 430.00 | 430.00 | 1.0 | S6 T12 T9 R-FSW-SELECT |
+| 8 | FUSE-250 | Fuse links 250 A, one per pole | 3 | 29.00 | 87.00 | 1.0 | S6 T12 T9 R-FUSE-LINKS |
+| 9 | FU-KIT-FUSE_SWITCH | Outgoing functional unit: compartment door, terminals, labels | 1 | 380.00 | 380.00 | 1.0 | S6 T12 T9 R-FU-KIT |
+| 10 | FSW-400-3P | Fuse-switch-disconnector 400 A 3-pole | 1 | 780.00 | 780.00 | 1.0 | S7 T14 T10 R-FSW-SELECT |
+| 11 | FUSE-400 | Fuse links 400 A, one per pole | 3 | 46.00 | 138.00 | 1.0 | S7 T14 T10 R-FUSE-LINKS |
+| 12 | FU-KIT-FUSE_SWITCH | Outgoing functional unit: compartment door, terminals, labels | 1 | 380.00 | 380.00 | 1.0 | S7 T14 T10 R-FU-KIT |
+| 13 | FSW-250-3P | Fuse-switch-disconnector 250 A 3-pole; feeds data hall | 1 | 430.00 | 430.00 | 0.95 | S8 T17 T13 R-FSW-SELECT |
+| 14 | FUSE-250 | Fuse links 250 A, one per pole | 3 | 29.00 | 87.00 | 0.95 | S8 T17 T13 R-FUSE-LINKS |
+| 15 | FU-KIT-FUSE_SWITCH | Outgoing functional unit: compartment door, terminals, labels | 1 | 380.00 | 380.00 | 0.95 | S8 T17 T13 R-FU-KIT |
+| 16 | FSW-400-3P | Fuse-switch-disconnector 400 A 3-pole; feeds lighting | 1 | 780.00 | 780.00 | 1.0 | S9 T15 T11 R-FSW-SELECT |
+| 17 | FUSE-400 | Fuse links 400 A, one per pole | 3 | 46.00 | 138.00 | 1.0 | S9 T15 T11 R-FUSE-LINKS |
+| 18 | FU-KIT-FUSE_SWITCH | Outgoing functional unit: compartment door, terminals, labels | 1 | 380.00 | 380.00 | 1.0 | S9 T15 T11 R-FU-KIT |
+| 19 | FSW-630-3P | Fuse-switch-disconnector 630 A 3-pole; feeds UPS input | 1 | 1,180.00 | 1,180.00 | 0.96 | S11 T20 T18 R-FSW-SELECT |
+| 20 | FUSE-630 | Fuse links 630 A, one per pole | 3 | 72.00 | 216.00 | 0.96 | S11 T20 T18 R-FUSE-LINKS |
+| 21 | FU-KIT-FUSE_SWITCH | Outgoing functional unit: compartment door, terminals, labels | 1 | 380.00 | 380.00 | 0.96 | S11 T20 T18 R-FU-KIT |
+| 22 | FSW-800-3P | Fuse-switch-disconnector 800 A 3-pole; feeds data hall | 1 | 1,520.00 | 1,520.00 | 1.0 | S12 T21 T19 R-FSW-SELECT |
+| 23 | FUSE-800 | Fuse links 800 A, one per pole | 3 | 94.00 | 282.00 | 1.0 | S12 T21 T19 R-FUSE-LINKS |
+| 24 | FU-KIT-FUSE_SWITCH | Outgoing functional unit: compartment door, terminals, labels | 1 | 380.00 | 380.00 | 1.0 | S12 T21 T19 R-FU-KIT |
 | 25 | BUSBAR-CU-2500 | Copper busbar set 2500 A (4-bar), 4 sections, about 182 kg | 1 | 2,097.60 | 2,097.60 | 0.9 | T7 T7 R-BUSBAR-SIZE |
 | 26 | ENC-SECTION | Enclosure section, Form 4 Type 6, IP42, RAL 7035 | 4 | 3,549.00 | 14,196.00 | 0.95 | T24 T24 T26 T28 R-ENCLOSURE |
 | 27 | LAB-ASSY | Assembly, wiring and routine verification: 146 hours | 1 | 7,008.00 | 7,008.00 | 0.9 |  R-LABOUR |
@@ -45,7 +45,7 @@ Subtotal £47,385.60; margin £7,107.84; **total £54,493.44**
 ## Clarifications and exclusions (from flagged items)
 - [missing] D10 (CONTACTOR): kW not read. Action: read from drawing / schedule. Evidence: S10 T22 T16
 - [missing] D13 (CAPACITOR): kVAr not read. Action: read from drawing / schedule. Evidence: S13
-- [low_confidence] devices read with low confidence: D2, D3, D4, D7, D9, D10, D11, D12, D13, D14, D15. Action: check against the drawing. Evidence: D2 D3 D4 D7 D9 D10 D11 D12 D13 D14 D15
+- [low_confidence] devices read with low confidence: D4, D13, D14, D15. Action: check against the drawing. Evidence: D4 D13 D14 D15
 
 ## Specification clauses matched
 
@@ -58,4 +58,4 @@ Subtotal £47,385.60; margin £7,107.84; **total £54,493.44**
 - certificates: clause 7.7 -> True
 - other (not priced automatically): clause 7.8: Two years' spares for all trip units shall be included.
 
-Generated by sld2quote 0.2.0 in 10.6 s; reader deskew -0.1 deg.
+Generated by sld2quote 0.2.0 in 6.5 s; reader deskew -0.1 deg.
