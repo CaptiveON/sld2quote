@@ -8,8 +8,10 @@ Environment: SLD2QUOTE_RUNS (run directories, default /tmp/sld2quote-runs, prune
 (default weights/rtdetr_r18_full; when missing, downloaded once at start-up from the model repo SLD2QUOTE_MODEL_REPO
 with HF_TOKEN); SLD2QUOTE_OCR (the OCR engine: vision on a Mac with the tool, else rapidocr); SLD2QUOTE_READER=classical
 (tests only: the shape-test reader, no weights); SLD2QUOTE_CROPS=0 or 1 (the OCR pass around every symbol; default: the
-engine's own, on for vision, off for rapidocr). The detector and the OCR engine warm up in a thread at start-up; live
-runs answer 503 until they are ready, and run one at a time."""
+engine's own, on for vision, off for rapidocr); SLD2QUOTE_DAILY_RUNS (live runs allowed per UTC day, default 24, the strict free-tier worst case; over it
+live runs answer 429, samples and scorecards never). The detector and the OCR engine warm up in a thread at start-up;
+/api/health and live runs answer 503 until they are ready (a load error keeps them at 503, so a revision whose models fail
+to load never passes its startup probe), and live runs go one at a time."""
 from __future__ import annotations
 import contextlib, io, json, os, re, secrets, shutil, sys, threading, time
 from typing import Literal
@@ -36,6 +38,9 @@ SCORECARDS = {"results_md": "eval/RESULTS.md", "ocr_md": "eval/OCR.md", "detecto
 ID, NAME = re.compile(r"^[A-Za-z0-9_-]{1,64}$"), re.compile(r"^[A-Za-z0-9_.-]{1,96}$")
 STATE = {"warm": False, "error": None}
 LOCK = threading.Lock()  # ponytail: live runs are serial on the 2-core Space; a queue with positions if the demo gets busy
+DAILY_RUNS = int(os.environ.get("SLD2QUOTE_DAILY_RUNS", "24"))
+TODAY = {"date": "", "runs": 0}  # ponytail: in memory, so the count resets when the instance restarts; a bucket or Firestore counter if it ever matters
+OVER = "today's free allowance of live runs is used up; the samples still work; try again tomorrow"
 
 
 def ensure_weights():
@@ -99,8 +104,10 @@ def mapped(res: dict, base: str) -> dict:
 # ---------------------------------------------------------------- health, samples, scorecards
 @app.get("/api/health")
 def health():
-    return {"ok": STATE["error"] is None, "model": os.path.basename(WEIGHTS) if READER == "trained" else READER, "engine": ENGINE,
+    """200 once the models are loaded, 503 with the same body before (and for good after a load error): the startup probe"""
+    body = {"ok": STATE["error"] is None, "model": os.path.basename(WEIGHTS) if READER == "trained" else READER, "engine": ENGINE,
             "warm": STATE["warm"], **({"error": STATE["error"]} if STATE["error"] else {})}
+    return JSONResponse(body, status_code=200 if STATE["warm"] else 503)
 
 
 @app.get("/api/samples")
@@ -159,8 +166,20 @@ def prune():
         shutil.rmtree(os.path.join(RUNS, name), ignore_errors=True)
 
 
+def runs_today() -> int:
+    """live runs counted so far on this UTC day"""
+    day = time.strftime("%Y-%m-%d", time.gmtime())
+    if TODAY["date"] != day:
+        TODAY.update(date=day, runs=0)
+    return TODAY["runs"]
+
+
 def live(rid: str, d: str, image: str, spec: str | None, gt: str | None, source: dict) -> dict:
     with LOCK:
+        if runs_today() >= DAILY_RUNS:
+            shutil.rmtree(d, ignore_errors=True)
+            raise HTTPException(429, OVER)
+        TODAY["runs"] += 1
         try:
             res = result.build_result(image, spec, d, gt, READER, WEIGHTS, "cpu", source, CROPS)
         except Exception as e:
@@ -173,6 +192,8 @@ def live(rid: str, d: str, image: str, spec: str | None, gt: str | None, source:
 def ready():
     if not STATE["warm"]:
         raise HTTPException(503, "the server is still loading the detector and the text reader; try again in a moment" if not STATE["error"] else f"the server could not load its models: {STATE['error']}")
+    if runs_today() >= DAILY_RUNS:  # before any work; live() counts under the lock
+        raise HTTPException(429, OVER)
 
 
 @app.post("/api/generate")

@@ -1,6 +1,7 @@
 """The site's back end (site/app.py) through FastAPI's test client, with the classical reader (SLD2QUOTE_READER=classical,
 so no weights are needed) and the runs in a temporary directory: health, the samples list without and with an index, a
-live generated sheet scored against its answer key, the upload checks, a run file served, and the OCR crop pass following the
+live generated sheet scored against its answer key, the upload checks, a run file served, health and live runs at 503
+while warming, the daily cap on live runs (429; samples and scorecards never capped), and the OCR crop pass following the
 engine (on for vision, off for rapidocr) unless overridden, in the reader and through the server's SLD2QUOTE_CROPS. About 10 s."""
 import json, os, sys, tempfile, time
 import pytest
@@ -78,6 +79,23 @@ def test_upload_rejects_a_non_image_and_accepts_a_png(client):
 def test_live_runs_answer_503_while_warming(client, monkeypatch):
     monkeypatch.setitem(site.STATE, "warm", False)
     assert client.post("/api/generate", json={"seed": 1}).status_code == 503
+
+
+def test_health_answers_503_while_warming(client, monkeypatch):
+    monkeypatch.setitem(site.STATE, "warm", False)
+    r = client.get("/api/health")
+    assert r.status_code == 503 and r.json()["warm"] is False and r.json()["ok"]
+    assert client.get("/api/samples").status_code == 200
+
+
+def test_the_daily_cap_on_live_runs(client, monkeypatch):
+    monkeypatch.setattr(site, "DAILY_RUNS", 0)
+    r = client.post("/api/generate", json={"seed": 1})
+    assert r.status_code == 429 and "allowance" in r.json()["detail"]
+    assert client.get("/api/samples").status_code == 200 and client.get("/api/scorecards").status_code == 200
+    monkeypatch.setattr(site, "DAILY_RUNS", site.runs_today() + 1)  # one more run today, then the cap
+    assert client.post("/api/generate", json={"seed": 2, "level": "simple"}).status_code == 200
+    assert client.post("/api/generate", json={"seed": 2, "level": "simple"}).status_code == 429
 
 
 def test_scorecards_and_index(client):
